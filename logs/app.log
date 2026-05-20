@@ -1,108 +1,20 @@
-{"timestamp": "2026-05-20 22:47:49,567", "level": "ERROR", "message": "Exception on /exhibition/ [GET]", "module": "app", "lineno": 875}
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/routes/exhibition/routes.py", line 23, in hall
-    active_exhibitions = Exhibition.query.filter_by(status='active').order_by(desc(Exhibition.start_date)).all()
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1992, in filter_by
-    _entity_namespace_key(from_entity, key) == value
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/operators.py", line 584, in __eq__
-    return self.operate(eq, other)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 453, in operate
-    return op(self.comparator, *other, **kwargs)  # type: ignore[no-any-return]  # noqa: E501
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 765, in __eq__
-    self.property._optimized_compare(
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 1198, in _optimized_compare
-    raise sa_exc.ArgumentError(
-sqlalchemy.exc.ArgumentError: Mapped instance expected for relationship comparison to object.   Classes, queries and other SQL elements are not accepted in this context; for comparison with a subquery, use Exhibition.status.has(**criteria).
-{"timestamp": "2026-05-20 22:47:49,611", "level": "ERROR", "message": "Exception on /trading/ [GET]", "module": "app", "lineno": 875}
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 2434, in _determine_joins
-    self.primaryjoin = join_condition(
-                       ^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/util.py", line 121, in join_condition
-    return Join._join_condition(
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/selectable.py", line 1441, in _join_condition
-    cls._joincond_trim_constraints(
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/selectable.py", line 1586, in _joincond_trim_constraints
-    raise exc.AmbiguousForeignKeysError(
-sqlalchemy.exc.AmbiguousForeignKeysError: Can't determine join between 'trade_orders' and 'trades'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/routes/trading/routes.py", line 27, in market
-    active_pairs = TradingPair.query.filter_by(status='active').order_by(TradingPair.base_currency).all()
-                   ^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/flask_sqlalchemy/model.py", line 22, in __get__
-    return cls.query_class(
-           ^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 276, in __init__
-    self._set_entities(entities)
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 289, in _set_entities
-    coercions.expect(
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/coercions.py", line 389, in expect
-    insp._post_inspect
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 1338, in __get__
-    obj.__dict__[self.__name__] = result = self.fget(obj)
-                                           ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/mapper.py", line 2733, in _post_inspect
-    self._check_configure()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/mapper.py", line 2410, in _check_configure
-    _configure_registries({self.registry}, cascade=True)
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/mapper.py", line 4227, in _configure_registries
-    _do_configure_registries(registries, cascade)
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/mapper.py", line 4268, in _do_configure_registries
-    mapper._post_configure_properties()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/mapper.py", line 2427, in _post_configure_properties
-    prop.init()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/interfaces.py", line 595, in init
-    self.do_init()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 1657, in do_init
-    self._setup_join_conditions()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 1895, in _setup_join_conditions
-    self._join_condition = jc = JoinCondition(
-                                ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 2321, in __init__
-    self._determine_joins()
-  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/relationships.py", line 2478, in _determine_joins
-    raise sa_exc.AmbiguousForeignKeysError(
-sqlalchemy.exc.AmbiguousForeignKeysError: Could not determine join condition between parent/child tables on relationship TradeOrder.trades - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
-{"timestamp": "2026-05-20 22:56:46,851", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
-{"timestamp": "2026-05-20 22:56:47,049", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
-{"timestamp": "2026-05-20 22:56:47,073", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
-{"timestamp": "2026-05-20 22:57:09,365", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
-{"timestamp": "2026-05-20 22:57:09,572", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
-{"timestamp": "2026-05-20 22:57:09,627", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
-{"timestamp": "2026-05-20 22:57:19,485", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
-{"timestamp": "2026-05-20 22:57:19,688", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
-{"timestamp": "2026-05-20 22:57:19,892", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
-{"timestamp": "2026-05-20 22:59:51,533", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
-{"timestamp": "2026-05-20 22:59:51,744", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
-{"timestamp": "2026-05-20 22:59:51,787", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-20 23:06:10,069", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:06:10,093", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-20 23:06:31,689", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:06:31,912", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:06:31,949", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-20 23:14:51,033", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:14:51,248", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:15:31,574", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:15:31,784", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:02,891", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:16:03,087", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:11,010", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:16:11,227", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:21,552", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:16:21,792", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:27,391", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:16:27,592", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:44,087", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-20 23:16:44,293", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 23:16:44,547", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}

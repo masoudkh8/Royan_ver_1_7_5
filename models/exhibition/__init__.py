@@ -1,23 +1,32 @@
 """
 Metisma Exhibition Hall Models
 =================================
-مدل‌های داده‌ای برای نمایشگاه آنلاین متیما
+Online Exhibition Data Models for Metisma
 
-شامل:
-- مدیریت نمایشگاه‌ها
-- غرفه‌های مجازی
-- بازدیدها و تعاملات
-- قرارهای ملاقات
+Includes:
+- Exhibition management
+- Virtual booths
+- Visits and interactions
+- Appointments
 
-نسخه: 1.0.0
+Version: 1.0.0
 """
 
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+try:
+    from sqlalchemy.dialects.postgresql import JSONB, UUID
+    POSTGRES_AVAILABLE = True
+except ImportError:
+    from sqlalchemy import JSON as JSONB
+    import uuid as uuid_module
+    POSTGRES_AVAILABLE = False
 import uuid
 
-db = SQLAlchemy()
+# Use the main db instance from models
+from models import db
+
+# Helper for UUID type compatibility
+UUID_TYPE = UUID(as_uuid=True) if POSTGRES_AVAILABLE else db.String(36)
 
 
 # =============================================================================
@@ -57,7 +66,7 @@ class Exhibition(db.Model):
     """
     __tablename__ = 'exhibitions'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     title_fa = db.Column(db.String(200), nullable=False)
     title_en = db.Column(db.String(200), nullable=False)
     description_fa = db.Column(db.Text)
@@ -90,8 +99,8 @@ class Exhibition(db.Model):
     total_interactions = db.Column(db.Integer, default=0)
     
     # متادیتا
-    settings = db.Column(JSONB, default={})
-    seo_metadata = db.Column(JSONB, default={})
+    settings = db.Column(db.JSON, default={})
+    seo_metadata = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -116,12 +125,12 @@ class Booth(db.Model):
     """
     __tablename__ = 'booths'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    exhibition_id = db.Column(UUID(as_uuid=True), db.ForeignKey('exhibitions.id'), nullable=False)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    exhibition_id = db.Column(UUID_TYPE, db.ForeignKey('exhibitions.id'), nullable=False)
     
     # اطلاعات صاحب غرفه (Polymorphic)
     owner_type = db.Column(db.String(50), nullable=False)  # company, user, brand
-    owner_id = db.Column(UUID(as_uuid=True), nullable=False)
+    owner_id = db.Column(UUID_TYPE, nullable=False)
     
     # مشخصات غرفه
     booth_number = db.Column(db.String(20), nullable=False)
@@ -139,20 +148,20 @@ class Booth(db.Model):
     floor_plan = db.Column(db.String(50))
     
     # محتوای چندرسانه‌ای
-    gallery_images = db.Column(JSONB, default=[])
-    video_urls = db.Column(JSONB, default=[])
+    gallery_images = db.Column(db.JSON, default=[])
+    video_urls = db.Column(db.JSON, default=[])
     brochure_url = db.Column(db.String(500))
     
     # مدل ۳بعدی
     model_3d_url = db.Column(db.String(500))
-    model_3d_config = db.Column(JSONB, default={})
+    model_3d_config = db.Column(db.JSON, default={})
     
     # محصولات/خدمات
-    featured_products = db.Column(JSONB, default=[])
-    services_offered = db.Column(JSONB, default=[])
+    featured_products = db.Column(db.JSON, default=[])
+    services_offered = db.Column(db.JSON, default=[])
     
     # تعاملات
-    contact_info = db.Column(JSONB, default={})
+    contact_info = db.Column(db.JSON, default={})
     chat_enabled = db.Column(db.Boolean, default=True)
     appointment_enabled = db.Column(db.Boolean, default=True)
     
@@ -167,7 +176,7 @@ class Booth(db.Model):
     
     # سئو
     slug = db.Column(db.String(200), unique=True, nullable=False)
-    seo_metadata = db.Column(JSONB, default={})
+    seo_metadata = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -192,11 +201,11 @@ class BoothVisit(db.Model):
     """ثبت بازدید از غرفه"""
     __tablename__ = 'booth_visits'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    booth_id = db.Column(UUID(as_uuid=True), db.ForeignKey('booths.id'), nullable=False)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    booth_id = db.Column(UUID_TYPE, db.ForeignKey('booths.id'), nullable=False)
     
     visitor_type = db.Column(db.String(50), nullable=False)
-    visitor_id = db.Column(UUID(as_uuid=True))
+    visitor_id = db.Column(UUID_TYPE)
     
     session_id = db.Column(db.String(100), nullable=False)
     ip_address = db.Column(db.String(45))
@@ -209,7 +218,7 @@ class BoothVisit(db.Model):
     referrer_url = db.Column(db.String(500))
     
     visited_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    interaction_data = db.Column(JSONB, default={})
+    interaction_data = db.Column(db.JSON, default={})
     
     __table_args__ = (
         db.Index('idx_booth_visits_booth', 'booth_id'),
@@ -225,13 +234,13 @@ class BoothInteraction(db.Model):
     """تعاملات کاربر با غرفه"""
     __tablename__ = 'booth_interactions'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    booth_id = db.Column(UUID(as_uuid=True), db.ForeignKey('booths.id'), nullable=False)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    booth_id = db.Column(UUID_TYPE, db.ForeignKey('booths.id'), nullable=False)
     
-    user_id = db.Column(UUID(as_uuid=True), nullable=False)
+    user_id = db.Column(UUID_TYPE, nullable=False)
     interaction_type = db.Column(db.String(50), nullable=False)  # message, inquiry, callback_request
     
-    content = db.Column(JSONB, default={})
+    content = db.Column(db.JSON, default={})
     status = db.Column(db.String(50), default='pending')
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -251,11 +260,11 @@ class BoothAppointment(db.Model):
     """قرار ملاقات در غرفه"""
     __tablename__ = 'booth_appointments'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    booth_id = db.Column(UUID(as_uuid=True), db.ForeignKey('booths.id'), nullable=False)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    booth_id = db.Column(UUID_TYPE, db.ForeignKey('booths.id'), nullable=False)
     
-    requester_id = db.Column(UUID(as_uuid=True), nullable=False)
-    host_id = db.Column(UUID(as_uuid=True), nullable=False)
+    requester_id = db.Column(UUID_TYPE, nullable=False)
+    host_id = db.Column(UUID_TYPE, nullable=False)
     
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
@@ -287,11 +296,11 @@ class ExhibitionVisit(db.Model):
     """بازدید کلی از نمایشگاه"""
     __tablename__ = 'exhibition_visits'
     
-    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    exhibition_id = db.Column(UUID(as_uuid=True), db.ForeignKey('exhibitions.id'), nullable=False)
+    id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    exhibition_id = db.Column(UUID_TYPE, db.ForeignKey('exhibitions.id'), nullable=False)
     
     visitor_type = db.Column(db.String(50), nullable=False)
-    visitor_id = db.Column(UUID(as_uuid=True))
+    visitor_id = db.Column(UUID_TYPE)
     
     session_id = db.Column(db.String(100), nullable=False)
     ip_address = db.Column(db.String(45))
@@ -301,7 +310,7 @@ class ExhibitionVisit(db.Model):
     duration_seconds = db.Column(db.Integer, default=0)
     
     booths_visited = db.Column(db.Integer, default=0)
-    device_info = db.Column(JSONB, default={})
+    device_info = db.Column(db.JSON, default={})
     
     __table_args__ = (
         db.Index('idx_exhibition_visits_exhibition', 'exhibition_id'),
