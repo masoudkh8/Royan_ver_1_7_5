@@ -6,7 +6,7 @@ db = SQLAlchemy()
 
 # Import models
 
-from .user import User
+from .user import User, UserProfile
 from .order import Order
 from .notification import Notification
 from .message import Message
@@ -47,3 +47,9 @@ from .i18n import Language, TranslationKey, Translation, LocalizationSettings
 
 # Data Intelligence (بخش ۸)
 from .data_intelligence import MarketTrend, CompetitorAnalysis, DemandForecast, TradeStatistic, CustomReport, DataAlert
+
+# Social Network (بخش سوشال - مرحله ۱)
+from .social import Follow, Post, Comment, Like, update_user_relationships
+
+# Initialize social relationships after all models are imported
+update_user_relationships()

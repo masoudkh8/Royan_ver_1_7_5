@@ -13,6 +13,7 @@ from models import db, User, Order, DataProvider, Port, PremiumRequest
 from models.user import Role
 from routes.admin.routes import admin_bp
 from routes.users.routes import users_bp
+from routes.social import social_bp
 from config import Config
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -370,6 +371,7 @@ def create_app():
     app.register_blueprint(root_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(magazine_bp, url_prefix='/magazine')
+    app.register_blueprint(social_bp)
     
     init_api_docs(app)
 
