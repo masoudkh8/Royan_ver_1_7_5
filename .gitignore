@@ -4,16 +4,40 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py~
 
 # Database
 instance/*.db
 
 # Logs
-logs/
 *.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*
 
 # Dependencies
 .venv/
 venv/
-env/
+pip-log.txt
+pip-selfcheck.json
+
+# Testing
+.coverage
+coverage/
+htmlcov/
+.nox/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
 ```

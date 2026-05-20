@@ -162,9 +162,9 @@ class TradingWallet(db.Model):
         return f"<TradingWallet User: {self.user_id}>"
 
 
-class WalletTransaction(db.Model):
+class TradingWalletTransaction(db.Model):
     """
-    تراکنش‌های کیف پول معاملاتی
+    کیف پول معاملاتی - تراکنش‌ها
     ثبت تمام تغییرات موجودی در تالار معامله
     """
     __tablename__ = 'trading_wallet_transactions'
