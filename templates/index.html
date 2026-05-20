@@ -619,13 +619,22 @@
       </div>
     </nav>
 
-    <!-- دکمه‌های سمت چپ هدر (زبان، پشتیبانی، تم، ورود) -->
+    <!-- دکمه‌های سمت چپ هدر (زبان، سرچ، ورود) -->
     <div class="flex items-center gap-2 sm:gap-3">
       
-      <!-- انتخابگر زبان (نمایش در دسکتاپ) -->
-      <div class="hidden sm:flex items-center gap-1 bg-gray-100 dark:bg-dark-800/50 rounded-lg p-1 border border-gray-200 dark:border-gold/10">
-        <button class="px-3 py-1.5 text-xs font-medium rounded-md text-gray-600 dark:text-slate-400 hover:text-gold transition">FA</button>
-        <button class="px-3 py-1.5 text-xs font-medium rounded-md bg-gold text-dark-900 transition">EN</button>
+      <!-- جستجو (نمایش در دسکتاپ) -->
+      <div class="hidden md:flex items-center relative group">
+        <input type="text" placeholder="Search..." 
+               class="w-40 focus:w-56 transition-all duration-300 pl-9 pr-3 py-2 text-sm bg-gray-50 dark:bg-dark-800/50 border border-gray-200 dark:border-gold/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold text-gray-700 dark:text-slate-300">
+        <svg class="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </div>
+      
+      <!-- انتخابگر زبان (نمایش در موبایل و تبلت) -->
+      <div class="flex sm:hidden items-center gap-1 bg-gray-100 dark:bg-dark-800/50 rounded-lg p-1 border border-gray-200 dark:border-gold/10">
+        <button class="px-2.5 py-1 text-xs font-medium rounded-md text-gray-600 dark:text-slate-400 hover:text-gold transition">FA</button>
+        <button class="px-2.5 py-1 text-xs font-medium rounded-md bg-gold text-dark-900 transition">EN</button>
       </div>
       
       <!-- دکمه Dark Mode -->
@@ -646,24 +655,21 @@
         </svg>
       </button>
       
-      <!-- آیکون پشتیبانی -->
-      <a href="https://wa.me/989123456789?text=Hello%2C%20I%20need%20support%20with%20Metisma%20platform" 
-         target="_blank"
-         class="hidden sm:flex p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20 relative" 
-         aria-label="Support">
-        <svg class="w-5 h-5 text-gray-600 dark:text-slate-400 hover:text-gold" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-      </a>
-      
-      <!-- دکمه ثبت‌نام (نمایش در دسکتاپ) -->
-      <a href="/users/register" class="hidden lg:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gold/10 hover:bg-gold/20 
-                        border border-gold/30 text-gold font-medium text-sm transition no-select">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-        </svg>
-        Sign Up
-      </a>
+      <!-- دکمه‌های ورود (دسکتاپ) -->
+      <div class="hidden lg:flex items-center gap-2 pl-3 border-l border-gray-200 dark:border-gold/10">
+        <a href="/users/login?lang=fa" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border border-blue-200 dark:border-blue-800/30 text-blue-900 dark:text-blue-300 font-medium text-sm transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h14a2 2 0 012 2v8M3 21a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2M3 21h18"/>
+          </svg>
+          <span class="text-xs whitespace-nowrap">ایرانی</span>
+        </a>
+        <a href="/users/login?lang=en" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-medium text-sm shadow-md hover:shadow-lg transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-xs whitespace-nowrap">Int'l</span>
+        </a>
+      </div>
       
       <!-- دکمه منوی موبایل (همبرگری) -->
       <button id="mobileMenuBtn" class="lg:hidden p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20" 
@@ -781,28 +787,49 @@
         
         <!-- حذف لینک‌های تکراری از منوی موبایل چون در آکاردئون خدمات هستند -->
         
+        <!-- لینک‌های مینیمال درباره ما و تماس با ما -->
+        <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-gray-100 dark:border-gold/10">
+          <a href="/about" class="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-dark-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition group">
+            <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">درباره ما</span>
+          </a>
+          <a href="/contact" class="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-dark-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition group">
+            <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">تماس با ما</span>
+          </a>
+        </div>
+        
         <!-- پشتیبانی واتس‌اپ -->
         <a href="https://wa.me/989123456789?text=Hello%2C%20I%20need%20support%20with%20Metisma%20platform" 
            target="_blank"
-           class="flex items-center gap-3 px-4 py-3 rounded-xl text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition mt-2">
+           class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition mt-2 border border-green-200 dark:border-green-800/30">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
-          Chat with Support
+          <span class="text-sm font-medium">Chat with Support</span>
         </a>
       </nav>
       
-      <!-- فوتر منو: زبان و دکمه‌های ورود -->
+      <!-- فوتر منو: دکمه‌های ورود -->
       <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gold/10 space-y-3">
-        <!-- انتخابگر زبان موبایل -->
-        <div class="flex items-center justify-center gap-1 bg-gray-100 dark:bg-dark-700 rounded-lg p-1">
-          <button class="flex-1 px-3 py-2 text-xs font-medium rounded-md text-gray-600 dark:text-slate-400">FA</button>
-          <button class="flex-1 px-3 py-2 text-xs font-medium rounded-md bg-gold text-dark-900">EN</button>
-        </div>
         <!-- دکمه‌های احراز هویت -->
-        <div class="grid grid-cols-2 gap-3">
-          <a href="{{ url_for('users.login') }}" class="px-4 py-2.5 rounded-xl border border-gold/30 text-gold text-sm font-medium text-center hover:bg-gold/10 transition">Log In</a>
-          <a href="{{ url_for('users.register') }}" class="px-4 py-2.5 rounded-xl bg-gold text-dark-900 text-sm font-bold text-center hover:bg-gold-light transition">Sign Up</a>
+        <div class="space-y-2">
+          <a href="/users/login?lang=fa" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-blue-200 dark:border-blue-800/30 bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-300 text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/30 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-8a2 2 0 012-2h14a2 2 0 012 2v8M3 21a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2M3 21h18"/>
+            </svg>
+            ورود کاربران ایرانی
+          </a>
+          <a href="/users/login?lang=en" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-sm font-medium shadow-md hover:shadow-lg transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            International Login
+          </a>
         </div>
       </div>
     </div>
