@@ -365,6 +365,8 @@ def create_app():
 
     # Register blueprints
     from routes.magazine import magazine_bp
+    from routes.exhibition import exhibition_bp
+    from routes.trading import trading_bp
     from api_docs import init_api_docs
 
     app.register_blueprint(users_bp, url_prefix='/users')
@@ -372,6 +374,8 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(magazine_bp, url_prefix='/magazine')
     app.register_blueprint(social_bp)
+    app.register_blueprint(exhibition_bp)
+    app.register_blueprint(trading_bp)
     
     init_api_docs(app)
 
