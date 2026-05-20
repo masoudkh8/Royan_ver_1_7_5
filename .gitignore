@@ -1,1 +1,36 @@
-Nothing should be ignored based on the provided file changes. The modification of 'templates/index.html' is a source file change, and there are no build artifacts, dependencies, or temporary files in the change list.
+```
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+logs/
+*.log
+
+# Database
+instance/
+*.db
+
+# Environment
+.env
+.env.local
+.env.*
+```
