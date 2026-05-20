@@ -1,0 +1,6 @@
+{"timestamp": "2026-05-20 12:28:51,835", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 66}
+{"timestamp": "2026-05-20 12:29:03,116", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 66}
+{"timestamp": "2026-05-20 12:29:03,260", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 12:29:11,995", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 66}
+{"timestamp": "2026-05-20 12:29:12,132", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-20 12:29:12,397", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 428}
