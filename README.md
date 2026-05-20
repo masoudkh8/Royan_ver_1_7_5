@@ -1,92 +1,326 @@
-# 🌐 Flask Project with PostgreSQL
+# 🌍 Global Trade Intelligence Platform - پلتفرم هوشمند تجارت بین‌المللی
 
-## 📋 Description
-This project is a Flask-based web application that uses **PostgreSQL** as its database.
+## 📋 Overview / معرفی کلی
+یک پلتفرم جامع و enterprise-grade برای تجارت بین‌المللی که با **Flask 2.3.3** و **Python 3.11** ساخته شده است. این سیستم شامل ۱۶ بخش کلیدی، ۶۰+ مدل داده‌ای، و ۵۰+ endpoint می‌باشد.
 
-## ✅ Features
-- Fully compatible with PostgreSQL
-- No SQLite dependencies
-- SQLAlchemy models for database management
-- Migration support with Flask-Migrate
-- User authentication with Flask-Login
-- Email sending with Flask-Mail
-- File upload support
-- PWA (Progressive Web App)
+**A comprehensive enterprise-grade platform for international trade built with Flask 2.3.3 and Python 3.11, featuring 16 core modules, 60+ data models, and 50+ endpoints.**
 
-## 🚀 Quick Setup
+---
 
-### 1. Install Prerequisites
+## ✨ ویژگی‌های کلیدی / Key Features
+
+### 🧠 هوش مصنوعی و تحلیل داده / AI & Data Intelligence
+- **AI Core**: گفتگوی هوشمند، توصیه‌های تجاری، تولید محتوا
+- **Smart Map**: اطلاعات گمرکی، تحلیل ریسک، مسیرهای تجاری
+- **Data Intelligence**: پیش‌بینی تقاضا، تحلیل بازار، شناسایی فرصت‌ها
+
+### 💼 ابزارهای تجاری / Business Tools
+- **Marketplace**: مدیریت محصولات، درخواست‌ها، پیشنهادات
+- **TradeCredit**: حساب‌های اعتباری تجاری
+- **Consortium**: پروژه‌های انجمنی و قراردادهـا
+- **CRM & Leads**: مدیریت مشتریان و کمپین‌ها
+
+### 🎮 تعامل و یادگیری / Engagement & Learning
+- **Gamification**: مدال‌ها، چالش‌ها، سیستم پیشرفت
+- **Trust Stack**: امتیاز اعتماد چهارلایه‌ای
+- **Learning Hub**: دوره‌ها، گواهینامه‌ها، مسیرهای یادگیری
+
+### 🔐 امنیت و زیرساخت / Security & Infrastructure
+- **Auth & RBAC**: احراز هویت پیشرفته، مدیریت نقش‌ها
+- **Feature Flags**: سیستم هدف‌گیری پیشرفته
+- **Rate Limiting & Caching**: مبتنی بر Redis
+- **Monitoring**: endpointهای سلامت و متریک
+- **i18n**: چندزبانه (فارسی و انگلیسی)
+
+---
+
+## 🏗️ معماری سیستم / System Architecture
+
+| لایه | فناوری | توضیحات |
+|------|--------|---------|
+| **Backend** | Flask 2.3.3 + Python 3.11 | RESTful API، Jinja2 Templates |
+| **Database** | PostgreSQL 15 | ۶۰+ مدل، روابط پیچیده |
+| **Cache/Queue** | Redis 7 + Celery 5.4.0 | پردازش ناهمگام، کشینگ |
+| **Frontend** | Tailwind CSS 4.3 + HTML5 | ۳۱ قالب responsive، PWA |
+| **Containerization** | Docker + Docker Compose | ۶ سرویس مجزا |
+
+---
+
+## 🚀 راه‌اندازی سریع / Quick Setup
+
+### روش ۱: Docker (توصیه شده) / Method 1: Docker (Recommended)
 ```bash
-pip install -r requirements.txt
+# کپی کردن فایل محیطی
+cp .env.example .env
+
+# اجرای تمام سرویس‌ها
+docker-compose up -d
+
+# مشاهده لاگ‌ها
+docker-compose logs -f
 ```
 
-### 2. Setup PostgreSQL Database
+### روش ۲: نصب محلی / Method 2: Local Installation
+
+#### ۱. نصب پیش‌نیازها / Install Prerequisites
 ```bash
-# Create database
+pip install -r requirements.txt
+npm install
+```
+
+#### ۲. تنظیم دیتابیس PostgreSQL / Setup PostgreSQL Database
+```bash
+# ایجاد دیتابیس
 sudo -u postgres psql -c "CREATE DATABASE ports_db;"
 sudo -u postgres psql -c "CREATE USER postgres WITH PASSWORD 'postgres';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ports_db TO postgres;"
 ```
 
-### 3. Configure `.env` File
+#### ۳. پیکربندی فایل `.env` / Configure `.env` File
 ```env
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/ports_db
+REDIS_URL=redis://localhost:6379/0
 SECRET_KEY=your-secret-key-here
+FLASK_ENV=development
 ```
 
-### 4. Create Tables
+#### ۴. اجرای Migrationها / Run Migrations
 ```bash
-python init_postgres_db.py
+flask db upgrade
 ```
 
-### 5. Load Port Data (Optional)
-```bash
-python load_ports_to_postgres.py
-```
-
-### 6. Run Application
-```bash
-python app.py
-```
-
-## 📚 Full Documentation
-For complete guide, see `POSTGRES_GUIDE.md`.
-
-## 🔧 Useful Scripts
-- `init_postgres_db.py` - Create empty tables
-- `load_ports_to_postgres.py` - Load port data
-- `view_db.py` - View database
-
-## 📦 Models
-- User
-- Port
-- Order
-- Magazine
-- Notification
-- Message
-- DataProvider
-- PremiumRequest
-
-## 🛠 Technologies
-- Flask 2.3.3
-- SQLAlchemy 2.0.46
-- PostgreSQL
-- Flask-Migrate
-- Flask-Login
-- Flask-Mail
-
-## 🛠️ Building Tailwind CSS for Offline Use
-
-To build the Tailwind CSS file for offline use:
-
+#### ۵. ساخت Tailwind CSS / Build Tailwind CSS
 ```bash
 python build_tailwind.py
-```
-
-Or manually:
-
-```bash
+# یا
 npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
 ```
 
-This will compile all Tailwind classes used in your templates into a single `output.css` file that works without internet connection.
+#### ۶. بارگذاری داده‌های اولیه / Load Initial Data (Optional)
+```bash
+python init_postgres_db.py
+python load_ports_to_postgres.py
+```
+
+#### ۷. اجرای برنامه / Run Application
+```bash
+# توسعه
+python app.py
+
+# Production
+gunicorn wsgi:app -b 0.0.0.0:5000 --workers 4
+```
+
+---
+
+## 📦 ماژول‌ها و مدل‌ها / Modules & Models
+
+### مدل‌های اصلی / Core Models
+- **User**: کاربران، نقش‌ها، پروفایل‌ها
+- **Product**: محصولات، دسته‌بندی‌ها، موجودی
+- **Order**: سفارشات، وضعیت‌ها، پرداخت‌ها
+- **Wallet**: کیف پول، تراکنش‌ها، نرخ تبدیل
+- **TrustScore**: امتیاز اعتماد چهارلایه‌ای
+- **Gamification**: مدال‌ها، چالش‌ها، امتیازات
+
+### مدل‌های تخصصی / Specialized Models
+- **Port**: اطلاعات بنادر و گمرکات
+- **SmartMap**: داده‌های جغرافیایی و ریسک
+- **Consortium**: پروژه‌های انجمنی
+- **TradeCredit**: اعتبارات تجاری
+- **Course**: دوره‌های آموزشی
+- **Magazine**: مقالات و مجلات
+- **Lead**: سرنخ‌های تجاری
+- **Message**: پیام‌ها و چت
+- **Notification**: اعلان‌ها
+
+---
+
+## 🛠️ اسکریپت‌های کاربردی / Useful Scripts
+
+| اسکریپت | کاربرد |
+|---------|--------|
+| `init_postgres_db.py` | ایجاد جداول خالی |
+| `load_ports_to_postgres.py` | بارگذاری داده‌های بندر |
+| `view_db.py` | مشاهده دیتابیس |
+| `build_tailwind.py` | کامپایل Tailwind CSS |
+| `compile_translations.py` | کامپایل ترجمه‌ها |
+| `celery_app.py` | اجرای workerهای Celery |
+
+---
+
+## 🧪 تست و دیباگ / Testing & Debugging
+
+```bash
+# اجرای تست‌ها
+pytest tests/ -v
+
+# با پوشش کد
+pytest tests/ --cov=app --cov-report=html
+
+# مشاهده coverage
+coverage html
+```
+
+---
+
+## 📚 مستندات کامل / Full Documentation
+
+| مستند | توضیحات |
+|-------|---------|
+| `POSTGRES_GUIDE.md` | راهنمای کامل PostgreSQL |
+| `PRODUCTION_SETUP_GUIDE.md` | راهنمای استقرار در Production |
+| `FEATURE_FLAG_CICD_GUIDE.md` | راهنمای Feature Flags |
+| `API_DOCUMENTATION.md` | مستندات API |
+| `IMPLEMENTATION_ROADMAP.md` | نقشه راه پیاده‌سازی |
+| `MODELS_SUMMARY.md` | خلاصه مدل‌ها |
+| `README_TRANSLATION.md` | راهنمای ترجمه و چندزبانه |
+| `FALLBACK_MECHANISM.md` | مکانیزم fallback |
+| `OFFLINE_MODE_SUMMARY.md` | حالت آفلاین |
+
+---
+
+## 🌐 Routes و Endpoints
+
+### Users Routes
+- `/` - Landing Page
+- `/register` - ثبت‌نام
+- `/login` - ورود
+- `/profile` - پروفایل کاربری
+- `/orders` - سفارشات
+- `/chat` - چت
+
+### Admin Routes
+- `/admin/dashboard` - داشبورد مدیریت
+- `/admin/users` - مدیریت کاربران
+- `/admin/approvals` - تأییدیه‌ها
+
+### Magazine Routes
+- `/magazine` - مجله
+- `/magazine/subscribe` - اشتراک
+- `/magazine/ads` - تبلیغات
+
+---
+
+## 🐳 Docker Services
+
+| سرویس | پورت | توضیحات |
+|-------|------|---------|
+| `web` | 5000 | Flask Application |
+| `celery` | - | Celery Worker |
+| `redis` | 6379 | Redis Cache/Queue |
+| `postgres` | 5432 | PostgreSQL Database |
+| `pgadmin` | 5050 | مدیریت دیتابیس |
+| `flower` | 5555 | مانیتورینگ Celery |
+
+---
+
+## 🎨 UI/UX Features
+
+- **۳۱ قالب HTML** با طراحی responsive
+- **Tailwind CSS 4.3** با custom configuration
+- **Dark Mode** support
+- **PWA** capabilities
+- **Multi-language** (FA/EN)
+- **Professional Color Palette** برای ۵ بخش خدماتی:
+  - Trade & Finance: `#1e3a8a` (آبی تیره)
+  - Logistics: `#0f766e` (فیروزه‌ای تیره)
+  - Analytics & AI: `#4c1d95` (بنفش تیره)
+  - Business Tools: `#065f46` (سبز تیره)
+  - Learning & Engagement: `#9a3412` (نارنجی تیره)
+
+---
+
+## 📊 آمار پروژه / Project Statistics
+
+- **۵۴ فایل Python**
+- **۳۱ قالب HTML**
+- **۴۴ مستندات Markdown**
+- **۲۲ فایل مدل داده‌ای**
+- **۸,۶۶۳+ خط کد Python**
+- **۶۰+ مدل داده‌ای**
+- **۵۰+ endpoint**
+- **~32MB حجم پروژه**
+
+---
+
+## 🔒 امنیت / Security
+
+- ✅ CSRF Protection
+- ✅ Password Hashing (bcrypt)
+- ✅ Role-Based Access Control (RBAC)
+- ✅ Rate Limiting
+- ✅ Input Validation
+- ✅ SQL Injection Prevention
+- ✅ XSS Protection
+
+---
+
+## 🚀 Production Deployment
+
+### الزامات / Requirements
+- SSL/TLS Certificate
+- Domain Configuration
+- Backup Strategy (Daily/Weekly)
+- Monitoring Setup (Prometheus/Grafana)
+- Load Balancer (Nginx/HAProxy)
+
+### دستورات استقرار / Deployment Commands
+```bash
+# Build Docker images
+docker-compose build
+
+# Deploy to production
+docker-compose -f docker-compose.prod.yml up -d
+
+# Run migrations
+docker-compose exec web flask db upgrade
+
+# Restart services
+docker-compose restart
+```
+
+---
+
+## 🤝 مشارکت / Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
+
+---
+
+## 📄 لایسنس / License
+
+این پروژه تحت لایسنس خصوصی است.
+
+---
+
+## 📞 پشتیبانی / Support
+
+برای سوالات و پشتیبانی:
+- 📧 Email: support@example.com
+- 📚 Documentation: `/docs` directory
+- 🐛 Issues: GitHub Issues
+
+---
+
+## 🔄 به‌روزرسانی‌های اخیر / Recent Updates
+
+- ✅ افزودن رنگ‌بندی حرفه‌ای به ۵ بخش خدماتی در هدر
+- ✅ بهبود UX/UI منوی همبرگر موبایل
+- ✅ بهینه‌سازی Transitionها و Hover effects
+- ✅ افزودن پشتیبانی از Dark Mode
+- ✅ بهبود Performance با Caching
+
+---
+
+<div align="center">
+
+**ساخته شده با ❤️ برای تجارت بین‌المللی**
+
+**Built with ❤️ for Global Trade**
+
+</div>
