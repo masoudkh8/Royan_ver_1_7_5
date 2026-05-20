@@ -51,5 +51,19 @@ from .data_intelligence import MarketTrend, CompetitorAnalysis, DemandForecast, 
 # Social Network (بخش سوشال - مرحله ۱)
 from .social import Follow, Post, Comment, Like, update_user_relationships
 
+# Exhibition Hall (نمایشگاه آنلاین - مرحله ۲)
+from .exhibition import (
+    Exhibition, Booth, BoothVisit, BoothInteraction, BoothAppointment, ExhibitionVisit,
+    ExhibitionStatus, BoothType,
+    init_exhibition_db
+)
+
+# Trading Hall (تالار معاملاتی - مرحله ۲)
+from .trading import (
+    TradingPair, TradingWallet, WalletTransaction, TradeOrder, Trade, MarketData, TradingSetting,
+    OrderType, OrderSide, OrderStatus,
+    init_trading_db
+)
+
 # Initialize social relationships after all models are imported
 update_user_relationships()

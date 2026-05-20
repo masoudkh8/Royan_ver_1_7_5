@@ -1,27 +1,16 @@
-```gitignore
+```
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.ENV.*
-.venv.bak/
-env.bak/
 
 # Logs
-logs/
 *.log
-
-# Database
-instance/*.db
+logs/
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 ```
