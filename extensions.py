@@ -2,6 +2,7 @@ from flask_mail import Mail
 from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_sqlalchemy import SQLAlchemy
 
 mail = Mail()
 cache = Cache()
@@ -11,3 +12,4 @@ limiter = Limiter(
     storage_uri="memory://",
     strategy="moving-window"
 )
+db = SQLAlchemy()
