@@ -10,7 +10,7 @@ from decimal import Decimal
 import json
 
 from models.trading import (
-    TradingPair, TradingWallet, WalletTransaction, 
+    TradingPair, TradingWallet, TradingWalletTransaction, 
     TradeOrder, Trade, MarketData, TradingSetting
 )
 from models.user import User
@@ -121,8 +121,8 @@ def wallet():
         db.session.commit()
     
     # Get recent transactions
-    transactions = WalletTransaction.query.filter_by(wallet_id=wallet.id)\
-        .order_by(desc(WalletTransaction.created_at)).limit(20).all()
+    transactions = TradingWalletTransaction.query.filter_by(wallet_id=wallet.id)\
+        .order_by(desc(TradingWalletTransaction.created_at)).limit(20).all()
     
     # Get active orders
     active_orders = TradeOrder.query.filter_by(

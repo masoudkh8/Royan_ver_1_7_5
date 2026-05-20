@@ -60,7 +60,7 @@ from .exhibition import (
 
 # Trading Hall (تالار معاملاتی - مرحله ۲)
 from .trading import (
-    TradingPair, TradingWallet, WalletTransaction, TradeOrder, Trade, MarketData, TradingSetting,
+    TradingPair, TradingWallet, TradingWalletTransaction, TradeOrder, Trade, MarketData, TradingSetting,
     OrderType, OrderSide, OrderStatus,
     init_trading_db
 )
