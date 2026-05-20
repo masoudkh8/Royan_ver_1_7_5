@@ -162,18 +162,57 @@
       transform: rotate(180deg);
     }
     
-    /* استایل دسته‌بندی‌های خدمات در دسکتاپ - ۵ ستونی */
+    /* Professional Color Palette for Services - Enterprise Grade */
+    :root {
+      --color-trade: #1e3a8a;       /* Royal Navy - Trust & Capital */
+      --color-trade-light: #dbeafe;
+      --color-trade-hover: #1e40af;
+      
+      --color-logistics: #0f766e;   /* Deep Teal - Infrastructure & Movement */
+      --color-logistics-light: #ccfbf1;
+      --color-logistics-hover: #115e59;
+      
+      --color-analytics: #4c1d95;   /* Deep Indigo - Intelligence & Tech */
+      --color-analytics-light: #ede9fe;
+      --color-analytics-hover: #5b21b6;
+      
+      --color-tools: #065f46;       /* Forest Green - Stability & Growth */
+      --color-tools-light: #d1fae5;
+      --color-tools-hover: #047857;
+      
+      --color-learning: #9a3412;    /* Burnt Sienna - Wisdom & Experience */
+      --color-learning-light: #ffedd5;
+      --color-learning-hover: #c2410c;
+    }
+
+    /* Desktop Service Categories - Professional Styling */
     .desktop-service-category {
       padding: 0.75rem;
-      background: rgba(212, 175, 55, 0.03);
       border-radius: 0.625rem;
       border-left: 3px solid;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .desktop-service-category.trade { border-left-color: #d4af37; }
-    .desktop-service-category.logistics { border-left-color: #3b82f6; }
-    .desktop-service-category.analytics { border-left-color: #a855f7; }
-    .desktop-service-category.business { border-left-color: #22c55e; }
-    .desktop-service-category.learning { border-left-color: #f97316; }
+    
+    .desktop-service-category.trade { 
+      border-left-color: var(--color-trade);
+      background: rgba(30, 58, 138, 0.03);
+    }
+    .desktop-service-category.logistics { 
+      border-left-color: var(--color-logistics);
+      background: rgba(15, 118, 110, 0.03);
+    }
+    .desktop-service-category.analytics { 
+      border-left-color: var(--color-analytics);
+      background: rgba(76, 29, 149, 0.03);
+    }
+    .desktop-service-category.business { 
+      border-left-color: var(--color-tools);
+      background: rgba(6, 95, 70, 0.03);
+    }
+    .desktop-service-category.learning { 
+      border-left-color: var(--color-learning);
+      background: rgba(154, 52, 18, 0.03);
+    }
     
     .desktop-service-category h4 {
       font-size: 0.75rem;
@@ -188,6 +227,12 @@
       border-bottom-color: rgba(255,255,255,0.08);
     }
     
+    .desktop-service-category.trade h4 { color: var(--color-trade); }
+    .desktop-service-category.logistics h4 { color: var(--color-logistics); }
+    .desktop-service-category.analytics h4 { color: var(--color-analytics); }
+    .desktop-service-category.business h4 { color: var(--color-tools); }
+    .desktop-service-category.learning h4 { color: var(--color-learning); }
+    
     .desktop-service-link {
       display: block;
       padding: 0.5rem 0.625rem;
@@ -195,24 +240,64 @@
       border-radius: 0.375rem;
       transition: all 0.2s ease;
       font-size: 0.8125rem;
-    }
-    .desktop-service-link:hover {
-      background: rgba(212, 175, 55, 0.08);
+      color: inherit;
     }
     
-    /* استایل دسته‌بندی‌های خدمات در موبایل - لمسی و راحت */
+    .desktop-service-category.trade .desktop-service-link:hover { 
+      background: var(--color-trade-light);
+      color: var(--color-trade-hover);
+      padding-left: 0.875rem;
+    }
+    .desktop-service-category.logistics .desktop-service-link:hover { 
+      background: var(--color-logistics-light);
+      color: var(--color-logistics-hover);
+      padding-left: 0.875rem;
+    }
+    .desktop-service-category.analytics .desktop-service-link:hover { 
+      background: var(--color-analytics-light);
+      color: var(--color-analytics-hover);
+      padding-left: 0.875rem;
+    }
+    .desktop-service-category.business .desktop-service-link:hover { 
+      background: var(--color-tools-light);
+      color: var(--color-tools-hover);
+      padding-left: 0.875rem;
+    }
+    .desktop-service-category.learning .desktop-service-link:hover { 
+      background: var(--color-learning-light);
+      color: var(--color-learning-hover);
+      padding-left: 0.875rem;
+    }
+    
+    /* Mobile Service Categories - Touch-Friendly */
     .service-category {
       margin-bottom: 0.875rem;
       padding: 0.625rem;
-      background: rgba(212, 175, 55, 0.03);
       border-radius: 0.625rem;
       border-left: 3px solid;
+      transition: all 0.3s ease;
     }
-    .service-category.trade { border-left-color: #d4af37; }
-    .service-category.logistics { border-left-color: #3b82f6; }
-    .service-category.analytics { border-left-color: #a855f7; }
-    .service-category.business { border-left-color: #22c55e; }
-    .service-category.learning { border-left-color: #f97316; }
+    
+    .service-category.trade { 
+      border-left-color: var(--color-trade);
+      background: rgba(30, 58, 138, 0.03);
+    }
+    .service-category.logistics { 
+      border-left-color: var(--color-logistics);
+      background: rgba(15, 118, 110, 0.03);
+    }
+    .service-category.analytics { 
+      border-left-color: var(--color-analytics);
+      background: rgba(76, 29, 149, 0.03);
+    }
+    .service-category.business { 
+      border-left-color: var(--color-tools);
+      background: rgba(6, 95, 70, 0.03);
+    }
+    .service-category.learning { 
+      border-left-color: var(--color-learning);
+      background: rgba(154, 52, 18, 0.03);
+    }
     
     .service-category h4 {
       font-size: 0.65rem;
@@ -227,6 +312,12 @@
       border-bottom-color: rgba(255,255,255,0.08);
     }
     
+    .service-category.trade h4 { color: var(--color-trade); }
+    .service-category.logistics h4 { color: var(--color-logistics); }
+    .service-category.analytics h4 { color: var(--color-analytics); }
+    .service-category.business h4 { color: var(--color-tools); }
+    .service-category.learning h4 { color: var(--color-learning); }
+    
     .service-link {
       display: block;
       padding: 0.375rem 0.625rem;
@@ -235,10 +326,33 @@
       transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
       font-size: 0.8125rem;
+      color: inherit;
     }
-    .service-link:active {
-      background: rgba(212, 175, 55, 0.1);
-      transform: scale(0.98);
+    
+    .service-category.trade .service-link:hover,
+    .service-category.trade .service-link:active { 
+      background: var(--color-trade-light);
+      color: var(--color-trade-hover);
+    }
+    .service-category.logistics .service-link:hover,
+    .service-category.logistics .service-link:active { 
+      background: var(--color-logistics-light);
+      color: var(--color-logistics-hover);
+    }
+    .service-category.analytics .service-link:hover,
+    .service-category.analytics .service-link:active { 
+      background: var(--color-analytics-light);
+      color: var(--color-analytics-hover);
+    }
+    .service-category.business .service-link:hover,
+    .service-category.business .service-link:active { 
+      background: var(--color-tools-light);
+      color: var(--color-tools-hover);
+    }
+    .service-category.learning .service-link:hover,
+    .service-category.learning .service-link:active { 
+      background: var(--color-learning-light);
+      color: var(--color-learning-hover);
     }
     
     /* افکت هاور کارت‌ها: حرکت به بالا و سایه طلایی */
