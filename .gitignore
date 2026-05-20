@@ -1,0 +1,27 @@
+```
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+
+# Environment
+.env
+.env.local
+.env.*
+```
+
+instance/
+app_b.py
+requirements3.txt
+texts_to_translate.txt
+translations_remaining.txt
+.idea
+.idea/

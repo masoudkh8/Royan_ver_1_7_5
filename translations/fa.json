@@ -1,0 +1,73 @@
+{
+  "common": {
+    "login": "ورود",
+    "register": "ثبت‌نام",
+    "logout": "خروج",
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "username": "نام کاربری",
+    "welcome": "خوش آمدید",
+    "submit": "ارسال",
+    "cancel": "انصراف",
+    "save": "ذخیره",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "view": "مشاهده",
+    "back": "بازگشت",
+    "next": "بعدی",
+    "previous": "قبلی",
+    "search": "جستجو",
+    "filter": "فیلتر",
+    "close": "بستن",
+    "confirm": "تأیید",
+    "yes": "بله",
+    "no": "خیر"
+  },
+  "roles": {
+    "buyer": "خریدار",
+    "seller": "فروشنده",
+    "broker": "کارگزار",
+    "admin": "مدیر",
+    "special": "ویژه"
+  },
+  "messages": {
+    "login_success": "✅ خوش آمدید!",
+    "login_error": "❌ ایمیل یا رمز عبور اشتباه است.",
+    "register_success": "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید.",
+    "register_error_username": "❌ نام کاربری قبلاً گرفته شده است.",
+    "register_error_email": "❌ ایمیل قبلاً استفاده شده است.",
+    "logout_success": "👋 با موفقیت خارج شدید.",
+    "profile_updated": "✅ پروفایل به‌روزرسانی شد.",
+    "access_denied": "❌ دسترسی غیرمجاز.",
+    "order_placed": "✅ سفارش با موفقیت ثبت شد.",
+    "fill_required_fields": "لطفاً فیلدهای الزامی را پر کنید."
+  },
+  "pages": {
+    "home": "صفحه اصلی",
+    "dashboard": "داشبورد",
+    "profile": "پروفایل",
+    "orders": "سفارشات",
+    "chat": "چت",
+    "map": "نقشه",
+    "magazine": "مجله"
+  },
+  "labels": {
+    "company_name": "نام شرکت",
+    "country": "کشور",
+    "phone": "تلفن",
+    "your_role": "نقش شما",
+    "account_login": "ورود به حساب",
+    "no_account": "حساب ندارید؟",
+    "have_account": "حساب دارید؟",
+    "registration": "ثبت‌نام",
+    "sign_up": "ثبت‌نام",
+    "our_services": "خدمات ما",
+    "manage_orders_service": "مدیریت سفارشات",
+    "security_auth": "امنیت و احراز هویت",
+    "support_24_7": "پشتیبانی ۲۴/۷",
+    "cooperate_with_us": "همکاری با ما",
+    "install_app": "نصب برنامه",
+    "dark_mode": "حالت تاریک",
+    "light_mode": "حالت روشن"
+  }
+}
