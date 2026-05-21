@@ -1,7 +1,7 @@
 # routes/social/routes.py
 """
-ماژول路由‌های شبکه اجتماعی متیسما
-شامل: پروفایل عمومی، فید اخبار، فالو/آنفالو، لایک، کامنت
+Metisma Social Network Routes Module
+Includes: Public Profile, News Feed, Follow/Unfollow, Like, Comment
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, current_app
@@ -18,19 +18,19 @@ social_bp = Blueprint('social', __name__, url_prefix='/social')
 
 
 # ============================================
-# ۱. پروفایل عمومی (Public Profile)
+# 1. Public Profile
 # ============================================
 
 @social_bp.route('/profile/<username>')
 def public_profile(username):
     """
-    نمایش پروفایل عمومی کاربر
-    این صفحه برای عموم (حتی بدون لاگین) قابل مشاهده است - SEO Friendly
+    Display user's public profile
+    This page is viewable by everyone (even without login) - SEO Friendly
     """
-    # دریافت کاربر از دیتابیس
+    # Get user from database
     profile_user = User.query.filter_by(username=username, is_active=True).first_or_404()
     
-    # دریافت پست‌های عمومی کاربر
+    # Get user's public posts
     profile_posts = Post.query.filter_by(
         author_id=profile_user.id,
         visibility='public'
@@ -42,21 +42,21 @@ def public_profile(username):
 
 
 # ============================================
-# ۲. سیستم فالو/کانکشن (Graph/Connections)
+# 2. Follow/Connection System (Graph/Connections)
 # ============================================
 
 @social_bp.route('/follow/<int:user_id>', methods=['POST'])
 @login_required
 def follow_user(user_id):
     """
-    دنبال کردن یک کاربر
+    Follow a user
     """
     if current_user.id == user_id:
-        return jsonify({'error': 'نمی‌توانید خودتان را دنبال کنید'}), 400
+        return jsonify({'error': 'You cannot follow yourself'}), 400
     
     user_to_follow = User.query.get_or_404(user_id)
     
-    # بررسی اینکه آیا قبلاً فالو کرده است
+    # Check if already following
     existing_follow = Follow.is_following(current_user.id, user_id)
     
     if not existing_follow:
@@ -68,12 +68,12 @@ def follow_user(user_id):
         db.session.add(follow)
         db.session.commit()
         
-        # ایجاد نوتیفیکیشن برای کاربر دنبال شده
+        # Create notification for the followed user
         from models.notification import Notification
         notification = Notification(
             user_id=user_id,
-            title='دنبال‌کننده جدید',
-            message=f'{current_user.username} شما را دنبال کرد.',
+            title=t_('social.new_follower_notification'),
+            message=f'{current_user.username} {t_("social.followed_you")|default("started following you")}.',
             type='follow',
             actor_id=current_user.id
         )
@@ -82,23 +82,23 @@ def follow_user(user_id):
         
         return jsonify({
             'success': True,
-            'message': f'شما {user_to_follow.username} را دنبال کردید.',
+            'message': f'You are now following {user_to_follow.username}.',
             'followers_count': Follow.get_followers_count(user_id)
         })
     else:
-        return jsonify({'error': 'شما قبلاً این کاربر را دنبال کرده‌اید'}), 400
+        return jsonify({'error': 'You are already following this user'}), 400
 
 
 @social_bp.route('/unfollow/<int:user_id>', methods=['POST'])
 @login_required
 def unfollow_user(user_id):
     """
-    آنفالو کردن یک کاربر
+    Unfollow a user
     """
     if current_user.id == user_id:
-        return jsonify({'error': 'نمی‌توانید خودتان را آنفالو کنید'}), 400
+        return jsonify({'error': 'You cannot unfollow yourself'}), 400
     
-    # پیدا کردن رکورد فالو
+    # Find follow record
     follow = Follow.query.filter_by(
         follower_id=current_user.id,
         following_id=user_id
@@ -110,17 +110,17 @@ def unfollow_user(user_id):
         
         return jsonify({
             'success': True,
-            'message': 'کاربر از لیست دنبال‌شونده‌ها حذف شد.',
+            'message': 'User removed from following list.',
             'followers_count': Follow.get_followers_count(user_id)
         })
     else:
-        return jsonify({'error': 'شما این کاربر را دنبال نمی‌کنید'}), 400
+        return jsonify({'error': 'You are not following this user'}), 400
 
 
 @social_bp.route('/followers/<int:user_id>')
 def user_followers(user_id):
     """
-    نمایش لیست دنبال‌کنندگان یک کاربر
+    Display list of user's followers
     """
     user = User.query.get_or_404(user_id)
     followers = Follow.query.filter_by(following_id=user_id).all()
@@ -133,7 +133,7 @@ def user_followers(user_id):
 @social_bp.route('/following/<int:user_id>')
 def user_following(user_id):
     """
-    نمایش لیست افرادی که کاربر دنبال می‌کند
+    Display list of users that this user is following
     """
     user = User.query.get_or_404(user_id)
     following = Follow.query.filter_by(follower_id=user_id).all()
@@ -144,17 +144,17 @@ def user_following(user_id):
 
 
 # ============================================
-# ۳. فید اخبار (The Feed)
+# 3. News Feed (The Feed)
 # ============================================
 
 @social_bp.route('/feed')
 @login_required
 def news_feed():
     """
-    فید اخبار شخصی‌سازی شده برای کاربر
-    نمایش پست‌های کسانی که فالو کرده + پست‌های برگزیده
+    Personalized news feed for user
+    Display posts from followed users + featured posts
     """
-    # دریافت فید با الگوریتم ساده
+    # Get feed with simple algorithm
     feed_posts = Post.get_feed_for_user(current_user.id, limit=50, include_featured=True)
     
     return render_template('users/feed.html', feed_posts=feed_posts)
@@ -164,24 +164,24 @@ def news_feed():
 @login_required
 def create_post():
     """
-    ایجاد پست جدید
+    Create new post
     """
     if request.method == 'POST':
         content = request.form.get('content', '').strip()
         visibility = request.form.get('visibility', 'public')
         
         if not content:
-            flash('محتوای پست نمی‌تواند خالی باشد.', 'error')
+            flash(t_('social.post_content_empty'), 'error')
             return redirect(url_for('social.news_feed'))
         
-        # پردازش فایل‌های آپلود شده (در صورت وجود)
+        # Process uploaded files (if any)
         media = {'images': [], 'files': []}
-        # TODO: اضافه کردن منطق آپلود فایل
+        # TODO: Add file upload logic
         
-        # پردازش تگ‌های محصولات/شرکت‌ها
+        # Process product/company tags
         tagged_products = []
         tagged_companies = []
-        # TODO: اضافه کردن منطق تگ کردن
+        # TODO: Add tagging logic
         
         post = Post(
             author_id=current_user.id,
@@ -195,7 +195,7 @@ def create_post():
         db.session.add(post)
         db.session.commit()
         
-        flash('پست شما با موفقیت منتشر شد.', 'success')
+        flash(t_('social.post_published'), 'success')
         return redirect(url_for('social.public_profile', username=current_user.username))
     
     return render_template('users/create_post.html')
@@ -204,15 +204,15 @@ def create_post():
 @social_bp.route('/post/<int:post_id>')
 def view_post(post_id):
     """
-    نمایش یک پست خاص
+    Display a specific post
     """
     post = Post.query.get_or_404(post_id)
     
-    # افزایش تعداد بازدید
+    # Increment view count
     post.views_count += 1
     db.session.commit()
     
-    # دریافت کامنت‌ها
+    # Get comments
     comments = Comment.query.filter_by(
         post_id=post_id,
         is_deleted=False
@@ -225,34 +225,34 @@ def view_post(post_id):
 @login_required
 def delete_post(post_id):
     """
-    حذف پست (فقط توسط نویسنده یا ادمین)
+    Delete post (only by author or admin)
     """
     post = Post.query.get_or_404(post_id)
     
     if post.author_id != current_user.id and not current_user.is_admin_or_moderator:
-        flash('شما مجوز حذف این پست را ندارید.', 'error')
+        flash(t_('messages.access_denied'), 'error')
         return redirect(url_for('social.view_post', post_id=post_id))
     
     db.session.delete(post)
     db.session.commit()
     
-    flash('پست با موفقیت حذف شد.', 'success')
+    flash(t_('social.post_deleted'), 'success')
     return redirect(url_for('social.public_profile', username=post.author.username))
 
 
 # ============================================
-# ۴. تعاملات (Engagement) - لایک و کامنت
+# 4. Engagement - Like and Comment
 # ============================================
 
 @social_bp.route('/post/<int:post_id>/like', methods=['POST'])
 @login_required
 def like_post(post_id):
     """
-    لایک کردن یک پست
+    Like a post
     """
     post = Post.query.get_or_404(post_id)
     
-    # بررسی اینکه آیا قبلاً لایک کرده است
+    # Check if already liked
     existing_like = Like.is_liked(current_user.id, 'post', post_id)
     
     if not existing_like:
@@ -263,16 +263,16 @@ def like_post(post_id):
         )
         db.session.add(like)
         
-        # افزایش شمارنده لایک
+        # Increment like counter
         post.likes_count += 1
         
-        # ایجاد نوتیفیکیشن برای نویسنده پست (اگر لایک کننده خودش نیست)
+        # Create notification for post author (if not liking own post)
         if post.author_id != current_user.id:
             from models.notification import Notification
             notification = Notification(
                 user_id=post.author_id,
-                title='لایک جدید',
-                message=f'{current_user.username} پست شما را لایک کرد.',
+                title=t_('social.new_like_notification'),
+                message=f'{current_user.username} {t_("social.liked_your_post")|default("liked your post")}.',
                 type='like',
                 actor_id=current_user.id,
                 related_id=post_id
@@ -287,7 +287,7 @@ def like_post(post_id):
             'is_liked': True
         })
     else:
-        # آنلایک کردن
+        # Unlike
         like = Like.query.filter_by(
             user_id=current_user.id,
             target_type='post',
@@ -305,22 +305,22 @@ def like_post(post_id):
                 'is_liked': False
             })
     
-    return jsonify({'error': 'خطا در عملیات لایک'}), 500
+    return jsonify({'error': 'Error in like operation'}), 500
 
 
 @social_bp.route('/post/<int:post_id>/comment', methods=['POST'])
 @login_required
 def add_comment(post_id):
     """
-    افزودن کامنت به یک پست
+    Add comment to a post
     """
     post = Post.query.get_or_404(post_id)
     
     content = request.form.get('content', '').strip()
-    parent_id = request.form.get('parent_id', type=int)  # برای پاسخ به کامنت
+    parent_id = request.form.get('parent_id', type=int)  # For reply to comment
     
     if not content:
-        flash('متن کامنت نمی‌تواند خالی باشد.', 'error')
+        flash(t_('social.comment_empty'), 'error')
         return redirect(url_for('social.view_post', post_id=post_id))
     
     comment = Comment(
@@ -332,30 +332,30 @@ def add_comment(post_id):
     
     db.session.add(comment)
     
-    # افزایش شمارنده کامنت
+    # Increment comment counter
     post.comments_count += 1
     
-    # ایجاد نوتیفیکیشن برای نویسنده پست (اگر کامنت گذار خودش نیست)
+    # Create notification for post author (if not commenting on own post)
     if post.author_id != current_user.id:
         from models.notification import Notification
         notification = Notification(
             user_id=post.author_id,
-            title='کامنت جدید',
-            message=f'{current_user.username} روی پست شما کامنت گذاشت.',
+            title=t_('social.new_comment_notification'),
+            message=f'{current_user.username} {t_("social.commented_on_your_post")|default("commented on your post")}.',
             type='comment',
             actor_id=current_user.id,
             related_id=post_id
         )
         db.session.add(notification)
     
-    # اگر پاسخ به کامنت دیگری است، به صاحب کامنت اصلی هم نوتیفیکیشن بده
+    # If replying to another comment, notify the original comment author
     if parent_id:
         parent_comment = Comment.query.get(parent_id)
         if parent_comment and parent_comment.author_id != current_user.id:
             notification = Notification(
                 user_id=parent_comment.author_id,
-                title='پاسخ به کامنت',
-                message=f'{current_user.username} به کامنت شما پاسخ داد.',
+                title=t_('social.new_reply_notification'),
+                message=f'{current_user.username} {t_("social.replied_to_your_comment")|default("replied to your comment")}.',
                 type='comment_reply',
                 actor_id=current_user.id,
                 related_id=post_id
@@ -364,7 +364,7 @@ def add_comment(post_id):
     
     db.session.commit()
     
-    flash('کامنت شما با موفقیت ثبت شد.', 'success')
+    flash(t_('social.comment_posted'), 'success')
     return redirect(url_for('social.view_post', post_id=post_id))
 
 
@@ -372,7 +372,7 @@ def add_comment(post_id):
 @login_required
 def like_comment(comment_id):
     """
-    لایک کردن یک کامنت
+    Like a comment
     """
     comment = Comment.query.get_or_404(comment_id)
     
@@ -387,13 +387,13 @@ def like_comment(comment_id):
         db.session.add(like)
         comment.likes_count += 1
         
-        # نوتیفیکیشن برای صاحب کامنت
+        # Notification for comment owner
         if comment.author_id != current_user.id:
             from models.notification import Notification
             notification = Notification(
                 user_id=comment.author_id,
-                title='لایک کامنت',
-                message=f'{current_user.username} کامنت شما را لایک کرد.',
+                title=t_('social.new_like_notification'),
+                message=f'{current_user.username} {t_("social.liked_your_comment")|default("liked your comment")}.',
                 type='like',
                 actor_id=current_user.id,
                 related_id=comment_id
@@ -425,43 +425,43 @@ def like_comment(comment_id):
                 'is_liked': False
             })
     
-    return jsonify({'error': 'خطا در عملیات لایک'}), 500
+    return jsonify({'error': 'Error in like operation'}), 500
 
 
 @social_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
 @login_required
 def delete_comment(comment_id):
     """
-    حذف کامنت (نرم‌دیلیت)
+    Delete comment (soft delete)
     """
     comment = Comment.query.get_or_404(comment_id)
     
     if comment.author_id != current_user.id and not current_user.is_admin_or_moderator:
-        flash('شما مجوز حذف این کامنت را ندارید.', 'error')
+        flash(t_('messages.access_denied'), 'error')
         return redirect(url_for('social.view_post', post_id=comment.post_id))
     
-    # نرم‌دیلیت برای حفظ زنجیره مکالمه
+    # Soft delete to preserve conversation thread
     comment.is_deleted = True
-    comment.content = '[این کامنت حذف شده است]'
+    comment.content = t_('social.this_comment_deleted')
     db.session.commit()
     
-    # کاهش شمارنده کامنت پست
+    # Decrease post comment counter
     comment.post.comments_count -= 1
     db.session.commit()
     
-    flash('کامنت حذف شد.', 'success')
+    flash(t_('social.comment_deleted'), 'success')
     return redirect(url_for('social.view_post', post_id=comment.post_id))
 
 
 # ============================================
-# ۵. API endpoints برای AJAX calls
+# 5. API endpoints for AJAX calls
 # ============================================
 
 @social_bp.route('/api/check-follow/<int:user_id>')
 @login_required
 def check_follow(user_id):
     """
-    بررسی وضعیت فالو (API)
+    Check follow status (API)
     """
     is_following = Follow.is_following(current_user.id, user_id)
     return jsonify({
@@ -474,7 +474,7 @@ def check_follow(user_id):
 @social_bp.route('/api/post/<int:post_id>/stats')
 def get_post_stats(post_id):
     """
-    دریافت آمار پست (API)
+    Get post statistics (API)
     """
     post = Post.query.get_or_404(post_id)
     is_liked = False
@@ -492,20 +492,20 @@ def get_post_stats(post_id):
 
 
 # ============================================
-# ۶. صفحات کمکی
+# 6. Helper Pages
 # ============================================
 
 @social_bp.route('/explore')
 def explore():
     """
-    کشف پست‌های برگزیده و کاربران پیشنهادی
+    Discover featured posts and suggested users
     """
     featured_posts = Post.query.filter_by(
         is_featured=True,
         visibility='public'
     ).order_by(Post.created_at.desc()).limit(20).all()
     
-    # کاربران پیشنهادی (بر اساس TrustScore)
+    # Suggested users (based on TrustScore)
     suggested_users = User.query.join(UserProfile).filter(
         User.is_active == True,
         User.role.value.in_(['producer', 'buyer', 'broker'])
