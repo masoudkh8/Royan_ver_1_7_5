@@ -405,7 +405,7 @@ def upload_documents():
         current_app.logger.info(f"Files received in POST: {list(request.files.keys())}")
         
         # پردازش فایل‌های آپلود شده - فقط passport و license که در فرم HTML وجود دارند
-        for field_name in ['passport_file', 'license_file']:
+        for field_name in ['passport', 'license']:
             file = request.files.get(field_name)
             if file and file.filename != '':
                 is_valid, error_msg = validate_file(file)
