@@ -79,21 +79,32 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def validate_file(file):
+def validate_file(file, image_only=False):
     """اعتبارسنجی کامل فایل آپلود شده"""
     if not file or file.filename == '':
         return False, "فایلی انتخاب نشده است"
     
-    if not allowed_file(file.filename):
-        return False, "نوع فایل مجاز نیست (فقط PDF, PNG, JPG)"
+    # Determine allowed extensions based on type
+    if image_only:
+        allowed_exts = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+        max_size = current_app.config.get('MAX_IMAGE_SIZE', 5 * 1024 * 1024)
+        error_msg = "نوع فایل مجاز نیست (فقط JPG, PNG, GIF, WEBP)"
+    else:
+        allowed_exts = ALLOWED_EXTENSIONS
+        max_size = MAX_FILE_SIZE
+        error_msg = "نوع فایل مجاز نیست (فقط PDF, PNG, JPG)"
+    
+    if '.' not in file.filename or file.filename.rsplit('.', 1)[1].lower() not in allowed_exts:
+        return False, error_msg
     
     # بررسی اندازه فایل
     file.seek(0, os.SEEK_END)
     file_size = file.tell()
     file.seek(0)
     
-    if file_size > MAX_FILE_SIZE:
-        return False, "حجم فایل نباید بیشتر از 5MB باشد"
+    if file_size > max_size:
+        size_mb = max_size / (1024 * 1024)
+        return False, f"حجم فایل نباید بیشتر از {size_mb:.0f}MB باشد"
     
     return True, ""
 
@@ -498,11 +509,37 @@ def edit_profile():
         social_links = {k: v for k, v in social_links.items() if v}
         current_user.social_links = json.dumps(social_links) if social_links else None
         
+        # ✅ آپلود عکس پروفایل
+        profile_file = request.files.get('profile_image')
+        if profile_file and profile_file.filename != '':
+            is_valid, error_msg = validate_file(profile_file, image_only=True)
+            if not is_valid:
+                flash(f"❌ {error_msg}", "error")
+            else:
+                upload_folder = current_app.config.get('PROFILE_UPLOAD_FOLDER', 'static/uploads/profiles')
+                os.makedirs(upload_folder, exist_ok=True)
+                filename = secure_filename(profile_file.filename)
+                unique_filename = f"{current_user.id}_{secrets.token_hex(8)}_{filename}"
+                filepath = os.path.join(upload_folder, unique_filename)
+                img = Image.open(profile_file)
+                if img.mode in ('RGBA', 'LA', 'P'):
+                    img = img.convert('RGB')
+                img.thumbnail((400, 400), Image.Resampling.LANCZOS)
+                img.save(filepath, quality=85, optimize=True)
+                if current_user.profile_image:
+                    old_path = os.path.join(current_app.root_path, current_user.profile_image.lstrip('/'))
+                    if os.path.exists(old_path):
+                        try:
+                            os.remove(old_path)
+                        except Exception as e:
+                            current_app.logger.error(f"Error deleting old profile image: {e}")
+                current_user.profile_image = f'/static/uploads/profiles/{unique_filename}'
+                flash("✅ Profile picture updated successfully.", "success")
+
         db.session.commit()
-        flash("✅ Profile updated successfully.")
+        flash("✅ Profile updated successfully.", "success")
         return redirect(url_for('users.profile'))
-    
-    return render_template('users/profile_edit.html', user=current_user)
+
 
 
 # -------------------------------
