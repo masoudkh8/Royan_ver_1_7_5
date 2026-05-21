@@ -481,9 +481,9 @@ def profile():
         flash("❌ This account is inactive.")
         return redirect(url_for('users.login'))
 
-    # محاسبه تعداد سفارش‌های در انتظار (فقط برای فروشنده)
+    # محاسبه تعداد سفارش‌های در انتظار (فقط برای PRODUCER)
     pending_orders = 0
-    if current_user.role == Role.SELLER:
+    if current_user.role == Role.PRODUCER:
         from models.order import OrderStatus,Order
         pending_orders = Order.query.filter_by(seller_id=current_user.id, status=OrderStatus.PENDING).count()
 
@@ -512,9 +512,9 @@ def profile():
     support_user = User.query.filter_by(username='support', is_active=True).first()
 
     if not support_user:
-        support_user = User.query.filter_by(role=Role.SELLER, is_active=True).first()
+        support_user = User.query.filter_by(role=Role.PRODUCER, is_active=True).first()
 
-    seller = User.query.filter_by(role=Role.SELLER, is_active=True).first()
+    seller = User.query.filter_by(role=Role.PRODUCER, is_active=True).first()
     buyer = User.query.filter_by(role=Role.BUYER, is_active=True).first()
     broker = User.query.filter_by(role=Role.BROKER, is_premium=True, is_active=True).first()
 
@@ -594,8 +594,8 @@ def place_order():
                 flash("❌ The desired seller was not found.")
                 return redirect(url_for('users.place_order'))
 
-            if seller.role != Role.SELLER:
-                flash("❌ The selected user is not a seller.")
+            if seller.role != Role.PRODUCER:
+                flash("❌ The selected user is not a producer.")
                 return redirect(url_for('users.place_order'))
 
             # ✅ تعیین بروکر (فقط اگر کاربر ویژه باشد)
@@ -637,8 +637,8 @@ def place_order():
             flash("❌ An error occurred while placing your order. Please try again.")
             return redirect(url_for('users.place_order'))
 
-    # GET: نمایش فرم — فقط فروشندگان
-    sellers = User.query.filter_by(role=Role.SELLER, is_active=True).all()
+    # GET: نمایش فرم — فقط PRODUCERها
+    sellers = User.query.filter_by(role=Role.PRODUCER, is_active=True).all()
     return render_template('users/place_order.html', sellers=sellers)
 
 
@@ -657,13 +657,13 @@ def my_orders():
 
 
 # -------------------------------
-# نمایش سفارش‌های فروشنده
+# نمایش سفارش‌های PRODUCER
 # -------------------------------
 @users_bp.route('/seller/orders')
 @login_required
 def seller_orders():
-    if current_user.role != Role.SELLER:
-        flash("❌ Only available to sellers.")
+    if current_user.role != Role.PRODUCER:
+        flash("❌ Only available to producers.")
         return redirect(url_for('users.profile'))
 
     orders = Order.query.filter_by(seller_id=current_user.id).order_by(Order.created_at.desc()).all()
@@ -678,7 +678,7 @@ def seller_orders():
 def confirm_order(order_id):
     order = Order.query.get_or_404(order_id)
 
-    if current_user.role != Role.SELLER or order.seller_id != current_user.id:
+    if current_user.role != Role.PRODUCER or order.seller_id != current_user.id:
         flash("❌ Unauthorized access.")
         return redirect(url_for('users.profile'))
 
@@ -710,7 +710,7 @@ def confirm_order(order_id):
 def reject_order(order_id):
     order = Order.query.get_or_404(order_id)
 
-    if current_user.role != Role.SELLER or order.seller_id != current_user.id:
+    if current_user.role != Role.PRODUCER or order.seller_id != current_user.id:
         flash("❌ Unauthorized access.")
         return redirect(url_for('users.profile'))
 
@@ -882,10 +882,10 @@ from flask import g
 @users_bp.app_context_processor
 def inject_support_user():
     if current_user.is_authenticated:
-        # مثلاً فروشنده اول یا کاربر با username='support'
+        # مثلاً PRODUCER اول یا کاربر با username='support'
         support_user = User.query.filter_by(username='support', is_active=True).first()
         if not support_user:
-            support_user = User.query.filter_by(role=Role.SELLER, is_active=True).first()
+            support_user = User.query.filter_by(role=Role.PRODUCER, is_active=True).first()
         return {'support_user': support_user}
     return {'support_user': None}
 
@@ -1035,7 +1035,7 @@ def get_ports():
 @users_bp.route('/add_port', methods=['POST'])
 @login_required
 def add_port():
-    if current_user.role != Role.SELLER:
+    if current_user.role != Role.PRODUCER:
         return jsonify({'error': 'Access denied'}), 403
 
     data = request.get_json()
@@ -1053,7 +1053,7 @@ def add_port():
 @users_bp.route('/update_port/<port_id>', methods=['PUT'])
 @login_required
 def update_port(port_id):
-    if current_user.role != Role.SELLER:
+    if current_user.role != Role.PRODUCER:
         return jsonify({'error': 'Access denied'}), 403
 
     # ✅ چک کردن اینکه port_id عددی باشه
@@ -1077,7 +1077,7 @@ def update_port(port_id):
 @users_bp.route('/delete_port/<port_id>', methods=['DELETE'])
 @login_required
 def delete_port(port_id):
-    if current_user.role != Role.SELLER:
+    if current_user.role != Role.PRODUCER:
         return jsonify({'error': 'Access denied'}), 403
     if not port_id.isdigit():
         return jsonify({'error': 'The port ID must be a positive number.'}), 400
