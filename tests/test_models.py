@@ -71,8 +71,9 @@ class TestUserModel(BaseTestCase):
     
     def test_user_role_enum(self):
         """Test Role enum values."""
+        # Test new role values from CONTEXT_MASTER_BRIEF
         self.assertEqual(Role.BUYER.value, 'buyer')
-        self.assertEqual(Role.SELLER.value, 'seller')
+        self.assertEqual(Role.PRODUCER.value, 'producer')
         self.assertEqual(Role.BROKER.value, 'broker')
         self.assertEqual(Role.ADMIN.value, 'admin')
     
@@ -88,7 +89,7 @@ class TestUserModel(BaseTestCase):
             username='testuser2',
             email='test2@example.com',
             password_hash='hash',
-            role=Role.SELLER
+            role=Role.PRODUCER
         )
         db.session.add(user)
         db.session.commit()
@@ -123,7 +124,7 @@ class TestUserModel(BaseTestCase):
             username='duplicate',
             email='user2@example.com',
             password_hash='hash2',
-            role=Role.SELLER
+            role=Role.PRODUCER
         )
         db.session.add(user2)
         
@@ -145,7 +146,7 @@ class TestUserModel(BaseTestCase):
             username='user2',
             email='duplicate@example.com',
             password_hash='hash2',
-            role=Role.SELLER
+            role=Role.PRODUCER
         )
         db.session.add(user2)
         
@@ -160,7 +161,7 @@ class TestOrderModel(BaseTestCase):
         """Test creating a new order."""
         # First create users
         buyer = User(username='buyer', email='buyer@test.com', password_hash='hash', role=Role.BUYER)
-        seller = User(username='seller', email='seller@test.com', password_hash='hash', role=Role.SELLER)
+        seller = User(username='seller', email='seller@test.com', password_hash='hash', role=Role.PRODUCER)
         db.session.add_all([buyer, seller])
         db.session.commit()
         
@@ -194,7 +195,7 @@ class TestOrderModel(BaseTestCase):
     def test_order_calculate_total(self):
         """Test order total price calculation."""
         buyer = User(username='buyer2', email='buyer2@test.com', password_hash='hash', role=Role.BUYER)
-        seller = User(username='seller2', email='seller2@test.com', password_hash='hash', role=Role.SELLER)
+        seller = User(username='seller2', email='seller2@test.com', password_hash='hash', role=Role.PRODUCER)
         db.session.add_all([buyer, seller])
         db.session.commit()
         
@@ -215,7 +216,7 @@ class TestOrderModel(BaseTestCase):
     def test_order_default_status(self):
         """Test that order status defaults to PENDING."""
         buyer = User(username='buyer3', email='buyer3@test.com', password_hash='hash', role=Role.BUYER)
-        seller = User(username='seller3', email='seller3@test.com', password_hash='hash', role=Role.SELLER)
+        seller = User(username='seller3', email='seller3@test.com', password_hash='hash', role=Role.PRODUCER)
         db.session.add_all([buyer, seller])
         db.session.commit()
         
@@ -280,7 +281,7 @@ class TestPremiumRequestModel(BaseTestCase):
     
     def test_premium_request_defaults(self):
         """Test PremiumRequest default values."""
-        user = User(username='premium_user2', email='premium2@test.com', password_hash='hash', role=Role.SELLER)
+        user = User(username='premium_user2', email='premium2@test.com', password_hash='hash', role=Role.PRODUCER)
         db.session.add(user)
         db.session.commit()
         

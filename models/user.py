@@ -188,7 +188,11 @@ class User(db.Model, UserMixin):
     # تاریخچه
     last_login = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    notifications = db.relationship('Notification', back_populates='user', lazy='dynamic',cascade='all, delete-orphan')
+    notifications = db.relationship('Notification', 
+                                   foreign_keys='Notification.user_id',
+                                   back_populates='user', 
+                                   lazy='dynamic',
+                                   cascade='all, delete-orphan')
 
     company_name = db.Column(db.String(100))
     country = db.Column(db.String(50))

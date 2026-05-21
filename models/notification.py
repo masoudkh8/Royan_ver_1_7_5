@@ -30,7 +30,7 @@ class Notification(db.Model):
     actor = db.relationship('User', foreign_keys=[actor_id], backref='actor_notifications')
     
     def __repr__(self):
-        return f"<Notification for {self.user.username}: {self.notification_type}>"
+        return f"<Notification for {self.user.username}: {self.notification_type}>" if self.user else f"<Notification {self.id}>"
     
     def to_dict(self):
         """Convert notification to dictionary for API"""
