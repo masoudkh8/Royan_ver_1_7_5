@@ -179,11 +179,22 @@ class User(db.Model, UserMixin):
     invited_by = db.relationship('User', remote_side=[id], backref='invitees', foreign_keys=[invited_by_id])
     
     # امتیاز اعتماد (کلید ارتقای لایه)
-    trust_score_value = db.Column(db.Integer, default=0, nullable=False, index=True)
+    trust_score_value = db.Column(db.Integer, default=50, nullable=False, index=True)  # ✅ امتیاز اولیه 50
     
     # وضعیت احراز هویت (شرط ورود به لایه ۲)
     is_kyc_verified = db.Column(db.Boolean, default=False, nullable=False)
     kyc_documents_url = db.Column(db.String(255), nullable=True)
+    
+    # === فیلدهای تخصصی پروفایل (درخواست ۱) ===
+    expertise_area = db.Column(db.String(200))  # حوزه تخصصی برای متخصصین
+    job_title = db.Column(db.String(100))  # عنوان شغلی
+    bio = db.Column(db.Text)  # درباره من / بیوگرافی حرفه‌ای
+    website = db.Column(db.String(200))  # وبسایت شخصی/شرکتی
+    social_links = db.Column(db.Text)  # لینک‌های اجتماعی (JSON format)
+    
+    # وضعیت تأیید هویت (درخواست ۱)
+    is_verified = db.Column(db.Boolean, default=False)  # ✅ تأیید هویت انجام شده
+    verification_documents = db.Column(db.Text)  # مدارک تأیید هویت (JSON format)
     
     # تاریخچه
     last_login = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
@@ -276,6 +287,7 @@ class User(db.Model, UserMixin):
     
     def to_dict(self):
         """تبدیل به دیکشنری برای API"""
+        import json
         return {
             'id': self.id,
             'username': self.username,
@@ -285,11 +297,18 @@ class User(db.Model, UserMixin):
             'tier': self.membership_tier.value if self.membership_tier else 'observer',
             'tier_display': self.tier_display_name,
             'trust_score': self.trust_score_value,
-            'is_verified': self.is_kyc_verified,
+            'is_verified': self.is_verified or self.is_kyc_verified,
             'company_name': self.company_name,
             'country': self.country,
             'invite_code': self.invite_code,
-            'created_at': self.created_at.isoformat() if self.created_at else None
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            # فیلدهای تخصصی جدید
+            'expertise_area': self.expertise_area,
+            'job_title': self.job_title,
+            'bio': self.bio,
+            'website': self.website,
+            'social_links': json.loads(self.social_links) if self.social_links else {},
+            'verification_documents': json.loads(self.verification_documents) if self.verification_documents else []
         }
 
     def __repr__(self):

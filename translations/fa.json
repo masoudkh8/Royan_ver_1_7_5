@@ -40,7 +40,9 @@
     "profile_updated": "✅ پروفایل به‌روزرسانی شد.",
     "access_denied": "❌ دسترسی غیرمجاز.",
     "order_placed": "✅ سفارش با موفقیت ثبت شد.",
-    "fill_required_fields": "لطفاً فیلدهای الزامی را پر کنید."
+    "fill_required_fields": "لطفاً فیلدهای الزامی را پر کنید.",
+    "already_logged_in": "شما قبلاً وارد شده‌اید. برای ثبت‌نام حساب جدید، ابتدا خارج شوید.",
+    "register_error": "خطایی در هنگام ثبت‌نام رخ داد."
   },
   "pages": {
     "home": "صفحه اصلی",
@@ -244,5 +246,44 @@
     "replied_to_your_comment": "به نظر شما پاسخ داد",
     "liked_your_comment": "نظر شما را پسندید",
     "shared_your_post": "پست شما را اشتراک‌گذاری کرد"
+  },
+  "registration": {
+    "create_account_subtitle": "ایجاد حساب کاربری جدید در پلتفرم متیسم",
+    "step_basic": "اطلاعات پایه",
+    "step_professional": "اطلاعات حرفه‌ای",
+    "step_security": "امنیت و رمز عبور",
+    "agree_terms": "با شرایط و قوانین موافقم"
+  },
+  "user": {
+    "role": "نقش کاربری",
+    "select_role": "انتخاب نقش",
+    "job_title": "عنوان شغلی",
+    "expertise_area": "حوزه تخصصی",
+    "bio": "درباره من",
+    "website": "وبسایت"
+  },
+  "placeholders": {
+    "username": "نام کاربری مورد نظر",
+    "email": "example@email.com",
+    "phone": "09123456789",
+    "country": "کشور",
+    "company": "نام شرکت",
+    "job_title": "مثال: مدیر صادرات",
+    "expertise_area": "مثال: صنایع پتروشیمی",
+    "bio": "توضیح مختصری درباره سوابق و تخصص خود...",
+    "password": "رمز عبور (حداقل ۸ کاراکتر)",
+    "confirm_password": "تکرار رمز عبور"
+  },
+  "validation": {
+    "username_min_length": "نام کاربری باید حداقل ۳ کاراکتر باشد",
+    "invalid_email": "آدرس ایمیل نامعتبر است",
+    "password_min_length": "رمز عبور باید حداقل ۸ کاراکتر باشد",
+    "password_mismatch": "رمزهای عبور مطابقت ندارند",
+    "password_weak": "رمز عبور باید شامل حروف بزرگ، کوچک و اعداد باشد",
+    "invalid_role": "نقش انتخاب شده نامعتبر است",
+    "invalid_phone": "شماره تلفن نامعتبر است",
+    "confirm_password": "تأیید رمز عبور",
+    "password_include_upper_lower": "شامل حروف بزرگ و کوچک باشد",
+    "password_include_number": "شامل اعداد باشد"
   }
 }
