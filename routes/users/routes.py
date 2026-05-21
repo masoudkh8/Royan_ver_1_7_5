@@ -1135,11 +1135,11 @@ def start_upgrade():
     return redirect(url_for('users.verify_phone'))
 
 # # آپلود مدارک
-@users_bp.route('/upload_documents', methods=['GET', 'POST'])
-@login_required
-def upload_documents():
-    req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
-
+# @users_bp.route('/upload_documents', methods=['GET', 'POST'])
+# @login_required
+# def upload_documents():
+#     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
+# 
 
 
     if not req or not req.email_verified:
