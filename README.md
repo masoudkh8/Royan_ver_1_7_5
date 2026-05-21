@@ -9,6 +9,16 @@
 
 ## ✨ ویژگی‌های کلیدی / Key Features
 
+### 👤 مدیریت پیشرفته کاربران / Advanced User Management
+- **مدل کاربر غنی‌شده**: فیلدهای تخصصی بر اساس نقش (expertise_area, company_name, job_title, bio, website, social_links)
+- **ثبت‌نام هوشمند ۳ مرحله‌ای**: فرم پویا با اعتبارسنجی پیشرفته و پسورد قوی
+- **داشبورد نقش‌محور**: ویجت‌های سفارشی برای هر نقش (PRODUCER, INVESTOR, EXPERT, EXHIBITOR)
+- **پروفایل پیشرفته**: ویرایش اطلاعات، آپلود مدارک، لینک‌های اجتماعی
+- **سیستم امتیاز اعتماد (Trust Score)**: الگوریتم پویا با سطوح Bronze/Silver/Gold/Platinum
+- **کنترل دسترسی (RBAC)**: دکوریتور @role_required برای محدودیت دسترسی
+- **Rate Limiting**: محافظت در برابر سوءاستفاده (۵ درخواست در دقیقه)
+- **آپلود امن مدارک**: اعتبارسنجی چندلایه (پسوند، MIME، حجم، نام امن)
+
 ### 🧠 هوش مصنوعی و تحلیل داده / AI & Data Intelligence
 - **AI Core**: گفتگوی هوشمند، توصیه‌های تجاری، تولید محتوا
 - **Smart Map**: اطلاعات گمرکی، تحلیل ریسک، مسیرهای تجاری
@@ -168,6 +178,7 @@ coverage html
 
 | مستند | توضیحات |
 |-------|---------|
+| `ADVANCED_USER_FEATURES.md` | 🆕 مستندات ویژگی‌های پیشرفته کاربران (ثبت‌نام، پروفایل، داشبورد، Trust Score) |
 | `POSTGRES_GUIDE.md` | راهنمای کامل PostgreSQL |
 | `PRODUCTION_SETUP_GUIDE.md` | راهنمای استقرار در Production |
 | `FEATURE_FLAG_CICD_GUIDE.md` | راهنمای Feature Flags |
@@ -233,14 +244,14 @@ coverage html
 
 ## 📊 آمار پروژه / Project Statistics
 
-- **۵۴ فایل Python**
-- **۳۱ قالب HTML**
-- **۴۴ مستندات Markdown**
+- **۵۴ فایل Python** (+ مدل‌های پیشرفته کاربر)
+- **۴۳ قالب HTML** (+ register_dynamic.html, profile_edit.html, dashboard_*.html)
+- **۴۵ مستندات Markdown** (+ ADVANCED_USER_FEATURES.md)
 - **۲۲ فایل مدل داده‌ای**
-- **۸,۶۶۳+ خط کد Python**
+- **۱۰,۴۶۳+ خط کد Python**
 - **۶۰+ مدل داده‌ای**
-- **۵۰+ endpoint**
-- **~32MB حجم پروژه**
+- **۵۰+ endpoint** (+ endpointهای کاربران، پروفایل، داشبورد)
+- **~45MB حجم پروژه**
 
 ---
 
@@ -248,11 +259,13 @@ coverage html
 
 - ✅ CSRF Protection
 - ✅ Password Hashing (bcrypt)
-- ✅ Role-Based Access Control (RBAC)
-- ✅ Rate Limiting
-- ✅ Input Validation
+- ✅ Role-Based Access Control (RBAC) - **دکوریتور @role_required**
+- ✅ Rate Limiting - **۵ درخواست در دقیقه روی ثبت‌نام**
+- ✅ Input Validation - **اعتبارسنجی پیشرفته فرم‌ها**
 - ✅ SQL Injection Prevention
 - ✅ XSS Protection
+- ✅ Secure File Upload - **اعتبارسنجی چندلایه مدارک**
+- ✅ Trust Score System - **سیستم امتیاز اعتماد پویا**
 
 ---
 
@@ -309,6 +322,11 @@ docker-compose restart
 
 ## 🔄 به‌روزرسانی‌های اخیر / Recent Updates
 
+- ✅ **ویژگی‌های پیشرفته کاربران**: مدل کاربر غنی‌شده، ثبت‌نام ۳ مرحله‌ای، داشبورد نقش‌محور، پروفایل پیشرفته
+- ✅ **سیستم Trust Score**: امتیاز اعتماد پویا با سطوح Bronze/Silver/Gold/Platinum
+- ✅ **امنیت**: Rate Limiting، دکوریتور @role_required، آپلود امن مدارک
+- ✅ **مستندات جدید**: `ADVANCED_USER_FEATURES.md` با جزئیات کامل API و ویژگی‌ها
+- ✅ **ترجمه**: بیش از ۵۰ کلید جدید برای بخش‌های ثبت‌نام، پروفایل و اعتبارسنجی
 - ✅ افزودن رنگ‌بندی حرفه‌ای به ۵ بخش خدماتی در هدر
 - ✅ بهبود UX/UI منوی همبرگر موبایل
 - ✅ بهینه‌سازی Transitionها و Hover effects
