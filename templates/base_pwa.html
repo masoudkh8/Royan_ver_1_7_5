@@ -158,6 +158,22 @@
     <!-- دکمه‌های سمت چپ هدر -->
     <div class="flex items-center gap-2 sm:gap-3">
         
+        <!-- جستجوی سراسری (فقط دسکتاپ) -->
+        {% if current_user.is_authenticated %}
+        <div class="hidden lg:flex items-center relative">
+            <input type="text" id="globalSearch" placeholder="Search..." 
+                   class="w-48 xl:w-64 px-4 py-2.5 rounded-xl bg-dark-800/50 border border-gold/15 
+                          text-sm text-slate-300 placeholder-slate-500 
+                          focus:outline-none focus:border-gold/30 focus:ring-1 focus:ring-gold/20
+                          transition-all duration-200">
+            <button onclick="performSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-dark-700 transition">
+                <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </button>
+        </div>
+        {% endif %}
+        
         {% if current_user.is_authenticated %}
             <!-- دکمه اعلانات (فقط برای کاربران لاگین) -->
             <a href="{{ url_for('users.notifications') }}" 
@@ -792,6 +808,27 @@
             mobileIconSun.classList.toggle('hidden');
         }
     }
+
+    // ✅ Global Search Function
+    function performSearch() {
+        const query = document.getElementById('globalSearch')?.value.trim();
+        if (query) {
+            window.location.href = `/search?q=${encodeURIComponent(query)}`;
+        }
+    }
+
+    // Handle Enter key in search input
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('globalSearch');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+        }
+    });
 
     // ✅ تابع باز و بسته کردن زیرمنوی خدمات در موبایل
     function toggleServicesSubmenu() {

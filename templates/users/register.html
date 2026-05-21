@@ -97,6 +97,11 @@
                 </label>
             </div>
 
+            <!-- CAPTCHA (reCAPTCHA v2) -->
+            <div class="flex justify-center pt-2">
+                <div class="g-recaptcha" data-sitekey="{{ config.RECAPTCHA_SITE_KEY }}"></div>
+            </div>
+
             <!-- دکمه ثبت‌نام -->
             <div class="pt-4">
                 <button type="submit"
@@ -122,4 +127,7 @@
         </div>
     </div>
 </div>
+
+<!-- reCAPTCHA Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {% endblock %}
