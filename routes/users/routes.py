@@ -11,11 +11,12 @@ from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import wraps
 from extensions import limiter
-from models import Message, Notification
-from models.user import db, User, Role
+from models import Message, Notification, db
+from models.user import User, Role
+from models.auth import PasswordResetToken, LoginSession, ActivityLog, EmailVerificationToken, TwoFactorBackupCode
 from models.port import Port
 
 from . import users_bp,root_bp
@@ -214,6 +215,7 @@ def set_language():
 # ثبت نام
 # -------------------------------
 # Register (Request 2: Smart Multi-step Registration)
+# ثبت‌نام پیشرفته با CAPTCHA و تأیید ایمیل
 # -------------------------------
 @users_bp.route('/register', methods=['GET', 'POST'])
 @limiter.limit("5 per minute")  # Rate limiting for registration
@@ -331,8 +333,8 @@ def register():
 # ورود
 # -------------------------------
 @users_bp.route('/login', methods=['GET', 'POST'])
+@limiter.limit("10 per minute")  # Rate limiting برای جلوگیری از brute force
 def login():
-
 
     if current_user.is_authenticated:
         return redirect(url_for('users.profile'))
@@ -340,16 +342,100 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        remember_me = request.form.get('remember', False)
+        
         user = User.query.filter_by(email=email, is_active=True).first()
 
+        # بررسی قفل بودن حساب
+        if user and user.locked_until:
+            if datetime.utcnow() < user.locked_until:
+                flash(f"❌ حساب شما تا {user.locked_until.strftime('%Y-%m-%d %H:%M')} به دلیل تلاش‌های ناموفق قفل است.")
+                ActivityLog.log_action(
+                    user_id=user.id,
+                    activity_type='login_blocked',
+                    description='حساب کاربری به دلیل تلاش‌های ناموفق قفل است',
+                    request=request,
+                    success=False,
+                    failure_reason='account_locked'
+                )
+                return render_template('users/login.html')
+            else:
+                # رفع قفل خودکار
+                user.locked_until = None
+                user.failed_login_attempts = 0
+                db.session.commit()
+
         if user and check_password_hash(user.password_hash, password):
-            login_user(user)
-            flash("✅ welcome!")
-            return redirect(url_for('users.profile'))
+            # ورود موفق - ریست کردن تلاش‌های ناموفق
+            if user.failed_login_attempts > 0:
+                user.failed_login_attempts = 0
+                user.locked_until = None
+                db.session.commit()
+            
+            # لاگ فعالیت ورود موفق
+            ActivityLog.log_action(
+                user_id=user.id,
+                activity_type='login',
+                description='ورود موفق به سیستم',
+                request=request,
+                success=True
+            )
+            
+            # ایجاد جلسه جدید
+            session_token = LoginSession.create_session(
+                user_id=user.id,
+                request=request,
+                remember_me=remember_me
+            )
+            
+            login_user(user, remember=remember_me)
+            
+            # ذخیره توکن جلسه در cookie
+            response = redirect(url_for('users.profile'))
+            response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
+            
+            flash("✅ خوش آمدید!")
+            return response
         else:
-            flash("❌ Incorrect email or password.")
+            # ورود ناموفق
+            if user:
+                user.failed_login_attempts += 1
+                
+                # قفل حساب پس از 5 تلاش ناموفق
+                if user.failed_login_attempts >= 5:
+                    user.locked_until = datetime.utcnow() + timedelta(minutes=15)  # 15 دقیقه قفل
+                    db.session.commit()
+                    
+                    ActivityLog.log_action(
+                        user_id=user.id,
+                        activity_type='account_locked',
+                        description='حساب به دلیل 5 تلاش ناموفق قفل شد',
+                        request=request,
+                        success=False,
+                        failure_reason='too_many_failed_attempts'
+                    )
+                    
+                    flash("❌ حساب شما به دلیل تلاش‌های ناموفق زیاد به مدت 15 دقیقه قفل شد.")
+                else:
+                    db.session.commit()
+                    
+                    ActivityLog.log_action(
+                        user_id=user.id,
+                        activity_type='login_failed',
+                        description=f'تلاش ناموفق برای ورود ({user.failed_login_attempts}/5)',
+                        request=request,
+                        success=False,
+                        failure_reason='invalid_password'
+                    )
+                    
+                    remaining_attempts = 5 - user.failed_login_attempts
+                    flash(f"❌ ایمیل یا رمز عبور نادرست است. {remaining_attempts} تلاش دیگر تا قفل شدن حساب.")
+            else:
+                # کاربر وجود ندارد - برای امنیت پیام کلی نمایش می‌دهیم
+                flash("❌ ایمیل یا رمز عبور نادرست است.")
+    
     support_user = User.query.filter_by(username='masoudkh', is_active=True).first()
-    return render_template('login.html',support_user=support_user)
+    return render_template('users/login.html', support_user=support_user)
 
 
 
@@ -587,8 +673,26 @@ def delete_account():
 @users_bp.route('/logout')
 @login_required
 def logout():
+    # لاگ فعالیت خروج
+    ActivityLog.log_action(
+        user_id=current_user.id,
+        activity_type='logout',
+        description='خروج از سیستم',
+        request=request,
+        success=True
+    )
+    
+    # باطل کردن جلسه فعلی
+    session_token = request.cookies.get('session_token')
+    if session_token:
+        from hashlib import sha256
+        hashed_token = sha256(session_token.encode()).hexdigest()
+        login_session = LoginSession.query.filter_by(session_token=hashed_token).first()
+        if login_session:
+            login_session.revoke()
+    
     logout_user()
-    flash("👋 You have exited successfully.")
+    flash("👋 شما با موفقیت خارج شدید.")
     return redirect(url_for('users.login'))
 
 

@@ -65,5 +65,8 @@ from .trading import (
     init_trading_db
 )
 
+# Authentication & Security Models (امنیت و احراز هویت)
+from .auth import PasswordResetToken, LoginSession, ActivityLog, EmailVerificationToken, TwoFactorBackupCode
+
 # Initialize social relationships after all models are imported
 update_user_relationships()

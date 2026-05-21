@@ -4,6 +4,9 @@ from . import db
 from flask_login import UserMixin
 from enum import Enum
 from datetime import datetime
+import pytz
+
+tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class Role(Enum):
@@ -195,6 +198,35 @@ class User(db.Model, UserMixin):
     # وضعیت تأیید هویت (درخواست ۱)
     is_verified = db.Column(db.Boolean, default=False)  # ✅ تأیید هویت انجام شده
     verification_documents = db.Column(db.Text)  # مدارک تأیید هویت (JSON format)
+    
+    # === فیلدهای امنیتی و احراز هویت ===
+    # Avatar/Profile Picture
+    avatar_filename = db.Column(db.String(255), nullable=True)  # نام فایل عکس پروفایل
+    
+    # Two-Factor Authentication (2FA)
+    two_factor_enabled = db.Column(db.Boolean, default=False, nullable=False)
+    two_factor_secret = db.Column(db.String(32), nullable=True)  # رمز的秘密 برای TOTP
+    backup_codes = db.Column(db.Text, nullable=True)  # کدهای پشتیبان (JSON format)
+    
+    # Account Lockout
+    failed_login_attempts = db.Column(db.Integer, default=0, nullable=False)
+    locked_until = db.Column(db.DateTime, nullable=True)  # زمان قفل بودن حساب
+    
+    # Password History (برای جلوگیری از استفاده مجدد)
+    password_history = db.Column(db.Text, nullable=True)  # JSON array of previous password hashes
+    
+    # Email Verification
+    is_email_verified = db.Column(db.Boolean, default=False, nullable=False)
+    email_verification_token = db.Column(db.String(255), nullable=True)
+    
+    # Dark Mode Preference (stored in backend)
+    dark_mode_preference = db.Column(db.String(20), default='system', nullable=False)  # 'light', 'dark', 'system'
+    
+    # Notification Preferences (JSON)
+    notification_preferences = db.Column(db.Text, nullable=True)  # JSON settings for notifications
+    
+    # Privacy Settings (JSON)
+    privacy_settings = db.Column(db.Text, nullable=True)  # JSON settings for privacy
     
     # تاریخچه
     last_login = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
