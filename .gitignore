@@ -1,17 +1,17 @@
 ```
+# Logs and temp files
+*.log
+logs/
+
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.py~
 
 # Database
-instance/*.db
-
-# Logs
-*.log
-logs/
+*.db
+instance/
 
 # Environment
 .env
@@ -21,21 +21,11 @@ logs/
 # Dependencies
 .venv/
 venv/
-pip-log.txt
-pip-selfcheck.json
+node_modules/
 
-# Testing
-.coverage
-coverage/
-htmlcov/
-.nox/
-.tox/
-
-# IDE
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # OS
 .DS_Store
