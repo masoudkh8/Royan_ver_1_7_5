@@ -466,20 +466,119 @@ def upload_documents():
 
 
 # -------------------------------
-# حذف حساب
+# تنظیمات حساب کاربری
 # -------------------------------
-@users_bp.route('/delete', methods=['POST'])
+@users_bp.route('/account-settings')
+@login_required
+def account_settings():
+    """نمایش صفحه تنظیمات حساب کاربری"""
+    return render_template('users/account_settings.html', user=current_user)
+
+
+# -------------------------------
+# تغییر رمز عبور
+# -------------------------------
+@users_bp.route('/change-password', methods=['POST'])
+@login_required
+def change_password():
+    """تغییر رمز عبور کاربر با اعتبارسنجی کامل"""
+    current_password = request.form.get('current_password', '')
+    new_password = request.form.get('new_password', '')
+    confirm_password = request.form.get('confirm_password', '')
+    
+    # بررسی رمز عبور فعلی
+    if not check_password_hash(current_user.password_hash, current_password):
+        flash("❌ رمز عبور فعلی نادرست است.", "error")
+        return redirect(url_for('users.account_settings'))
+    
+    # اعتبارسنجی رمز عبور جدید
+    if len(new_password) < 8:
+        flash("❌ رمز عبور جدید باید حداقل ۸ کاراکتر باشد.", "error")
+        return redirect(url_for('users.account_settings'))
+    
+    # بررسی تطابق رمز جدید و تکرار آن
+    if new_password != confirm_password:
+        flash("❌ رمز عبور جدید و تکرار آن مطابقت ندارند.", "error")
+        return redirect(url_for('users.account_settings'))
+    
+    # بررسی تکراری نبودن رمز عبور جدید با رمز قبلی
+    if check_password_hash(current_user.password_hash, new_password):
+        flash("⚠️ رمز عبور جدید نباید مشابه رمز عبور قبلی باشد.", "warning")
+        return redirect(url_for('users.account_settings'))
+    
+    try:
+        # به‌روزرسانی رمز عبور با هش کردن
+        current_user.password_hash = generate_password_hash(new_password)
+        db.session.commit()
+        
+        # لاگ عملیات برای امنیت
+        current_app.logger.info(f"Password changed for user {current_user.id} ({current_user.email})")
+        
+        flash("✅ رمز عبور شما با موفقیت تغییر یافت.", "success")
+        return redirect(url_for('users.account_settings'))
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(f"Error changing password for user {current_user.id}: {e}")
+        flash("❌ خطایی در تغییر رمز عبور رخ داد. لطفاً مجدداً تلاش کنید.", "error")
+        return redirect(url_for('users.account_settings'))
+
+
+# -------------------------------
+# حذف حساب کاربری
+# -------------------------------
+@users_bp.route('/delete-account', methods=['POST'])
 @login_required
 def delete_account():
+    """حذف نرم حساب کاربری با تأیید دو مرحله‌ای"""
+    
+    # بررسی وجود چک‌باکس تأیید
+    confirmation = request.form.get('confirmation_checkbox')
+    if not confirmation:
+        flash("⚠️ لطفاً برای حذف حساب، چک‌باکس تأیید را علامت بزنید.", "warning")
+        return redirect(url_for('users.account_settings'))
+    
     user_id = current_user.id
-    logout_user()
-    user = User.query.get(user_id)
-
-    # db.session.delete(user)
-    user.is_active = False
-    db.session.commit()
-    flash("🗑️ Your account has been deleted.")
-    return redirect(url_for('users.register'))
+    user_email = current_user.email
+    username = current_user.username
+    
+    try:
+        # غیرفعال‌سازی حساب کاربری (soft delete)
+        current_user.is_active = False
+        
+        # حذف توکن‌های فعال کاربر (در صورت وجود مدل Session/Token)
+        # این بخش بستگی به پیاده‌سازی session management دارد
+        # فعلاً logout انجام می‌دهیم
+        logout_user()
+        
+        # لاگ عملیات برای امنیت
+        current_app.logger.warning(
+            f"Account deleted: User ID={user_id}, Email={user_email}, Username={username}"
+        )
+        
+        # ارسال نوتیفیکیشن به ادمین (اختیاری)
+        try:
+            from models.notification import Notification
+            admin_notification = Notification(
+                user_id=None,  # نوتیفیکیشن سیستمی
+                title="حذف حساب کاربری",
+                message=f"حساب کاربری {username} ({user_email}) حذف شد.",
+                category="admin_alert",
+                is_read=False
+            )
+            db.session.add(admin_notification)
+            db.session.commit()
+        except Exception as notif_error:
+            db.session.rollback()
+            current_app.logger.error(f"Error creating admin notification: {notif_error}")
+        
+        flash("🗑️ حساب کاربری شما با موفقیت حذف شد. از همکاری شما متشکریم.", "success")
+        return redirect(url_for('users.register'))
+        
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(f"Error deleting account for user {user_id}: {e}")
+        flash("❌ خطایی در حذف حساب رخ داد. لطفاً با پشتیبانی تماس بگیرید.", "error")
+        return redirect(url_for('users.account_settings'))
 
 
 # -------------------------------
