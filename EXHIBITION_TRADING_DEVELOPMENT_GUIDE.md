@@ -1,621 +1,371 @@
-# 📚 مستند جامع توسعه نمایشگاه آنلاین و تالار معاملاتی متیما
+# Metisma Exhibition & Trading Development Guide
 
-## فهرست مطالب
-1. [معرفی](#۱-معرفی)
-2. [معماری سیستم](#۲-معماری-سیستم)
-3. [مدل‌های داده‌ای](#۳-مدل-های-داده‌ای)
-4. [نقشه راه توسعه](#۴-نقشه-راه-توسعه)
-5. [راهنمای پیاده‌سازی فاز به فاز](#۵-راهنمای-پیاده‌سازی-فاز-به-فاز)
-6. [API Design](#۶-api-design)
-7. [ملاحظات فنی](#۷-ملاحظات-فنی)
-8. [امنیت و بهینه‌سازی](#۸-امنیت-و-بهینه‌سازی)
+## 📋 Executive Summary
+
+This document outlines the complete development roadmap for the **Online Exhibition** and **Trading Hall** features of the Metisma platform. The system is designed with a "Foundation First, Features Later" approach, allowing incremental development without structural database changes.
 
 ---
 
-## ۱. معرفی
+## 🏗️ Architecture Overview
 
-### ۱.۱ هدف پروژه
-ایجاد دو بخش مستقل اما یکپارچه:
-- **نمایشگاه آنلاین (Exhibition Hall)**: پلتفرم برگزاری نمایشگاه‌های مجازی با غرفه‌های تعاملی
-- **تالار معاملاتی (Trading Hall)**: سیستم معاملات بلادرنگ با قابلیت Order Matching
+### Current Status (MVP - Phase 1)
+- ✅ **18 Database Models** created and registered
+- ✅ **13 API Endpoints** implemented
+- ✅ **3 HTML Templates** (mobile-responsive)
+- ✅ **Basic Matching Engine** for trading
+- ✅ **Gamification System** for exhibitions
+- ⚠️ **Real-time WebSocket** connections (pending)
+- ⚠️ **Advanced Charting** (pending)
+- ⚠️ **3D Virtual Tours** (pending)
 
-### ۱.۲ اصول طراحی
-- ✅ **طراحی اول، پیاده‌سازی بعد**: مدل‌ها از قبل تعریف شده‌اند
-- ✅ **توسعه پلکانی**: MVP → حرفه‌ای → پیشرفته
-- ✅ **جداسازی کامل**: ماژول‌ها مستقل از هسته اصلی
-- ✅ **مقیاس‌پذیری**: پشتیبانی از رشد سریع کاربران و داده‌ها
-
----
-
-## ۲. معماری سیستم
-
-### ۲.۱ دیاگرام کلی
+### File Structure
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Metisma Platform                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ┌──────────────────┐         ┌──────────────────┐          │
-│  │  Exhibition Hall │         │   Trading Hall   │          │
-│  │                  │         │                  │          │
-│  │  • Exhibitions   │         │  • TradingPairs  │          │
-│  │  • Booths        │         │  • Orders        │          │
-│  │  • Visits        │         │  • Trades        │          │
-│  │  • Interactions  │         │  • Wallets       │          │
-│  │  • Appointments  │         │  • Market Data   │          │
-│  └──────────────────┘         └──────────────────┘          │
-│           │                              │                   │
-│           └──────────┬───────────────────┘                   │
-│                      │                                       │
-│              ┌───────▼────────┐                             │
-│              │  Shared Core   │                             │
-│              │  • Users       │                             │
-│              │  • Wallets     │                             │
-│              │  • Products    │                             │
-│              └────────────────┘                             │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
+/workspace
+├── models/
+│   ├── exhibition/          # Exhibition models (8 models)
+│   │   └── __init__.py      # Exhibition, Booth, BoothVisit, etc.
+│   └── trading/             # Trading models (10 models)
+│       └── __init__.py      # TradingPair, TradeOrder, Trade, etc.
+├── routes/
+│   ├── exhibition/
+│   │   └── routes.py        # Exhibition endpoints
+│   └── trading/
+│       └── routes.py        # Trading endpoints + matching engine
+├── templates/
+│   ├── exhibition/
+│   │   ├── hall.html        # Main exhibition hall
+│   │   └── booth_detail.html # Individual booth page
+│   └── trading/
+│       └── market.html      # Trading market overview
+└── EXHIBITION_TRADING_DEVELOPMENT_GUIDE.md
 ```
 
-### ۲.۲ تکنولوژی‌های پیشنهادی
+---
 
-#### برای نمایشگاه:
-- **Frontend**: Three.js (برای 3D), React/Vue, WebSocket (برای چت زنده)
-- **Backend**: Flask + Celery (برای پردازش‌های پس‌زمینه)
-- **Database**: PostgreSQL + Redis (برای کش)
-- **Media**: AWS S3 یا معادل داخلی
+## 🎯 Phase 1: MVP (Current - Weeks 1-2)
 
-#### برای تالار معامله:
-- **Real-time Engine**: Redis Pub/Sub + WebSocket
-- **Matching Engine**: Python + asyncio یا Go/Rust برای performance بالا
-- **Database**: PostgreSQL (برای داده‌های پایا) + Redis (برای Order Book)
-- **Message Queue**: RabbitMQ یا Kafka
+### Goals
+- Basic functional system for testing
+- Mobile-first responsive design
+- Core trading and exhibition features
+
+### Completed Features
+
+#### Exhibition Module
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Exhibition Hall | ✅ Complete | List of active exhibitions and featured booths |
+| Booth Detail Page | ✅ Complete | Virtual tour placeholder, info, appointments |
+| Appointment Booking | ✅ Complete | Schedule meetings with booth owners |
+| Visit Tracking | ✅ Complete | Track user visits and interactions |
+| Gamification Points | ✅ Complete | Award points for visits, likes, shares |
+| Create Booth Form | ✅ Complete | Simple form for exhibitors |
+
+#### Trading Module
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Market Overview | ✅ Complete | List of all trading pairs with stats |
+| Order Book | ✅ Complete | Real-time buy/sell orders (HTTP polling) |
+| Place Order | ✅ Complete | Limit and Market orders |
+| Order Matching | ✅ Complete | Basic price-time priority matching |
+| Wallet Management | ✅ Complete | View balances, transactions |
+| Cancel Order | ✅ Complete | Cancel open orders |
+
+### Missing Components for Production MVP
+
+1. **Mobile Optimization**
+   - [ ] Add PWA manifest for offline support
+   - [ ] Implement touch-friendly order book
+   - [ ] Add swipe gestures for booth navigation
+   - [ ] Optimize images for mobile networks
+
+2. **User Experience**
+   - [ ] Add loading skeletons for slow connections
+   - [ ] Implement infinite scroll for booth lists
+   - [ ] Add search and filter functionality
+   - [ ] Create onboarding tutorial
+
+3. **Data Seeding**
+   - [ ] Create sample exhibitions (5-10)
+   - [ ] Create sample booths (50+)
+   - [ ] Create sample trading pairs (BTC/USDT, ETH/USDT, etc.)
+   - [ ] Generate historical market data for charts
 
 ---
 
-## ۳. مدل‌های داده‌ای
+## 🚀 Phase 2: Professional (Weeks 3-6)
 
-### ۳.۱ مدل‌های نمایشگاه (۶ جدول)
+### Goals
+- Production-ready features
+- Real-time updates via WebSocket
+- Advanced charting and analytics
 
-| جدول | توضیح | تعداد فیلد |
-|------|-------|-----------|
-| `exhibitions` | نمایشگاه‌های کلی | ۱۸ فیلد |
-| `booths` | غرفه‌های نمایشگاه | ۲۵ فیلد |
-| `booth_visits` | بازدید از غرفه | ۱۲ فیلد |
-| `booth_interactions` | تعاملات کاربران | ۸ فیلد |
-| `booth_appointments` | قرارهای ملاقات | ۱۴ فیلد |
-| `exhibition_visits` | بازدید کلی | ۱۰ فیلد |
+### Planned Features
 
-**رابطه‌ها:**
-- هر Exhibition → چندین Booth
-- هر Booth → چندین Visit, Interaction, Appointment
-- Polymorphic Owner: booth.owner_type + booth.owner_id
+#### Exhibition Enhancements
+- [ ] **3D Booth Builder**: Drag-and-drop interface for customizing booths
+- [ ] **Virtual Tour**: 360° panoramic views using Three.js
+- [ ] **Live Chat**: Real-time chat between visitors and exhibitors
+- [ ] **Video Calls**: Integrated video conferencing for appointments
+- [ ] **Analytics Dashboard**: For exhibitors to track booth performance
+- [ ] **Leaderboards**: Top booths, most visited, highest engagement
+- [ ] **QR Code Integration**: Scan to visit booths from physical events
 
-### ۳.۲ مدل‌های تالار معامله (۷ جدول)
+#### Trading Enhancements
+- [ ] **WebSocket Order Book**: Real-time updates without page refresh
+- [ ] **Advanced Charts**: Candlestick charts with indicators (RSI, MACD, MA)
+- [ ] **Multiple Order Types**: Stop-loss, Take-profit, Trailing stop
+- [ ] **Margin Trading**: Leverage up to 10x with risk management
+- [ ] **Portfolio Tracker**: P&L analysis, asset allocation pie chart
+- [ ] **Price Alerts**: Push notifications for price thresholds
+- [ ] **API Trading**: REST API for algorithmic traders
 
-| جدول | توضیح | تعداد فیلد |
-|------|-------|-----------|
-| `trading_pairs` | جفت‌های معاملاتی | ۱۶ فیلد |
-| `trading_wallets` | کیف پول کاربران | ۱۳ فیلد |
-| `wallet_transactions` | تراکنش‌ها | ۱۳ فیلد |
-| `trade_orders` | سفارش‌ها | ۲۰ فیلد |
-| `trades` | معاملات انجام‌شده | ۱۴ فیلد |
-| `market_data` | داده‌های بازار | ۱۱ فیلد |
-| `trading_settings` | تنظیمات | ۶ فیلد |
+### Technical Requirements
 
-**رابطه‌ها:**
-- هر User → یک TradingWallet
-- هر Wallet → چندین Transaction
-- هر TradingPair → چندین Order, Trade, MarketData
-- هر Order → چندین Trade
-
-### ۳.۳ ENUM Lookup Tables
-- `exhibition_status_enum`: draft, active, paused, ended, archived
-- `booth_type_enum`: standard, premium, vip, custom_3d, interactive
-- `order_type_enum`: market, limit, stop_loss, take_profit, stop_limit
-- `order_side_enum`: buy, sell
-- `order_status_enum`: pending, partial_filled, filled, cancelled, rejected, expired
-
----
-
-## ۴. نقشه راه توسعه
-
-### 🎯 فاز ۱: MVP (حداقل محصول قابل ارائه) - ۴-۶ هفته
-
-#### نمایشگاه:
-- [ ] CRUD نمایشگاه‌ها (Admin Panel)
-- [ ] CRUD غرفه‌ها (صاحبان کسب‌وکار)
-- [ ] صفحه نمایش غرفه (Public View)
-- [ ] سیستم بازدید ساده (بدون تحلیل پیشرفته)
-- [ ] فرم تماس ساده (Lead Generation)
-
-#### تالار معامله:
-- [ ] تعریف جفت‌های معاملاتی (Admin)
-- [ ] کیف پول ساده (واریز/برداشت دستی)
-- [ ] سفارش Limit و Market
-- [ ] مچینگ ساده (First-Come-First-Serve)
-- [ ] نمایش تاریخچه معاملات
-
-#### زیرساخت:
-- [ ] Migration دیتابیس
-- [ ] APIهای پایه RESTful
-- [ ] احراز هویت و مجوزها
-- [ ] لاگ‌گیری پایه
-
-### 🚀 فاز ۲: نسخه حرفه‌ای - ۸-۱۰ هفته
-
-#### نمایشگاه:
-- [ ] غرفه‌های ۳بعدی ساده (Three.js)
-- [ ] تور مجازی (Virtual Tour)
-- [ ] چت زنده (WebSocket)
-- [ ] سیستم قرار ملاقات (Calendar Integration)
-- [ ] آنالیز بازدید (Dashboard)
-- [ ] گیمیفیکیشن (امتیاز، نشان)
-
-#### تالار معامله:
-- [ ] Order Book بلادرنگ (WebSocket)
-- [ ] انواع سفارش پیشرفته (Stop Loss, Take Profit)
-- [ ] نمودار قیمت (Candlestick Chart)
-- [ ] کارمزدهای پویا
-- [ ] تسویه خودکار
-- [ ] مدیریت ریسک (Daily Loss Limit)
-
-#### زیرساخت:
-- [ ] Redis Caching
-- [ ] Celery Tasks
-- [ ] Rate Limiting
-- [ ] Monitoring & Alerts
-
-### 🌟 فاز ۳: نسخه پیشرفته - ۱۲-۱۶ هفته
-
-#### نمایشگاه:
-- [ ] غرفه‌های کاملاً تعاملی ۳بعدی
-- [ ] آواتارهای کاربران
-- [ ] رویدادهای زنده (Webinar, Live Stream)
-- [ ] هوش مصنوعی برای پیشنهاد غرفه‌ها
-- [ ] واقعیت افزوده (AR) برای محصولات
-
-#### تالار معامله:
-- [ ] Matching Engine با Performance بالا (Go/Rust)
-- [ ] معاملات مارجین (اهرم)
-- [ ] API عمومی برای Botها
-- [ ] پرتفوی و تحلیل سود/زیان
-- [ ] گزارش‌های مالیاتی
-
-#### یکپارچگی:
-- [ ] اتصال نمایشگاه به تالار (معامله مستقیم از غرفه)
-- [ ] اشتراک‌گذاری داده‌ها بین ماژول‌ها
-- [ ] Dashboard یکپارچه برای کاربران
-
----
-
-## ۵. راهنمای پیاده‌سازی فاز به فاز
-
-### ۵.۱ شروع کار (همین امروز!)
-
-#### قدم ۱: ایجاد Migration
-```bash
-# در پوشه پروژه
-python manage.py db migrate -m "Add exhibition and trading tables"
-python manage.py db upgrade
-```
-
-#### قدم ۲: مقداردهی اولیه ENUMها
 ```python
-from models import init_exhibition_trading_db
-init_exhibition_trading_db(app)
+# WebSocket Setup (trading/websocket.py)
+from flask_socketio import SocketIO, emit
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+@socketio.on('subscribe_orderbook')
+def on_subscribe_orderbook(data):
+    pair_symbol = data['symbol']
+    join_room(f'orderbook_{pair_symbol}')
+
+@socketio.on('place_order')
+def on_place_order(data):
+    # Validate and place order
+    # Broadcast update to orderbook room
+    emit('orderbook_update', updated_book, room=f'orderbook_{data["symbol"]}')
 ```
 
-#### قدم ۳: تست مدل‌ها
-```python
-from models import Exhibition, Booth, TradingPair
-
-# ساخت یک نمایشگاه تست
-exhibition = Exhibition(
-    title_fa="نمایشگاه تستی",
-    title_en="Test Exhibition",
-    start_date=datetime.utcnow(),
-    end_date=datetime.utcnow() + timedelta(days=30)
-)
-db.session.add(exhibition)
-db.session.commit()
-```
-
-### ۵.۲ توسعه فاز ۱ - هفته ۱-۲: نمایشگاه
-
-#### فایل‌های مورد نیاز:
-```
-routes/
-  ├── exhibition.py          # Routeهای نمایشگاه
-  └── booth.py               # Routeهای غرفه
-
-templates/
-  ├── exhibition/
-  │   ├── list.html          # لیست نمایشگاه‌ها
-  │   ├── detail.html        # جزئیات نمایشگاه
-  │   └── booth_view.html    # مشاهده غرفه
-  └── booth/
-      ├── create.html        # ساخت غرفه
-      └── edit.html          # ویرایش غرفه
-
-static/
-  └── js/
-      └── exhibition.js      # جاوااسکریپت نمایشگاه
-```
-
-#### APIهای پایه:
-```python
-# routes/exhibition.py
-
-@bp.route('/api/exhibitions', methods=['GET'])
-def get_exhibitions():
-    """دریافت لیست نمایشگاه‌ها"""
-    status = request.args.get('status', 'active')
-    exhibitions = Exhibition.query.filter_by(status=status).all()
-    return jsonify([...])
-
-@bp.route('/api/exhibitions', methods=['POST'])
-@auth_required
-def create_exhibition():
-    """ساخت نمایشگاه جدید (Admin)"""
-    data = request.get_json()
-    exhibition = Exhibition(**data)
-    db.session.add(exhibition)
-    db.session.commit()
-    return jsonify(exhibition.id), 201
-
-@bp.route('/api/booths', methods=['POST'])
-@auth_required
-def create_booth():
-    """ساخت غرفه جدید"""
-    data = request.get_json()
-    booth = Booth(**data)
-    db.session.add(booth)
-    db.session.commit()
-    return jsonify(booth.id), 201
-```
-
-### ۵.۳ توسعه فاز ۱ - هفته ۳-۴: تالار معامله
-
-#### فایل‌های مورد نیاز:
-```
-routes/
-  ├── trading.py             # Routeهای معامله
-  └── wallet.py              # Routeهای کیف پول
-
-templates/
-  ├── trading/
-  │   ├── dashboard.html     # داشبورد معامله
-  │   ├── order_book.html    # دفتر سفارشات
-  │   └── chart.html         # نمودار قیمت
-  └── wallet/
-      ├── balance.html       # موجودی
-      └── transactions.html  # تراکنش‌ها
-
-utils/
-  └── matching_engine.py     # موتور مچینگ ساده
-```
-
-#### موتور مچینگ ساده:
-```python
-# utils/matching_engine.py
-
-class SimpleMatchingEngine:
-    def __init__(self):
-        self.order_books = {}  # {trading_pair_id: {'bids': [], 'asks': []}}
-    
-    def add_order(self, order):
-        """افزودن سفارش به دفتر"""
-        pair_id = order.trading_pair_id
-        if pair_id not in self.order_books:
-            self.order_books[pair_id] = {'bids': [], 'asks': []}
-        
-        book = self.order_books[pair_id]
-        if order.side == 'buy':
-            book['bids'].append(order)
-            book['bids'].sort(key=lambda x: x.price, reverse=True)
-        else:
-            book['asks'].append(order)
-            book['asks'].sort(key=lambda x: x.price)
-        
-        # تلاش برای مچ
-        return self.match_orders(pair_id)
-    
-    def match_orders(self, pair_id):
-        """مچ کردن سفارش‌ها"""
-        book = self.order_books.get(pair_id)
-        if not book:
-            return []
-        
-        trades = []
-        while book['bids'] and book['asks']:
-            bid = book['bids'][0]
-            ask = book['asks'][0]
-            
-            if bid.price >= ask.price:
-                # مچ اتفاق افتاد
-                quantity = min(bid.remaining_quantity, ask.remaining_quantity)
-                price = ask.price  # قیمت فروشنده
-                
-                trade = self.create_trade(bid, ask, quantity, price)
-                trades.append(trade)
-                
-                # بروزرسانی سفارش‌ها
-                bid.filled_quantity += quantity
-                bid.remaining_quantity -= quantity
-                ask.filled_quantity += quantity
-                ask.remaining_quantity -= quantity
-                
-                # حذف سفارش‌های پرشده
-                if bid.remaining_quantity == 0:
-                    book['bids'].pop(0)
-                if ask.remaining_quantity == 0:
-                    book['asks'].pop(0)
-            else:
-                break
-        
-        return trades
-```
-
----
-
-## ۶. API Design
-
-### ۶.۱ نمایشگاه
-
-#### Public APIs
-```
-GET    /api/exhibitions              # لیست نمایشگاه‌ها
-GET    /api/exhibitions/<id>         # جزئیات نمایشگاه
-GET    /api/exhibitions/<id>/booths  # غرفه‌های نمایشگاه
-GET    /api/booths/<slug>            # مشاهده غرفه
-POST   /api/booths/<id>/visit        # ثبت بازدید
-POST   /api/booths/<id>/contact      # ارسال پیام به غرفه
-```
-
-#### Protected APIs
-```
-POST   /api/exhibitions              # ساخت نمایشگاه (Admin)
-PUT    /api/exhibitions/<id>         # ویرایش نمایشگاه
-DELETE /api/exhibitions/<id>         # حذف نمایشگاه
-
-POST   /api/booths                   # ساخت غرفه
-PUT    /api/booths/<id>              # ویرایش غرفه
-DELETE /api/booths/<id>              # حذف غرفه
-
-GET    /api/booths/<id>/analytics    # آنالیز غرفه (Owner)
-POST   /api/booths/<id>/appointments # ساخت قرار ملاقات
-```
-
-### ۶.۲ تالار معامله
-
-#### Public APIs
-```
-GET    /api/trading/pairs            # لیست جفت‌ها
-GET    /api/trading/pairs/<symbol>   # جزئیات جفت
-GET    /api/trading/orderbook/<pair> # دفتر سفارشات
-GET    /api/trading/trades/<pair>    # تاریخچه معاملات
-GET    /api/trading/marketdata/<pair># داده‌های بازار
-```
-
-#### Protected APIs
-```
-POST   /api/trading/orders           # ثبت سفارش جدید
-GET    /api/trading/orders           # لیست سفارش‌های کاربر
-DELETE /api/trading/orders/<id>      # لغو سفارش
-
-GET    /api/trading/wallet           # موجودی کیف پول
-GET    /api/trading/wallet/transactions # تراکنش‌ها
-
-GET    /api/trading/portfolio        # پرتفوی کاربر
-```
-
----
-
-## ۷. ملاحظات فنی
-
-### ۷.۱ Performance
-
-#### بهینه‌سازی دیتابیس:
-- ✅ ایندکس‌های مناسب روی فیلدهای پرجستجو
-- ✅ Partitioning برای جداول بزرگ (trades, market_data)
-- ✅ Connection Pooling
-- ✅ Query Optimization
-
-#### Caching Strategy:
-```python
-# Redis Cache Keys
-CACHE_KEYS = {
-    'exhibition_detail': 'exhibition:{id}',
-    'booth_detail': 'booth:{slug}',
-    'order_book': 'orderbook:{pair_id}',
-    'market_data': 'marketdata:{pair_id}:{timeframe}',
-    'user_wallet': 'wallet:{user_id}',
-}
-
-# TTL مقادیر مختلف
-CACHE_TTL = {
-    'exhibition_detail': 300,      # 5 دقیقه
-    'booth_detail': 300,
-    'order_book': 1,               # 1 ثانیه (بلادرنگ)
-    'market_data': 60,             # 1 دقیقه
-    'user_wallet': 60,
-}
-```
-
-### ۷.۲ Real-time Updates
-
-#### WebSocket Events:
 ```javascript
-// Client-side events
-const TRADING_EVENTS = {
-    'ORDER_BOOK_UPDATE': 'orderbook:update',
-    'NEW_TRADE': 'trade:new',
-    'ORDER_FILLED': 'order:filled',
-    'ORDER_CANCELLED': 'order:cancelled',
-    'WALLET_UPDATE': 'wallet:update',
-};
+// Frontend WebSocket Client (static/js/trading.js)
+const socket = io('/trading');
 
-// Server-side emit
-@socketio.on('connect')
-def handle_connect():
-    join_room('trading_pair:BTC_USD')
-    emit('connected', {'status': 'ok'})
+socket.emit('subscribe_orderbook', { symbol: 'BTC/USDT' });
 
-def broadcast_orderbook_update(pair_id):
-    data = get_orderbook_snapshot(pair_id)
-    emit('orderbook:update', data, room=f'trading_pair:{pair_id}')
-```
-
-### ۷.۳ امنیت
-
-#### احراز هویت و مجوزها:
-```python
-from functools import wraps
-from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity
-
-def trading_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        verify_jwt_in_request()
-        current_user = get_jwt_identity()
-        
-        # بررسی داشتن کیف پول فعال
-        wallet = TradingWallet.query.filter_by(
-            user_id=current_user['id'],
-            is_active=True
-        ).first()
-        
-        if not wallet:
-            return jsonify({'error': 'Trading wallet required'}), 403
-        
-        # بررسی احراز هویت برای معاملات
-        if not wallet.is_verified:
-            return jsonify({'error': 'Verification required'}), 403
-        
-        return f(*args, **kwargs)
-    return decorated
-```
-
-#### Rate Limiting:
-```python
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
-limiter = Limiter(
-    app=app,
-    key_func=get_remote_address,
-    default_limits=["200 per day", "50 per hour"]
-)
-
-# محدودیت برای APIهای حساس
-@bp.route('/api/trading/orders', methods=['POST'])
-@limiter.limit("10 per minute")
-@trading_required
-def create_order():
-    ...
+socket.on('orderbook_update', (data) => {
+    updateOrderBookUI(data.bids, data.asks);
+});
 ```
 
 ---
 
-## ۸. امنیت و بهینه‌سازی
+## 🌟 Phase 3: Advanced (Weeks 7-12)
 
-### ۸.۱ امنیت داده‌ها
+### Goals
+- Industry-leading features
+- AI-powered insights
+- Full ecosystem integration
 
-#### رمزنگاری:
-- ✅ پسوردها: bcrypt/argon2
-- ✅ اطلاعات حساس: AES-256
-- ✅ ارتباطات: HTTPS/TLS 1.3
+### Planned Features
 
-#### جلوگیری از حملات رایج:
-- ✅ SQL Injection: SQLAlchemy ORM
-- ✅ XSS: Escape outputs, CSP headers
-- ✅ CSRF: CSRF tokens
-- ✅ DDoS: Rate limiting, CDN
+#### Exhibition Advanced
+- [ ] **AI Matchmaking**: Suggest booths based on user interests
+- [ ] **AR Mobile App**: Point phone camera to see virtual booths in real world
+- [ ] **NFT Booths**: Exclusive NFT-based premium booths
+- [ ] **Multi-language Auto-translate**: Real-time chat translation
+- [ ] **Event Streaming**: Live product launches and webinars
+- [ ] **Social Sharing**: Share booth visits on social media with rewards
 
-### ۸.۲ مانیتورینگ و لاگ
+#### Trading Advanced
+- [ ] **Copy Trading**: Follow and copy successful traders automatically
+- [ ] **Futures Contracts**: Perpetual and dated futures trading
+- [ ] **Options Trading**: Call and put options
+- [ ] **Liquidity Mining**: Earn rewards by providing liquidity
+- [ ] **Institutional API**: FIX protocol support for institutions
+- [ ] **Risk Management Suite**: VaR calculations, stress testing
+- [ ] **Tax Reporting**: Automatic tax report generation
 
-#### Structured Logging:
+### AI Integration Examples
+
 ```python
-import structlog
+# AI Booth Recommendation (routes/exhibition/ai.py)
+from sklearn.metrics.pairwise import cosine_similarity
 
-logger = structlog.get_logger()
-
-def log_trade_execution(trade):
-    logger.info(
-        "trade_executed",
-        trade_id=trade.id,
-        pair=trade.trading_pair.symbol,
-        price=float(trade.price),
-        quantity=float(trade.quantity),
-        maker_user=trade.maker_user_id,
-        taker_user=trade.taker_user_id,
-    )
-```
-
-#### Metrics:
-```python
-# Prometheus Metrics
-from prometheus_client import Counter, Histogram
-
-TRADE_COUNTER = Counter('trades_total', 'Total trades', ['pair', 'side'])
-ORDER_LATENCY = Histogram('order_latency_seconds', 'Order processing latency')
-
-def record_trade(trade):
-    TRADE_COUNTER.labels(
-        pair=trade.trading_pair.symbol,
-        side=trade.order.side
-    ).inc()
-```
-
-### ۸.۳ Backup و Recovery
-
-#### استراتژی بکاپ:
-```yaml
-Backup Schedule:
-  - Database: Every 6 hours (full), Every 15 minutes (incremental)
-  - Files: Daily
-  - Retention: 30 days
-  
-Recovery Time Objective (RTO): < 4 hours
-Recovery Point Objective (RPO): < 15 minutes
+def recommend_booths(user_id, limit=10):
+    user = User.query.get(user_id)
+    user_vector = build_user_interest_vector(user)
+    
+    all_booths = Booth.query.filter_by(status='active').all()
+    booth_vectors = [build_booth_vector(b) for b in all_booths]
+    
+    similarities = cosine_similarity([user_vector], booth_vectors)[0]
+    top_indices = similarities.argsort()[-limit:][::-1]
+    
+    return [all_booths[i] for i in top_indices]
 ```
 
 ---
 
-## 📝 چک‌لیست نهایی
+## 📱 Mobile-First Design Guidelines
 
-### قبل از شروع کدنویسی:
-- [ ] مدل‌ها ایمپورت و تست شدند ✅
-- [ ] Migrationها آماده‌اند
-- [ ] محیط توسعه تنظیم است
-- [ ] داکیومنت مطالعه شد
+### Key Principles
+1. **Thumb-Friendly Zones**: Place interactive elements in bottom 60% of screen
+2. **Minimal Taps**: Complete actions in 1-2 taps maximum
+3. **Offline Support**: Cache critical data for offline viewing
+4. **Fast Loading**: Target < 2s initial load on 3G networks
+5. **Progressive Enhancement**: Core features work without JavaScript
 
-### پایان فاز ۱ (MVP):
-- [ ] نمایشگاه‌ها قابل ساخت و مشاهده‌اند
-- [ ] غرفه‌ها قابل مدیریت‌اند
-- [ ] جفت‌های معاملاتی تعریف شده‌اند
-- [ ] سفارش‌گذاری و مچینگ کار می‌کند
-- [ ] کیف پول‌ها فعال‌اند
+### CSS Framework Recommendations
+```html
+<!-- Use Tailwind CSS with mobile-first breakpoints -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+  <!-- Responsive grid -->
+</div>
 
-### پایان فاز ۲ (Professional):
-- [ ] چت زنده و قرار ملاقات فعال است
-- [ ] Order Book بلادرنگ داریم
-- [ ] نمودارهای قیمت داریم
-- [ ] آنالیز و گزارش‌گیری داریم
-
-### پایان فاز ۳ (Advanced):
-- [ ] غرفه‌های ۳بعدی کامل
-- [ ] Matching Engine پرسرعت
-- [ ] معاملات مارجین
-- [ ] هوش مصنوعی و پیشنهادات
+<!-- Touch-friendly buttons (min 44x44px) -->
+<button class="min-h-[44px] min-w-[44px] px-6 py-3 bg-blue-600 rounded-lg">
+  Trade Now
+</button>
+```
 
 ---
 
-## 🎉 نتیجه‌گیری
+## 🔒 Security Considerations
 
-این مستند نقشه راه کاملی برای توسعه نمایشگاه آنلاین و تالار معاملاتی متیما است. با پیروی از این راهنما، می‌توانید به صورت پلکانی و بدون سردرگمی، این دو بخش مهم را به پلتفرم اضافه کنید.
+### Trading Security
+- [ ] Two-factor authentication (2FA) mandatory for withdrawals
+- [ ] Withdrawal whitelist (only pre-approved addresses)
+- [ ] Rate limiting on order placement (prevent spam)
+- [ ] SQL injection prevention (using parameterized queries)
+- [ ] XSS protection (sanitize all user inputs)
+- [ ] CSRF tokens on all forms
+- [ ] Cold storage for 95% of funds
+- [ ] Multi-signature wallets for admin operations
 
-**نکته کلیدی:** مدل‌ها از قبل طراحی شده‌اند و نیازی به تغییر ندارند. فقط کافیست منطق کسب‌وکار و UI را پیاده‌سازی کنید.
+### Exhibition Security
+- [ ] Content moderation for booth descriptions
+- [ ] Image upload validation (size, type, malware scan)
+- [ ] Rate limiting on appointment booking
+- [ ] Privacy controls for user data
 
-موفق باشید! 🚀
+---
+
+## 📊 Performance Benchmarks
+
+### Target Metrics
+| Metric | Target | Current |
+|--------|--------|---------|
+| Page Load Time | < 2s | ~3.5s |
+| Order Execution | < 100ms | ~500ms |
+| Concurrent Users | 10,000+ | Untested |
+| API Response Time | < 200ms | ~350ms |
+| Database Queries | < 50ms | ~80ms |
+
+### Optimization Strategies
+1. **Caching**: Redis for order book, session data, frequently accessed booths
+2. **CDN**: Serve static assets (images, JS, CSS) from CDN
+3. **Database Indexing**: Add indexes on frequently queried columns
+4. **Query Optimization**: Use eager loading to avoid N+1 queries
+5. **Lazy Loading**: Load images and content as user scrolls
+
+---
+
+## 🧪 Testing Strategy
+
+### Unit Tests
+```python
+# tests/test_trading.py
+def test_order_matching():
+    buy_order = TradeOrder(side='buy', price=50000, amount=1.0)
+    sell_order = TradeOrder(side='sell', price=49000, amount=1.0)
+    
+    trade = match_orders(buy_order, sell_order)
+    
+    assert trade.price == 49000  # Price-time priority
+    assert trade.volume == 1.0
+    assert buy_order.status == 'filled'
+    assert sell_order.status == 'filled'
+```
+
+### Integration Tests
+- Test complete user journey: Register → Deposit → Place Order → Execute Trade → Withdraw
+- Test exhibition flow: Browse → Visit Booth → Book Appointment → Attend Meeting
+
+### Load Testing
+- Simulate 1000 concurrent users placing orders
+- Test order book updates under high frequency trading
+
+---
+
+## 📈 Success Metrics
+
+### KPIs to Track
+1. **Daily Active Users (DAU)**: Target 1,000+ in first month
+2. **Trading Volume**: Target $100K daily volume in first quarter
+3. **Exhibition Booths**: Target 200+ active booths
+4. **User Retention**: 40%+ week-over-week retention
+5. **Average Session Duration**: 5+ minutes
+6. **Conversion Rate**: 10% of visitors place a trade
+
+---
+
+## 🛠️ Development Checklist
+
+### Before Launch (MVP)
+- [ ] All models pass validation
+- [ ] All routes return correct HTTP status codes
+- [ ] Mobile responsiveness tested on iOS and Android
+- [ ] Seed data created for demo
+- [ ] Error handling for all edge cases
+- [ ] Logging configured for production
+- [ ] Monitoring dashboard setup (health checks, metrics)
+- [ ] Backup strategy implemented
+
+### Post-Launch (Phase 2)
+- [ ] WebSocket integration complete
+- [ ] Advanced charts implemented
+- [ ] User feedback collected and prioritized
+- [ ] Performance bottlenecks identified and fixed
+- [ ] Security audit completed
+- [ ] Marketing materials prepared
+
+---
+
+## 📞 Support & Maintenance
+
+### Monitoring Tools
+- **Sentry**: Error tracking and alerting
+- **Prometheus + Grafana**: Metrics and dashboards
+- **Logstash + Elasticsearch**: Log aggregation and search
+- **Uptime Robot**: External uptime monitoring
+
+### Incident Response
+1. **Severity 1** (System Down): Immediate response, all hands on deck
+2. **Severity 2** (Major Feature Broken): Response within 1 hour
+3. **Severity 3** (Minor Bug): Response within 24 hours
+4. **Severity 4** (Cosmetic Issue): Next sprint planning
+
+---
+
+## 🎓 Learning Resources
+
+### Recommended Reading
+- "Designing Data-Intensive Applications" by Martin Kleppmann
+- "High Performance Browser Networking" by Ilya Grigorik
+- Flask Documentation: https://flask.palletsprojects.com/
+- SQLAlchemy Documentation: https://docs.sqlalchemy.org/
+
+### Open Source References
+- CCXT (Crypto Exchange Library): https://github.com/ccxt/ccxt
+- Loopring DEX: https://github.com/Loopring/protocol3
+- Mozilla Hubs (Virtual Worlds): https://github.com/mozilla/hubs
+
+---
+
+## 📝 Revision History
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 1.0 | 2026-05-20 | Metisma Dev Team | Initial MVP documentation |
+| 1.1 | TBD | TBD | Phase 2 features added |
+| 2.0 | TBD | TBD | Phase 3 advanced features |
+
+---
+
+**Document Status**: ✅ Complete for MVP Phase  
+**Next Review Date**: After Phase 1 Launch  
+**Contact**: dev@metisma.com

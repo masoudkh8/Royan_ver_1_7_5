@@ -27,6 +27,7 @@ from models import db
 
 # Helper for UUID type compatibility
 UUID_TYPE = UUID(as_uuid=True) if POSTGRES_AVAILABLE else db.String(36)
+STRING_UUID_TYPE = db.String(36)  # For foreign keys to UUIDs when not using postgres
 
 
 # =============================================================================
@@ -130,7 +131,7 @@ class Booth(db.Model):
     
     # اطلاعات صاحب غرفه (Polymorphic)
     owner_type = db.Column(db.String(50), nullable=False)  # company, user, brand
-    owner_id = db.Column(UUID_TYPE, nullable=False)
+    owner_id = db.Column(STRING_UUID_TYPE, nullable=False)
     
     # مشخصات غرفه
     booth_number = db.Column(db.String(20), nullable=False)
