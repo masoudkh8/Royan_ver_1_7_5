@@ -40,7 +40,9 @@
     "profile_updated": "✅ Profile updated.",
     "access_denied": "❌ Access denied.",
     "order_placed": "✅ Order placed successfully.",
-    "fill_required_fields": "Please fill required fields."
+    "fill_required_fields": "Please fill required fields.",
+    "already_logged_in": "You are already logged in. Please log out first to register a new account.",
+    "register_error": "An error occurred during registration."
   },
   "pages": {
     "home": "Home",
@@ -244,5 +246,44 @@
     "replied_to_your_comment": "replied to your comment",
     "liked_your_comment": "liked your comment",
     "shared_your_post": "shared your post"
+  },
+  "registration": {
+    "create_account_subtitle": "Create a new account on Metisma platform",
+    "step_basic": "Basic Information",
+    "step_professional": "Professional Details",
+    "step_security": "Security & Password",
+    "agree_terms": "I agree to the terms and conditions"
+  },
+  "user": {
+    "role": "User Role",
+    "select_role": "Select a role",
+    "job_title": "Job Title",
+    "expertise_area": "Area of Expertise",
+    "bio": "About Me",
+    "website": "Website"
+  },
+  "placeholders": {
+    "username": "Desired username",
+    "email": "example@email.com",
+    "phone": "+1234567890",
+    "country": "Country",
+    "company": "Company name",
+    "job_title": "e.g., Export Manager",
+    "expertise_area": "e.g., Petrochemical Industry",
+    "bio": "Brief description of your background and expertise...",
+    "password": "Password (min 8 characters)",
+    "confirm_password": "Confirm password"
+  },
+  "validation": {
+    "username_min_length": "Username must be at least 3 characters",
+    "invalid_email": "Invalid email address",
+    "password_min_length": "Password must be at least 8 characters",
+    "password_mismatch": "Passwords do not match",
+    "password_weak": "Password should contain uppercase, lowercase, and numbers",
+    "invalid_role": "Invalid role selected",
+    "invalid_phone": "Invalid phone number",
+    "confirm_password": "Confirm password",
+    "password_include_upper_lower": "Include uppercase and lowercase letters",
+    "password_include_number": "Include numbers"
   }
 }

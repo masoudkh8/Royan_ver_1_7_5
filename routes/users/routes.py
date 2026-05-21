@@ -157,46 +157,117 @@ def set_language():
 # -------------------------------
 # ثبت نام
 # -------------------------------
+# Register (Request 2: Smart Multi-step Registration)
+# -------------------------------
 @users_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash("you have account and you are login. if you want to register a new account you should first log out. ")
-        return redirect(url_for('users.profile'))  # یا صفحه‌ی مناسب دیگر
+        flash("You already have an account. Please log out first to register a new account.")
+        return redirect(url_for('users.profile'))
+    
     if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        role = request.form['role']
-        company = request.form.get('company')
-        country = request.form.get('country')
-        phone = request.form.get('phone')
-
+        # Get form data
+        username = request.form.get('username', '').strip()
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
+        confirm_password = request.form.get('confirm_password', '')
+        role = request.form.get('role')
+        company = request.form.get('company', '').strip()
+        country = request.form.get('country', '').strip()
+        phone = request.form.get('phone', '').strip()
+        
+        # New specialized fields
+        expertise_area = request.form.get('expertise_area', '').strip()
+        job_title = request.form.get('job_title', '').strip()
+        bio = request.form.get('bio', '').strip()
+        website = request.form.get('website', '').strip()
+        
+        # Precise input validation (Request 2)
+        errors = []
+        
+        # Username check
+        if not username or len(username) < 3:
+            errors.append("Username must be at least 3 characters long.")
         if User.query.filter_by(username=username, is_active=True).first():
-            flash("❌ Username already taken.")
-            return redirect(url_for('users.register'))
-
+            errors.append("Username already taken.")
+        
+        # Email check
+        if not email or '@' not in email:
+            errors.append("Invalid email address.")
         if User.query.filter_by(email=email, is_active=True).first():
-            flash("❌ Email already used.")
+            errors.append("Email already used.")
+        
+        # Strong password check (Request 2)
+        if not password or len(password) < 8:
+            errors.append("Password must be at least 8 characters long.")
+        elif password != confirm_password:
+            errors.append("Passwords do not match.")
+        else:
+            # Password strength check
+            has_upper = any(c.isupper() for c in password)
+            has_lower = any(c.islower() for c in password)
+            has_digit = any(c.isdigit() for c in password)
+            
+            if not (has_upper and has_lower and has_digit):
+                errors.append("Password should contain uppercase, lowercase, and numbers for better security.")
+        
+        # Role check
+        if not role or not Role.has_value(role):
+            errors.append("Invalid role selected.")
+        
+        # Phone check
+        if phone and (not phone.isdigit() or len(phone.replace('+', '').replace('-', '')) < 10):
+            errors.append("Invalid phone number.")
+        
+        # If there are errors, return to form
+        if errors:
+            for error in errors:
+                flash(error)
+            return redirect(url_for('users.register'))
+        
+        # Create new user
+        try:
+            hashed = generate_password_hash(password)
+            new_user = User(
+                username=username,
+                email=email,
+                password_hash=hashed,
+                role=Role(role),
+                company_name=company,
+                country=country,
+                phone=phone,
+                # New specialized fields (Request 1)
+                expertise_area=expertise_area,
+                job_title=job_title,
+                bio=bio,
+                website=website,
+                # Initial trust_score (Request 2)
+                trust_score_value=50  # Initial trust score
+            )
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            # Create user profile
+            from models.user import UserProfile
+            if not new_user.profile:
+                profile = UserProfile(user=new_user)
+                db.session.add(profile)
+                db.session.commit()
+
+            flash("Registration successful! Please log in.")
+            return redirect(url_for('users.login'))
+            
+        except Exception as e:
+            db.session.rollback()
+            current_app.logger.error(f"Error creating user: {e}")
+            flash("An error occurred during registration.")
             return redirect(url_for('users.register'))
 
-        hashed = generate_password_hash(password)
-        new_user = User(
-            username=username,
-            email=email,
-            password_hash=hashed,
-            role=Role(role),
-            company_name=company,
-            country=country,
-            phone=phone
-        )
+    # GET: Display smart registration form
+    return render_template('users/register_dynamic.html', roles=Role)
 
-        db.session.add(new_user)
-        db.session.commit()
 
-        flash("✅ Registration successful! Please log in.")
-        return redirect(url_for('users.login'))
-
-    return render_template('register.html', roles=Role)
 
 
 # -------------------------------
