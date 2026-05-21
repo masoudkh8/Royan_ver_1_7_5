@@ -168,7 +168,7 @@
                 
                 <div class="mb-6">
                     <label class="flex items-center">
-                        <input type="checkbox" required class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <input type="checkbox" name="agree_terms" required class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                         <span class="ml-2 text-sm text-gray-700">{{ t_('registration.agree_terms') }}</span>
                     </label>
                 </div>
@@ -243,5 +243,44 @@ function updateProgress(step) {
         }
     });
 }
+
+// Form submission validation
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
+    const agreeTerms = document.querySelector('input[name="agree_terms"]');
+    
+    // Check password match
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert('Passwords do not match!');
+        return false;
+    }
+    
+    // Check password strength
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasDigit = /[0-9]/.test(password);
+    
+    if (password.length < 8 || !hasUpper || !hasLower || !hasDigit) {
+        e.preventDefault();
+        alert('Password must be at least 8 characters and contain uppercase, lowercase, and numbers.');
+        return false;
+    }
+    
+    // Check terms agreement
+    if (!agreeTerms || !agreeTerms.checked) {
+        e.preventDefault();
+        alert('You must agree to the terms and conditions.');
+        return false;
+    }
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '⏳ Processing...';
+    
+    return true;
+});
 </script>
 {% endblock %}
