@@ -18,6 +18,31 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 social_bp = Blueprint('social', __name__, url_prefix='/social')
 
 
+def send_notification_async(user_id, notification_data):
+    """
+    Send notification via Celery task for real-time delivery.
+    Falls back to synchronous if Celery is not available.
+    """
+    try:
+        from celery_app import celery
+        task = send_notification_task.delay(user_id, notification_data)
+        return task
+    except Exception:
+        # Fallback: create notification synchronously
+        notification = Notification(
+            user_id=user_id,
+            title=notification_data.get('title', ''),
+            message=notification_data.get('message', ''),
+            notification_type=notification_data.get('type', 'system'),
+            actor_id=notification_data.get('actor_id'),
+            related_id=notification_data.get('related_id'),
+            related_type=notification_data.get('related_type')
+        )
+        db.session.add(notification)
+        db.session.commit()
+        return None
+
+
 # ============================================
 # 1. Public Profile
 # ============================================
@@ -67,17 +92,18 @@ def follow_user(user_id):
             connection_type='public'
         )
         db.session.add(follow)
-        db.session.commit()
         
-        # Create notification for the followed user
-        notification = Notification(
-            user_id=user_id,
-            title=t_('social.new_follower_notification'),
-            message=f'{current_user.username} {t_("social.followed_you")}',
-            notification_type='follow',
-            actor_id=current_user.id
-        )
-        db.session.add(notification)
+        # Create notification data
+        notification_data = {
+            'title': t_('social.new_follower_notification'),
+            'message': f'{current_user.username} {t_("social.followed_you")}',
+            'type': 'follow',
+            'actor_id': current_user.id
+        }
+        
+        # Send notification asynchronously
+        send_notification_async(user_id, notification_data)
+        
         db.session.commit()
         
         return jsonify({
@@ -269,16 +295,15 @@ def like_post(post_id):
         
         # Create notification for post author (if not liking own post)
         if post.author_id != current_user.id:
-            notification = Notification(
-                user_id=post.author_id,
-                title=t_('social.new_like_notification'),
-                message=f'{current_user.username} {t_("social.liked_your_post")}',
-                notification_type='like',
-                actor_id=current_user.id,
-                related_id=post_id,
-                related_type='post'
-            )
-            db.session.add(notification)
+            notification_data = {
+                'title': t_('social.new_like_notification'),
+                'message': f'{current_user.username} {t_("social.liked_your_post")}',
+                'type': 'like',
+                'actor_id': current_user.id,
+                'related_id': post_id,
+                'related_type': 'post'
+            }
+            send_notification_async(post.author_id, notification_data)
         
         db.session.commit()
         
@@ -338,31 +363,29 @@ def add_comment(post_id):
     
     # Create notification for post author (if not commenting on own post)
     if post.author_id != current_user.id:
-        notification = Notification(
-            user_id=post.author_id,
-            title=t_('social.new_comment_notification'),
-            message=f'{current_user.username} {t_("social.commented_on_your_post")}',
-            notification_type='comment',
-            actor_id=current_user.id,
-            related_id=post_id,
-            related_type='post'
-        )
-        db.session.add(notification)
+        notification_data = {
+            'title': t_('social.new_comment_notification'),
+            'message': f'{current_user.username} {t_("social.commented_on_your_post")}',
+            'type': 'comment',
+            'actor_id': current_user.id,
+            'related_id': post_id,
+            'related_type': 'post'
+        }
+        send_notification_async(post.author_id, notification_data)
     
     # If replying to another comment, notify the original comment author
     if parent_id:
         parent_comment = Comment.query.get(parent_id)
         if parent_comment and parent_comment.author_id != current_user.id:
-            notification = Notification(
-                user_id=parent_comment.author_id,
-                title=t_('social.new_reply_notification'),
-                message=f'{current_user.username} {t_("social.replied_to_your_comment")}',
-                notification_type='comment_reply',
-                actor_id=current_user.id,
-                related_id=post_id,
-                related_type='comment'
-            )
-            db.session.add(notification)
+            notification_data = {
+                'title': t_('social.new_reply_notification'),
+                'message': f'{current_user.username} {t_("social.replied_to_your_comment")}',
+                'type': 'comment_reply',
+                'actor_id': current_user.id,
+                'related_id': post_id,
+                'related_type': 'comment'
+            }
+            send_notification_async(parent_comment.author_id, notification_data)
     
     db.session.commit()
     
@@ -391,16 +414,15 @@ def like_comment(comment_id):
         
         # Notification for comment owner
         if comment.author_id != current_user.id:
-            notification = Notification(
-                user_id=comment.author_id,
-                title=t_('social.new_like_notification'),
-                message=f'{current_user.username} {t_("social.liked_your_comment")}',
-                notification_type='like',
-                actor_id=current_user.id,
-                related_id=comment_id,
-                related_type='comment'
-            )
-            db.session.add(notification)
+            notification_data = {
+                'title': t_('social.new_like_notification'),
+                'message': f'{current_user.username} {t_("social.liked_your_comment")}',
+                'type': 'like',
+                'actor_id': current_user.id,
+                'related_id': comment_id,
+                'related_type': 'comment'
+            }
+            send_notification_async(comment.author_id, notification_data)
         
         db.session.commit()
         
@@ -516,3 +538,4 @@ def explore():
     return render_template('users/explore.html', 
                          featured_posts=featured_posts, 
                          suggested_users=suggested_users)
+# Share System Routes Added
