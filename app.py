@@ -343,7 +343,7 @@ def create_app():
     from utils.translations import translator
     @app.context_processor
     def inject_translator():
-        return {'t': translator.t}
+        return {'t': translator.t, 't_': translator.t}
 
     # ✅ Inject current_locale for all templates (FIXES UndefinedError)
     @app.context_processor
