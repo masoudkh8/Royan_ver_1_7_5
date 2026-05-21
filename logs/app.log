@@ -29,3 +29,21 @@
 {"timestamp": "2026-05-20 23:40:06,189", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
 {"timestamp": "2026-05-20 23:40:06,412", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
 {"timestamp": "2026-05-20 23:40:06,728", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-21 00:22:02,927", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:22:12,448", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:22:12,568", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-21 00:22:12,604", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-21 00:32:42,029", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:32:42,163", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-21 00:32:42,202", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-21 00:32:50,308", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:32:50,424", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-21 00:32:50,462", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-21 00:32:58,204", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:32:58,311", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-21 00:32:58,346", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 434}
+{"timestamp": "2026-05-21 00:33:32,383", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 67}
+{"timestamp": "2026-05-21 00:33:32,489", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-21 00:33:33,669", "level": "INFO", "message": "Exhibition module initialized successfully.", "module": "app", "lineno": 441}
+{"timestamp": "2026-05-21 00:33:33,702", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 447}
+{"timestamp": "2026-05-21 00:33:33,702", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 451}

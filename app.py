@@ -431,6 +431,23 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        
+        # Initialize Exhibition & Trading modules
+        from models.exhibition import init_exhibition_db
+        from models.trading import init_trading_db
+        
+        try:
+            init_exhibition_db()
+            app.logger.info("Exhibition module initialized successfully.")
+        except Exception as e:
+            app.logger.warning(f"Exhibition initialization skipped: {e}")
+        
+        try:
+            init_trading_db()
+            app.logger.info("Trading module initialized successfully.")
+        except Exception as e:
+            app.logger.warning(f"Trading initialization skipped: {e}")
+        
         app.logger.info("Database and tables created.")
     
     app.config['START_TIME'] = time.time()
