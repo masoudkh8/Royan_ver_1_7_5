@@ -58,8 +58,8 @@
                 </a>
             </div>
 
-            <!-- کارت: مدیریت سفارشات (فقط برای Seller) -->
-            {% if current_user.role.value == 'seller' %}
+            <!-- کارت: مدیریت سفارشات (فقط برای Producer) -->
+            {% if current_user.role.value == 'producer' %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">

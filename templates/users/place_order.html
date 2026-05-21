@@ -67,11 +67,11 @@
                 </div>
             </div>
 
-            <!-- انتخاب فروشنده -->
+            <!-- انتخاب تولیدکننده -->
             <div>
-                <label for="seller" class="form-label">Select Seller *</label>
-                <select id="seller" name="seller_id" required class="form-input cursor-pointer">
-                    <option value="" disabled selected>Choose a verified seller...</option>
+                <label for="producer" class="form-label">Select Producer *</label>
+                <select id="producer" name="seller_id" required class="form-input cursor-pointer">
+                    <option value="" disabled selected>Choose a verified producer...</option>
                     {% for seller in sellers %}
                     <option value="{{ seller.id }}">
                         {{ seller.username }} {% if seller.company_name %}({{ seller.company_name }}){% endif %} - {{ seller.country }}
