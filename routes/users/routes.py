@@ -392,7 +392,7 @@ def login():
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
                 flash(f"❌ حساب شما تا {user.locked_until.strftime('%Y-%m-%d %H:%M')} به دلیل تلاش‌های ناموفق قفل است.")
-                ActivityLog.log_action(
+                ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='login_blocked',
                     description='حساب کاربری به دلیل تلاش‌های ناموفق قفل است',
@@ -415,7 +415,7 @@ def login():
                 db.session.commit()
             
             # لاگ فعالیت ورود موفق
-            ActivityLog.log_action(
+            ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login',
                 description='ورود موفق به سیستم',
@@ -448,7 +448,7 @@ def login():
                     user.locked_until = datetime.utcnow() + timedelta(minutes=15)  # 15 دقیقه قفل
                     db.session.commit()
                     
-                    ActivityLog.log_action(
+                    ActivityLog.log_activity(
                         user_id=user.id,
                         activity_type='account_locked',
                         description='حساب به دلیل 5 تلاش ناموفق قفل شد',
@@ -461,7 +461,7 @@ def login():
                 else:
                     db.session.commit()
                     
-                    ActivityLog.log_action(
+                    ActivityLog.log_activity(
                         user_id=user.id,
                         activity_type='login_failed',
                         description=f'تلاش ناموفق برای ورود ({user.failed_login_attempts}/5)',
@@ -742,7 +742,7 @@ def delete_account():
 @login_required
 def logout():
     # لاگ فعالیت خروج
-    ActivityLog.log_action(
+    ActivityLog.log_activity(
         user_id=current_user.id,
         activity_type='logout',
         description='خروج از سیستم',
