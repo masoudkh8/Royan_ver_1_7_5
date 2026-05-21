@@ -1,7 +1,7 @@
 # routes/social/routes.py
 """
 Metisma Social Network Routes Module
-Includes: Public Profile, News Feed, Follow/Unfollow, Like, Comment
+Includes: Public Profile, News Feed, Follow/Unfollow, Like, Comment, Share
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, current_app
@@ -9,6 +9,7 @@ from flask_login import login_required, current_user
 from models import db
 from models.user import User, UserProfile
 from models.social import Post, Comment, Like, Follow
+from models.notification import Notification
 from datetime import datetime
 import pytz
 
@@ -52,7 +53,7 @@ def follow_user(user_id):
     Follow a user
     """
     if current_user.id == user_id:
-        return jsonify({'error': 'You cannot follow yourself'}), 400
+        return jsonify({'error': t_('social.cannot_follow_self')}), 400
     
     user_to_follow = User.query.get_or_404(user_id)
     
@@ -69,12 +70,11 @@ def follow_user(user_id):
         db.session.commit()
         
         # Create notification for the followed user
-        from models.notification import Notification
         notification = Notification(
             user_id=user_id,
             title=t_('social.new_follower_notification'),
-            message=f'{current_user.username} {t_("social.followed_you")|default("started following you")}.',
-            type='follow',
+            message=f'{current_user.username} {t_("social.followed_you")}',
+            notification_type='follow',
             actor_id=current_user.id
         )
         db.session.add(notification)
@@ -82,11 +82,11 @@ def follow_user(user_id):
         
         return jsonify({
             'success': True,
-            'message': f'You are now following {user_to_follow.username}.',
+            'message': t_('social.now_following').format(username=user_to_follow.username),
             'followers_count': Follow.get_followers_count(user_id)
         })
     else:
-        return jsonify({'error': 'You are already following this user'}), 400
+        return jsonify({'error': t_('social.already_following')}), 400
 
 
 @social_bp.route('/unfollow/<int:user_id>', methods=['POST'])
@@ -96,7 +96,7 @@ def unfollow_user(user_id):
     Unfollow a user
     """
     if current_user.id == user_id:
-        return jsonify({'error': 'You cannot unfollow yourself'}), 400
+        return jsonify({'error': t_('social.cannot_follow_self')}), 400
     
     # Find follow record
     follow = Follow.query.filter_by(
@@ -110,11 +110,11 @@ def unfollow_user(user_id):
         
         return jsonify({
             'success': True,
-            'message': 'User removed from following list.',
+            'message': t_('social.unfollowed'),
             'followers_count': Follow.get_followers_count(user_id)
         })
     else:
-        return jsonify({'error': 'You are not following this user'}), 400
+        return jsonify({'error': t_('social.not_following')}), 400
 
 
 @social_bp.route('/followers/<int:user_id>')
@@ -153,9 +153,10 @@ def news_feed():
     """
     Personalized news feed for user
     Display posts from followed users + featured posts
+    Enhanced algorithm using TrustScore
     """
-    # Get feed with simple algorithm
-    feed_posts = Post.get_feed_for_user(current_user.id, limit=50, include_featured=True)
+    # Get feed with TrustScore-enhanced algorithm
+    feed_posts = Post.get_feed_with_trust_score(current_user.id, limit=50, include_featured=True)
     
     return render_template('users/feed.html', feed_posts=feed_posts)
 
@@ -268,14 +269,14 @@ def like_post(post_id):
         
         # Create notification for post author (if not liking own post)
         if post.author_id != current_user.id:
-            from models.notification import Notification
             notification = Notification(
                 user_id=post.author_id,
                 title=t_('social.new_like_notification'),
-                message=f'{current_user.username} {t_("social.liked_your_post")|default("liked your post")}.',
-                type='like',
+                message=f'{current_user.username} {t_("social.liked_your_post")}',
+                notification_type='like',
                 actor_id=current_user.id,
-                related_id=post_id
+                related_id=post_id,
+                related_type='post'
             )
             db.session.add(notification)
         
@@ -305,7 +306,7 @@ def like_post(post_id):
                 'is_liked': False
             })
     
-    return jsonify({'error': 'Error in like operation'}), 500
+    return jsonify({'error': t_('messages.error_occurred')}), 500
 
 
 @social_bp.route('/post/<int:post_id>/comment', methods=['POST'])
@@ -337,14 +338,14 @@ def add_comment(post_id):
     
     # Create notification for post author (if not commenting on own post)
     if post.author_id != current_user.id:
-        from models.notification import Notification
         notification = Notification(
             user_id=post.author_id,
             title=t_('social.new_comment_notification'),
-            message=f'{current_user.username} {t_("social.commented_on_your_post")|default("commented on your post")}.',
-            type='comment',
+            message=f'{current_user.username} {t_("social.commented_on_your_post")}',
+            notification_type='comment',
             actor_id=current_user.id,
-            related_id=post_id
+            related_id=post_id,
+            related_type='post'
         )
         db.session.add(notification)
     
@@ -355,10 +356,11 @@ def add_comment(post_id):
             notification = Notification(
                 user_id=parent_comment.author_id,
                 title=t_('social.new_reply_notification'),
-                message=f'{current_user.username} {t_("social.replied_to_your_comment")|default("replied to your comment")}.',
-                type='comment_reply',
+                message=f'{current_user.username} {t_("social.replied_to_your_comment")}',
+                notification_type='comment_reply',
                 actor_id=current_user.id,
-                related_id=post_id
+                related_id=post_id,
+                related_type='comment'
             )
             db.session.add(notification)
     
@@ -389,14 +391,14 @@ def like_comment(comment_id):
         
         # Notification for comment owner
         if comment.author_id != current_user.id:
-            from models.notification import Notification
             notification = Notification(
                 user_id=comment.author_id,
                 title=t_('social.new_like_notification'),
-                message=f'{current_user.username} {t_("social.liked_your_comment")|default("liked your comment")}.',
-                type='like',
+                message=f'{current_user.username} {t_("social.liked_your_comment")}',
+                notification_type='like',
                 actor_id=current_user.id,
-                related_id=comment_id
+                related_id=comment_id,
+                related_type='comment'
             )
             db.session.add(notification)
         
@@ -425,7 +427,7 @@ def like_comment(comment_id):
                 'is_liked': False
             })
     
-    return jsonify({'error': 'Error in like operation'}), 500
+    return jsonify({'error': t_('messages.error_occurred')}), 500
 
 
 @social_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
