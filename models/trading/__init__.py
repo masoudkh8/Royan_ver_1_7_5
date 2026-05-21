@@ -36,7 +36,7 @@ UUID_TYPE = UUID(as_uuid=True) if POSTGRES_AVAILABLE else db.String(36)
 # =============================================================================
 
 class OrderType(db.Model):
-    """انواع سفارش"""
+    """Order types"""
     __tablename__ = 'order_type_enum'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +47,7 @@ class OrderType(db.Model):
 
 
 class OrderSide(db.Model):
-    """سمت سفارش (خرید/فروش)"""
+    """Order side (buy/sell)"""
     __tablename__ = 'order_side_enum'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -58,7 +58,7 @@ class OrderSide(db.Model):
 
 
 class OrderStatus(db.Model):
-    """وضعیت‌های سفارش"""
+    """Order statuses"""
     __tablename__ = 'order_status_enum'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -74,8 +74,8 @@ class OrderStatus(db.Model):
 
 class TradingPair(db.Model):
     """
-    جفت ارز/کالا قابل معامله
-    مثال: BTC/USDT, GOLD/USD
+    Tradable asset pairs
+    Example: BTC/USDT, GOLD/USD
     """
     __tablename__ = 'trading_pairs'
     
@@ -121,8 +121,8 @@ class TradingPair(db.Model):
 
 class TradingWallet(db.Model):
     """
-    کیف پول داخلی کاربران برای معاملات
-    هر کاربر یک کیف پول با موجودی چندارزی دارد
+    Internal user wallet for trading
+    Each user has a multi-currency wallet
     """
     __tablename__ = 'trading_wallets'
     
@@ -164,8 +164,8 @@ class TradingWallet(db.Model):
 
 class TradingWalletTransaction(db.Model):
     """
-    کیف پول معاملاتی - تراکنش‌ها
-    ثبت تمام تغییرات موجودی در تالار معامله
+    Trading wallet transactions
+    Records all balance changes in trading hall
     """
     __tablename__ = 'trading_wallet_transactions'
     
@@ -208,8 +208,8 @@ class TradingWalletTransaction(db.Model):
 
 class TradeOrder(db.Model):
     """
-    سفارش معامله
-    پشتیبانی از انواع سفارش: Market, Limit, Stop-Limit
+    Trade order
+    Supports order types: Market, Limit, Stop-Limit
     """
     __tablename__ = 'trade_orders'
     
@@ -277,8 +277,8 @@ class TradeOrder(db.Model):
 
 class Trade(db.Model):
     """
-    معامله انجام‌شده
-    نتیجه مچ شدن دو سفارش خرید و فروش
+    Executed trade
+    Result of matching buy and sell orders
     """
     __tablename__ = 'trades'
     
@@ -371,7 +371,7 @@ class MarketData(db.Model):
 
 class TradingSetting(db.Model):
     """
-    تنظیمات کلی تالار معاملاتی
+    General trading hall settings
     """
     __tablename__ = 'trading_settings'
     
@@ -404,8 +404,8 @@ class TradingSetting(db.Model):
 
 def init_trading_db(app=None):
     """
-    مقداردهی اولیه دیتابیس تالار معاملاتی
-    ایجاد مقادیر پیش‌فرض ENUMها و تنظیمات
+    Initialize trading database
+    Create default ENUM values and settings
     """
     if app:
         db.init_app(app)

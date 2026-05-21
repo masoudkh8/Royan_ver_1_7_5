@@ -35,7 +35,7 @@ STRING_UUID_TYPE = db.String(36)  # For foreign keys to UUIDs when not using pos
 # =============================================================================
 
 class ExhibitionStatus(db.Model):
-    """وضعیت‌های نمایشگاه"""
+    """Exhibition status types"""
     __tablename__ = 'exhibition_status_enum'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -46,7 +46,7 @@ class ExhibitionStatus(db.Model):
 
 
 class BoothType(db.Model):
-    """انواع غرفه"""
+    """Booth type categories"""
     __tablename__ = 'booth_type_enum'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -62,8 +62,8 @@ class BoothType(db.Model):
 
 class Exhibition(db.Model):
     """
-    نمایشگاه کلی
-    هر نمایشگاه می‌تواند چندین غرفه داشته باشد
+    Main exhibition entity
+    Each exhibition can have multiple booths
     """
     __tablename__ = 'exhibitions'
     
@@ -73,40 +73,40 @@ class Exhibition(db.Model):
     description_fa = db.Column(db.Text)
     description_en = db.Column(db.Text)
     
-    # زمان‌بندی
+    # Timing
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     timezone = db.Column(db.String(50), default='Asia/Tehran')
     
-    # وضعیت
+    # Status
     status_id = db.Column(db.Integer, db.ForeignKey('exhibition_status_enum.id'), 
                          default=1)
     status = db.relationship('ExhibitionStatus', backref='exhibitions')
     
-    # تنظیمات نمایشی
+    # Display settings
     banner_url = db.Column(db.String(500))
     thumbnail_url = db.Column(db.String(500))
     theme_color = db.Column(db.String(7), default='#1a56db')
     
-    # قابلیت‌ها
+    # Features
     has_virtual_tour = db.Column(db.Boolean, default=False)
     has_3d_booths = db.Column(db.Boolean, default=False)
     has_live_chat = db.Column(db.Boolean, default=True)
     has_video_conference = db.Column(db.Boolean, default=False)
     
-    # آمار
+    # Statistics
     total_booths = db.Column(db.Integer, default=0)
     total_visitors = db.Column(db.Integer, default=0)
     total_interactions = db.Column(db.Integer, default=0)
     
-    # متادیتا
+    # Metadata
     settings = db.Column(db.JSON, default={})
     seo_metadata = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # Relationships
     booths = db.relationship('Booth', backref='exhibition', lazy='dynamic', cascade='all, delete-orphan')
     visits = db.relationship('ExhibitionVisit', backref='exhibition', lazy='dynamic')
     
@@ -121,26 +121,26 @@ class Exhibition(db.Model):
 
 class Booth(db.Model):
     """
-    غرفه نمایشگاه
-    می‌تواند ساده، پریمیوم یا ۳بعدی باشد
+    Exhibition booth entity
+    Can be standard, premium, or 3D booth
     """
     __tablename__ = 'booths'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     exhibition_id = db.Column(UUID_TYPE, db.ForeignKey('exhibitions.id'), nullable=False)
     
-    # اطلاعات صاحب غرفه (Polymorphic)
+    # Owner information (Polymorphic)
     owner_type = db.Column(db.String(50), nullable=False)  # company, user, brand
     owner_id = db.Column(STRING_UUID_TYPE, nullable=False)
     
-    # مشخصات غرفه
+    # Booth details
     booth_number = db.Column(db.String(20), nullable=False)
     title_fa = db.Column(db.String(200), nullable=False)
     title_en = db.Column(db.String(200), nullable=False)
     description_fa = db.Column(db.Text)
     description_en = db.Column(db.Text)
     
-    # نوع و موقعیت
+    # Type and location
     type_id = db.Column(db.Integer, db.ForeignKey('booth_type_enum.id'), default=1)
     booth_type = db.relationship('BoothType', backref='booths')
     
@@ -148,41 +148,41 @@ class Booth(db.Model):
     location_y = db.Column(db.Integer, default=0)
     floor_plan = db.Column(db.String(50))
     
-    # محتوای چندرسانه‌ای
+    # Multimedia content
     gallery_images = db.Column(db.JSON, default=[])
     video_urls = db.Column(db.JSON, default=[])
     brochure_url = db.Column(db.String(500))
     
-    # مدل ۳بعدی
+    # 3D model
     model_3d_url = db.Column(db.String(500))
     model_3d_config = db.Column(db.JSON, default={})
     
-    # محصولات/خدمات
+    # Products/Services
     featured_products = db.Column(db.JSON, default=[])
     services_offered = db.Column(db.JSON, default=[])
     
-    # تعاملات
+    # Interactions
     contact_info = db.Column(db.JSON, default={})
     chat_enabled = db.Column(db.Boolean, default=True)
     appointment_enabled = db.Column(db.Boolean, default=True)
     
-    # آمار
+    # Statistics
     view_count = db.Column(db.Integer, default=0)
     interaction_count = db.Column(db.Integer, default=0)
     lead_count = db.Column(db.Integer, default=0)
     
-    # وضعیت
+    # Status
     is_active = db.Column(db.Boolean, default=True)
     approval_status = db.Column(db.String(50), default='pending')
     
-    # سئو
+    # SEO
     slug = db.Column(db.String(200), unique=True, nullable=False)
     seo_metadata = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # Relationships
     visits = db.relationship('BoothVisit', backref='booth', lazy='dynamic')
     interactions = db.relationship('BoothInteraction', backref='booth', lazy='dynamic')
     appointments = db.relationship('BoothAppointment', backref='booth', lazy='dynamic')
@@ -199,7 +199,7 @@ class Booth(db.Model):
 
 
 class BoothVisit(db.Model):
-    """ثبت بازدید از غرفه"""
+    """Booth visit registration"""
     __tablename__ = 'booth_visits'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
@@ -232,7 +232,7 @@ class BoothVisit(db.Model):
 
 
 class BoothInteraction(db.Model):
-    """تعاملات کاربر با غرفه"""
+    """User interactions with booth"""
     __tablename__ = 'booth_interactions'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
@@ -258,7 +258,7 @@ class BoothInteraction(db.Model):
 
 
 class BoothAppointment(db.Model):
-    """قرار ملاقات در غرفه"""
+    """Booth appointment scheduling"""
     __tablename__ = 'booth_appointments'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
@@ -294,7 +294,7 @@ class BoothAppointment(db.Model):
 
 
 class ExhibitionVisit(db.Model):
-    """بازدید کلی از نمایشگاه"""
+    """General exhibition visit tracking"""
     __tablename__ = 'exhibition_visits'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
@@ -328,20 +328,20 @@ class ExhibitionVisit(db.Model):
 
 def init_exhibition_db(app=None):
     """
-    مقداردهی اولیه دیتابیس نمایشگاه
-    ایجاد مقادیر پیش‌فرض ENUMها
+    Initialize exhibition database
+    Create default ENUM values
     """
     if app:
         db.init_app(app)
     
-    # ایجاد وضعیت‌های نمایشگاه
+    # Create exhibition statuses
     exhibition_statuses = ['draft', 'upcoming', 'active', 'paused', 'completed', 'cancelled']
     for status in exhibition_statuses:
         existing = ExhibitionStatus.query.filter_by(status=status).first()
         if not existing:
             db.session.add(ExhibitionStatus(status=status))
     
-    # ایجاد انواع غرفه
+    # Create booth types
     booth_types = ['standard', 'premium', 'vip', '3d', 'interactive']
     for btype in booth_types:
         existing = BoothType.query.filter_by(booth_type=btype).first()
