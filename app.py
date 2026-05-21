@@ -20,14 +20,24 @@ from flask_login import LoginManager
 from flask_mail import Mail, Message
 from routes.users import root_bp
 from extensions import mail, cache, limiter, babel
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from datetime import datetime
 import time
+import eventlet
+from eventlet import wsgi
 
 migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-socketio = SocketIO(cors_allowed_origins="*", async_mode='gevent')
+
+# Initialize SocketIO with Redis message queue for production
+socketio = SocketIO(
+    cors_allowed_origins="*",
+    async_mode='eventlet',
+    message_queue=os.environ.get("SOCKETIO_MESSAGE_QUEUE", "redis://localhost:6379/0"),
+    engineio_logger=False,
+    logger=False
+)
 
 
 def get_locale():
@@ -373,6 +383,55 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
+    # =============================================================================
+    # ✅ SocketIO Real-time Notifications Setup
+    # =============================================================================
+    @socketio.on('connect')
+    def handle_connect():
+        """Handle client connection."""
+        from flask_login import current_user
+        if current_user.is_authenticated:
+            # Join user-specific room
+            socketio.enter_room(f'user_{current_user.id}')
+            emit('connected', {'message': 'Connected to real-time notifications'})
+            app.logger.info(f'User {current_user.id} connected to SocketIO')
+
+    @socketio.on('disconnect')
+    def handle_disconnect():
+        """Handle client disconnection."""
+        from flask_login import current_user
+        if current_user.is_authenticated:
+            socketio.leave_room(f'user_{current_user.id}')
+            app.logger.info(f'User {current_user.id} disconnected from SocketIO')
+
+    @socketio.on('join_room')
+    def handle_join_room(data):
+        """Allow clients to join specific rooms."""
+        from flask_login import current_user
+        if current_user.is_authenticated:
+            room = data.get('room')
+            if room:
+                socketio.enter_room(room)
+                emit('joined_room', {'room': room})
+
+    # Function to send notifications (can be called from anywhere in the app)
+    def send_notification(user_id, notification_type, message, data=None):
+        """Send real-time notification to a specific user."""
+        from flask_login import current_user
+        notification = {
+            'type': notification_type,
+            'message': message,
+            'data': data or {},
+            'timestamp': datetime.utcnow().isoformat()
+        }
+        socketio.emit('notification', notification, room=f'user_{user_id}')
+        return notification
+
+    # Inject socketio and send_notification into template context
+    @app.context_processor
+    def inject_socketio():
+        return {'send_notification': send_notification}
+
     # Register blueprints
     from routes.magazine import magazine_bp
     from routes.exhibition import exhibition_bp
@@ -464,9 +523,108 @@ def create_app():
     
     app.config['START_TIME'] = time.time()
 
+    # =============================================================================
+    # ✅ Global Search Endpoint
+    # =============================================================================
+    @app.route('/search')
+    @limiter.limit("30 per minute")  # Rate limiting for search
+    def global_search():
+        """Global search endpoint for users, products, and content."""
+        from flask_login import current_user
+        query = request.args.get('q', '').strip()
+        search_type = request.args.get('type', 'all')  # all, users, products, articles
+        
+        if not query or len(query) < 2:
+            return jsonify({'error': 'Query must be at least 2 characters'}), 400
+        
+        results = {
+            'query': query,
+            'users': [],
+            'products': [],
+            'articles': [],
+            'ports': []
+        }
+        
+        try:
+            # Search users
+            if search_type in ['all', 'users']:
+                users = User.query.filter(
+                    db.or_(
+                        User.username.ilike(f'%{query}%'),
+                        User.email.ilike(f'%{query}%'),
+                        User.company_name.ilike(f'%{query}%')
+                    )
+                ).limit(10).all()
+                results['users'] = [{
+                    'id': u.id,
+                    'username': u.username,
+                    'company_name': u.company_name,
+                    'avatar': u.profile_image,
+                    'url': url_for('users.profile', user_id=u.id)
+                } for u in users]
+            
+            # Search products (from trading module)
+            if search_type in ['all', 'products']:
+                try:
+                    from models.trading import Product
+                    products = Product.query.filter(
+                        Product.title.ilike(f'%{query}%')
+                    ).limit(10).all()
+                    results['products'] = [{
+                        'id': p.id,
+                        'title': p.title,
+                        'price': p.price,
+                        'image': p.images[0] if p.images else None,
+                        'url': url_for('trading.product_detail', product_id=p.id)
+                    } for p in products]
+                except:
+                    pass
+            
+            # Search articles (from magazine module)
+            if search_type in ['all', 'articles']:
+                try:
+                    from models.magazine import Article
+                    articles = Article.query.filter(
+                        db.or_(
+                            Article.title.ilike(f'%{query}%'),
+                            Article.content.ilike(f'%{query}%')
+                        )
+                    ).limit(10).all()
+                    results['articles'] = [{
+                        'id': a.id,
+                        'title': a.title,
+                        'excerpt': a.excerpt,
+                        'image': a.featured_image,
+                        'url': url_for('magazine.article_detail', article_id=a.id)
+                    } for a in articles]
+                except:
+                    pass
+            
+            # Search ports
+            if search_type in ['all', 'ports']:
+                ports = Port.query.filter(
+                    db.or_(
+                        Port.name.ilike(f'%{query}%'),
+                        Port.country.ilike(f'%{query}%')
+                    )
+                ).limit(10).all()
+                results['ports'] = [{
+                    'id': p.id,
+                    'name': p.name,
+                    'country': p.country,
+                    'url': url_for('exhibition.port_detail', port_id=p.id)
+                } for p in ports]
+            
+            return jsonify(results)
+        
+        except Exception as e:
+            app.logger.error(f'Search error: {e}')
+            return jsonify({'error': 'Search failed'}), 500
+
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    # Run with SocketIO for real-time features
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True, allow_unsafe_werkzeug=True)
