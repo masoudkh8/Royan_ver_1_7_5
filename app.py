@@ -20,12 +20,14 @@ from flask_login import LoginManager
 from flask_mail import Mail, Message
 from routes.users import root_bp
 from extensions import mail, cache, limiter, babel
+from flask_socketio import SocketIO
 from datetime import datetime
 import time
 
 migrate = Migrate()
 login_manager = LoginManager()
 csrf = CSRFProtect()
+socketio = SocketIO(cors_allowed_origins="*", async_mode='gevent')
 
 
 def get_locale():
@@ -336,8 +338,15 @@ def create_app():
     if Config.RATELIMIT_ENABLED:
         limiter.init_app(app)
     
+    # Initialize SocketIO
+    socketio.init_app(app, message_queue=Config.SOCKETIO_MESSAGE_QUEUE, cors_allowed_origins="*")
+    
     setup_logging(app)
     setup_monitoring(app)
+    
+    # Create upload folders
+    os.makedirs(Config.PROFILE_UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(Config.MAGAZINE_UPLOAD_FOLDER, exist_ok=True)
 
     # Inject translator from utils
     from utils.translations import translator
@@ -460,4 +469,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)

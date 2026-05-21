@@ -21,6 +21,31 @@ from models.port import Port
 
 from . import users_bp,root_bp
 
+from config import Config
+from PIL import Image
+import requests
+
+# reCAPTCHA validation helper
+def verify_recaptcha(response_token):
+    """Verify reCAPTCHA token with Google"""
+    if not Config.RECAPTCHA_ENABLED or not response_token:
+        return True  # Skip if disabled
+    
+    secret_key = Config.RECAPTCHA_SECRET_KEY
+    verify_url = "https://www.google.com/recaptcha/api/siteverify"
+    
+    try:
+        payload = {
+            'secret': secret_key,
+            'response': response_token
+        }
+        response = requests.post(verify_url, data=payload, timeout=5)
+        result = response.json()
+        return result.get('success', False) and result.get('score', 0) >= 0.5
+    except Exception as e:
+        current_app.logger.error(f"reCAPTCHA verification failed: {e}")
+        return False
+
 
 # ==============================
 # دکوریتورهای دسترسی مبتنی بر نقش
@@ -240,6 +265,12 @@ def register():
         job_title = request.form.get('job_title', '').strip()
         bio = request.form.get('bio', '').strip()
         website = request.form.get('website', '').strip()
+        
+        # reCAPTCHA verification
+        recaptcha_response = request.form.get('g-recaptcha-response')
+        if not verify_recaptcha(recaptcha_response):
+            flash("reCAPTCHA verification failed. Please try again.", "error")
+            return redirect(url_for('users.register'))
         
         # Precise input validation (Request 2)
         errors = []
