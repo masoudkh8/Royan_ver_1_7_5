@@ -3,17 +3,73 @@ from flask_wtf.csrf import generate_csrf
 from datetime import datetime
 import pytz
 tehran_tz = pytz.timezone('Asia/Tehran')
+import os
+import json
+import secrets
+from werkzeug.utils import secure_filename
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
-from flask_limiter import Limiter
+from functools import wraps
+from extensions import limiter
 from models import Message, Notification
 from models.user import db, User, Role
 from models.port import Port
 
 from . import users_bp,root_bp
+
+
+# ==============================
+# دکوریتورهای دسترسی مبتنی بر نقش
+# ==============================
+def role_required(*roles):
+    """دکوریتور برای محدود کردن دسترسی بر اساس نقش کاربر"""
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if not current_user.is_authenticated:
+                flash("لطفاً ابتدا وارد شوید.", "error")
+                return redirect(url_for('users.login'))
+            
+            if current_user.role.value not in roles:
+                flash("دسترسی غیرمجاز. این بخش مخصوص نقش‌های خاصی است.", "error")
+                return redirect(url_for('users.profile'))
+            
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+# ==============================
+# توابع کمکی برای آپلود امن فایل
+# ==============================
+ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+
+def allowed_file(filename):
+    """بررسی پسوند فایل مجاز"""
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def validate_file(file):
+    """اعتبارسنجی کامل فایل آپلود شده"""
+    if not file or file.filename == '':
+        return False, "فایلی انتخاب نشده است"
+    
+    if not allowed_file(file.filename):
+        return False, "نوع فایل مجاز نیست (فقط PDF, PNG, JPG)"
+    
+    # بررسی اندازه فایل
+    file.seek(0, os.SEEK_END)
+    file_size = file.tell()
+    file.seek(0)
+    
+    if file_size > MAX_FILE_SIZE:
+        return False, "حجم فایل نباید بیشتر از 5MB باشد"
+    
+    return True, ""
 
 
 # routes/users/routes.py یا app.py
@@ -160,6 +216,7 @@ def set_language():
 # Register (Request 2: Smart Multi-step Registration)
 # -------------------------------
 @users_bp.route('/register', methods=['GET', 'POST'])
+@limiter.limit("5 per minute")  # Rate limiting for registration
 def register():
     if current_user.is_authenticated:
         flash("You already have an account. Please log out first to register a new account.")
@@ -297,19 +354,92 @@ def login():
 
 
 # -------------------------------
-# ویرایش پروفایل
+# ویرایش پروفایل پیشرفته
 # -------------------------------
 @users_bp.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     if request.method == 'POST':
-        current_user.company_name = request.form['company']
-        current_user.country = request.form['country']
-        current_user.phone = request.form['phone']
+        # اطلاعات پایه
+        current_user.company_name = request.form.get('company', '').strip()
+        current_user.country = request.form.get('country', '').strip()
+        current_user.phone = request.form.get('phone', '').strip()
+        
+        # فیلدهای تخصصی جدید (درخواست ۴)
+        current_user.expertise_area = request.form.get('expertise_area', '').strip()
+        current_user.job_title = request.form.get('job_title', '').strip()
+        current_user.bio = request.form.get('bio', '').strip()
+        current_user.website = request.form.get('website', '').strip()
+        
+        # پردازش شبکه‌های اجتماعی (JSON format)
+        social_links = {
+            'linkedin': request.form.get('linkedin', '').strip(),
+            'telegram': request.form.get('telegram', '').strip(),
+            'whatsapp': request.form.get('whatsapp', '').strip()
+        }
+        # حذف مقادیر خالی
+        social_links = {k: v for k, v in social_links.items() if v}
+        current_user.social_links = json.dumps(social_links) if social_links else None
+        
         db.session.commit()
-        flash("✅ Profile updated.")
+        flash("✅ Profile updated successfully.")
         return redirect(url_for('users.profile'))
-    return render_template('edit_profile.html', user=current_user)
+    
+    return render_template('users/profile_edit.html', user=current_user)
+
+
+# -------------------------------
+# آپلود مدارک تأیید هویت
+# -------------------------------
+@users_bp.route('/upload_documents', methods=['GET', 'POST'])
+@login_required
+def upload_documents():
+    if request.method == 'POST':
+        documents = []
+        upload_folder = current_app.config.get('UPLOAD_FOLDER', 'static/uploads/documents')
+        
+        # اطمینان از وجود پوشه
+        os.makedirs(upload_folder, exist_ok=True)
+        
+        # پردازش فایل‌های آپلود شده
+        for field_name in ['passport', 'license', 'id_card', 'other']:
+            file = request.files.get(field_name)
+            if file and file.filename != '':
+                is_valid, error_msg = validate_file(file)
+                if not is_valid:
+                    flash(f"❌ {error_msg}", "error")
+                    return redirect(url_for('users.upload_documents'))
+                
+                # تولید نام امن برای فایل
+                filename = secure_filename(file.filename)
+                unique_filename = f"{current_user.id}_{secrets.token_hex(8)}_{filename}"
+                filepath = os.path.join(upload_folder, unique_filename)
+                
+                file.save(filepath)
+                
+                # ذخیره اطلاعات مدرک
+                documents.append({
+                    'type': field_name,
+                    'filename': unique_filename,
+                    'uploaded_at': datetime.utcnow().isoformat()
+                })
+        
+        if documents:
+            # ذخیره مدارک در فیلد verification_documents (JSON format)
+            existing_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
+            existing_docs.extend(documents)
+            current_user.verification_documents = json.dumps(existing_docs)
+            
+            # تنظیم وضعیت is_verified به pending (نیاز به بررسی admin)
+            current_user.is_verified = False
+            
+            db.session.commit()
+            flash("✅ مدارک شما با موفقیت آپلود شد. پس از بررسی توسط ادمین، وضعیت تأیید تغییر خواهد کرد.", "success")
+            return redirect(url_for('users.profile'))
+        else:
+            flash("⚠️ لطفاً حداقل یک مدرک آپلود کنید.", "warning")
+    
+    return render_template('users/upload_documents.html', user=current_user)
 
 
 
@@ -357,19 +487,46 @@ def profile():
         from models.order import OrderStatus,Order
         pending_orders = Order.query.filter_by(seller_id=current_user.id, status=OrderStatus.PENDING).count()
 
-
+    # دریافت مدارک آپلود شده برای بررسی وضعیت تأیید
+    verification_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
+    
+    # محاسبه وضعیت pending tasks
+    pending_tasks = []
+    if not current_user.is_verified and verification_docs:
+        pending_tasks.append({
+            'title': 'بررسی مدارک تأیید هویت',
+            'description': 'مدارک شما در حال بررسی توسط ادمین است',
+            'status': 'pending',
+            'icon': 'document'
+        })
+    elif not current_user.is_verified and not verification_docs:
+        pending_tasks.append({
+            'title': 'آپلود مدارک تأیید هویت',
+            'description': 'برای افزایش امتیاز اعتماد، مدارک خود را آپلود کنید',
+            'status': 'action_required',
+            'action_url': url_for('users.upload_documents'),
+            'icon': 'upload'
+        })
+    
+    # پروفایل کامل برای داشبورد هوشمند
     support_user = User.query.filter_by(username='support', is_active=True).first()
 
     if not support_user:
-        # If not found, use first seller
         support_user = User.query.filter_by(role=Role.SELLER, is_active=True).first()
-
 
     seller = User.query.filter_by(role=Role.SELLER, is_active=True).first()
     buyer = User.query.filter_by(role=Role.BUYER, is_active=True).first()
     broker = User.query.filter_by(role=Role.BROKER, is_premium=True, is_active=True).first()
 
-    return render_template('users/dashboard.html', user=current_user,support_user=support_user , pending_orders=pending_orders, seller=seller,buyer=buyer, broker=broker)
+    return render_template('users/dashboard.html', 
+                          user=current_user,
+                          support_user=support_user,
+                          pending_orders=pending_orders,
+                          seller=seller,
+                          buyer=buyer,
+                          broker=broker,
+                          pending_tasks=pending_tasks,
+                          verification_docs=verification_docs)
 
 
 
