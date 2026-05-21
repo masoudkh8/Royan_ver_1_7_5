@@ -38,9 +38,17 @@ class Config:
     # File upload settings
     basedir = os.path.abspath(os.path.dirname(__file__))
     UPLOAD_FOLDER = os.path.join(basedir, 'uploads')
+    PROFILE_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER, 'profiles')
     MAGAZINE_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER, 'magazines')
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50 MB max file size
     ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
+    ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+    MAX_IMAGE_SIZE = 5 * 1024 * 1024  # 5MB max for profile images
+    
+    # reCAPTCHA Configuration
+    RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY", "")
+    RECAPTCHA_SECRET_KEY = os.environ.get("RECAPTCHA_SECRET_KEY", "")
+    RECAPTCHA_ENABLED = os.environ.get("RECAPTCHA_ENABLED", "False").lower() in ("true", "1", "yes")
     
     # Redis Configuration
     REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
@@ -56,6 +64,9 @@ class Config:
     CACHE_TYPE = 'RedisCache'
     CACHE_REDIS_URL = os.environ.get("CACHE_REDIS_URL", "redis://localhost:6379/0")
     CACHE_DEFAULT_TIMEOUT = 300  # 5 minutes default timeout
+    
+    # SocketIO Configuration
+    SOCKETIO_MESSAGE_QUEUE = os.environ.get("SOCKETIO_MESSAGE_QUEUE", "redis://localhost:6379/0")
     
     # Rate Limiting Configuration
     RATELIMIT_ENABLED = os.environ.get("RATELIMIT_ENABLED", "True").lower() in ("true", "1", "yes")
