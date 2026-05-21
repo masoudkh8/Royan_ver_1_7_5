@@ -3,6 +3,7 @@ from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_sqlalchemy import SQLAlchemy
+from flask_babel import Babel
 
 mail = Mail()
 cache = Cache()
@@ -13,3 +14,4 @@ limiter = Limiter(
     strategy="moving-window"
 )
 db = SQLAlchemy()
+babel = Babel()
