@@ -19,7 +19,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 from routes.users import root_bp
-from extensions import mail, cache, limiter
+from extensions import mail, cache, limiter, babel
 from datetime import datetime
 import time
 
@@ -202,8 +202,9 @@ def create_app():
 
     # === Flask-Babel Setup (Compatible with v4.x) ===
     babel = Babel(app)
-    app.config['BABEL_DEFAULT_LOCALE'] = 'fa'
+    app.config['BABEL_DEFAULT_LOCALE'] = 'fa_IR'
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = trans_dir
+    app.config['BABEL_SUPPORTED_LANGUAGES'] = ['fa_IR', 'en']
 
     # =============================================================================
     # ✅ CLI Command: Load Ports from JSON (با پشتیبانی از PostgreSQL)
@@ -308,7 +309,7 @@ def create_app():
         if lang:
             session['lang'] = lang
             return lang
-        return request.accept_languages.best_match(['fa', 'en'], 'fa')
+        return request.accept_languages.best_match(['fa_IR', 'en'], 'fa_IR')
 
     babel.init_app(app, locale_selector=get_locale)
 
@@ -353,7 +354,7 @@ def create_app():
         lang = request.args.get('lang')
         if lang:
             return {'current_locale': lang}
-        return {'current_locale': request.accept_languages.best_match(['fa', 'en'], 'fa')}
+        return {'current_locale': request.accept_languages.best_match(['fa_IR', 'en'], 'fa_IR')}
 
     @app.context_processor
     def inject_roles():
@@ -367,6 +368,7 @@ def create_app():
     from routes.magazine import magazine_bp
     from routes.exhibition import exhibition_bp
     from routes.trading import trading_bp
+    from routes.language import language_bp
     from api_docs import init_api_docs
 
     app.register_blueprint(users_bp, url_prefix='/users')
@@ -376,6 +378,7 @@ def create_app():
     app.register_blueprint(social_bp)
     app.register_blueprint(exhibition_bp)
     app.register_blueprint(trading_bp)
+    app.register_blueprint(language_bp, url_prefix='/language')
     
     init_api_docs(app)
 

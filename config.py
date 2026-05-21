@@ -64,4 +64,10 @@ class Config:
     RATELIMIT_DEFAULT = "100 per hour"  # Default rate limit
     RATELIMIT_AUTHENTICATED = "200 per hour"  # Rate limit for authenticated users
     RATELIMIT_HEADERS_ENABLED = True  # Include rate limit headers in response
+    
+    # Internationalization (i18n) Configuration
+    BABEL_DEFAULT_LOCALE = 'fa_IR'  # Default to Persian
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(basedir, 'translations')
+    LANGUAGES = ['fa_IR', 'en']
+    DEFAULT_LANGUAGE = 'fa_IR'
 
