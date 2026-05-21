@@ -342,6 +342,16 @@ class User(db.Model, UserMixin):
             'social_links': json.loads(self.social_links) if self.social_links else {},
             'verification_documents': json.loads(self.verification_documents) if self.verification_documents else []
         }
-
+    
+    def set_password(self, password):
+        """تنظیم رمز عبور با هش کردن"""
+        from werkzeug.security import generate_password_hash
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        """بررسی رمز عبور"""
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password_hash, password)
+    
     def __repr__(self):
         return f"<User {self.username} ({self.role.value}) [{self.membership_tier.value}]>"

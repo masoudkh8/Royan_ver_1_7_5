@@ -23,15 +23,43 @@ class PasswordResetToken(db.Model):
     expires_at = db.Column(db.DateTime, nullable=False)
     used = db.Column(db.Boolean, default=False)
     used_at = db.Column(db.DateTime, nullable=True)
+    ip_address = db.Column(db.String(45), nullable=True)  # IP درخواست‌دهنده
     
     # Relationship
     user = db.relationship('User', backref=db.backref('reset_tokens', lazy='dynamic', cascade='all, delete-orphan'))
     
-    def __init__(self, user_id, expiration_hours=24):
+    def __init__(self, user_id, expiration_hours=24, ip_address=None):
         self.user_id = user_id
         self.token = secrets.token_urlsafe(32)
         self.created_at = datetime.now(tehran_tz)
         self.expires_at = self.created_at + timedelta(hours=expiration_hours)
+        self.ip_address = ip_address
+    
+    @staticmethod
+    def create_for_user(user, expiry_hours=1, ip_address=None):
+        """ایجاد توکن بازیابی برای کاربر و ذخیره در دیتابیس"""
+        import hashlib
+        
+        # باطل کردن توکن‌های قبلی استفاده نشده
+        PasswordResetToken.query.filter_by(
+            user_id=user.id, 
+            used=False
+        ).update({'used': True})
+        
+        # ایجاد توکن جدید
+        reset_token = PasswordResetToken(
+            user_id=user.id,
+            expiration_hours=expiry_hours,
+            ip_address=ip_address
+        )
+        
+        # هش کردن توکن برای ذخیره امن
+        reset_token.token = hashlib.sha256(reset_token.token.encode()).hexdigest()
+        
+        db.session.add(reset_token)
+        db.session.commit()
+        
+        return reset_token.token  # بازگرداندن توکن اصلی (نه هش شده)
     
     def is_valid(self):
         """بررسی اعتبار توکن"""
@@ -41,6 +69,7 @@ class PasswordResetToken(db.Model):
         """علامت‌گذاری توکن به عنوان استفاده شده"""
         self.used = True
         self.used_at = datetime.now(tehran_tz)
+        db.session.commit()
     
     def __repr__(self):
         return f"<PasswordResetToken for User {self.user_id}>"
@@ -96,6 +125,38 @@ class LoginSession(db.Model):
             # جلسه معمولی: 24 ساعت بدون فعالیت منقضی می‌شود
             self.expires_at = self.created_at + timedelta(hours=24)
     
+    @staticmethod
+    def create_session(user, request=None, remember_me=False):
+        """ایجاد جلسه ورود جدید برای کاربر"""
+        # غیرفعال کردن جلسات قدیمی منقضی شده
+        LoginSession.query.filter_by(
+            user_id=user.id,
+            is_active=True
+        ).filter(
+            LoginSession.expires_at < datetime.now(tehran_tz)
+        ).update({'is_active': False})
+        
+        # ایجاد جلسه جدید
+        new_session = LoginSession(
+            user_id=user.id,
+            request=request,
+            remember_me=remember_me
+        )
+        
+        db.session.add(new_session)
+        db.session.commit()
+        
+        return new_session
+    
+    @staticmethod
+    def logout_all_sessions(user_id):
+        """خروج از تمام جلسات کاربر به جز جلسه فعلی"""
+        LoginSession.query.filter_by(
+            user_id=user_id,
+            is_active=True
+        ).update({'is_active': False})
+        db.session.commit()
+    
     def _parse_user_agent(self):
         """تجزیه User Agent برای تشخیص دستگاه و مرورگر"""
         ua = self.user_agent or ''
@@ -145,6 +206,7 @@ class LoginSession(db.Model):
         else:
             # تمدید انقضا برای جلسه معمولی
             self.expires_at = datetime.now(tehran_tz) + timedelta(hours=24)
+        db.session.commit()
     
     def is_expired(self):
         """بررسی انقضای جلسه"""
@@ -153,6 +215,12 @@ class LoginSession(db.Model):
     def revoke(self):
         """ابطال جلسه"""
         self.is_active = False
+        db.session.commit()
+    
+    def logout(self):
+        """خروج از جلسه"""
+        self.revoke()
+        db.session.commit()
     
     def to_dict(self):
         """تبدیل به دیکشنری برای نمایش"""
@@ -222,6 +290,29 @@ class ActivityLog(db.Model):
             import json
             self.extra_data = json.dumps(extra_data)
     
+    @staticmethod
+    def log_activity(user_id=None, activity_type='unknown', description=None,
+                     request=None, success=True, failure_reason=None, status=None, extra_data=None):
+        """ثبت فعالیت کاربر در لاگ"""
+        # پشتیبانی از پارامتر status برای سازگاری با کدهای قدیمی
+        if status is not None:
+            success = (status == 'success')
+        
+        log = ActivityLog(
+            user_id=user_id,
+            activity_type=activity_type,
+            description=description,
+            request=request,
+            success=success,
+            failure_reason=failure_reason,
+            extra_data=extra_data
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+        
+        return log
+    
     def to_dict(self):
         """تبدیل به دیکشنری برای نمایش"""
         import json
@@ -233,7 +324,7 @@ class ActivityLog(db.Model):
             'ip_address': self.ip_address,
             'success': self.success,
             'failure_reason': self.failure_reason,
-            'metadata': json.loads(self.metadata) if self.metadata else None,
+            'metadata': json.loads(self.extra_data) if self.extra_data else None,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
         }
     
@@ -287,7 +378,7 @@ class TwoFactorBackupCode(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
     # Relationship
-    user = db.relationship('User', backref=db.backref('backup_codes', lazy='dynamic', cascade='all, delete-orphan'))
+    user = db.relationship('User', backref=db.backref('two_factor_backup_codes_rel', lazy='dynamic', cascade='all, delete-orphan'))
     
     @staticmethod
     def generate_backup_codes(user_id, count=10):
