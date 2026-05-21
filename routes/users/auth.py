@@ -1,14 +1,16 @@
 import random
 import logging
-from flask import render_template, flash, redirect, url_for, request, current_app
-from flask_login import login_required, current_user
+import pytz
+import secrets
+import hashlib
+from datetime import datetime, timedelta
+from flask import render_template, flash, redirect, url_for, request, current_app, session
+from flask_login import login_required, current_user, login_user, logout_user
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from flask_mail import Message
-from models import db
+from models import db, User, PasswordResetToken, EmailVerificationToken, LoginSession, ActivityLog
 from models.premium_request import PremiumRequest
 from . import users_bp
-from datetime import datetime
-import pytz
 from extensions import mail
 from kavenegar import KavenegarAPI
 
@@ -245,3 +247,340 @@ def confirm_email(token):
         flash("✅ Email has been verified.")
 
     return redirect(url_for('users.upload_documents'))
+
+
+# ==================== فراموشی رمز عبور ====================
+
+@users_bp.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    """درخواست بازیابی رمز عبور"""
+    if request.method == 'POST':
+        email = request.form.get('email')
+        
+        if not email:
+            flash("❌ لطفاً ایمیل خود را وارد کنید.", "error")
+            return redirect(url_for('users.forgot_password'))
+        
+        user = User.query.filter_by(email=email).first()
+        
+        # حتی اگر کاربر وجود نداشت، برای امنیت پیام یکسان نشان بده
+        if user:
+            # ایجاد توکن بازیابی
+            token = PasswordResetToken.create_for_user(
+                user=user,
+                ip_address=request.remote_addr,
+                expiry_hours=1
+            )
+            
+            # ارسال ایمیل
+            reset_url = url_for('users.reset_password', token=token, _external=True)
+            
+            msg = Message(
+                subject='بازیابی رمز عبور متیسما',
+                recipients=[user.email],
+                html=render_template('emails/password_reset.html', 
+                                   user=user, 
+                                   reset_url=reset_url)
+            )
+            
+            try:
+                mail.send(msg)
+                ActivityLog.log_activity(
+                    user_id=user.id,
+                    activity_type='password_reset_requested',
+                    description='درخواست بازیابی رمز عبور',
+                    request=request,
+                    status='success'
+                )
+            except Exception as e:
+                logger.error(f"Error sending password reset email: {e}")
+                ActivityLog.log_activity(
+                    user_id=user.id,
+                    activity_type='password_reset_requested',
+                    description=f'خطا در ارسال ایمیل: {str(e)}',
+                    request=request,
+                    status='failed'
+                )
+        
+        flash("✅ اگر ایمیل شما در سیستم ثبت شده باشد، لینک بازیابی برای شما ارسال خواهد شد.", "info")
+        return redirect(url_for('users.login'))
+    
+    return render_template('users/forgot_password.html')
+
+
+@users_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    """بازیابی رمز عبور با توکن"""
+    # هش کردن توکن برای مقایسه
+    token_hash = hashlib.sha256(token.encode()).hexdigest()
+    
+    reset_token = PasswordResetToken.query.filter_by(
+        token=token_hash,
+        is_used=False
+    ).first()
+    
+    if not reset_token or not reset_token.is_valid():
+        flash("❌ لینک بازیابی نامعتبر است یا منقضی شده است.", "error")
+        return redirect(url_for('users.forgot_password'))
+    
+    user = User.query.get(reset_token.user_id)
+    if not user:
+        flash("❌ کاربر یافت نشد.", "error")
+        return redirect(url_for('users.login'))
+    
+    if request.method == 'POST':
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        
+        if not password or len(password) < 8:
+            flash("❌ رمز عبور باید حداقل ۸ کاراکتر باشد.", "error")
+            return redirect(url_for('users.reset_password', token=token))
+        
+        if password != confirm_password:
+            flash("❌ رمز عبور و تکرار آن مطابقت ندارند.", "error")
+            return redirect(url_for('users.reset_password', token=token))
+        
+        # بررسی تاریخچه رمز عبور
+        import json
+        if user.password_history:
+            try:
+                history = json.loads(user.password_history)
+                # بررسی نکنیم که رمز فعلی در تاریخچه نباشد (اختیاری)
+            except:
+                pass
+        
+        # تنظیم رمز عبور جدید
+        user.set_password(password)
+        
+        # ذخیره رمز قبلی در تاریخچه
+        if user.password_history:
+            try:
+                history = json.loads(user.password_history)
+            except:
+                history = []
+        else:
+            history = []
+        
+        history.append(user.password_hash)
+        # فقط ۵ رمز آخر را نگه دار
+        user.password_history = json.dumps(history[-5:])
+        
+        # ریست کردن تلاش‌های ناموفق
+        user.failed_login_attempts = 0
+        user.locked_until = None
+        
+        # استفاده از توکن
+        reset_token.mark_as_used()
+        
+        # لاگ فعالیت
+        ActivityLog.log_activity(
+            user_id=user.id,
+            activity_type='password_reset_completed',
+            description='بازیابی موفق رمز عبور',
+            request=request,
+            status='success'
+        )
+        
+        # خروج از تمام نشست‌ها به جز نشست فعلی
+        LoginSession.logout_all_sessions(user.id)
+        
+        flash("✅ رمز عبور شما با موفقیت تغییر کرد. لطفاً وارد شوید.", "success")
+        return redirect(url_for('users.login'))
+    
+    return render_template('users/reset_password.html', token=token, user=user)
+
+
+# ==================== تأیید دو مرحله‌ای (2FA) ====================
+
+import pyotp
+
+@users_bp.route('/enable_2fa', methods=['GET', 'POST'])
+@login_required
+def enable_2fa():
+    """فعال‌سازی احراز هویت دو مرحله‌ای"""
+    if current_user.two_factor_enabled:
+        flash("⚠️ احراز هویت دو مرحله‌ای قبلاً فعال شده است.", "warning")
+        return redirect(url_for('users.profile'))
+    
+    if request.method == 'POST':
+        code = request.form.get('code')
+        secret = session.get('2fa_secret')
+        
+        if not secret or not code:
+            flash("❌ اطلاعات ناقص است.", "error")
+            return redirect(url_for('users.enable_2fa'))
+        
+        totp = pyotp.TOTP(secret)
+        
+        if totp.verify(code):
+            # ذخیره秘密 و فعال‌سازی
+            current_user.two_factor_secret = secret
+            current_user.two_factor_enabled = True
+            
+            # تولید کدهای پشتیبان
+            backup_codes = [str(random.randint(100000, 999999)) for _ in range(10)]
+            current_user.backup_codes = json.dumps(backup_codes)
+            
+            db.session.commit()
+            
+            # پاک کردن session
+            session.pop('2fa_secret', None)
+            session['backup_codes'] = backup_codes
+            
+            ActivityLog.log_activity(
+                user_id=current_user.id,
+                activity_type='2fa_enabled',
+                description='فعال‌سازی احراز هویت دو مرحله‌ای',
+                request=request,
+                status='success'
+            )
+            
+            flash("✅ احراز هویت دو مرحله‌ای فعال شد. کدهای پشتیبان را ذخیره کنید!", "success")
+            return redirect(url_for('users.show_backup_codes'))
+        else:
+            flash("❌ کد وارد شده معتبر نیست.", "error")
+    
+    # تولید secret جدید
+    secret = pyotp.random_base32()
+    session['2fa_secret'] = secret
+    
+    # تولید URI برای QR Code
+    uri = pyotp.totp.TOTP(secret).provisioning_uri(
+        name=current_user.email,
+        issuer_name="Metisma"
+    )
+    
+    return render_template('users/enable_2fa.html', uri=uri, secret=secret)
+
+
+@users_bp.route('/show_backup_codes')
+@login_required
+def show_backup_codes():
+    """نمایش کدهای پشتیبان"""
+    backup_codes = session.get('backup_codes')
+    if not backup_codes:
+        flash("⚠️ کدهای پشتیبان یافت نشدند.", "warning")
+        return redirect(url_for('users.profile'))
+    
+    return render_template('users/show_backup_codes.html', codes=backup_codes)
+
+
+@users_bp.route('/disable_2fa', methods=['POST'])
+@login_required
+def disable_2fa():
+    """غیرفعال‌سازی احراز هویت دو مرحله‌ای"""
+    if not current_user.two_factor_enabled:
+        flash("⚠️ احراز هویت دو مرحله‌ای فعال نیست.", "warning")
+        return redirect(url_for('users.profile'))
+    
+    code = request.form.get('code')
+    backup_code = request.form.get('backup_code')
+    
+    verified = False
+    
+    if code:
+        totp = pyotp.TOTP(current_user.two_factor_secret)
+        verified = totp.verify(code)
+    elif backup_code:
+        import json
+        if current_user.backup_codes:
+            try:
+                codes = json.loads(current_user.backup_codes)
+                if backup_code in codes:
+                    codes.remove(backup_code)
+                    current_user.backup_codes = json.dumps(codes)
+                    verified = True
+            except:
+                pass
+    
+    if verified:
+        current_user.two_factor_enabled = False
+        current_user.two_factor_secret = None
+        db.session.commit()
+        
+        ActivityLog.log_activity(
+            user_id=current_user.id,
+            activity_type='2fa_disabled',
+            description='غیرفعال‌سازی احراز هویت دو مرحله‌ای',
+            request=request,
+            status='success'
+        )
+        
+        flash("✅ احراز هویت دو مرحله‌ای غیرفعال شد.", "success")
+    else:
+        flash("❌ کد وارد شده معتبر نیست.", "error")
+    
+    return redirect(url_for('users.profile'))
+
+
+# ==================== مدیریت نشست‌ها ====================
+
+@users_bp.route('/sessions')
+@login_required
+def manage_sessions():
+    """مدیریت نشست‌های فعال"""
+    sessions = LoginSession.query.filter_by(
+        user_id=current_user.id,
+        is_active=True
+    ).order_by(LoginSession.created_at.desc()).all()
+    
+    return render_template('users/sessions.html', sessions=sessions)
+
+
+@users_bp.route('/sessions/<int:session_id>/revoke', methods=['POST'])
+@login_required
+def revoke_session(session_id):
+    """لغو یک نشست خاص"""
+    login_session = LoginSession.query.filter_by(
+        id=session_id,
+        user_id=current_user.id
+    ).first()
+    
+    if login_session:
+        login_session.logout()
+        ActivityLog.log_activity(
+            user_id=current_user.id,
+            activity_type='session_revoked',
+            description=f'لغو نشست {session_id}',
+            request=request,
+            status='success'
+        )
+        flash("✅ نشست با موفقیت لغو شد.", "success")
+    else:
+        flash("❌ نشست یافت نشد.", "error")
+    
+    return redirect(url_for('users.manage_sessions'))
+
+
+@users_bp.route('/sessions/revoke_all', methods=['POST'])
+@login_required
+def revoke_all_sessions():
+    """لغو تمام نشست‌ها"""
+    LoginSession.logout_all_sessions(current_user.id)
+    
+    ActivityLog.log_activity(
+        user_id=current_user.id,
+        activity_type='all_sessions_revoked',
+        description='لغو تمام نشست‌ها',
+        request=request,
+        status='success'
+    )
+    
+    flash("✅ تمام نشست‌ها لغو شدند.", "success")
+    return redirect(url_for('users.manage_sessions'))
+
+
+# ==================== فعالیت‌های کاربر ====================
+
+@users_bp.route('/activity_log')
+@login_required
+def activity_log():
+    """نمایش لاگ فعالیت‌های کاربر"""
+    page = request.args.get('page', 1, type=int)
+    activities = ActivityLog.query.filter_by(
+        user_id=current_user.id
+    ).order_by(
+        ActivityLog.created_at.desc()
+    ).paginate(page=page, per_page=20, error_out=False)
+    
+    return render_template('users/activity_log.html', activities=activities)
