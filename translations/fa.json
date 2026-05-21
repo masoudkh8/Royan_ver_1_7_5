@@ -237,6 +237,12 @@
     "trust_score": "امتیاز اعتماد",
     "high_trust": "اعتماد بالا",
     "medium_trust": "اعتماد متوسط",
-    "low_trust": "اعتماد پایین"
+    "low_trust": "اعتماد پایین",
+    "followed_you": "شما را دنبال کرد",
+    "liked_your_post": "پست شما را پسندید",
+    "commented_on_your_post": "روی پست شما نظر داد",
+    "replied_to_your_comment": "به نظر شما پاسخ داد",
+    "liked_your_comment": "نظر شما را پسندید",
+    "shared_your_post": "پست شما را اشتراک‌گذاری کرد"
   }
 }

@@ -237,6 +237,12 @@
     "trust_score": "Trust Score",
     "high_trust": "High Trust",
     "medium_trust": "Medium Trust",
-    "low_trust": "Low Trust"
+    "low_trust": "Low Trust",
+    "followed_you": "followed you",
+    "liked_your_post": "liked your post",
+    "commented_on_your_post": "commented on your post",
+    "replied_to_your_comment": "replied to your comment",
+    "liked_your_comment": "liked your comment",
+    "shared_your_post": "shared your post"
   }
 }
