@@ -5,6 +5,16 @@
 
 {% block content %}
 <div class="container mt-4">
+    <!-- دکمه بازگشت -->
+    <div class="mb-3">
+        <a href="{{ url_for('social.news_feed') }}" class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to Feed
+        </a>
+    </div>
+    
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow-sm">

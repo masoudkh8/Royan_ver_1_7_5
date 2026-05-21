@@ -5,6 +5,16 @@
 {% block content %}
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-6xl mx-auto">
+        <!-- دکمه بازگشت به صفحه اصلی -->
+        <div class="mb-6">
+            <a href="{{ url_for('users.profile') }}" 
+               class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Return to Profile
+            </a>
+        </div>
         
         <!-- هدر پروفایل کاربر -->
         <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-6 mb-6 transition-all duration-300">
@@ -25,11 +35,49 @@
                             Premium Member 🌟
                         </span>
                     {% endif %}
+                    
+                    <!-- نمایش وضعیت تأیید هویت -->
+                    <div class="mt-3 flex items-center gap-2 text-sm">
+                        {% if document_status == 'approved' %}
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                هویت تأیید شده ✅
+                            </span>
+                        {% elif document_status == 'pending' %}
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 font-medium">
+                                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                در حال بررسی ⏳
+                            </span>
+                        {% else %}
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                                </svg>
+                                نیاز به آپلود مدارک ⚠️
+                            </span>
+                        {% endif %}
+                        {% if document_status != 'approved' %}
+                            <a href="{{ url_for('users.upload_documents') }}" class="text-gold hover:text-gold-dark underline text-xs font-medium">
+                                آپلود مدارک
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
-                <a href="{{ url_for('users.edit_profile') }}" 
-                   class="px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition text-sm font-medium">
-                    ✏️ Edit Profile
-                </a>
+                <div class="flex flex-col gap-2">
+                    <a href="{{ url_for('users.edit_profile') }}" 
+                       class="px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-center">
+                        ✏️ Edit Profile
+                    </a>
+                    <a href="{{ url_for('users.upload_documents') }}" 
+                       class="px-4 py-2 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark transition text-sm font-medium text-center">
+                        📄 مدارک من
+                    </a>
+                </div>
             </div>
         </div>
 

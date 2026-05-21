@@ -436,6 +436,22 @@ def upload_documents():
             # تنظیم وضعیت is_verified به pending (نیاز به بررسی admin)
             current_user.is_verified = False
             
+            # ایجاد نوتیفیکیشن برای ادمین
+            from models.notification import Notification
+            from models.user import User
+            admin_users = User.query.filter_by(role='admin').all()
+            for admin in admin_users:
+                notification = Notification(
+                    user_id=admin.id,
+                    notification_type='system',
+                    actor_id=current_user.id,
+                    related_id=current_user.id,
+                    related_type='document_upload',
+                    title='📄 مدارک جدید برای بررسی',
+                    message=f'کاربر {current_user.username} مدارک جدیدی برای تأیید هویت آپلود کرده است. لطفاً بررسی کنید.'
+                )
+                db.session.add(notification)
+            
             db.session.commit()
             flash("✅ مدارک شما با موفقیت آپلود شد. پس از بررسی توسط ادمین، وضعیت تأیید تغییر خواهد کرد.", "success")
             return redirect(url_for('users.profile'))
@@ -480,6 +496,7 @@ def logout():
 @users_bp.route('/profile')
 @login_required
 def profile():
+    """نمایش پروفایل کاربر با اطلاعات کامل و وضعیت مدارک"""
 
     if not current_user.is_active:
         logout_user()
@@ -494,6 +511,15 @@ def profile():
 
     # دریافت مدارک آپلود شده برای بررسی وضعیت تأیید
     verification_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
+    
+    # تعیین وضعیت تأیید مدارک
+    document_status = 'not_uploaded'  # not_uploaded, pending, approved, rejected
+    if verification_docs:
+        # اگر مدارک آپلود شده باشند، فرض می‌کنیم در حال بررسی هستند
+        # در آینده می‌توان فیلد جداگانه برای وضعیت هر مدرک اضافه کرد
+        document_status = 'pending'
+        if current_user.is_verified:
+            document_status = 'approved'
     
     # محاسبه وضعیت pending tasks
     pending_tasks = []
@@ -531,7 +557,8 @@ def profile():
                           buyer=buyer,
                           broker=broker,
                           pending_tasks=pending_tasks,
-                          verification_docs=verification_docs)
+                          verification_docs=verification_docs,
+                          document_status=document_status)
 
 
 
