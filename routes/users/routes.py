@@ -401,8 +401,11 @@ def upload_documents():
         # اطمینان از وجود پوشه
         os.makedirs(upload_folder, exist_ok=True)
         
-        # پردازش فایل‌های آپلود شده
-        for field_name in ['passport', 'license', 'id_card', 'other']:
+        # لاگ برای دیباگ - مشاهده فایل‌های دریافتی
+        current_app.logger.info(f"Files received in POST: {list(request.files.keys())}")
+        
+        # پردازش فایل‌های آپلود شده - فقط passport و license که در فرم HTML وجود دارند
+        for field_name in ['passport_file', 'license_file']:
             file = request.files.get(field_name)
             if file and file.filename != '':
                 is_valid, error_msg = validate_file(file)
@@ -437,7 +440,9 @@ def upload_documents():
             flash("✅ مدارک شما با موفقیت آپلود شد. پس از بررسی توسط ادمین، وضعیت تأیید تغییر خواهد کرد.", "success")
             return redirect(url_for('users.profile'))
         else:
-            flash("⚠️ لطفاً حداقل یک مدرک آپلود کنید.", "warning")
+            # لاگ برای دیباگ - وقتی هیچ فایلی دریافت نشده
+            current_app.logger.warning(f"No files uploaded. Request files: {request.files}")
+            flash("⚠️ هیچ فایلی برای آپلود دریافت نشد. لطفاً فایل‌ها را انتخاب و مجدداً تلاش کنید.", "warning")
     
     return render_template('users/upload_documents.html', user=current_user)
 
