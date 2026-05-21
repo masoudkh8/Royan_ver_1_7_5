@@ -6,7 +6,7 @@
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-3xl mx-auto">
         
-        <!-- هدر بخش -->
+        <!-- هدر بخش با دکمه بازگشت -->
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -16,13 +16,22 @@
                 </div>
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Notifications</h2>
             </div>
-            <a href="{{ url_for('users.profile') }}" 
-               class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                </svg>
-                Return
-            </a>
+            <div class="flex items-center gap-3">
+                <a href="{{ url_for('users.dashboard') }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back to Dashboard
+                </a>
+                <a href="{{ url_for('users.profile') }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Return
+                </a>
+            </div>
         </div>
         
         <!-- لیست اعلانات -->

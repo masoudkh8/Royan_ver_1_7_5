@@ -57,14 +57,36 @@ def admin_required(f):
 @login_required
 @admin_required
 def dashboard():
+    """داشبورد ادمین با نمایش آمار و نوتیفیکیشن‌های جدید"""
     total_users = User.query.count()
     premium_requests = PremiumRequest.query.count()
     pending_requests = PremiumRequest.query.filter_by(status='pending').count()
+    
+    # شمارش مدارک آپلود شده برای بررسی (کاربرانی که مدارک دارند اما هنوز تأیید نشده‌اند)
+    users_with_pending_docs = User.query.filter(
+        User.verification_documents != None,
+        User.verification_documents != '[]',
+        User.is_verified == False
+    ).count()
+    
+    # دریافت نوتیفیکیشن‌های خوانده‌نشده ادمین
+    from models.notification import Notification
+    unread_notifications = Notification.query.filter_by(
+        user_id=current_user.id,
+        is_read=False
+    ).order_by(Notification.created_at.desc()).limit(5).all()
+    unread_count = Notification.query.filter_by(
+        user_id=current_user.id,
+        is_read=False
+    ).count()
 
     return render_template('admin/dashboard.html',
                            total_users=total_users,
                            premium_requests=premium_requests,
-                           pending_requests=pending_requests)
+                           pending_requests=pending_requests,
+                           users_with_pending_docs=users_with_pending_docs,
+                           unread_notifications=unread_notifications,
+                           unread_count=unread_count)
 
 
 # ---------------------------------------
@@ -144,14 +166,37 @@ def premium_requests():
 
 
 # ---------------------------------------
-# تأیید درخواست ارتقاء
+# تأیید یا رد درخواست ارتقاء (یکپارچه‌سازی approve و reject)
+# ---------------------------------------
+@admin_bp.route('/premium_request/<int:req_id>/review', methods=['POST'])
+@admin_required
+def review_premium_request(req_id):
+    req = PremiumRequest.query.get_or_404(req_id)
+    action = request.form.get('action')
+    
+    if action == 'approve':
+        req.status = 'approved'
+        req.user.is_premium = True
+        flash(f"✅ User '{req.user.username}' Successfully promoted to special user.", "success")
+    elif action == 'reject':
+        req.status = 'rejected'
+        flash(f"❌ Upgrade Request for '{req.user.username}' rejected.", "warning")
+    else:
+        flash("⚠️ Invalid action.", "error")
+        return redirect(url_for('admin.view_premium_request', req_id=req_id))
+    
+    db.session.commit()
+    return redirect(url_for('admin.premium_requests'))
+
+
+# ---------------------------------------
+# تأیید درخواست ارتقاء (قدیمی - برای سازگاری)
 # ---------------------------------------
 @admin_bp.route('/approve_premium/<int:req_id>', methods=['POST'])
 @admin_required
 def approve_premium(req_id):
     req = PremiumRequest.query.get_or_404(req_id)
     req.status = 'approved'
-    # reviewed_at will be set automatically by the model's default
     req.user.is_premium = True
     db.session.commit()
 
@@ -160,17 +205,16 @@ def approve_premium(req_id):
 
 
 # ---------------------------------------
-# رد درخواست ارتقاء
+# رد درخواست ارتقاء (قدیمی - برای سازگاری)
 # ---------------------------------------
 @admin_bp.route('/reject_premium/<int:req_id>', methods=['POST'])
 @admin_required
 def reject_premium(req_id):
     req = PremiumRequest.query.get_or_404(req_id)
     req.status = 'rejected'
-    # reviewed_at will be set automatically by the model's default
     db.session.commit()
 
-    flash(f"❌ User Upgrade Request '{req.user.username}' rejected.", "warning")
+    flash(f"❌ Upgrade Request for '{req.user.username}' rejected.", "warning")
     return redirect(url_for('admin.premium_requests'))
 
 
@@ -182,6 +226,128 @@ def reject_premium(req_id):
 def view_premium_request(req_id):
     req = PremiumRequest.query.get_or_404(req_id)
     return render_template('admin/view_premium_request.html', req=req)
+
+
+# ---------------------------------------
+# مشاهده مدارک کاربر
+# ---------------------------------------
+@admin_bp.route('/user/<int:user_id>/documents')
+@admin_required
+def view_user_documents(user_id):
+    user = User.query.get_or_404(user_id)
+    
+    # دریافت مدارک از فیلد verification_documents (JSON format)
+    import json
+    documents = json.loads(user.verification_documents) if user.verification_documents else []
+    
+    return render_template('admin/view_user_documents.html', user=user, documents=documents)
+
+
+# ---------------------------------------
+# مشاهده همه مدارک کاربران برای بررسی
+# ---------------------------------------
+@admin_bp.route('/documents')
+@admin_required
+def view_all_documents():
+    """نمایش لیست تمام کاربرانی که مدارک آپلود کرده‌اند"""
+    page = request.args.get('page', 1, type=int)
+    per_page = 15
+    status_filter = request.args.get('status', 'pending')  # pending, approved, rejected, all
+    
+    query = User.query.filter(
+        User.verification_documents != None,
+        User.verification_documents != '[]'
+    )
+    
+    if status_filter == 'pending':
+        query = query.filter_by(is_verified=False)
+    elif status_filter == 'approved':
+        query = query.filter_by(is_verified=True)
+    
+    users_with_docs = query.order_by(User.created_at.desc()).paginate(
+        page=page,
+        per_page=per_page,
+        error_out=False
+    )
+    
+    # آمار
+    total_pending = User.query.filter(
+        User.verification_documents != None,
+        User.verification_documents != '[]',
+        User.is_verified == False
+    ).count()
+    
+    total_approved = User.query.filter(
+        User.verification_documents != None,
+        User.verification_documents != '[]',
+        User.is_verified == True
+    ).count()
+    
+    return render_template('admin/view_all_documents.html', 
+                          users=users_with_docs,
+                          total_pending=total_pending,
+                          total_approved=total_approved,
+                          current_status=status_filter)
+
+
+# ---------------------------------------
+# تأیید مدارک کاربر
+# ---------------------------------------
+@admin_bp.route('/user/<int:user_id>/verify_documents', methods=['POST'])
+@admin_required
+def verify_user_documents(user_id):
+    user = User.query.get_or_404(user_id)
+    user.is_verified = True
+    
+    # ایجاد نوتیفیکیشن برای کاربر
+    from models.notification import Notification
+    notification = Notification(
+        user_id=user.id,
+        notification_type='system',
+        actor_id=current_user.id,
+        related_id=user.id,
+        related_type='document_verified',
+        title='✅ مدارک شما تأیید شد',
+        message=f'مدارک تأیید هویت شما با موفقیت تأیید شد. امتیاز اعتماد شما افزایش یافت.'
+    )
+    db.session.add(notification)
+    
+    # افزایش TrustScore
+    if user.trust_score:
+        user.trust_score_value = min(100, user.trust_score_value + 20)
+    
+    db.session.commit()
+    flash(f"✅ مدارک کاربر '{user.username}' با موفقیت تأیید شد.", "success")
+    return redirect(url_for('admin.view_user_documents', user_id=user_id))
+
+
+# ---------------------------------------
+# رد مدارک کاربر
+# ---------------------------------------
+@admin_bp.route('/user/<int:user_id>/reject_documents', methods=['POST'])
+@admin_required
+def reject_user_documents(user_id):
+    user = User.query.get_or_404(user_id)
+    # می‌توانیم مدارک را پاک کنیم یا فقط وضعیت را تغییر دهیم
+    # در اینجا فقط وضعیت را به False تغییر می‌دهیم
+    user.is_verified = False
+    
+    # ایجاد نوتیفیکیشن برای کاربر
+    from models.notification import Notification
+    notification = Notification(
+        user_id=user.id,
+        notification_type='system',
+        actor_id=current_user.id,
+        related_id=user.id,
+        related_type='document_rejected',
+        title='⚠️ مدارک شما رد شد',
+        message=f'مدارک تأیید هویت شما مورد تأیید قرار نگرفت. لطفاً مدارک صحیح را آپلود کنید.'
+    )
+    db.session.add(notification)
+    
+    db.session.commit()
+    flash(f"⚠️ مدارک کاربر '{user.username}' رد شد.", "warning")
+    return redirect(url_for('admin.view_user_documents', user_id=user_id))
 
 
 # ---------------------------------------
