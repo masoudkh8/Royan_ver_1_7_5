@@ -1441,45 +1441,59 @@ def start_upgrade():
     flash("The upgrade process has started. Please verify your mobile number.")
     return redirect(url_for('users.verify_phone'))
 
-# # آپلود مدارک
-# @users_bp.route('/upload_documents', methods=['GET', 'POST'])
-# @login_required
-# def upload_documents():
-#     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
-# 
-
+# آپلود مدارک برای Premium
+@users_bp.route('/upload_documents', methods=['GET', 'POST'])
+@login_required
+def upload_documents():
+    req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
     if not req or not req.email_verified:
+        flash("لطفاً ابتدا ایمیل خود را تأیید کنید.", "error")
         return redirect(url_for('users.verify_email'))
 
     if req.docs_verified:
+        flash("مدارک شما قبلاً تأیید شده است.", "success")
         return redirect(url_for('users.make_payment'))
-
-    # if not req:
-    #     return redirect(url_for('users.upgrade_to_premium'))
 
     upload_folder = 'static/uploads/documents/'
     os.makedirs(upload_folder, exist_ok=True)
 
     if request.method == 'POST':
-        if 'passport' in request.files:
-            file = request.files['passport']
-            if file.filename != '':
-                filename = secure_filename(f"passport_{current_user.id}_{file.filename}")
-                file.save(os.path.join(upload_folder, filename))
-                req.passport_file = filename
+        files_uploaded = False
+        
+        # پردازش پاسپورت
+        passport_file = request.files.get('passport_file')
+        if passport_file and passport_file.filename != '':
+            is_valid, error_msg = validate_file(passport_file)
+            if not is_valid:
+                flash(f"❌ {error_msg}", "error")
+                return redirect(url_for('users.upload_documents'))
+            
+            filename = secure_filename(f"passport_{current_user.id}_{passport_file.filename}")
+            passport_file.save(os.path.join(upload_folder, filename))
+            req.passport_file = filename
+            files_uploaded = True
 
-        if 'license' in request.files:
-            file = request.files['license']
-            if file.filename != '':
-                filename = secure_filename(f"license_{current_user.id}_{file.filename}")
-                file.save(os.path.join(upload_folder, filename))
-                req.license_file = filename
+        # پردازش لایسنس
+        license_file = request.files.get('license_file')
+        if license_file and license_file.filename != '':
+            is_valid, error_msg = validate_file(license_file)
+            if not is_valid:
+                flash(f"❌ {error_msg}", "error")
+                return redirect(url_for('users.upload_documents'))
+            
+            filename = secure_filename(f"license_{current_user.id}_{license_file.filename}")
+            license_file.save(os.path.join(upload_folder, filename))
+            req.license_file = filename
+            files_uploaded = True
 
-        req.docs_verified = True
-        db.session.commit()
-        flash("Documents uploaded successfully.")
-        return redirect(url_for('users.make_payment'))
+        if files_uploaded:
+            req.docs_verified = True
+            db.session.commit()
+            flash("✅ مدارک با موفقیت آپلود شدند.", "success")
+            return redirect(url_for('users.make_payment'))
+        else:
+            flash("❌ هیچ فایلی برای آپلود دریافت نشد. لطفاً فایل‌ها را انتخاب و مجدداً تلاش کنید.", "error")
 
     return render_template('users/upload_documents.html', req=req)
 
