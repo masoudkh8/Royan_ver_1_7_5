@@ -27,11 +27,11 @@
   <!-- Tailwind CSS -->
   <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
   
-  <!-- Three.js for Data Network Animation -->
+  <!-- Three.js for Globe and Data Network Animation -->
   <script src="/static/js/three.min.js"></script>
   
   <style>
-    /* Premium Dark Theme Variables */
+    /* Premium Theme Variables */
     :root {
       --midnight-blue: #0a1628;
       --deep-navy: #1e3a5f;
@@ -46,6 +46,11 @@
       --burnt-sienna: #9a3412;
     }
     
+    /* Dark Mode Base Styles */
+    html.dark {
+      color-scheme: dark;
+    }
+    
     /* Smooth Transitions */
     * { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
     
@@ -54,8 +59,37 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--champagne-gold); border-radius: 3px; opacity: 0.5; }
     ::-webkit-scrollbar-thumb:hover { background: #f5d76e; opacity: 0.8; }
+    html.dark ::-webkit-scrollbar-thumb { background: #475569; }
+    html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
     
-    /* Hero Canvas */
+    /* Theme Toggle Button Animation */
+    .theme-toggle {
+      transition: transform 0.15s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .theme-toggle:active {
+      transform: scale(0.9);
+    }
+    .theme-toggle:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Icon Animations */
+    #icon-moon, #icon-sun {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    
+    /* Globe Canvas */
+    #globe-canvas { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: 0; 
+    }
+    
+    /* Network Canvas (fallback) */
     #network-canvas { 
       position: absolute; 
       top: 0; 
@@ -206,10 +240,33 @@
   </style>
 </head>
 
-<body class="bg-[#0a1628] text-slate-200 overflow-x-hidden min-h-screen flex flex-col">
+<body class="bg-gray-50 dark:bg-dark-900 text-gray-900 dark:text-slate-200 overflow-x-hidden min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- Theme Toggle Button (Fixed Bottom Left) -->
+  <button onclick="toggleDarkMode()"
+          class="theme-toggle fixed bottom-6 left-6 z-50 p-3.5 rounded-full
+                 bg-white dark:bg-dark-700 shadow-lg border border-gray-200 dark:border-dark-600
+                 hover:shadow-xl transition-all duration-300"
+          aria-label="Toggle Dark Mode" title="Toggle Theme">
+
+    <!-- Moon Icon (shown in light mode) -->
+    <svg id="icon-moon" class="w-5 h-5 text-gray-700 dark:hidden transition-transform duration-300"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+    </svg>
+
+    <!-- Sun Icon (shown in dark mode) -->
+    <svg id="icon-sun" class="w-5 h-5 text-yellow-400 hidden dark:block transition-transform duration-300"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+    </svg>
+
+  </button>
 
   <!-- Loading Screen -->
-  <div id="loading" class="fixed inset-0 z-[100] bg-[#0a1628] flex items-center justify-center">
+  <div id="loading" class="fixed inset-0 z-[100] bg-gray-50 dark:bg-dark-900 flex items-center justify-center transition-colors duration-300">
     <div class="text-center">
       <!-- Owl Logo Placeholder -->
       <div class="w-24 h-24 mx-auto mb-6 relative">
@@ -233,12 +290,12 @@
       <div class="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
         <div class="h-full bg-gradient-to-r from-[#d4af37] via-[#f5d76e] to-[#d4af37]" style="animation: progressFill 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;"></div>
       </div>
-      <p class="mt-4 text-xs tracking-[0.2em] text-slate-400 uppercase">Initializing Secure Access</p>
+      <p class="mt-4 text-xs tracking-[0.2em] text-gray-500 dark:text-slate-400 uppercase">Initializing Secure Access</p>
     </div>
   </div>
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0a1628]/80 border-b border-white/5">
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0a1628]/80 border-b border-gray-200 dark:border-white/5">
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <!-- Logo -->
@@ -257,17 +314,17 @@
         
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-8">
-          <a href="#features" class="text-sm text-slate-300 hover:text-[#d4af37] transition-colors">Features</a>
-          <a href="#levels" class="text-sm text-slate-300 hover:text-[#d4af37] transition-colors">Membership</a>
-          <a href="#about" class="text-sm text-slate-300 hover:text-[#d4af37] transition-colors">About</a>
-          <a href="/login" class="text-sm text-slate-300 hover:text-white transition-colors">Sign In</a>
+          <a href="#features" class="text-sm text-gray-700 dark:text-slate-300 hover:text-[#d4af37] transition-colors">Features</a>
+          <a href="#levels" class="text-sm text-gray-700 dark:text-slate-300 hover:text-[#d4af37] transition-colors">Membership</a>
+          <a href="#about" class="text-sm text-gray-700 dark:text-slate-300 hover:text-[#d4af37] transition-colors">About</a>
+          <a href="/login" class="text-sm text-gray-700 dark:text-slate-300 hover:text-white transition-colors">Sign In</a>
           <a href="/register" class="cta-glow px-5 py-2.5 bg-gradient-to-r from-[#d4af37] to-[#f5d76e] text-[#0a1628] text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all">
             Request Access
           </a>
         </div>
         
         <!-- Mobile Menu Button -->
-        <button class="md:hidden text-slate-300 hover:text-white" onclick="toggleMobileMenu()">
+        <button class="md:hidden text-gray-700 dark:text-slate-300 hover:text-white" onclick="toggleMobileMenu()">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
@@ -277,32 +334,32 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-    <!-- Three.js Network Background -->
-    <canvas id="network-canvas"></canvas>
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gray-50 dark:bg-dark-900 transition-colors duration-300">
+    <!-- Three.js Globe Canvas -->
+    <canvas id="globe-canvas"></canvas>
     
     <!-- Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a1628]/60 to-[#0a1628]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-50/30 via-gray-50/60 to-gray-50 dark:from-dark-900/30 dark:via-dark-900/60 dark:to-dark-900 transition-colors duration-300"></div>
     
     <!-- Content -->
     <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
       <!-- Trust Badge with TrustScore Mention -->
       <div class="inline-flex items-center space-x-3 px-5 py-2.5 glass-panel rounded-full mb-8 fade-in-up trust-pulse" style="animation-delay: 0.2s;">
         <span class="w-2.5 h-2.5 bg-[#2dd4bf] rounded-full animate-pulse"></span>
-        <span class="text-xs tracking-widest text-slate-300 uppercase">Exclusive Network • TrustScore™ Powered</span>
+        <span class="text-xs tracking-widest text-gray-700 dark:text-slate-300 uppercase">Exclusive Network • TrustScore™ Powered</span>
       </div>
       
       <!-- Main Headline -->
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight fade-in-up" style="animation-delay: 0.4s;">
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight fade-in-up" style="animation-delay: 0.4s;">
         Where Elite Traders<br/>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#f5d76e] to-[#d4af37]">Build Trust & Trade Globally</span>
       </h1>
       
       <!-- Subheadline -->
-      <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-4xl mx-auto fade-in-up" style="animation-delay: 0.6s;">
+      <p class="text-lg md:text-xl text-gray-600 dark:text-slate-400 mb-10 max-w-4xl mx-auto fade-in-up" style="animation-delay: 0.6s;">
         An invitation-only platform combining AI-powered intelligence, verified professional networks, and exclusive market access. 
         Our proprietary <span class="text-[#d4af37] font-semibold">TrustScore™</span> system ensures every connection is valuable.
-        <br/><span class="text-[#2dd4bf] mt-2 inline-block">If you're not here, you're not trading at the highest level.</span>
+        <br/><span class="text-[#0f766e] dark:text-[#2dd4bf] mt-2 inline-block">If you're not here, you're not trading at the highest level.</span>
       </p>
       
       <!-- CTA Buttons - Exclusive Language -->
@@ -310,7 +367,7 @@
         <a href="/register" class="cta-glow w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-[#d4af37] to-[#f5d76e] text-[#0a1628] font-bold rounded-xl text-lg hover:shadow-2xl hover:shadow-[#d4af37]/40 transition-all">
           Request Access
         </a>
-        <a href="#features" class="w-full sm:w-auto px-10 py-5 glass-panel text-white font-semibold rounded-xl hover:bg-white/10 transition-all border border-white/15">
+        <a href="#features" class="w-full sm:w-auto px-10 py-5 glass-panel text-gray-700 dark:text-white font-semibold rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-all border border-gray-300 dark:border-white/15">
           Explore Platform
         </a>
       </div>
@@ -328,22 +385,22 @@
             </div>
           </div>
           <div class="text-left">
-            <div class="text-sm text-slate-400 uppercase tracking-wider mb-1">Your Potential</div>
-            <div class="text-xl font-bold text-white">TrustScore™</div>
-            <div class="text-xs text-[#2dd4bf] mt-1">Multi-layer verification system</div>
+            <div class="text-sm text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Your Potential</div>
+            <div class="text-xl font-bold text-gray-900 dark:text-white">TrustScore™</div>
+            <div class="text-xs text-[#0f766e] dark:text-[#2dd4bf] mt-1">Multi-layer verification system</div>
           </div>
         </div>
       </div>
       
       <!-- Enhanced Social Proof -->
-      <div class="mt-16 pt-8 border-t border-white/5 fade-in-up" style="animation-delay: 1.2s;">
-        <p class="text-sm text-slate-500 mb-6">Trusted by professionals from leading organizations</p>
+      <div class="mt-16 pt-8 border-t border-gray-200 dark:border-white/5 fade-in-up" style="animation-delay: 1.2s;">
+        <p class="text-sm text-gray-500 dark:text-slate-500 mb-6">Trusted by professionals from leading organizations</p>
         <div class="flex flex-wrap items-center justify-center gap-8 opacity-50">
-          <span class="text-slate-400 font-semibold">Goldman Sachs</span>
-          <span class="text-slate-400 font-semibold">Maersk</span>
-          <span class="text-slate-400 font-semibold">DHL</span>
-          <span class="text-slate-400 font-semibold">Cargill</span>
-          <span class="text-slate-400 font-semibold">Trafigura</span>
+          <span class="text-gray-600 dark:text-slate-400 font-semibold">Goldman Sachs</span>
+          <span class="text-gray-600 dark:text-slate-400 font-semibold">Maersk</span>
+          <span class="text-gray-600 dark:text-slate-400 font-semibold">DHL</span>
+          <span class="text-gray-600 dark:text-slate-400 font-semibold">Cargill</span>
+          <span class="text-gray-600 dark:text-slate-400 font-semibold">Trafigura</span>
         </div>
       </div>
     </div>
@@ -367,7 +424,7 @@
         <!-- Trade & Commerce Group -->
         <div class="elite-card p-5 rounded-xl service-trade fade-in-up" style="animation-delay: 0.2s;">
           <h4 class="text-xs font-bold uppercase tracking-wider mb-3 text-[#2dd4bf]">Trade & Commerce</h4>
-          <ul class="space-y-2 text-sm text-slate-300">
+          <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-300">
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Social Network & Feed</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Virtual Showrooms</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Trading Rooms</li>
@@ -379,7 +436,7 @@
         <!-- Logistics Group -->
         <div class="elite-card p-5 rounded-xl service-logistics fade-in-up" style="animation-delay: 0.3s;">
           <h4 class="text-xs font-bold uppercase tracking-wider mb-3 text-[#2dd4bf]">Logistics</h4>
-          <ul class="space-y-2 text-sm text-slate-300">
+          <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-300">
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Smart Map & Routes</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Vessel Finder</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Escrow Payments</li>
@@ -390,7 +447,7 @@
         <!-- Analytics & AI Group -->
         <div class="elite-card p-5 rounded-xl service-analytics fade-in-up" style="animation-delay: 0.4s;">
           <h4 class="text-xs font-bold uppercase tracking-wider mb-3 text-[#2dd4bf]">Analytics & AI</h4>
-          <ul class="space-y-2 text-sm text-slate-300">
+          <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-300">
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>AI Trade Advisor</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Business Intelligence</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Market Analytics</li>
@@ -401,7 +458,7 @@
         <!-- Business Tools Group -->
         <div class="elite-card p-5 rounded-xl service-business fade-in-up" style="animation-delay: 0.5s;">
           <h4 class="text-xs font-bold uppercase tracking-wider mb-3 text-[#2dd4bf]">Business Tools</h4>
-          <ul class="space-y-2 text-sm text-slate-300">
+          <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-300">
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>CRM System</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>TrustScore™ Dashboard</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Document Management</li>
@@ -412,7 +469,7 @@
         <!-- Learning & Growth Group -->
         <div class="elite-card p-5 rounded-xl service-learning fade-in-up" style="animation-delay: 0.6s;">
           <h4 class="text-xs font-bold uppercase tracking-wider mb-3 text-[#2dd4bf]">Learning & Growth</h4>
-          <ul class="space-y-2 text-sm text-slate-300">
+          <ul class="space-y-2 text-sm text-gray-700 dark:text-slate-300">
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Metisma Academy</span></li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Imejeh Magazine</li>
             <li class="flex items-start"><span class="text-[#2dd4bf] mr-2 mt-0.5">✓</span>Certification Programs</li>
@@ -629,7 +686,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-12 bg-[#0f2038] border-t border-white/5">
+  <footer class="py-12 bg-[#0f2038] border-t border-gray-200 dark:border-white/5">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <!-- Logo -->
@@ -660,9 +717,42 @@
       </div>
     </div>
   </footer>
-
   <!-- Scripts -->
   <script>
+    // Dark Mode Toggle Function
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const iconMoon = document.getElementById('icon-moon');
+      const iconSun = document.getElementById('icon-sun');
+
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+
+      if (iconMoon && iconSun) {
+        iconMoon.classList.toggle('hidden');
+        iconSun.classList.toggle('hidden');
+      }
+    }
+
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem('theme');
+      const iconMoon = document.getElementById('icon-moon');
+      const iconSun = document.getElementById('icon-sun');
+
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+        if (iconMoon && iconSun) {
+          iconMoon.classList.add('hidden');
+          iconSun.classList.remove('hidden');
+        }
+      }
     // Loading Screen
     window.addEventListener('load', () => {
       setTimeout(() => {
