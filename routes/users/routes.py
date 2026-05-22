@@ -425,7 +425,7 @@ def login():
             
             # ایجاد جلسه جدید
             session_token = LoginSession.create_session(
-                user_id=user.id,
+                user=user,
                 request=request,
                 remember_me=remember_me
             )
