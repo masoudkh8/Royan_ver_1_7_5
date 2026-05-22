@@ -212,7 +212,7 @@
                 
                 <!-- منوی کشویی کاربر -->
                 <div id="userMenuDropdown" 
-                     class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-dark-800 rounded-xl shadow-2xl border border-gray-200 dark:border-dark-700 opacity-0 invisible transition-all duration-200 transform translate-y-2 z-50">
+                     class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-dark-800 rounded-xl shadow-2xl border border-gray-200 dark:border-dark-700 opacity-0 invisible pointer-events-none transition-all duration-200 transform translate-y-2 z-50">
                     <div class="p-3 border-b border-gray-200 dark:border-dark-700">
                         <p class="font-bold text-gray-900 dark:text-white">{{ current_user.username }}</p>
                         <p class="text-xs text-slate-400">{{ current_user.email }}</p>
@@ -914,6 +914,8 @@
                 userMenuDropdown.classList.toggle('opacity-100');
                 userMenuDropdown.classList.toggle('invisible');
                 userMenuDropdown.classList.toggle('visible');
+                userMenuDropdown.classList.toggle('pointer-events-none');
+                userMenuDropdown.classList.toggle('pointer-events-auto');
                 userMenuDropdown.classList.toggle('translate-y-2');
                 userMenuDropdown.classList.toggle('translate-y-0');
             });
@@ -921,8 +923,8 @@
             // بستن منو با کلیک بیرون
             document.addEventListener('click', (e) => {
                 if (!userMenuDropdown.contains(e.target) && !userMenuBtn.contains(e.target)) {
-                    userMenuDropdown.classList.add('opacity-0', 'invisible', 'translate-y-2');
-                    userMenuDropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                    userMenuDropdown.classList.add('opacity-0', 'invisible', 'translate-y-2', 'pointer-events-none');
+                    userMenuDropdown.classList.remove('opacity-100', 'visible', 'translate-y-0', 'pointer-events-auto');
                     userMenuBtn.setAttribute('aria-expanded', 'false');
                 }
             });
@@ -933,6 +935,15 @@
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuBackdrop = document.getElementById('menuBackdrop');
+
+        // اطمینان از بسته بودن منو در ابتدای لود صفحه
+        if (mobileMenu) {
+            mobileMenu.classList.add('hidden');
+        }
+        if (mobileMenuBtn) {
+            mobileMenuBtn.classList.remove('hamburger-active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
 
         function toggleMenu() {
             const isMenuOpen = !mobileMenu?.classList.contains('hidden');
