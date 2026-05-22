@@ -1,0 +1,179 @@
+{% extends "base_pwa.html" %}
+
+{% block title %}{{ t_('common.edit_profile') }} - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ t_('common.edit_profile') }}</h1>
+            <p class="text-gray-600">{{ t_('profile.edit_profile_subtitle') }}</p>
+        </div>
+
+        <!-- Profile Edit Form -->
+        <form method="POST" class="bg-white rounded-lg shadow-md p-8">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <!-- Section 1: Basic Information -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+                    {{ t_('profile.section_basic') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('labels.company_name') }}</label>
+                        <input type="text" name="company" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="{{ t_('placeholders.company') }}"
+                               value="{{ user.company_name or '' }}">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('labels.country') }} *</label>
+                        <input type="text" name="country" required
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="{{ t_('placeholders.country') }}"
+                               value="{{ user.country or '' }}">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('labels.phone') }}</label>
+                        <input type="tel" name="phone" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="{{ t_('placeholders.phone') }}"
+                               value="{{ user.phone or '' }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Professional Information -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+                    {{ t_('profile.section_professional') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('user.job_title') }}</label>
+                        <input type="text" name="job_title" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="{{ t_('placeholders.job_title') }}"
+                               value="{{ user.job_title or '' }}">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('user.expertise_area') }}</label>
+                        <input type="text" name="expertise_area" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="{{ t_('placeholders.expertise_area') }}"
+                               value="{{ user.expertise_area or '' }}">
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('user.bio') }}</label>
+                    <textarea name="bio" rows="4" 
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="{{ t_('placeholders.bio') }}">{{ user.bio or '' }}</textarea>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ t_('user.website') }}</label>
+                    <input type="url" name="website" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="https://example.com"
+                           value="{{ user.website or '' }}">
+                </div>
+            </div>
+
+            <!-- Section 3: Social Links -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">
+                    {{ t_('profile.section_social') }}
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                        <input type="url" name="linkedin" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="https://linkedin.com/in/username"
+                               value="{{ (user.social_links|default('{}')|from_json).get('linkedin', '') }}">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Telegram</label>
+                        <input type="text" name="telegram" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="@username"
+                               value="{{ (user.social_links|default('{}')|from_json).get('telegram', '') }}">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                        <input type="tel" name="whatsapp" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="+98 912 345 6789"
+                               value="{{ (user.social_links|default('{}')|from_json).get('whatsapp', '') }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4 pt-6 border-t">
+                <button type="submit" 
+                        class="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
+                    {{ t_('common.save') }} ✓
+                </button>
+                <a href="{{ url_for('users.profile') }}" 
+                   class="flex-1 bg-gray-300 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-400 transition duration-200 font-medium text-center">
+                    {{ t_('common.cancel') }}
+                </a>
+            </div>
+        </form>
+
+        <!-- Account Settings Link -->
+        <div class="mt-6 bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div class="flex items-center gap-3">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div>
+                    <p class="text-sm font-medium text-indigo-800">{{ t_('profile.account_settings_title') }}</p>
+                    <p class="text-xs text-indigo-700 mt-1">{{ t_('profile.account_settings_desc') }}</p>
+                    <a href="{{ url_for('users.account_settings') }}" class="text-xs text-indigo-900 underline font-medium mt-1 inline-block">
+                        {{ t_('common.account_settings') }} →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Documents Link -->
+        <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <div class="flex items-center gap-3">
+                <svg class="w-6 h-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <div>
+                    <p class="text-sm font-medium text-yellow-800">{{ t_('profile.upload_documents_title') }}</p>
+                    <p class="text-xs text-yellow-700 mt-1">{{ t_('profile.upload_documents_desc') }}</p>
+                    <a href="{{ url_for('users.upload_documents') }}" class="text-xs text-yellow-900 underline font-medium mt-1 inline-block">
+                        {{ t_('common.upload') }} →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom filter for JSON parsing -->
+
+{% macro parse_json(str) %}
+      {% if str and str != 'null' %}
+        {{ str }}
+    {% else %}
+        {}
+    {% endif %}
+{% endmacro %}
+{% endblock %}
+
