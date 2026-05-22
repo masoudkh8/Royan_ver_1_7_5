@@ -540,6 +540,9 @@ def edit_profile():
         db.session.commit()
         flash("✅ Profile updated successfully.", "success")
         return redirect(url_for('users.profile'))
+    
+    # GET: نمایش فرم ویرایش پروفایل
+    return render_template('users/profile_edit.html', user=current_user)
 
 
 
