@@ -689,6 +689,31 @@
   .ticker-wrap:hover .animate-ticker {
     animation-play-state: paused;
   }
+  
+  /* ✅ استایل‌های منوی همبرگری موبایل */
+  .hamburger-line {
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+  }
+  
+  /* حالت فعال: تبدیل به ضربدر */
+  .hamburger-active .hamburger-line:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+  .hamburger-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .hamburger-active .hamburger-line:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  
+  /* مخفی کردن کامل دکمه همبرگری در دسکتاپ */
+  @media (min-width: 1024px) {
+    #mobileMenuBtn {
+      display: none !important;
+    }
+  }
 </style>
 {% endblock %}
 
