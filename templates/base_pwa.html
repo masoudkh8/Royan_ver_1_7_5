@@ -340,7 +340,7 @@
 
         <!-- دکمه منوی موبایل (همبرگری) -->
         <button id="mobileMenuBtn"
-                class="lg:hidden lg:pointer-events-none lg:opacity-0 p-2.5 rounded-xl hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20"
+                class="lg:hidden p-2.5 rounded-xl hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20"
                 aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
             <div class="w-6 h-5 flex flex-col justify-between">
                 <span class="hamburger-line h-0.5 w-full bg-slate-300 rounded-full"></span>
@@ -352,7 +352,7 @@
 </header>
 
 <!-- منوی کشویی موبایل (اورلی) -->
-<div id="mobileMenu" class="fixed inset-0 z-40 lg:hidden lg:pointer-events-none lg:opacity-0 hidden" role="dialog" aria-modal="true">
+<div id="mobileMenu" class="fixed inset-0 z-40 lg:hidden hidden" role="dialog" aria-modal="true">
     <!-- پس‌زمینه تیره برای بستن منو با کلیک -->
     <div id="menuBackdrop" class="absolute inset-0 bg-dark-900/90 backdrop-blur-sm"></div>
 
@@ -710,8 +710,10 @@
   
   /* مخفی کردن کامل دکمه همبرگری در دسکتاپ */
   @media (min-width: 1024px) {
-    #mobileMenuBtn {
+    #mobileMenuBtn, #mobileMenu {
       display: none !important;
+      pointer-events: none;
+      opacity: 0;
     }
   }
 </style>
@@ -951,11 +953,25 @@
             document.body.style.overflow = '';
         }
 
-        if (mobileMenuBtn) {
+        if (mobileMenuBtn && window.innerWidth < 1024) {
             mobileMenuBtn.addEventListener('click', toggleMenu);
             closeMenuBtn?.addEventListener('click', closeMenu);
             menuBackdrop?.addEventListener('click', closeMenu);
         }
+        
+        // غیرفعال کردن کامل دکمه در دسکتاپ حتی اگر کاربر لاگین باشد
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeMenu();
+                mobileMenuBtn?.removeEventListener('click', toggleMenu);
+                closeMenuBtn?.removeEventListener('click', closeMenu);
+                menuBackdrop?.removeEventListener('click', closeMenu);
+            } else if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                closeMenuBtn?.addEventListener('click', closeMenu);
+                menuBackdrop?.addEventListener('click', closeMenu);
+            }
+        });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 closeMenu();
