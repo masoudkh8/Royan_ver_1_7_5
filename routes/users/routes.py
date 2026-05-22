@@ -424,11 +424,12 @@ def login():
             )
             
             # ایجاد جلسه جدید
-            session_token = LoginSession.create_session(
+            session = LoginSession.create_session(
                 user=user,
                 request=request,
                 remember_me=remember_me
             )
+            session_token = session.session_token
             
             login_user(user, remember=remember_me)
             
