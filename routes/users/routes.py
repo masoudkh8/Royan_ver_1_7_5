@@ -112,7 +112,7 @@ def validate_file(file, image_only=False):
 # routes/users/routes.py یا app.py
 @root_bp.route('/')
 def main_page():
-    return render_template('index.html')
+    return render_template('landingbase.html')
 
 
 @users_bp.before_request
