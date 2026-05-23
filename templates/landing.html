@@ -79,17 +79,7 @@
       transform-origin: center;
     }
     
-    /* Globe Canvas */
-    #globe-canvas { 
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      z-index: 0; 
-    }
-    
-    /* Network Canvas (fallback) */
+    /* Network Canvas */
     #network-canvas { 
       position: absolute; 
       top: 0; 
@@ -97,7 +87,17 @@
       width: 100%; 
       height: 100%; 
       z-index: 0; 
-      opacity: 0.5;
+      opacity: 0.6;
+    }
+    
+    /* Globe Canvas (fallback) */
+    #globe-canvas { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: 0; 
     }
     
     /* Glassmorphism Card Effects - Enhanced */
@@ -266,7 +266,7 @@
   </button>
 
   <!-- Loading Screen -->
-  <div id="loading" class="fixed inset-0 z-[100] bg-gray-50 dark:bg-dark-900 flex items-center justify-center transition-colors duration-300">
+  <div id="loading" class="fixed inset-0 z-[100] bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 flex items-center justify-center transition-colors duration-300">
     <div class="text-center">
       <!-- Owl Logo Placeholder -->
       <div class="w-24 h-24 mx-auto mb-6 relative">
@@ -287,10 +287,10 @@
         </svg>
       </div>
       <!-- Progress Bar -->
-      <div class="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
+      <div class="w-48 h-0.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
         <div class="h-full bg-gradient-to-r from-[#d4af37] via-[#f5d76e] to-[#d4af37]" style="animation: progressFill 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;"></div>
       </div>
-      <p class="mt-4 text-xs tracking-[0.2em] text-gray-500 dark:text-slate-400 uppercase">Initializing Secure Access</p>
+      <p class="mt-4 text-xs tracking-[0.2em] text-gray-600 dark:text-slate-400 uppercase">Initializing Secure Access</p>
     </div>
   </div>
 
@@ -334,12 +334,12 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gray-50 dark:bg-dark-900 transition-colors duration-300">
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900 transition-colors duration-300">
     <!-- Three.js Globe Canvas -->
-    <canvas id="globe-canvas"></canvas>
+    <canvas id="network-canvas" class="absolute inset-0 w-full h-full"></canvas>
     
     <!-- Gradient Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-gray-50/30 via-gray-50/60 to-gray-50 dark:from-dark-900/30 dark:via-dark-900/60 dark:to-dark-900 transition-colors duration-300"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-50/20 via-gray-50/40 to-gray-50 dark:from-dark-900/20 dark:via-dark-900/40 dark:to-dark-900 transition-colors duration-300"></div>
     
     <!-- Content -->
     <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
@@ -756,7 +756,10 @@
     // Loading Screen
     window.addEventListener('load', () => {
       setTimeout(() => {
-        document.getElementById('loading').classList.add('hidden');
+        const loadingScreen = document.getElementById('loading');
+        if (loadingScreen) {
+          loadingScreen.classList.add('hidden');
+        }
       }, 2500);
     });
     
@@ -766,94 +769,101 @@
       menu.classList.toggle('active');
     }
     
-    // Three.js Network Animation
-    const canvas = document.getElementById('network-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    
-    // Create nodes
-    const nodes = [];
-    const nodeCount = 80;
-    const geometry = new THREE.SphereGeometry(0.15, 8, 8);
-    const material = new THREE.MeshBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.6 });
-    
-    for (let i = 0; i < nodeCount; i++) {
-      const node = new THREE.Mesh(geometry, material);
-      node.position.x = (Math.random() - 0.5) * 40;
-      node.position.y = (Math.random() - 0.5) * 40;
-      node.position.z = (Math.random() - 0.5) * 40;
-      node.velocity = new THREE.Vector3(
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02,
-        (Math.random() - 0.5) * 0.02
-      );
-      nodes.push(node);
-      scene.add(node);
-    }
-    
-    // Create connections
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.15 });
-    
-    function connectNodes() {
-      const lines = [];
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const distance = nodes[i].position.distanceTo(nodes[j].position);
-          if (distance < 8) {
-            const points = [nodes[i].position, nodes[j].position];
-            const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-            const line = new THREE.Line(lineGeometry, lineMaterial);
-            lines.push(line);
-            scene.add(line);
-          }
-        }
-      }
-      return lines;
-    }
-    
-    let lines = connectNodes();
-    
-    // Camera position
-    camera.position.z = 20;
-    
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      
-      // Update nodes
-      nodes.forEach(node => {
-        node.position.add(node.velocity);
-        
-        // Boundary check
-        if (Math.abs(node.position.x) > 20) node.velocity.x *= -1;
-        if (Math.abs(node.position.y) > 20) node.velocity.y *= -1;
-        if (Math.abs(node.position.z) > 20) node.velocity.z *= -1;
-      });
-      
-      // Reconnect nodes periodically
-      if (Math.random() < 0.02) {
-        lines.forEach(line => scene.remove(line));
-        lines = connectNodes();
-      }
-      
-      // Slow rotation
-      scene.rotation.y += 0.0005;
-      
-      renderer.render(scene, camera);
-    }
-    
-    animate();
-    
-    // Resize handler
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+    // Three.js Globe Animation (from index.html)
+    const globeCanvas = document.getElementById('network-canvas');
+    if (globeCanvas) {
+      const renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const isMobile = window.innerWidth <= 768;
+      camera.position.set(0, 0, isMobile ? 6 : 3);
+
+      window.addEventListener('resize', () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.position.z = width <= 768 ? 6 : 3;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+      const sun = new THREE.DirectionalLight(0xffffff, 1.0);
+      sun.position.set(5, 3, 5);
+      scene.add(sun);
+
+      const earthGeo = new THREE.SphereGeometry(1, 64, 64);
+      const earthMat = new THREE.MeshPhongMaterial({
+        color: 0x1a3a5c,
+        specular: 0x112244,
+        shininess: 10,
+      });
+      const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+      scene.add(earthMesh);
+
+      // Atmosphere glow
+      const atmosGeo = new THREE.SphereGeometry(1.15, 64, 64);
+      const atmosMat = new THREE.ShaderMaterial({
+        vertexShader: `varying vec3 vNormal; void main(){ vNormal = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+        fragmentShader: `varying vec3 vNormal; void main(){ float intensity = pow(0.62 - dot(vNormal, vec3(0,0,1)), 2.8); gl_FragColor = vec4(0.23, 0.51, 0.96, intensity * 1.8); }`,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+        transparent: true,
+        depthWrite: false,
+      });
+      scene.add(new THREE.Mesh(atmosGeo, atmosMat));
+
+      // Stars
+      const starsGeo = new THREE.BufferGeometry();
+      const starsPos = [];
+      for(let i = 0; i < 2000; i++) {
+        const r = 30 + Math.random() * 70;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        starsPos.push(r*Math.sin(phi)*Math.cos(theta), r*Math.sin(phi)*Math.sin(theta), r*Math.cos(phi));
+      }
+      starsGeo.setAttribute('position', new THREE.Float32BufferAttribute(starsPos, 3));
+      scene.add(new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.12, color: 0xffffff, transparent: true, opacity: 0.6 })));
+
+      // Cities
+      const cities = [
+        { lat: 35.68, lng: 51.39 }, { lat: 27.18, lng: 56.28 }, { lat: 25.20, lng: 55.27 },
+        { lat: 23.58, lng: 58.38 }, { lat: 41.00, lng: 28.97 }, { lat: 50.11, lng: 8.68 },
+        { lat: 40.71, lng: -74.00 }, { lat: 31.23, lng: 121.47 }, { lat: 1.35, lng: 103.81 },
+        { lat: 28.61, lng: 77.20 }, { lat: 55.75, lng: 37.61 }, { lat: -33.86, lng: 151.20 },
+        { lat: -22.90, lng: -43.17 }, { lat: -34.60, lng: -58.38 }, { lat: 6.52, lng: 3.37 },
+      ];
+
+      function latLngToVec3(lat, lng, r) {
+        const phi = (90 - lat) * Math.PI / 180;
+        const theta = (lng + 180) * Math.PI / 180;
+        return new THREE.Vector3(
+          -r * Math.sin(phi) * Math.cos(theta),
+           r * Math.cos(phi),
+           r * Math.sin(phi) * Math.sin(theta)
+        );
+      }
+
+      cities.forEach(city => {
+        const pos = latLngToVec3(city.lat, city.lng, 1.015);
+        const glowGeo = new THREE.SphereGeometry(0.035, 16, 16);
+        const glowMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.35 });
+        const glow = new THREE.Mesh(glowGeo, glowMat);
+        glow.position.copy(pos);
+        earthMesh.add(glow);
+      });
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        earthMesh.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
     
     // Fade-in animations on scroll
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
