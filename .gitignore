@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since only a template file (templates/landing.html) was modified and no build artifacts, dependencies, or temporary files were included in the changes.
+Nothing should be ignored in this case, as only a template HTML file was added without any build artifacts, dependencies, or temporary files.
