@@ -2,14 +2,16 @@
 # مدل‌های امنیتی و احراز هویت پیشرفته
 
 from . import db
-from datetime import datetime, timedelta
-import pytz
+from datetime import datetime, timedelta, timezone
 import secrets
 import base64
 import hashlib
 import time
 
-tehran_tz = pytz.timezone('Asia/Tehran')
+
+def utc_now():
+    """برگرداندن زمان فعلی به UTC"""
+    return datetime.now(timezone.utc)
 
 
 class PasswordResetToken(db.Model):
@@ -19,7 +21,7 @@ class PasswordResetToken(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     token = db.Column(db.String(255), unique=True, nullable=False, index=True)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
+    created_at = db.Column(db.DateTime, default=utc_now)
     expires_at = db.Column(db.DateTime, nullable=False)
     used = db.Column(db.Boolean, default=False)
     used_at = db.Column(db.DateTime, nullable=True)
@@ -31,7 +33,7 @@ class PasswordResetToken(db.Model):
     def __init__(self, user_id, expiry_hours=24, ip_address=None):
         self.user_id = user_id
         self.token = secrets.token_urlsafe(32)
-        self.created_at = datetime.now(tehran_tz)
+        self.created_at = utc_now()
         self.expires_at = self.created_at + timedelta(hours=expiry_hours)
         self.ip_address = ip_address
     
@@ -44,32 +46,34 @@ class PasswordResetToken(db.Model):
         PasswordResetToken.query.filter_by(
             user_id=user.id, 
             used=False
-        # ).update({'used': True})
         ).update({'used': True}, synchronize_session=False)
 
-        # ایجاد توکن جدید
+        # ایجاد توکن جدید - ذخیره توکن اصلی قبل از هش کردن
         reset_token = PasswordResetToken(
             user_id=user.id,
             expiry_hours=expiry_hours,
             ip_address=ip_address
         )
         
-        # هش کردن توکن برای ذخیره امن
+        # ذخیره توکن اصلی برای بازگرداندن
+        original_token = reset_token.token
+        
+        # هش کردن توکن برای ذخیره امن در دیتابیس
         reset_token.token = hashlib.sha256(reset_token.token.encode()).hexdigest()
         
         db.session.add(reset_token)
         db.session.commit()
         
-        return reset_token.token  # بازگرداندن توکن اصلی (نه هش شده)
+        return original_token  # بازگرداندن توکن اصلی (نه هش شده)
     
     def is_valid(self):
         """بررسی اعتبار توکن"""
-        return not self.used and datetime.now(tehran_tz) < self.expires_at
+        return not self.used and utc_now() < self.expires_at
     
     def mark_as_used(self):
         """علامت‌گذاری توکن به عنوان استفاده شده"""
         self.used = True
-        self.used_at = datetime.now(tehran_tz)
+        self.used_at = utc_now()
         db.session.commit()
     
     def __repr__(self):
@@ -96,8 +100,8 @@ class LoginSession(db.Model):
     # وضعیت جلسه
     is_active = db.Column(db.Boolean, default=True, index=True)
     is_current = db.Column(db.Boolean, default=False)  # آیا این جلسه فعلی است؟
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), index=True)
-    last_activity = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
+    created_at = db.Column(db.DateTime, default=utc_now, index=True)
+    last_activity = db.Column(db.DateTime, default=utc_now)
     expires_at = db.Column(db.DateTime, nullable=True)
     
     # Remember Me
@@ -116,8 +120,8 @@ class LoginSession(db.Model):
             self.user_agent = request.headers.get('User-Agent', '')[:500]
             self._parse_user_agent()
         
-        self.created_at = datetime.now(tehran_tz)
-        self.last_activity = datetime.now(tehran_tz)
+        self.created_at = utc_now()
+        self.last_activity = utc_now()
         
         # تنظیم زمان انقضا بر اساس Remember Me
         if remember_me:
@@ -134,7 +138,7 @@ class LoginSession(db.Model):
             user_id=user.id,
             is_active=True
         ).filter(
-            LoginSession.expires_at < datetime.now(tehran_tz)
+            LoginSession.expires_at < utc_now()
         ).update({'is_active': False})
         
         # ایجاد جلسه جدید
@@ -200,18 +204,18 @@ class LoginSession(db.Model):
     
     def update_activity(self):
         """به‌روزرسانی زمان آخرین فعالیت"""
-        self.last_activity = datetime.now(tehran_tz)
+        self.last_activity = utc_now()
         if self.remember_me and self.expires_at:
             # تمدید انقضا برای Remember Me
-            self.expires_at = datetime.now(tehran_tz) + timedelta(days=30)
+            self.expires_at = utc_now() + timedelta(days=30)
         else:
             # تمدید انقضا برای جلسه معمولی
-            self.expires_at = datetime.now(tehran_tz) + timedelta(hours=24)
+            self.expires_at = utc_now() + timedelta(hours=24)
         db.session.commit()
     
     def is_expired(self):
         """بررسی انقضای جلسه"""
-        return datetime.now(tehran_tz) > self.expires_at if self.expires_at else False
+        return utc_now() > self.expires_at if self.expires_at else False
     
     def revoke(self):
         """ابطال جلسه"""
@@ -270,7 +274,7 @@ class ActivityLog(db.Model):
     # متادیتا اضافی (JSON) - renamed from metadata to extra_data to avoid SQLAlchemy reserved word
     extra_data = db.Column(db.Text, nullable=True)
     
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), index=True)
+    created_at = db.Column(db.DateTime, default=utc_now, index=True)
     
     # Relationship
     user = db.relationship('User', backref=db.backref('activity_logs', lazy='dynamic', cascade='all, delete-orphan'))
@@ -341,7 +345,7 @@ class EmailVerificationToken(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     email = db.Column(db.String(120), nullable=False)
     token = db.Column(db.String(255), unique=True, nullable=False, index=True)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
+    created_at = db.Column(db.DateTime, default=utc_now)
     expires_at = db.Column(db.DateTime, nullable=False)
     used = db.Column(db.Boolean, default=False)
     
@@ -352,12 +356,12 @@ class EmailVerificationToken(db.Model):
         self.user_id = user_id
         self.email = email
         self.token = secrets.token_urlsafe(32)
-        self.created_at = datetime.now(tehran_tz)
+        self.created_at = utc_now()
         self.expires_at = self.created_at + timedelta(hours=expiration_hours)
     
     def is_valid(self):
         """بررسی اعتبار توکن"""
-        return not self.used and datetime.now(tehran_tz) < self.expires_at
+        return not self.used and utc_now() < self.expires_at
     
     def mark_as_used(self):
         """علامت‌گذاری توکن به عنوان استفاده شده"""
@@ -376,7 +380,7 @@ class TwoFactorBackupCode(db.Model):
     code_hash = db.Column(db.String(255), nullable=False, index=True)
     used = db.Column(db.Boolean, default=False, nullable=False)
     used_at = db.Column(db.DateTime, nullable=True)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
+    created_at = db.Column(db.DateTime, default=utc_now)
     
     # Relationship
     user = db.relationship('User', backref=db.backref('two_factor_backup_codes_rel', lazy='dynamic', cascade='all, delete-orphan'))
@@ -409,7 +413,7 @@ class TwoFactorBackupCode(db.Model):
         
         if backup_code:
             backup_code.used = True
-            backup_code.used_at = datetime.now(tehran_tz)
+            backup_code.used_at = utc_now()
             db.session.commit()
             return True
         return False
