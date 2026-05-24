@@ -1,5 +1,23 @@
-.idea/
-.venv/
+```
+# Python
 __pycache__/
-/__pycache__
-logs/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.DS_Store
+Thumbs.db
+```
