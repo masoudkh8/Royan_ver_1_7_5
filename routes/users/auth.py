@@ -221,10 +221,15 @@ def confirm_email(token):
         email = s.loads(token, salt='email-verify-salt', max_age=86400)
     except SignatureExpired:
         flash("❌ The link has expired.")
-        return redirect(url_for('users.verify_email'))
+
+    #     return redirect(url_for('users.verify_email'))
+    # except BadSignature:
+    #     flash("❌ The link is invalid.")
+    #     return redirect(url_for('users.upgrade_to_premium'))
+        return redirect(url_for('users.show_verify_email_page'))
     except BadSignature:
         flash("❌ The link is invalid.")
-        return redirect(url_for('users.upgrade_to_premium'))
+        return redirect(url_for('users.show_verify_email_page'))
 
     if email != current_user.email:
         flash("❌ This link is not for you.")
@@ -238,6 +243,9 @@ def confirm_email(token):
     if not req.email_verified:
         req.email_verified = True
         req.email_verification_token = None
+        # ✅ همچنین is_email_verified را در جدول User نیز true کن
+        current_user.is_email_verified = True
+
         db.session.commit()
         flash("✅ Email has been verified.")
 
@@ -273,7 +281,7 @@ def forgot_password():
             msg = Message(
                 subject='بازیابی رمز عبور متیسما',
                 recipients=[user.email],
-                html=render_template('emails/password_reset.html', 
+                html=render_template('email/password_reset.html',
                                    user=user, 
                                    reset_url=reset_url)
             )
@@ -311,7 +319,7 @@ def reset_password(token):
     
     reset_token = PasswordResetToken.query.filter_by(
         token=token_hash,
-        is_used=False
+        used=False
     ).first()
     
     if not reset_token or not reset_token.is_valid():

@@ -28,11 +28,11 @@ class PasswordResetToken(db.Model):
     # Relationship
     user = db.relationship('User', backref=db.backref('reset_tokens', lazy='dynamic', cascade='all, delete-orphan'))
     
-    def __init__(self, user_id, expiration_hours=24, ip_address=None):
+    def __init__(self, user_id, expiry_hours=24, ip_address=None):
         self.user_id = user_id
         self.token = secrets.token_urlsafe(32)
         self.created_at = datetime.now(tehran_tz)
-        self.expires_at = self.created_at + timedelta(hours=expiration_hours)
+        self.expires_at = self.created_at + timedelta(hours=expiry_hours)
         self.ip_address = ip_address
     
     @staticmethod
@@ -44,12 +44,13 @@ class PasswordResetToken(db.Model):
         PasswordResetToken.query.filter_by(
             user_id=user.id, 
             used=False
-        ).update({'used': True})
-        
+        # ).update({'used': True})
+        ).update({'used': True}, synchronize_session=False)
+
         # ایجاد توکن جدید
         reset_token = PasswordResetToken(
             user_id=user.id,
-            expiration_hours=expiry_hours,
+            expiry_hours=expiry_hours,
             ip_address=ip_address
         )
         

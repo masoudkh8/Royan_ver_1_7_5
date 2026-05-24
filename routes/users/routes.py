@@ -1,4 +1,6 @@
 # routes/users/routes.py
+import hashlib
+
 from flask_wtf.csrf import generate_csrf
 from datetime import datetime
 import pytz
@@ -1634,7 +1636,7 @@ def check_availability():
         }), 200
 
 
-@users_bp.route('/verify-email/<token>')
+@users_bp.route('/verify-email/<token>', endpoint='verify_email_route')
 def verify_email(token):
     """بررسی توکن و فعال‌سازی حساب کاربری"""
     # 1. اعتبارسنجی توکن (چک کردن هش و تاریخ انقضا)
@@ -1651,6 +1653,8 @@ def verify_email(token):
 
     # 3. تایید کاربر
     user.is_email_verified = True
+    # 4. ذخیره تغییرات در دیتابیس
+    db.session.commit()
 
     # 4. علامت‌گذاری توکن به عنوان استفاده شده
     import hashlib
@@ -1681,6 +1685,22 @@ def resend_verification():
 
         # تولید توکن جدید و ارسال
         raw_token = generate_verification_token(user)
+
+        # ✅ ذخیره توکن در دیتابیس (EmailVerificationToken)
+        token_hash = hashlib.sha256(raw_token.encode()).hexdigest()
+        existing_token = EmailVerificationToken.query.filter_by(token=token_hash).first()
+        if not existing_token:
+            new_token_record = EmailVerificationToken(
+                user_id=user.id,
+                email=user.email,
+                expiration_hours=48
+            )
+            # هش کردن توکن قبل از ذخیره
+            new_token_record.token = token_hash
+            db.session.add(new_token_record)
+            db.session.commit()
+
+
         success, error = send_verification_email(user, raw_token)
 
         if success:

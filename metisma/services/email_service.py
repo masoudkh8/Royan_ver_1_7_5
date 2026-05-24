@@ -33,7 +33,7 @@ def verify_email_token(token_string):
 
 def send_verification_email(user, token_string):
     """قالب ایمیل را رندر و ارسال می‌کند"""
-    verify_url = url_for('users.verify_email', token=token_string, _external=True)
+    verify_url = url_for('users.verify_email_route', token=token_string, _external=True)
     
     html_body = render_template(
         'email/verify_email.html',
