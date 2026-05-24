@@ -218,7 +218,13 @@ class User(db.Model, UserMixin):
     # Email Verification
     is_email_verified = db.Column(db.Boolean, default=False, nullable=False)
     email_verification_token = db.Column(db.String(255), nullable=True)
-    
+
+    registered_at = db.Column(db.DateTime, default=datetime.utcnow)
+    # ===================================
+
+
+
+
     # Dark Mode Preference (stored in backend)
     dark_mode_preference = db.Column(db.String(20), default='system', nullable=False)  # 'light', 'dark', 'system'
     

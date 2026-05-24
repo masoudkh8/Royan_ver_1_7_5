@@ -1,1 +1,5 @@
-Nothing needs to be added to .gitignore since only a template file (index_main.html) was added, which is a source file that should be tracked in version control. No build artifacts, dependencies, or temporary files were included in the changes.
+.idea/
+.venv/
+__pycache__/
+/__pycache__
+logs/

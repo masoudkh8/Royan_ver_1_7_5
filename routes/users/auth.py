@@ -147,30 +147,24 @@ def verify_phone():
 # -------------------------------
 # تأیید ایمیل (صفحه نمایش)
 # -------------------------------
-@users_bp.route('/verify_email')
+# -------------------------------
+# تأیید ایمیل (صفحه نمایش - برای کاربرانی که ثبت‌نام کرده‌اند)
+# -------------------------------
+@users_bp.route('/verify_email', endpoint='show_verify_email_page')  # ← تغییر: اضافه کردن endpoint منحصر به فرد
 @login_required
-def verify_email():
+def show_verify_email_page():  # ← تغییر: نام تابع جدید
     print('start email process')
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
-    # if not req:
-    #     print('if not req')
-    #     return redirect(url_for('users.upgrade_to_premium'))
 
     if not req or not req.phone_verified:
         return redirect(url_for('users.verify_phone'))
-
 
     if req.email_verified:
         print('req.email_verified')
         return redirect(url_for('users.upload_documents'))
 
-    # if req.email_verification_token:
-    #     print(req.email_verification_token)
-
     if not req.email_verification_token:
-        # print('not req.email_verification_token')
         if send_email_verification(current_user):
-            # print('....... send_email_verification')
             flash("Confirmation email sent.")
         else:
             print('....... ❌❌')
@@ -178,7 +172,6 @@ def verify_email():
             return render_template('users/verify_email.html', req=req)
 
     return render_template('users/verify_email.html', req=req)
-
 
 # ارسال ایمیل تأیید
 def send_email_verification(user):

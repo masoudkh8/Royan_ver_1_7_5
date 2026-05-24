@@ -34,7 +34,11 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME", "")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD", "")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER", "")
-    
+    # ===== خطوط جدید برای پشتیبانی بهتر =====
+    MAIL_ASCII_ATTACHMENTS = False  # پشتیبانی از کاراکترهای غیر انگلیسی در پیوست‌ها
+    MAIL_SUPPRESS_SEND = False  # در توسعه اگر True باشد، ایمیل فقط در کنسول چاپ می‌شود
+
+
     # File upload settings
     basedir = os.path.abspath(os.path.dirname(__file__))
     UPLOAD_FOLDER = os.path.join(basedir, 'uploads')

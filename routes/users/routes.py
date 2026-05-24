@@ -7,7 +7,7 @@ import os
 import json
 import secrets
 from werkzeug.utils import secure_filename
-
+from metisma.services.email_service import generate_verification_token, send_verification_email ,verify_email_token
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
@@ -112,7 +112,7 @@ def validate_file(file, image_only=False):
 # routes/users/routes.py یا app.py
 @root_bp.route('/')
 def main_page():
-    return render_template('landingbase.html')
+    return render_template('landing.html')
 
 
 @users_bp.before_request
@@ -325,29 +325,21 @@ def register():
             for error in errors:
                 flash(error)
             return redirect(url_for('users.register'))
-        
-        # Create new user
+        # Create new user - DEBUG VERSION
         try:
             hashed = generate_password_hash(password)
             new_user = User(
-                username=username,
-                email=email,
-                password_hash=hashed,
-                role=Role(role),
-                company_name=company,
-                country=country,
-                phone=phone,
-                # New specialized fields (Request 1)
-                expertise_area=expertise_area,
-                job_title=job_title,
-                bio=bio,
-                website=website,
-                # Initial trust_score (Request 2)
-                trust_score_value=50  # Initial trust score
+                username=username, email=email, password_hash=hashed,
+                role=Role(role), company_name=company, country=country, phone=phone,
+                expertise_area=expertise_area, job_title=job_title, bio=bio, website=website,
+                trust_score_value=50,
+                is_email_verified=False,
+                registered_at=datetime.now(tehran_tz)
             )
 
             db.session.add(new_user)
             db.session.commit()
+            print(f"✅ User {new_user.username} created in DB")
 
             # Create user profile
             from models.user import UserProfile
@@ -355,18 +347,114 @@ def register():
                 profile = UserProfile(user=new_user)
                 db.session.add(profile)
                 db.session.commit()
+                print(f"✅ Profile created for {new_user.username}")
 
-            flash("Registration successful! Please log in.")
+            # ==========================================
+            # ✅ بخش ایمیل - با دیباگ دقیق
+            # ==========================================
+            print("📧 Starting email verification process...")
+
+            try:
+                # 1. تولید توکن
+                print("  → Generating token...")
+                from metisma.services.email_service import generate_verification_token
+                raw_token = generate_verification_token(new_user)
+                print(f"  → Token generated: {raw_token[:10]}...")
+
+                # 2. ارسال ایمیل
+                print("  → Sending email...")
+                from metisma.services.email_service import send_verification_email
+                email_sent, error_msg = send_verification_email(new_user, raw_token)
+
+                if email_sent:
+                    print(f"  → ✅ Email sent to {new_user.email}")
+                    flash("✅ Registration successful! Verification email sent.", "success")
+                else:
+                    print(f"  → ❌ Email failed: {error_msg}")
+                    flash(f"⚠️ Account created but email failed: {error_msg}", "warning")
+
+            except Exception as email_error:
+                # خطای اختصاصی بخش ایمیل
+                print(f"  → 💥 Email subsystem error: {email_error}")
+                import traceback
+                traceback.print_exc()
+                flash(f"⚠️ Account created but email system error: {str(email_error)}", "warning")
+
             return redirect(url_for('users.login'))
-            
+
         except Exception as e:
+            # خطای اصلی و نهایی
             db.session.rollback()
-            current_app.logger.error(f"Error creating user: {e}")
-            flash("An error occurred during registration.")
+            print(f"💥 CRITICAL ERROR in register: {e}")
+            import traceback
+            traceback.print_exc()  # چاپ کامل خطا در کنسول
+            flash(f"❌ Registration error: {str(e)}", "error")  # نمایش خطا به کاربر (فقط برای تست)
             return redirect(url_for('users.register'))
+        # Create new user
+        # try:
+        #     hashed = generate_password_hash(password)
+        #     new_user = User(
+        #         username=username,
+        #         email=email,
+        #         password_hash=hashed,
+        #         role=Role(role),
+        #         company_name=company,
+        #         country=country,
+        #         phone=phone,
+        #         # New specialized fields (Request 1)
+        #         expertise_area=expertise_area,
+        #         job_title=job_title,
+        #         bio=bio,
+        #         website=website,
+        #         # Initial trust_score (Request 2)
+        #         trust_score_value=50 , # Initial trust score
+        #         is_email_verified = False,            # ✅ پیش‌فرض: تایید نشده
+        #         registered_at = datetime.utcnow()     # ✅ زمان ثبت‌نام
+        #     )
+        #
+        #     db.session.add(new_user)
+        #     db.session.commit()
+        #
+        #     # Create user profile
+        #     from models.user import UserProfile
+        #     if not new_user.profile:
+        #         profile = UserProfile(user=new_user)
+        #         db.session.add(profile)
+        #         db.session.commit()
+        #
+        #
+        #     # ==========================================
+        #     # ✅ شروع سیستم تایید ایمیل
+        #     # ==========================================
+        #     # ۱. تولید توکن امن و ذخیره در دیتابیس (توسط کلاس EmailVerificationToken)
+        #     raw_token = generate_verification_token(new_user)
+        #
+        #     # ۲. ارسال ایمیل به کاربر
+        #     email_sent, error_msg = send_verification_email(new_user, raw_token)
+        #
+        #     if email_sent:
+        #         flash(
+        #             "✅ Registration successful! A verification email has been sent. Please check your inbox to activate your account.",
+        #             "success")
+        #     else:
+        #         # اگر ایمیل ارسال نشد، کاربر ثبت شده اما اخطار می‌دهیم
+        #         current_app.logger.error(f"Failed to send email to {new_user.email}: {error_msg}")
+        #         flash(
+        #             "⚠️ Registration successful! However, we couldn't send the verification email. Please use 'Resend Verification' or contact support.",
+        #             "warning")
+        #
+        #     return redirect(url_for('users.login'))
+        #     # ==========================================
+        #
+        #
+        # except Exception as e:
+        #     db.session.rollback()
+        #     current_app.logger.error(f"Error creating user: {e}")
+        #     flash("An error occurred during registration.")
+        #     return redirect(url_for('users.register'))
 
     # GET: Display smart registration form
-    return render_template('users/register_dynamic.html', roles=Role)
+    return render_template('users/register.html', roles=Role)
 
 
 
@@ -1485,3 +1573,121 @@ def notify_admin_of_new_request(req):
     except Exception as e:
         current_app.logger.error(f"Error sending admin notification: {e}")
         # Don't raise exception - this is a non-critical operation
+
+
+# routes/api.py
+from flask import Blueprint, request, jsonify, current_app
+from models import User
+
+
+api_bp = Blueprint('api', __name__, url_prefix='/api')
+
+
+@api_bp.route('/check-availability', methods=['GET'])
+def check_availability():
+    """Real-time availability check - ALWAYS returns JSON"""
+
+    # دریافت پارامترها با دیباگ لاگ
+    field = request.args.get('field')
+    value = request.args.get('value', '').strip()
+
+    current_app.logger.debug(f'Check availability: field={field}, value={value}')
+
+    # اعتبارسنجی فیلد
+    valid_fields = ['username', 'email', 'phone']
+    if not field or field not in valid_fields:
+        current_app.logger.warning(f'Invalid field parameter: {field}')
+        return jsonify({
+            'error': f'Invalid field. Must be one of: {valid_fields}',
+            'available': True  # Fail-safe: اجازه ادامه می‌دهیم
+        }), 400
+
+    if not value or len(value) < 3:
+        return jsonify({'available': True, 'message': 'Too short to check'}), 200
+
+    try:
+        # نرمال‌سازی مقدار
+        if field == 'phone':
+            value = ''.join(filter(str.isdigit, value)).lstrip('0')
+            if not value:
+                return jsonify({'available': True}), 200
+
+        if field in ['email', 'username']:
+            value = value.lower()
+
+        # کوئری دیتابیس
+        existing = User.query.filter(
+            getattr(User, field) == value
+        ).first()
+
+        return jsonify({
+            'available': existing is None,
+            'message': 'Available' if existing is None else f'{field} already taken'
+        }), 200
+
+    except Exception as e:
+        current_app.logger.error(f'Availability check error: {str(e)}', exc_info=True)
+        # در صورت خطا، اجازه می‌دهیم فرم ارسال شود و سرور در submit نهایی چک کند
+        return jsonify({
+            'available': True,
+            'warning': 'Could not verify, will check on submit'
+        }), 200
+
+
+@users_bp.route('/verify-email/<token>')
+def verify_email(token):
+    """بررسی توکن و فعال‌سازی حساب کاربری"""
+    # 1. اعتبارسنجی توکن (چک کردن هش و تاریخ انقضا)
+    user, error_msg = verify_email_token(token)
+
+    if not user:
+        flash(f"❌ {error_msg}", "error")
+        return redirect(url_for('users.resend_verification'))
+
+    # 2. اگر قبلاً تایید شده
+    if user.is_email_verified:
+        flash("✅ Your email is already verified. You can login.", "success")
+        return redirect(url_for('users.login'))
+
+    # 3. تایید کاربر
+    user.is_email_verified = True
+
+    # 4. علامت‌گذاری توکن به عنوان استفاده شده
+    import hashlib
+    token_hash = hashlib.sha256(token.encode()).hexdigest()
+    token_record = EmailVerificationToken.query.filter_by(token=token_hash).first()
+    if token_record:
+        token_record.mark_as_used()
+        db.session.commit()
+
+    flash("🎉 Email verified successfully! Welcome to Metisma.", "success")
+    return redirect(url_for('users.login'))
+
+
+@users_bp.route('/resend-verification', methods=['GET', 'POST'])
+def resend_verification():
+    """ارسال مجدد ایمیل تایید"""
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            flash("No account found with this email.", "error")
+            return redirect(url_for('users.resend_verification'))
+
+        if user.is_email_verified:
+            flash("✅ Your email is already verified.", "success")
+            return redirect(url_for('users.login'))
+
+        # تولید توکن جدید و ارسال
+        raw_token = generate_verification_token(user)
+        success, error = send_verification_email(user, raw_token)
+
+        if success:
+            flash("📧 New verification email sent! Please check your inbox.", "success")
+        else:
+            flash(f"⚠️ Failed to send email: {error}", "error")
+
+        return redirect(url_for('users.login'))
+
+    return render_template('users/email/resend_form.html')  # یک تمپلیت ساده برای گرفتن ایمیل

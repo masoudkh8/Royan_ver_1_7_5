@@ -2,7 +2,7 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
-from routes.users.auth import verify_phone, verify_email
+from routes.users.auth import verify_phone
 import click
 from flask import Flask, redirect, url_for, request, session, jsonify, g
 from flask_babel import Babel, gettext
@@ -23,6 +23,7 @@ from extensions import mail, cache, limiter, babel
 from flask_socketio import SocketIO, emit
 from datetime import datetime
 import time
+from routes.users.routes import api_bp
 import eventlet
 from eventlet import wsgi
 
@@ -60,7 +61,7 @@ def setup_logging(app):
         if not os.path.exists('logs'):
             os.mkdir('logs')
         
-        file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=10)
+        file_handler = RotatingFileHandler('logs/app.log', maxBytes=10240, backupCount=3 , delay=True)
         file_handler.setFormatter(logging.Formatter(
             '{"timestamp": "%(asctime)s", "level": "%(levelname)s", "message": "%(message)s", '
             '"module": "%(module)s", "lineno": %(lineno)d}'
@@ -463,7 +464,8 @@ def create_app():
     app.register_blueprint(exhibition_bp)
     app.register_blueprint(trading_bp)
     app.register_blueprint(language_bp, url_prefix='/language')
-    
+
+    app.register_blueprint(api_bp)
     init_api_docs(app)
 
     @app.cli.command("create-admin")
