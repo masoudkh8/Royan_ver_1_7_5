@@ -261,7 +261,7 @@ def forgot_password():
         email = request.form.get('email')
         
         if not email:
-            flash("❌ لطفاً ایمیل خود را وارد کنید.", "error")
+            flash("❌ Please enter your email.", "error")
             return redirect(url_for('users.forgot_password'))
         
         user = User.query.filter_by(email=email).first()
@@ -279,7 +279,7 @@ def forgot_password():
             reset_url = url_for('users.reset_password', token=token, _external=True)
             
             msg = Message(
-                subject='بازیابی رمز عبور متیسما',
+                subject='Metisma Password Recovery',
                 recipients=[user.email],
                 html=render_template('email/password_reset.html',
                                    user=user, 
@@ -291,7 +291,7 @@ def forgot_password():
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='password_reset_requested',
-                    description='درخواست بازیابی رمز عبور',
+                    description='Request Password Recovery',
                     request=request,
                     status='success'
                 )
@@ -300,12 +300,12 @@ def forgot_password():
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='password_reset_requested',
-                    description=f'خطا در ارسال ایمیل: {str(e)}',
+                    description='of Error sending email: {str(e)}',
                     request=request,
                     status='failed'
                 )
         
-        flash("✅ اگر ایمیل شما در سیستم ثبت شده باشد، لینک بازیابی برای شما ارسال خواهد شد.", "info")
+        flash("✅ If your email is registered in the system, a recovery link will be sent to you.", "info")
         return redirect(url_for('users.login'))
     
     return render_template('users/forgot_password.html')
@@ -323,12 +323,12 @@ def reset_password(token):
     ).first()
     
     if not reset_token or not reset_token.is_valid():
-        flash("❌ لینک بازیابی نامعتبر است یا منقضی شده است.", "error")
+        flash("❌ The recovery link is invalid or expired.", "error")
         return redirect(url_for('users.forgot_password'))
     
     user = User.query.get(reset_token.user_id)
     if not user:
-        flash("❌ کاربر یافت نشد.", "error")
+        flash("❌ User not found.", "error")
         return redirect(url_for('users.login'))
     
     if request.method == 'POST':
@@ -336,11 +336,11 @@ def reset_password(token):
         confirm_password = request.form.get('confirm_password')
         
         if not password or len(password) < 8:
-            flash("❌ رمز عبور باید حداقل ۸ کاراکتر باشد.", "error")
+            flash("❌ Password must be at least 8 characters long.", "error")
             return redirect(url_for('users.reset_password', token=token))
         
         if password != confirm_password:
-            flash("❌ رمز عبور و تکرار آن مطابقت ندارند.", "error")
+            flash("❌ Password and repeat do not match.", "error")
             return redirect(url_for('users.reset_password', token=token))
         
         # بررسی تاریخچه رمز عبور
@@ -387,7 +387,7 @@ def reset_password(token):
         # خروج از تمام نشست‌ها به جز نشست فعلی
         LoginSession.logout_all_sessions(user.id)
         
-        flash("✅ رمز عبور شما با موفقیت تغییر کرد. لطفاً وارد شوید.", "success")
+        flash("✅ Your password has been changed successfully. Please log in.", "success")
         return redirect(url_for('users.login'))
     
     return render_template('users/reset_password.html', token=token, user=user)
@@ -402,7 +402,7 @@ import pyotp
 def enable_2fa():
     """فعال‌سازی احراز هویت دو مرحله‌ای"""
     if current_user.two_factor_enabled:
-        flash("⚠️ احراز هویت دو مرحله‌ای قبلاً فعال شده است.", "warning")
+        flash("⚠️ Two-factor authentication is already enabled.", "warning")
         return redirect(url_for('users.profile'))
     
     if request.method == 'POST':
@@ -410,7 +410,7 @@ def enable_2fa():
         secret = session.get('2fa_secret')
         
         if not secret or not code:
-            flash("❌ اطلاعات ناقص است.", "error")
+            flash("❌ The information is incomplete.", "error")
             return redirect(url_for('users.enable_2fa'))
         
         totp = pyotp.TOTP(secret)
@@ -433,15 +433,15 @@ def enable_2fa():
             ActivityLog.log_activity(
                 user_id=current_user.id,
                 activity_type='2fa_enabled',
-                description='فعال‌سازی احراز هویت دو مرحله‌ای',
+                description='Enable two-factor authentication',
                 request=request,
                 status='success'
             )
-            
-            flash("✅ احراز هویت دو مرحله‌ای فعال شد. کدهای پشتیبان را ذخیره کنید!", "success")
+
+            flash("✅ Two-factor authentication enabled. Save backup codes!", "success")
             return redirect(url_for('users.show_backup_codes'))
         else:
-            flash("❌ کد وارد شده معتبر نیست.", "error")
+            flash("❌ The code entered is not valid.", "error")
     
     # تولید secret جدید
     secret = pyotp.random_base32()
@@ -462,7 +462,7 @@ def show_backup_codes():
     """نمایش کدهای پشتیبان"""
     backup_codes = session.get('backup_codes')
     if not backup_codes:
-        flash("⚠️ کدهای پشتیبان یافت نشدند.", "warning")
+        flash("⚠️ No backup codes found.", "warning")
         return redirect(url_for('users.profile'))
     
     return render_template('users/show_backup_codes.html', codes=backup_codes)
@@ -473,7 +473,7 @@ def show_backup_codes():
 def disable_2fa():
     """غیرفعال‌سازی احراز هویت دو مرحله‌ای"""
     if not current_user.two_factor_enabled:
-        flash("⚠️ احراز هویت دو مرحله‌ای فعال نیست.", "warning")
+        flash("⚠️ Two-factor authentication is not enabled.", "warning")
         return redirect(url_for('users.profile'))
     
     code = request.form.get('code')
@@ -504,14 +504,14 @@ def disable_2fa():
         ActivityLog.log_activity(
             user_id=current_user.id,
             activity_type='2fa_disabled',
-            description='غیرفعال‌سازی احراز هویت دو مرحله‌ای',
+            description='Disable two-factor authentication',
             request=request,
             status='success'
         )
-        
-        flash("✅ احراز هویت دو مرحله‌ای غیرفعال شد.", "success")
+
+        flash("✅ Two-factor authentication disabled.", "success")
     else:
-        flash("❌ کد وارد شده معتبر نیست.", "error")
+        flash("❌ The code entered is not valid.", "error")
     
     return redirect(url_for('users.profile'))
 
@@ -548,9 +548,9 @@ def revoke_session(session_id):
             request=request,
             status='success'
         )
-        flash("✅ نشست با موفقیت لغو شد.", "success")
+        flash("✅ Session successfully canceled.", "success")
     else:
-        flash("❌ نشست یافت نشد.", "error")
+        flash("❌ Session not found.", "error")
     
     return redirect(url_for('users.manage_sessions'))
 
@@ -564,12 +564,12 @@ def revoke_all_sessions():
     ActivityLog.log_activity(
         user_id=current_user.id,
         activity_type='all_sessions_revoked',
-        description='لغو تمام نشست‌ها',
+        description='Cancel all sessions',
         request=request,
         status='success'
     )
-    
-    flash("✅ تمام نشست‌ها لغو شدند.", "success")
+
+    flash("✅ All sessions have been canceled.", "success")
     return redirect(url_for('users.manage_sessions'))
 
 

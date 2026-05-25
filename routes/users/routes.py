@@ -58,11 +58,11 @@ def role_required(*roles):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not current_user.is_authenticated:
-                flash("لطفاً ابتدا وارد شوید.", "error")
+                flash("Please log in first.", "error")
                 return redirect(url_for('users.login'))
             
             if current_user.role.value not in roles:
-                flash("دسترسی غیرمجاز. این بخش مخصوص نقش‌های خاصی است.", "error")
+                flash("Unauthorized access. This section is for specific roles.", "error")
                 return redirect(url_for('users.profile'))
             
             return f(*args, **kwargs)
@@ -84,17 +84,17 @@ def allowed_file(filename):
 def validate_file(file, image_only=False):
     """اعتبارسنجی کامل فایل آپلود شده"""
     if not file or file.filename == '':
-        return False, "فایلی انتخاب نشده است"
+        return False, "No file selected."
     
     # Determine allowed extensions based on type
     if image_only:
         allowed_exts = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
         max_size = current_app.config.get('MAX_IMAGE_SIZE', 5 * 1024 * 1024)
-        error_msg = "نوع فایل مجاز نیست (فقط JPG, PNG, GIF, WEBP)"
+        error_msg = "File type not allowed (JPG, PNG, GIF, WEBP only)"
     else:
         allowed_exts = ALLOWED_EXTENSIONS
         max_size = MAX_FILE_SIZE
-        error_msg = "نوع فایل مجاز نیست (فقط PDF, PNG, JPG)"
+        error_msg = "File type not allowed (PDF, PNG, JPG only)"
     
     if '.' not in file.filename or file.filename.rsplit('.', 1)[1].lower() not in allowed_exts:
         return False, error_msg
@@ -106,7 +106,7 @@ def validate_file(file, image_only=False):
     
     if file_size > max_size:
         size_mb = max_size / (1024 * 1024)
-        return False, f"حجم فایل نباید بیشتر از {size_mb:.0f}MB باشد"
+        return False, f"File size must not exceed {size_mb:.0f}MB"
     
     return True, ""
 
@@ -187,7 +187,7 @@ def create_first_admin():
 @users_bp.route('/create_first_admin', methods=['GET', 'POST'])
 def create_first_admin():
     if User.query.filter_by(role=Role.ADMIN, is_active=True).first():
-        flash("قبلاً یک ادمین وجود دارد.")
+        flash("There is already an admin.")
         return redirect(url_for('users.login'))
 
     if request.method == 'POST':
@@ -196,11 +196,11 @@ def create_first_admin():
         password = request.form['password']
 
         if User.query.filter_by(username=username, is_active=True).first():
-            flash("❌ نام کاربری قبلاً گرفته شده.")
+            flash("❌ Username already taken.")
             return redirect(url_for('users.register'))
 
         if User.query.filter_by(email=email, is_active=True).first():
-            flash("❌ ایمیل قبلاً استفاده شده.")
+            flash("❌ Email has already been used.")
             return redirect(url_for('users.register'))
 
         from werkzeug.security import generate_password_hash
@@ -216,7 +216,7 @@ def create_first_admin():
 
         db.session.add(user)
         db.session.commit()
-        flash("ادمین اول ایجاد شد.")
+        flash("The first admin was created.")
         return redirect(url_for('admin.login'))
 
     # ✅ Generate & inject CSRF token
@@ -224,10 +224,10 @@ def create_first_admin():
     return f'''
     <form method="post">
         <input type="hidden" name="csrf_token" value="{csrf_token}">
-        <input name="username" placeholder="نام کاربری" required><br>
-        <input name="email" type="email" placeholder="ایمیل" required><br>
-        <input name="password" type="password" placeholder="رمز عبور" required><br>
-        <button type="submit">ایجاد ادمین</button>
+        <input name="username" placeholder="username" required><br>
+        <input name="email" type="email" placeholder="email" required><br>
+        <input name="password" type="password" placeholder="password" required><br>
+        <button type="submit">create admin</button>
     </form>
     '''
 
@@ -392,70 +392,7 @@ def register():
             traceback.print_exc()  # چاپ کامل خطا در کنسول
             flash(f"❌ Registration error: {str(e)}", "error")  # نمایش خطا به کاربر (فقط برای تست)
             return redirect(url_for('users.register'))
-        # Create new user
-        # try:
-        #     hashed = generate_password_hash(password)
-        #     new_user = User(
-        #         username=username,
-        #         email=email,
-        #         password_hash=hashed,
-        #         role=Role(role),
-        #         company_name=company,
-        #         country=country,
-        #         phone=phone,
-        #         # New specialized fields (Request 1)
-        #         expertise_area=expertise_area,
-        #         job_title=job_title,
-        #         bio=bio,
-        #         website=website,
-        #         # Initial trust_score (Request 2)
-        #         trust_score_value=50 , # Initial trust score
-        #         is_email_verified = False,            # ✅ پیش‌فرض: تایید نشده
-        #         registered_at = datetime.utcnow()     # ✅ زمان ثبت‌نام
-        #     )
-        #
-        #     db.session.add(new_user)
-        #     db.session.commit()
-        #
-        #     # Create user profile
-        #     from models.user import UserProfile
-        #     if not new_user.profile:
-        #         profile = UserProfile(user=new_user)
-        #         db.session.add(profile)
-        #         db.session.commit()
-        #
-        #
-        #     # ==========================================
-        #     # ✅ شروع سیستم تایید ایمیل
-        #     # ==========================================
-        #     # ۱. تولید توکن امن و ذخیره در دیتابیس (توسط کلاس EmailVerificationToken)
-        #     raw_token = generate_verification_token(new_user)
-        #
-        #     # ۲. ارسال ایمیل به کاربر
-        #     email_sent, error_msg = send_verification_email(new_user, raw_token)
-        #
-        #     if email_sent:
-        #         flash(
-        #             "✅ Registration successful! A verification email has been sent. Please check your inbox to activate your account.",
-        #             "success")
-        #     else:
-        #         # اگر ایمیل ارسال نشد، کاربر ثبت شده اما اخطار می‌دهیم
-        #         current_app.logger.error(f"Failed to send email to {new_user.email}: {error_msg}")
-        #         flash(
-        #             "⚠️ Registration successful! However, we couldn't send the verification email. Please use 'Resend Verification' or contact support.",
-        #             "warning")
-        #
-        #     return redirect(url_for('users.login'))
-        #     # ==========================================
-        #
-        #
-        # except Exception as e:
-        #     db.session.rollback()
-        #     current_app.logger.error(f"Error creating user: {e}")
-        #     flash("An error occurred during registration.")
-        #     return redirect(url_for('users.register'))
 
-    # GET: Display smart registration form
     return render_template('users/register.html', roles=Role)
 
 
@@ -468,8 +405,8 @@ def register():
 @limiter.limit("10 per minute")  # Rate limiting برای جلوگیری از brute force
 def login():
 
-    if current_user.is_authenticated:
-        return redirect(url_for('users.profile'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('users.profile'))
 
     if request.method == 'POST':
         email = request.form['email']
@@ -481,11 +418,11 @@ def login():
         # بررسی قفل بودن حساب
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
-                flash(f"❌ حساب شما تا {user.locked_until.strftime('%Y-%m-%d %H:%M')} به دلیل تلاش‌های ناموفق قفل است.")
+                flash(f"❌ Your account is locked until {user.locked_until.strftime('%Y-%m-%d %H:%M')} due to failed attempts.")
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='login_blocked',
-                    description='حساب کاربری به دلیل تلاش‌های ناموفق قفل است',
+                    description='Account locked due to failed attempts',
                     request=request,
                     success=False,
                     failure_reason='account_locked'
@@ -498,6 +435,22 @@ def login():
                 db.session.commit()
 
         if user and check_password_hash(user.password_hash, password):
+
+            # ✅ بررسی تأیید ایمیل قبل از ورود
+            if not user.is_email_verified:
+                flash("❌ Please verify your email before logging in. Check your inbox for the verification link.",
+                      "warning")
+                ActivityLog.log_activity(
+                    user_id=user.id,
+                    activity_type='login_blocked',
+                    description='Login blocked - Email not verified',
+                    request=request,
+                    success=False,
+                    failure_reason='email_not_verified'
+                )
+                return render_template('users/login.html')
+
+
             # ورود موفق - ریست کردن تلاش‌های ناموفق
             if user.failed_login_attempts > 0:
                 user.failed_login_attempts = 0
@@ -508,7 +461,7 @@ def login():
             ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login',
-                description='ورود موفق به سیستم',
+                description='Successful login',
                 request=request,
                 success=True
             )
@@ -527,7 +480,7 @@ def login():
             response = redirect(url_for('users.profile'))
             response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
             
-            flash("✅ خوش آمدید!")
+            flash("✅ Welcome!")
             return response
         else:
             # ورود ناموفق
@@ -542,30 +495,30 @@ def login():
                     ActivityLog.log_activity(
                         user_id=user.id,
                         activity_type='account_locked',
-                        description='حساب به دلیل 5 تلاش ناموفق قفل شد',
+                        description='Account locked due to 5 failed attempts',
                         request=request,
                         success=False,
                         failure_reason='too_many_failed_attempts'
                     )
                     
-                    flash("❌ حساب شما به دلیل تلاش‌های ناموفق زیاد به مدت 15 دقیقه قفل شد.")
+                    flash("❌ Your account has been locked for 15 minutes due to too many failed attempts.")
                 else:
                     db.session.commit()
                     
                     ActivityLog.log_activity(
                         user_id=user.id,
                         activity_type='login_failed',
-                        description=f'تلاش ناموفق برای ورود ({user.failed_login_attempts}/5)',
+                        description=f'Failed login attempt ({user.failed_login_attempts}/5)',
                         request=request,
                         success=False,
                         failure_reason='invalid_password'
                     )
                     
                     remaining_attempts = 5 - user.failed_login_attempts
-                    flash(f"❌ ایمیل یا رمز عبور نادرست است. {remaining_attempts} تلاش دیگر تا قفل شدن حساب.")
+                    flash(f"❌ Incorrect email or password. {remaining_attempts} more attempts before account is locked.")
             else:
                 # کاربر وجود ندارد - برای امنیت پیام کلی نمایش می‌دهیم
-                flash("❌ ایمیل یا رمز عبور نادرست است.")
+                flash("❌ Incorrect email or password.")
     
     support_user = User.query.filter_by(username='masoudkh', is_active=True).first()
     return render_template('users/login.html', support_user=support_user)
@@ -663,22 +616,22 @@ def change_password():
     
     # بررسی رمز عبور فعلی
     if not check_password_hash(current_user.password_hash, current_password):
-        flash("❌ رمز عبور فعلی نادرست است.", "error")
+        flash("❌ The current password is incorrect.", "error")
         return redirect(url_for('users.account_settings'))
     
     # اعتبارسنجی رمز عبور جدید
     if len(new_password) < 8:
-        flash("❌ رمز عبور جدید باید حداقل ۸ کاراکتر باشد.", "error")
+        flash("❌ New password must be at least 8 characters long.", "error")
         return redirect(url_for('users.account_settings'))
     
     # بررسی تطابق رمز جدید و تکرار آن
     if new_password != confirm_password:
-        flash("❌ رمز عبور جدید و تکرار آن مطابقت ندارند.", "error")
+        flash("❌ New password and repeat password do not match.", "error")
         return redirect(url_for('users.account_settings'))
     
     # بررسی تکراری نبودن رمز عبور جدید با رمز قبلی
     if check_password_hash(current_user.password_hash, new_password):
-        flash("⚠️ رمز عبور جدید نباید مشابه رمز عبور قبلی باشد.", "warning")
+        flash("⚠️ New password must not be the same as previous password.", "warning")
         return redirect(url_for('users.account_settings'))
     
     try:
@@ -688,13 +641,13 @@ def change_password():
         
         # لاگ عملیات برای امنیت
         current_app.logger.info(f"Password changed for user {current_user.id} ({current_user.email})")
-        
-        flash("✅ رمز عبور شما با موفقیت تغییر یافت.", "success")
+
+        flash("✅ Your password has been changed successfully.", "success")
         return redirect(url_for('users.account_settings'))
     except Exception as e:
         db.session.rollback()
         current_app.logger.error(f"Error changing password for user {current_user.id}: {e}")
-        flash("❌ خطایی در تغییر رمز عبور رخ داد. لطفاً مجدداً تلاش کنید.", "error")
+        flash("❌ An error occurred while changing the password. Please try again.", "error")
         return redirect(url_for('users.account_settings'))
 
 
@@ -709,7 +662,7 @@ def delete_account():
     # بررسی وجود چک‌باکس تأیید
     confirmation = request.form.get('confirmation_checkbox')
     if not confirmation:
-        flash("⚠️ لطفاً برای حذف حساب، چک‌باکس تأیید را علامت بزنید.", "warning")
+        flash("⚠️ Please check the confirmation checkbox to delete the account.", "warning")
         return redirect(url_for('users.account_settings'))
     
     user_id = current_user.id
@@ -735,10 +688,10 @@ def delete_account():
             from models.notification import Notification
             admin_notification = Notification(
                 user_id=None,  # نوتیفیکیشن سیستمی
-                title="حذف حساب کاربری",
-                message=f"حساب کاربری {username} ({user_email}) حذف شد.",
-                category="admin_alert",
-                is_read=False
+                title = "Delete Account",
+                message = f"The account {username} ({user_email}) has been deleted.",
+                category = "admin_alert",
+                is_read = False
             )
             db.session.add(admin_notification)
             db.session.commit()
@@ -746,13 +699,13 @@ def delete_account():
             db.session.rollback()
             current_app.logger.error(f"Error creating admin notification: {notif_error}")
         
-        flash("🗑️ حساب کاربری شما با موفقیت حذف شد. از همکاری شما متشکریم.", "success")
+        flash("🗑️ Your account has been successfully deleted. Thank you for your cooperation.", "success")
         return redirect(url_for('users.register'))
         
     except Exception as e:
         db.session.rollback()
         current_app.logger.error(f"Error deleting account for user {user_id}: {e}")
-        flash("❌ خطایی در حذف حساب رخ داد. لطفاً با پشتیبانی تماس بگیرید.", "error")
+        flash("❌ An error occurred while deleting the account. Please contact support.", "error")
         return redirect(url_for('users.account_settings'))
 
 
@@ -766,7 +719,7 @@ def logout():
     ActivityLog.log_activity(
         user_id=current_user.id,
         activity_type='logout',
-        description='خروج از سیستم',
+        description='Logout',
         request=request,
         success=True
     )
@@ -781,7 +734,7 @@ def logout():
             login_session.revoke()
     
     logout_user()
-    flash("👋 شما با موفقیت خارج شدید.")
+    flash("👋 You have successfully logged out.")
     return redirect(url_for('users.login'))
 
 
@@ -817,15 +770,15 @@ def profile():
     pending_tasks = []
     if not current_user.is_verified and verification_docs:
         pending_tasks.append({
-            'title': 'بررسی مدارک تأیید هویت',
-            'description': 'مدارک شما در حال بررسی توسط ادمین است',
+            'title': 'Checking Identity Verification Documents',
+            'description': 'Your documents are being reviewed by the admin',
             'status': 'pending',
             'icon': 'document'
         })
     elif not current_user.is_verified and not verification_docs:
         pending_tasks.append({
-            'title': 'آپلود مدارک تأیید هویت',
-            'description': 'برای افزایش امتیاز اعتماد، مدارک خود را آپلود کنید',
+            'title': 'Upload Identity Verification Documents',
+            'description': 'Upload your documents to increase your trust score',
             'status': 'action_required',
             'action_url': url_for('users.upload_documents'),
             'icon': 'upload'
@@ -1508,10 +1461,10 @@ def upload_documents():
             req.docs_verified = True
             db.session.commit()
 
-            flash("✅ مدارک با موفقیت آپلود شدند.", "success")
+            flash("✅ Documents uploaded successfully.", "success")
             return redirect(url_for('users.make_payment'))
         else:
-            flash("❌ هیچ فایلی برای آپلود دریافت نشد. لطفاً فایل‌ها را انتخاب و مجدداً تلاش کنید.", "error")
+            flash("❌ No files were found to upload. Please select files and try again.", "error")
 
     return render_template('users/upload_documents.html', req=req)
 

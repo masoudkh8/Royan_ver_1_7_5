@@ -18,19 +18,18 @@ def verify_email_token(token_string):
         # بازیابی ایمیل از توکن
         email = serializer.loads(token_string, salt='email-verify-salt', max_age=86400) # اعتبار ۲۴ ساعت
         user = User.query.filter_by(email=email).first()
-        
+
         if not user:
-            return None, "کاربر یافت نشد."
+            return None, "User not found."
         return user, None
-        
+
     except SignatureExpired:
-        return None, "توکن منقضی شده است. لطفاً از لینک ارسال مجدد استفاده کنید."
+        return None, "Token expired. Please use the resend link."
     except BadSignature:
-        return None, "توکن نامعتبر یا دستکاری شده است."
+        return None, "Token is invalid or tampered with."
     except Exception as e:
         current_app.logger.error(f"Token verification error: {e}")
-        return None, "خطا در اعتبارسنجی توکن."
-
+        return None, "Token verification error."
 def send_verification_email(user, token_string):
     """قالب ایمیل را رندر و ارسال می‌کند"""
     verify_url = url_for('users.verify_email_route', token=token_string, _external=True)
