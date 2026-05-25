@@ -156,8 +156,14 @@ def show_verify_email_page():  # ← تغییر: نام تابع جدید
     print('start email process')
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    if not req or not req.phone_verified:
-        return redirect(url_for('users.verify_phone'))
+    # اگر درخواستی وجود ندارد، کاربر باید ابتدا فرآیند را شروع کند
+    if not req:
+        flash("Please start the premium verification process first.", "error")
+        return redirect(url_for('users.upgrade_to_premium'))
+
+    # حذف شرط phone_verified - مستقیماً به تأیید ایمیل می‌رویم
+    # if not req or not req.phone_verified:
+    #     return redirect(url_for('users.verify_phone'))
 
     if req.email_verified:
         print('req.email_verified')

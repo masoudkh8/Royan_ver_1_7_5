@@ -1403,13 +1403,35 @@ def upgrade_to_premium():
 @users_bp.route('/start_upgrade', methods=['POST'])
 @login_required
 def start_upgrade():
-    # همیشه یک درخواست جدید ایجاد می‌کنیم
-    req = PremiumRequest(user_id=current_user.id)
+    # حذف احراز موبایل - مستقیماً به آپلود مدارک می‌رویم
+    
+    # بررسی اینکه آیا کاربر قبلاً درخواست تأیید شده دارد
+    existing_approved = PremiumRequest.query.filter_by(
+        user_id=current_user.id, 
+        status='approved'
+    ).first()
+    
+    if existing_approved:
+        flash("You are already a Premium member. Your documents have been verified.", "info")
+        return redirect(url_for('users.view_my_documents'))
+    
+    # بررسی درخواست در حال انتظار
+    existing_pending = PremiumRequest.query.filter_by(
+        user_id=current_user.id, 
+        status='pending'
+    ).first()
+    
+    if existing_pending:
+        flash("You already have a pending verification request.", "info")
+        return redirect(url_for('users.upgrade_to_premium'))
+    
+    # ایجاد درخواست جدید فقط اگر هیچ درخواست فعالی وجود ندارد
+    req = PremiumRequest(user_id=current_user.id, requested_phone=current_user.phone or '')
     db.session.add(req)
     db.session.commit()
 
-    flash("The upgrade process has started. Please verify your mobile number.")
-    return redirect(url_for('users.verify_phone'))
+    flash("The upgrade process has started. Please upload your documents.")
+    return redirect(url_for('users.upload_documents'))
 
 # آپلود مدارک برای Premium
 @users_bp.route('/upload_documents', methods=['GET', 'POST'])
@@ -1417,15 +1439,26 @@ def start_upgrade():
 def upload_documents():
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    # if not req or not req.email_verified:
-    #     flash("لطفاً ابتدا ایمیل خود را تأیید کنید.", "error")
-    #     return redirect(url_for('users.verify_email'))
+    # اگر درخواستی وجود ندارد، کاربر باید ابتدا فرآیند را شروع کند
+    if not req:
+        flash("Please start the premium verification process first.", "error")
+        return redirect(url_for('users.upgrade_to_premium'))
 
-    # if req.docs_verified:
-    #     flash("مدارک شما قبلاً تأیید شده است.", "success")
-    #     return redirect(url_for('users.make_payment'))
+    # اگر کاربر قبلاً پریمیوم شده (تأیید نهایی)، نمی‌تواند مدارک را تغییر دهد
+    if req.status == 'approved':
+        flash("Your documents have been verified. You cannot modify them.", "info")
+        return redirect(url_for('users.view_my_documents'))
 
-    upload_folder = 'static/uploads/documents/'
+    # اگر مدارک قبلاً آپلود شده و در حال بررسی است
+    if req.passport_file and req.license_file:
+        if req.status == 'pending':
+            flash("Your documents are under review by admin.", "info")
+            return redirect(url_for('users.view_my_documents'))
+        else:
+            # هنوز تأیید نشده، اجازه آپلود مجدد
+            pass
+
+    upload_folder = f'static/uploads/documents/user_{current_user.id}/'
     os.makedirs(upload_folder, exist_ok=True)
 
     if request.method == 'POST':
@@ -1439,7 +1472,7 @@ def upload_documents():
                 flash(f"❌ {error_msg}", "error")
                 return redirect(url_for('users.upload_documents'))
 
-            filename = secure_filename(f"passport_{current_user.id}_{passport_file.filename}")
+            filename = secure_filename(f"passport_{passport_file.filename}")
             passport_file.save(os.path.join(upload_folder, filename))
             req.passport_file = filename
             files_uploaded = True
@@ -1452,7 +1485,7 @@ def upload_documents():
                 flash(f"❌ {error_msg}", "error")
                 return redirect(url_for('users.upload_documents'))
 
-            filename = secure_filename(f"license_{current_user.id}_{license_file.filename}")
+            filename = secure_filename(f"license_{license_file.filename}")
             license_file.save(os.path.join(upload_folder, filename))
             req.license_file = filename
             files_uploaded = True
@@ -1468,14 +1501,28 @@ def upload_documents():
 
     return render_template('users/upload_documents.html', req=req)
 
+
+# مشاهده مدارک توسط کاربر (فقط خواندنی بعد از تأیید)
+@users_bp.route('/my_documents')
+@login_required
+def view_my_documents():
+    req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
+    
+    if not req:
+        flash("No verification request found.", "error")
+        return redirect(url_for('users.upgrade_to_premium'))
+    
+    return render_template('users/my_documents.html', req=req)
+
 # پرداخت و آپلود رسید
 @users_bp.route('/make_payment', methods=['GET', 'POST'])
 @login_required
 def make_payment():
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-
-    if not req or not req.docs_verified:
+    # اگر درخواستی وجود ندارد یا مدارک آپلود نشده، کاربر باید ابتدا مدارک را آپلود کند
+    if not req or not (req.passport_file and req.license_file):
+        flash("Please upload your documents first.", "error")
         return redirect(url_for('users.upload_documents'))
 
     if req.payment_verified:

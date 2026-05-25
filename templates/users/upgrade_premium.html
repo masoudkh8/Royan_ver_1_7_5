@@ -27,10 +27,22 @@
                 <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Priority Support & Dedicated Account Manager</li>
                 <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Increased Trust Score & Credibility Badge</li>
             </ul>
-            <form method="POST" action="{{ url_for('users.start_upgrade') }}" class="inline">
+            
+            <!-- فرم شروع بدون نیاز به شماره تلفن -->
+            <form method="POST" action="{{ url_for('users.start_upgrade') }}" class="max-w-md mx-auto">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="mb-6 text-left bg-gray-50 dark:bg-dark-700/50 p-4 rounded-lg">
+                    <p class="text-sm text-gray-700 dark:text-slate-300 mb-2">
+                        <strong>Current Phone:</strong> {{ current_user.phone or 'Not set (set in profile)' }}
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-slate-400">
+                        Phone verification is temporarily disabled. Proceed with document upload.
+                    </p>
+                </div>
+                
                 <button type="submit" 
-                        class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-lg 
+                        class="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-lg 
                                hover:from-gold-light hover:to-gold transform hover:scale-105 active:scale-95 
                                transition-all duration-200 shadow-xl">
                     🚀 Start Premium Verification
@@ -56,59 +68,42 @@
             <!-- لیست مراحل -->
             <div class="space-y-4">
                 
-                <!-- مرحله ۱: موبایل -->
-                <div class="flex items-center gap-4 p-3 rounded-lg {% if req and req.phone_verified %}bg-green-50 dark:bg-green-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
-                    <div class="w-8 h-8 rounded-full flex items-center justify-center {% if req and req.phone_verified %}bg-green-500 text-white{% else %}bg-gray-200 dark:bg-dark-600 text-gray-600 dark:text-slate-400{% endif %}">
-                        1
-                    </div>
-                    <div class="flex-1">
-                        <p class="font-medium text-gray-900 dark:text-white">Verify Mobile Number</p>
-                    </div>
-                    {% if req and req.phone_verified %}
-                        <span class="text-green-600 dark:text-green-400 text-sm font-medium">✅ Done</span>
-                    {% else %}
-                        <a href="{{ url_for('users.verify_phone') }}" class="text-gold hover:text-gold-light text-sm font-medium">Complete →</a>
-                    {% endif %}
-                </div>
-
-                <!-- مرحله ۲: ایمیل -->
+                <!-- مرحله ۱: ایمیل (جابجا شده به اول) -->
                 <div class="flex items-center gap-4 p-3 rounded-lg {% if req and req.email_verified %}bg-green-50 dark:bg-green-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center {% if req and req.email_verified %}bg-green-500 text-white{% else %}bg-gray-200 dark:bg-dark-600 text-gray-600 dark:text-slate-400{% endif %}">
-                        2
+                        1
                     </div>
                     <div class="flex-1">
                         <p class="font-medium text-gray-900 dark:text-white">Verify Email</p>
                     </div>
                     {% if req and req.email_verified %}
                         <span class="text-green-600 dark:text-green-400 text-sm font-medium">✅ Done</span>
-                    {% elif req and req.phone_verified %}
-                        <a href="{{ url_for('users.verify_email') }}" class="text-gold hover:text-gold-light text-sm font-medium">Complete →</a>
                     {% else %}
-                        <span class="text-gray-400 text-xs">Step 1 Required</span>
+                        <a href="{{ url_for('users.verify_email') }}" class="text-gold hover:text-gold-light text-sm font-medium">Complete →</a>
                     {% endif %}
                 </div>
 
-                <!-- مرحله ۳: مدارک -->
+                <!-- مرحله ۲: مدارک -->
                 <div class="flex items-center gap-4 p-3 rounded-lg {% if req and req.passport_file and req.license_file %}bg-green-50 dark:bg-green-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center {% if req and req.passport_file and req.license_file %}bg-green-500 text-white{% else %}bg-gray-200 dark:bg-dark-600 text-gray-600 dark:text-slate-400{% endif %}">
-                        3
+                        2
                     </div>
                     <div class="flex-1">
                         <p class="font-medium text-gray-900 dark:text-white">Upload Documents (Passport & License)</p>
                     </div>
                     {% if req and req.passport_file and req.license_file %}
                         <span class="text-green-600 dark:text-green-400 text-sm font-medium">✅ Done</span>
-                    {% elif req and req.email_verified %}
+                    {% elif req %}
                         <a href="{{ url_for('users.upload_documents') }}" class="text-gold hover:text-gold-light text-sm font-medium">Complete →</a>
                     {% else %}
-                        <span class="text-gray-400 text-xs">Step 2 Required</span>
+                        <span class="text-gray-400 text-xs">Start Required</span>
                     {% endif %}
                 </div>
 
-                <!-- مرحله ۴: پرداخت -->
+                <!-- مرحله ۳: پرداخت -->
                 <div class="flex items-center gap-4 p-3 rounded-lg {% if req and req.payment_receipt %}bg-green-50 dark:bg-green-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center {% if req and req.payment_receipt %}bg-green-500 text-white{% else %}bg-gray-200 dark:bg-dark-600 text-gray-600 dark:text-slate-400{% endif %}">
-                        4
+                        3
                     </div>
                     <div class="flex-1">
                         <p class="font-medium text-gray-900 dark:text-white">Payment ($1,000 Annual Fee)</p>
@@ -118,14 +113,14 @@
                     {% elif req and req.passport_file and req.license_file %}
                         <a href="{{ url_for('users.make_payment') }}" class="text-gold hover:text-gold-light text-sm font-medium">Complete →</a>
                     {% else %}
-                        <span class="text-gray-400 text-xs">Step 3 Required</span>
+                        <span class="text-gray-400 text-xs">Step 2 Required</span>
                     {% endif %}
                 </div>
 
-                <!-- مرحله ۵: بررسی نهایی -->
+                <!-- مرحله ۴: بررسی نهایی -->
                 <div class="flex items-center gap-4 p-3 rounded-lg {% if req and req.status == 'approved' %}bg-green-50 dark:bg-green-900/20{% elif req and req.status == 'rejected' %}bg-red-50 dark:bg-red-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center {% if req and req.status == 'approved' %}bg-green-500 text-white{% elif req and req.status == 'rejected' %}bg-red-500 text-white{% else %}bg-gray-200 dark:bg-dark-600 text-gray-600 dark:text-slate-400{% endif %}">
-                        5
+                        4
                     </div>
                     <div class="flex-1">
                         <p class="font-medium text-gray-900 dark:text-white">Admin Review & Approval</p>
