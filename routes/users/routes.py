@@ -498,6 +498,19 @@ def login():
                 db.session.commit()
 
         if user and check_password_hash(user.password_hash, password):
+            # ✅ بررسی تأیید ایمیل قبل از ورود
+            if not user.is_email_verified:
+                flash("❌ Please verify your email before logging in. Check your inbox for the verification link.", "warning")
+                ActivityLog.log_activity(
+                    user_id=user.id,
+                    activity_type='login_blocked',
+                    description='Login blocked - Email not verified',
+                    request=request,
+                    success=False,
+                    failure_reason='email_not_verified'
+                )
+                return render_template('users/login.html')
+            
             # ورود موفق - ریست کردن تلاش‌های ناموفق
             if user.failed_login_attempts > 0:
                 user.failed_login_attempts = 0
