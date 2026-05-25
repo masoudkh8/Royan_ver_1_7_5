@@ -32,6 +32,7 @@
                 <thead class="bg-gray-50 dark:bg-dark-700/50 border-b border-gray-200 dark:border-dark-600">
                     <tr>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">User</th>
+                        <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Phone</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Status</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Submitted</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-right">Actions</th>
@@ -41,6 +42,7 @@
                     {% for req in requests %}
                     <tr class="hover:bg-gray-50 dark:hover:bg-dark-700/30 transition">
                         <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ req.user.username }}</td>
+                        <td class="px-4 py-3 text-gray-600 dark:text-slate-400 text-xs">{{ req.requested_phone or '—' }}</td>
                         <td class="px-4 py-3">
                             {% if req.status == 'pending' %}
                                 <span class="px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-medium">Pending ⏳</span>

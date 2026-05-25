@@ -30,6 +30,7 @@
                     <tr>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Username</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Email</th>
+                        <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Email Verified</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Role</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Premium</th>
                         <th class="px-4 py-3 font-semibold text-gray-700 dark:text-slate-300">Documents</th>
@@ -42,6 +43,18 @@
                     <tr class="hover:bg-gray-50 dark:hover:bg-dark-700/30 transition">
                         <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">{{ user.username }}</td>
                         <td class="px-4 py-3 text-gray-600 dark:text-slate-400">{{ user.email }}</td>
+                        <td class="px-4 py-3">
+                            {% if user.is_email_verified %}
+                                <span class="flex items-center gap-1 text-green-600 dark:text-green-400 font-medium text-xs">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Verified
+                                </span>
+                            {% else %}
+                                <span class="text-red-500 dark:text-red-400 text-xs">Not Verified</span>
+                            {% endif %}
+                        </td>
                         <td class="px-4 py-3"><span class="px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-slate-300">{{ user.role.value }}</span></td>
                         <td class="px-4 py-3">
                             {% if user.is_premium %}
