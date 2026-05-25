@@ -140,6 +140,10 @@ def change_user_role(user_id):
         # print(new_role)
         if new_role=="admin":
             user.is_premium=True
+            from models.user import MembershipTier
+            user.membership_tier = MembershipTier.VERIFIED
+            user.is_kyc_verified = True
+            user.premium_since = datetime.now(tehran_tz)
         db.session.commit()
         flash(f"✅ User role {user.username} changed to '{new_role}' .", "success")
     return redirect(url_for('admin.manage_users'))
@@ -177,9 +181,31 @@ def review_premium_request(req_id):
     if action == 'approve':
         req.status = 'approved'
         req.user.is_premium = True
-        flash(f"✅ User '{req.user.username}' Successfully promoted to special user.", "success")
+        # ارتقای لایه عضویت به VERIFIED (لایه ۲)
+        from models.user import MembershipTier
+        req.user.membership_tier = MembershipTier.VERIFIED
+        # تأیید KYC
+        req.user.is_kyc_verified = True
+        # افزایش امتیاز اعتماد (Trust Score)
+        req.user.trust_score_value = min(100, req.user.trust_score_value + 20)
+        # ثبت زمان پریمیوم شدن
+        req.user.premium_since = datetime.now(tehran_tz)
+        
+        # ذخیره مدارک در فیلد verification_documents
+        import json
+        docs = {
+            'passport': req.passport_file,
+            'license': req.license_file,
+            'payment_receipt': req.payment_receipt,
+            'verified_at': datetime.now(tehran_tz).isoformat()
+        }
+        req.user.verification_documents = json.dumps(docs)
+        
+        db.session.commit()
+        flash(f"✅ User '{req.user.username}' successfully promoted to Premium Level 1 (Verified). Trust Score increased by 20 points!", "success")
     elif action == 'reject':
         req.status = 'rejected'
+        db.session.commit()
         flash(f"❌ Upgrade Request for '{req.user.username}' rejected.", "warning")
     else:
         flash("⚠️ Invalid action.", "error")
@@ -198,6 +224,13 @@ def approve_premium(req_id):
     req = PremiumRequest.query.get_or_404(req_id)
     req.status = 'approved'
     req.user.is_premium = True
+    # ارتقای لایه عضویت به VERIFIED (لایه ۲)
+    from models.user import MembershipTier
+    req.user.membership_tier = MembershipTier.VERIFIED
+    # تأیید KYC
+    req.user.is_kyc_verified = True
+    # ثبت زمان پریمیوم شدن
+    req.user.premium_since = datetime.now(tehran_tz)
     db.session.commit()
 
     flash(f"✅ User '{req.user.username}' Successfully promoted to special user.", "success")
@@ -298,6 +331,12 @@ def view_all_documents():
 def verify_user_documents(user_id):
     user = User.query.get_or_404(user_id)
     user.is_verified = True
+    user.is_kyc_verified = True
+    
+    # اگر کاربر مدارک کامل دارد، لایه عضویت را ارتقا بده
+    from models.user import MembershipTier
+    if user.verification_documents and user.verification_documents != '[]':
+        user.membership_tier = MembershipTier.VERIFIED
     
     # ایجاد نوتیفیکیشن برای کاربر
     from models.notification import Notification
@@ -424,6 +463,14 @@ def toggle_premium(user_id):
 
     user = User.query.get_or_404(user_id)
     user.is_premium = not user.is_premium
+    
+    # اگر کاربر پریمیوم شد، لایه عضویت را ارتقا بده
+    if user.is_premium:
+        from models.user import MembershipTier
+        user.membership_tier = MembershipTier.VERIFIED
+        user.is_kyc_verified = True
+        user.premium_since = datetime.now(tehran_tz)
+    
     db.session.commit()
     
     if user.is_premium:
