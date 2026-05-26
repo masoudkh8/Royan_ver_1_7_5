@@ -118,6 +118,7 @@ def dashboard():
     داشبورد هوشمند که بر اساس نقش و مجوزهای کاربر، سرویس‌های مرتبط را نمایش می‌دهد.
     """
     from services.access_control import service_module_enabled
+    from models.notification import Notification
     
     # بررسی دسترسی به ماژول‌های مختلف
     modules = {
@@ -133,11 +134,25 @@ def dashboard():
     # دریافت آمارهای مرتبط بر اساس نقش
     stats = _get_user_stats(current_user)
     
+    # محاسبه تعداد اعلان‌های خوانده‌نشده
+    unread_notifications = Notification.query.filter_by(user_id=current_user.id, is_read=False).count()
+    
+    # تعیین وضعیت تأیید مدارک
+    import json
+    verification_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
+    document_status = 'not_uploaded'
+    if verification_docs:
+        document_status = 'pending'
+        if current_user.is_verified:
+            document_status = 'approved'
+    
     # ادغام داشبورد ماژولار در dashboard.html اصلی برای یکپارچگی
     return render_template('users/dashboard.html', 
                          modules=modules, 
                          stats=stats,
-                         user_role=current_user.role.value)
+                         user_role=current_user.role.value,
+                         unread_notifications=unread_notifications,
+                         document_status=document_status)
 
 
 def _get_user_stats(user):

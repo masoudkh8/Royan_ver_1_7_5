@@ -98,7 +98,7 @@ def create_order():
 │   └── permissions_routes.py    # Routeهای مدیریت مجوزها و داشبورد
 ├── templates/users/
 │   ├── manage_permissions.html  # فرم مدیریت مجوزها
-│   └── dashboard_modular.html   # داشبورد هوشمند
+│   └── dashboard.html           # داشبورد هوشمند (ادغام‌شده)
 └── docs/
     └── PERMISSION_SYSTEM_GUIDE.md  # این فایل
 ```

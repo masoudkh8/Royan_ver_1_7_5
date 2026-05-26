@@ -11,7 +11,7 @@
 | `/workspace/services/__init__.py` | ماژول خدمات با lazy loading |
 | `/workspace/routes/users/permissions_routes.py` | Routeهای مدیریت مجوزها و داشبورد هوشمند |
 | `/workspace/templates/users/manage_permissions.html` | فرم مدیریت مجوزها |
-| `/workspace/templates/users/dashboard_modular.html` | داشبورد هوشمند مبتنی بر مجوز |
+| `/workspace/templates/users/dashboard.html` | داشبورد هوشمند مبتنی بر مجوز (ادغام‌شده) |
 | `/workspace/models/user.py` | افزودن فیلد `custom_permissions` به UserProfile |
 | `/workspace/docs/PERMISSION_SYSTEM_GUIDE.md` | راهنمای کامل فارسی |
 | `/workspace/docs/MODULAR_PERMISSION_SYSTEM_SUMMARY.md` | این فایل |
@@ -156,7 +156,7 @@ def list_products():
 - 📖 [راهنمای کامل فارسی](./PERMISSION_SYSTEM_GUIDE.md)
 - 📄 [تعریف مجوزها](../services/permissions.py)
 - 🔐 [دکوریتورهای دسترسی](../services/access_control.py)
-- 🎨 [داشبورد هوشمند](../templates/users/dashboard_modular.html)
+- 🎨 [داشبورد هوشمند](../templates/users/dashboard.html)
 
 ---
 
