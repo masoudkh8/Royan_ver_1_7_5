@@ -38,18 +38,26 @@
             text-align: left;
         }
         
+        <!-- Inter Font for English (Google Fonts CDN with fallback) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <!-- Vazirmatn Font for Persian (Local files) -->
         @font-face {
             font-family: 'Vazirmatn';
-            src: url('static/fonts/Vazirmatn-Regular.woff2') format('woff2');
+            src: url('/static/fonts/Vazirmatn-Regular.woff2') format('woff2');
             font-weight: 400;
             font-display: swap;
+            unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
         }
 
         @font-face {
             font-family: 'Vazirmatn';
-            src: url('static/fonts/Vazirmatn-Bold.woff2') format('woff2');
+            src: url('/static/fonts/Vazirmatn-Bold.woff2') format('woff2');
             font-weight: 700;
             font-display: swap;
+            unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
         }
     </style>
     
