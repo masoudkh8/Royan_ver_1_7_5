@@ -11,12 +11,11 @@ users_bp = Blueprint('users', __name__, url_prefix='/users')
 
 @users_bp.route('/profile/permissions', methods=['GET', 'POST'])
 @login_required
-@permission_required(Permission.PROFILE_EDIT)
+@role_required(Role.ADMIN)
 def manage_permissions():
     """
     مدیریت مجوزهای سفارشی برای کاربر.
-    ادمین می‌تواند برای هر کاربر مجوزهای خاصی را فعال/غیرفعال کند.
-    کاربران عادی فقط می‌توانند مجوزهای پیش‌فرض نقش خود را ببینند.
+    فقط ادمین می‌تواند برای هر کاربر مجوزهای خاصی را فعال/غیرفعال کند.
     """
     from models.user import UserProfile
     
@@ -53,11 +52,6 @@ def manage_permissions():
         categories[cat].append(perm)
     
     if request.method == 'POST':
-        # فقط ادمین می‌تواند مجوزهای سفارشی تنظیم کند
-        if current_user.role != Role.ADMIN:
-            flash("فقط مدیر سیستم می‌تواند مجوزهای سفارشی تنظیم کند.", "error")
-            return redirect(url_for('users.manage_permissions'))
-        
         target_user_id = request.form.get('target_user_id', current_user.id)
         target_user = User.query.get_or_404(target_user_id)
         target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
@@ -67,7 +61,10 @@ def manage_permissions():
         
         if selected_permissions:
             # ذخیره به صورت JSON
-            target_profile.custom_permissions = json.dumps(selected_permissions)
+            if not target_profile.custom_permissions:
+                target_profile.custom_permissions = json.dumps(selected_permissions)
+            else:
+                target_profile.custom_permissions = json.dumps(selected_permissions)
             flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد.", "success")
         else:
             # اگر هیچ مجوزی انتخاب نشده، از مجوزهای پیش‌فرض استفاده شود
