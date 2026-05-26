@@ -2,13 +2,18 @@
 const CACHE_NAME = 'metisma-v1';
 const OFFLINE_URL = '/offline.html';
 
+// ✅ Enhanced cache list - now caches more essential resources
 const urlsToCache = [
     '/',
     '/static/css/output.css',
     '/static/js/three.min.js',
     '/static/icons/icon-192.png',
     '/static/icons/icon-512.png',
-    OFFLINE_URL
+    '/static/manifest.json',
+    OFFLINE_URL,
+    // Cache common fonts
+    '/static/fonts/Vazirmatn-Regular.woff2',
+    '/static/fonts/Vazirmatn-Bold.woff2'
 ];
 
 // Install event - cache essential assets
@@ -41,7 +46,7 @@ self.addEventListener('activate', (event) => {
     self.clients.claim(); // Take control immediately
 });
 
-// Fetch event - Network First, fallback to cache
+// Fetch event - Network First with Cache fallback, Stale-While-Revalidate for static assets
 self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
@@ -49,6 +54,29 @@ self.addEventListener('fetch', (event) => {
     // Skip cross-origin requests
     if (!event.request.url.startsWith(self.location.origin)) return;
 
+    const requestUrl = new URL(event.request.url);
+    
+    // ✅ Stale-While-Revalidate for static assets (CSS, JS, images, fonts)
+    if (requestUrl.pathname.match(/\.(css|js|png|jpg|jpeg|svg|ico|woff2|woff|ttf)$/)) {
+        event.respondWith(
+            caches.match(event.request).then((cachedResponse) => {
+                const fetchPromise = fetch(event.request).then((networkResponse) => {
+                    // Update cache in background
+                    if (networkResponse.status === 200) {
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, networkResponse.clone());
+                        });
+                    }
+                    return networkResponse;
+                }).catch(() => cachedResponse);
+                
+                return cachedResponse || fetchPromise;
+            })
+        );
+        return;
+    }
+    
+    // ✅ Network First for HTML pages and API calls
     event.respondWith(
         fetch(event.request)
             .then((response) => {

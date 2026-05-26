@@ -1669,9 +1669,11 @@
     }
   }
   
-  // ✅ FIX #4: Set language function for language switcher
+    // ✅ FIX #4: Set language function for language switcher with backend support
   function setLanguage(lang) {
     const html = document.documentElement;
+    
+    // Update UI immediately
     if (lang === 'fa' || lang === 'ar') {
       html.setAttribute('dir', 'rtl');
       html.setAttribute('lang', lang);
@@ -1681,6 +1683,12 @@
       html.setAttribute('lang', 'en');
       localStorage.setItem('lang', 'en');
     }
+    
+    // Send request to backend to persist language preference
+    fetch(`/language/set_language/${lang === 'fa' ? 'fa_IR' : 'en'}`, {
+      method: 'GET',
+      credentials: 'same-origin'
+    }).catch(err => console.warn('Language sync failed:', err));
   }
 
   // ✅ بارگذاری تم هنگام لود صفحه
