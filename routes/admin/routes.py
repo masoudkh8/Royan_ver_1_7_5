@@ -58,6 +58,8 @@ def admin_required(f):
 @admin_required
 def dashboard():
     """داشبورد ادمین با نمایش آمار و نوتیفیکیشن‌های جدید"""
+    from models.auth import ActivityLog
+    
     total_users = User.query.count()
     premium_requests = PremiumRequest.query.count()
     pending_requests = PremiumRequest.query.filter_by(status='pending').count()
@@ -79,6 +81,9 @@ def dashboard():
         user_id=current_user.id,
         is_read=False
     ).count()
+    
+    # ✅ Fetch recent activity logs for admin dashboard
+    recent_activities = ActivityLog.query.order_by(ActivityLog.created_at.desc()).limit(10).all()
 
     return render_template('admin/dashboard.html',
                            total_users=total_users,
@@ -86,7 +91,8 @@ def dashboard():
                            pending_requests=pending_requests,
                            users_with_pending_docs=users_with_pending_docs,
                            unread_notifications=unread_notifications,
-                           unread_count=unread_count)
+                           unread_count=unread_count,
+                           recent_activities=recent_activities)
 
 
 # ---------------------------------------
