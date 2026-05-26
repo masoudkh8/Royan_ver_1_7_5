@@ -469,7 +469,11 @@ def create_app():
     # Blueprint از permissions_routes به دلیل استفاده از همان users_bp در آن فایل، نیاز به ثبت جداگانه ندارد
     # تمام routeهای permissions_routes تحت همان users_bp ثبت شده‌اند
     app.register_blueprint(root_bp)
-    app.register_blueprint(admin_bp, url_prefix='/admin')
+    
+    # Initialize admin blueprints (includes permission management)
+    admin_bp_instance = init_admin_blueprints()
+    app.register_blueprint(admin_bp_instance, url_prefix='/admin')
+    
     app.register_blueprint(magazine_bp, url_prefix='/magazine')
     app.register_blueprint(social_bp)
     app.register_blueprint(exhibition_bp)

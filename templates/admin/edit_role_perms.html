@@ -2,46 +2,344 @@
 
 {% block title %}ویرایش مجوزهای نقش {{ role.value }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    .edit-permissions-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+    }
+    
+    .permission-group {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border: none;
+    }
+    
+    .permission-group-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #edf2f7;
+    }
+    
+    .permission-group-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+    }
+    
+    .permission-group-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.75rem;
+        font-size: 1.3rem;
+    }
+    
+    .group-order { background: #fed7d7; }
+    .group-logistics { background: #bee3f8; }
+    .group-legal { background: #fef3c7; }
+    .group-finance { background: #c6f6d5; }
+    .group-investment { background: #e9d8fd; }
+    .group-tech { background: #feebc8; }
+    .group-dashboard { background: #fed7e2; }
+    .group-profile { background: #e2e8f0; }
+    .group-public { background: #cbd5e0; }
+    
+    .permission-checkbox {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        background: #f7fafc;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    
+    .permission-checkbox:hover {
+        background: #edf2f7;
+        transform: translateX(5px);
+    }
+    
+    .permission-checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-left: 1rem;
+        cursor: pointer;
+    }
+    
+    .permission-checkbox.checked {
+        background: #c6f6d5;
+        border-color: #48bb78;
+    }
+    
+    .permission-label {
+        flex: 1;
+        font-weight: 500;
+        color: #4a5568;
+    }
+    
+    .permission-code {
+        font-size: 0.75rem;
+        color: #a0aec0;
+        font-family: monospace;
+        background: #edf2f7;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+    }
+    
+    .action-bar {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        z-index: 100;
+        margin-top: 2rem;
+    }
+    
+    .btn-save {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+    }
+    
+    .btn-cancel {
+        background: #edf2f7;
+        color: #4a5568;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-cancel:hover {
+        background: #e2e8f0;
+    }
+    
+    .stats-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    .select-all-btn {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .select-all-btn:hover {
+        background: #5a67d8;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>ویرایش مجوزهای پیش‌فرض نقش: {{ role.value }}</h2>
-        <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-secondary">بازگشت به داشبورد</a>
-    </div>
-
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">تنظیم مجوزهای این نقش</h5>
-        </div>
-        <div class="card-body">
-            <form method="POST">
-                <div class="row">
-                    {% for perm in permissions %}
-                    <div class="col-md-4 mb-3">
-                        <div class="form-check border p-2 rounded {% if perm in current_perms %}bg-light{% endif %}">
-                            <input class="form-check-input" type="checkbox" name="permissions" 
-                                   value="{{ perm.name }}" id="perm_{{ perm.name }}"
-                                   {% if perm in current_perms %}checked{% endif %}>
-                            <label class="form-check-label font-weight-normal" for="perm_{{ perm.name }}">
-                                {{ perm.value }}
-                            </label>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <hr>
-                
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success btn-lg">ذخیره تغییرات</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="window.history.back()">انصراف</button>
-                </div>
-            </form>
-
-            <div class="alert alert-info mt-4">
-                <strong>توجه:</strong> این تغییرات روی تمام کاربرانی که این نقش را دارند تأثیر می‌گذارد، مگر اینکه برای کاربر خاصی مجوز سفارشی تعریف کرده باشید.
+    <!-- هدر صفحه -->
+    <div class="edit-permissions-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2 class="mb-2">
+                    <i class="fas fa-user-shield ml-2"></i>
+                    ویرایش مجوزهای نقش: 
+                    <span class="stats-badge">{{ role.value }}</span>
+                </h2>
+                <p class="mb-0 opacity-75">دسترسی‌های این نقش را تنظیم کنید. تغییرات روی تمام کاربران با این نقش تأثیر می‌گذارد.</p>
+            </div>
+            <div class="col-md-4 text-left">
+                <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-light action-btn">
+                    <i class="fas fa-arrow-right ml-1"></i>بازگشت به داشبورد
+                </a>
             </div>
         </div>
     </div>
+    
+    <form method="POST" id="permissionsForm">
+        {% set categories = {
+            'ORDER': {'title': 'مدیریت سفارشات', 'icon': '📦', 'class': 'group-order'},
+            'LOGISTICS': {'title': 'لجستیک و حمل‌ونقل', 'icon': '🚚', 'class': 'group-logistics'},
+            'LEGAL': {'title': 'امور حقوقی', 'icon': '⚖️', 'class': 'group-legal'},
+            'FINANCE': {'title': 'امور مالی', 'icon': '💰', 'class': 'group-finance'},
+            'INVESTMENT': {'title': 'سرمایه‌گذاری', 'icon': '📈', 'class': 'group-investment'},
+            'TECH': {'title': 'بازرسی فنی', 'icon': '🔧', 'class': 'group-tech'},
+            'DASHBOARD': {'title': 'داشبورد', 'icon': '📊', 'class': 'group-dashboard'},
+            'PROFILE': {'title': 'پروفایل', 'icon': '👤', 'class': 'group-profile'},
+            'PUBLIC': {'title': 'عمومی', 'icon': '🌐', 'class': 'group-public'}
+        } %}
+        
+        {% for category, info in categories.items() %}
+        {% set category_perms = permissions|selectattr('name', 'startswith', category)|list %}
+        {% if category_perms %}
+        <div class="permission-group">
+            <div class="permission-group-header">
+                <div class="permission-group-title">
+                    <div class="permission-group-icon {{ info.class }}">
+                        {{ info.icon }}
+                    </div>
+                    {{ info.title }}
+                </div>
+                <button type="button" class="select-all-btn" onclick="toggleCategory('{{ category }}')">
+                    <i class="fas fa-check-square ml-1"></i>انتخاب همه
+                </button>
+            </div>
+            
+            <div class="row">
+                {% for perm in category_perms %}
+                <div class="col-md-6 col-lg-4">
+                    <label class="permission-checkbox {% if perm in current_perms %}checked{% endif %}" 
+                           onclick="toggleCheckbox(this)">
+                        <input type="checkbox" name="permissions" value="{{ perm.name }}" 
+                               {% if perm in current_perms %}checked{% endif %}>
+                        <div class="permission-label">
+                            {{ perm.value }}
+                            <div class="permission-code">{{ perm.name }}</div>
+                        </div>
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        
+        <!-- نوار اقدام -->
+        <div class="action-bar">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div id="selectedCount" class="text-muted">
+                        <i class="fas fa-info-circle ml-1"></i>
+                        <span id="countValue">{{ current_perms|length }}</span> مجوز انتخاب شده است
+                    </div>
+                </div>
+                <div class="col-md-6 text-left">
+                    <button type="submit" class="btn btn-success btn-save">
+                        <i class="fas fa-save ml-1"></i>ذخیره تغییرات
+                    </button>
+                    <button type="button" class="btn btn-cancel" onclick="window.history.back()">
+                        <i class="fas fa-times ml-1"></i>انصراف
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="alert alert-info mt-4">
+        <i class="fas fa-exclamation-triangle ml-2"></i>
+        <strong>توجه مهم:</strong> 
+        این تغییرات روی تمام کاربرانی که نقش <strong>{{ role.value }}</strong> را دارند تأثیر می‌گذارد، 
+        مگر اینکه برای کاربر خاصی مجوز سفارشی تعریف کرده باشید.
+    </div>
 </div>
+
+<script>
+// به‌روزرسانی شمارنده مجوزهای انتخاب‌شده
+function updateCount() {
+    const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
+    document.getElementById('countValue').textContent = checked;
+}
+
+// تغییر وضعیت چک‌باکس با کلیک روی لیبل
+function toggleCheckbox(label) {
+    if (event.target.tagName !== 'INPUT') {
+        const checkbox = label.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        label.classList.toggle('checked', checkbox.checked);
+        updateCount();
+    }
+}
+
+// انتخاب/عدم انتخاب همه مجوزهای یک دسته
+function toggleCategory(category) {
+    const checkboxes = document.querySelectorAll(`input[name="permissions"][value^="${category}_"]`);
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+    
+    checkboxes.forEach(cb => {
+        cb.checked = !allChecked;
+        cb.parentElement.classList.toggle('checked', !allChecked);
+    });
+    
+    updateCount();
+}
+
+// به‌روزرسانی اولیه شمارنده
+document.addEventListener('DOMContentLoaded', function() {
+    updateCount();
+    
+    // اضافه کردن event listener برای همه چک‌باکس‌ها
+    document.querySelectorAll('input[name="permissions"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            this.parentElement.classList.toggle('checked', this.checked);
+            updateCount();
+        });
+    });
+});
+
+// جلوگیری از ارسال فرم خالی
+document.getElementById('permissionsForm').addEventListener('submit', function(e) {
+    const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
+    if (checked === 0) {
+        e.preventDefault();
+        showAlert('حداقل یک مجوز باید انتخاب شود', 'warning');
+    }
+});
+
+// نمایش پیام
+function showAlert(message, type = 'info') {
+    const alertClass = {
+        'success': 'alert-success',
+        'error': 'alert-danger',
+        'warning': 'alert-warning',
+        'info': 'alert-info'
+    }[type] || 'alert-info';
+    
+    const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </div>
+    `;
+    
+    $('.container').prepend(alertHtml);
+    setTimeout(() => {
+        $('.alert').alert('close');
+    }, 5000);
+}
+</script>
 {% endblock %}

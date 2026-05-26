@@ -104,3 +104,19 @@ DEFAULT_ROLE_PERMISSIONS = {
         perm for perm in Permission # دسترسی به همه چیز
     ]
 }
+
+def get_role_permissions(role):
+    """
+    دریافت لیست مجوزهای پیش‌فرض برای یک نقش خاص.
+    
+    Args:
+        role: شیء Role از enum
+        
+    Returns:
+        لیستی از اشیاء Permission
+    """
+    if role is None:
+        return DEFAULT_ROLE_PERMISSIONS.get('guest', [])
+    
+    role_name = role.name.lower() if hasattr(role, 'name') else str(role).lower()
+    return DEFAULT_ROLE_PERMISSIONS.get(role_name, [])
