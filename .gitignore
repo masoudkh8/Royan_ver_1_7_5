@@ -1,15 +1,43 @@
-Nothing needs to be added to .gitignore since the changes only include HTML templates and Python route files, which are source code/config files and not build artifacts, dependencies, or temporary files.
-
+```
+# Python
 __pycache__/
-/__pycache__
 *.pyc
-logs
-*.log
-static/uploads/
+*.pyo
+*.pyd
+
+# Dependencies
 .venv/
+venv/
+env/
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# IDE
+.vscode/
 .idea/
-*.pyc
-/*.pyc
-*.pyc/
-/*.pyc/
-models/__pycache__/*.pyc
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.egg-info/
+```

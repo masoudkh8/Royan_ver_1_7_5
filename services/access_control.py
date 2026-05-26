@@ -128,6 +128,27 @@ def has_permission(user, permission):
     return permission in user_permissions
 
 
+def get_role_permissions(role):
+    """
+    دریافت مجوزهای پیش‌فرض یک نقش خاص.
+    
+    Args:
+        role: شیء Role یا رشته نام نقش
+        
+    Returns:
+        لیستی از مجوزهای Permission مربوط به آن نقش
+    """
+    from models.user import Role
+    
+    # تبدیل به رشته اگر Role object باشد
+    if isinstance(role, Role):
+        role_name = role.value
+    else:
+        role_name = str(role)
+    
+    return DEFAULT_ROLE_PERMISSIONS.get(role_name, [])
+
+
 def service_module_enabled(service_name, user=None):
     """
     بررسی اینکه آیا یک ماژول خدماتی برای کاربر فعال است یا خیر.

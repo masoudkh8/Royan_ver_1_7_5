@@ -125,7 +125,7 @@ def make_session_permanent():
     """Make sessions permanent so they expire after PERMANENT_SESSION_LIFETIME"""
     session.permanent = True
 
-"""
+
 @users_bp.route('/create_first_admin', methods=['GET', 'POST'])
 def create_first_admin():
     # فقط در محیط توسعه یا وقتی هیچ ادمینی وجود ندارد قابل دسترسی است
@@ -184,55 +184,6 @@ def create_first_admin():
             return redirect(url_for('users.create_first_admin'))
 
     return render_template('create_first_admin.html')
-"""
-
-
-@users_bp.route('/create_first_admin', methods=['GET', 'POST'])
-def create_first_admin():
-    if User.query.filter_by(role=Role.ADMIN, is_active=True).first():
-        flash("There is already an admin.")
-        return redirect(url_for('users.login'))
-
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-
-        if User.query.filter_by(username=username, is_active=True).first():
-            flash("❌ Username already taken.")
-            return redirect(url_for('users.register'))
-
-        if User.query.filter_by(email=email, is_active=True).first():
-            flash("❌ Email has already been used.")
-            return redirect(url_for('users.register'))
-
-        from werkzeug.security import generate_password_hash
-        hashed = generate_password_hash(password)
-
-        user = User(
-            username=username,
-            email=email,
-            password_hash=hashed,
-            role=Role.ADMIN,
-            is_premium=True
-        )
-
-        db.session.add(user)
-        db.session.commit()
-        flash("The first admin was created.")
-        return redirect(url_for('admin.login'))
-
-    # ✅ Generate & inject CSRF token
-    csrf_token = generate_csrf()
-    return f'''
-    <form method="post">
-        <input type="hidden" name="csrf_token" value="{csrf_token}">
-        <input name="username" placeholder="username" required><br>
-        <input name="email" type="email" placeholder="email" required><br>
-        <input name="password" type="password" placeholder="password" required><br>
-        <button type="submit">create admin</button>
-    </form>
-    '''
 
 
 ##############

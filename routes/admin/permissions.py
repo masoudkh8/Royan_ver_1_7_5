@@ -6,7 +6,7 @@ from services.permissions import Permission, DEFAULT_ROLE_PERMISSIONS, get_role_
 from services.access_control import role_required
 from functools import wraps
 
-admin_perms_bp = Blueprint('admin_perms', __name__, url_prefix='/admin/permissions')
+admin_perms_bp = Blueprint('admin_perms', __name__, url_prefix='/permissions')
 
 def admin_required(f):
     @wraps(f)
@@ -118,13 +118,13 @@ def preview_user_menu(user_id):
     """پیش‌نمایش JSON منوی کاربر بر اساس دسترسی‌ها"""
     user = User.query.get_or_404(user_id)
     
-    # شبیه‌سازی سرویس‌های موجود
+    # شبیه‌سازی سرویس‌های موجود با استفاده از مجوزهای واقعی
     available_modules = [
         {'id': 'orders', 'name': 'مدیریت سفارشات', 'perm': Permission.ORDER_CREATE},
-        {'id': 'logistics', 'name': 'پنل لجستیک', 'perm': Permission.LOGISTICS_MANAGE},
-        {'id': 'legal', 'name': 'امور حقوقی', 'perm': Permission.LEGAL_REVIEW},
-        {'id': 'finance', 'name': 'امور مالی', 'perm': Permission.FINANCE_VIEW},
-        {'id': 'tech', 'name': 'بازرسی فنی', 'perm': Permission.TECH_INSPECT},
+        {'id': 'logistics', 'name': 'پنل لجستیک', 'perm': Permission.LOGISTICS_ASSIGN_DRIVER},
+        {'id': 'legal', 'name': 'امور حقوقی', 'perm': Permission.LEGAL_APPROVE_DOCS},
+        {'id': 'finance', 'name': 'امور مالی', 'perm': Permission.FINANCE_VIEW_WALLET},
+        {'id': 'tech', 'name': 'بازرسی فنی', 'perm': Permission.TECH_SUBMIT_REPORT},
     ]
     
     visible_modules = []
