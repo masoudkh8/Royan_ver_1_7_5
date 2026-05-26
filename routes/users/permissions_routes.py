@@ -133,7 +133,8 @@ def dashboard():
     # دریافت آمارهای مرتبط بر اساس نقش
     stats = _get_user_stats(current_user)
     
-    return render_template('users/dashboard_modular.html', 
+    # ادغام داشبورد ماژولار در dashboard.html اصلی برای یکپارچگی
+    return render_template('users/dashboard.html', 
                          modules=modules, 
                          stats=stats,
                          user_role=current_user.role.value)
