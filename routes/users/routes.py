@@ -904,7 +904,7 @@ def place_order():
             notification = Notification(
                 user_id=seller.id,
                 title='New Order Received',
-                message=f"You received a new order from {current_user.username} for {quantity} tons of {product|title}. (#{order.id})",
+                message=f"You received a new order from {current_user.username} for {quantity} tons of {product.title()}. (#{order.id})",
                 notification_type='new_order',
                 actor_id=current_user.id,
                 related_id=order.id,
