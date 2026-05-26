@@ -11,3 +11,5 @@
 {"timestamp": "2026-05-26 17:12:11,979", "level": "INFO", "message": "Exhibition module initialized successfully.", "module": "app", "lineno": 540}
 {"timestamp": "2026-05-26 17:12:11,997", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 546}
 {"timestamp": "2026-05-26 17:12:11,998", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 550}
+{"timestamp": "2026-05-26 17:32:01,841", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-26 17:32:01,940", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}

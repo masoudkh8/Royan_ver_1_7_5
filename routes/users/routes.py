@@ -23,6 +23,9 @@ from models.port import Port
 
 from . import users_bp,root_bp
 
+# Import permissions routes to register them under users_bp
+from . import permissions_routes
+
 from config import Config
 from PIL import Image
 import requests
