@@ -57,7 +57,7 @@
 
         <!-- دسترسی سریع -->
         <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">🔧 Quick Actions</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <a href="{{ url_for('admin.manage_users') }}" class="flex items-center gap-3 p-4 bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 hover:border-gold/40 hover:shadow-lg transition group">
                 <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition">👥</div>
                 <span class="font-medium text-gray-900 dark:text-white">User Management</span>
@@ -75,6 +75,10 @@
                 {% if users_with_pending_docs > 0 %}
                 <span class="absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white text-xs font-bold rounded-full flex items-center justify-center">{{ users_with_pending_docs }}</span>
                 {% endif %}
+            </a>
+            <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="flex items-center gap-3 p-4 bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 hover:border-gold/40 hover:shadow-lg transition group">
+                <div class="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition">🔐</div>
+                <span class="font-medium text-gray-900 dark:text-white">مدیریت مجوزها</span>
             </a>
             <a href="{{ url_for('admin.admin_chat_list') }}" class="flex items-center gap-3 p-4 bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 hover:border-gold/40 hover:shadow-lg transition group">
                 <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 group-hover:scale-110 transition">💬</div>
