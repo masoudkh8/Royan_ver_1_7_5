@@ -116,6 +116,12 @@ class UserProfile(db.Model):
     premium_since = db.Column(db.DateTime)
     trust_score_override = db.Column(db.Integer)  # امتیاز اعتماد دستی (برای Admin)
     
+    # === سیستم مجوزهای سفارشی (Custom Permissions) ===
+    # این فیلد اجازه می‌دهد دسترسی‌های کاربر را به صورت ریزدانه تنظیم کنید
+    # اگر NULL یا خالی باشد، از مجوزهای پیش‌فرض نقش استفاده می‌شود
+    # فرمت: JSON Array از رشته‌های Permission (مثلاً ["order.view", "logistics.update_status"])
+    custom_permissions = db.Column(db.Text, nullable=True)  # JSON format
+    
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}مدیریت مجوزهای دسترسی{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">مدیریت مجوزهای دسترسی</h2>
+            
+            {% if current_user_obj.role.value == 'admin' %}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">انتخاب کاربر برای مدیریت مجوزها</h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="{{ url_for('users.manage_permissions') }}">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="target_user" class="form-label">کاربر مورد نظر:</label>
+                                <select name="target_user_id" id="target_user" class="form-select">
+                                    {% for user in users_list %}
+                                    <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>
+                                        {{ user.username }} ({{ user.role_display_name }})
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">بارگذاری مجوزها</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        {% if request.args.get('target_user_id') %}
+                            مجوزهای کاربر انتخاب شده
+                        {% else %}
+                            مجوزهای پیش‌فرض نقش شما ({{ current_user_obj.role_display_name }})
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% if request.args.get('target_user_id') %}
+                        <input type="hidden" name="target_user_id" value="{{ request.args.get('target_user_id') }}">
+                        {% endif %}
+                        
+                        {% for category, permissions in categories.items() %}
+                        <div class="mb-4">
+                            <h6 class="border-bottom pb-2">{{ category }}</h6>
+                            <div class="row">
+                                {% for perm in permissions %}
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               name="permissions" 
+                                               value="{{ perm.value }}" 
+                                               id="perm_{{ perm.value }}"
+                                               {% if perm.is_enabled %}checked{% endif %}
+                                               {% if current_user_obj.role.value != 'admin' %}disabled{% endif %}>
+                                        <label class="form-check-label" for="perm_{{ perm.value }}">
+                                            {{ perm.name }}
+                                            <small class="text-muted d-block">{{ perm.value }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        {% if current_user_obj.role.value == 'admin' %}
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
+                            <a href="{{ url_for('users.manage_permissions') }}" class="btn btn-secondary">بازنشانی به پیش‌فرض</a>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle"></i>
+                            فقط مدیر سیستم می‌تواند مجوزها را تغییر دهد. شما در حال مشاهده مجوزهای پیش‌فرض نقش خود هستید.
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">راهنمای مجوزها</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>مجوزهای پیش‌فرض:</strong> هر نقش کاربری مجموعه‌ای از مجوزهای پیش‌فرض دارد که بر اساس وظایف آن نقش تعریف شده است.</li>
+                        <li><strong>مجوزهای سفارشی:</strong> مدیر سیستم می‌تواند برای هر کاربر، مجوزهای خاصی را فعال یا غیرفعال کند.</li>
+                        <li><strong>کاربران غیر احراز هویت:</strong> فقط به مجوزهای عمومی (مشاهده محصولات و درباره ما) دسترسی دارند.</li>
+                        <li><strong>تغییر نقش:</strong> با تغییر نقش کاربر، مجوزهای پیش‌فرض او نیز تغییر می‌کند مگر اینکه مجوزهای سفارشی تنظیم شده باشد.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
