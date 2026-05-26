@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes, as they only include source files (.py, .js, .html) and no build artifacts, dependencies, or temporary files.
+Nothing should be ignored based on the provided file changes, as they consist only of source files (HTML templates and JSON manifest) without any build artifacts, dependencies, or temporary files.
