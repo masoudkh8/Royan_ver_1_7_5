@@ -71,12 +71,9 @@
                 
                 <!-- دکمه علامت‌گذاری همه به‌عنوان خوانده‌شده -->
                 <div class="p-4 border-t border-gray-200 dark:border-dark-700 text-center">
-                    <form action="{{ url_for('users.mark_all_read') }}" method="POST" class="inline">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="text-sm text-gold hover:text-gold-light font-medium transition">
-                            Mark all as read
-                        </button>
-                    </form>
+                    <button class="text-sm text-gold hover:text-gold-light font-medium transition">
+                        Mark all as read
+                    </button>
                 </div>
                 
             {% else %}

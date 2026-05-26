@@ -411,9 +411,8 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        raw_remember_me = request.form.get('remember', False)
-        remember_me = True if raw_remember_me == 'on' or raw_remember_me is True else False
-
+        remember_me = request.form.get('remember', False)
+        
         user = User.query.filter_by(email=email, is_active=True).first()
 
         # بررسی قفل بودن حساب
@@ -749,10 +748,6 @@ def profile():
         flash("❌ This account is inactive.")
         return redirect(url_for('users.login'))
 
-    # محاسبه تعداد اعلان‌های خوانده‌نشده
-    from models.notification import Notification
-    unread_notifications = Notification.query.filter_by(user_id=current_user.id, is_read=False).count()
-    
     # محاسبه تعداد سفارش‌های در انتظار (فقط برای PRODUCER)
     pending_orders = 0
     if current_user.role == Role.PRODUCER:
@@ -803,7 +798,6 @@ def profile():
                           user=current_user,
                           support_user=support_user,
                           pending_orders=pending_orders,
-                          unread_notifications=unread_notifications,
                           seller=seller,
                           buyer=buyer,
                           broker=broker,
@@ -1019,27 +1013,7 @@ def notifications():
             n.is_read = True
     db.session.commit()
 
-    return render_template('users/notifications.html', notifications=notifs, unread_count=0)
-
-
-@users_bp.route('/api/unread-notifications')
-@login_required
-def get_unread_notifications():
-    """API endpoint to get unread notification count"""
-    from models.notification import Notification
-    unread_count = Notification.query.filter_by(user_id=current_user.id, is_read=False).count()
-    return {'unread_count': unread_count}
-
-
-@users_bp.route('/notifications/mark-all-read', methods=['POST'])
-@login_required
-def mark_all_read():
-    """Mark all notifications as read"""
-    from models.notification import Notification
-    Notification.query.filter_by(user_id=current_user.id, is_read=False).update({'is_read': True})
-    db.session.commit()
-    flash("✅ All notifications marked as read")
-    return redirect(url_for('users.notifications'))
+    return render_template('users/notifications.html', notifications=notifs)
 
 
 @users_bp.route('/chat', methods=['GET', 'POST'])
