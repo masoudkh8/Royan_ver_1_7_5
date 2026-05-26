@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}مدیریت مجوزهای {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>مدیریت مجوزهای کاربر: {{ user.username }}</h2>
+        <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-secondary">بازگشت به پنل</a>
+    </div>
+
+    <div class="row">
+        <!-- اطلاعات کاربر -->
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">اطلاعات کاربر</div>
+                <div class="card-body">
+                    <p><strong>نام کاربری:</strong> {{ user.username }}</p>
+                    <p><strong>نقش:</strong> <span class="badge badge-primary">{{ user.role.value }}</span></p>
+                    <p><strong>ایمیل:</strong> {{ user.email }}</p>
+                    <p><strong>تاریخ عضویت:</strong> {{ user.created_at.strftime('%Y/%m/%d') if user.created_at else '-' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- مجوزهای پایه (ارث‌بری از نقش) -->
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">مجوزهای پایه (از نقش {{ user.role.value }})</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for perm in base_perms %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ perm.value }}
+                            <span class="badge badge-success">فعال (پیش‌فرض)</span>
+                        </li>
+                        {% else %}
+                        <li class="list-group-item text-muted">هیچ مجوز پیش‌فرضی برای این نقش تعریف نشده است.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مجوزهای سفارشی (استثناها) -->
+    <div class="card">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">مجوزهای سفارشی (اعطا/حذف دستی)</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted small">
+                در این بخش می‌توانید مجوزهایی را به صورت استثنا به کاربر اعطا کنید یا مجوزهای پیش‌فرض او را لغو نمایید.
+            </p>
+
+            <form method="POST" class="mb-4">
+                <div class="form-row align-items-end">
+                    <div class="col-md-6">
+                        <label for="permission">انتخاب مجوز:</label>
+                        <select name="permission" id="permission" class="form-control" required>
+                            <option value="">-- انتخاب مجوز --</option>
+                            {% for perm in all_permissions %}
+                            <option value="{{ perm.name }}">{{ perm.value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" name="action" value="grant" class="btn btn-success btn-block">اعطا کردن (+)</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" name="action" value="revoke" class="btn btn-danger btn-block">حذف کردن (-)</button>
+                    </div>
+                </div>
+            </form>
+
+            <h6>لیست مجوزهای سفارشی فعلی:</h6>
+            <ul class="list-group">
+                {% for perm in custom_perms %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ perm.value }}
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="permission" value="{{ perm.name }}">
+                        <button type="submit" name="action" value="revoke" class="btn btn-sm btn-outline-danger">حذف</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="list-group-item text-muted">هیچ مجوز سفارشی برای این کاربر ثبت نشده است.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- پیش‌نمایش نهایی -->
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">پیش‌نمایش دسترسی نهایی</div>
+        <div class="card-body">
+            <p>کاربر پس از ذخیره تغییرات، به مجموع مجوزهای زیر دسترسی خواهد داشت:</p>
+            <div id="finalPermsList" class="alert alert-light border">
+                <ul class="mb-0">
+                    {% set all_perms = base_perms + custom_perms %}
+                    {% set unique_perms = [] %}
+                    {% for perm in all_perms %}
+                        {% if perm not in unique_perms %}
+                            {% set _ = unique_perms.append(perm) %}
+                            <li>{{ perm.value }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

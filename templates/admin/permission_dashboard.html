@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}مدیریت دسترسی‌ها و مجوزها{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">پنل مدیریت دسترسی‌ها (Admin)</h2>
+
+    <!-- تب‌های ناوبری -->
+    <ul class="nav nav-tabs mb-4" id="permTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="matrix-tab" data-toggle="tab" href="#matrix" role="tab">ماتریس دسترسی نقش‌ها</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">مدیریت کاربران خاص</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">پیش‌نمایش منو</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="permTabsContent">
+        
+        <!-- تب ۱: ماتریس دسترسی نقش‌ها -->
+        <div class="tab-pane fade show active" id="matrix" role="tabpanel">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">جدول دسترسی پیش‌فرض نقش‌ها</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-hover text-center">
+                        <thead class="thead-light">
+                            <tr>
+                                <th style="min-width: 150px;">مجوز / نقش</th>
+                                {% for role in roles %}
+                                <th>{{ role.value }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for perm in permissions %}
+                            <tr>
+                                <td class="text-left font-weight-bold">{{ perm.value }}</td>
+                                {% for role in roles %}
+                                <td>
+                                    {% if matrix[role.name][perm.name] %}
+                                        <span class="badge badge-success">✔</span>
+                                    {% else %}
+                                        <span class="badge badge-secondary">✘</span>
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                    <div class="mt-3">
+                        <a href="{{ url_for('admin_perms.edit_role_permissions', role_name='PRODUCER') }}" class="btn btn-sm btn-outline-primary">ویرایش PRODUCER</a>
+                        <a href="{{ url_for('admin_perms.edit_role_permissions', role_name='BUYER') }}" class="btn btn-sm btn-outline-primary">ویرایش BUYER</a>
+                        <a href="{{ url_for('admin_perms.edit_role_permissions', role_name='LOGISTICS') }}" class="btn btn-sm btn-outline-primary">ویرایش LOGISTICS</a>
+                        <span class="text-muted small ml-2">برای ویرایش سایر نقش‌ها از URL استفاده کنید.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب ۲: مدیریت کاربران خاص -->
+        <div class="tab-pane fade" id="users" role="tabpanel">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">اعطای مجوز استثنایی به کاربر</h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="{{ url_for('admin_perms.manage_user_permissions', user_id=0) }}" class="form-inline mb-4">
+                        <label class="mr-2">انتخاب کاربر:</label>
+                        <select name="user_id" class="form-control mr-2" required onchange="this.form.submit()">
+                            <option value="">-- انتخاب کنید --</option>
+                            {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }} ({{ user.role.value }})</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    <p class="text-muted">کاربر را انتخاب کنید تا به صفحه مدیریت مجوزهای اختصاصی او هدایت شوید.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب ۳: پیش‌نمایش منو -->
+        <div class="tab-pane fade" id="preview" role="tabpanel">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">پیش‌نمایش سرویس‌های قابل مشاهده برای کاربر</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>انتخاب کاربر برای پیش‌نمایش:</label>
+                        <select id="previewUserSelect" class="form-control">
+                            <option value="">-- انتخاب کنید --</option>
+                            {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }} ({{ user.role.value }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <button onclick="loadPreview()" class="btn btn-primary mt-2">بارگذاری پیش‌نمایش</button>
+                    
+                    <div id="previewResult" class="mt-4" style="display:none;">
+                        <h6>ماژول‌های قابل مشاهده:</h6>
+                        <ul id="previewList" class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadPreview() {
+    const userId = document.getElementById('previewUserSelect').value;
+    if (!userId) {
+        alert('لطفاً یک کاربر انتخاب کنید');
+        return;
+    }
+
+    fetch(`/admin/permissions/api/preview/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('previewList');
+            list.innerHTML = '';
+            
+            if (data.visible_modules.length === 0) {
+                list.innerHTML = '<li class="list-group-item text-muted">هیچ ماژولی قابل مشاهده نیست</li>';
+            } else {
+                data.visible_modules.forEach(mod => {
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item';
+                    li.textContent = mod.name;
+                    list.appendChild(li);
+                });
+            }
+            
+            document.getElementById('previewResult').style.display = 'block';
+        })
+        .catch(err => console.error(err));
+}
+</script>
+{% endblock %}

@@ -12,6 +12,7 @@ import json
 from models import db, User, Order, DataProvider, Port, PremiumRequest
 from models.user import Role
 from routes.admin.routes import admin_bp
+from routes.admin import init_admin_blueprints  # Import the initializer function
 from routes.users.routes import users_bp, api_bp
 from routes.social import social_bp
 from config import Config
