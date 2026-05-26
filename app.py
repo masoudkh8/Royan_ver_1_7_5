@@ -12,13 +12,14 @@ import json
 from models import db, User, Order, DataProvider, Port, PremiumRequest
 from models.user import Role
 from routes.admin.routes import admin_bp
-from routes.users.routes import users_bp
+from routes.users.routes import users_bp, api_bp
 from routes.social import social_bp
 from config import Config
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 from routes.users import root_bp
+# Note: permissions_routes uses the same users_bp, so no separate import needed
 from extensions import mail, cache, limiter, babel
 from flask_socketio import SocketIO, emit
 from datetime import datetime
@@ -464,6 +465,8 @@ def create_app():
     from api_docs import init_api_docs
 
     app.register_blueprint(users_bp, url_prefix='/users')
+    # Blueprint از permissions_routes به دلیل استفاده از همان users_bp در آن فایل، نیاز به ثبت جداگانه ندارد
+    # تمام routeهای permissions_routes تحت همان users_bp ثبت شده‌اند
     app.register_blueprint(root_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(magazine_bp, url_prefix='/magazine')
