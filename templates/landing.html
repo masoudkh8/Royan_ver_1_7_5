@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Metisma - Intelligent Global Trade Platform</title>
   
+  <script>
+    // ✅ FIX #2: Auto-detect and set language/direction on page load
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const lang = urlParams.get('lang') || 'en';
+      const html = document.documentElement;
+      
+      if (lang === 'fa' || lang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', lang);
+      } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+      }
+    })();
+  </script>
+  
   <!-- فونت وزیر برای پشتیبانی از اعداد و کاراکترهای خاص -->
   <!-- <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"> -->
   <style>
@@ -51,8 +68,24 @@
 	  
   
   
-  <!-- کتابخانه Three.js (لود لوکال - بدون تغییر) -->
-  <script src="/static/js/three.min.js"></script>
+  <!-- ✅ FIX #3: Lazy load Three.js only when needed (not on initial page load) -->
+  <script>
+    // Load Three.js only after DOM is ready and when user scrolls or interacts
+    let threeLoaded = false;
+    function loadThreeJS() {
+      if (threeLoaded) return;
+      threeLoaded = true;
+      const script = document.createElement('script');
+      script.src = '/static/js/three.min.js';
+      script.onload = () => console.log('✅ Three.js loaded lazily');
+      document.body.appendChild(script);
+    }
+    
+    // Load on user interaction or after 2 seconds (whichever comes first)
+    setTimeout(loadThreeJS, 2000);
+    window.addEventListener('scroll', loadThreeJS, { once: true });
+    window.addEventListener('touchstart', loadThreeJS, { once: true });
+  </script>
   
   <style>
   
@@ -727,8 +760,9 @@
         </button>
         <div class="absolute right-0 mt-2 w-24 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
           <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
-            <a href="?lang=fa" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition">فارسی</a>
-            <a href="?lang=en" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition">English</a>
+            <!-- ✅ FIX #4: Language links now work with backend session -->
+            <a href="?lang=fa" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('fa')">فارسی</a>
+            <a href="?lang=en" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('en')">English</a>
           </div>
         </div>
       </div>
@@ -1632,6 +1666,20 @@
     if (iconMoon && iconSun) {
       iconMoon.classList.toggle('hidden');
       iconSun.classList.toggle('hidden');
+    }
+  }
+  
+  // ✅ FIX #4: Set language function for language switcher
+  function setLanguage(lang) {
+    const html = document.documentElement;
+    if (lang === 'fa' || lang === 'ar') {
+      html.setAttribute('dir', 'rtl');
+      html.setAttribute('lang', lang);
+      localStorage.setItem('lang', lang);
+    } else {
+      html.setAttribute('dir', 'ltr');
+      html.setAttribute('lang', 'en');
+      localStorage.setItem('lang', 'en');
     }
   }
 

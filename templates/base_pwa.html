@@ -51,6 +51,10 @@
     <!-- کتابخانه Three.js (لود لوکال - بدون تغییر) -->
     <script src="/static/js/three.min.js"></script>
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#1e293b">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -1038,6 +1042,19 @@
     // Update notifications on page load and every 30 seconds
     updateNotificationCount();
     setInterval(updateNotificationCount, 30000);
+
+    // ✅ Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/static/js/sw.js')
+                .then(registration => {
+                    console.log('✅ SW registered:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('❌ SW registration failed:', error);
+                });
+        });
+    }
 </script>
 {% block extra_js %}{% endblock %}
 </body>
