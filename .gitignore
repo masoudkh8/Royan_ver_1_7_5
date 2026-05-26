@@ -26,3 +26,4 @@ node_modules/
 .git
 static/uploads/
 uploads/
+.venv/

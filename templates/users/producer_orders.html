@@ -99,7 +99,7 @@
                                             ✅ Confirm
                                         </button>
                                     </form>
-                                    <form method="POST" action="{{ url_for('users.confirm_order', order_id=order.id) }}">
+                                    <form method="POST" action="{{ url_for('users.reject_order', order_id=order.id) }}">
                                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                         <button type="submit" name="action" value="cancel"
                                                 class="w-full py-2.5 px-4 rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 

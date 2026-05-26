@@ -86,7 +86,7 @@
                         <p class="font-medium text-gray-900 dark:text-white">Passport Copy</p>
                         <p class="text-xs text-gray-500 dark:text-slate-400">Uploaded: {{ req.submitted_at.strftime('%Y/%m/%d') }}</p>
                     </div>
-                    <a href="{{ url_for('static', filename='uploads/documents/user_' + current_user.id|string + '/' + req.passport_file) }}" target="_blank" 
+                    <a href="{{ url_for('static', filename='uploads/documents/user_' + current_user.id|string +'_'+ current_user.username|string+ '/' + req.passport_file) }}" target="_blank"
                        class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                         View →
                     </a>
@@ -106,7 +106,7 @@
                         <p class="font-medium text-gray-900 dark:text-white">Company License</p>
                         <p class="text-xs text-gray-500 dark:text-slate-400">Uploaded: {{ req.submitted_at.strftime('%Y/%m/%d') }}</p>
                     </div>
-                    <a href="{{ url_for('static', filename='uploads/documents/user_' + current_user.id|string + '/' + req.license_file) }}" target="_blank" 
+                    <a href="{{ url_for('static', filename='uploads/documents/user_' + current_user.id|string +'_'+ current_user.username|string+ '/' + req.license_file) }}" target="_blank"
                        class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                         View →
                     </a>
@@ -126,7 +126,7 @@
                         <p class="font-medium text-gray-900 dark:text-white">Payment Receipt ($1,000)</p>
                         <p class="text-xs text-gray-500 dark:text-slate-400">Uploaded: {{ req.submitted_at.strftime('%Y/%m/%d') }}</p>
                     </div>
-                    <a href="{{ url_for('static', filename='uploads/' + req.payment_receipt) }}" target="_blank" 
+                    <a href="{{ url_for('static', filename='uploads/documents/user_' + current_user.id|string +'_'+ current_user.username|string+ '/' + req.payment_receipt) }}" target="_blank"
                        class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                         View →
                     </a>

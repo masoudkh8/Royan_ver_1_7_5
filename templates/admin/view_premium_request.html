@@ -56,7 +56,7 @@
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">📎 Uploaded Documents</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {% if req.passport_file %}
-                <a href="{{ url_for('static', filename='uploads/documents/' + req.passport_file) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group">
+                <a href="{{ url_for('static', filename='uploads/documents/user_' + req.user.id|string +'_'+ req.user.username|string+ '/' + req.passport_file) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group">
                     <span class="text-2xl">🛂</span>
                     <div><p class="text-sm font-medium text-gray-900 dark:text-white">Passport Copy</p><p class="text-xs text-blue-600 dark:text-blue-400 group-hover:underline">View File →</p></div>
                 </a>
@@ -65,7 +65,7 @@
                 {% endif %}
 
                 {% if req.license_file %}
-                <a href="{{ url_for('static', filename='uploads/documents/' + req.license_file) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group">
+                <a href="{{ url_for('static', filename='uploads/documents/user_' + req.user.id|string +'_'+ req.user.username|string+ '/' + req.license_file) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group">
                     <span class="text-2xl">📜</span>
                     <div><p class="text-sm font-medium text-gray-900 dark:text-white">Company License</p><p class="text-xs text-blue-600 dark:text-blue-400 group-hover:underline">View File →</p></div>
                 </a>
@@ -74,7 +74,7 @@
                 {% endif %}
 
                 {% if req.payment_receipt %}
-                <a href="{{ url_for('static', filename='uploads/' + req.payment_receipt) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group sm:col-span-2">
+                <a href="{{ url_for('static', filename='uploads/documents/user_' + req.user.id|string +'_'+ req.user.username|string+ '/' + req.payment_receipt) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group sm:col-span-2">
                     <span class="text-2xl">🧾</span>
                     <div><p class="text-sm font-medium text-gray-900 dark:text-white">Payment Receipt</p><p class="text-xs text-blue-600 dark:text-blue-400 group-hover:underline">View File →</p></div>
                 </a>

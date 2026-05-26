@@ -906,7 +906,7 @@ def place_order():
             db.session.commit()
 
             flash("✅ Order successfully placed.")
-            return redirect(url_for('users.profile'))
+            return redirect(url_for('users.my_orders'))
 
         except Exception as e:
             db.session.rollback()  # ⚠️ بازگردانی تراکنش در صورت خطا
@@ -944,7 +944,7 @@ def seller_orders():
         return redirect(url_for('users.profile'))
 
     orders = Order.query.filter_by(seller_id=current_user.id).order_by(Order.created_at.desc()).all()
-    return render_template('users/seller_orders.html', orders=orders)
+    return render_template('users/producer_orders.html', orders=orders)
 
 
 # -------------------------------
@@ -957,7 +957,7 @@ def confirm_order(order_id):
 
     if current_user.role != Role.PRODUCER or order.seller_id != current_user.id:
         flash("❌ Unauthorized access.")
-        return redirect(url_for('users.profile'))
+        return redirect(url_for('users.seller_orders'))
 
     if order.status == OrderStatus.PENDING:
         order.status = OrderStatus.CONFIRMED
@@ -989,7 +989,7 @@ def reject_order(order_id):
 
     if current_user.role != Role.PRODUCER or order.seller_id != current_user.id:
         flash("❌ Unauthorized access.")
-        return redirect(url_for('users.profile'))
+        return redirect(url_for('users.seller_orders'))
 
     if order.status == OrderStatus.PENDING:
         order.status = OrderStatus.CANCELLED
@@ -1714,4 +1714,4 @@ def resend_verification():
 
         return redirect(url_for('users.login'))
 
-    return render_template('users/email/resend_form.html')  # یک تمپلیت ساده برای گرفتن ایمیل
+    return render_template('email/resend_form.html')  # یک تمپلیت ساده برای گرفتن ایمیل
