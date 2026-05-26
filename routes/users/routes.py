@@ -881,7 +881,7 @@ def place_order():
                 flash("❌ The selected user is not a producer.")
                 return redirect(url_for('users.place_order'))
 
-            # ✅ تعیین بروکر (فقط اگر کاربر ویژه باشد)
+    # ✅ تعیین بروکر (فقط اگر کاربر ویژه باشد)
             broker_id = current_user.id if current_user.is_premium else None
 
             # ✅ ایجاد سفارش
@@ -903,13 +903,32 @@ def place_order():
             from models.notification import Notification
             notification = Notification(
                 user_id=seller.id,
-                message=f" You received a new order from {current_user.username} . (#{order.id})"
+                title='New Order Received',
+                message=f"You received a new order from {current_user.username} for {quantity} tons of {product|title}. (#{order.id})",
+                notification_type='new_order',
+                actor_id=current_user.id,
+                related_id=order.id,
+                related_type='order'
             )
 
             # ✅ افزودن و ذخیره در یک تراکنش واحد
             db.session.add(order)
             db.session.add(notification)
             db.session.commit()
+            
+            # Send real-time notification via Celery
+            try:
+                from tasks.social_notifications import send_notification_task
+                send_notification_task.delay(seller.id, {
+                    'title': 'New Order Received',
+                    'message': f"You received a new order from {current_user.username}!",
+                    'type': 'new_order',
+                    'actor_id': current_user.id,
+                    'related_id': order.id,
+                    'related_type': 'order'
+                })
+            except Exception as e:
+                print(f"Celery not available: {e}")
 
             flash("✅ Order successfully placed.")
             return redirect(url_for('users.my_orders'))
@@ -953,6 +972,54 @@ def seller_orders():
     return render_template('users/producer_orders.html', orders=orders)
 
 
+@users_bp.route('/order/<int:order_id>/cancel', methods=['POST'])
+@login_required
+def cancel_order(order_id):
+    """Cancel a pending order (buyer only)"""
+    order = Order.query.get_or_404(order_id)
+    
+    # Only buyer or admin can cancel
+    if order.buyer_id != current_user.id and current_user.role != Role.ADMIN:
+        flash("❌ You can only cancel your own orders.")
+        return redirect(url_for('users.my_orders'))
+    
+    if order.status == OrderStatus.PENDING:
+        order.status = OrderStatus.CANCELLED
+        
+        # Notify seller
+        from models.notification import Notification
+        notification = Notification(
+            user_id=order.seller_id,
+            title='Order Cancelled',
+            message=f"Order (#{order.id}) for {order.quantity_tons} tons of {order.product|title} was cancelled by the buyer.",
+            notification_type='order_cancelled_by_buyer',
+            actor_id=current_user.id,
+            related_id=order.id,
+            related_type='order'
+        )
+        db.session.add(notification)
+        
+        try:
+            from tasks.social_notifications import send_notification_task
+            send_notification_task.delay(order.seller_id, {
+                'title': 'Order Cancelled',
+                'message': f"Order (#{order.id}) was cancelled by the buyer.",
+                'type': 'order_cancelled_by_buyer',
+                'actor_id': current_user.id,
+                'related_id': order.id,
+                'related_type': 'order'
+            })
+        except Exception as e:
+            print(f"Celery not available: {e}")
+        
+        db.session.commit()
+        flash(f"🗑️ Order #{order_id} has been cancelled.")
+    else:
+        flash("⚠️ This order cannot be cancelled as it has already been processed.")
+    
+    return redirect(url_for('users.my_orders'))
+
+
 # -------------------------------
 # تأیید سفارش توسط فروشنده
 # -------------------------------
@@ -973,9 +1040,29 @@ def confirm_order(order_id):
         from models.notification import Notification
         notification = Notification(
             user_id=order.buyer_id,
-            message=f"Your order (#{order.id}) was confirmed by {current_user.username} ."
+            title='Order Confirmed',
+            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product|title} was confirmed by {current_user.username}.",
+            notification_type='order_confirmed',
+            actor_id=current_user.id,
+            related_id=order.id,
+            related_type='order'
         )
         db.session.add(notification)
+        
+        # Send real-time notification
+        try:
+            from tasks.social_notifications import send_notification_task
+            send_notification_task.delay(order.buyer_id, {
+                'title': 'Order Confirmed',
+                'message': f"Your order (#{order.id}) was confirmed!",
+                'type': 'order_confirmed',
+                'actor_id': current_user.id,
+                'related_id': order.id,
+                'related_type': 'order'
+            })
+        except Exception as e:
+            print(f"Celery not available: {e}")
+        
         db.session.commit()
 
         flash("✅ The order was confirmed and the notification was sent")
@@ -999,12 +1086,130 @@ def reject_order(order_id):
 
     if order.status == OrderStatus.PENDING:
         order.status = OrderStatus.CANCELLED
+        
+        # ارسال اعلان به خریدار
+        from models.notification import Notification
+        notification = Notification(
+            user_id=order.buyer_id,
+            title='Order Rejected',
+            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product|title} was rejected by {current_user.username}.",
+            notification_type='order_cancelled',
+            actor_id=current_user.id,
+            related_id=order.id,
+            related_type='order'
+        )
+        db.session.add(notification)
+        
+        # Send real-time notification
+        try:
+            from tasks.social_notifications import send_notification_task
+            send_notification_task.delay(order.buyer_id, {
+                'title': 'Order Rejected',
+                'message': f"Your order (#{order.id}) was rejected.",
+                'type': 'order_cancelled',
+                'actor_id': current_user.id,
+                'related_id': order.id,
+                'related_type': 'order'
+            })
+        except Exception as e:
+            print(f"Celery not available: {e}")
+        
         db.session.commit()
         flash(f"🗑️ Order #{order_id} rejected.")
     else:
         flash("⚠️ This order has already changed status.")
 
     return redirect(url_for('users.seller_orders'))
+
+
+# -------------------------------
+# Update Order Status (In Transit / Delivered)
+# -------------------------------
+@users_bp.route('/order/<int:order_id>/update-status', methods=['POST'])
+@login_required
+def update_order_status(order_id):
+    """Update order status to in_transit or delivered"""
+    order = Order.query.get_or_404(order_id)
+    
+    # Only seller can update to in_transit, only admin or seller can mark as delivered
+    if current_user.role not in [Role.PRODUCER, Role.ADMIN]:
+        flash("❌ Unauthorized access.")
+        return redirect(url_for('users.my_orders'))
+    
+    if order.seller_id != current_user.id and current_user.role != Role.ADMIN:
+        flash("❌ You can only update your own orders.")
+        return redirect(url_for('users.seller_orders'))
+    
+    new_status = request.form.get('status')
+    
+    if new_status == 'in_transit' and order.status == OrderStatus.CONFIRMED:
+        order.status = OrderStatus.IN_TRANSIT
+        order.shipped_at = datetime.now(tehran_tz)
+        
+        # Notify buyer
+        from models.notification import Notification
+        notification = Notification(
+            user_id=order.buyer_id,
+            title='Order Shipped',
+            message=f"Your order (#{order.id}) has been shipped and is in transit.",
+            notification_type='order_shipped',
+            actor_id=current_user.id,
+            related_id=order.id,
+            related_type='order'
+        )
+        db.session.add(notification)
+        
+        try:
+            from tasks.social_notifications import send_notification_task
+            send_notification_task.delay(order.buyer_id, {
+                'title': 'Order Shipped',
+                'message': f"Your order (#{order.id}) is on its way!",
+                'type': 'order_shipped',
+                'actor_id': current_user.id,
+                'related_id': order.id,
+                'related_type': 'order'
+            })
+        except Exception as e:
+            print(f"Celery not available: {e}")
+        
+        flash("✅ Order status updated to In Transit")
+        
+    elif new_status == 'delivered' and order.status == OrderStatus.IN_TRANSIT:
+        order.status = OrderStatus.DELIVERED
+        order.delivered_at = datetime.now(tehran_tz)
+        
+        # Notify buyer
+        from models.notification import Notification
+        notification = Notification(
+            user_id=order.buyer_id,
+            title='Order Delivered',
+            message=f"Your order (#{order.id}) has been delivered successfully.",
+            notification_type='order_delivered',
+            actor_id=current_user.id,
+            related_id=order.id,
+            related_type='order'
+        )
+        db.session.add(notification)
+        
+        try:
+            from tasks.social_notifications import send_notification_task
+            send_notification_task.delay(order.buyer_id, {
+                'title': 'Order Delivered',
+                'message': f"Your order (#{order.id}) has been delivered!",
+                'type': 'order_delivered',
+                'actor_id': current_user.id,
+                'related_id': order.id,
+                'related_type': 'order'
+            })
+        except Exception as e:
+            print(f"Celery not available: {e}")
+        
+        flash("✅ Order marked as Delivered")
+    else:
+        flash("⚠️ Cannot update order status at this stage.")
+    
+    db.session.commit()
+    return redirect(url_for('users.seller_orders') if current_user.role == Role.PRODUCER else url_for('users.my_orders'))
 
 
 @users_bp.route('/notifications')
