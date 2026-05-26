@@ -545,6 +545,10 @@ def admin_chat_with_user(user_id):
 # صفحه ورود
 @admin_bp.route('/login')
 def login():
+    # اگر اولین ادمین وجود ندارد، به صفحه ساخت ادمین هدایت کن
+    admin_exists = User.query.filter_by(role=Role.ADMIN).first()
+    if not admin_exists:
+        return redirect(url_for('admin.create_first_admin'))
     return render_template('admin/login.html', current_year=datetime.now().year)
 
 # پردازش ورود
@@ -568,3 +572,94 @@ def login_post():
         flash("❌ The email or password is incorrect.", "error")
 
     return redirect(url_for('admin.login'))
+
+
+# ---------------------------------------
+# ساخت اولین ادمین (فقط زمانی که هیچ ادمینی وجود ندارد)
+# ---------------------------------------
+@admin_bp.route('/create-first-admin', methods=['GET', 'POST'])
+def create_first_admin():
+    # بررسی اینکه آیا ادمینی وجود دارد یا خیر
+    admin_exists = User.query.filter_by(role=Role.ADMIN).first()
+    
+    if admin_exists:
+        flash("⚠️ Admin already exists. Please log in.", "warning")
+        return redirect(url_for('admin.login'))
+    
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '')
+        confirm_password = request.form.get('confirm_password', '')
+        
+        # اعتبارسنجی
+        errors = []
+        
+        if not username or len(username) < 3:
+            errors.append("Username must be at least 3 characters.")
+        
+        if not email or '@' not in email:
+            errors.append("Please enter a valid email address.")
+        
+        if not password or len(password) < 8:
+            errors.append("Password must be at least 8 characters.")
+        
+        if password != confirm_password:
+            errors.append("Passwords do not match.")
+        
+        # بررسی تکراری بودن ایمیل
+        if User.query.filter_by(email=email).first():
+            errors.append("This email is already registered.")
+        
+        # بررسی تکراری بودن نام کاربری
+        if User.query.filter_by(username=username).first():
+            errors.append("This username is already taken.")
+        
+        if errors:
+            for error in errors:
+                flash(f"❌ {error}", "error")
+            return render_template('admin/create_first_admin.html', 
+                                 username=username, 
+                                 email=email,
+                                 current_year=datetime.now().year)
+        
+        # ساخت کاربر ادمین
+        from werkzeug.security import generate_password_hash
+        from models.user import MembershipTier
+        
+        admin_user = User(
+            username=username,
+            email=email,
+            password_hash=generate_password_hash(password),
+            role=Role.ADMIN,
+            is_active=True,
+            is_verified=True,
+            is_kyc_verified=True,
+            is_premium=True,
+            membership_tier=MembershipTier.ELITE,
+            trust_score_value=100,
+            premium_since=datetime.now(tehran_tz)
+        )
+        
+        db.session.add(admin_user)
+        db.session.commit()
+        
+        # لاگ فعالیت
+        from models.auth import ActivityLog
+        activity = ActivityLog(
+            user_id=admin_user.id,
+            action='first_admin_created',
+            ip_address=request.remote_addr,
+            user_agent=request.headers.get('User-Agent', '')[:255],
+            details='First admin account created automatically'
+        )
+        db.session.add(activity)
+        db.session.commit()
+        
+        flash("✅ First admin account created successfully! Please log in.", "success")
+        return redirect(url_for('admin.login'))
+    
+    return render_template('admin/create_first_admin.html', 
+                         username='', 
+                         email='',
+                         current_year=datetime.now().year)

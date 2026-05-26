@@ -20,3 +20,13 @@
 {"timestamp": "2026-05-26 21:51:26,625", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 547}
 {"timestamp": "2026-05-26 21:51:26,626", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 551}
 {"timestamp": "2026-05-26 21:52:40,347", "level": "WARNING", "message": "Slow request: POST /admin/login took 1.0984s", "module": "app", "lineno": 160}
+{"timestamp": "2026-05-26 19:09:12,954", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-26 19:09:26,239", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-26 19:09:26,599", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-26 19:09:34,818", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-26 19:09:35,152", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-26 19:09:46,740", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-26 19:09:46,993", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-26 19:09:47,893", "level": "INFO", "message": "Exhibition module initialized successfully.", "module": "app", "lineno": 545}
+{"timestamp": "2026-05-26 19:09:47,914", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 551}
+{"timestamp": "2026-05-26 19:09:47,915", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 555}
