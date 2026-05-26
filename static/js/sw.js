@@ -1,5 +1,6 @@
 // static/js/sw.js - Enhanced PWA Service Worker
-const CACHE_NAME = 'metisma-v2';
+const CACHE_VERSION = 'v3';
+const CACHE_NAME = `metisma-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
 // ✅ Enhanced cache list - now caches more essential resources
@@ -11,7 +12,7 @@ const urlsToCache = [
     '/static/icons/icon-512.png',
     '/static/manifest.json',
     OFFLINE_URL,
-    // Cache common fonts
+    // Cache common fonts (local fallback)
     '/static/fonts/Vazirmatn-Regular.woff2',
     '/static/fonts/Vazirmatn-Bold.woff2'
 ];

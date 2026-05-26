@@ -38,39 +38,56 @@
             text-align: left;
         }
         
-        <!-- Inter Font for English (Google Fonts CDN with fallback) -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <!-- Vazirmatn Font for Persian (Local files) -->
-        @font-face {
-            font-family: 'Vazirmatn';
-            src: url('/static/fonts/Vazirmatn-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-display: swap;
-            unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
-        }
-
-        @font-face {
-            font-family: 'Vazirmatn';
-            src: url('/static/fonts/Vazirmatn-Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-display: swap;
-            unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
-        }
-    </style>
+    <!-- Fonts Strategy: Inter for English + Vazirmatn for Persian -->
+    <!-- Preconnect to Google Fonts for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- System font fallback -->
+    <!-- Inter Font for English/Latin characters -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Vazirmatn Font for Persian/Arabic characters (CDN fallback + local) -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Vazirmatn', Tahoma, sans-serif;
+        /* Safe area insets for mobile devices */
+        :root {
+            --safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-inset-left: env(safe-area-inset-left, 0px);
+            --safe-area-inset-right: env(safe-area-inset-right, 0px);
         }
         
-        /* Mobile touch targets - minimum 44x44px */
-        button, a, input, select, textarea {
+        /* Font Stack: Inter for Latin, Vazirmatn for Persian/Arabic */
+        body {
+            font-family: 'Inter', 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', Roboto, Tahoma, sans-serif;
+            font-feature-settings: 'liga' 1, 'calt' 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Force Vazirmatn for Persian/Arabic text */
+        [lang="fa"], .fa-text, body:lang(fa) {
+            font-family: 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Tahoma, sans-serif;
+        }
+        
+        /* RTL Support */
+        html[dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        html[dir="rtl"] .ltr-content,
+        html[dir="rtl"] .en-text {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        /* Mobile touch targets - minimum 44x44px for accessibility */
+        button, a, input, select, textarea, [role="button"] {
             min-height: 44px;
             min-width: 44px;
+            touch-action: manipulation;
         }
         
         /* Adjust for safe areas */
