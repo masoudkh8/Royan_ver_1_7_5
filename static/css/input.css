@@ -4,8 +4,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* فونت‌ها */
-  --font-sans: 'Vazirmatn', Tahoma, sans-serif;
+  /* فونت‌ها - ترکیب بهینه برای فارسی و انگلیسی */
+  /* Inter برای انگلیسی + Vazirmatn برای فارسی */
+  --font-sans: 'Inter', 'Vazirmatn', Tahoma, sans-serif;
   
   /* ✅ رنگ‌های طلایی */
   --color-gold: #d4af37;

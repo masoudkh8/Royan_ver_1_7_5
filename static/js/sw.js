@@ -1,5 +1,5 @@
 // static/js/sw.js - Enhanced PWA Service Worker
-const CACHE_NAME = 'metisma-v1';
+const CACHE_NAME = 'metisma-v2';
 const OFFLINE_URL = '/offline.html';
 
 // ✅ Enhanced cache list - now caches more essential resources
