@@ -1,1 +1,15 @@
 Nothing needs to be added to .gitignore since the changes only include HTML templates and Python route files, which are source code/config files and not build artifacts, dependencies, or temporary files.
+
+__pycache__/
+/__pycache__
+*.pyc
+logs
+*.log
+static/uploads/
+.venv/
+.idea/
+*.pyc
+/*.pyc
+*.pyc/
+/*.pyc/
+models/__pycache__/*.pyc

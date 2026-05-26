@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+
+from flask import render_template, redirect, url_for, flash, request, jsonify
 from flask_login import login_required, current_user
 from models import db
 from models.user import User, UserProfile, Role
@@ -6,7 +7,9 @@ from services.permissions import Permission, DEFAULT_ROLE_PERMISSIONS
 from services.access_control import role_required, permission_required, get_user_permissions, has_permission
 import json
 
-users_bp = Blueprint('users', __name__, url_prefix='/users')
+# users_bp = Blueprint('users', __name__, url_prefix='/users')
+# استفاده از users_bp مشترک از __init__.py
+from . import users_bp
 
 
 @users_bp.route('/profile/permissions', methods=['GET', 'POST'])
