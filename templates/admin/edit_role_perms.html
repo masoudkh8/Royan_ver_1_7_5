@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}ویرایش مجوزهای نقش {{ role.value }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>ویرایش مجوزهای پیش‌فرض نقش: {{ role.value }}</h2>
+        <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-secondary">بازگشت به داشبورد</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">تنظیم مجوزهای این نقش</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="row">
+                    {% for perm in permissions %}
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check border p-2 rounded {% if perm in current_perms %}bg-light{% endif %}">
+                            <input class="form-check-input" type="checkbox" name="permissions" 
+                                   value="{{ perm.name }}" id="perm_{{ perm.name }}"
+                                   {% if perm in current_perms %}checked{% endif %}>
+                            <label class="form-check-label font-weight-normal" for="perm_{{ perm.name }}">
+                                {{ perm.value }}
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <hr>
+                
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success btn-lg">ذخیره تغییرات</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="window.history.back()">انصراف</button>
+                </div>
+            </form>
+
+            <div class="alert alert-info mt-4">
+                <strong>توجه:</strong> این تغییرات روی تمام کاربرانی که این نقش را دارند تأثیر می‌گذارد، مگر اینکه برای کاربر خاصی مجوز سفارشی تعریف کرده باشید.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
