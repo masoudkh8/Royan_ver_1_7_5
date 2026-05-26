@@ -288,7 +288,7 @@ def register():
                 username=username, email=email, password_hash=hashed,
                 role=Role(role), company_name=company, country=country, phone=phone,
                 expertise_area=expertise_area, job_title=job_title, bio=bio, website=website,
-                trust_score_value=50,
+                trust_score_value=0,  # شروع با امتیاز صفر برای سخت‌گیری Trust Score
                 is_email_verified=False,
                 registered_at=datetime.now(tehran_tz)
             )
