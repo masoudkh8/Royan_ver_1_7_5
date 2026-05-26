@@ -802,7 +802,7 @@ def profile():
     buyer = User.query.filter_by(role=Role.BUYER, is_active=True).first()
     broker = User.query.filter_by(role=Role.BROKER, is_premium=True, is_active=True).first()
 
-    return render_template('users/dashboard.html', 
+    return render_template('users/profile.html', 
                           user=current_user,
                           support_user=support_user,
                           pending_orders=pending_orders,
