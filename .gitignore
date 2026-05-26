@@ -1,1 +1,1 @@
-Nothing needs to be added to the .gitignore file based on the provided file changes. The changes consist only of source files (.js, .css, .json, .html) which should not be ignored.
+Nothing needs to be added to .gitignore since only a markdown file (TECHNICAL_MASTER_PLAN.md) was added, which is source content that should be tracked in version control.
