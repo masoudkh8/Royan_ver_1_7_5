@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_pwa.html" %}
 
 {% block title %}ویرایش مجوزهای نقش {{ role.value }}{% endblock %}
 
@@ -182,7 +182,7 @@
                 <p class="mb-0 opacity-75">دسترسی‌های این نقش را تنظیم کنید. تغییرات روی تمام کاربران با این نقش تأثیر می‌گذارد.</p>
             </div>
             <div class="col-md-4 text-left">
-                <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-light action-btn">
+                <a href="{{ url_for('admin.admin_perms.permission_dashboard') }}" class="btn btn-light action-btn">
                     <i class="fas fa-arrow-right ml-1"></i>بازگشت به داشبورد
                 </a>
             </div>
@@ -190,6 +190,7 @@
     </div>
     
     <form method="POST" id="permissionsForm">
+     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         {% set categories = {
             'ORDER': {'title': 'مدیریت سفارشات', 'icon': '📦', 'class': 'group-order'},
             'LOGISTICS': {'title': 'لجستیک و حمل‌ونقل', 'icon': '🚚', 'class': 'group-logistics'},
@@ -203,7 +204,15 @@
         } %}
         
         {% for category, info in categories.items() %}
-        {% set category_perms = permissions|selectattr('name', 'startswith', category)|list %}
+{#        {% set category_perms = permissions|selectattr('name', 'startswith', category)|list %}#}
+
+        {% set category_perms = [] %}
+        {% for perm in permissions %}
+            {% if perm.name.startswith(category) %}
+                {% set _ = category_perms.append(perm) %}
+            {% endif %}
+        {% endfor %}
+
         {% if category_perms %}
         <div class="permission-group">
             <div class="permission-group-header">

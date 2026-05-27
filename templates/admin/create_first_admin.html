@@ -314,6 +314,7 @@
             
             <!-- Form -->
             <form method="POST" action="{{ url_for('admin.create_first_admin') }}" id="createForm">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <!-- Username -->
                 <div class="form-group">
                     <label class="form-label" for="username">

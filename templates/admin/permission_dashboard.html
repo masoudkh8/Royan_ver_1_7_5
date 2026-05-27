@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_pwa.html" %}
 
 {% block title %}مدیریت دسترسی‌ها و مجوزها{% endblock %}
 
@@ -387,7 +387,7 @@
             
             <div class="mt-4 d-flex flex-wrap gap-2">
                 {% for role_name in ['ADMIN', 'PRODUCER', 'BUYER', 'LOGISTICS', 'LEGAL', 'TECH_PARTNER', 'INVESTOR', 'CORPORATE_AGENT', 'BROKER'] %}
-                <a href="{{ url_for('admin_perms.edit_role_permissions', role_name=role_name) }}" 
+                <a href="{{ url_for('admin.admin_perms.edit_role_permissions', role_name=role_name) }}"
                    class="btn action-btn action-btn-primary btn-sm">
                     <i class="fas fa-edit ml-1"></i>ویرایش {{ roles|selectattr('name', 'equalto', role_name)|first|default(role_name)|attr('value') }}
                 </a>
@@ -409,8 +409,9 @@
                             <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>اعطای مجوز استثنایی به کاربر</h5>
                         </div>
                         <div class="card-body">
-                            <form method="GET" action="{{ url_for('admin_perms.manage_user_permissions', user_id=0) }}" 
+                            <form method="GET" action="{{ url_for('admin.admin_perms.manage_user_permissions', user_id=0) }}"
                                   class="mb-4">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                 <label class="font-weight-bold mb-2">انتخاب کاربر:</label>
                                 <select name="user_id" class="form-control filter-select" required 
                                         onchange="this.form.submit()">

@@ -183,7 +183,7 @@ def create_first_admin():
             flash("❌ An error occurred while creating the admin.")
             return redirect(url_for('users.create_first_admin'))
 
-    return render_template('create_first_admin.html')
+    return render_template('admin/create_first_admin.html')
 
 
 ##############
@@ -950,7 +950,7 @@ def cancel_order(order_id):
         notification = Notification(
             user_id=order.seller_id,
             title='Order Cancelled',
-            message=f"Order (#{order.id}) for {order.quantity_tons} tons of {order.product|title} was cancelled by the buyer.",
+            message=f"Order (#{order.id}) for {order.quantity_tons} tons of {order.product.title()} was cancelled by the buyer.",
             notification_type='order_cancelled_by_buyer',
             actor_id=current_user.id,
             related_id=order.id,
@@ -1001,7 +1001,7 @@ def confirm_order(order_id):
             user_id=order.buyer_id,
             # message=f"Your order (#{order.id}) was confirmed by {current_user.username} ."
             title='Order Confirmed',
-            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product | title} was confirmed by {current_user.username}.",
+            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product.title()} was confirmed by {current_user.username}.",
             notification_type='order_confirmed',
             actor_id=current_user.id,
             related_id=order.id,
@@ -1054,7 +1054,7 @@ def reject_order(order_id):
         notification = Notification(
             user_id=order.buyer_id,
             title='Order Rejected',
-            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product|title} was rejected by {current_user.username}.",
+            message=f"Your order (#{order.id}) for {order.quantity_tons} tons of {order.product.title()} was rejected by {current_user.username}.",
             notification_type='order_cancelled',
             actor_id=current_user.id,
             related_id=order.id,
@@ -1663,13 +1663,16 @@ def upload_documents():
 
         # پردازش پاسپورت
         passport_file = request.files.get('passport_file')
+
+
         if passport_file and passport_file.filename != '':
             is_valid, error_msg = validate_file(passport_file)
             if not is_valid:
                 flash(f"❌ {error_msg}", "error")
                 return redirect(url_for('users.upload_documents'))
 
-            filename = secure_filename(f"passport_{passport_file.filename}")
+            filename = secure_filename(f"passport.+{passport_file.filename.rsplit('.', 1)[1].lower()}")
+            # filename = secure_filename(f"passport_{current_user.id}_{current_user.username}+")
             passport_file.save(os.path.join(upload_folder, filename))
             req.passport_file = filename
             files_uploaded = True
@@ -1682,7 +1685,8 @@ def upload_documents():
                 flash(f"❌ {error_msg}", "error")
                 return redirect(url_for('users.upload_documents'))
 
-            filename = secure_filename(f"license_{license_file.filename}")
+            filename = secure_filename(f"license.+{license_file.filename.rsplit('.', 1)[1].lower()}")
+            # filename = secure_filename(f"license_{req.user.id}_{req.user.username}")
             license_file.save(os.path.join(upload_folder, filename))
             req.license_file = filename
             files_uploaded = True
@@ -1733,7 +1737,8 @@ def make_payment():
                 unique_f = f"{current_user.id}_{current_user.username}"
                 upload_folder = f'static/uploads/documents/user_{unique_f}/'
 
-                filename = secure_filename(f"receipt_{current_user.id}_{file.filename}")
+                filename = secure_filename(f"receipt.+{file.filename.rsplit('.', 1)[1].lower()}")
+                # filename = secure_filename(f"receipt_{current_user.id}_{current_user.username}")
                 file.save(os.path.join(upload_folder, filename))
                 req.payment_receipt = filename
 

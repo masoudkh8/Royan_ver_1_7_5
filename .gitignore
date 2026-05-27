@@ -1,1 +1,10 @@
-Nothing needs to be added to the .gitignore file based on the provided file changes. The changes consist only of source files (.js, .css, .json, .html) which should not be ignored.
+.venv
+.venv/
+.idea
+.idea/
+*.pyc
+__pycache__
+__pycache__/
+/*.pyc
+/*.pyc/
+static/uploads/

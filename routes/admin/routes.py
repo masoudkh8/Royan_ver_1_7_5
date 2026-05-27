@@ -653,11 +653,9 @@ def create_first_admin():
         # لاگ فعالیت
         from models.auth import ActivityLog
         activity = ActivityLog(
-            user_id=admin_user.id,
-            action='first_admin_created',
-            ip_address=request.remote_addr,
-            user_agent=request.headers.get('User-Agent', '')[:255],
-            details='First admin account created automatically'
+            activity_type='first_admin_created',
+            description='First admin account created automatically',
+            request=request
         )
         db.session.add(activity)
         db.session.commit()

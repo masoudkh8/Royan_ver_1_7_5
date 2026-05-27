@@ -55,7 +55,7 @@
                         <p class="text-xs text-gray-500 dark:text-slate-400">{{ doc.filename }}</p>
                         <p class="text-xs text-gray-500 dark:text-slate-400">{{ doc.uploaded_at }}</p>
                     </div>
-                    <a href="{{ url_for('static', filename='uploads/documents/' + doc.filename) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium transition">مشاهده فایل</a>
+                    <a href="{{ url_for('static', filename='uploads/documents/user_'+user.id|string+'_'+ user.username|string+ '/'  + doc) }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium transition">مشاهده فایل</a>
                 </div>
                 {% endfor %}
             </div>

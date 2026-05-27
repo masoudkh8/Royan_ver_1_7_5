@@ -48,7 +48,7 @@ def edit_role_permissions(role_name):
         target_role = Role[role_name.upper()]
     except KeyError:
         flash("نقش نامعتبر است.", "error")
-        return redirect(url_for('admin_perms.permission_dashboard'))
+        return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     if request.method == 'POST':
         # در نسخه پیشرفته، این مقادیر باید در دیتابیس ذخیره شوند
@@ -58,7 +58,7 @@ def edit_role_permissions(role_name):
         # اینجا لاجیک ذخیره‌سازی در دیتابیس برای_override کردن پیش‌فرض‌ها قرار می‌گیرد
         # برای سادگی فعلاً پیام موفقیت نشان می‌دهیم
         flash(f"تنظیمات نقش {target_role.value} با موفقیت به‌روزرسانی شد. ({len(selected_perms)} مجوز فعال)", "success")
-        return redirect(url_for('admin_perms.permission_dashboard'))
+        return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     current_perms = get_role_permissions(target_role)
     return render_template('admin/edit_role_perms.html', 
@@ -79,7 +79,7 @@ def manage_user_permissions(user_id):
         
         if not perm_name or perm_name not in Permission.__members__:
             flash("مجوز نامعتبر است.", "error")
-            return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+            return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
             
         perm_enum = Permission[perm_name]
         
@@ -99,7 +99,7 @@ def manage_user_permissions(user_id):
                 flash(f"مجوز {perm_enum.value} از کاربر {user.username} حذف شد.", "warning")
                 
         db.session.commit()
-        return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+        return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
     
     # محاسبه مجوزهای نهایی کاربر
     base_perms = get_role_permissions(user.role)
