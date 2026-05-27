@@ -1,10 +1,20 @@
-.venv
-.venv/
-.idea
-.idea/
+```
+# Compiled and build artifacts
+*.mo
 *.pyc
-__pycache__
 __pycache__/
-/*.pyc
-/*.pyc/
-static/uploads/
+
+# Dependencies
+venv/
+.venv/
+.env
+.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Editors
+.vscode/
+.idea/
+```
