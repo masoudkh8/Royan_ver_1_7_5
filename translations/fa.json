@@ -21,7 +21,8 @@
     "close": "بستن",
     "confirm": "تأیید",
     "yes": "بله",
-    "no": "خیر"
+    "no": "خیر",
+    "tip": "نکته"
   },
   "roles": {
     "buyer": "خریدار",
@@ -245,7 +246,13 @@
     "commented_on_your_post": "روی پست شما نظر داد",
     "replied_to_your_comment": "به نظر شما پاسخ داد",
     "liked_your_comment": "نظر شما را پسندید",
-    "shared_your_post": "پست شما را اشتراک‌گذاری کرد"
+    "shared_your_post": "پست شما را اشتراک‌گذاری کرد",
+    "total_score": "امتیاز کل",
+    "identity_verified": "هویت تأیید شده",
+    "expertise_verified": "تخصص تأیید شده",
+    "social_dynamic": "اجتماعی و پویا",
+    "trust_progress": "پیشرفت اعتماد",
+    "trust_tip": "با تکمیل مدارک و فعالیت‌های بیشتر، امتیاز اعتماد خود را افزایش دهید"
   },
   "registration": {
     "create_account_subtitle": "ایجاد حساب کاربری جدید در پلتفرم متیسم",
@@ -285,5 +292,20 @@
     "confirm_password": "تأیید رمز عبور",
     "password_include_upper_lower": "شامل حروف بزرگ و کوچک باشد",
     "password_include_number": "شامل اعداد باشد"
+  },
+  "security": {
+    "two_factor_auth": "احراز هویت دو مرحله‌ای",
+    "two_factor_desc": "امنیت حساب کاربری خود را با تأیید دو مرحله‌ای افزایش دهید",
+    "two_factor_enabled": "احراز هویت دو مرحله‌ای فعال است",
+    "two_factor_active_msg": "حساب شما با احراز هویت دو مرحله‌ای محافظت می‌شود",
+    "enter_code_to_disable": "برای غیرفعال‌سازی کد را وارد کنید",
+    "disable_2fa": "غیرفعال‌سازی 2FA",
+    "confirm_disable_2fa": "آیا از غیرفعال‌سازی احراز هویت دو مرحله‌ای اطمینان دارید؟",
+    "two_factor_disabled": "احراز هویت دو مرحله‌ای غیرفعال است",
+    "two_factor_inactive_msg": "برای افزایش امنیت حساب، احراز هویت دو مرحله‌ای را فعال کنید",
+    "two_factor_benefit_1": "محافظت در برابر دسترسی غیرمجاز",
+    "two_factor_benefit_2": "نیاز به کد موبایل علاوه بر رمز عبور",
+    "two_factor_benefit_3": "امنیت بیشتر برای معاملات و اطلاعات",
+    "enable_2fa_btn": "فعال‌سازی احراز هویت دو مرحله‌ای"
   }
 }

@@ -21,7 +21,8 @@
     "close": "Close",
     "confirm": "Confirm",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "tip": "Tip"
   },
   "roles": {
     "buyer": "Buyer",
@@ -245,7 +246,13 @@
     "commented_on_your_post": "commented on your post",
     "replied_to_your_comment": "replied to your comment",
     "liked_your_comment": "liked your comment",
-    "shared_your_post": "shared your post"
+    "shared_your_post": "shared your post",
+    "total_score": "Total Score",
+    "identity_verified": "Identity Verified",
+    "expertise_verified": "Expertise Verified",
+    "social_dynamic": "Social & Dynamic",
+    "trust_progress": "Trust Progress",
+    "trust_tip": "Increase your trust score by completing documents and activities"
   },
   "registration": {
     "create_account_subtitle": "Create a new account on Metisma platform",
@@ -285,5 +292,20 @@
     "confirm_password": "Confirm password",
     "password_include_upper_lower": "Include uppercase and lowercase letters",
     "password_include_number": "Include numbers"
+  },
+  "security": {
+    "two_factor_auth": "Two-Factor Authentication",
+    "two_factor_desc": "Enhance your account security with two-factor authentication",
+    "two_factor_enabled": "Two-Factor Authentication Enabled",
+    "two_factor_active_msg": "Your account is protected with 2FA",
+    "enter_code_to_disable": "Enter code to disable",
+    "disable_2fa": "Disable 2FA",
+    "confirm_disable_2fa": "Are you sure you want to disable two-factor authentication?",
+    "two_factor_disabled": "Two-Factor Authentication Disabled",
+    "two_factor_inactive_msg": "Enable 2FA to increase your account security",
+    "two_factor_benefit_1": "Protection against unauthorized access",
+    "two_factor_benefit_2": "Requires mobile code in addition to password",
+    "two_factor_benefit_3": "Enhanced security for transactions and data",
+    "enable_2fa_btn": "Enable Two-Factor Authentication"
   }
 }
