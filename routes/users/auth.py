@@ -522,6 +522,95 @@ def disable_2fa():
     return redirect(url_for('users.profile'))
 
 
+# ==================== تأیید 2FA هنگام ورود ====================
+
+@users_bp.route('/verify_2fa_login', methods=['GET', 'POST'])
+def verify_2fa_login():
+    """صفحه تأیید کد 2FA هنگام ورود"""
+    # بررسی وجود کاربر در session
+    user_id = session.get('2fa_pending_user_id')
+    if not user_id:
+        flash("❌ No pending login found. Please log in first.", "warning")
+        return redirect(url_for('users.login'))
+    
+    user = User.query.get(user_id)
+    if not user or not user.two_factor_enabled:
+        # اگر 2FA غیرفعال شد، به پروفایل برگرد
+        session.pop('2fa_pending_user_id', None)
+        session.pop('2fa_remember_me', None)
+        return redirect(url_for('users.login'))
+    
+    if request.method == 'POST':
+        code = request.form.get('code')
+        backup_code = request.form.get('backup_code')
+        
+        verified = False
+        
+        # بررسی کد TOTP
+        if code:
+            totp = pyotp.TOTP(user.two_factor_secret)
+            # پنجره زمانی برای اختلاف ساعت (valid for 30 seconds before/after)
+            verified = totp.verify(code, valid_window=1)
+        
+        # بررسی کد پشتیبان
+        if not verified and backup_code:
+            import json
+            if user.backup_codes:
+                try:
+                    codes = json.loads(user.backup_codes)
+                    if backup_code in codes:
+                        codes.remove(backup_code)
+                        user.backup_codes = json.dumps(codes)
+                        verified = True
+                except:
+                    pass
+        
+        if verified:
+            remember_me = session.get('2fa_remember_me', False)
+            
+            # لاگ فعالیت ورود موفق
+            ActivityLog.log_activity(
+                user_id=user.id,
+                activity_type='login_2fa_verified',
+                description='Successful 2FA verification during login',
+                request=request,
+                success=True
+            )
+            
+            # ایجاد جلسه جدید
+            login_session = LoginSession.create_session(
+                user=user,
+                request=request,
+                remember_me=remember_me
+            )
+            session_token = login_session.session_token
+            
+            login_user(user, remember=remember_me)
+            
+            # پاک کردن session موقت
+            session.pop('2fa_pending_user_id', None)
+            session.pop('2fa_remember_me', None)
+            
+            # ذخیره توکن جلسه در cookie
+            response = redirect(url_for('users.profile'))
+            response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
+            
+            flash("✅ Welcome! Two-factor authentication successful.", "success")
+            return response
+        else:
+            flash("❌ The code entered is not valid. Please try again.", "error")
+            ActivityLog.log_activity(
+                user_id=user.id,
+                activity_type='login_2fa_failed',
+                description='Failed 2FA verification during login',
+                request=request,
+                success=False,
+                failure_reason='invalid_2fa_code'
+            )
+    
+    return render_template('users/verify_2fa_login.html', user=user)
+
+
 # ==================== مدیریت نشست‌ها ====================
 
 @users_bp.route('/sessions')

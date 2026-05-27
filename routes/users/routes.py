@@ -359,8 +359,13 @@ def register():
 @limiter.limit("10 per minute")  # Rate limiting برای جلوگیری از brute force
 def login():
 
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('users.profile'))
+    # اگر کاربر قبلاً لاگین کرده و 2FA فعال نیست، مستقیم به پروفایل برود
+    if current_user.is_authenticated and not current_user.two_factor_enabled:
+        return redirect(url_for('users.profile'))
+    
+    # اگر کاربر در حال گذر از مرحله 2FA است، اجازه نده دوباره لاگین کند
+    if session.get('2fa_pending_user_id'):
+        return redirect(url_for('users.verify_2fa_login'))
 
     if request.method == 'POST':
         email = request.form['email']
@@ -416,18 +421,27 @@ def login():
             ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login',
-                description='Successful login',
+                description='Successful password authentication',
                 request=request,
                 success=True
             )
             
+            # اگر 2FA فعال است، به صفحه تأیید کد برو
+            if user.two_factor_enabled:
+                # ذخیره اطلاعات موقت در session برای مرحله بعد
+                session['2fa_pending_user_id'] = user.id
+                session['2fa_remember_me'] = remember_me
+                flash("✅ Password verified. Please enter your 2FA code.", "info")
+                return redirect(url_for('users.verify_2fa_login'))
+            
+            # اگر 2FA فعال نیست، ادامه فرآیند ورود عادی
             # ایجاد جلسه جدید
-            session = LoginSession.create_session(
+            login_session = LoginSession.create_session(
                 user=user,
                 request=request,
                 remember_me=remember_me
             )
-            session_token = session.session_token
+            session_token = login_session.session_token
             
             login_user(user, remember=remember_me)
             
