@@ -1,6 +1,6 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}فعال‌سازی احراز هویت دو مرحله‌ای - متیسما{% endblock %}
+{% block title %}Enable Two-Factor Authentication - Metisma{% endblock %}
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
@@ -12,16 +12,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
                 </div>
-                <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">فعال‌سازی احراز هویت دو مرحله‌ای</h2>
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Enable Two-Factor Authentication</h2>
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    امنیت حساب کاربری خود را با تأیید دو مرحله‌ای افزایش دهید
+                    Increase your account security with two-factor authentication
                 </p>
             </div>
         </div>
 
         <!-- Step 1: QR Code -->
         <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">مرحله ۱: اسکن کد QR</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Step 1: Scan QR Code</h3>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ uri }}" 
@@ -30,13 +30,13 @@
                 </div>
                 <div class="text-center md:text-right">
                     <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                        ۱. اپلیکیشن Google Authenticator یا Authy را نصب کنید
+                        1. Install Google Authenticator or Authy app
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                        ۲. کد QR بالا را اسکن کنید
+                        2. Scan the QR code above
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                        ۳. یا کد زیر را به صورت دستی وارد کنید:
+                        3. Or enter the code below manually:
                     </p>
                     <div class="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600">
                         <code class="text-lg font-mono text-blue-600 dark:text-blue-400">{{ secret }}</code>
@@ -49,7 +49,7 @@
         <form class="mt-8 space-y-6" method="POST" action="{{ url_for('users.enable_2fa') }}">
             <div>
                 <label for="code" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    کد تأیید ۶ رقمی
+                    6-digit verification code
                 </label>
                 <div class="mt-1">
                     <input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6"
@@ -62,7 +62,7 @@
                            placeholder="000000" dir="ltr">
                 </div>
                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                    کد ۶ رقمی نمایش داده شده در اپلیکیشن را وارد کنید
+                    Enter the 6-digit code displayed in the app
                 </p>
             </div>
 
@@ -77,21 +77,21 @@
                     <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    فعال‌سازی احراز هویت دو مرحله‌ای
+                    Enable Two-Factor Authentication
                 </button>
             </div>
         </form>
 
         <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <p class="text-sm text-blue-800 dark:text-blue-200">
-                <strong>💡 نکته:</strong> پس از فعال‌سازی، کدهای پشتیبان را در مکان امنی ذخیره کنید. این کدها برای مواقع اضطراری استفاده می‌شوند.
+                <strong>💡 Tip:</strong> After activation, store backup codes in a secure location. These codes are used for emergencies.
             </p>
         </div>
 
         <div class="text-center">
             <a href="{{ url_for('users.profile') }}" 
                class="font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300">
-                ← انصراف و بازگشت به پروفایل
+                ← Cancel and return to profile
             </a>
         </div>
     </div>
