@@ -150,6 +150,7 @@ def dashboard():
     return render_template('users/dashboard.html', 
                          modules=modules, 
                          stats=stats,
+                         user=current_user,
                          user_role=current_user.role.value,
                          unread_notifications=unread_notifications,
                          document_status=document_status)
