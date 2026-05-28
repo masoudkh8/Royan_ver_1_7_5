@@ -10,6 +10,8 @@ import json
 import secrets
 from werkzeug.utils import secure_filename
 from metisma.services.email_service import generate_verification_token, send_verification_email ,verify_email_token
+from services.access_control import has_permission, permission_required
+from services.permissions import Permission
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
@@ -937,8 +939,9 @@ def my_orders():
 @users_bp.route('/seller/orders')
 @login_required
 def seller_orders():
-    if current_user.role != Role.PRODUCER:
-        flash("❌ Only available to producers.")
+    # Check if user has permission to manage orders instead of just checking role
+    if not has_permission(current_user, Permission.ORDER_EDIT):
+        flash("❌ You do not have permission to manage orders.")
         return redirect(url_for('users.profile'))
 
     orders = Order.query.filter_by(seller_id=current_user.id).order_by(Order.created_at.desc()).all()

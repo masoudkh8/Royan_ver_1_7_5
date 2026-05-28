@@ -1,5 +1,35 @@
 ```
-# Logs and temp files
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Dependencies
+.venv/
+venv/
+env/
+.env
+.env.local
+.env.*
+
+# Logs
 *.log
-logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Build/distribution artifacts
+dist/
+build/
+*.egg-info/
+.coverage
+coverage/
+htmlcov/
+.mypy_cache/
+.pytest_cache/
 ```
