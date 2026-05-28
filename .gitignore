@@ -1,1 +1,1 @@
-(routes/users/permissions_routes.py, services/access_control.py, templates/users/manage_permissions.html)
+Nothing should be ignored based on the provided file changes. The only modified file is a template HTML file (`templates/admin/permission_dashboard.html`), which is a source file that should not be ignored.
