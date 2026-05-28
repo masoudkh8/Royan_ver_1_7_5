@@ -3,24 +3,24 @@
 
 {% block content %}
 <style>
-    /* ===== حذف فلش پیش‌فرض مرورگر ===== */
+    /* ===== Remove browser default arrow ===== */
     select {
-        -webkit-appearance: none !important; /* برای سافاری و کروم */
-        -moz-appearance: none !important;    /* برای فایرفاکس */
+        -webkit-appearance: none !important; /* For Safari and Chrome */
+        -moz-appearance: none !important;    /* For Firefox */
         appearance: none !important;
-        background-image: none !important;   /* حذف تصویر پس‌زمینه فلش */
+        background-image: none !important;   /* Remove arrow background image */
     }
 
-    /* فیکس مخصوص اینپوت‌های تاریخ و شماره در برخی مرورگرها */
+    /* Fix for date and number inputs in some browsers */
     select::-ms-expand {
         display: none;
     }
 
-    /* تنظیمات فلش سفارشی */
+    /* Custom arrow settings */
     .custom-select-arrow {
         pointer-events: none;
         z-index: 10;
-        background: transparent !important; /* اطمینان از شفاف بودن */
+        background: transparent !important; /* Ensure transparency */
     }
 </style>
 
@@ -834,7 +834,7 @@ function showTempMessage(el, msg, type = 'info') {
 // ===== Phone Input Functions (FIXED for datalist) =====
 
 function updatePhoneFromInput(code) {
-    const countryInput = $('#countryInput');  // ✅ اصلاح: countryInput به جای countryCode
+    const countryInput = $('#countryInput');  // ✅ Fixed: countryInput به جای countryCode
     const phoneInput = $('#phone');
 
     if (!countryInput || !phoneInput) return;
@@ -861,7 +861,7 @@ function formatPhoneInput(el) {
 }
 
 function updateFullPhone() {
-    const countryInput = $('#countryInput');  // ✅ اصلاح
+    const countryInput = $('#countryInput');  // ✅ Fixed
     const phoneInput = $('#phone');
     const phoneFull = $('#phoneFull');
 
@@ -887,7 +887,7 @@ async function checkAvailability(field, value) {
 
     checkTimeouts[field] = setTimeout(async () => {
         try {
-            // ✅ اصلاح شده: ارسال پارامترها به صورت field=...&value=...
+            // ✅ Fixed شده: ارسال پارامترها به صورت field=...&value=...
             {#const url = `/api/check-availability?field=${field}&value=${encodeURIComponent(value)}`;#}
             const url = `/api/check-availability?field=${encodeURIComponent(field)}&value=${encodeURIComponent(value)}`;
             const response = await fetch(url, {
@@ -1121,7 +1121,7 @@ $('#registerForm')?.addEventListener('submit', async function(e) {
             return false;
         }
 
-        // ✅ اصلاح: ارسال پارامترها به صورت field=...&value=...
+        // ✅ Fixed: ارسال پارامترها به صورت field=...&value=...
         const email = $('#email')?.value;
         const phoneFull = $('#phoneFull')?.value;
 
@@ -1129,7 +1129,7 @@ $('#registerForm')?.addEventListener('submit', async function(e) {
             const res = await fetch(`/api/check-availability?field=email&value=${encodeURIComponent(email)}`, {
                 headers: { 'Accept': 'application/json' }
             });
-            // چک کردن Content-Type برای جلوگیری از خطای JSON
+            // Check Content-Type to prevent JSON error
             const contentType = res.headers.get('content-type');
             if (contentType?.includes('application/json')) {
                 const data = await res.json();
