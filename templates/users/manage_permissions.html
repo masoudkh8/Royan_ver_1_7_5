@@ -2,109 +2,590 @@
 
 {% block title %}مدیریت مجوزهای دسترسی{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* استایل‌های حرفه‌ای برای صفحه مدیریت مجوزها */
+    .permissions-page {
+        background: #f8f9fa;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+    
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+    }
+    
+    .page-header h2 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-size: 2rem;
+    }
+    
+    .page-header p {
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+    
+    .user-selector-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+    
+    .user-selector-card .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border: none;
+        font-weight: 600;
+    }
+    
+    .filter-select {
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.875rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .filter-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+    
+    .permission-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+        overflow: hidden;
+    }
+    
+    .permission-card .card-header {
+        background: #f7fafc;
+        padding: 1.5rem;
+        border-bottom: 2px solid #e2e8f0;
+        font-weight: 700;
+        color: #2d3748;
+    }
+    
+    .category-section {
+        margin-bottom: 2rem;
+        background: #f7fafc;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .category-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #cbd5e0;
+    }
+    
+    .category-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1rem;
+        font-size: 1.4rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .category-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #2d3748;
+        margin: 0;
+    }
+    
+    .permission-item {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .permission-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-color: #667eea;
+    }
+    
+    .permission-checkbox {
+        width: 22px;
+        height: 22px;
+        margin-left: 1rem;
+        cursor: pointer;
+        accent-color: #667eea;
+    }
+    
+    .permission-info {
+        flex: 1;
+    }
+    
+    .permission-name {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+    
+    .permission-value {
+        font-size: 0.8rem;
+        color: #718096;
+        font-family: 'Courier New', monospace;
+        background: #edf2f7;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        display: inline-block;
+    }
+    
+    .status-badge {
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+    
+    .status-enabled {
+        background: #c6f6d5;
+        color: #22543d;
+    }
+    
+    .status-disabled {
+        background: #fed7d7;
+        color: #742a2a;
+    }
+    
+    .action-buttons {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .btn-permission {
+        padding: 0.875rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-save {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+    }
+    
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+        color: white;
+    }
+    
+    .btn-reset {
+        background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(237, 137, 54, 0.4);
+    }
+    
+    .btn-reset:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(237, 137, 54, 0.5);
+        color: white;
+    }
+    
+    .btn-cancel {
+        background: #e2e8f0;
+        color: #2d3748;
+    }
+    
+    .btn-cancel:hover {
+        background: #cbd5e0;
+        color: #2d3748;
+    }
+    
+    .info-alert {
+        background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+        border: 2px solid #90cdf4;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        color: #2c5282;
+    }
+    
+    .info-alert i {
+        font-size: 1.5rem;
+        margin-left: 0.75rem;
+    }
+    
+    .guide-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: none;
+        margin-top: 2rem;
+    }
+    
+    .guide-card .card-header {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        padding: 1.25rem;
+        border: none;
+        font-weight: 600;
+    }
+    
+    .guide-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .guide-list li {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .guide-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .guide-list li i {
+        color: #48bb78;
+        font-size: 1.2rem;
+        margin-top: 0.25rem;
+    }
+    
+    .guide-list strong {
+        color: #2d3748;
+    }
+    
+    .user-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.5rem 1.25rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .role-badge {
+        padding: 0.35rem 0.875rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: inline-block;
+    }
+    
+    .role-admin { background: #fed7d7; color: #742a2a; }
+    .role-logistics { background: #bee3f8; color: #2a4365; }
+    .role-legal { background: #fef3c7; color: #744210; }
+    .role-tech { background: #e9d8fd; color: #44337a; }
+    .role-investor { background: #c6f6d5; color: #22543d; }
+    .role-producer { background: #feebc8; color: #7c2d12; }
+    .role-buyer { background: #fed7e2; color: #831843; }
+    .role-broker { background: #feebc8; color: #7c2d12; }
+    .role-corporate { background: #e2e8f0; color: #2d3748; }
+    
+    .cat-order { background: #fed7d7; color: #742a2a; }
+    .cat-logistics { background: #bee3f8; color: #2a4365; }
+    .cat-legal { background: #fef3c7; color: #744210; }
+    .cat-finance { background: #c6f6d5; color: #22543d; }
+    .cat-investment { background: #fef3c7; color: #744210; }
+    .cat-tech { background: #e9d8fd; color: #44337a; }
+    .cat-dashboard { background: #feebc8; color: #7c2d12; }
+    .cat-profile { background: #fed7e2; color: #831843; }
+    .cat-public { background: #e2e8f0; color: #2d3748; }
+    .cat-other { background: #edf2f7; color: #4a5568; }
+    
+    @media (max-width: 768px) {
+        .page-header {
+            padding: 1.5rem;
+        }
+        
+        .page-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .permission-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .permission-checkbox {
+            margin-left: 0;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .btn-permission {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="mb-4">مدیریت مجوزهای دسترسی</h2>
-            
-            {% if current_user_obj.role.value == 'admin' %}
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">انتخاب کاربر برای مدیریت مجوزها</h5>
+<div class="permissions-page">
+    <div class="container">
+        <!-- هدر صفحه -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2><i class="fas fa-shield-alt ml-2"></i>مدیریت مجوزهای دسترسی</h2>
+                    <p class="mb-0 opacity-75">تنظیم و مدیریت دسترسی‌های کاربران به صورت ریزدانه و پیشرفته</p>
                 </div>
-                <div class="card-body">
-                    <form method="GET" action="{{ url_for('users.manage_permissions') }}">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="target_user" class="form-label">کاربر مورد نظر:</label>
-                                <select name="target_user_id" id="target_user" class="form-select">
-                                    {% for user in users_list %}
-                                    <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>
-                                        {{ user.username }} ({{ user.role_display_name }})
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="col-md-4 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary w-100">بارگذاری مجوزها</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-md-4 text-left">
+                    <span class="user-badge">
+                        <i class="fas fa-user-shield"></i>
+                        پنل ادمین
+                    </span>
                 </div>
             </div>
-            {% endif %}
-            
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        {% if request.args.get('target_user_id') %}
-                            مجوزهای کاربر انتخاب شده
+        </div>
+        
+        {% if current_user_obj.role.value == 'admin' %}
+        <!-- انتخاب کاربر -->
+        <div class="user-selector-card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-users ml-2"></i>انتخاب کاربر برای مدیریت مجوزها</h5>
+            </div>
+            <div class="card-body p-4">
+                <form method="GET" action="{{ url_for('users.manage_permissions') }}">
+                    <div class="row align-items-end">
+                        <div class="col-md-8">
+                            <label for="target_user" class="form-label font-weight-bold mb-2">کاربر مورد نظر:</label>
+                            <select name="target_user_id" id="target_user" class="form-control filter-select">
+                                {% for user in users_list %}
+                                <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>
+                                    {{ user.username }} 
+                                    <span class="role-badge role-{{ user.role.value|lower }}">{{ user.role_display_name }}</span>
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-permission btn-save w-100">
+                                <i class="fas fa-sync-alt"></i>
+                                بارگذاری مجوزها
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- کارت مجوزها -->
+        <div class="permission-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-key ml-2"></i>
+                    {% if request.args.get('target_user_id') %}
+                        مجوزهای کاربر: 
+                        <span class="role-badge role-{{ target_user.role.value|lower }}">{{ target_user.username }}</span>
+                    {% else %}
+                        مجوزهای پیش‌فرض نقش شما
+                        <span class="role-badge role-{{ current_user_obj.role.value|lower }}">{{ current_user_obj.role_display_name }}</span>
+                    {% endif %}
+                </h5>
+                <div>
+                    <span class="status-badge {% if custom_perms %}status-enabled{% else %}status-disabled{% endif %}">
+                        {% if custom_perms %}
+                            <i class="fas fa-check-circle"></i>
+                            مجوزهای سفارشی فعال
                         {% else %}
-                            مجوزهای پیش‌فرض نقش شما ({{ current_user_obj.role_display_name }})
+                            <i class="fas fa-clock"></i>
+                            استفاده از پیش‌فرض
                         {% endif %}
-                    </h5>
+                    </span>
                 </div>
-                <div class="card-body">
-                    <form method="POST">
-                        {% if request.args.get('target_user_id') %}
-                        <input type="hidden" name="target_user_id" value="{{ request.args.get('target_user_id') }}">
-                        {% endif %}
-                        
-                        {% for category, permissions in categories.items() %}
-                        <div class="mb-4">
-                            <h6 class="border-bottom pb-2">{{ category }}</h6>
-                            <div class="row">
-                                {% for perm in permissions %}
-                                <div class="col-md-6 col-lg-4 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" 
-                                               type="checkbox" 
-                                               name="permissions" 
-                                               value="{{ perm.value }}" 
-                                               id="perm_{{ perm.value }}"
-                                               {% if perm.is_enabled %}checked{% endif %}
-                                               {% if current_user_obj.role.value != 'admin' %}disabled{% endif %}>
-                                        <label class="form-check-label" for="perm_{{ perm.value }}">
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" id="permissionsForm">
+                    {% if request.args.get('target_user_id') %}
+                    <input type="hidden" name="target_user_id" value="{{ request.args.get('target_user_id') }}">
+                    {% endif %}
+                    
+                    {% for category, permissions in categories.items() %}
+                    {% set cat_class = 'cat-' + category|lower|replace(' ', '-') %}
+                    <div class="category-section">
+                        <div class="category-header">
+                            {% if category == 'سفارشات' %}
+                                <div class="category-icon" style="background: #fed7d7;">📦</div>
+                            {% elif category == 'لجستیک' %}
+                                <div class="category-icon" style="background: #bee3f8;">🚚</div>
+                            {% elif category == 'حقوقی' %}
+                                <div class="category-icon" style="background: #fef3c7;">⚖️</div>
+                            {% elif category == 'مالی' %}
+                                <div class="category-icon" style="background: #c6f6d5;">💰</div>
+                            {% elif category == 'سرمایه‌گذاری' %}
+                                <div class="category-icon" style="background: #fef3c7;">📈</div>
+                            {% elif category == 'فنی' %}
+                                <div class="category-icon" style="background: #e9d8fd;">🔧</div>
+                            {% elif category == 'داشبورد' %}
+                                <div class="category-icon" style="background: #feebc8;">📊</div>
+                            {% elif category == 'پروفایل' %}
+                                <div class="category-icon" style="background: #fed7e2;">👤</div>
+                            {% else %}
+                                <div class="category-icon" style="background: #e2e8f0;">📌</div>
+                            {% endif %}
+                            <h6 class="category-title">{{ category }} 
+                                <span class="badge {{ cat_class }} mr-2">{{ permissions|length }} مجوز</span>
+                            </h6>
+                        </div>
+                        <div class="row">
+                            {% for perm in permissions %}
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="permission-item">
+                                    <input class="permission-checkbox" 
+                                           type="checkbox" 
+                                           name="permissions" 
+                                           value="{{ perm.value }}" 
+                                           id="perm_{{ perm.value }}"
+                                           {% if perm.is_enabled %}checked{% endif %}
+                                           {% if current_user_obj.role.value != 'admin' %}disabled{% endif %}>
+                                    <div class="permission-info">
+                                        <label class="permission-name" for="perm_{{ perm.value }}">
                                             {{ perm.name }}
-                                            <small class="text-muted d-block">{{ perm.value }}</small>
                                         </label>
+                                        <span class="permission-value">{{ perm.value }}</span>
                                     </div>
                                 </div>
-                                {% endfor %}
                             </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
-                        
-                        {% if current_user_obj.role.value == 'admin' %}
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
-                            <a href="{{ url_for('users.manage_permissions') }}" class="btn btn-secondary">بازنشانی به پیش‌فرض</a>
-                        </div>
-                        {% else %}
-                        <div class="alert alert-info mt-3">
-                            <i class="fas fa-info-circle"></i>
-                            فقط مدیر سیستم می‌تواند مجوزها را تغییر دهد. شما در حال مشاهده مجوزهای پیش‌فرض نقش خود هستید.
-                        </div>
-                        {% endif %}
-                    </form>
-                </div>
+                    </div>
+                    {% endfor %}
+                    
+                    {% if current_user_obj.role.value == 'admin' %}
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-permission btn-save">
+                            <i class="fas fa-save"></i>
+                            ذخیره تغییرات
+                        </button>
+                        <a href="{{ url_for('users.manage_permissions', target_user_id=request.args.get('target_user_id') or current_user.id) }}" 
+                           class="btn btn-permission btn-reset">
+                            <i class="fas fa-undo"></i>
+                            بازنشانی به پیش‌فرض
+                        </a>
+                        <a href="{{ url_for('users.dashboard') }}" class="btn btn-permission btn-cancel">
+                            <i class="fas fa-times"></i>
+                            انصراف
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="info-alert">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>توجه:</strong> فقط مدیر سیستم می‌تواند مجوزها را تغییر دهد. شما در حال مشاهده مجوزهای پیش‌فرض نقش خود هستید.
+                    </div>
+                    {% endif %}
+                </form>
             </div>
-            
-            <div class="card mt-4">
-                <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">راهنمای مجوزها</h5>
-                </div>
-                <div class="card-body">
-                    <ul>
-                        <li><strong>مجوزهای پیش‌فرض:</strong> هر نقش کاربری مجموعه‌ای از مجوزهای پیش‌فرض دارد که بر اساس وظایف آن نقش تعریف شده است.</li>
-                        <li><strong>مجوزهای سفارشی:</strong> مدیر سیستم می‌تواند برای هر کاربر، مجوزهای خاصی را فعال یا غیرفعال کند.</li>
-                        <li><strong>کاربران غیر احراز هویت:</strong> فقط به مجوزهای عمومی (مشاهده محصولات و درباره ما) دسترسی دارند.</li>
-                        <li><strong>تغییر نقش:</strong> با تغییر نقش کاربر، مجوزهای پیش‌فرض او نیز تغییر می‌کند مگر اینکه مجوزهای سفارشی تنظیم شده باشد.</li>
-                    </ul>
-                </div>
+        </div>
+        
+        <!-- راهنما -->
+        <div class="guide-card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-book ml-2"></i>راهنمای سیستم مجوزها</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="guide-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>مجوزهای پیش‌فرض:</strong>
+                            هر نقش کاربری مجموعه‌ای از مجوزهای پیش‌فرض دارد که بر اساس وظایف آن نقش تعریف شده است.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>مجوزهای سفارشی:</strong>
+                            مدیر سیستم می‌تواند برای هر کاربر، مجوزهای خاصی را فعال یا غیرفعال کند. این مجوزها جایگزین مجوزهای پیش‌فرض می‌شوند.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>کاربران غیر احراز هویت:</strong>
+                            فقط به مجوزهای عمومی (مشاهده محصولات و درباره ما) دسترسی دارند.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>تغییر نقش:</strong>
+                            با تغییر نقش کاربر، مجوزهای پیش‌فرض او نیز تغییر می‌کند مگر اینکه مجوزهای سفارشی تنظیم شده باشد.
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+// تأیید قبل از بازنشانی
+document.querySelectorAll('.btn-reset').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        if (!confirm('آیا مطمئن هستید که می‌خواهید مجوزها را به حالت پیش‌فرض بازگردانید؟')) {
+            e.preventDefault();
+        }
+    });
+});
+
+// نمایش تعداد مجوزهای انتخاب شده
+function updateSelectedCount() {
+    const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
+    const total = document.querySelectorAll('input[name="permissions"]').length;
+    console.log(`مجوزهای انتخاب شده: ${checked} از ${total}`);
+}
+
+document.querySelectorAll('input[name="permissions"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateSelectedCount);
+});
+</script>
 {% endblock %}

@@ -1,237 +1,468 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}مدیریت دسترسی‌ها و مجوزها{% endblock %}
+{% block title %}داشبورد مدیریت دسترسی‌ها و مجوزها{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* استایل‌های اختصاصی داشبورد مدیریت مجوزها */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --info-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        --dark-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+        --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+        --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Dashboard Header */
     .permission-dashboard {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
         color: white;
-        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .permission-dashboard::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(10deg); }
     }
     
     .permission-dashboard h2 {
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 0.5rem;
+        font-size: 2rem;
+        position: relative;
+        z-index: 1;
     }
     
+    .permission-dashboard p {
+        opacity: 0.9;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Stat Cards */
     .stat-card {
         background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
         height: 100%;
         border: none;
+        position: relative;
+        overflow: hidden;
     }
     
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--primary-gradient);
+    }
+    
+    .stat-card:nth-child(2)::before { background: var(--secondary-gradient); }
+    .stat-card:nth-child(3)::before { background: var(--success-gradient); }
+    .stat-card:nth-child(4)::before { background: var(--warning-gradient); }
+    
     .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
     }
     
     .stat-card .icon {
-        font-size: 2.5rem;
+        font-size: 3rem;
         margin-bottom: 1rem;
+        display: inline-block;
+        animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
     
     .stat-card .value {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #2d3748;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .stat-card:nth-child(2) .value { 
+        background: var(--secondary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .stat-card:nth-child(3) .value { 
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .stat-card:nth-child(4) .value { 
+        background: var(--warning-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     .stat-card .label {
         color: #718096;
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+    
+    /* Navigation Tabs */
+    .nav-tabs {
+        border: none;
+        gap: 1rem;
+        margin-bottom: 0;
     }
     
     .nav-tabs .nav-link {
         border: none;
         color: #4a5568;
-        font-weight: 600;
-        padding: 1rem 1.5rem;
-        border-radius: 10px 10px 0 0;
-        transition: all 0.3s ease;
+        font-weight: 700;
+        padding: 1.2rem 2rem;
+        border-radius: 15px 15px 0 0;
+        transition: var(--transition);
+        background: #f7fafc;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .nav-tabs .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background: var(--primary-gradient);
+        transition: var(--transition);
+        transform: translateX(-50%);
     }
     
     .nav-tabs .nav-link.active {
-        background: #667eea;
-        color: white;
+        background: white;
+        color: #667eea;
         border: none;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .nav-tabs .nav-link.active::before {
+        width: 80%;
     }
     
     .nav-tabs .nav-link:hover:not(.active) {
         background: #edf2f7;
+        transform: translateY(-2px);
     }
     
+    .nav-tabs .nav-link i {
+        margin-left: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Tab Content */
     .tab-content {
         background: white;
-        border-radius: 0 0 15px 15px;
-        padding: 2rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-radius: 0 0 20px 20px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-md);
     }
     
+    /* Permission Matrix Table */
     .permission-matrix {
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
-        border-radius: 10px;
+        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        box-shadow: var(--shadow-sm);
+        background: white;
     }
     
     .permission-matrix thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--primary-gradient);
         color: white;
     }
     
-    .permission-matrix th,
-    .permission-matrix td {
-        padding: 1rem;
+    .permission-matrix th {
+        padding: 1.5rem 1rem;
         text-align: center;
-        border: 1px solid #e2e8f0;
+        border: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .permission-matrix td {
+        padding: 1.2rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #e2e8f0;
+        transition: var(--transition);
     }
     
     .permission-matrix th:first-child,
     .permission-matrix td:first-child {
         text-align: right;
-        font-weight: 600;
+        font-weight: 700;
         background: #f7fafc;
-        min-width: 200px;
+        min-width: 220px;
+        border-right: 2px solid #e2e8f0;
+    }
+    
+    .permission-matrix tbody tr {
+        transition: var(--transition);
     }
     
     .permission-matrix tbody tr:hover {
-        background: #f7fafc;
+        background: linear-gradient(90deg, #f7fafc 0%, #ffffff 100%);
+        transform: scale(1.01);
     }
     
+    .permission-matrix tbody tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* Badge Permission */
     .badge-permission {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-        font-size: 1.2rem;
-        transition: all 0.2s ease;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        transition: var(--transition);
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .badge-permission:hover {
+        transform: scale(1.2) rotate(5deg);
+        box-shadow: var(--shadow-md);
     }
     
     .badge-permission.granted {
-        background: #c6f6d5;
+        background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
         color: #22543d;
     }
     
     .badge-permission.denied {
-        background: #fed7d7;
+        background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
         color: #742a2a;
+        opacity: 0.7;
     }
     
+    /* Role Badge */
     .role-badge {
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        font-weight: 700;
         font-size: 0.85rem;
         display: inline-block;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
     }
     
-    .role-admin { background: #fed7d7; color: #742a2a; }
-    .role-logistics { background: #bee3f8; color: #2a4365; }
-    .role-legal { background: #fef3c7; color: #744210; }
-    .role-tech { background: #e9d8fd; color: #44337a; }
-    .role-investor { background: #c6f6d5; color: #22543d; }
-    .role-producer { background: #feebc8; color: #7c2d12; }
-    .role-buyer { background: #fed7e2; color: #831843; }
+    .role-badge:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-md);
+    }
     
+    .role-admin { background: linear-gradient(135deg, #fed7d7 0%, #fc8181 100%); color: #742a2a; }
+    .role-logistics { background: linear-gradient(135deg, #bee3f8 0%, #63b3ed 100%); color: #2a4365; }
+    .role-legal { background: linear-gradient(135deg, #fef3c7 0%, #f6e05e 100%); color: #744210; }
+    .role-tech { background: linear-gradient(135deg, #e9d8fd 0%, #b794f4 100%); color: #44337a; }
+    .role-investor { background: linear-gradient(135deg, #c6f6d5 0%, #68d391 100%); color: #22543d; }
+    .role-producer { background: linear-gradient(135deg, #feebc8 0%, #f6ad55 100%); color: #7c2d12; }
+    .role-buyer { background: linear-gradient(135deg, #fed7e2 0%, #f687b3 100%); color: #831843; }
+    .role-corporate_agent { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%); color: #2d3748; }
+    .role-broker { background: linear-gradient(135deg, #fef5e7 0%, #fbd38d 100%); color: #744210; }
+    
+    /* Action Buttons */
     .action-btn {
-        padding: 0.5rem 1.2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        padding: 0.7rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: var(--transition);
         border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    
+    .action-btn:hover::before {
+        width: 300px;
+        height: 300px;
     }
     
     .action-btn-primary {
-        background: #667eea;
+        background: var(--primary-gradient);
         color: white;
+        box-shadow: var(--shadow-sm);
     }
     
     .action-btn-primary:hover {
-        background: #5a67d8;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
     }
     
+    .action-btn-success {
+        background: var(--success-gradient);
+        color: white;
+    }
+    
+    .action-btn-warning {
+        background: var(--warning-gradient);
+        color: white;
+    }
+    
+    .action-btn-info {
+        background: var(--info-gradient);
+        color: #2d3748;
+    }
+    
+    /* Filter Select */
     .filter-select {
         border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        padding: 0.875rem 1.25rem;
+        font-weight: 600;
+        transition: var(--transition);
+        background: white;
     }
     
     .filter-select:focus {
         border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
         outline: none;
+        transform: translateY(-2px);
     }
     
+    /* Preview Box */
     .preview-box {
-        background: #f7fafc;
-        border-radius: 12px;
-        padding: 1.5rem;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 16px;
+        padding: 2rem;
         margin-top: 1.5rem;
-        border: 2px dashed #cbd5e0;
+        border: 3px dashed #cbd5e0;
+        transition: var(--transition);
     }
     
+    .preview-box:hover {
+        border-color: #667eea;
+        background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+    }
+    
+    /* Module Item */
     .module-item {
         background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 0.75rem;
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        border: 2px solid transparent;
     }
     
     .module-item:hover {
-        transform: translateX(5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateX(10px);
+        box-shadow: var(--shadow-md);
+        border-color: #667eea;
+        background: linear-gradient(90deg, #ffffff 0%, #f7fafc 100%);
     }
     
     .module-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-left: 1rem;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+        transition: var(--transition);
     }
     
+    .module-item:hover .module-icon {
+        transform: rotate(10deg) scale(1.1);
+        background: var(--primary-gradient);
+        color: white;
+    }
+    
+    /* Category Badge */
     .category-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
+        padding: 0.35rem 0.875rem;
+        border-radius: 20px;
         font-size: 0.75rem;
-        font-weight: 600;
-        margin-right: 0.5rem;
+        font-weight: 700;
+        margin-left: 0.5rem;
+        display: inline-block;
+        box-shadow: var(--shadow-sm);
     }
     
-    .cat-order { background: #fed7d7; color: #742a2a; }
-    .cat-logistics { background: #bee3f8; color: #2a4365; }
-    .cat-legal { background: #fef3c7; color: #744210; }
-    .cat-finance { background: #c6f6d5; color: #22543d; }
-    .cat-tech { background: #e9d8fd; color: #44337a; }
-    .cat-dashboard { background: #feebc8; color: #7c2d12; }
-    .cat-profile { background: #fed7e2; color: #831843; }
-    .cat-public { background: #e2e8f0; color: #2d3748; }
+    .cat-order { background: linear-gradient(135deg, #fed7d7 0%, #fc8181 100%); color: #742a2a; }
+    .cat-logistics { background: linear-gradient(135deg, #bee3f8 0%, #63b3ed 100%); color: #2a4365; }
+    .cat-legal { background: linear-gradient(135deg, #fef3c7 0%, #f6e05e 100%); color: #744210; }
+    .cat-finance { background: linear-gradient(135deg, #c6f6d5 0%, #68d391 100%); color: #22543d; }
+    .cat-tech { background: linear-gradient(135deg, #e9d8fd 0%, #b794f4 100%); color: #44337a; }
+    .cat-dashboard { background: linear-gradient(135deg, #feebc8 0%, #f6ad55 100%); color: #7c2d12; }
+    .cat-profile { background: linear-gradient(135deg, #fed7e2 0%, #f687b3 100%); color: #831843; }
+    .cat-public { background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%); color: #2d3748; }
     
+    /* Search Box */
     .search-box {
         position: relative;
         margin-bottom: 1.5rem;
@@ -239,25 +470,167 @@
     
     .search-box input {
         width: 100%;
-        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        padding: 1rem 1.25rem 1rem 3rem;
         border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
+        border-radius: 15px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+        background: white;
     }
     
     .search-box input:focus {
         border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
         outline: none;
+        transform: translateY(-2px);
     }
     
     .search-box i {
         position: absolute;
-        right: 1rem;
+        right: 1.25rem;
         top: 50%;
         transform: translateY(-50%);
         color: #a0aec0;
+        font-size: 1.1rem;
+        transition: var(--transition);
+    }
+    
+    .search-box input:focus + i {
+        color: #667eea;
+    }
+    
+    /* Cards */
+    .card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+    }
+    
+    .card-header {
+        border-radius: 16px 16px 0 0 !important;
+        padding: 1.5rem 2rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    
+    .card-header.bg-warning {
+        background: var(--warning-gradient) !important;
+        color: white !important;
+    }
+    
+    .card-header.bg-info {
+        background: var(--success-gradient) !important;
+        color: white !important;
+    }
+    
+    .card-header.bg-primary {
+        background: var(--primary-gradient) !important;
+        color: white !important;
+    }
+    
+    /* Alerts */
+    .alert {
+        border: none;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .alert-info {
+        background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+        color: #234e52;
+    }
+    
+    .alert-light {
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        color: #4a5568;
+        border: 2px solid #e2e8f0 !important;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .permission-dashboard {
+            padding: 1.5rem;
+        }
+        
+        .permission-dashboard h2 {
+            font-size: 1.5rem;
+        }
+        
+        .stat-card {
+            padding: 1.5rem;
+        }
+        
+        .stat-card .icon {
+            font-size: 2rem;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+        }
+        
+        .tab-content {
+            padding: 1.5rem;
+        }
+        
+        .nav-tabs .nav-link {
+            padding: 1rem 1.25rem;
+            font-size: 0.9rem;
+        }
+        
+        .permission-matrix {
+            font-size: 0.85rem;
+        }
+        
+        .permission-matrix th,
+        .permission-matrix td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+    
+    /* Loading Spinner */
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        border-width: 0.25rem;
+    }
+    
+    /* Button Group */
+    .btn-group-sm > .btn, .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        border-radius: 10px;
+    }
+    
+    /* Gap Utility */
+    .gap-2 { gap: 0.5rem !important; }
+    .gap-3 { gap: 1rem !important; }
+    
+    /* Animation for page load */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .permission-dashboard,
+    .stat-card,
+    .tab-content {
+        animation: fadeInUp 0.6s ease-out;
     }
 </style>
 {% endblock %}
@@ -268,14 +641,18 @@
     <div class="permission-dashboard mb-4">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h2><i class="fas fa-shield-alt ml-2"></i>پنل مدیریت دسترسی‌ها و مجوزها</h2>
-                <p class="mb-0 opacity-75">مدیریت متمرکز نقش‌ها، مجوزها و دسترسی‌های کاربران</p>
+                <h2><i class="fas fa-shield-alt ml-2"></i>داشبورد مدیریت دسترسی‌ها و مجوزها</h2>
+                <p class="mb-0 opacity-75">مدیریت متمرکز نقش‌ها، مجوزها و دسترسی‌های کاربران به صورت حرفه‌ای</p>
             </div>
             <div class="col-md-4 text-left">
                 <div class="d-flex justify-content-end gap-2">
-                    <button class="btn btn-light action-btn" onclick="location.reload()">
+                    <button class="btn btn-light action-btn action-btn-primary" onclick="location.reload()">
                         <i class="fas fa-sync-alt ml-1"></i>به‌روزرسانی
                     </button>
+                    <a href="{{ url_for('admin.admin_perms.manage_permissions', user_id=current_user.id) }}" 
+                       class="btn btn-light action-btn action-btn-success">
+                        <i class="fas fa-user-cog ml-1"></i>مدیریت کاربران
+                    </a>
                 </div>
             </div>
         </div>
@@ -287,7 +664,7 @@
             <div class="stat-card text-center">
                 <div class="icon">🎭</div>
                 <div class="value">{{ roles|length }}</div>
-                <div class="label">نقش‌های کاربری</div>
+                <div class="label">نقش‌های کاربری فعال</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -301,7 +678,7 @@
             <div class="stat-card text-center">
                 <div class="icon">👥</div>
                 <div class="value">{{ users|length }}</div>
-                <div class="label">کاربران فعال</div>
+                <div class="label">کاربران ثبت‌نام شده</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
@@ -322,12 +699,12 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">
-                <i class="fas fa-users ml-1"></i>مدیریت کاربران خاص
+                <i class="fas fa-users-cog ml-1"></i>مدیریت کاربران خاص
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">
-                <i class="fas fa-eye ml-1"></i>پیش‌نمایش منو
+                <i class="fas fa-eye ml-1"></i>پیش‌نمایش منوی کاربر
             </a>
         </li>
     </ul>
@@ -337,11 +714,19 @@
         <!-- تب ۱: ماتریس دسترسی نقش‌ها -->
         <div class="tab-pane fade show active" id="matrix" role="tabpanel">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0 text-primary"><i class="fas fa-grid-2 ml-2"></i>جدول دسترسی پیش‌فرض نقش‌ها</h5>
-                <div class="search-box" style="width: 300px;">
-                    <input type="text" id="matrixSearch" placeholder="جستجو در مجوزها..." onkeyup="filterMatrix()">
+                <h5 class="mb-0 text-primary font-weight-bold">
+                    <i class="fas fa-grid-2 ml-2"></i>جدول دسترسی پیش‌فرض نقش‌ها
+                </h5>
+                <div class="search-box" style="width: 350px;">
+                    <input type="text" id="matrixSearch" placeholder="جستجو در مجوزها و نقش‌ها..." onkeyup="filterMatrix()">
                     <i class="fas fa-search"></i>
                 </div>
+            </div>
+            
+            <div class="alert alert-info mb-3">
+                <i class="fas fa-info-circle ml-2"></i>
+                <strong>راهنما:</strong> علامت ✅ نشان‌دهنده دسترسی مجاز و ❌ نشان‌دهنده عدم دسترسی است. 
+                برای ویرایش دسترسی‌های هر نقش، از دکمه‌های زیر جدول استفاده کنید.
             </div>
             
             <div class="table-responsive">
@@ -364,16 +749,16 @@
                                 <span class="category-badge cat-{{ perm_category }}">
                                     {{ perm_category }}
                                 </span>
-                                {{ perm.value }}
+                                <strong>{{ perm.value }}</strong>
                             </td>
                             {% for role in roles %}
                             <td>
                                 {% if matrix[role.name][perm.name] %}
-                                    <span class="badge-permission granted" title="دسترسی دارد">
+                                    <span class="badge-permission granted" title="{{ role.value }}: دسترسی دارد">
                                         <i class="fas fa-check"></i>
                                     </span>
                                 {% else %}
-                                    <span class="badge-permission denied" title="بدون دسترسی">
+                                    <span class="badge-permission denied" title="{{ role.value }}: بدون دسترسی">
                                         <i class="fas fa-times"></i>
                                     </span>
                                 {% endif %}
@@ -387,16 +772,14 @@
             
             <div class="mt-4 d-flex flex-wrap gap-2">
                 {% for role_name in ['ADMIN', 'PRODUCER', 'BUYER', 'LOGISTICS', 'LEGAL', 'TECH_PARTNER', 'INVESTOR', 'CORPORATE_AGENT', 'BROKER'] %}
+                {% set role_obj = roles|selectattr('name', 'equalto', role_name)|first %}
+                {% if role_obj %}
                 <a href="{{ url_for('admin.admin_perms.edit_role_permissions', role_name=role_name) }}"
                    class="btn action-btn action-btn-primary btn-sm">
-                    <i class="fas fa-edit ml-1"></i>ویرایش {{ roles|selectattr('name', 'equalto', role_name)|first|default(role_name)|attr('value') }}
+                    <i class="fas fa-edit ml-1"></i>ویرایش {{ role_obj.value }}
                 </a>
+                {% endif %}
                 {% endfor %}
-            </div>
-            
-            <div class="alert alert-info mt-3">
-                <i class="fas fa-info-circle ml-2"></i>
-                <strong>راهنما:</strong> برای ویرایش دسترسی‌های هر نقش، روی دکمه مربوطه کلیک کنید. تغییرات روی تمام کاربران آن نقش تأثیر می‌گذارد.
             </div>
         </div>
 
@@ -404,7 +787,7 @@
         <div class="tab-pane fade" id="users" role="tabpanel">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-warning text-dark border-0">
                             <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>اعطای مجوز استثنایی به کاربر</h5>
                         </div>
@@ -428,28 +811,54 @@
                             <div class="alert alert-light border">
                                 <i class="fas fa-lightbulb text-warning ml-2"></i>
                                 <strong>کاربرد:</strong> از این بخش برای اعطای مجوزهای خاص به کاربران ویژه استفاده کنید. 
-                                این مجوزها به صورت استثنا به دسترسی‌های پیش‌فرض نقش اضافه می‌شوند.
+                                این مجوزها به صورت استثنا به دسترسی‌های پیش‌فرض نقش اضافه می‌شوند و اولویت بالاتری دارند.
+                            </div>
+                            
+                            <div class="mt-3">
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-info-circle ml-1"></i>نکات مهم:</h6>
+                                <ul class="small text-muted pr-2">
+                                    <li>مجوزهای سفارشی بر مجوزهای نقش ارجحیت دارند</li>
+                                    <li>برای حذف مجوز سفارشی، به صفحه مدیریت کاربر مراجعه کنید</li>
+                                    <li>تغییرات بلافاصله اعمال می‌شوند</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-md-6">
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-info text-white border-0">
                             <h5 class="mb-0"><i class="fas fa-chart-pie ml-2"></i>آمار دسترسی‌های سفارشی</h5>
                         </div>
                         <div class="card-body">
                             <div class="text-center py-4">
-                                <div class="display-4 text-info mb-2">
+                                <div class="display-4 text-info mb-3">
                                     <i class="fas fa-key"></i>
                                 </div>
-                                <p class="text-muted">
+                                <p class="text-muted mb-3">
                                     در این بخش می‌توانید کاربرانی که دارای مجوزهای سفارشی هستند را مشاهده و مدیریت کنید.
                                 </p>
-                                <button class="btn btn-outline-info" onclick="showCustomPermsStats()">
-                                    <i class="fas fa-list ml-1"></i>مشاهده لیست
+                                <button class="btn action-btn action-btn-info" onclick="showCustomPermsStats()">
+                                    <i class="fas fa-list ml-1"></i>مشاهده لیست کاربران ویژه
                                 </button>
+                                
+                                <div class="mt-4 pt-4 border-top">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="stat-card p-2">
+                                                <div class="value" style="font-size: 1.5rem;">{{ users|length }}</div>
+                                                <div class="label small">کل کاربران</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="stat-card p-2">
+                                                <div class="value" style="font-size: 1.5rem;">{{ (users|selectattr('custom_permissions')|list)|length }}</div>
+                                                <div class="label small">با مجوز سفارشی</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -464,10 +873,16 @@
                     <h5 class="mb-0"><i class="fas fa-desktop ml-2"></i>پیش‌نمایش سرویس‌های قابل مشاهده برای کاربر</h5>
                 </div>
                 <div class="card-body">
+                    <div class="alert alert-info mb-4">
+                        <i class="fas fa-info-circle ml-2"></i>
+                        <strong>کاربرد:</strong> در این بخش می‌توانید پیش‌نمایشی از ماژول‌ها و سرویس‌هایی که یک کاربر خاص می‌تواند مشاهده کند را ببینید.
+                        این ابزار برای تست و بررسی صحت تنظیمات مجوزها بسیار مفید است.
+                    </div>
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="font-weight-bold">انتخاب کاربر برای پیش‌نمایش:</label>
+                                <label class="font-weight-bold mb-2">انتخاب کاربر برای پیش‌نمایش:</label>
                                 <select id="previewUserSelect" class="form-control filter-select">
                                     <option value="">-- کاربر را انتخاب کنید --</option>
                                     {% for user in users %}
@@ -479,9 +894,16 @@
                                 </select>
                             </div>
                             
-                            <button onclick="loadPreview()" class="btn action-btn action-btn-primary btn-block">
+                            <button onclick="loadPreview()" class="btn action-btn action-btn-primary btn-block mt-3">
                                 <i class="fas fa-play ml-1"></i>بارگذاری پیش‌نمایش
                             </button>
+                            
+                            <div class="mt-4 p-3 bg-light rounded">
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>نکته:</h6>
+                                <p class="small text-muted mb-0">
+                                    پیش‌نمایش بر اساس مجوزهای نقش کاربر به علاوه هرگونه مجوز سفارشی اعطا شده نمایش داده می‌شود.
+                                </p>
+                            </div>
                         </div>
                         
                         <div class="col-md-6">
@@ -495,7 +917,7 @@
                             
                             <div id="previewPlaceholder" class="text-center text-muted py-5">
                                 <i class="fas fa-arrow-left display-4 mb-3"></i>
-                                <p>برای مشاهده پیش‌نمایش، یک کاربر انتخاب کرده و دکمه بارگذاری را بزنید.</p>
+                                <p class="mb-0">برای مشاهده پیش‌نمایش، یک کاربر انتخاب کرده و دکمه بارگذاری را بزنید.</p>
                             </div>
                         </div>
                     </div>

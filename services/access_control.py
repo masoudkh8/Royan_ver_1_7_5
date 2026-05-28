@@ -87,10 +87,15 @@ def get_user_permissions(user):
     """
     دریافت لیست مجوزهای یک کاربر.
     اولویت‌بندی:
-    1. اگر کاربر مجوزهای سفارشی در پروفایل خود دارد، از آن‌ها استفاده می‌شود.
+    1. اگر کاربر مجوزهای سفارشی در پروفایل خود دارد، آن مجوزها به عنوان مجوزهای نهایی استفاده می‌شوند.
     2. اگر مجوز سفارشی وجود ندارد، از مجوزهای پیش‌فرض نقش (DEFAULT_ROLE_PERMISSIONS) استفاده می‌شود.
     3. اگر کاربر مهمان است، مجوزهای guest بازگردانده می‌شود.
+    
+    Returns:
+        لیستی از اشیاء Permission
     """
+    import json
+    
     if not user.is_authenticated:
         return DEFAULT_ROLE_PERMISSIONS.get('guest', [])
     
@@ -101,13 +106,31 @@ def get_user_permissions(user):
         # اگر کاربر مجوزهای دستی تنظیم کرده باشد
         from services.permissions import Permission as PermEnum
         custom_perms = []
-        for perm_str in profile.custom_permissions:
-            try:
-                perm = PermEnum(perm_str)
-                custom_perms.append(perm)
-            except ValueError:
-                continue  # نادیده گرفتن مجوزهای نامعتبر
-        return custom_perms
+        
+        # Parse JSON string to list
+        try:
+            if isinstance(profile.custom_permissions, str):
+                perm_strings = json.loads(profile.custom_permissions)
+            else:
+                perm_strings = profile.custom_permissions
+            
+            if perm_strings:  # اگر لیست خالی نباشد
+                for perm_str in perm_strings:
+                    try:
+                        # پشتیبانی از هر دو فرمت: رشته و شیء Permission
+                        if isinstance(perm_str, PermEnum):
+                            custom_perms.append(perm_str)
+                        else:
+                            perm = PermEnum(str(perm_str))
+                            custom_perms.append(perm)
+                    except ValueError:
+                        continue  # نادیده گرفتن مجوزهای نامعتبر
+                
+                # اگر مجوز سفارشی معتبر وجود داشت، برگردان
+                if custom_perms:
+                    return custom_perms
+        except (json.JSONDecodeError, TypeError, AttributeError):
+            pass  # اگر JSON نامعتبر بود، از پیش‌فرض استفاده کن
     
     # استفاده از مجوزهای پیش‌فرض نقش
     role_name = user.role.value if user.role else 'guest'
