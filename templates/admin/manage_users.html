@@ -3,7 +3,7 @@
 {% block content %}
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-7xl mx-auto">
-        <!-- دکمه بازگشت به داشبورد ادمین -->
+        <!-- Back to Admin Dashboard Button -->
         <div class="mb-6">
             <a href="{{ url_for('admin.dashboard') }}" 
                class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
@@ -16,14 +16,14 @@
         
         <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">🔧 User Management</h1>
 
-        <!-- فیلترها -->
+        <!-- Filters -->
         <div class="flex flex-wrap gap-2 mb-6">
             <a href="{{ url_for('admin.manage_users', status='active', page=1) }}" class="px-4 py-2 rounded-lg text-sm font-medium transition {% if status_filter == 'active' %}bg-gold text-dark-900{% else %}bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700{% endif %}">Active ({{ total_active }})</a>
             <a href="{{ url_for('admin.manage_users', status='inactive', page=1) }}" class="px-4 py-2 rounded-lg text-sm font-medium transition {% if status_filter == 'inactive' %}bg-gold text-dark-900{% else %}bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700{% endif %}">Disabled ({{ total_inactive }})</a>
             <a href="{{ url_for('admin.manage_users', status='all', page=1) }}" class="px-4 py-2 rounded-lg text-sm font-medium transition {% if status_filter == 'all' %}bg-gold text-dark-900{% else %}bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700{% endif %}">All Users</a>
         </div>
 
-        <!-- جدول کاربران -->
+        <!-- Users Table -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead class="bg-gray-50 dark:bg-dark-700/50 border-b border-gray-200 dark:border-dark-600">
@@ -66,9 +66,9 @@
                         <td class="px-4 py-3">
                             {% set docs = user.verification_documents | default('', true) %}
                             {% if docs and docs != '[]' %}
-                                <a href="{{ url_for('admin.view_user_documents', user_id=user.id) }}" class="px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition">📎 مشاهده مدارک</a>
+                                <a href="{{ url_for('admin.view_user_documents', user_id=user.id) }}" class="px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition">📎 View Documents</a>
                             {% else %}
-                                <span class="text-gray-500 dark:text-slate-400 text-xs">بدون مدرک</span>
+                                <span class="text-gray-500 dark:text-slate-400 text-xs">No Documents</span>
                             {% endif %}
                         </td>
                         <td class="px-4 py-3">
@@ -100,7 +100,7 @@
             </table>
         </div>
 
-        <!-- صفحه‌بندی -->
+        <!-- Pagination -->
         {% if users.pages > 1 %}
         <div class="flex items-center justify-center gap-2 mt-6">
             {% if users.has_prev %}<a href="{{ url_for('admin.manage_users', page=users.prev_num, status=status_filter) }}" class="px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover:bg-dark-700 transition">Previous</a>{% endif %}

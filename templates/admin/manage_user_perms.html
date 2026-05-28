@@ -1,6 +1,6 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}مدیریت مجوزهای {{ user.username }}{% endblock %}
+{% block title %}Manage {{ user.username }}'s Permissions{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -171,44 +171,44 @@
     <div class="perm-page-header">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div>
-                <h2 class="mb-2"><i class="fas fa-user-shield ml-2"></i>مدیریت مجوزهای کاربر</h2>
+                <h2 class="mb-2"><i class="fas fa-user-shield ml-2"></i>User Permission Management</h2>
                 <p class="mb-0 opacity-90">{{ user.username }} - {{ user.role_display_name }}</p>
             </div>
             <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-light btn-lg" style="border-radius: 14px; font-weight: 700;">
-                <i class="fas fa-arrow-right ml-2"></i>بازگشت به پنل
+                <i class="fas fa-arrow-right ml-2"></i>Back to Panel
             </a>
         </div>
     </div>
 
     <div class="row">
-        <!-- اطلاعات کاربر -->
+        <!-- User Information -->
         <div class="col-lg-4 mb-4">
             <div class="user-info-card h-100">
                 <div class="card-header">
-                    <i class="fas fa-id-card ml-2"></i>اطلاعات کاربر
+                    <i class="fas fa-id-card ml-2"></i>User Information
                 </div>
                 <div class="card-body p-4">
                     <div class="mb-3">
-                        <label class="text-muted small mb-1">نام کاربری:</label>
+                        <label class="text-muted small mb-1">Username:</label>
                         <div class="font-weight-bold text-dark">{{ user.username }}</div>
                     </div>
                     <div class="mb-3">
-                        <label class="text-muted small mb-1">نقش:</label>
+                        <label class="text-muted small mb-1">Role:</label>
                         <span class="badge badge-primary p-2" style="font-size: 0.9rem;">{{ user.role_display_name }}</span>
                     </div>
                     <div class="mb-3">
-                        <label class="text-muted small mb-1">ایمیل:</label>
+                        <label class="text-muted small mb-1">Email:</label>
                         <div class="text-dark"><i class="fas fa-envelope ml-1"></i>{{ user.email }}</div>
                     </div>
                     <div class="mb-3">
-                        <label class="text-muted small mb-1">تاریخ عضویت:</label>
+                        <label class="text-muted small mb-1">Membership Date:</label>
                         <div class="text-dark"><i class="fas fa-calendar ml-1"></i>{{ user.created_at.strftime('%Y/%m/%d') if user.created_at else '-' }}</div>
                     </div>
                     {% if user.profile and user.profile.get_custom_permissions() %}
                     <div class="mt-4 pt-3 border-top">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="text-muted small">مجوزهای سفارشی:</span>
-                            <span class="badge badge-custom">{{ user.profile.get_custom_permissions()|length }} مورد</span>
+                            <span class="text-muted small">Custom Permissions:</span>
+                            <span class="badge badge-custom">{{ user.profile.get_custom_permissions()|length }} items</span>
                         </div>
                     </div>
                     {% endif %}
@@ -216,11 +216,11 @@
             </div>
         </div>
 
-        <!-- مجوزهای پایه (ارث‌بری از نقش) -->
+        <!-- Base Permissions (Inherited from Role) -->
         <div class="col-lg-8 mb-4">
             <div class="perm-list-card">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0"><i class="fas fa-check-circle ml-2"></i>مجوزهای پایه (از نقش {{ user.role.value }})</h5>
+                    <h5 class="mb-0"><i class="fas fa-check-circle ml-2"></i>Base Permissions (from role {{ user.role.value }})</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="row">
@@ -228,12 +228,12 @@
                         <div class="col-md-6 col-lg-4 mb-3">
                             <div class="perm-item">
                                 <span class="perm-value">{{ perm.value }}</span>
-                                <span class="badge-perm badge-default">پیش‌فرض</span>
+                                <span class="badge-perm badge-default">Default</span>
                             </div>
                         </div>
                         {% else %}
                         <div class="col-12">
-                            <div class="alert alert-muted text-center">هیچ مجوز پیش‌فرضی برای این نقش تعریف نشده است.</div>
+                            <div class="alert alert-muted text-center">No default permissions defined for this role.</div>
                         </div>
                         {% endfor %}
                     </div>
@@ -242,24 +242,24 @@
         </div>
     </div>
 
-    <!-- مجوزهای سفارشی (اعطا/حذف دستی) -->
+    <!-- Custom Permissions (Manual Grant/Revoke) -->
     <div class="perm-list-card">
         <div class="card-header" style="background: var(--warning-gradient); color: white;">
-            <h5 class="mb-0"><i class="fas fa-key ml-2"></i>مدیریت مجوزهای سفارشی</h5>
+            <h5 class="mb-0"><i class="fas fa-key ml-2"></i>Manage Custom Permissions</h5>
         </div>
         <div class="card-body p-4">
             <p class="text-muted small mb-4">
                 <i class="fas fa-info-circle ml-1"></i>
-                در این بخش می‌توانید مجوزهایی را به صورت استثنا به کاربر اعطا کنید یا مجوزهای پیش‌فرض او را لغو نمایید.
+                In this section, you can exceptionally grant permissions to the user or revoke their default permissions.
             </p>
 
             <form method="POST" class="mb-5">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="row align-items-end">
                     <div class="col-lg-6 mb-3">
-                        <label for="permission" class="form-label font-weight-bold mb-2">انتخاب مجوز:</label>
+                        <label for="permission" class="form-label font-weight-bold mb-2">Select Permission:</label>
                         <select name="permission" id="permission" class="form-control perm-form-control" required>
-                            <option value="">-- انتخاب مجوز --</option>
+                            <option value="">-- Select Permission --</option>
                             {% for perm in all_permissions %}
                             <option value="{{ perm.value }}">{{ perm.name }} ({{ perm.value }})</option>
                             {% endfor %}
@@ -267,18 +267,18 @@
                     </div>
                     <div class="col-lg-3 mb-3">
                         <button type="submit" name="action" value="grant" class="btn btn-grant w-100">
-                            <i class="fas fa-plus-circle ml-2"></i>اعطا کردن
+                            <i class="fas fa-plus-circle ml-2"></i>Grant
                         </button>
                     </div>
                     <div class="col-lg-3 mb-3">
                         <button type="submit" name="action" value="revoke" class="btn btn-revoke w-100">
-                            <i class="fas fa-minus-circle ml-2"></i>حذف کردن
+                            <i class="fas fa-minus-circle ml-2"></i>Revoke
                         </button>
                     </div>
                 </div>
             </form>
 
-            <h6 class="font-weight-bold mb-3"><i class="fas fa-list ml-2"></i>لیست مجوزهای سفارشی فعلی:</h6>
+            <h6 class="font-weight-bold mb-3"><i class="fas fa-list ml-2"></i>Current Custom Permissions List:</h6>
             <div class="row">
                 {% for perm in custom_perms %}
                 <div class="col-md-6 col-lg-4 mb-3">
@@ -297,7 +297,7 @@
                 <div class="col-12">
                     <div class="alert alert-muted text-center">
                         <i class="fas fa-info-circle ml-1"></i>
-                        هیچ مجوز سفارشی برای این کاربر ثبت نشده است.
+                        No custom permissions registered for this user.
                     </div>
                 </div>
                 {% endfor %}
@@ -305,13 +305,13 @@
         </div>
     </div>
 
-    <!-- پیش‌نمایش نهایی -->
+    <!-- Final Preview -->
     <div class="perm-list-card mt-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="fas fa-eye ml-2"></i>پیش‌نمایش دسترسی نهایی</h5>
+            <h5 class="mb-0"><i class="fas fa-eye ml-2"></i>Final Access Preview</h5>
         </div>
         <div class="card-body p-4">
-            <p class="mb-3">کاربر پس از ذخیره تغییرات، به مجموع مجوزهای زیر دسترسی خواهد داشت:</p>
+            <p class="mb-3">After saving changes, the user will have access to the following permissions:</p>
             <div class="alert alert-light border" style="border-radius: 14px;">
                 <div class="row">
                     {% set all_perms = [] %}
@@ -336,14 +336,14 @@
                         </div>
                         {% endfor %}
                     {% else %}
-                        <div class="col-12 text-muted text-center">هیچ مجوزی تعریف نشده است.</div>
+                        <div class="col-12 text-muted text-center">No permissions defined.</div>
                     {% endif %}
                 </div>
             </div>
             <div class="text-left mt-3">
                 <span class="badge badge-primary p-2">
                     <i class="fas fa-layer-group ml-1"></i>
-                    مجموع مجوزها: {{ all_perms|length }}
+                    Total Permissions: {{ all_perms|length }}
                 </span>
             </div>
         </div>
