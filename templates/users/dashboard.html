@@ -105,7 +105,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             
             <!-- کارت: مدیریت مجوزها (فقط برای ادمین) -->
-            {% if current_user.role.value == 'admin' %}
+            {% if has_permission(current_user, Permission.DASHBOARD_VIEW_STATS) or current_user.role.value == 'admin' %}
             <div class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl p-5 shadow border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg col-span-1 md:col-span-2 lg:col-span-3">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -131,6 +131,7 @@
             {% endif %}
             
             <!-- کارت: سفارشات -->
+            {% if service_module_enabled('order') %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2">
@@ -151,9 +152,10 @@
                     View Orders →
                 </a>
             </div>
+            {% endif %}
 
             <!-- کارت: مدیریت سفارشات (فقط برای Producer) -->
-            {% if current_user.role.value == 'producer' %}
+            {% if current_user.role.value == 'producer' and service_module_enabled('order') %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -167,6 +169,102 @@
                 <a href="{{ url_for('users.seller_orders') }}" 
                    class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
                     Manage →
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- کارت: لجستیک -->
+            {% if service_module_enabled('logistics') %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1A8 8 0 017.025 13.234A7.997 7.997 0 017 12c0-1.381.33-2.69.917-3.852M13 16a1 1 0 001-1v-1m0 0a1 1 0 011-1h1m-1 1a1 1 0 001 1v1m0-1a1 1 0 011-1h1m-1 1v1m0-1a1 1 0 001-1h1m-1 1a1 1 0 011-1h1m-1 1v1m0-1a1 1 0 001-1h1"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Logistics</h3>
+                </div>
+                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">Track shipments and manage logistics.</p>
+                <a href="{{ url_for('logistics.dashboard') if modules.logistics else '#' }}" 
+                   class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
+                    View Logistics →
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- کارت: خدمات حقوقی -->
+            {% if service_module_enabled('legal') %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Legal Services</h3>
+                </div>
+                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">Contracts, legal documents and compliance.</p>
+                <a href="{{ url_for('legal.dashboard') if modules.legal else '#' }}" 
+                   class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
+                    View Legal →
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- کارت: خدمات مالی -->
+            {% if service_module_enabled('finance') %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Finance</h3>
+                </div>
+                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">Wallet, payments and financial reports.</p>
+                <a href="{{ url_for('finance.dashboard') if modules.finance else '#' }}" 
+                   class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
+                    View Finance →
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- کارت: سرمایه‌گذاری -->
+            {% if service_module_enabled('investment') %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Investment</h3>
+                </div>
+                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">Portfolio management and investment opportunities.</p>
+                <a href="{{ url_for('investment.dashboard') if modules.investment else '#' }}" 
+                   class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
+                    View Investments →
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- کارت: خدمات فنی -->
+            {% if service_module_enabled('technical') %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Technical Services</h3>
+                </div>
+                <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">Inspections, certifications and technical support.</p>
+                <a href="{{ url_for('technical.dashboard') if modules.technical else '#' }}" 
+                   class="inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition">
+                    View Technical →
                 </a>
             </div>
             {% endif %}

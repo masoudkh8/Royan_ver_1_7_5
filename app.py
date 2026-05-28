@@ -403,7 +403,17 @@ def create_app():
 
     @app.context_processor
     def inject_roles():
-        return {'Role': Role}
+        from services.permissions import Permission
+        return {'Role': Role, 'Permission': Permission}
+
+    # Inject permission functions for use in templates
+    @app.context_processor
+    def inject_permission_functions():
+        from services.access_control import has_permission, service_module_enabled
+        return {
+            'has_permission': has_permission,
+            'service_module_enabled': service_module_enabled
+        }
 
     @login_manager.user_loader
     def load_user(user_id):
