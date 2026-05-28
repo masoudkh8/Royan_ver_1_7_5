@@ -99,8 +99,17 @@ def get_user_permissions(user):
     if not user.is_authenticated:
         return DEFAULT_ROLE_PERMISSIONS.get('guest', [])
     
-    # تلاش برای دریافت مجوزهای سفارشی از پروفایل کاربر
-    profile = UserProfile.query.filter_by(user_id=user.id).first()
+    # Try to get custom permissions from user profile first
+    # Use the relationship if available, otherwise query
+    profile = None
+    if hasattr(user, 'profile') and user.profile:
+        profile = user.profile
+    else:
+        try:
+            profile = UserProfile.query.filter_by(user_id=user.id).first()
+        except Exception:
+            # If database is not available, skip custom permissions
+            pass
     
     if profile and profile.custom_permissions:
         # اگر کاربر مجوزهای دستی تنظیم کرده باشد
