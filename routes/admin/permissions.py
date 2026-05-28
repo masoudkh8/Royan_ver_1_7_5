@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+from flask.views import MethodView
 from flask_login import login_required, current_user
 from models.user import User, UserProfile, Role
 from models import db
@@ -66,38 +67,58 @@ def edit_role_permissions(role_name):
                            permissions=Permission, 
                            current_perms=current_perms)
 
-@admin_perms_bp.route('/user/<int:user_id>', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def manage_user_permissions(user_id):
-    """مدیریت دسترسی‌های خاص یک کاربر (استثناها)"""
-    user = User.query.get_or_404(user_id)
+# ============================================
+# پیاده‌سازی با استفاده از MethodView (CBV)
+# ============================================
+
+class ManageUserPermissionsView(MethodView):
+    """نمای مبتنی بر کلاس برای مدیریت مجوزهای کاربر"""
     
-    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
-    if not user.profile:
-        from models.user import UserProfile
-        user.profile = UserProfile(user_id=user.id)
-        db.session.add(user.profile)
-        db.session.commit()
-        flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
-    # ===========================================
+    decorators = [login_required, admin_required]
     
-    if request.method == 'POST':
+    def get(self, user_id):
+        """نمایش صفحه مدیریت مجوزهای کاربر"""
+        user = User.query.get_or_404(user_id)
+        
+        # === ایجاد خودکار پروفایل اگر وجود ندارد ===
+        if not user.profile:
+            user.profile = UserProfile(user_id=user.id)
+            db.session.add(user.profile)
+            db.session.commit()
+            flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
+        
+        base_perms = get_role_permissions(user.role)
+        custom_perms = user.profile.get_custom_permissions() if user.profile else []
+        
+        return render_template('admin/manage_user_perms.html', 
+                               user=user, 
+                               base_perms=base_perms, 
+                               custom_perms=custom_perms,
+                               all_permissions=Permission)
+    
+    def post(self, user_id):
+        """اعطا یا حذف مجوز برای کاربر"""
+        user = User.query.get_or_404(user_id)
+        
+        # اطمینان از وجود پروفایل
+        if not user.profile:
+            user.profile = UserProfile(user_id=user.id)
+            db.session.add(user.profile)
+            db.session.commit()
+        
         action = request.form.get('action')
-        perm_value = request.form.get('permission')  # دریافت permission value به صورت رشته
+        perm_value = request.form.get('permission')
         
         if not perm_value:
             flash("مجوز نامعتبر است.", "error")
-            return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
+            return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
-        # اعتبارسنجی مجوز
         try:
             perm_enum = Permission(perm_value)
         except ValueError:
             flash("مجوز نامعتبر است.", "error")
-            return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
+            return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
-        # استفاده از متدهای جدید مدل برای مدیریت مجوزها
         if action == 'grant':
             if user.profile.add_permission(perm_value):
                 flash(f"مجوز {perm_enum.value} به کاربر {user.username} اعطا شد.", "success")
@@ -110,9 +131,58 @@ def manage_user_permissions(user_id):
                 flash(f"مجوز {perm_enum.value} در لیست مجوزهای کاربر نبود.", "info")
         
         db.session.commit()
-        return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
+        return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+
+# ثبت View به عنوان route
+admin_perms_bp.add_url_rule(
+    '/user-cbv/<int:user_id>',
+    view_func=ManageUserPermissionsView.as_view('manage_user_permissions_cbv'),
+    methods=['GET', 'POST']
+)
+
+# حفظ route قدیمی برای سازگاری معکوس (اما با کد تمیزتر)
+@admin_perms_bp.route('/user/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def manage_user_permissions(user_id):
+    """مدیریت دسترسی‌های خاص یک کاربر (استثناها) - FBV"""
+    user = User.query.get_or_404(user_id)
     
-    # محاسبه مجوزهای نهایی کاربر
+    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
+    if not user.profile:
+        user.profile = UserProfile(user_id=user.id)
+        db.session.add(user.profile)
+        db.session.commit()
+        flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        perm_value = request.form.get('permission')
+        
+        if not perm_value:
+            flash("مجوز نامعتبر است.", "error")
+            return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+        
+        try:
+            perm_enum = Permission(perm_value)
+        except ValueError:
+            flash("مجوز نامعتبر است.", "error")
+            return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+        
+        if action == 'grant':
+            if user.profile.add_permission(perm_value):
+                flash(f"مجوز {perm_enum.value} به کاربر {user.username} اعطا شد.", "success")
+            else:
+                flash(f"مجوز {perm_enum.value} قبلاً به کاربر داده شده است.", "info")
+        elif action == 'revoke':
+            if user.profile.remove_permission(perm_value):
+                flash(f"مجوز {perm_enum.value} از کاربر {user.username} حذف شد.", "warning")
+            else:
+                flash(f"مجوز {perm_enum.value} در لیست مجوزهای کاربر نبود.", "info")
+        
+        db.session.commit()
+        return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
+    
     base_perms = get_role_permissions(user.role)
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
     
