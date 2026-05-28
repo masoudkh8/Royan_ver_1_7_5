@@ -1,6 +1,6 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}داشبورد مدیریت دسترسی‌ها و مجوزها{% endblock %}
+{% block title %}Permissions and Access Management Dashboard{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -641,17 +641,17 @@
     <div class="permission-dashboard mb-4">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h2><i class="fas fa-shield-alt ml-2"></i>داشبورد مدیریت دسترسی‌ها و مجوزها</h2>
-                <p class="mb-0 opacity-75">مدیریت متمرکز نقش‌ها، مجوزها و دسترسی‌های کاربران به صورت حرفه‌ای</p>
+                <h2><i class="fas fa-shield-alt ml-2"></i>Permissions and Access Management Dashboard</h2>
+                <p class="mb-0 opacity-75">Professional centralized management of roles, permissions and user access</p>
             </div>
             <div class="col-md-4 text-left">
                 <div class="d-flex justify-content-end gap-2">
                     <button class="btn btn-light action-btn action-btn-primary" onclick="location.reload()">
-                        <i class="fas fa-sync-alt ml-1"></i>به‌روزرسانی
+                        <i class="fas fa-sync-alt ml-1"></i>Update
                     </button>
                     <a href="{{ url_for('users.manage_permissions', target_user_id=current_user.id) }}" 
                        class="btn btn-light action-btn action-btn-success">
-                        <i class="fas fa-user-cog ml-1"></i>مدیریت کاربران
+                        <i class="fas fa-user-cog ml-1"></i>User Management
                     </a>
                 </div>
             </div>
@@ -664,28 +664,28 @@
             <div class="stat-card text-center">
                 <div class="icon">🎭</div>
                 <div class="value">{{ roles|length }}</div>
-                <div class="label">نقش‌های کاربری فعال</div>
+                <div class="label">Active User Roles</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
                 <div class="icon">🔐</div>
                 <div class="value">{{ permissions|length }}</div>
-                <div class="label">مجوزهای تعریف‌شده</div>
+                <div class="label">Defined Permissions</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
                 <div class="icon">👥</div>
                 <div class="value">{{ users|length }}</div>
-                <div class="label">کاربران ثبت‌نام شده</div>
+                <div class="label">Registered Users</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
                 <div class="icon">⚙️</div>
                 <div class="value">{{ matrix|length }}</div>
-                <div class="label">سیستم‌های فعال</div>
+                <div class="label">Active Systems</div>
             </div>
         </div>
     </div>
@@ -694,17 +694,17 @@
     <ul class="nav nav-tabs mb-0" id="permTabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="matrix-tab" data-toggle="tab" href="#matrix" role="tab">
-                <i class="fas fa-table ml-1"></i>ماتریس دسترسی نقش‌ها
+                <i class="fas fa-table ml-1"></i>Role Access Matrix
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">
-                <i class="fas fa-users-cog ml-1"></i>مدیریت کاربران خاص
+                <i class="fas fa-users-cog ml-1"></i>Special User Management
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">
-                <i class="fas fa-eye ml-1"></i>پیش‌نمایش منوی کاربر
+                <i class="fas fa-eye ml-1"></i>User Menu Preview
             </a>
         </li>
     </ul>
@@ -715,7 +715,7 @@
         <div class="tab-pane fade show active" id="matrix" role="tabpanel">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0 text-primary font-weight-bold">
-                    <i class="fas fa-grid-2 ml-2"></i>جدول دسترسی پیش‌فرض نقش‌ها
+                    <i class="fas fa-grid-2 ml-2"></i>Default Role Access Table
                 </h5>
                 <div class="search-box" style="width: 350px;">
                     <input type="text" id="matrixSearch" placeholder="جستجو در مجوزها و نقش‌ها..." onkeyup="filterMatrix()">
@@ -725,15 +725,15 @@
             
             <div class="alert alert-info mb-3">
                 <i class="fas fa-info-circle ml-2"></i>
-                <strong>راهنما:</strong> علامت ✅ نشان‌دهنده دسترسی مجاز و ❌ نشان‌دهنده عدم دسترسی است. 
-                برای ویرایش دسترسی‌های هر نقش، از دکمه‌های زیر جدول استفاده کنید.
+                <strong>Guide:</strong> ✅ indicates authorized access and ❌ indicates no access. 
+                برای Edit Access‌های Each Role، of دکمه‌های زیر جدandل استفاده کنید.
             </div>
             
             <div class="table-responsive">
                 <table class="permission-matrix" id="permissionMatrix">
                     <thead>
                         <tr>
-                            <th>مجوز / نقش</th>
+                            <th>Permission / Role</th>
                             {% for role in roles %}
                             <th>
                                 <span class="role-badge role-{{ role.name|lower }}">{{ role.value }}</span>
@@ -776,7 +776,7 @@
                 {% if role_obj %}
                 <a href="{{ url_for('admin.admin_perms.edit_role_permissions', role_name=role_name) }}"
                    class="btn action-btn action-btn-primary btn-sm">
-                    <i class="fas fa-edit ml-1"></i>ویرایش {{ role_obj.value }}
+                    <i class="fas fa-edit ml-1"></i>Edit {{ role_obj.value }}
                 </a>
                 {% endif %}
                 {% endfor %}
@@ -789,7 +789,7 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-warning text-dark border-0">
-                            <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>اعطای مجوز استثنایی به کاربر</h5>
+                            <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>Grant Exceptional Permission to User</h5>
                         </div>
                         <div class="card-body">
                             <form method="GET" action="{{ url_for('admin.admin_perms.manage_user_permissions', user_id=0) }}"
@@ -810,16 +810,16 @@
                             
                             <div class="alert alert-light border">
                                 <i class="fas fa-lightbulb text-warning ml-2"></i>
-                                <strong>کاربرد:</strong> از این بخش برای اعطای مجوزهای خاص به کاربران ویژه استفاده کنید. 
-                                این مجوزها به صورت استثنا به دسترسی‌های پیش‌فرض نقش اضافه می‌شوند و اولویت بالاتری دارند.
+                                <strong>Application:</strong> Use this section to grant special permissions to special users. 
+                                این Permissions به صandرت استثنا به Access‌های پیش‌فرض Role اضافه می‌شandند and اandلandیت بالاتری دارند.
                             </div>
                             
                             <div class="mt-3">
-                                <h6 class="font-weight-bold mb-2"><i class="fas fa-info-circle ml-1"></i>نکات مهم:</h6>
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-info-circle ml-1"></i>Important Points:</h6>
                                 <ul class="small text-muted pr-2">
-                                    <li>مجوزهای سفارشی بر مجوزهای نقش ارجحیت دارند</li>
-                                    <li>برای حذف مجوز سفارشی، به صفحه مدیریت کاربر مراجعه کنید</li>
-                                    <li>تغییرات بلافاصله اعمال می‌شوند</li>
+                                    <li>Custom permissions have priority over role permissions</li>
+                                    <li>To delete custom permission, refer to user management page</li>
+                                    <li>Changes are applied immediately</li>
                                 </ul>
                             </div>
                         </div>
@@ -829,7 +829,7 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-info text-white border-0">
-                            <h5 class="mb-0"><i class="fas fa-chart-pie ml-2"></i>آمار دسترسی‌های سفارشی</h5>
+                            <h5 class="mb-0"><i class="fas fa-chart-pie ml-2"></i>Custom Access Statistics</h5>
                         </div>
                         <div class="card-body">
                             <div class="text-center py-4">
@@ -837,10 +837,10 @@
                                     <i class="fas fa-key"></i>
                                 </div>
                                 <p class="text-muted mb-3">
-                                    در این بخش می‌توانید کاربرانی که دارای مجوزهای سفارشی هستند را مشاهده و مدیریت کنید.
+                                    در این بخش می‌تandانید Usersی که دارای Permissionsی سفارشی هستند را View and Management کنید.
                                 </p>
                                 <button class="btn action-btn action-btn-info" onclick="showCustomPermsStats()">
-                                    <i class="fas fa-list ml-1"></i>مشاهده لیست کاربران ویژه
+                                    <i class="fas fa-list ml-1"></i>View List of special users
                                 </button>
                                 
                                 <div class="mt-4 pt-4 border-top">
@@ -848,13 +848,13 @@
                                         <div class="col-6">
                                             <div class="stat-card p-2">
                                                 <div class="value" style="font-size: 1.5rem;">{{ users|length }}</div>
-                                                <div class="label small">کل کاربران</div>
+                                                <div class="label small">Total Users</div>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="stat-card p-2">
                                                 <div class="value" style="font-size: 1.5rem;">{{ (users|selectattr('custom_permissions')|list)|length }}</div>
-                                                <div class="label small">با مجوز سفارشی</div>
+                                                <div class="label small">With custom permission</div>
                                             </div>
                                         </div>
                                     </div>
@@ -870,21 +870,21 @@
         <div class="tab-pane fade" id="preview" role="tabpanel">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-primary text-white border-0">
-                    <h5 class="mb-0"><i class="fas fa-desktop ml-2"></i>پیش‌نمایش سرویس‌های قابل مشاهده برای کاربر</h5>
+                    <h5 class="mb-0"><i class="fas fa-desktop ml-2"></i>Preview of services visible to user</h5>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info mb-4">
                         <i class="fas fa-info-circle ml-2"></i>
-                        <strong>کاربرد:</strong> در این بخش می‌توانید پیش‌نمایشی از ماژول‌ها و سرویس‌هایی که یک کاربر خاص می‌تواند مشاهده کند را ببینید.
-                        این ابزار برای تست و بررسی صحت تنظیمات مجوزها بسیار مفید است.
+                        <strong>Application:</strong> In this section you can see a preview of modules and services that a specific user can view.
+                        این ابزار برای تست and بررسی صحت تنظیمات Permissions بسیار مفید است.
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="font-weight-bold mb-2">انتخاب کاربر برای پیش‌نمایش:</label>
+                                <label class="font-weight-bold mb-2">Select user for preview:</label>
                                 <select id="previewUserSelect" class="form-control filter-select">
-                                    <option value="">-- کاربر را انتخاب کنید --</option>
+                                    <option value="">-- Select a user --</option>
                                     {% for user in users %}
                                     <option value="{{ user.id }}">
                                         {{ user.username }} 
@@ -895,13 +895,13 @@
                             </div>
                             
                             <button onclick="loadPreview()" class="btn action-btn action-btn-primary btn-block mt-3">
-                                <i class="fas fa-play ml-1"></i>بارگذاری پیش‌نمایش
+                                <i class="fas fa-play ml-1"></i>Load Preview
                             </button>
                             
                             <div class="mt-4 p-3 bg-light rounded">
-                                <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>نکته:</h6>
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>Note:</h6>
                                 <p class="small text-muted mb-0">
-                                    پیش‌نمایش بر اساس مجوزهای نقش کاربر به علاوه هرگونه مجوز سفارشی اعطا شده نمایش داده می‌شود.
+                                    پیش‌نمایش بر اساس Permissionsی Role User به علاandه هرگandنه مجandز سفارشی اعطا شده نمایش داده می‌شandد.
                                 </p>
                             </div>
                         </div>
@@ -910,14 +910,14 @@
                             <div id="previewResult" class="preview-box" style="display:none;">
                                 <h6 class="font-weight-bold mb-3">
                                     <i class="fas fa-check-circle text-success ml-1"></i>
-                                    ماژول‌های قابل مشاهده:
+                                    Visible Modules:
                                 </h6>
                                 <div id="previewList"></div>
                             </div>
                             
                             <div id="previewPlaceholder" class="text-center text-muted py-5">
                                 <i class="fas fa-arrow-left display-4 mb-3"></i>
-                                <p class="mb-0">برای مشاهده پیش‌نمایش، یک کاربر انتخاب کرده و دکمه بارگذاری را بزنید.</p>
+                                <p class="mb-0">To view preview, select a user and click the load button.</p>
                             </div>
                         </div>
                     </div>
@@ -928,7 +928,7 @@
 </div>
 
 <script>
-// فیلتر کردن ماتریس بر اساس جستجو
+// فیلتر کردن ماتریس بر اساس جستجand
 function filterMatrix() {
     const input = document.getElementById('matrixSearch');
     const filter = input.value.toLowerCase();
@@ -940,7 +940,7 @@ function filterMatrix() {
     });
 }
 
-// بارگذاری پیش‌نمایش منوی کاربر
+// بارگذاری User Menu Preview
 function loadPreview() {
     const userId = document.getElementById('previewUserSelect').value;
     
@@ -949,13 +949,13 @@ function loadPreview() {
         return;
     }
 
-    // نمایش حالت لودینگ
+    // نمایش حالت لandدینگ
     document.getElementById('previewResult').style.display = 'none';
     document.getElementById('previewPlaceholder').innerHTML = `
         <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">در حال بارگذاری...</span>
+            <span class="sr-only">Loading...</span>
         </div>
-        <p class="mt-3">در حال دریافت اطلاعات...</p>
+        <p class="mt-3">Fetching information...</p>
     `;
 
     fetch(`/admin/permissions/api/preview/${userId}`)
@@ -968,7 +968,7 @@ function loadPreview() {
                 list.innerHTML = `
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle ml-2"></i>
-                        هیچ ماژولی قابل مشاهده نیست
+                        هیچ ماژandلی قابل View نیست
                     </div>`;
             } else {
                 const icons = {
@@ -1002,7 +1002,7 @@ function loadPreview() {
             showAlert('خطا در بارگذاری اطلاعات', 'error');
             document.getElementById('previewPlaceholder').innerHTML = `
                 <i class="fas fa-exclamation-circle text-danger display-4"></i>
-                <p class="mt-3 text-danger">خطا در دریافت اطلاعات</p>
+                <p class="mt-3 text-danger">Error fetching information</p>
             `;
         });
 }
@@ -1031,7 +1031,7 @@ function showAlert(message, type = 'info') {
     }, 5000);
 }
 
-// نمایش آمار مجوزهای سفارشی
+// نمایش آمار Permissionsی سفارشی
 function showCustomPermsStats() {
     showAlert('این قابلیت به زودی اضافه خواهد شد', 'info');
 }
