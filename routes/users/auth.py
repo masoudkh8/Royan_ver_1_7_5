@@ -332,7 +332,7 @@ def reset_password(token):
         flash("❌ The recovery link is invalid or expired.", "error")
         return redirect(url_for('users.forgot_password'))
     
-    user = User.query.get(reset_token.user_id)
+    user = db.session.get(User, reset_token.user_id)
     if not user:
         flash("❌ User not found.", "error")
         return redirect(url_for('users.login'))
@@ -533,7 +533,7 @@ def verify_2fa_login():
         flash("❌ No pending login found. Please log in first.", "warning")
         return redirect(url_for('users.login'))
     
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
     if not user or not user.two_factor_enabled:
         # اگر 2FA غیرفعال شد، به پروفایل برگرد
         session.pop('2fa_pending_user_id', None)

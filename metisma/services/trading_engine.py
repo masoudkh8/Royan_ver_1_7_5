@@ -311,7 +311,7 @@ class MatchingEngine:
     
     def _update_order_status(self, order_id: str, status: OrderStatus):
         """Update order status in database."""
-        order = TradeOrder.query.get(order_id)
+        order = db.session.get(TradeOrder, order_id)
         if order:
             order.status = status
             db.session.commit()
@@ -328,7 +328,7 @@ class MatchingEngine:
             
             if not market_data:
                 # Create new daily record
-                pair = TradingPair.query.get(pair_id)
+                pair = db.session.get(TradingPair, pair_id)
                 if not pair:
                     return
                     
@@ -366,7 +366,7 @@ matching_engine = MatchingEngine()
 
 def process_order(order_id: str):
     """Process a single order through the matching engine."""
-    order = TradeOrder.query.get(order_id)
+    order = db.session.get(TradeOrder, order_id)
     if not order or order.status != OrderStatus.PENDING:
         return []
     
@@ -381,7 +381,7 @@ def process_order(order_id: str):
 
 def cancel_order(order_id: str) -> bool:
     """Cancel an order."""
-    order = TradeOrder.query.get(order_id)
+    order = db.session.get(TradeOrder, order_id)
     if not order or order.status not in [OrderStatus.PENDING, OrderStatus.PARTIALLY_FILLED]:
         return False
     
