@@ -9,23 +9,23 @@ from datetime import datetime
 tehran_tz = pytz.timezone('Asia/Tehran')
 
 
-# مسیرهای عمومی برای نمایش مجله
+# TODO: Translate -  Pathهای عمومی برای View مجله
 @magazine_bp.route('/')
 def index():
-    """صفحه اصلی مجله - نمایش شماره‌های موجود"""
+    """TODO: Translate - Page اصلی مجله - View شماره‌های موجود"""
     issues = MagazineIssue.query.filter_by(is_published=True).order_by(MagazineIssue.issue_number.desc()).all()
     return render_template('magazine/index.html', issues=issues)
 
 @magazine_bp.route('/download/<int:issue_id>')
 def download_issue(issue_id):
-    """دانلود فایل دیجیتال مجله"""
+    """TODO: Translate - Download File دیجیتال مجله"""
     issue = MagazineIssue.query.get_or_404(issue_id)
     
     if not issue.is_published:
         flash('This issue has not been published yet.', 'error')
         return redirect(url_for('magazine.index'))
     
-    # مسیر فایل را برگردانید
+    # TODO: Translate -  Path File را برگRejectانید
     file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'magazines', issue.file_path)
     
     if os.path.exists(file_path):
@@ -39,10 +39,10 @@ def download_issue(issue_id):
         flash('Magazine file not found.', 'error')
         return redirect(url_for('magazine.index'))
 
-# فرم درخواست اسپانسری
+# TODO: Translate -  فرم Request اسپانسری
 @magazine_bp.route('/sponsorship', methods=['GET', 'POST'])
 def sponsorship_request():
-    """ثبت درخواست اسپانسری"""
+    """TODO: Translate - ثبت Request اسپانسری"""
     if request.method == 'POST':
         name = request.form.get('name')
         company = request.form.get('company')
@@ -70,10 +70,10 @@ def sponsorship_request():
     
     return render_template('magazine/sponsorship.html')
 
-# فرم درخواست تبلیغات
+# TODO: Translate -  فرم Request تبلیغات
 @magazine_bp.route('/advertisement', methods=['GET', 'POST'])
 def advertisement_request():
-    """ثبت درخواست تبلیغات در مجله"""
+    """TODO: Translate - ثبت Request تبلیغات در مجله"""
     if request.method == 'POST':
         name = request.form.get('name')
         company = request.form.get('company')
@@ -107,10 +107,10 @@ def advertisement_request():
     
     return render_template('magazine/advertisement.html')
 
-# فرم اشتراک سالیانه
+# TODO: Translate -  فرم اشتراک سالیانه
 @magazine_bp.route('/subscribe', methods=['GET', 'POST'])
 def subscribe():
-    """ثبت نام اشتراک سالیانه"""
+    """TODO: Translate - ثبت نام اشتراک سالیانه"""
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')

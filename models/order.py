@@ -5,7 +5,7 @@ import pytz
 from enum import Enum
 from sqlalchemy import Enum as SqlEnum
 
-# تنظیم منطقه زمانی تهران
+# TODO: Translate -  تنظیم منطقه Timeی تهران
 tehran_tz = pytz.timezone('Asia/Tehran')
 
 class OrderStatus(Enum):
@@ -22,7 +22,7 @@ class Order(db.Model):
     product = db.Column(db.String(100), nullable=False)
     quantity_tons = db.Column(db.Float, nullable=False)
     price_per_ton = db.Column(db.Float, nullable=False)
-    total_price = db.Column(db.Float, nullable=False)  # محاسبه شده
+    total_price = db.Column(db.Float, nullable=False)  # TODO: Translate -  محاسبه شده
 
     origin_port = db.Column(db.String(100), nullable=False)
     destination_port = db.Column(db.String(100), nullable=False)

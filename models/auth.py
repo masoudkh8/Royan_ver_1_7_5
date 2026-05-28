@@ -1,5 +1,5 @@
 # models/auth.py
-# مدل‌های امنیتی و احراز هویت پیشرفته
+# TODO: Translate -  Model‌های امنیتی و Authentication پیشرفته
 
 from . import db
 from datetime import datetime, timedelta, timezone
@@ -11,12 +11,12 @@ import time
 
 
 def utc_now():
-    """برگرداندن زمان فعلی به UTC بدون timezone info برای سازگاری با دیتابیس"""
+    """TODO: Translate - برگRejectاندن Time فعلی به UTC بدون timezone info برای سازگاری با دیتابیس"""
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 class PasswordResetToken(db.Model):
-    """توکن بازیابی رمز عبور با انقضا"""
+    """TODO: Translate - Token بازیابی Password با انقضا"""
     __tablename__ = 'password_reset_tokens'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -26,7 +26,7 @@ class PasswordResetToken(db.Model):
     expires_at = db.Column(db.DateTime, nullable=False)
     used = db.Column(db.Boolean, default=False)
     used_at = db.Column(db.DateTime, nullable=True)
-    ip_address = db.Column(db.String(45), nullable=True)  # IP درخواست‌دهنده
+    ip_address = db.Column(db.String(45), nullable=True)  # TODO: Translate -  IP Request‌دهنده
     
     # Relationship
     user = db.relationship('User', backref=db.backref('reset_tokens', lazy='dynamic', cascade='all, delete-orphan'))
@@ -40,40 +40,40 @@ class PasswordResetToken(db.Model):
     
     @staticmethod
     def create_for_user(user, expiry_hours=1, ip_address=None):
-        """ایجاد توکن بازیابی برای کاربر و ذخیره در دیتابیس"""
+        """TODO: Translate - Create Token بازیابی برای User و Save در دیتابیس"""
         import hashlib
         
-        # باطل کردن توکن‌های قبلی استفاده نشده
+        # TODO: Translate -  باطل کRejectن Token‌های قبلی استفاده نشده
         PasswordResetToken.query.filter_by(
             user_id=user.id, 
             used=False
         ).update({'used': True}, synchronize_session=False)
 
-        # ایجاد توکن جدید - ذخیره توکن اصلی قبل از هش کردن
+        # TODO: Translate -  Create Token جدید - Save Token اصلی قبل از هش کRejectن
         reset_token = PasswordResetToken(
             user_id=user.id,
             expiry_hours=expiry_hours,
             ip_address=ip_address
         )
         
-        # ذخیره توکن اصلی برای بازگرداندن
+        # TODO: Translate -  Save Token اصلی برای بازگRejectاندن
         original_token = reset_token.token
         
-        # هش کردن توکن برای ذخیره امن در دیتابیس
+        # TODO: Translate -  هش کRejectن Token برای Save امن در دیتابیس
         reset_token.token = hashlib.sha256(reset_token.token.encode()).hexdigest()
         
         db.session.add(reset_token)
         db.session.commit()
         
-        return original_token  # بازگرداندن توکن اصلی (نه هش شده)
+        return original_token  # TODO: Translate -  بازگRejectاندن Token اصلی (نه هش شده)
     
     def is_valid(self):
-        """بررسی اعتبار توکن"""
+        """Check Credit Token"""
         return not self.used and utc_now() < self.expires_at
 
 
     def mark_as_used(self):
-        """علامت‌گذاری توکن به عنوان استفاده شده"""
+        """TODO: Translate - علامت‌گذاری Token به عنوان استفاده شده"""
         self.used = True
         self.used_at = utc_now()
         db.session.commit()
@@ -83,14 +83,14 @@ class PasswordResetToken(db.Model):
 
 
 class LoginSession(db.Model):
-    """مدیریت جلسات ورود کاربران"""
+    """TODO: Translate - مدیریت جلسات Login Userان"""
     __tablename__ = 'login_sessions'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     session_token = db.Column(db.String(255), unique=True, nullable=False, index=True)
     
-    # اطلاعات دستگاه و موقعیت
+    # TODO: Translate -  Information دستگاه و موقعیت
     ip_address = db.Column(db.String(45), nullable=True)  # IPv6 support
     user_agent = db.Column(db.Text, nullable=True)
     device_type = db.Column(db.String(50), nullable=True)  # mobile, desktop, tablet
@@ -99,9 +99,9 @@ class LoginSession(db.Model):
     country = db.Column(db.String(50), nullable=True)
     city = db.Column(db.String(100), nullable=True)
     
-    # وضعیت جلسه
+    #  Status Session
     is_active = db.Column(db.Boolean, default=True, index=True)
-    is_current = db.Column(db.Boolean, default=False)  # آیا این جلسه فعلی است؟
+    is_current = db.Column(db.Boolean, default=False)  # TODO: Translate -  آیا این Session فعلی است؟
     created_at = db.Column(db.DateTime, default=utc_now, index=True)
     last_activity = db.Column(db.DateTime, default=utc_now)
     expires_at = db.Column(db.DateTime, nullable=True)
@@ -125,17 +125,17 @@ class LoginSession(db.Model):
         self.created_at = utc_now()
         self.last_activity = utc_now()
         
-        # تنظیم زمان انقضا بر اساس Remember Me
+        # TODO: Translate -  تنظیم Time انقضا بر اساس Remember Me
         if remember_me:
             self.expires_at = self.created_at + timedelta(days=session_duration_days)
         else:
-            # جلسه معمولی: 24 ساعت بدون فعالیت منقضی می‌شود
+            # TODO: Translate -  Session معمولی: 24 ساعت بدون Activeیت منقضی می‌شود
             self.expires_at = self.created_at + timedelta(hours=24)
     
     @staticmethod
     def create_session(user, request=None, remember_me=False):
-        """ایجاد جلسه ورود جدید برای کاربر"""
-        # غیرفعال کردن جلسات قدیمی منقضی شده
+        """TODO: Translate - Create Session Login جدید برای User"""
+        # TODO: Translate -  غیرActive کRejectن جلسات قدیمی منقضی شده
         LoginSession.query.filter_by(
             user_id=user.id,
             is_active=True
@@ -143,7 +143,7 @@ class LoginSession(db.Model):
             LoginSession.expires_at < utc_now()
         ).update({'is_active': False})
         
-        # ایجاد جلسه جدید
+        # TODO: Translate -  Create Session جدید
         new_session = LoginSession(
             user_id=user.id,
             request=request,
@@ -157,7 +157,7 @@ class LoginSession(db.Model):
     
     @staticmethod
     def logout_all_sessions(user_id):
-        """خروج از تمام جلسات کاربر به جز جلسه فعلی"""
+        """TODO: Translate - Logout از تمام جلسات User به جز Session فعلی"""
         LoginSession.query.filter_by(
             user_id=user_id,
             is_active=True
@@ -165,10 +165,10 @@ class LoginSession(db.Model):
         db.session.commit()
     
     def _parse_user_agent(self):
-        """تجزیه User Agent برای تشخیص دستگاه و مرورگر"""
+        """TODO: Translate - تجزیه User Agent برای تشخیص دستگاه و مرورگر"""
         ua = self.user_agent or ''
         
-        # تشخیص نوع دستگاه
+        # TODO: Translate -  تشخیص Type دستگاه
         if 'Mobile' in ua or 'Android' in ua or 'iPhone' in ua:
             self.device_type = 'mobile'
         elif 'Tablet' in ua or 'iPad' in ua:
@@ -176,7 +176,7 @@ class LoginSession(db.Model):
         else:
             self.device_type = 'desktop'
         
-        # تشخیص مرورگر
+        # TODO: Translate -  تشخیص مرورگر
         if 'Chrome' in ua and 'Edg' not in ua:
             self.browser = 'Chrome'
         elif 'Firefox' in ua:
@@ -190,7 +190,7 @@ class LoginSession(db.Model):
         else:
             self.browser = 'Other'
         
-        # تشخیص سیستم عامل
+        # TODO: Translate -  تشخیص System عامل
         if 'Windows' in ua:
             self.os = 'Windows'
         elif 'Mac OS' in ua or 'MacOS' in ua:
@@ -205,35 +205,35 @@ class LoginSession(db.Model):
             self.os = 'Other'
     
     def update_activity(self):
-        """به‌روزرسانی زمان آخرین فعالیت"""
+        """TODO: Translate - Update Time آخرین Activeیت"""
         self.last_activity = utc_now()
         if self.remember_me and self.expires_at:
-            # تمدید انقضا برای Remember Me
+            # TODO: Translate -  تمدید انقضا برای Remember Me
             self.expires_at = utc_now() + timedelta(days=30)
         else:
-            # تمدید انقضا برای جلسه معمولی
+            # TODO: Translate -  تمدید انقضا برای Session معمولی
             self.expires_at = utc_now() + timedelta(hours=24)
         db.session.commit()
     
     def is_expired(self):
-        """بررسی انقضای جلسه"""
+        """TODO: Translate - Check انقضای Session"""
         return utc_now() > self.expires_at if self.expires_at else False
     
     def revoke(self):
-        """ابطال جلسه"""
+        """TODO: Translate - ابطال Session"""
         self.is_active = False
         db.session.commit()
     
     def logout(self):
-        """خروج از جلسه"""
+        """TODO: Translate - Logout از Session"""
         self.revoke()
         db.session.commit()
     
     def to_dict(self):
-        """تبدیل به دیکشنری برای نمایش"""
+        """TODO: Translate - تبدیل به Dictionary برای View"""
         return {
             'id': self.id,
-            'session_token': self.session_token[:8] + '...',  # نمایش بخشی از توکن
+            'session_token': self.session_token[:8] + '...',  # TODO: Translate -  View Sectionی از Token
             'ip_address': self.ip_address,
             'device_type': self.device_type,
             'browser': self.browser,
@@ -253,27 +253,27 @@ class LoginSession(db.Model):
 
 
 class ActivityLog(db.Model):
-    """لاگ فعالیت‌های کاربران برای امنیت و ممیزی"""
+    """TODO: Translate - لاگ Activeیت‌های Userان برای امنیت و ممیزی"""
     __tablename__ = 'activity_logs'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True, index=True)
     
-    # نوع فعالیت
+    # TODO: Translate -  Type Activeیت
     activity_type = db.Column(db.String(50), nullable=False, index=True)
     # login, logout, login_failed, password_change, email_change, profile_update, 
     # 2fa_enabled, 2fa_disabled, session_created, session_revoked, etc.
     
-    # جزئیات فعالیت
+    # TODO: Translate -  جزئیات Activeیت
     description = db.Column(db.Text, nullable=True)
     ip_address = db.Column(db.String(45), nullable=True)
     user_agent = db.Column(db.Text, nullable=True)
     
-    # وضعیت
+    #  Status
     success = db.Column(db.Boolean, default=True, index=True)
     failure_reason = db.Column(db.String(255), nullable=True)
     
-    # متادیتا اضافی (JSON) - renamed from metadata to extra_data to avoid SQLAlchemy reserved word
+    # TODO: Translate -  متادیتا اضافی (JSON) - renamed from metadata to extra_data to avoid SQLAlchemy reserved word
     extra_data = db.Column(db.Text, nullable=True)
     
     created_at = db.Column(db.DateTime, default=utc_now, index=True)
@@ -300,8 +300,8 @@ class ActivityLog(db.Model):
     @staticmethod
     def log_activity(user_id=None, activity_type='unknown', description=None,
                      request=None, success=True, failure_reason=None, status=None, extra_data=None):
-        """ثبت فعالیت کاربر در لاگ"""
-        # پشتیبانی از پارامتر status برای سازگاری با کدهای قدیمی
+        """TODO: Translate - ثبت Activeیت User در لاگ"""
+        # TODO: Translate -  پشتیبانی از پارامتر status برای سازگاری با کدهای قدیمی
         if status is not None:
             success = (status == 'success')
         
@@ -321,7 +321,7 @@ class ActivityLog(db.Model):
         return log
     
     def to_dict(self):
-        """تبدیل به دیکشنری برای نمایش"""
+        """TODO: Translate - تبدیل به Dictionary برای View"""
         import json
         return {
             'id': self.id,
@@ -340,7 +340,7 @@ class ActivityLog(db.Model):
 
 
 class EmailVerificationToken(db.Model):
-    """توکن تأیید ایمیل"""
+    """TODO: Translate - Token Confirm ایمیل"""
     __tablename__ = 'email_verification_tokens'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -362,11 +362,11 @@ class EmailVerificationToken(db.Model):
         self.expires_at = self.created_at + timedelta(hours=expiration_hours)
     
     def is_valid(self):
-        """بررسی اعتبار توکن"""
+        """Check Credit Token"""
         return not self.used and utc_now() < self.expires_at
     
     def mark_as_used(self):
-        """علامت‌گذاری توکن به عنوان استفاده شده"""
+        """TODO: Translate - علامت‌گذاری Token به عنوان استفاده شده"""
         self.used = True
     
     def __repr__(self):
@@ -374,7 +374,7 @@ class EmailVerificationToken(db.Model):
 
 
 class TwoFactorBackupCode(db.Model):
-    """کدهای پشتیبان احراز هویت دو مرحله‌ای"""
+    """TODO: Translate - کدهای پشتیبان Authentication دو مرحله‌ای"""
     __tablename__ = 'two_factor_backup_codes'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -389,10 +389,10 @@ class TwoFactorBackupCode(db.Model):
     
     @staticmethod
     def generate_backup_codes(user_id, count=10):
-        """تولید کدهای پشتیبان"""
+        """TODO: Translate - تولید کدهای پشتیبان"""
         codes = []
         for _ in range(count):
-            code = ''.join([str(secrets.randbelow(10)) for _ in range(8)])  # 8 رقمی
+            code = ''.join([str(secrets.randbelow(10)) for _ in range(8)])  # TODO: Translate -  8 رقمی
             codes.append(code)
             backup_code = TwoFactorBackupCode(
                 user_id=user_id,
@@ -405,7 +405,7 @@ class TwoFactorBackupCode(db.Model):
     
     @staticmethod
     def verify_backup_code(user_id, code):
-        """بررسی کد پشتیبان"""
+        """TODO: Translate - Check کد پشتیبان"""
         code_hash = hashlib.sha256(code.encode()).hexdigest()
         backup_code = TwoFactorBackupCode.query.filter_by(
             user_id=user_id, 
@@ -422,7 +422,7 @@ class TwoFactorBackupCode(db.Model):
     
     @staticmethod
     def invalidate_all(user_id):
-        """باطل کردن تمام کدهای پشتیبان"""
+        """TODO: Translate - باطل کRejectن تمام کدهای پشتیبان"""
         TwoFactorBackupCode.query.filter_by(user_id=user_id, used=False).update({'used': True})
         db.session.commit()
     

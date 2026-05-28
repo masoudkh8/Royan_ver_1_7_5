@@ -8,15 +8,15 @@ class Notification(db.Model):
     __tablename__ = 'notifications'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)  # کسی که اعلان رو دریافت می‌کند
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)  # TODO: Translate -  کسی که Notification رو دریافت می‌کند
     
-    # نوع اعلان: follow, like, comment, comment_reply, share, mention, system
+    #  Type Notification: follow, like, comment, comment_reply, share, mention, system
     notification_type = db.Column(db.String(50), nullable=False, default='system')
     
-    # کاربر انجام‌دهنده عمل (مثلاً کسی که لایک کرده)
+    # TODO: Translate -  User انجام‌دهنده عمل (مثلاً کسی که Like کRejectه)
     actor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     
-    # آیتم مرتبط (post_id, comment_id, etc.)
+    # TODO: Translate -  آیتم مرتبط (post_id, comment_id, etc.)
     related_id = db.Column(db.Integer, nullable=True)
     related_type = db.Column(db.String(50), nullable=True)  # 'post', 'comment', etc.
     

@@ -84,20 +84,20 @@ def verify_phone():
 
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    # اگر درخواستی وجود ندارد، یک درخواست جدید با وضعیت draft ایجاد کن
+    # TODO: Translate -  اگر Requestی وجود نداReject، یک Request جدید با Status draft Create کن
     if not req:
         req = PremiumRequest(
             user_id=current_user.id,
             requested_phone=current_user.phone,
-            status='draft',  # ✅ تغییر از 'pending' به 'draft'
+            status='draft',  # TODO: Translate -  ✅ تغییر از 'Pending' به 'draft'
         )
         db.session.add(req)
         db.session.commit()
 
-    # اگر شماره قبلاً تأیید شده، به مرحله بعد برو
+    # TODO: Translate -  اگر شماره قبلاً Confirm شده، به مرحله بعد برو
     if req.phone_verified:
         flash("✅ Your mobile number has already been verified.")
-        return redirect(url_for('users.verify_email'))  # ✅ به ایمیل برو، نه payment_confirmation
+        return redirect(url_for('users.verify_email'))  # TODO: Translate -  ✅ به ایمیل برو، نه payment_confirmation
 
     if request.method == 'POST':
         if 'resend' in request.form:
@@ -120,11 +120,11 @@ def verify_phone():
             req.phone_verification_code = None
             db.session.commit()
             flash("✅ Mobile number successfully verified.")
-            return redirect(url_for('users.verify_email'))  # ✅ بعد از تأیید شماره، به ایمیل برو
+            return redirect(url_for('users.verify_email'))  # TODO: Translate -  ✅ بعد از Confirm شماره، به ایمیل برو
         else:
             flash("❌ The code is invalid.")
 
-    # ارسال اولیه کد
+    # TODO: Translate -  ارسال اولیه کد
     if not req.phone_verification_code:
         code = str(random.randint(100000, 999999))
         req.phone_verification_code = code
@@ -145,23 +145,23 @@ def verify_phone():
 
 
 # -------------------------------
-# تأیید ایمیل (صفحه نمایش)
+# TODO: Translate -  Confirm ایمیل (Page View)
 # -------------------------------
 # -------------------------------
-# تأیید ایمیل (صفحه نمایش - برای کاربرانی که ثبت‌نام کرده‌اند)
+# TODO: Translate -  Confirm ایمیل (Page View - برای Userانی که Registration کRejectه‌اند)
 # -------------------------------
-@users_bp.route('/verify_email', endpoint='show_verify_email_page')  # ← تغییر: اضافه کردن endpoint منحصر به فرد
+@users_bp.route('/verify_email', endpoint='show_verify_email_page')  # TODO: Translate -  ← تغییر: اضافه کRejectن endpoint منحصر به فReject
 @login_required
-def show_verify_email_page():  # ← تغییر: نام تابع جدید
+def show_verify_email_page():  # TODO: Translate -  ← تغییر: نام Function جدید
     print('start email process')
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    # اگر درخواستی وجود ندارد، کاربر باید ابتدا فرآیند را شروع کند
+    # TODO: Translate -  اگر Requestی وجود نداReject، User باید ابتدا فرآیند را شروع کند
     if not req:
         flash("Please start the premium verification process first.", "error")
         return redirect(url_for('users.upgrade_to_premium'))
 
-    # حذف شرط phone_verified - مستقیماً به تأیید ایمیل می‌رویم
+    # TODO: Translate -  Delete شرط phone_verified - مستقیماً به Confirm ایمیل می‌رویم
     # if not req or not req.phone_verified:
     #     return redirect(url_for('users.verify_phone'))
 
@@ -179,7 +179,7 @@ def show_verify_email_page():  # ← تغییر: نام تابع جدید
 
     return render_template('users/verify_email.html', req=req)
 
-# ارسال ایمیل تأیید
+# TODO: Translate -  ارسال ایمیل Confirm
 def send_email_verification(user):
 
     print('send email func')
@@ -216,7 +216,7 @@ def send_email_verification(user):
 
 
 # -------------------------------
-# تأیید توکن ایمیل
+# TODO: Translate -  Confirm Token ایمیل
 # -------------------------------
 @users_bp.route('/confirm_email/<token>')
 @login_required
@@ -249,7 +249,7 @@ def confirm_email(token):
     if not req.email_verified:
         req.email_verified = True
         req.email_verification_token = None
-        # ✅ همچنین is_email_verified را در جدول User نیز true کن
+        # TODO: Translate -  ✅ همچنین is_email_verified را در Table User نیز true کن
         current_user.is_email_verified = True
 
         db.session.commit()
@@ -258,11 +258,11 @@ def confirm_email(token):
     return redirect(url_for('users.upload_documents'))
 
 
-# ==================== فراموشی رمز عبور ====================
+# TODO: Translate -  ==================== فراموشی Password ====================
 
 @users_bp.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
-    """درخواست بازیابی رمز عبور"""
+    """TODO: Translate - Request بازیابی Password"""
     if request.method == 'POST':
         email = request.form.get('email')
         
@@ -272,16 +272,16 @@ def forgot_password():
         
         user = User.query.filter_by(email=email).first()
         
-        # حتی اگر کاربر وجود نداشت، برای امنیت پیام یکسان نشان بده
+        # TODO: Translate -  حتی اگر User وجود نداشت، برای امنیت Message یکسان نشان بده
         if user:
-            # ایجاد توکن بازیابی
+            # TODO: Translate -  Create Token بازیابی
             token = PasswordResetToken.create_for_user(
                 user=user,
                 ip_address=request.remote_addr,
                 expiry_hours=1
             )
             
-            # ارسال ایمیل
+            # TODO: Translate -  ارسال ایمیل
             reset_url = url_for('users.reset_password', token=token, _external=True)
             
             msg = Message(
@@ -319,8 +319,8 @@ def forgot_password():
 
 @users_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    """بازیابی رمز عبور با توکن"""
-    # هش کردن توکن برای مقایسه
+    """TODO: Translate - بازیابی Password با Token"""
+    # TODO: Translate -  هش کRejectن Token برای مقایسه
     token_hash = hashlib.sha256(token.encode()).hexdigest()
     
     reset_token = PasswordResetToken.query.filter_by(
@@ -349,19 +349,19 @@ def reset_password(token):
             flash("❌ Password and repeat do not match.", "error")
             return redirect(url_for('users.reset_password', token=token))
         
-        # بررسی تاریخچه رمز عبور
+        # TODO: Translate -  Check Dateچه Password
         import json
         if user.password_history:
             try:
                 history = json.loads(user.password_history)
-                # بررسی نکنیم که رمز فعلی در تاریخچه نباشد (اختیاری)
+                # TODO: Translate -  Check نکنیم که رمز فعلی در Dateچه نباشد (Optional)
             except:
                 pass
         
-        # تنظیم رمز عبور جدید
+        # TODO: Translate -  تنظیم Password جدید
         user.set_password(password)
         
-        # ذخیره رمز قبلی در تاریخچه
+        # TODO: Translate -  Save رمز قبلی در Dateچه
         if user.password_history:
             try:
                 history = json.loads(user.password_history)
@@ -371,17 +371,17 @@ def reset_password(token):
             history = []
         
         history.append(user.password_hash)
-        # فقط ۵ رمز آخر را نگه دار
+        # TODO: Translate -  فقط ۵ رمز آخر را نگه دار
         user.password_history = json.dumps(history[-5:])
         
-        # ریست کردن تلاش‌های ناموفق
+        # TODO: Translate -  ریست کRejectن تلاش‌های ناSuccess
         user.failed_login_attempts = 0
         user.locked_until = None
         
-        # استفاده از توکن
+        # TODO: Translate -  استفاده از Token
         reset_token.mark_as_used()
         
-        # لاگ فعالیت
+        # TODO: Translate -  لاگ Activeیت
         ActivityLog.log_activity(
             user_id=user.id,
             activity_type='password_reset_completed',
@@ -390,7 +390,7 @@ def reset_password(token):
             status='success'
         )
         
-        # خروج از تمام نشست‌ها به جز نشست فعلی
+        # TODO: Translate -  Logout از تمام نشست‌ها به جز نشست فعلی
         LoginSession.logout_all_sessions(user.id)
         
         flash("✅ Your password has been changed successfully. Please log in.", "success")
@@ -399,14 +399,14 @@ def reset_password(token):
     return render_template('users/reset_password.html', token=token, user=user)
 
 
-# ==================== تأیید دو مرحله‌ای (2FA) ====================
+# TODO: Translate -  ==================== Confirm دو مرحله‌ای (2FA) ====================
 
 import pyotp
 
 @users_bp.route('/enable_2fa', methods=['GET', 'POST'])
 @login_required
 def enable_2fa():
-    """فعال‌سازی احراز هویت دو مرحله‌ای"""
+    """TODO: Translate - Active‌سازی Authentication دو مرحله‌ای"""
     if current_user.two_factor_enabled:
         flash("⚠️ Two-factor authentication is already enabled.", "warning")
         return redirect(url_for('users.profile'))
@@ -422,17 +422,17 @@ def enable_2fa():
         totp = pyotp.TOTP(secret)
         
         if totp.verify(code):
-            # ذخیره秘密 و فعال‌سازی
+            # TODO: Translate -  Save秘密 و Active‌سازی
             current_user.two_factor_secret = secret
             current_user.two_factor_enabled = True
             
-            # تولید کدهای پشتیبان
+            # TODO: Translate -  تولید کدهای پشتیبان
             backup_codes = [str(random.randint(100000, 999999)) for _ in range(10)]
             current_user.backup_codes = json.dumps(backup_codes)
             
             db.session.commit()
             
-            # پاک کردن session
+            # TODO: Translate -  پاک کRejectن session
             session.pop('2fa_secret', None)
             session['backup_codes'] = backup_codes
             
@@ -449,11 +449,11 @@ def enable_2fa():
         else:
             flash("❌ The code entered is not valid.", "error")
     
-    # تولید secret جدید
+    # TODO: Translate -  تولید secret جدید
     secret = pyotp.random_base32()
     session['2fa_secret'] = secret
     
-    # تولید URI برای QR Code
+    # TODO: Translate -  تولید URI برای QR Code
     uri = pyotp.totp.TOTP(secret).provisioning_uri(
         name=current_user.email,
         issuer_name="Metisma"
@@ -465,7 +465,7 @@ def enable_2fa():
 @users_bp.route('/show_backup_codes')
 @login_required
 def show_backup_codes():
-    """نمایش کدهای پشتیبان"""
+    """TODO: Translate - View کدهای پشتیبان"""
     backup_codes = session.get('backup_codes')
     if not backup_codes:
         flash("⚠️ No backup codes found.", "warning")
@@ -477,7 +477,7 @@ def show_backup_codes():
 @users_bp.route('/disable_2fa', methods=['POST'])
 @login_required
 def disable_2fa():
-    """غیرفعال‌سازی احراز هویت دو مرحله‌ای"""
+    """TODO: Translate - غیرActive‌سازی Authentication دو مرحله‌ای"""
     if not current_user.two_factor_enabled:
         flash("⚠️ Two-factor authentication is not enabled.", "warning")
         return redirect(url_for('users.profile'))
@@ -522,12 +522,12 @@ def disable_2fa():
     return redirect(url_for('users.profile'))
 
 
-# ==================== تأیید 2FA هنگام ورود ====================
+# TODO: Translate -  ==================== Confirm 2FA هنگام Login ====================
 
 @users_bp.route('/verify_2fa_login', methods=['GET', 'POST'])
 def verify_2fa_login():
-    """صفحه تأیید کد 2FA هنگام ورود"""
-    # بررسی وجود کاربر در session
+    """TODO: Translate - Page Confirm کد 2FA هنگام Login"""
+    # TODO: Translate -  Check وجود User در session
     user_id = session.get('2fa_pending_user_id')
     if not user_id:
         flash("❌ No pending login found. Please log in first.", "warning")
@@ -535,7 +535,7 @@ def verify_2fa_login():
     
     user = db.session.get(User, user_id)
     if not user or not user.two_factor_enabled:
-        # اگر 2FA غیرفعال شد، به پروفایل برگرد
+        # TODO: Translate -  اگر 2FA غیرActive شد، به پروFile برگReject
         session.pop('2fa_pending_user_id', None)
         session.pop('2fa_remember_me', None)
         return redirect(url_for('users.login'))
@@ -546,13 +546,13 @@ def verify_2fa_login():
         
         verified = False
         
-        # بررسی کد TOTP
+        # TODO: Translate -  Check کد TOTP
         if code:
             totp = pyotp.TOTP(user.two_factor_secret)
-            # پنجره زمانی برای اختلاف ساعت (valid for 30 seconds before/after)
+            # TODO: Translate -  پنجره Timeی برای اختلاف ساعت (valid for 30 seconds before/after)
             verified = totp.verify(code, valid_window=1)
         
-        # بررسی کد پشتیبان
+        # TODO: Translate -  Check کد پشتیبان
         if not verified and backup_code:
             import json
             if user.backup_codes:
@@ -568,7 +568,7 @@ def verify_2fa_login():
         if verified:
             remember_me = session.get('2fa_remember_me', False)
             
-            # لاگ فعالیت ورود موفق
+            # TODO: Translate -  لاگ Activeیت Login Success
             ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login_2fa_verified',
@@ -577,7 +577,7 @@ def verify_2fa_login():
                 success=True
             )
             
-            # ایجاد جلسه جدید
+            # TODO: Translate -  Create Session جدید
             login_session = LoginSession.create_session(
                 user=user,
                 request=request,
@@ -587,11 +587,11 @@ def verify_2fa_login():
             
             login_user(user, remember=remember_me)
             
-            # پاک کردن session موقت
+            # TODO: Translate -  پاک کRejectن session موقت
             session.pop('2fa_pending_user_id', None)
             session.pop('2fa_remember_me', None)
             
-            # ذخیره توکن جلسه در cookie
+            # TODO: Translate -  Save Token Session در cookie
             response = redirect(url_for('users.profile'))
             response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
             
@@ -611,12 +611,12 @@ def verify_2fa_login():
     return render_template('users/verify_2fa_login.html', user=user)
 
 
-# ==================== مدیریت نشست‌ها ====================
+# TODO: Translate -  ==================== مدیریت نشست‌ها ====================
 
 @users_bp.route('/sessions')
 @login_required
 def manage_sessions():
-    """مدیریت نشست‌های فعال"""
+    """TODO: Translate - مدیریت نشست‌های Active"""
     sessions = LoginSession.query.filter_by(
         user_id=current_user.id,
         is_active=True
@@ -628,7 +628,7 @@ def manage_sessions():
 @users_bp.route('/sessions/<int:session_id>/revoke', methods=['POST'])
 @login_required
 def revoke_session(session_id):
-    """لغو یک نشست خاص"""
+    """TODO: Translate - لغو یک نشست خاص"""
     login_session = LoginSession.query.filter_by(
         id=session_id,
         user_id=current_user.id
@@ -653,7 +653,7 @@ def revoke_session(session_id):
 @users_bp.route('/sessions/revoke_all', methods=['POST'])
 @login_required
 def revoke_all_sessions():
-    """لغو تمام نشست‌ها"""
+    """TODO: Translate - لغو تمام نشست‌ها"""
     LoginSession.logout_all_sessions(current_user.id)
     
     ActivityLog.log_activity(
@@ -668,12 +668,12 @@ def revoke_all_sessions():
     return redirect(url_for('users.manage_sessions'))
 
 
-# ==================== فعالیت‌های کاربر ====================
+# TODO: Translate -  ==================== Activeیت‌های User ====================
 
 @users_bp.route('/activity_log')
 @login_required
 def activity_log():
-    """نمایش لاگ فعالیت‌های کاربر"""
+    """TODO: Translate - View لاگ Activeیت‌های User"""
     page = request.args.get('page', 1, type=int)
     activities = ActivityLog.query.filter_by(
         user_id=current_user.id

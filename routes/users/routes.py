@@ -55,10 +55,10 @@ def verify_recaptcha(response_token):
 
 
 # ==============================
-# دکوریتورهای دسترسی مبتنی بر نقش
+# TODO: Translate -  دکوریتورهای Access مبتنی بر Role
 # ==============================
 def role_required(*roles):
-    """دکوریتور برای محدود کردن دسترسی بر اساس نقش کاربر"""
+    """TODO: Translate - دکوریتور برای محدود کRejectن Access بر اساس Role User"""
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
@@ -76,18 +76,18 @@ def role_required(*roles):
 
 
 # ==============================
-# توابع کمکی برای آپلود امن فایل
+# TODO: Translate -  توابع کمکی برای Upload امن File
 # ==============================
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 def allowed_file(filename):
-    """بررسی پسوند فایل مجاز"""
+    """TODO: Translate - Check پسوند File مجاز"""
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def validate_file(file, image_only=False):
-    """اعتبارسنجی کامل فایل آپلود شده"""
+    """TODO: Translate - Creditسنجی Complete File Upload شده"""
     if not file or file.filename == '':
         return False, "No file selected."
     
@@ -104,7 +104,7 @@ def validate_file(file, image_only=False):
     if '.' not in file.filename or file.filename.rsplit('.', 1)[1].lower() not in allowed_exts:
         return False, error_msg
     
-    # بررسی اندازه فایل
+    # TODO: Translate -  Check اندازه File
     file.seek(0, os.SEEK_END)
     file_size = file.tell()
     file.seek(0)
@@ -116,7 +116,7 @@ def validate_file(file, image_only=False):
     return True, ""
 
 
-# routes/users/routes.py یا app.py
+# TODO: Translate -  routes/users/routes.py یا app.py
 @root_bp.route('/')
 def main_page():
     return render_template('landing.html')
@@ -130,7 +130,7 @@ def make_session_permanent():
 
 @users_bp.route('/create_first_admin', methods=['GET', 'POST'])
 def create_first_admin():
-    # فقط در محیط توسعه یا وقتی هیچ ادمینی وجود ندارد قابل دسترسی است
+    # TODO: Translate -  فقط در محیط توسعه یا وقتی هیچ ادمینی وجود نداReject قابل Access است
     if User.query.filter_by(role=Role.ADMIN, is_active=True).first():
         flash("There is already an admin.")
         return redirect(url_for('users.login'))
@@ -189,14 +189,14 @@ def create_first_admin():
 
 
 ##############
-# در routes/users/routes.py یا root_bp
+# TODO: Translate -  در routes/users/routes.py یا root_bp
 @users_bp.route('/set-language')
 def set_language():
     """Set user language preference"""
     lang = request.args.get('lang', 'fa')
     if lang in ['fa', 'en']:
         session['lang'] = lang
-        # ریدایرکت به صفحه قبلی یا خانه
+        # TODO: Translate -  ریدایرکت به Page قبلی یا خانه
         next_page = request.args.get('next') or request.referrer or url_for('root.index')
         return redirect(next_page)
     return redirect(url_for('root.index'))
@@ -206,10 +206,10 @@ def set_language():
 
 
 # -------------------------------
-# ثبت نام
+# TODO: Translate -  ثبت نام
 # -------------------------------
 # Register (Request 2: Smart Multi-step Registration)
-# ثبت‌نام پیشرفته با CAPTCHA و تأیید ایمیل
+# TODO: Translate -  Registration پیشرفته با CAPTCHA و Confirm ایمیل
 # -------------------------------
 @users_bp.route('/register', methods=['GET', 'POST'])
 @limiter.limit("5 per minute")  # Rate limiting for registration
@@ -290,7 +290,7 @@ def register():
                 username=username, email=email, password_hash=hashed,
                 role=Role(role), company_name=company, country=country, phone=phone,
                 expertise_area=expertise_area, job_title=job_title, bio=bio, website=website,
-                trust_score_value=0,  # شروع با امتیاز صفر برای سخت‌گیری Trust Score
+                trust_score_value=0,  # TODO: Translate -  شروع با Score صفر برای سخت‌گیری Trust Score
                 is_email_verified=False,
                 registered_at=datetime.now(tehran_tz)
             )
@@ -308,18 +308,18 @@ def register():
                 print(f"✅ Profile created for {new_user.username}")
 
             # ==========================================
-            # ✅ بخش ایمیل - با دیباگ دقیق
+            # TODO: Translate -  ✅ Section ایمیل - با دیباگ دقیق
             # ==========================================
             print("📧 Starting email verification process...")
 
             try:
-                # 1. تولید توکن
+                # TODO: Translate -  1. تولید Token
                 print("  → Generating token...")
                 from metisma.services.email_service import generate_verification_token
                 raw_token = generate_verification_token(new_user)
                 print(f"  → Token generated: {raw_token[:10]}...")
 
-                # 2. ارسال ایمیل
+                # TODO: Translate -  2. ارسال ایمیل
                 print("  → Sending email...")
                 from metisma.services.email_service import send_verification_email
                 email_sent, error_msg = send_verification_email(new_user, raw_token)
@@ -332,7 +332,7 @@ def register():
                     flash(f"⚠️ Account created but email failed: {error_msg}", "warning")
 
             except Exception as email_error:
-                # خطای اختصاصی بخش ایمیل
+                # TODO: Translate -  Errorی اختصاصی Section ایمیل
                 print(f"  → 💥 Email subsystem error: {email_error}")
                 import traceback
                 traceback.print_exc()
@@ -341,12 +341,12 @@ def register():
             return redirect(url_for('users.login'))
 
         except Exception as e:
-            # خطای اصلی و نهایی
+            # TODO: Translate -  Errorی اصلی و نهایی
             db.session.rollback()
             print(f"💥 CRITICAL ERROR in register: {e}")
             import traceback
-            traceback.print_exc()  # چاپ کامل خطا در کنسول
-            flash(f"❌ Registration error: {str(e)}", "error")  # نمایش خطا به کاربر (فقط برای تست)
+            traceback.print_exc()  # TODO: Translate -  چاپ Complete Error در کنسول
+            flash(f"❌ Registration error: {str(e)}", "error")  # TODO: Translate -  View Error به User (فقط برای تست)
             return redirect(url_for('users.register'))
 
     return render_template('users/register.html', roles=Role)
@@ -355,17 +355,17 @@ def register():
 
 
 # -------------------------------
-# ورود
+#  Login
 # -------------------------------
 @users_bp.route('/login', methods=['GET', 'POST'])
-@limiter.limit("10 per minute")  # Rate limiting برای جلوگیری از brute force
+@limiter.limit("10 per minute")  # TODO: Translate -  Rate limiting برای جلوگیری از brute force
 def login():
 
-    # اگر کاربر قبلاً لاگین کرده و 2FA فعال نیست، مستقیم به پروفایل برود
+    # TODO: Translate -  اگر User قبلاً لاگین کRejectه و 2FA Active نیست، مستقیم به پروFile برود
     if current_user.is_authenticated and not current_user.two_factor_enabled:
         return redirect(url_for('users.profile'))
     
-    # اگر کاربر در حال گذر از مرحله 2FA است، اجازه نده دوباره لاگین کند
+    # TODO: Translate -  اگر User در حال گذر از مرحله 2FA است، اجازه نده دوباره لاگین کند
     if session.get('2fa_pending_user_id'):
         return redirect(url_for('users.verify_2fa_login'))
 
@@ -377,7 +377,7 @@ def login():
 
         user = User.query.filter_by(email=email, is_active=True).first()
 
-        # بررسی قفل بودن حساب
+        # TODO: Translate -  Check قفل بودن Account
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
                 flash(f"❌ Your account is locked until {user.locked_until.strftime('%Y-%m-%d %H:%M')} due to failed attempts.")
@@ -391,14 +391,14 @@ def login():
                 )
                 return render_template('users/login.html')
             else:
-                # رفع قفل خودکار
+                # TODO: Translate -  رفع قفل خودکار
                 user.locked_until = None
                 user.failed_login_attempts = 0
                 db.session.commit()
 
         if user and check_password_hash(user.password_hash, password):
 
-            # ✅ بررسی تأیید ایمیل قبل از ورود
+            # TODO: Translate -  ✅ Check Confirm ایمیل قبل از Login
             if not user.is_email_verified:
                 flash("❌ Please verify your email before logging in. Check your inbox for the verification link.",
                       "warning")
@@ -413,13 +413,13 @@ def login():
                 return render_template('users/login.html')
 
 
-            # ورود موفق - ریست کردن تلاش‌های ناموفق
+            # TODO: Translate -  Login Success - ریست کRejectن تلاش‌های ناSuccess
             if user.failed_login_attempts > 0:
                 user.failed_login_attempts = 0
                 user.locked_until = None
                 db.session.commit()
             
-            # لاگ فعالیت ورود موفق
+            # TODO: Translate -  لاگ Activeیت Login Success
             ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login',
@@ -428,16 +428,16 @@ def login():
                 success=True
             )
             
-            # اگر 2FA فعال است، به صفحه تأیید کد برو
+            # TODO: Translate -  اگر 2FA Active است، به Page Confirm کد برو
             if user.two_factor_enabled:
-                # ذخیره اطلاعات موقت در session برای مرحله بعد
+                # TODO: Translate -  Save Information موقت در session برای مرحله بعد
                 session['2fa_pending_user_id'] = user.id
                 session['2fa_remember_me'] = remember_me
                 flash("✅ Password verified. Please enter your 2FA code.", "info")
                 return redirect(url_for('users.verify_2fa_login'))
             
-            # اگر 2FA فعال نیست، ادامه فرآیند ورود عادی
-            # ایجاد جلسه جدید
+            # TODO: Translate -  اگر 2FA Active نیست، ادامه فرآیند Login عادی
+            # TODO: Translate -  Create Session جدید
             login_session = LoginSession.create_session(
                 user=user,
                 request=request,
@@ -447,20 +447,20 @@ def login():
             
             login_user(user, remember=remember_me)
             
-            # ذخیره توکن جلسه در cookie
+            # TODO: Translate -  Save Token Session در cookie
             response = redirect(url_for('users.profile'))
             response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
             
             flash("✅ Welcome!")
             return response
         else:
-            # ورود ناموفق
+            # TODO: Translate -  Login ناSuccess
             if user:
                 user.failed_login_attempts += 1
                 
-                # قفل حساب پس از 5 تلاش ناموفق
+                # TODO: Translate -  قفل Account پس از 5 تلاش ناSuccess
                 if user.failed_login_attempts >= 5:
-                    user.locked_until = datetime.utcnow() + timedelta(minutes=15)  # 15 دقیقه قفل
+                    user.locked_until = datetime.utcnow() + timedelta(minutes=15)  # TODO: Translate -  15 دقیقه قفل
                     db.session.commit()
                     
                     ActivityLog.log_activity(
@@ -488,7 +488,7 @@ def login():
                     remaining_attempts = 5 - user.failed_login_attempts
                     flash(f"❌ Incorrect email or password. {remaining_attempts} more attempts before account is locked.")
             else:
-                # کاربر وجود ندارد - برای امنیت پیام کلی نمایش می‌دهیم
+                # TODO: Translate -  User وجود نداReject - برای امنیت Message کلی View می‌دهیم
                 flash("❌ Incorrect email or password.")
     
     support_user = User.query.filter_by(username='masoudkh', is_active=True).first()
@@ -497,34 +497,34 @@ def login():
 
 
 # -------------------------------
-# ویرایش پروفایل پیشرفته
+# TODO: Translate -  Edit پروFile پیشرفته
 # -------------------------------
 @users_bp.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     if request.method == 'POST':
-        # اطلاعات پایه
+        # TODO: Translate -  Information پایه
         current_user.company_name = request.form.get('company', '').strip()
         current_user.country = request.form.get('country', '').strip()
         current_user.phone = request.form.get('phone', '').strip()
         
-        # فیلدهای تخصصی جدید (درخواست ۴)
+        # TODO: Translate -  Fieldهای تخصصی جدید (Request ۴)
         current_user.expertise_area = request.form.get('expertise_area', '').strip()
         current_user.job_title = request.form.get('job_title', '').strip()
         current_user.bio = request.form.get('bio', '').strip()
         current_user.website = request.form.get('website', '').strip()
         
-        # پردازش شبکه‌های اجتماعی (JSON format)
+        # TODO: Translate -  پRejectازش شبکه‌های اجتماعی (JSON format)
         social_links = {
             'linkedin': request.form.get('linkedin', '').strip(),
             'telegram': request.form.get('telegram', '').strip(),
             'whatsapp': request.form.get('whatsapp', '').strip()
         }
-        # حذف مقادیر خالی
+        # TODO: Translate -  Delete مقادیر خالی
         social_links = {k: v for k, v in social_links.items() if v}
         current_user.social_links = json.dumps(social_links) if social_links else None
         
-        # ✅ آپلود عکس پروفایل
+        # TODO: Translate -  ✅ Upload عکس پروFile
         profile_file = request.files.get('profile_image')
         if profile_file and profile_file.filename != '':
             is_valid, error_msg = validate_file(profile_file, image_only=True)
@@ -555,7 +555,7 @@ def edit_profile():
         flash("✅ Profile updated successfully.", "success")
         return redirect(url_for('users.profile'))
     
-    # GET: نمایش فرم ویرایش پروفایل
+    # TODO: Translate -  GET: View فرم Edit پروFile
     return render_template('users/profile_edit.html', user=current_user)
 
 
@@ -565,52 +565,52 @@ def edit_profile():
 
 
 # -------------------------------
-# تنظیمات حساب کاربری
+# TODO: Translate -  Settings Account Userی
 # -------------------------------
 @users_bp.route('/account-settings')
 @login_required
 def account_settings():
-    """نمایش صفحه تنظیمات حساب کاربری"""
+    """TODO: Translate - View Page Settings Account Userی"""
     return render_template('users/account_settings.html', user=current_user)
 
 
 # -------------------------------
-# تغییر رمز عبور
+# TODO: Translate -  تغییر Password
 # -------------------------------
 @users_bp.route('/change-password', methods=['POST'])
 @login_required
 def change_password():
-    """تغییر رمز عبور کاربر با اعتبارسنجی کامل"""
+    """TODO: Translate - تغییر Password User با Creditسنجی Complete"""
     current_password = request.form.get('current_password', '')
     new_password = request.form.get('new_password', '')
     confirm_password = request.form.get('confirm_password', '')
     
-    # بررسی رمز عبور فعلی
+    # TODO: Translate -  Check Password فعلی
     if not check_password_hash(current_user.password_hash, current_password):
         flash("❌ The current password is incorrect.", "error")
         return redirect(url_for('users.account_settings'))
     
-    # اعتبارسنجی رمز عبور جدید
+    # TODO: Translate -  Creditسنجی Password جدید
     if len(new_password) < 8:
         flash("❌ New password must be at least 8 characters long.", "error")
         return redirect(url_for('users.account_settings'))
     
-    # بررسی تطابق رمز جدید و تکرار آن
+    # TODO: Translate -  Check تطابق رمز جدید و تکرار آن
     if new_password != confirm_password:
         flash("❌ New password and repeat password do not match.", "error")
         return redirect(url_for('users.account_settings'))
     
-    # بررسی تکراری نبودن رمز عبور جدید با رمز قبلی
+    # TODO: Translate -  Check تکراری نبودن Password جدید با رمز قبلی
     if check_password_hash(current_user.password_hash, new_password):
         flash("⚠️ New password must not be the same as previous password.", "warning")
         return redirect(url_for('users.account_settings'))
     
     try:
-        # به‌روزرسانی رمز عبور با هش کردن
+        # TODO: Translate -  Update Password با هش کRejectن
         current_user.password_hash = generate_password_hash(new_password)
         db.session.commit()
         
-        # لاگ عملیات برای امنیت
+        # TODO: Translate -  لاگ عملیات برای امنیت
         current_app.logger.info(f"Password changed for user {current_user.id} ({current_user.email})")
 
         flash("✅ Your password has been changed successfully.", "success")
@@ -623,14 +623,14 @@ def change_password():
 
 
 # -------------------------------
-# حذف حساب کاربری
+# TODO: Translate -  Delete Account Userی
 # -------------------------------
 @users_bp.route('/delete-account', methods=['POST'])
 @login_required
 def delete_account():
-    """حذف نرم حساب کاربری با تأیید دو مرحله‌ای"""
+    """TODO: Translate - Delete نرم Account Userی با Confirm دو مرحله‌ای"""
     
-    # بررسی وجود چک‌باکس تأیید
+    # TODO: Translate -  Check وجود چک‌باکس Confirm
     confirmation = request.form.get('confirmation_checkbox')
     if not confirmation:
         flash("⚠️ Please check the confirmation checkbox to delete the account.", "warning")
@@ -641,24 +641,24 @@ def delete_account():
     username = current_user.username
     
     try:
-        # غیرفعال‌سازی حساب کاربری (soft delete)
+        # TODO: Translate -  غیرActive‌سازی Account Userی (soft delete)
         current_user.is_active = False
         
-        # حذف توکن‌های فعال کاربر (در صورت وجود مدل Session/Token)
-        # این بخش بستگی به پیاده‌سازی session management دارد
-        # فعلاً logout انجام می‌دهیم
+        # TODO: Translate -  Delete Token‌های Active User (در صورت وجود Model Session/Token)
+        # TODO: Translate -  این Section بستگی به پیاده‌سازی session management داReject
+        # TODO: Translate -  فعلاً logout انجام می‌دهیم
         logout_user()
         
-        # لاگ عملیات برای امنیت
+        # TODO: Translate -  لاگ عملیات برای امنیت
         current_app.logger.warning(
             f"Account deleted: User ID={user_id}, Email={user_email}, Username={username}"
         )
         
-        # ارسال نوتیفیکیشن به ادمین (اختیاری)
+        # TODO: Translate -  ارسال نوتیفیکیشن به ادمین (Optional)
         try:
             from models.notification import Notification
             admin_notification = Notification(
-                user_id=None,  # نوتیفیکیشن سیستمی
+                user_id=None,  # TODO: Translate -  نوتیفیکیشن Systemی
                 title = "Delete Account",
                 message = f"The account {username} ({user_email}) has been deleted.",
                 category = "admin_alert",
@@ -681,12 +681,12 @@ def delete_account():
 
 
 # -------------------------------
-# خروج
+#  Logout
 # -------------------------------
 @users_bp.route('/logout')
 @login_required
 def logout():
-    # لاگ فعالیت خروج
+    # TODO: Translate -  لاگ Activeیت Logout
     ActivityLog.log_activity(
         user_id=current_user.id,
         activity_type='logout',
@@ -695,7 +695,7 @@ def logout():
         success=True
     )
     
-    # باطل کردن جلسه فعلی
+    # TODO: Translate -  باطل کRejectن Session فعلی
     session_token = request.cookies.get('session_token')
     if session_token:
         from hashlib import sha256
@@ -712,36 +712,36 @@ def logout():
 @users_bp.route('/profile')
 @login_required
 def profile():
-    """نمایش پروفایل کاربر با اطلاعات کامل و وضعیت مدارک"""
+    """TODO: Translate - View پروFile User با Information Complete و Status مدارک"""
 
     if not current_user.is_active:
         logout_user()
         flash("❌ This account is inactive.")
         return redirect(url_for('users.login'))
 
-    # محاسبه تعداد اعلان‌های خوانده‌نشده
+    # TODO: Translate -  محاسبه تعداد Notification‌های خوانده‌نشده
     from models.notification import Notification
     unread_notifications = Notification.query.filter_by(user_id=current_user.id, is_read=False).count()
     
-    # محاسبه تعداد سفارش‌های در انتظار (فقط برای PRODUCER)
+    # TODO: Translate -  محاسبه تعداد Order‌های Pending (فقط برای PRODUCER)
     pending_orders = 0
     if current_user.role == Role.PRODUCER:
         from models.order import OrderStatus,Order
         pending_orders = Order.query.filter_by(seller_id=current_user.id, status=OrderStatus.PENDING).count()
 
-    # دریافت مدارک آپلود شده برای بررسی وضعیت تأیید
+    # TODO: Translate -  دریافت مدارک Upload شده برای Check Status Confirm
     verification_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
     
-    # تعیین وضعیت تأیید مدارک
+    # TODO: Translate -  تعیین Status Confirm مدارک
     document_status = 'not_uploaded'  # not_uploaded, pending, approved, rejected
     if verification_docs:
-        # اگر مدارک آپلود شده باشند، فرض می‌کنیم در حال بررسی هستند
-        # در آینده می‌توان فیلد جداگانه برای وضعیت هر مدرک اضافه کرد
+        # TODO: Translate -  اگر مدارک Upload شده باشند، فرض می‌کنیم در حال Check هستند
+        # TODO: Translate -  در آینده می‌توان Field جداگانه برای Status هر مدرک اضافه کReject
         document_status = 'pending'
         if current_user.is_verified:
             document_status = 'approved'
     
-    # محاسبه وضعیت pending tasks
+    # TODO: Translate -  محاسبه Status Pending tasks
     pending_tasks = []
     if not current_user.is_verified and verification_docs:
         pending_tasks.append({
@@ -759,7 +759,7 @@ def profile():
             'icon': 'upload'
         })
     
-    # پروفایل کامل برای داشبورد هوشمند
+    # TODO: Translate -  پروFile Complete برای داشبوReject هوشمند
     support_user = User.query.filter_by(username='support', is_active=True).first()
 
     if not support_user:
@@ -807,7 +807,7 @@ def place_order():
     """
     if request.method == 'POST':
         try:
-            # دریافت و اعتبارسنجی ورودی
+            # TODO: Translate -  دریافت و Creditسنجی Loginی
             product = request.form.get('product', '').strip()
             quantity_str = request.form.get('quantity', '').strip()
             price_str = request.form.get('price', '').strip()
@@ -816,7 +816,7 @@ def place_order():
             seller_id_str = request.form.get('seller_id', '').strip()
             notes = request.form.get('notes', '').strip()
 
-            # ✅ اعتبارسنجی فیلدها
+            # TODO: Translate -  ✅ Creditسنجی Fieldها
             if not product:
                 flash("❌ Please enter the product name.")
                 return redirect(url_for('users.place_order'))
@@ -825,7 +825,7 @@ def place_order():
                 flash("❌ Please select origin and destination.")
                 return redirect(url_for('users.place_order'))
 
-            # ✅ اعتبارسنجی کمیت و قیمت
+            # TODO: Translate -  ✅ Creditسنجی کمیت و Price
             try:
                 quantity = float(quantity_str)
                 price = float(price_str)
@@ -835,7 +835,7 @@ def place_order():
                 flash("❌ Invalid quantity or price.")
                 return redirect(url_for('users.place_order'))
 
-            # ✅ اعتبارسنجی فروشنده
+            # TODO: Translate -  ✅ Creditسنجی Saleنده
             if not seller_id_str.isdigit():
                 flash("❌ The seller is invalid.")
                 return redirect(url_for('users.place_order'))
@@ -851,10 +851,10 @@ def place_order():
                 flash("❌ The selected user is not a producer.")
                 return redirect(url_for('users.place_order'))
 
-            # ✅ تعیین بروکر (فقط اگر کاربر ویژه باشد)
+            # TODO: Translate -  ✅ تعیین بروکر (فقط اگر User ویژه باشد)
             broker_id = current_user.id if current_user.is_premium else None
 
-            # ✅ ایجاد سفارش
+            #  ✅ Create Order
             order = Order(
                 product=product,
                 quantity_tons=quantity,
@@ -869,7 +869,7 @@ def place_order():
             )
             order.calculate_total()
 
-            # ✅ ارسال اعلان به فروشنده
+            # TODO: Translate -  ✅ ارسال Notification به Saleنده
             from models.notification import Notification
             notification = Notification(
                 user_id=seller.id,
@@ -883,7 +883,7 @@ def place_order():
                 related_type='order'
             )
 
-            # ✅ افزودن و ذخیره در یک تراکنش واحد
+            # TODO: Translate -  ✅ افزودن و Save در یک Transaction واحد
             db.session.add(order)
             db.session.add(notification)
             db.session.commit()
@@ -909,18 +909,18 @@ def place_order():
             return redirect(url_for('users.my_orders'))
 
         except Exception as e:
-            db.session.rollback()  # ⚠️ بازگردانی تراکنش در صورت خطا
+            db.session.rollback()  # TODO: Translate -  ⚠️ بازگRejectانی Transaction در صورت Error
             print(f"❌ Error creating order: {e}")
             flash("❌ An error occurred while placing your order. Please try again.")
             return redirect(url_for('users.place_order'))
 
-    # GET: نمایش فرم — فقط PRODUCERها
+    # TODO: Translate -  GET: View فرم — فقط PRODUCERها
     sellers = User.query.filter_by(role=Role.PRODUCER, is_active=True).all()
     return render_template('users/place_order.html', sellers=sellers)
 
 
 # -------------------------------
-# نمایش سفارش‌های کاربر
+# TODO: Translate -  View Order‌های User
 # -------------------------------
 @users_bp.route('/orders')
 @login_required
@@ -934,7 +934,7 @@ def my_orders():
 
 
 # -------------------------------
-# نمایش سفارش‌های PRODUCER
+# TODO: Translate -  View Order‌های PRODUCER
 # -------------------------------
 @users_bp.route('/seller/orders')
 @login_required
@@ -997,7 +997,7 @@ def cancel_order(order_id):
 
 
 # -------------------------------
-# تأیید سفارش توسط فروشنده
+# TODO: Translate -  Confirm Order توسط Saleنده
 # -------------------------------
 @users_bp.route('/order/<int:order_id>/confirm', methods=['POST'])
 @login_required
@@ -1012,7 +1012,7 @@ def confirm_order(order_id):
         order.status = OrderStatus.CONFIRMED
         # confirmed_at will be set automatically by the model's default
 
-        # ارسال اعلان به خریدار
+        # TODO: Translate -  ارسال Notification به Purchaseار
         from models.notification import Notification
         notification = Notification(
             user_id=order.buyer_id,
@@ -1050,7 +1050,7 @@ def confirm_order(order_id):
 
 
 # -------------------------------
-# رد سفارش توسط فروشنده
+# TODO: Translate -  Reject Order توسط Saleنده
 # -------------------------------
 @users_bp.route('/order/<int:order_id>/reject', methods=['POST'])
 @login_required
@@ -1066,7 +1066,7 @@ def reject_order(order_id):
 
 
 
-        # ارسال اعلان به خریدار
+        # TODO: Translate -  ارسال Notification به Purchaseار
         from models.notification import Notification
         notification = Notification(
             user_id=order.buyer_id,
@@ -1197,10 +1197,10 @@ def update_order_status(order_id):
 @users_bp.route('/notifications')
 @login_required
 def notifications():
-    # خواندن همه اعلان‌ها
+    # TODO: Translate -  Read همه Notification‌ها
     notifs = Notification.query.filter_by(user_id=current_user.id).order_by(Notification.created_at.desc()).all()
 
-    # علامت‌گذاری به عنوان خوانده شده
+    # TODO: Translate -  علامت‌گذاری به عنوان خوانده شده
     for n in notifs:
         if not n.is_read:
             n.is_read = True
@@ -1232,45 +1232,45 @@ def mark_all_read():
 @users_bp.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
-    # ✅ فقط کاربران ویژه می‌تونن به لیست چت دسترسی داشته باشن و با کاربران دیگر چت کنن
-    # اما کاربران غیر ویژه می‌تونن پیام‌های ادمین رو ببینن
+    # TODO: Translate -  ✅ فقط Userان ویژه می‌تونن به List Chat Access داشته باشن و با Userان دیگر Chat کنن
+    # TODO: Translate -  اما Userان غیر ویژه می‌تونن Message‌های ادمین رو ببینن
     receiver_id = request.args.get('receiver_id', type=int)
     receiver = db.session.get(User, receiver_id) if receiver_id else None
     
-    # بررسی اینکه آیا کاربر جاری غیر ویژه است و سعی دارد به چت دسترسی پیدا کند
+    # TODO: Translate -  Check اینکه آیا User جاری غیر ویژه است و سعی داReject به Chat Access پیدا کند
     if not current_user.is_premium:
-        # اگر کاربر غیر ویژه است، فقط می‌تواند پیام‌های ادمین را ببیند
-        # نمی‌تواند به صورت فعال چت جدیدی شروع کند
+        # TODO: Translate -  اگر User غیر ویژه است، فقط می‌تواند Message‌های ادمین را ببیند
+        # TODO: Translate -  نمی‌تواند به صورت Active Chat جدیدی شروع کند
         if request.method == 'POST':
             flash("❌ Limited access: Only special users can send messages.", "error")
             return redirect(url_for('users.profile'))
         
-        # برای کاربران غیر ویژه، فقط نمایش پیام‌های ادمین مجاز است
-        # لیست کاربران را خالی نگه می‌داریم
+        # TODO: Translate -  برای Userان غیر ویژه، فقط View Message‌های ادمین مجاز است
+        # TODO: Translate -  List Userان را خالی نگه می‌داریم
         users = []
         
-        # اگر receiver مشخص شده، باید ادمین باشد
+        # TODO: Translate -  اگر receiver مشخص شده، باید ادمین باشد
         if receiver and receiver.role != Role.ADMIN:
             flash("❌ Access denied: Non-special users can only view messages from admin.", "error")
             return redirect(url_for('users.profile'))
             
     else:
-        # کاربران ویژه می‌تونن با همه کاربران ویژه چت کنن
+        # TODO: Translate -  Userان ویژه می‌تونن با همه Userان ویژه Chat کنن
         users = User.query.filter(
             User.id != current_user.id,
             User.is_premium == True
         ).all()
 
-        # ✅ اگر گیرنده وجود نداشته باشه یا ویژه نباشه (برای کاربران عادی)
+        # TODO: Translate -  ✅ اگر گیرنده وجود نداشته باشه یا ویژه نباشه (برای Userان عادی)
         if receiver and not receiver.is_premium:
             flash("❌ This user is not special and you cannot chat with him/her.", "error")
             receiver = None
 
-    # ارسال پیام (فقط برای کاربران ویژه)
+    # TODO: Translate -  ارسال Message (فقط برای Userان ویژه)
     if request.method == 'POST' and receiver and current_user.is_premium:
         content = request.form['content'].strip()
         if content:
-            # ایجاد پیام
+            #  Create Message
             msg = Message(
                 sender_id=current_user.id,
                 receiver_id=receiver.id,
@@ -1279,7 +1279,7 @@ def chat():
             db.session.add(msg)
             db.session.commit()
 
-            # ✅ ارسال اعلان به گیرنده
+            # TODO: Translate -  ✅ ارسال Notification به گیرنده
             notification = Notification(
                 user_id=receiver.id,
                 message=f"📩 You received a new message from {current_user.username} ."
@@ -1290,7 +1290,7 @@ def chat():
             flash("✉️ Message sent.")
         return redirect(url_for('users.chat', receiver_id=receiver.id))
 
-    # دریافت پیام‌ها
+    # TODO: Translate -  دریافت Message‌ها
     messages = []
     if receiver:
         messages = Message.query.filter(
@@ -1298,7 +1298,7 @@ def chat():
             ((Message.sender_id == receiver.id) & (Message.receiver_id == current_user.id))
         ).order_by(Message.created_at.asc()).all()
 
-        # علامت‌گذاری پیام‌های دریافتی به عنوان خوانده شده
+        # TODO: Translate -  علامت‌گذاری Message‌های دریافتی به عنوان خوانده شده
         for m in messages:
             if m.receiver_id == current_user.id and not m.is_read:
                 m.is_read = True
@@ -1307,19 +1307,19 @@ def chat():
     return render_template('users/chat.html', users=users, receiver=receiver, messages=messages)
 
 
-# ✅ مسیر جدید برای پشتیبانی - کاربران غیر ویژه می‌تونن پیام‌های ادمین رو اینجا ببینن و ارسال کنن
+# TODO: Translate -  ✅ Path جدید برای پشتیبانی - Userان غیر ویژه می‌تونن Message‌های ادمین رو اینجا ببینن و ارسال کنن
 @users_bp.route('/support', methods=['GET', 'POST'])
 @login_required
 def support():
-    """بخش پشتیبانی برای کاربران - مشاهده و ارسال پیام به ادمین"""
-    # پیدا کردن کاربر ادمین
+    """TODO: Translate - Section پشتیبانی برای Userان - مشاهده و ارسال Message به ادمین"""
+    # TODO: Translate -  پیدا کRejectن User ادمین
     admin_user = User.query.filter_by(role=Role.ADMIN, is_active=True).first()
     
     if not admin_user:
         flash("⚠️ No admin found to contact.", "warning")
         return redirect(url_for('users.profile'))
     
-    # اگر درخواست POST است، کاربر می‌خواهد پیام ارسال کند
+    # TODO: Translate -  اگر Request POST است، User می‌خواهد Message ارسال کند
     if request.method == 'POST':
         content = request.form.get('message', '').strip()
         
@@ -1327,7 +1327,7 @@ def support():
             flash("❌ Please enter a message.", "error")
             return redirect(url_for('users.support'))
         
-        # ایجاد پیام جدید از کاربر به ادمین
+        # TODO: Translate -  Create Message جدید از User به ادمین
         message = Message(
             sender_id=current_user.id,
             receiver_id=admin_user.id,
@@ -1335,7 +1335,7 @@ def support():
         )
         db.session.add(message)
         
-        # ایجاد اعلان برای ادمین
+        # TODO: Translate -  Create Notification برای ادمین
         from models.notification import Notification
         notification = Notification(
             user_id=admin_user.id,
@@ -1347,13 +1347,13 @@ def support():
         flash("✅ Your message was sent to support.", "success")
         return redirect(url_for('users.support'))
     
-    # دریافت پیام‌های بین کاربر جاری و ادمین
+    # TODO: Translate -  دریافت Message‌های بین User جاری و ادمین
     messages = Message.query.filter(
         ((Message.sender_id == current_user.id) & (Message.receiver_id == admin_user.id)) |
         ((Message.sender_id == admin_user.id) & (Message.receiver_id == current_user.id))
     ).order_by(Message.created_at.asc()).all()
 
-    # علامت‌گذاری پیام‌های دریافتی به عنوان خوانده شده
+    # TODO: Translate -  علامت‌گذاری Message‌های دریافتی به عنوان خوانده شده
     for m in messages:
         if m.receiver_id == current_user.id and not m.is_read:
             m.is_read = True
@@ -1372,7 +1372,7 @@ from flask import g
 @users_bp.app_context_processor
 def inject_support_user():
     if current_user.is_authenticated:
-        # مثلاً PRODUCER اول یا کاربر با username='support'
+        # TODO: Translate -  مثلاً PRODUCER اول یا User با username='support'
         support_user = User.query.filter_by(username='support', is_active=True).first()
         if not support_user:
             support_user = User.query.filter_by(role=Role.PRODUCER, is_active=True).first()
@@ -1399,11 +1399,11 @@ def vessel_finder():
         flash("❌ Access is only allowed for special users.", "error")
         return redirect(url_for('users.profile'))
 
-    # فقط در صورت POST و دریافت IMO
+    # TODO: Translate -  فقط در صورت POST و دریافت IMO
     if request.method == 'POST':
         imo = request.form.get('imo', '').strip()
 
-        # اعتبارسنجی
+        # TODO: Translate -  Creditسنجی
         if not imo or not imo.isdigit() or len(imo) != 7:
             flash("❌ Please enter a valid 7-digit ID (IMO).", "error")
             return render_template('users/vessel_finder.html')
@@ -1466,11 +1466,11 @@ def vessel_finder():
         except (KeyError, IndexError) as e:
             flash("❌ The received data is invalid.", "error")
 
-    # GET یا خطا: نمایش فرم
+    # TODO: Translate -  GET یا Error: View فرم
     return render_template('users/vessel_finder.html')
 ######################################TEST
 
-# نمایش نقشه
+# TODO: Translate -  View Roleه
 @users_bp.route('/map')
 @login_required
 def show_map():
@@ -1504,7 +1504,7 @@ from flask import jsonify
 @users_bp.route('/api/ports', methods=['GET'])
 @login_required
 def get_ports():
-    # فقط کاربران ویژه می‌تونن ببینن
+    # TODO: Translate -  فقط Userان ویژه می‌تونن ببینن
     if not current_user.is_premium:
         return jsonify({'error': 'Restricted access: Special users only'}), 403
 
@@ -1546,7 +1546,7 @@ def update_port(port_id):
     if current_user.role != Role.PRODUCER:
         return jsonify({'error': 'Access denied'}), 403
 
-    # ✅ چک کردن اینکه port_id عددی باشه
+    # TODO: Translate -  ✅ چک کRejectن اینکه port_id Numberی باشه
     if not port_id.isdigit():
         return jsonify({'error': 'The port ID must be a positive number.'}), 400
 
@@ -1580,7 +1580,7 @@ def delete_port(port_id):
 
 # @users_bp.route('/test')
 # def test():
-#     return "✅ مسیر /users/test کار می‌کنه!"
+# TODO: Translate -      return "✅ Path /users/test کار می‌کنه!"
 
 ####################################################################
 
@@ -1591,13 +1591,13 @@ from werkzeug.utils import secure_filename
 from models import db
 from models.premium_request import PremiumRequest
 
-# مسیر اصلی ارتقاء
+# TODO: Translate -  Path اصلی ارتقاء
 @users_bp.route('/upgrade_to_premium')
 @login_required
 def upgrade_to_premium():
-    # آخرین درخواست کاربر
+    # TODO: Translate -  آخرین Request User
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
-    # دریافت تمام درخواست‌ها برای نمایش تاریخچه
+    # TODO: Translate -  دریافت تمام Request‌ها برای View Dateچه
     requests = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(
         PremiumRequest.submitted_at.desc()).all()
 
@@ -1609,16 +1609,16 @@ def upgrade_to_premium():
             flash("⚠️ Your request is being reviewed.")
             return redirect(url_for('users.payment_confirmation',now=datetime.now()))
 
-    # ارسال `req` به تمپلیت
+    # TODO: Translate -  ارسال `req` به تمپلیت
     return render_template('users/upgrade_premium.html', req=req, requests=requests)
 
-# شروع فرآیند (ایجاد درخواست جدید)
+# TODO: Translate -  شروع فرآیند (Create Request جدید)
 @users_bp.route('/start_upgrade', methods=['POST'])
 @login_required
 def start_upgrade():
-    # حذف احراز موبایل - مستقیماً به آپلود مدارک می‌رویم
+    # TODO: Translate -  Delete احراز موبایل - مستقیماً به Upload مدارک می‌رویم
     
-    # بررسی اینکه آیا کاربر قبلاً درخواست تأیید شده دارد
+    # TODO: Translate -  Check اینکه آیا User قبلاً Request Confirm شده داReject
     existing_approved = PremiumRequest.query.filter_by(
         user_id=current_user.id, 
         status='approved'
@@ -1628,7 +1628,7 @@ def start_upgrade():
         flash("You are already a Premium member. Your documents have been verified.", "info")
         return redirect(url_for('users.view_my_documents'))
     
-    # بررسی درخواست در حال انتظار
+    # TODO: Translate -  Check Request در حال انتظار
     existing_pending = PremiumRequest.query.filter_by(
         user_id=current_user.id, 
         status='pending'
@@ -1638,7 +1638,7 @@ def start_upgrade():
         flash("You already have a pending verification request.", "info")
         return redirect(url_for('users.upgrade_to_premium'))
     
-    # ایجاد درخواست جدید فقط اگر هیچ درخواست فعالی وجود ندارد
+    # TODO: Translate -  Create Request جدید فقط اگر هیچ Request Activeی وجود نداReject
     req = PremiumRequest(user_id=current_user.id, requested_phone=current_user.phone or '')
     db.session.add(req)
     db.session.commit()
@@ -1646,29 +1646,29 @@ def start_upgrade():
     flash("The upgrade process has started. Please upload your documents.")
     return redirect(url_for('users.upload_documents'))
 
-# آپلود مدارک برای Premium
+# TODO: Translate -  Upload مدارک برای Premium
 @users_bp.route('/upload_documents', methods=['GET', 'POST'])
 @login_required
 def upload_documents():
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    # اگر درخواستی وجود ندارد، کاربر باید ابتدا فرآیند را شروع کند
+    # TODO: Translate -  اگر Requestی وجود نداReject، User باید ابتدا فرآیند را شروع کند
     if not req:
         flash("Please start the premium verification process first.", "error")
         return redirect(url_for('users.upgrade_to_premium'))
 
-    # اگر کاربر قبلاً پریمیوم شده (تأیید نهایی)، نمی‌تواند مدارک را تغییر دهد
+    # TODO: Translate -  اگر User قبلاً پریمیوم شده (Confirm نهایی)، نمی‌تواند مدارک را تغییر دهد
     if req.status == 'approved':
         flash("Your documents have been verified. You cannot modify them.", "info")
         return redirect(url_for('users.view_my_documents'))
 
-    # اگر مدارک قبلاً آپلود شده و در حال بررسی است
+    # TODO: Translate -  اگر مدارک قبلاً Upload شده و در حال Check است
     if req.passport_file and req.license_file:
         if req.status == 'pending':
             flash("Your documents are under review by admin.", "info")
             return redirect(url_for('users.view_my_documents'))
         else:
-            # هنوز تأیید نشده، اجازه آپلود مجدد
+            # TODO: Translate -  هنوز Confirm نشده، اجازه Upload مجدد
             pass
 
     unique_f = f"{current_user.id}_{current_user.username}"
@@ -1678,7 +1678,7 @@ def upload_documents():
     if request.method == 'POST':
         files_uploaded = False
 
-        # پردازش پاسپورت
+        # TODO: Translate -  پRejectازش پاسپورت
         passport_file = request.files.get('passport_file')
 
 
@@ -1694,7 +1694,7 @@ def upload_documents():
             req.passport_file = filename
             files_uploaded = True
 
-        # پردازش لایسنس
+        # TODO: Translate -  پRejectازش لایسنس
         license_file = request.files.get('license_file')
         if license_file and license_file.filename != '':
             is_valid, error_msg = validate_file(license_file)
@@ -1720,7 +1720,7 @@ def upload_documents():
     return render_template('users/upload_documents.html', req=req)
 
 
-# مشاهده مدارک توسط کاربر (فقط خواندنی بعد از تأیید)
+# TODO: Translate -  مشاهده مدارک توسط User (فقط Readی بعد از Confirm)
 @users_bp.route('/my_documents')
 @login_required
 def view_my_documents():
@@ -1732,13 +1732,13 @@ def view_my_documents():
     
     return render_template('users/my_documents.html', req=req)
 
-# پرداخت و آپلود رسید
+# TODO: Translate -  Payment و Upload رسید
 @users_bp.route('/make_payment', methods=['GET', 'POST'])
 @login_required
 def make_payment():
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
 
-    # اگر درخواستی وجود ندارد یا مدارک آپلود نشده، کاربر باید ابتدا مدارک را آپلود کند
+    # TODO: Translate -  اگر Requestی وجود نداReject یا مدارک Upload نشده، User باید ابتدا مدارک را Upload کند
     if not req or not (req.passport_file and req.license_file):
         flash("Please upload your documents first.", "error")
         return redirect(url_for('users.upload_documents'))
@@ -1763,19 +1763,19 @@ def make_payment():
                 req.payment_verified = True
                 db.session.commit()
                 flash("Payment receipt received. Reviewing...")
-                # ارسال اعلان به ادمین
+                # TODO: Translate -  ارسال Notification به ادمین
                 notify_admin_of_new_request(req)
                 return redirect(url_for('users.payment_confirmation',now=datetime.now()))
 
     return render_template('users/make_payment.html', req=req)
 
-# تأیید نهایی
+# TODO: Translate -  Confirm نهایی
 @users_bp.route('/payment_confirmation')
 @login_required
 def payment_confirmation():
     return render_template('users/payment_confirmation.html',now=datetime.now())
 
-# --- تابع کمکی: اعلان به ادمین ---
+# TODO: Translate -  --- Function کمکی: Notification به ادمین ---
 def notify_admin_of_new_request(req):
     """Send email notification to admins when a new premium request is submitted."""
     from flask_mail import Message
@@ -1811,26 +1811,26 @@ api_bp = Blueprint('api', __name__, url_prefix='/api')
 def check_availability():
     """Real-time availability check - ALWAYS returns JSON"""
 
-    # دریافت پارامترها با دیباگ لاگ
+    # TODO: Translate -  دریافت پارامترها با دیباگ لاگ
     field = request.args.get('field')
     value = request.args.get('value', '').strip()
 
     current_app.logger.debug(f'Check availability: field={field}, value={value}')
 
-    # اعتبارسنجی فیلد
+    # TODO: Translate -  Creditسنجی Field
     valid_fields = ['username', 'email', 'phone']
     if not field or field not in valid_fields:
         current_app.logger.warning(f'Invalid field parameter: {field}')
         return jsonify({
             'error': f'Invalid field. Must be one of: {valid_fields}',
-            'available': True  # Fail-safe: اجازه ادامه می‌دهیم
+            'available': True  # TODO: Translate -  Fail-safe: اجازه ادامه می‌دهیم
         }), 400
 
     if not value or len(value) < 3:
         return jsonify({'available': True, 'message': 'Too short to check'}), 200
 
     try:
-        # نرمال‌سازی مقدار
+        # TODO: Translate -  نرمال‌سازی Value
         if field == 'phone':
             value = ''.join(filter(str.isdigit, value)).lstrip('0')
             if not value:
@@ -1839,7 +1839,7 @@ def check_availability():
         if field in ['email', 'username']:
             value = value.lower()
 
-        # کوئری دیتابیس
+        # TODO: Translate -  کوئری دیتابیس
         existing = User.query.filter(
             getattr(User, field) == value
         ).first()
@@ -1851,7 +1851,7 @@ def check_availability():
 
     except Exception as e:
         current_app.logger.error(f'Availability check error: {str(e)}', exc_info=True)
-        # در صورت خطا، اجازه می‌دهیم فرم ارسال شود و سرور در submit نهایی چک کند
+        # TODO: Translate -  در صورت Error، اجازه می‌دهیم فرم ارسال شود و سرور در submit نهایی چک کند
         return jsonify({
             'available': True,
             'warning': 'Could not verify, will check on submit'
@@ -1860,25 +1860,25 @@ def check_availability():
 
 @users_bp.route('/verify-email/<token>', endpoint='verify_email_route')
 def verify_email(token):
-    """بررسی توکن و فعال‌سازی حساب کاربری"""
-    # 1. اعتبارسنجی توکن (چک کردن هش و تاریخ انقضا)
+    """TODO: Translate - Check Token و Active‌سازی Account Userی"""
+    # TODO: Translate -  1. Creditسنجی Token (چک کRejectن هش و Date انقضا)
     user, error_msg = verify_email_token(token)
 
     if not user:
         flash(f"❌ {error_msg}", "error")
         return redirect(url_for('users.resend_verification'))
 
-    # 2. اگر قبلاً تایید شده
+    # TODO: Translate -  2. اگر قبلاً تایید شده
     if user.is_email_verified:
         flash("✅ Your email is already verified. You can login.", "success")
         return redirect(url_for('users.login'))
 
-    # 3. تایید کاربر
+    # TODO: Translate -  3. تایید User
     user.is_email_verified = True
-    # 4. ذخیره تغییرات در دیتابیس
+    # TODO: Translate -  4. Save تغییرات در دیتابیس
     db.session.commit()
 
-    # 4. علامت‌گذاری توکن به عنوان استفاده شده
+    # TODO: Translate -  4. علامت‌گذاری Token به عنوان استفاده شده
     import hashlib
     token_hash = hashlib.sha256(token.encode()).hexdigest()
     token_record = EmailVerificationToken.query.filter_by(token=token_hash).first()
@@ -1892,7 +1892,7 @@ def verify_email(token):
 
 @users_bp.route('/resend-verification', methods=['GET', 'POST'])
 def resend_verification():
-    """ارسال مجدد ایمیل تایید"""
+    """TODO: Translate - ارسال مجدد ایمیل تایید"""
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         user = User.query.filter_by(email=email).first()
@@ -1905,10 +1905,10 @@ def resend_verification():
             flash("✅ Your email is already verified.", "success")
             return redirect(url_for('users.login'))
 
-        # تولید توکن جدید و ارسال
+        # TODO: Translate -  تولید Token جدید و ارسال
         raw_token = generate_verification_token(user)
 
-        # ✅ ذخیره توکن در دیتابیس (EmailVerificationToken)
+        # TODO: Translate -  ✅ Save Token در دیتابیس (EmailVerificationToken)
         token_hash = hashlib.sha256(raw_token.encode()).hexdigest()
         existing_token = EmailVerificationToken.query.filter_by(token=token_hash).first()
         if not existing_token:
@@ -1917,7 +1917,7 @@ def resend_verification():
                 email=user.email,
                 expiration_hours=48
             )
-            # هش کردن توکن قبل از ذخیره
+            # TODO: Translate -  هش کRejectن Token قبل از Save
             new_token_record.token = token_hash
             db.session.add(new_token_record)
             db.session.commit()
@@ -1932,4 +1932,4 @@ def resend_verification():
 
         return redirect(url_for('users.login'))
 
-    return render_template('email/resend_form.html')  # یک تمپلیت ساده برای گرفتن ایمیل
+    return render_template('email/resend_form.html')  # TODO: Translate -  یک تمپلیت ساده برای گرفتن ایمیل

@@ -13,38 +13,38 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class TradeCreditAccount(db.Model):
-    """حساب اعتبار تجاری هر کاربر"""
+    """TODO: Translate - Account Credit تجاری هر User"""
     __tablename__ = 'trade_credit_accounts'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     
-    # موجودی اعتبار (واحد: تِردکُرد - TC)
+    # TODO: Translate -  موجودی Credit (واحد: تِRejectکُReject - TC)
     balance = db.Column(db.Integer, default=0)
     
-    # اعتبار رزرو شده (برای معاملات در جریان)
+    # TODO: Translate -  Credit رزرو شده (برای معاملات در جریان)
     reserved_balance = db.Column(db.Integer, default=0)
     
-    # تاریخچه
+    # TODO: Translate -  Dateچه
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     last_transaction_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    #  Relationship
     user = db.relationship('User', back_populates='credit_account')
     
     def get_available_balance(self):
-        """محاسبه موجودی قابل استفاده"""
+        """TODO: Translate - محاسبه موجودی قابل استفاده"""
         balance = self.balance or 0
         reserved = self.reserved_balance or 0
         return balance - reserved
     
     def add_credit(self, amount, reason, transaction_type='earn'):
-        """افزایش اعتبار"""
+        """TODO: Translate - افزایش Credit"""
         if amount > 0:
             self.balance += amount
             self.last_transaction_at = datetime.now(tehran_tz)
             
-            # ثبت تراکنش
+            # TODO: Translate -  ثبت Transaction
             transaction = CreditTransaction(
                 user_id=self.user_id,
                 amount=amount,
@@ -57,13 +57,13 @@ class TradeCreditAccount(db.Model):
         return False
     
     def spend_credit(self, amount, reason, transaction_type='spend'):
-        """مصرف اعتبار"""
+        """TODO: Translate - مصرف Credit"""
         available = self.get_available_balance()
         if amount > 0 and amount <= available:
             self.balance -= amount
             self.last_transaction_at = datetime.now(tehran_tz)
             
-            # ثبت تراکنش
+            # TODO: Translate -  ثبت Transaction
             transaction = CreditTransaction(
                 user_id=self.user_id,
                 amount=-amount,
@@ -76,7 +76,7 @@ class TradeCreditAccount(db.Model):
         return False
     
     def reserve_credit(self, amount):
-        """رزرو اعتبار برای معامله"""
+        """TODO: Translate - رزرو Credit برای معامله"""
         available = self.get_available_balance()
         if amount > 0 and amount <= available:
             self.reserved_balance += amount
@@ -84,7 +84,7 @@ class TradeCreditAccount(db.Model):
         return False
     
     def release_reservation(self, amount):
-        """آزادسازی اعتبار رزرو شده"""
+        """TODO: Translate - آزادسازی Credit رزرو شده"""
         if amount > 0 and amount <= self.reserved_balance:
             self.reserved_balance -= amount
             return True
@@ -92,50 +92,50 @@ class TradeCreditAccount(db.Model):
 
 
 class CreditTransaction(db.Model):
-    """تاریخچه تراکنش‌های اعتباری"""
+    """TODO: Translate - Dateچه Transaction‌های Creditی"""
     __tablename__ = 'credit_transactions'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    # مقدار تغییر (مثبت برای کسب، منفی برای مصرف)
+    # TODO: Translate -  Value تغییر (مثبت برای کسب، منفی برای مصرف)
     amount = db.Column(db.Integer, nullable=False)
     
-    # نوع تراکنش
+    #  Type Transaction
     transaction_type = db.Column(db.String(20), nullable=False)  # earn, spend, reserve, release
     
-    # دلیل تراکنش
-    reason = db.Column(db.String(200), nullable=False)  # e.g., 'تکمیل پروفایل', 'پرداخت هزینه مشاوره'
+    # TODO: Translate -  دلیل Transaction
+    reason = db.Column(db.String(200), nullable=False)  # TODO: Translate -  e.g., 'تکمیل پروFile', 'Payment هزینه مشاوره'
     
-    # موجودی پس از تراکنش
+    # TODO: Translate -  موجودی پس از Transaction
     balance_after = db.Column(db.Integer, nullable=False)
     
-    # مرجع (اختیاری)
+    # TODO: Translate -  مرجع (Optional)
     reference_id = db.Column(db.String(100))  # e.g., order_id, challenge_id
     
-    # زمان
+    #  Time
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    #  Relationship
     user = db.relationship('User', backref='credit_transactions')
 
 
 class CreditRule(db.Model):
-    """قوانین کسب و مصرف اعتبار"""
+    """TODO: Translate - قوانین کسب و مصرف Credit"""
     __tablename__ = 'credit_rules'
     
     id = db.Column(db.Integer, primary_key=True)
     rule_name = db.Column(db.String(100), nullable=False, unique=True)  # e.g., 'profile_completion'
-    credit_amount = db.Column(db.Integer, nullable=False)  # مقدار اعتبار
-    description = db.Column(db.Text)  # توضیح قانون
+    credit_amount = db.Column(db.Integer, nullable=False)  #  Value Credit
+    description = db.Column(db.Text)  # TODO: Translate -  توضیح قانون
     is_active = db.Column(db.Boolean, default=True)
     
     @staticmethod
     def get_earning_rules():
-        """دریافت قوانین کسب اعتبار فعال"""
+        """TODO: Translate - دریافت قوانین کسب Credit Active"""
         return CreditRule.query.filter_by(is_active=True).filter(CreditRule.credit_amount > 0).all()
     
     @staticmethod
     def get_spending_rules():
-        """دریافت قوانین مصرف اعتبار فعال"""
+        """TODO: Translate - دریافت قوانین مصرف Credit Active"""
         return CreditRule.query.filter_by(is_active=True).filter(CreditRule.credit_amount < 0).all()

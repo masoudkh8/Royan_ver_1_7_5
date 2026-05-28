@@ -14,106 +14,106 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class ConsortiumProject(db.Model):
-    """پروژه‌های بزرگ نیازمند مشارکت چند شرکت"""
+    """TODO: Translate - پروژه‌های بزرگ نیازمند مشارکت چند شرکت"""
     __tablename__ = 'consortium_projects'
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
     
-    # اطلاعات پروژه
-    industry = db.Column(db.String(100))  # صنعت مرتبط
-    target_country = db.Column(db.String(100))  # کشور هدف
-    required_capacity = db.Column(db.String(200))  # ظرفیت مورد نیاز
-    estimated_value = db.Column(db.String(100))  # ارزش تقریبی
+    # TODO: Translate -  Information پروژه
+    industry = db.Column(db.String(100))  # TODO: Translate -  صنعت مرتبط
+    target_country = db.Column(db.String(100))  # TODO: Translate -  کشور هدف
+    required_capacity = db.Column(db.String(200))  # TODO: Translate -  ظرفیت موReject نیاز
+    estimated_value = db.Column(db.String(100))  # TODO: Translate -  ارزش تقریبی
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='open')  # open, forming, active, completed, cancelled
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # اعضا
+    # TODO: Translate -  اعضا
     members = db.relationship('ConsortiumMember', back_populates='project', cascade='all, delete-orphan')
     
-    # قرارداد
+    # TODO: Translate -  قراRejectاد
     contract = db.relationship('ConsortiumContract', back_populates='project', uselist=False, cascade='all, delete-orphan')
 
 
 class ConsortiumMember(db.Model):
-    """اعضای هر کنسرسیوم"""
+    """TODO: Translate - اعضای هر کنسرسیوم"""
     __tablename__ = 'consortium_members'
     
     id = db.Column(db.Integer, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('consortium_projects.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    # نقش در کنسرسیوم
+    # TODO: Translate -  Role در کنسرسیوم
     role = db.Column(db.String(50), nullable=False)  # e.g., 'leader', 'supplier', 'logistics_partner'
     
-    # سهم سرمایه (درصد)
+    # TODO: Translate -  سهم سرمایه (درصد)
     capital_share = db.Column(db.Integer, default=0)  # 0-100
     
-    # سهم سود (درصد)
+    # TODO: Translate -  سهم سود (درصد)
     profit_share = db.Column(db.Integer, default=0)  # 0-100
     
-    # وضعیت
+    #  Status
     joined_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     status = db.Column(db.String(20), default='active')  # active, left, removed
     
-    # روابط
+    # TODO: Translate -  روابط
     project = db.relationship('ConsortiumProject', back_populates='members')
     user = db.relationship('User', backref='consortium_memberships')
 
 
 class ConsortiumContract(db.Model):
-    """قرارداد هوشمند کنسرسیوم"""
+    """TODO: Translate - قراRejectاد هوشمند کنسرسیوم"""
     __tablename__ = 'consortium_contracts'
     
     id = db.Column(db.Integer, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('consortium_projects.id'), unique=True, nullable=False)
     
-    # مفاد قرارداد
-    terms = db.Column(db.Text)  # شرایط و ضوابط
-    responsibilities = db.Column(db.Text)  # مسئولیت‌های هر عضو
+    # TODO: Translate -  مفاد قراRejectاد
+    terms = db.Column(db.Text)  # TODO: Translate -  شرایط و ضوابط
+    responsibilities = db.Column(db.Text)  # TODO: Translate -  مسئولیت‌های هر عضو
     
-    # توزیع سود
+    # TODO: Translate -  توزیع سود
     profit_distribution_method = db.Column(db.String(100))  # e.g., 'proportional_to_capital'
     
-    # شرایط خروج
+    # TODO: Translate -  شرایط Logout
     exit_conditions = db.Column(db.Text)
     
-    # امضاها
-    signed_by = db.Column(db.Text)  # لیست کاربرانی که امضا کرده‌اند (JSON)
+    # TODO: Translate -  امضاها
+    signed_by = db.Column(db.Text)  # TODO: Translate -  List Userانی که امضا کRejectه‌اند (JSON)
     fully_signed = db.Column(db.Boolean, default=False)
     
-    # زمان
+    #  Time
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     last_updated = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    #  Relationship
     project = db.relationship('ConsortiumProject', back_populates='contract')
 
 
 class PartnerMatch(db.Model):
-    """پیشنهادات شریک هوشمند"""
+    """TODO: Translate - پیشنهادات شریک هوشمند"""
     __tablename__ = 'partner_matches'
     
     id = db.Column(db.Integer, primary_key=True)
     
-    # کاربران برای تطبیق
+    # TODO: Translate -  Userان برای تطبیق
     user1_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user2_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    # امتیاز تطابق (۰-۱۰۰)
+    # TODO: Translate -  Score تطابق (۰-۱۰۰)
     match_score = db.Column(db.Integer, default=0)
     
-    # دلیل تطابق
-    match_reasons = db.Column(db.Text)  # e.g., 'مکمل در صنعت X', 'تجربه در کشور Y'
+    # TODO: Translate -  دلیل تطابق
+    match_reasons = db.Column(db.Text)  # TODO: Translate -  e.g., 'مکمل در صنعت X', 'تجربه در کشور Y'
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='pending')  # pending, accepted, rejected
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # روابط
+    # TODO: Translate -  روابط
     user1 = db.relationship('User', foreign_keys=[user1_id], backref='partner_matches_as_user1')
     user2 = db.relationship('User', foreign_keys=[user2_id], backref='partner_matches_as_user2')

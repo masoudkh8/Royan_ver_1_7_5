@@ -21,51 +21,51 @@ from .gamification import UserBadge, UserProgress, SeasonalChallenge, ChallengeP
 from .trade_credit import TradeCreditAccount, CreditTransaction, CreditRule
 from .consortium import ConsortiumProject, ConsortiumMember, ConsortiumContract, PartnerMatch
 
-# Marketplace & Products (بخش ۹)
+# TODO: Translate -  Marketplace & Products (Section ۹)
 from .product import Product, RFQ, RFQProposal, ProductComparison, FavoriteProduct
 
-# Financial Layer (بخش ۱۰)
+# TODO: Translate -  Financial Layer (Section ۱۰)
 from .wallet import Wallet, WalletTransaction, EscrowTransaction, ExchangeRate, FinancialReport
 
-# Learning Hub (بخش ۱۴)
+# TODO: Translate -  Learning Hub (Section ۱۴)
 from .course import Course, CourseModule, CourseLesson, CourseEnrollment, LessonProgress, Certificate, Webinar, WebinarRegistration, LearningPath
 
-# CRM & Leads (بخش ۱۲)
+# TODO: Translate -  CRM & Leads (Section ۱۲)
 from .lead import Lead, LeadInteraction, LeadTask, Campaign, CampaignLead, CampaignAnalytics, EmailTemplate, AutomationRule
 
-# Integrations (بخش ۱۱)
+# TODO: Translate -  Integrations (Section ۱۱)
 from .integration import ExternalIntegration, IntegrationLog, WebhookSubscription, WebhookDelivery, LinkedInProfile, LinkedInPost, WhatsAppContact, LogisticsProvider, LogisticsQuote, APICache
 
-# AI Core (بخش ۱)
+# TODO: Translate -  AI Core (Section ۱)
 from .ai_chat import Conversation, ChatMessage, AIRecommendation, CustomizationProfile, ContentGenerationRequest
 
-# Smart Map & Logistics (بخش ۲)
+# TODO: Translate -  Smart Map & Logistics (Section ۲)
 from .smart_map import Country, CustomsData, RiskEvent, TradeRoute, ShipmentTracking
 
-# i18n & Localization (بخش ۱۳)
+# TODO: Translate -  i18n & Localization (Section ۱۳)
 from .i18n import Language, TranslationKey, Translation, LocalizationSettings
 
-# Data Intelligence (بخش ۸)
+# TODO: Translate -  Data Intelligence (Section ۸)
 from .data_intelligence import MarketTrend, CompetitorAnalysis, DemandForecast, TradeStatistic, CustomReport, DataAlert
 
-# Social Network (بخش سوشال - مرحله ۱)
+# TODO: Translate -  Social Network (Section سوشال - مرحله ۱)
 from .social import Follow, Post, Comment, Like, update_user_relationships
 
-# Exhibition Hall (نمایشگاه آنلاین - مرحله ۲)
+# TODO: Translate -  Exhibition Hall (Viewگاه آنلاین - مرحله ۲)
 from .exhibition import (
     Exhibition, Booth, BoothVisit, BoothInteraction, BoothAppointment, ExhibitionVisit,
     ExhibitionStatus, BoothType,
     init_exhibition_db
 )
 
-# Trading Hall (تالار معاملاتی - مرحله ۲)
+# TODO: Translate -  Trading Hall (تالار معاملاتی - مرحله ۲)
 from .trading import (
     TradingPair, TradingWallet, TradingWalletTransaction, TradeOrder, Trade, MarketData, TradingSetting,
     OrderType, OrderSide, OrderStatus,
     init_trading_db
 )
 
-# Authentication & Security Models (امنیت و احراز هویت)
+# TODO: Translate -  Authentication & Security Models (امنیت و Authentication)
 from .auth import PasswordResetToken, LoginSession, ActivityLog, EmailVerificationToken, TwoFactorBackupCode
 
 # Initialize social relationships after all models are imported

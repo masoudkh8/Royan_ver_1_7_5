@@ -1,6 +1,6 @@
 # wsgi.py
-# این فایل را در کنار app.py بسازید
-# ایجاد اپلیکیشن برای محیط production
+# TODO: Translate -  این File را در کنار app.py بسازید
+# TODO: Translate -  Create اپلیکیشن برای محیط production
 
 
 from app import create_app

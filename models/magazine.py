@@ -7,7 +7,7 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class Magazine(db.Model):
-    """مدل اطلاعات کلی مجله"""
+    """TODO: Translate - Model Information کلی مجله"""
     __tablename__ = 'magazines'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +18,7 @@ class Magazine(db.Model):
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     is_active = db.Column(db.Boolean, default=True)
     
-    # رابطه با شماره‌های مجله
+    # TODO: Translate -  Relationship با شماره‌های مجله
     issues = db.relationship('MagazineIssue', backref='magazine', lazy=True, cascade='all, delete-orphan')
     
     def __repr__(self):
@@ -26,20 +26,20 @@ class Magazine(db.Model):
 
 
 class MagazineIssue(db.Model):
-    """مدل شماره‌های مجله"""
+    """TODO: Translate - Model شماره‌های مجله"""
     __tablename__ = 'magazine_issues'
     
     id = db.Column(db.Integer, primary_key=True)
     magazine_id = db.Column(db.Integer, db.ForeignKey('magazines.id'), nullable=False)
-    issue_number = db.Column(db.Integer, nullable=False)  # شماره نشریه
-    title = db.Column(db.String(200), nullable=False)  # عنوان شماره
-    description = db.Column(db.Text)  # توضیحات شماره
-    cover_image_url = db.Column(db.String(500))  # URL تصویر جلد
-    file_url = db.Column(db.String(500), nullable=False)  # URL فایل PDF برای دانلود
-    file_size = db.Column(db.String(50))  # حجم فایل
-    publish_date = db.Column(db.Date, nullable=False)  # تاریخ انتشار
-    is_published = db.Column(db.Boolean, default=False)  # وضعیت انتشار
-    download_count = db.Column(db.Integer, default=0)  # تعداد دانلود
+    issue_number = db.Column(db.Integer, nullable=False)  # TODO: Translate -  شماره نشریه
+    title = db.Column(db.String(200), nullable=False)  # TODO: Translate -  عنوان شماره
+    description = db.Column(db.Text)  # TODO: Translate -  توضیحات شماره
+    cover_image_url = db.Column(db.String(500))  # TODO: Translate -  URL تصویر جلد
+    file_url = db.Column(db.String(500), nullable=False)  # TODO: Translate -  URL File PDF برای Download
+    file_size = db.Column(db.String(50))  # TODO: Translate -  حجم File
+    publish_date = db.Column(db.Date, nullable=False)  # TODO: Translate -  Date انتشار
+    is_published = db.Column(db.Boolean, default=False)  # TODO: Translate -  Status انتشار
+    download_count = db.Column(db.Integer, default=0)  # TODO: Translate -  تعداد Download
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     
@@ -48,21 +48,21 @@ class MagazineIssue(db.Model):
 
 
 class SponsorshipRequest(db.Model):
-    """مدل درخواست اسپانسری"""
+    """TODO: Translate - Model Request اسپانسری"""
     __tablename__ = 'sponsorship_requests'
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # اگر کاربر لاگین کرده باشد
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # TODO: Translate -  اگر User لاگین کRejectه باشد
     full_name = db.Column(db.String(200), nullable=False)
-    company_name = db.Column(db.String(200))  # نام شرکت
+    company_name = db.Column(db.String(200))  # TODO: Translate -  نام شرکت
     email = db.Column(db.String(120), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
-    message = db.Column(db.Text)  # پیام و توضیحات
+    message = db.Column(db.Text)  # TODO: Translate -  Message و توضیحات
     status = db.Column(db.String(50), default='pending')  # pending, approved, rejected
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     
-    # رابطه با کاربر
+    # TODO: Translate -  Relationship با User
     user = db.relationship('User', backref=db.backref('sponsorship_requests', lazy=True))
     
     def __repr__(self):
@@ -70,7 +70,7 @@ class SponsorshipRequest(db.Model):
 
 
 class AdvertisementRequest(db.Model):
-    """مدل درخواست تبلیغات در مجله"""
+    """TODO: Translate - Model Request تبلیغات در مجله"""
     __tablename__ = 'advertisement_requests'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -79,13 +79,13 @@ class AdvertisementRequest(db.Model):
     company_name = db.Column(db.String(200))
     email = db.Column(db.String(120), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
-    ad_type = db.Column(db.String(50))  # نوع تبلیغ: full_page, half_page, quarter_page, etc.
+    ad_type = db.Column(db.String(50))  # TODO: Translate -  Type تبلیغ: full_page, half_page, quarter_page, etc.
     message = db.Column(db.Text)
     status = db.Column(db.String(50), default='pending')  # pending, approved, rejected
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     
-    # رابطه با کاربر
+    # TODO: Translate -  Relationship با User
     user = db.relationship('User', backref=db.backref('advertisement_requests', lazy=True))
     
     def __repr__(self):
@@ -93,7 +93,7 @@ class AdvertisementRequest(db.Model):
 
 
 class Subscription(db.Model):
-    """مدل اشتراک سالیانه مجله"""
+    """TODO: Translate - Model اشتراک سالیانه مجله"""
     __tablename__ = 'subscriptions'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -101,7 +101,7 @@ class Subscription(db.Model):
     full_name = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
-    address = db.Column(db.Text)  # آدرس پستی برای ارسال نسخه چاپی
+    address = db.Column(db.Text)  # TODO: Translate -  آدرس Postی برای ارسال نسخه چاپی
     subscription_type = db.Column(db.String(50), default='annual')  # annual, semi_annual
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
@@ -111,7 +111,7 @@ class Subscription(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     
-    # رابطه با کاربر
+    # TODO: Translate -  Relationship با User
     user = db.relationship('User', backref=db.backref('subscriptions', lazy=True))
     
     def __repr__(self):

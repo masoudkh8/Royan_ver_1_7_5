@@ -7,18 +7,18 @@ import re
 from pathlib import Path
 
 def extract_text_from_html(html_file):
-    """استخراج متن‌های قابل مشاهده از فایل HTML"""
+    """TODO: Translate - استخراج متن‌های قابل مشاهده از File HTML"""
     texts = []
     with open(html_file, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # استخراج متن بین تگ‌ها
+    # TODO: Translate -  استخراج متن بین تگ‌ها
     pattern = r'>([^<>\n{}]+?)<'
     matches = re.findall(pattern, content)
     
     for match in matches:
         text = match.strip()
-        # فیلتر کردن متن‌های کوتاه، متغیرها و کدها
+        # TODO: Translate -  فیلتر کRejectن متن‌های کوتاه، Variableها و کدها
         if (len(text) > 2 and 
             not text.startswith('{') and 
             not text.endswith('}') and
@@ -31,12 +31,12 @@ def extract_text_from_html(html_file):
     return texts
 
 def extract_flash_messages(py_file):
-    """استخراج پیام‌های flash از فایل‌های Python"""
+    """TODO: Translate - استخراج Message‌های flash از File‌های Python"""
     messages = []
     with open(py_file, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # پیدا کردن تمام flash() ها
+    # TODO: Translate -  پیدا کRejectن تمام flash() ها
     pattern = r'flash\([\'"]([^\'"]+)[\'"]'
     matches = re.findall(pattern, content)
     
@@ -53,7 +53,7 @@ def main():
     
     all_texts = {}
     
-    # استخراج از تمپلیت‌ها
+    # TODO: Translate -  استخراج از تمپلیت‌ها
     print("=== استخراج متن از تمپلیت‌ها ===\n")
     for root, dirs, files in os.walk(templates_dir):
         for file in files:
@@ -64,12 +64,12 @@ def main():
                 if texts:
                     all_texts[rel_path] = texts
                     print(f"\n{rel_path}:")
-                    for text in texts[:10]:  # نمایش ۱۰ تای اول
+                    for text in texts[:10]:  # TODO: Translate -  View ۱۰ تای اول
                         print(f"  - {text}")
                     if len(texts) > 10:
                         print(f"  ... و {len(texts) - 10} متن دیگر")
     
-    # استخراج پیام‌های flash
+    # TODO: Translate -  استخراج Message‌های flash
     print("\n\n=== استخراج پیام‌های flash از routeها ===\n")
     flash_messages = []
     for root, dirs, files in os.walk(routes_dir):
@@ -84,7 +84,7 @@ def main():
                     for msg in messages[:5]:
                         print(f"  - {msg}")
     
-    # ذخیره در فایل
+    # TODO: Translate -  Save در File
     output_file = os.path.join(workspace, 'texts_to_translate.txt')
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("متن‌های استخراج شده برای ترجمه به فارسی\n")
@@ -95,7 +95,7 @@ def main():
             for text in texts:
                 f.write(f"{text}\n")
         
-        f.write("\n\n### پیام‌های Flash ###\n")
+        f.write("\n\n# TODO: Translate - ## Message‌های Flash ###\n")
         for msg in set(flash_messages):
             f.write(f"{msg}\n")
     

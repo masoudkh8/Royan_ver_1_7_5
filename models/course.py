@@ -1,26 +1,26 @@
 # models/course.py
-# بخش ۱۴: Learning Hub - آموزش و آکادمی
+# TODO: Translate -  Section ۱۴: Learning Hub - آموزش و آکادمی
 
 from . import db
 from datetime import datetime, timedelta
 from enum import Enum
 
 class CourseLevel(Enum):
-    BEGINNER = 'beginner'  # مقدماتی
-    INTERMEDIATE = 'intermediate'  # متوسط
-    ADVANCED = 'advanced'  # پیشرفته
-    EXPERT = 'expert'  # تخصصی
+    BEGINNER = 'beginner'  # TODO: Translate -  مقدماتی
+    INTERMEDIATE = 'intermediate'  # TODO: Translate -  متوسط
+    ADVANCED = 'advanced'  # TODO: Translate -  پیشرفته
+    EXPERT = 'expert'  # TODO: Translate -  تخصصی
 
 class CourseCategory(Enum):
-    EXPORT_BASICS = 'export_basics'  # اصول صادرات
-    IMPORT_BASICS = 'import_basics'  # اصول واردات
-    CUSTOMS_REGULATIONS = 'customs_regulations'  # مقررات گمرکی
-    INTERNATIONAL_LAW = 'international_law'  # حقوق بین‌الملل
-    LOGISTICS = 'logistics'  # لجستیک و حمل‌ونقل
-    MARKETING = 'marketing'  # بازاریابی بین‌الملل
-    FINANCE = 'finance'  # مالی و پرداخت
-    COUNTRY_SPECIFIC = 'country_specific'  # ویژه کشور خاص
-    INDUSTRY_SPECIFIC = 'industry_specific'  # ویژه صنعت خاص
+    EXPORT_BASICS = 'export_basics'  # TODO: Translate -  اصول صادرات
+    IMPORT_BASICS = 'import_basics'  # TODO: Translate -  اصول واRejectات
+    CUSTOMS_REGULATIONS = 'customs_regulations'  # TODO: Translate -  مقررات گمرکی
+    INTERNATIONAL_LAW = 'international_law'  # TODO: Translate -  حقوق بین‌الملل
+    LOGISTICS = 'logistics'  # TODO: Translate -  لجستیک و حمل‌ونقل
+    MARKETING = 'marketing'  # TODO: Translate -  بازاریابی بین‌الملل
+    FINANCE = 'finance'  # TODO: Translate -  مالی و Payment
+    COUNTRY_SPECIFIC = 'country_specific'  # TODO: Translate -  ویژه کشور خاص
+    INDUSTRY_SPECIFIC = 'industry_specific'  # TODO: Translate -  ویژه صنعت خاص
 
 class ContentType(Enum):
     VIDEO = 'video'
@@ -32,9 +32,9 @@ class ContentType(Enum):
     EXTERNAL_LINK = 'external_link'
 
 class CertificateType(Enum):
-    COMPLETION = 'completion'  # گواهی تکمیل دوره
-    ACHIEVEMENT = 'achievement'  # گواهی موفقیت (نمره بالا)
-    PARTICIPATION = 'participation'  # گواهی مشارکت در وبینار
+    COMPLETION = 'completion'  # TODO: Translate -  گواهی تکمیل دوره
+    ACHIEVEMENT = 'achievement'  # TODO: Translate -  گواهی Successیت (نمره بالا)
+    PARTICIPATION = 'participation'  # TODO: Translate -  گواهی مشارکت در وبینار
 
 class Course(db.Model):
     """
@@ -44,7 +44,7 @@ class Course(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     
-    # اطلاعات پایه
+    # TODO: Translate -  Information پایه
     title_fa = db.Column(db.String(200), nullable=False)
     title_en = db.Column(db.String(200))
     title_ar = db.Column(db.String(200))
@@ -53,50 +53,50 @@ class Course(db.Model):
     description_en = db.Column(db.Text)
     description_ar = db.Column(db.Text)
     
-    # دسته‌بندی
+    # TODO: Translate -  دسته‌بندی
     category = db.Column(db.Enum(CourseCategory), nullable=False)
     level = db.Column(db.Enum(CourseLevel), default=CourseLevel.BEGINNER)
     
-    # مدرس
+    # TODO: Translate -  مدرس
     instructor_id = db.Column(db.Integer, db.ForeignKey('user.id'), index=True)
     instructor_name_fa = db.Column(db.String(100))
     instructor_name_en = db.Column(db.String(100))
     instructor_bio = db.Column(db.Text)
     
-    # محتوا
-    thumbnail = db.Column(db.String(500))  # تصویر شاخص
-    trailer_url = db.Column(db.String(500))  # لینک تریلر
+    # TODO: Translate -  محتوا
+    thumbnail = db.Column(db.String(500))  # TODO: Translate -  تصویر شاخص
+    trailer_url = db.Column(db.String(500))  # TODO: Translate -  لینک تریلر
     
-    # زمان‌بندی
-    duration_minutes = db.Column(db.Integer, default=0)  # مدت کل (دقیقه)
-    estimated_days = db.Column(db.Integer)  # روزهای تخمینی برای تکمیل
+    # TODO: Translate -  Time‌بندی
+    duration_minutes = db.Column(db.Integer, default=0)  # TODO: Translate -  مدت کل (دقیقه)
+    estimated_days = db.Column(db.Integer)  # TODO: Translate -  روزهای تخمینی برای تکمیل
     
-    # قیمت‌گذاری
-    price = db.Column(db.Numeric(10, 2), default=0)  # قیمت به دلار
+    # TODO: Translate -  Price‌گذاری
+    price = db.Column(db.Numeric(10, 2), default=0)  # TODO: Translate -  Price به دلار
     currency = db.Column(db.String(3), default='USD')
     is_free = db.Column(db.Boolean, default=False)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='draft')  # draft, published, archived
     is_featured = db.Column(db.Boolean, default=False)
     
-    # آمار
+    # TODO: Translate -  آمار
     enrolled_count = db.Column(db.Integer, default=0)
     completed_count = db.Column(db.Integer, default=0)
     average_rating = db.Column(db.Numeric(3, 2), default=0)
     rating_count = db.Column(db.Integer, default=0)
     
-    # پیش‌نیازها
-    prerequisites = db.Column(db.JSON)  # لیست دوره‌های پیش‌نیاز
-    target_audience = db.Column(db.Text)  # مخاطبان هدف
+    # TODO: Translate -  پیش‌نیازها
+    prerequisites = db.Column(db.JSON)  # TODO: Translate -  List دوره‌های پیش‌نیاز
+    target_audience = db.Column(db.Text)  # TODO: Translate -  مخاطبان هدف
     
-    # سرفصل‌ها
-    syllabus = db.Column(db.JSON)  # ساختار دوره
+    # TODO: Translate -  سرفصل‌ها
+    syllabus = db.Column(db.JSON)  # TODO: Translate -  ساختار دوره
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     instructor = db.relationship('User', backref=db.backref('taught_courses', lazy='dynamic'))
     modules = db.relationship('CourseModule', backref='course', lazy='dynamic', cascade='all, delete-orphan')
     enrollments = db.relationship('CourseEnrollment', backref='course', lazy='dynamic', cascade='all, delete-orphan')
@@ -132,13 +132,13 @@ class CourseModule(db.Model):
     title_en = db.Column(db.String(200))
     
     description = db.Column(db.Text)
-    order_index = db.Column(db.Integer, default=0)  # ترتیب نمایش
+    order_index = db.Column(db.Integer, default=0)  # TODO: Translate -  ترتیب View
     
     duration_minutes = db.Column(db.Integer, default=0)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     lessons = db.relationship('CourseLesson', backref='module', lazy='dynamic', cascade='all, delete-orphan', order_by='CourseLesson.order_index')
     
     def to_dict(self):
@@ -165,25 +165,25 @@ class CourseLesson(db.Model):
     
     content_type = db.Column(db.Enum(ContentType), nullable=False)
     
-    # محتوا
-    video_url = db.Column(db.String(500))  # برای ویدیو
-    video_duration = db.Column(db.Integer)  # مدت ویدیو (ثانیه)
+    # TODO: Translate -  محتوا
+    video_url = db.Column(db.String(500))  # TODO: Translate -  برای ویدیو
+    video_duration = db.Column(db.Integer)  # TODO: Translate -  مدت ویدیو (ثانیه)
     
-    article_content = db.Column(db.Text)  # برای مقاله
+    article_content = db.Column(db.Text)  # TODO: Translate -  برای مقاله
     
-    quiz_data = db.Column(db.JSON)  # سوالات آزمون
-    passing_score = db.Column(db.Integer, default=70)  # نمره قبولی (درصد)
+    quiz_data = db.Column(db.JSON)  # TODO: Translate -  سوالات آزمون
+    passing_score = db.Column(db.Integer, default=70)  # TODO: Translate -  نمره قبولی (درصد)
     
-    file_url = db.Column(db.String(500))  # برای PDF و فایل‌ها
-    external_url = db.Column(db.String(500))  # لینک خارجی
+    file_url = db.Column(db.String(500))  # TODO: Translate -  برای PDF و File‌ها
+    external_url = db.Column(db.String(500))  # TODO: Translate -  لینک خارجی
     
     order_index = db.Column(db.Integer, default=0)
     
-    is_preview = db.Column(db.Boolean, default=False)  # قابل مشاهده رایگان
+    is_preview = db.Column(db.Boolean, default=False)  # TODO: Translate -  قابل مشاهده رایگان
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # آمار
+    # TODO: Translate -  آمار
     view_count = db.Column(db.Integer, default=0)
     completion_count = db.Column(db.Integer, default=0)
     
@@ -208,22 +208,22 @@ class CourseEnrollment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False, index=True)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='active')  # active, completed, dropped
     
-    # پیشرفت
+    # TODO: Translate -  پیشرفت
     progress_percentage = db.Column(db.Numeric(5, 2), default=0)
-    completed_lessons = db.Column(db.JSON, default=[])  # لیست ID درس‌های تکمیل‌شده
+    completed_lessons = db.Column(db.JSON, default=[])  # TODO: Translate -  List ID درس‌های تکمیل‌شده
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     enrolled_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_accessed_at = db.Column(db.DateTime)
     completed_at = db.Column(db.DateTime)
     
-    # یادداشت‌ها
-    notes = db.Column(db.Text)  # یادداشت‌های کاربر
+    # TODO: Translate -  یادداشت‌ها
+    notes = db.Column(db.Text)  # TODO: Translate -  یادداشت‌های User
     
-    # روابط
+    # TODO: Translate -  روابط
     user = db.relationship('User', backref=db.backref('course_enrollments', lazy='dynamic'))
     lesson_progress = db.relationship('LessonProgress', backref='enrollment', lazy='dynamic', cascade='all, delete-orphan')
     
@@ -253,12 +253,12 @@ class LessonProgress(db.Model):
     is_completed = db.Column(db.Boolean, default=False)
     completed_at = db.Column(db.DateTime)
     
-    # برای آزمون‌ها
-    quiz_score = db.Column(db.Integer)  # نمره کسب‌شده
+    # TODO: Translate -  برای آزمون‌ها
+    quiz_score = db.Column(db.Integer)  # TODO: Translate -  نمره کسب‌شده
     quiz_passed = db.Column(db.Boolean)
     quiz_attempts = db.Column(db.Integer, default=0)
     
-    time_spent_seconds = db.Column(db.Integer, default=0)  # زمان صرف‌شده
+    time_spent_seconds = db.Column(db.Integer, default=0)  # TODO: Translate -  Time صرف‌شده
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -280,30 +280,30 @@ class Certificate(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False, index=True)
     
-    # نوع گواهی
+    # TODO: Translate -  Type گواهی
     certificate_type = db.Column(db.Enum(CertificateType), nullable=False)
     
-    # نمره نهایی
+    # TODO: Translate -  نمره نهایی
     final_score = db.Column(db.Numeric(5, 2))
     
-    # تاریخ
+    #  Date
     issued_at = db.Column(db.DateTime, default=datetime.utcnow)
-    expires_at = db.Column(db.DateTime)  # تاریخ انقضا (برای گواهی‌های موقت)
+    expires_at = db.Column(db.DateTime)  # TODO: Translate -  Date انقضا (برای گواهی‌های موقت)
     
-    # فایل
-    pdf_url = db.Column(db.String(500))  # لینک دانلود PDF
-    verification_code = db.Column(db.String(20), unique=True)  # کد استعلام
+    #  File
+    pdf_url = db.Column(db.String(500))  # TODO: Translate -  لینک Download PDF
+    verification_code = db.Column(db.String(20), unique=True)  # TODO: Translate -  کد استعلام
     
-    # امضاها
-    instructor_signature = db.Column(db.String(500))  # تصویر امضای مدرس
-    platform_signature = db.Column(db.String(500))  # تصویر امضای پلتفرم
+    # TODO: Translate -  امضاها
+    instructor_signature = db.Column(db.String(500))  # TODO: Translate -  تصویر امضای مدرس
+    platform_signature = db.Column(db.String(500))  # TODO: Translate -  تصویر امضای پلتفرم
     
     is_verified = db.Column(db.Boolean, default=True)
-    is_public = db.Column(db.Boolean, default=True)  # نمایش در پروفایل عمومی
+    is_public = db.Column(db.Boolean, default=True)  # TODO: Translate -  View در پروFile عمومی
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     user = db.relationship('User', backref=db.backref('certificates', lazy='dynamic'))
     
     def to_dict(self):
@@ -334,29 +334,29 @@ class Webinar(db.Model):
     description_fa = db.Column(db.Text)
     description_en = db.Column(db.Text)
     
-    # مدرس
+    # TODO: Translate -  مدرس
     speaker_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     speaker_name = db.Column(db.String(100))
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     scheduled_at = db.Column(db.DateTime, nullable=False)
     duration_minutes = db.Column(db.Integer, default=60)
     
-    # لینک‌ها
-    meeting_url = db.Column(db.String(500))  # لینک جلسه
-    recording_url = db.Column(db.String(500))  # لینک ضبط شده
+    # TODO: Translate -  لینک‌ها
+    meeting_url = db.Column(db.String(500))  # TODO: Translate -  لینک Session
+    recording_url = db.Column(db.String(500))  # TODO: Translate -  لینک ضبط شده
     
-    # ظرفیت
+    # TODO: Translate -  ظرفیت
     max_participants = db.Column(db.Integer, default=100)
     
-    # قیمت
+    #  Price
     price = db.Column(db.Numeric(10, 2), default=0)
     is_free = db.Column(db.Boolean, default=False)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='scheduled')  # scheduled, live, completed, cancelled
     
-    # آمار
+    # TODO: Translate -  آمار
     registered_count = db.Column(db.Integer, default=0)
     attended_count = db.Column(db.Integer, default=0)
     
@@ -389,7 +389,7 @@ class WebinarRegistration(db.Model):
     
     registered_at = db.Column(db.DateTime, default=datetime.utcnow)
     attended = db.Column(db.Boolean, default=False)
-    attendance_duration = db.Column(db.Integer)  # مدت حضور (دقیقه)
+    attendance_duration = db.Column(db.Integer)  # TODO: Translate -  مدت حضور (دقیقه)
     
     certificate_issued = db.Column(db.Boolean, default=False)
     
@@ -410,10 +410,10 @@ class LearningPath(db.Model):
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
     
-    # دوره‌های پیشنهادی
-    recommended_courses = db.Column(db.JSON)  # لیست ID دوره‌ها
+    # TODO: Translate -  دوره‌های پیشنهادی
+    recommended_courses = db.Column(db.JSON)  # TODO: Translate -  List ID دوره‌ها
     
-    # پیشرفت کلی
+    # TODO: Translate -  پیشرفت کلی
     total_courses = db.Column(db.Integer, default=0)
     completed_courses = db.Column(db.Integer, default=0)
     progress_percentage = db.Column(db.Numeric(5, 2), default=0)

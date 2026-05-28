@@ -52,32 +52,32 @@ def sample_user(app):
 
 
 class TestI18nSystem:
-    """تست‌های سیستم چندزبانه"""
+    """TODO: Translate - تست‌های System چندزبانه"""
     
     def test_persian_locale_default(self, client):
-        """تست پیش‌فرض بودن زبان فارسی"""
+        """TODO: Translate - تست Default بودن زبان فارسی"""
         rv = client.get('/')
         assert rv.status_code == 200
     
     def test_language_switcher_fa(self, client):
-        """تست تغییر زبان به فارسی"""
+        """TODO: Translate - تست تغییر زبان به فارسی"""
         rv = client.get('/language/set_language/fa_IR', follow_redirects=True)
         # Should redirect without error
         assert rv.status_code in [200, 302]
     
     def test_language_switcher_en(self, client):
-        """تست تغییر زبان به انگلیسی"""
+        """TODO: Translate - تست تغییر زبان به انگلیسی"""
         rv = client.get('/language/set_language/en', follow_redirects=True)
         assert rv.status_code in [200, 302]
     
     def test_invalid_language_code(self, client):
-        """تست کد زبان نامعتبر"""
+        """TODO: Translate - تست کد زبان نامعتبر"""
         rv = client.get('/language/set_language/invalid', follow_redirects=True)
         # Should handle gracefully
         assert rv.status_code in [200, 302, 404]
     
     def test_session_language_persistence(self, client):
-        """تست پایداری زبان در session"""
+        """TODO: Translate - تست پایداری زبان در session"""
         with client.session_transaction() as sess:
             sess['lang'] = 'fa_IR'
         
@@ -86,7 +86,7 @@ class TestI18nSystem:
         assert rv.status_code in [200, 302, 401, 403]
     
     def test_url_language_parameter(self, client):
-        """تست پارامتر زبان در URL"""
+        """TODO: Translate - تست پارامتر زبان در URL"""
         rv = client.get('/?lang=fa_IR')
         assert rv.status_code == 200
         
@@ -95,10 +95,10 @@ class TestI18nSystem:
 
 
 class TestTranslations:
-    """تست‌های فایل‌های ترجمه"""
+    """TODO: Translate - تست‌های File‌های ترجمه"""
     
     def test_translation_files_exist(self):
-        """تست وجود فایل‌های ترجمه"""
+        """TODO: Translate - تست وجود File‌های ترجمه"""
         import os
         po_file = '/workspace/translations/fa_IR/LC_MESSAGES/messages.po'
         mo_file = '/workspace/translations/fa_IR/LC_MESSAGES/messages.mo'
@@ -107,7 +107,7 @@ class TestTranslations:
         assert os.path.exists(mo_file), "فایل messages.mo وجود ندارد"
     
     def test_translation_file_not_empty(self):
-        """تست خالی نبودن فایل ترجمه"""
+        """TODO: Translate - تست خالی نبودن File ترجمه"""
         import os
         po_file = '/workspace/translations/fa_IR/LC_MESSAGES/messages.po'
         
@@ -118,7 +118,7 @@ class TestTranslations:
         assert 'msgstr' in content, "فایل ترجمه فاقد ترجمه‌ها است"
     
     def test_key_translation_pairs(self):
-        """تست جفت‌های کلید-ترجمه"""
+        """TODO: Translate - تست جفت‌های Key-ترجمه"""
         import os
         po_file = '/workspace/translations/fa_IR/LC_MESSAGES/messages.po'
         
@@ -135,14 +135,14 @@ class TestTranslations:
 
 
 class TestBabelIntegration:
-    """تست‌های یکپارچگی Flask-Babel"""
+    """TODO: Translate - تست‌های یکپارچگی Flask-Babel"""
     
     def test_babel_initialized(self, app):
-        """تست مقداردهی Flask-Babel"""
+        """TODO: Translate - تست Valueدهی Flask-Babel"""
         assert 'babel' in app.extensions or hasattr(app, 'extensions')
     
     def test_locale_selector_function(self, app):
-        """تست تابع انتخابگر زبان"""
+        """TODO: Translate - تست Function انتخابگر زبان"""
         with app.test_request_context('/?lang=fa_IR'):
             from flask import session
             session['lang'] = 'fa_IR'
@@ -153,17 +153,17 @@ class TestBabelIntegration:
             assert True  # Basic check
     
     def test_translation_function_available(self, client):
-        """تست در دسترس بودن تابع ترجمه"""
+        """TODO: Translate - تست در دسترس بودن Function ترجمه"""
         rv = client.get('/')
         # Page should load without translation errors
         assert rv.status_code == 200
 
 
 class TestRTLSupport:
-    """تست‌های پشتیبانی از راست‌چین"""
+    """TODO: Translate - تست‌های پشتیبانی از راست‌چین"""
     
     def test_persian_text_direction(self):
-        """تست جهت متن فارسی"""
+        """TODO: Translate - تست جهت متن فارسی"""
         persian_text = "فارسی"
         # Persian text should be right-to-left
         assert len(persian_text) > 0
@@ -171,7 +171,7 @@ class TestRTLSupport:
         assert any('\u0600' <= char <= '\u06FF' for char in persian_text)
     
     def test_translation_contains_rtl_content(self):
-        """تست محتوای RTL در ترجمه‌ها"""
+        """TODO: Translate - تست محتوای RTL در ترجمه‌ها"""
         import os
         po_file = '/workspace/translations/fa_IR/LC_MESSAGES/messages.po'
         
@@ -184,14 +184,14 @@ class TestRTLSupport:
 
 
 class TestLanguageRoutes:
-    """تست‌های مسیرهای زبان"""
+    """TODO: Translate - تست‌های Pathهای زبان"""
     
     def test_language_blueprint_registered(self, app):
-        """تست ثبت بلوپرینت زبان"""
+        """TODO: Translate - تست ثبت بلوپرینت زبان"""
         assert 'language' in app.blueprints
     
     def test_set_language_route_exists(self, client):
-        """تست وجود مسیر تغییر زبان"""
+        """TODO: Translate - تست وجود Path تغییر زبان"""
         # Route should exist
         rv = client.get('/language/set_language/fa_IR')
         assert rv.status_code in [200, 302, 404]

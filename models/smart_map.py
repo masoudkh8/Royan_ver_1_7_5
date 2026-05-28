@@ -1,5 +1,5 @@
 # models/smart_map.py
-# بخش ۲: نقشه تعاملی و هوش لجستیک (Smart Map & Logistics)
+# TODO: Translate -  Section ۲: Roleه تعاملی و هوش لجستیک (Smart Map & Logistics)
 
 from . import db
 from datetime import datetime
@@ -21,7 +21,7 @@ class JSONB(db.TypeDecorator):
         return value
 
 class Country(db.Model):
-    """اطلاعات کشورهای جهان برای نقشه تجاری"""
+    """TODO: Translate - Information کشورهای جهان برای Roleه تجاری"""
     __tablename__ = 'countries'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -58,7 +58,7 @@ class Country(db.Model):
 
 
 class CustomsData(db.Model):
-    """داده‌های گمرکی و تعرفه‌ای هر کشور"""
+    """TODO: Translate - Data‌های گمرکی و تعرفه‌ای هر کشور"""
     __tablename__ = 'customs_data'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -94,7 +94,7 @@ class CustomsData(db.Model):
 
 
 class RiskEvent(db.Model):
-    """رویدادهای ریسک ژئوپلیتیک و اقتصادی"""
+    """TODO: Translate - رویDataای ریسک ژئوپلیتیک و اقتصادی"""
     __tablename__ = 'risk_events'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -141,7 +141,7 @@ class RiskEvent(db.Model):
 
 
 class TradeRoute(db.Model):
-    """مسیرهای تجاری و حمل‌ونقل بین کشورها"""
+    """TODO: Translate - Pathهای تجاری و حمل‌ونقل بین کشورها"""
     __tablename__ = 'trade_routes'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -189,7 +189,7 @@ class TradeRoute(db.Model):
 
 
 class ShipmentTracking(db.Model):
-    """رهگیری محموله‌ها"""
+    """TODO: Translate - رهگیری محموله‌ها"""
     __tablename__ = 'shipment_tracking'
     
     id = db.Column(db.Integer, primary_key=True)

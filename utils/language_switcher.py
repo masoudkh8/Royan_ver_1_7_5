@@ -29,12 +29,12 @@
 
 ```python
 from flask import session
-session['lang'] = 'fa_IR'  # یا 'en'
+session['lang'] = 'fa_IR'  # TODO: Translate -  یا 'en'
 ```
 
 """
 
-# نمونه کد برای افزودن به templates/base.html
+# TODO: Translate -  نمونه کد برای افزودن به templates/base.html
 LANGUAGE_SWITCHER_HTML = """
 <!-- Language Switcher - Start -->
 <nav class="language-switcher" dir="rtl">
@@ -96,11 +96,11 @@ LANGUAGE_SWITCHER_HTML = """
 <!-- Language Switcher - End -->
 """
 
-# نمونه استفاده در Flask routes
+# TODO: Translate -  نمونه استفاده در Flask routes
 ROUTE_EXAMPLE = """
 @users_bp.route('/set_language/<lang>')
 def set_language(lang):
-    '''تغییر زبان کاربر'''
+    '''TODO: Translate - تغییر زبان User'''
     if lang in ['fa_IR', 'en']:
         session['lang'] = lang
     return redirect(request.referrer or url_for('users.profile'))

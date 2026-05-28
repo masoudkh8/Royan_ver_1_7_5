@@ -31,7 +31,7 @@ from models.trust_score import TrustScore
 from extensions import limiter
 
 
-# تعریف سطوح اعتماد به صورت دستی چون در مدل وجود ندارد
+# TODO: Translate -  تعریف سطوح Trust به صورت دستی چون در Model وجود نداReject
 class TrustLevel:
     NEWCOMER = 'newcomer'
     BRONZE = 'bronze'
@@ -42,7 +42,7 @@ class TrustLevel:
 
 @pytest.fixture
 def app():
-    """ایجاد اپلیکیشن با تنظیمات تست"""
+    """TODO: Translate - Create اپلیکیشن با Settings تست"""
     app = create_app()
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -62,13 +62,13 @@ def app():
 
 @pytest.fixture
 def client(app):
-    """ایجاد کلاینت تست"""
+    """TODO: Translate - Create کلاینت تست"""
     return app.test_client()
 
 
 @pytest.fixture
 def sample_user(app):
-    """ایجاد کاربر نمونه برای تست‌ها"""
+    """TODO: Translate - Create User نمونه برای تست‌ها"""
     with app.app_context():
         user = User(
             username='testuser',
@@ -104,14 +104,14 @@ def sample_user(app):
 
 
 # ============================================================================
-# 1. تست‌های مدل کاربر پیشرفته
+# TODO: Translate -  1. تست‌های Model User پیشرفته
 # ============================================================================
 
 class TestAdvancedUserModel:
-    """تست‌های مدل کاربر با فیلدهای تخصصی"""
+    """TODO: Translate - تست‌های Model User با Fieldهای تخصصی"""
     
     def test_create_user_with_specialized_fields(self, app):
-        """تست ایجاد کاربر با فیلدهای تخصصی"""
+        """TODO: Translate - تست Create User با Fieldهای تخصصی"""
         with app.app_context():
             user = User(
                 username='prouser',
@@ -139,7 +139,7 @@ class TestAdvancedUserModel:
             assert user.is_verified is False
     
     def test_user_profile_creation(self, app, sample_user):
-        """تست ایجاد خودکار پروفایل کاربر"""
+        """TODO: Translate - تست Create خودکار پروFile User"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             assert user.profile is not None
@@ -148,7 +148,7 @@ class TestAdvancedUserModel:
             assert user.profile.job_title == 'CEO'
     
     def test_user_verification_documents(self, app, sample_user):
-        """تست مدارک تأیید هویت کاربر"""
+        """TODO: Translate - تست مدارک Confirm هویت User"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -167,7 +167,7 @@ class TestAdvancedUserModel:
             assert user.verification_documents[0].status == 'pending'
     
     def test_user_invite_code_generation(self, app):
-        """تست تولید کد دعوت انحصاری"""
+        """TODO: Translate - تست تولید کد دعوت انحصاری"""
         with app.app_context():
             import secrets
             
@@ -185,7 +185,7 @@ class TestAdvancedUserModel:
             assert user.invite_code.isalnum()
     
     def test_user_role_enum_values(self, app):
-        """تست مقادیر enum نقش‌های کاربری"""
+        """TODO: Translate - تست مقادیر enum Role‌های Userی"""
         assert UserRole.PRODUCER.value == 'producer'
         assert UserRole.BUYER.value == 'buyer'
         assert UserRole.BROKER.value == 'broker'
@@ -200,14 +200,14 @@ class TestAdvancedUserModel:
 
 
 # ============================================================================
-# 2. تست‌های سیستم ثبت‌نام ۳ مرحله‌ای
+# TODO: Translate -  2. تست‌های System Registration ۳ مرحله‌ای
 # ============================================================================
 
 class TestThreeStepRegistration:
-    """تست‌های سیستم ثبت‌نام ۳ مرحله‌ای هوشمند"""
+    """TODO: Translate - تست‌های System Registration ۳ مرحله‌ای هوشمند"""
     
     def test_registration_step1_basic_info(self, client):
-        """تست مرحله ۱: اطلاعات پایه"""
+        """TODO: Translate - تست مرحله ۱: Information پایه"""
         response = client.post('/users/register', data={
             'username': 'step1user',
             'email': 'step1@example.com',
@@ -219,7 +219,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_step2_professional_info(self, client):
-        """تست مرحله ۲: اطلاعات حرفه‌ای"""
+        """TODO: Translate - تست مرحله ۲: Information حرفه‌ای"""
         response = client.post('/users/register', data={
             'username': 'step2user',
             'email': 'step2@example.com',
@@ -235,7 +235,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_step3_security_terms(self, client):
-        """تست مرحله ۳: امنیت و پذیرش شرایط"""
+        """TODO: Translate - تست مرحله ۳: امنیت و پذیرش شرایط"""
         response = client.post('/users/register', data={
             'username': 'step3user',
             'email': 'step3@example.com',
@@ -248,8 +248,8 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_password_strength_validation(self, client):
-        """تست اعتبارسنجی قدرت رمز عبور"""
-        # رمز عبور ضعیف - بدون حروف بزرگ
+        """TODO: Translate - تست Creditسنجی قدرت Password"""
+        # TODO: Translate -  Password ضعیف - بدون حروف بزرگ
         response = client.post('/users/register', data={
             'username': 'weakpass1',
             'email': 'weak1@example.com',
@@ -260,7 +260,7 @@ class TestThreeStepRegistration:
         
         assert response.status_code == 200
         
-        # رمز عبور قوی
+        # TODO: Translate -  Password قوی
         response = client.post('/users/register', data={
             'username': 'strongpass',
             'email': 'strong@example.com',
@@ -272,7 +272,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_password_mismatch(self, client):
-        """تست عدم تطابق رمز عبور"""
+        """TODO: Translate - تست عدم تطابق Password"""
         response = client.post('/users/register', data={
             'username': 'mismatch',
             'email': 'mismatch@example.com',
@@ -284,7 +284,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_duplicate_email(self, client, sample_user):
-        """تست جلوگیری از ایمیل تکراری"""
+        """TODO: Translate - تست جلوگیری از ایمیل تکراری"""
         response = client.post('/users/register', data={
             'username': 'duplicate',
             'email': 'test@example.com',
@@ -295,7 +295,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_auto_profile_creation(self, app, client):
-        """تست ایجاد خودکار پروفایل پس از ثبت‌نام"""
+        """TODO: Translate - تست Create خودکار پروFile پس از Registration"""
         with app.app_context():
             response = client.post('/users/register', data={
                 'username': 'autoprofile',
@@ -311,14 +311,14 @@ class TestThreeStepRegistration:
 
 
 # ============================================================================
-# 3. تست‌های داشبورد هوشمند نقش‌محور
+# TODO: Translate -  3. تست‌های داشبوReject هوشمند Role‌محور
 # ============================================================================
 
 class TestSmartDashboard:
-    """تست‌های داشبورد هوشمند نقش‌محور"""
+    """TODO: Translate - تست‌های داشبوReject هوشمند Role‌محور"""
     
     def test_dashboard_rendering(self, client, sample_user):
-        """تست رندر شدن داشبورد"""
+        """TODO: Translate - تست رندر شدن داشبوReject"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -329,12 +329,12 @@ class TestSmartDashboard:
             assert response.status_code == 200
     
     def test_dashboard_widgets_for_buyer(self, app, sample_user):
-        """تست ویجت‌های داشبورد برای Buyer"""
+        """TODO: Translate - تست ویجت‌های داشبوReject برای Buyer"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             assert user.role == UserRole.BUYER
             
-            # Buyer باید ویجت‌های خاصی داشته باشد
+            # TODO: Translate -  Buyer باید ویجت‌های خاصی داشته باشد
             pending_tasks = []
             if not user.is_verified:
                 pending_tasks.append('verify_identity')
@@ -344,7 +344,7 @@ class TestSmartDashboard:
             assert 'verify_identity' in pending_tasks
     
     def test_dashboard_widgets_for_producer(self, app):
-        """تست ویجت‌های داشبورد برای Producer"""
+        """TODO: Translate - تست ویجت‌های داشبوReject برای Producer"""
         with app.app_context():
             producer = User(
                 username='producer',
@@ -356,16 +356,16 @@ class TestSmartDashboard:
             db.session.commit()
             
             assert producer.role == UserRole.PRODUCER
-            # Producer باید ویجت‌های محصولات و سفارشات داشته باشد
+            # TODO: Translate -  Producer باید ویجت‌های Productات و Orderات داشته باشد
     
     def test_dashboard_pending_tasks_calculation(self, app, sample_user):
-        """تست محاسبه وظایف pending در داشبورد"""
+        """TODO: Translate - تست محاسبه وظایف Pending در داشبوReject"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
             pending_tasks = []
             
-            # بررسی وضعیت تأیید هویت
+            # TODO: Translate -  Check Status Confirm هویت
             if not user.is_verified:
                 pending_tasks.append({
                     'id': 'verify_identity',
@@ -373,7 +373,7 @@ class TestSmartDashboard:
                     'priority': 'high'
                 })
             
-            # بررسی تکمیل پروفایل
+            # TODO: Translate -  Check تکمیل پروFile
             if not user.profile.bio:
                 pending_tasks.append({
                     'id': 'complete_bio',
@@ -386,14 +386,14 @@ class TestSmartDashboard:
 
 
 # ============================================================================
-# 4. تست‌های پروفایل کاربری و آپلود مدارک
+# TODO: Translate -  4. تست‌های پروFile Userی و Upload مدارک
 # ============================================================================
 
 class TestProfileAndDocuments:
-    """تست‌های پروفایل کاربری و آپلود مدارک"""
+    """TODO: Translate - تست‌های پروFile Userی و Upload مدارک"""
     
     def test_profile_edit(self, client, sample_user):
-        """تست ویرایش پروفایل"""
+        """TODO: Translate - تست Edit پروFile"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -411,7 +411,7 @@ class TestProfileAndDocuments:
             assert response.status_code == 200
     
     def test_profile_social_links_update(self, client, sample_user):
-        """تست به‌روزرسانی لینک‌های اجتماعی"""
+        """TODO: Translate - تست Update لینک‌های اجتماعی"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -425,7 +425,7 @@ class TestProfileAndDocuments:
             assert response.status_code == 200
     
     def test_document_upload_allowed_extensions(self, app):
-        """تست پسوند فایل‌های مجاز برای آپلود"""
+        """TODO: Translate - تست پسوند File‌های مجاز برای Upload"""
         from routes.users.routes import allowed_file
         
         assert allowed_file('document.pdf') is True
@@ -438,27 +438,27 @@ class TestProfileAndDocuments:
         assert allowed_file('hack.php') is False
     
     def test_document_upload_size_validation(self, app):
-        """تست اعتبارسنجی حجم فایل"""
+        """TODO: Translate - تست Creditسنجی حجم File"""
         from routes.users.routes import validate_file
         
-        # فایل 1MB (مجاز)
+        # TODO: Translate -  File 1MB (مجاز)
         small_file = BytesIO(b'a' * 1024 * 1024)
         assert validate_file(small_file) is True
         
-        # فایل 4MB (مجاز)
+        # TODO: Translate -  File 4MB (مجاز)
         medium_file = BytesIO(b'a' * 4 * 1024 * 1024)
         assert validate_file(medium_file) is True
         
-        # فایل 6MB (غیرمجاز - بیشتر از 5MB)
+        # TODO: Translate -  File 6MB (غیرمجاز - بیشتر از 5MB)
         large_file = BytesIO(b'a' * 6 * 1024 * 1024)
         assert validate_file(large_file) is False
     
     def test_secure_filename_generation(self, app):
-        """تست تولید نام امن فایل"""
+        """TODO: Translate - تست تولید نام امن File"""
         from werkzeug.utils import secure_filename
         import secrets
         
-        # نام فایل خطرناک
+        # TODO: Translate -  نام File خطرناک
         dangerous_names = [
             '../../../etc/passwd',
             '..\\..\\windows\\system32',
@@ -473,15 +473,15 @@ class TestProfileAndDocuments:
             assert '\\' not in safe_name
     
     def test_document_upload_flow(self, client, sample_user):
-        """تست جریان کامل آپلود مدرک"""
+        """TODO: Translate - تست جریان Complete Upload مدرک"""
         with app.test_client() as c:
-            # لاگین
+            # TODO: Translate -  لاگین
             c.post('/users/login', data={
                 'username': 'testuser',
                 'password': 'TestPass123!'
             })
             
-            # آپلود مدرک
+            # TODO: Translate -  Upload مدرک
             data = {
                 'document': (BytesIO(b'PDF content for testing'), 'passport.pdf')
             }
@@ -494,14 +494,14 @@ class TestProfileAndDocuments:
 
 
 # ============================================================================
-# 5. تست‌های امنیت و کنترل دسترسی
+# TODO: Translate -  5. تست‌های امنیت و کنترل Access
 # ============================================================================
 
 class TestSecurityAndAccessControl:
-    """تست‌های امنیت و کنترل دسترسی"""
+    """TODO: Translate - تست‌های امنیت و کنترل Access"""
     
     def test_role_required_decorator_authenticated(self, app, sample_user):
-        """تست دکوریتور role_required با کاربر لاگین شده"""
+        """TODO: Translate - تست دکوریتور role_required با User لاگین شده"""
         from routes.users.routes import role_required
         from flask_login import login_user
         
@@ -516,7 +516,7 @@ class TestSecurityAndAccessControl:
             assert result == 'Access Granted'
     
     def test_role_required_decorator_unauthenticated(self, app):
-        """تست دکوریتور role_required بدون لاگین"""
+        """TODO: Translate - تست دکوریتور role_required بدون لاگین"""
         from routes.users.routes import role_required
         from flask_login import current_user
         
@@ -527,28 +527,28 @@ class TestSecurityAndAccessControl:
             def admin_view():
                 return 'Admin Access'
             
-            # باید redirect به صفحه لاگین شود
+            # TODO: Translate -  باید redirect به Page لاگین شود
             with pytest.raises(Exception):
                 admin_view()
     
     def test_role_required_decorator_wrong_role(self, app, sample_user):
-        """تست دکوریتور role_required با نقش اشتباه"""
+        """TODO: Translate - تست دکوریتور role_required با Role اشتباه"""
         from routes.users.routes import role_required
         from flask_login import login_user
         
         with app.test_request_context():
-            login_user(sample_user)  # کاربر BUYER است
+            login_user(sample_user)  # TODO: Translate -  User BUYER است
             
             @role_required('admin')
             def admin_only():
                 return 'Admin Only'
             
-            # باید access denied شود
+            # TODO: Translate -  باید access denied شود
             with pytest.raises(Exception):
                 admin_only()
     
     def test_password_hashing_security(self, app):
-        """تست امنیت هش کردن رمز عبور"""
+        """TODO: Translate - تست امنیت هش کRejectن Password"""
         with app.app_context():
             user = User(
                 username='hashuser',
@@ -558,60 +558,60 @@ class TestSecurityAndAccessControl:
             db.session.add(user)
             db.session.commit()
             
-            # رمز عبور نباید به صورت plain text ذخیره شود
+            # TODO: Translate -  Password نباید به صورت plain text Save شود
             assert user.password_hash != 'MySecurePassword123!'
             assert len(user.password_hash) > 50
             
-            # بررسی صحت رمز عبور
+            # TODO: Translate -  Check صحت Password
             assert check_password_hash(user.password_hash, 'MySecurePassword123!')
             assert not check_password_hash(user.password_hash, 'WrongPassword')
     
     def test_sql_injection_prevention(self, client, sample_user):
-        """تست جلوگیری از SQL Injection"""
-        # تلاش برای SQL Injection در لاگین
+        """TODO: Translate - تست جلوگیری از SQL Injection"""
+        # TODO: Translate -  تلاش برای SQL Injection در لاگین
         response = client.post('/users/login', data={
             'username': "admin' OR '1'='1' --",
             'password': 'anything'
         }, follow_redirects=True)
         
         assert response.status_code == 200
-        # نباید بتواند بدون رمز عبور صحیح وارد شود
+        # TODO: Translate -  نباید بتواند بدون Password صحیح واReject شود
     
     def test_xss_prevention_in_profile(self, client, sample_user):
-        """تست جلوگیری از XSS در پروفایل"""
+        """TODO: Translate - تست جلوگیری از XSS در پروFile"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
                 'password': 'TestPass123!'
             })
             
-            # تلاش برای تزریق XSS
+            # TODO: Translate -  تلاش برای تزریق XSS
             response = c.post('/users/edit', data={
                 'bio': '<script>alert("XSS Attack")</script>',
                 'company_name': 'Test Company'
             }, follow_redirects=True)
             
             assert response.status_code == 200
-            # اسکریپت باید escape شود
+            # TODO: Translate -  اسکریپت باید escape شود
 
 
 # ============================================================================
-# 6. تست‌های Rate Limiting
+# TODO: Translate -  6. تست‌های Rate Limiting
 # ============================================================================
 
 class TestRateLimiting:
-    """تست‌های محدودیت نرخ درخواست"""
+    """TODO: Translate - تست‌های محدودیت نرخ Request"""
     
     def test_rate_limit_configuration(self, app):
-        """تست پیکربندی Rate Limiting"""
-        # در محیط تست غیرفعال است
+        """TODO: Translate - تست Configuration Rate Limiting"""
+        # TODO: Translate -  در محیط تست غیرActive است
         assert app.config['RATELIMIT_ENABLED'] is False
         assert app.config['RATELIMIT_DEFAULT'] == '100 per hour'
         assert app.config['RATELIMIT_STRATEGY'] == 'moving-window'
     
     def test_rate_limit_on_registration_endpoint(self, client):
-        """تست Rate Limit روی endpoint ثبت‌نام"""
-        # ارسال چندین درخواست متوالی
+        """TODO: Translate - تست Rate Limit روی endpoint Registration"""
+        # TODO: Translate -  ارسال چندین Request متوالی
         responses = []
         for i in range(3):
             response = client.post('/users/register', data={
@@ -622,27 +622,27 @@ class TestRateLimiting:
             })
             responses.append(response.status_code)
         
-        # همه درخواست‌ها باید موفق باشند (چون در تست Rate Limit غیرفعال است)
+        # TODO: Translate -  همه Request‌ها باید Success باشند (چون در تست Rate Limit غیرActive است)
         assert all(status in [200, 302] for status in responses)
     
     def test_rate_limit_decorator_presence(self, app):
-        """تست وجود دکوریتور Rate Limit روی routeها"""
+        """TODO: Translate - تست وجود دکوریتور Rate Limit روی routeها"""
         from routes.users.routes import users_bp
         
-        # بررسی وجود دکوریتور limiter
-        # این تست بیشتر برای اطمینان از تنظیمات است
+        # TODO: Translate -  Check وجود دکوریتور limiter
+        # TODO: Translate -  این تست بیشتر برای اطمینان از Settings است
         assert app.config['RATELIMIT_ENABLED'] is not None
 
 
 # ============================================================================
-# 7. تست‌های آپلود امن مدارک
+# TODO: Translate -  7. تست‌های Upload امن مدارک
 # ============================================================================
 
 class TestSecureDocumentUpload:
-    """تست‌های آپلود امن مدارک با اعتبارسنجی چندلایه"""
+    """TODO: Translate - تست‌های Upload امن مدارک با Creditسنجی چندلایه"""
     
     def test_multi_layer_validation_extension(self, app):
-        """تست لایه اول: بررسی پسوند فایل"""
+        """TODO: Translate - تست لایه اول: Check پسوند File"""
         from routes.users.routes import allowed_file
         
         valid_extensions = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
@@ -655,16 +655,16 @@ class TestSecureDocumentUpload:
             assert allowed_file(f'malicious.{ext}') is False
     
     def test_multi_layer_validation_size(self, app):
-        """تست لایه دوم: بررسی حجم فایل"""
+        """TODO: Translate - تست لایه دوم: Check حجم File"""
         from routes.users.routes import validate_file
         
-        # فایل‌های با حجم مختلف
+        # TODO: Translate -  File‌های با حجم مختلف
         test_sizes = [
             (100 * 1024, True),      # 100KB
             (1024 * 1024, True),     # 1MB
             (4 * 1024 * 1024, True), # 4MB
-            (5 * 1024 * 1024, True), # 5MB (حد مجاز)
-            (6 * 1024 * 1024, False) # 6MB (بیش از حد)
+            (5 * 1024 * 1024, True), # TODO: Translate -  5MB (حد مجاز)
+            (6 * 1024 * 1024, False) # TODO: Translate -  6MB (بیش از حد)
         ]
         
         for size, expected in test_sizes:
@@ -673,7 +673,7 @@ class TestSecureDocumentUpload:
             assert result == expected
     
     def test_multi_layer_validation_secure_name(self, app):
-        """تست لایه سوم: تولید نام امن فایل"""
+        """TODO: Translate - تست لایه سوم: تولید نام امن File"""
         from werkzeug.utils import secure_filename
         import secrets
         
@@ -684,16 +684,16 @@ class TestSecureDocumentUpload:
         assert ".." not in secured
         assert "/" not in secured
         
-        # افزودن token امن
+        # TODO: Translate -  افزودن token امن
         unique_name = f"user_{secrets.token_hex(8)}_{secured}"
         assert len(unique_name) > len(secured)
     
     def test_document_json_storage(self, app, sample_user):
-        """تست ذخیره JSON مدارک"""
+        """TODO: Translate - تست Save JSON مدارک"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
-            # شبیه‌سازی ذخیره JSON مدارک
+            # TODO: Translate -  شبیه‌سازی Save JSON مدارک
             import json
             documents = [
                 {
@@ -710,17 +710,17 @@ class TestSecureDocumentUpload:
                 }
             ]
             
-            # تبدیل به JSON
+            # TODO: Translate -  تبدیل به JSON
             json_str = json.dumps(documents, ensure_ascii=False)
             assert isinstance(json_str, str)
             
-            # بازیابی از JSON
+            # TODO: Translate -  بازیابی از JSON
             parsed = json.loads(json_str)
             assert len(parsed) == 2
             assert parsed[0]['type'] == 'passport'
     
     def test_document_upload_directory_traversal_prevention(self, app):
-        """تست جلوگیری از Directory Traversal"""
+        """TODO: Translate - تست جلوگیری از Directory Traversal"""
         from werkzeug.utils import secure_filename
         import os
         
@@ -739,14 +739,14 @@ class TestSecureDocumentUpload:
 
 
 # ============================================================================
-# 8. تست‌های سیستم امتیاز اعتماد (Trust Score)
+# TODO: Translate -  8. تست‌های System Score Trust (Trust Score)
 # ============================================================================
 
 class TestTrustScoreSystem:
-    """تست‌های سیستم امتیاز اعتماد با سطوح Bronze/Silver/Gold/Platinum"""
+    """TODO: Translate - تست‌های System Score Trust با سطوح Bronze/Silver/Gold/Platinum"""
     
     def test_trust_score_initialization(self, app, sample_user):
-        """تست مقداردهی اولیه امتیاز اعتماد"""
+        """TODO: Translate - تست Valueدهی اولیه Score Trust"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
@@ -758,7 +758,7 @@ class TestTrustScoreSystem:
             assert trust_score.total_score == 50
     
     def test_trust_score_badge_levels(self, app):
-        """تست سطوح بج‌های اعتماد"""
+        """TODO: Translate - تست سطوح بج‌های Trust"""
         with app.app_context():
             # Platinum (90-100)
             platinum = TrustScore(identity_score=25, expertise_score=25, social_score=25, dynamic_score=25)
@@ -785,7 +785,7 @@ class TestTrustScoreSystem:
             assert newcomer.get_badge() == "Newcomer 🆕"
     
     def test_trust_score_progression(self, app, sample_user):
-        """تست پیشرفت امتیاز اعتماد"""
+        """TODO: Translate - تست پیشرفت Score Trust"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
@@ -793,24 +793,24 @@ class TestTrustScoreSystem:
             initial_score = trust_score.total_score
             assert initial_score == 50
             
-            # افزودن امتیاز برای تکمیل پروفایل
+            # TODO: Translate -  افزودن Score برای تکمیل پروFile
             trust_score.add_score_change(10, 'profile_completion', 'تکمیل اطلاعات پروفایل')
             assert trust_score.total_score == 60
             
-            # افزودن امتیاز برای آپلود مدارک
+            # TODO: Translate -  افزودن Score برای Upload مدارک
             trust_score.add_score_change(15, 'document_upload', 'آپلود پاسپورت')
             assert trust_score.total_score == 75
             
-            # بررسی تغییر بج
+            # TODO: Translate -  Check تغییر بج
             assert trust_score.get_badge() == "Gold 🥇"
     
     def test_trust_score_history_tracking(self, app, sample_user):
-        """تست ردیابی تاریخچه تغییرات امتیاز"""
+        """TODO: Translate - تست Rejectیابی Dateچه تغییرات Score"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
             
-            # ثبت چندین تغییر
+            # TODO: Translate -  ثبت چندین تغییر
             trust_score.add_score_change(10, 'profile_completion', 'تکمیل پروفایل')
             trust_score.add_score_change(15, 'document_upload', 'آپلود مدارک')
             trust_score.add_score_change(-5, 'inactive_period', 'دوره عدم فعالیت')
@@ -818,36 +818,36 @@ class TestTrustScoreSystem:
             
             assert len(trust_score.score_history) == 3
             
-            # بررسی آخرین تغییر
+            # TODO: Translate -  Check آخرین تغییر
             last_change = trust_score.score_history[-1]
             assert last_change.points == -5
             assert last_change.reason == 'inactive_period'
     
     def test_trust_score_four_layers(self, app):
-        """تست چهار لایه امتیازدهی"""
+        """TODO: Translate - تست چهار لایه Scoreدهی"""
         with app.app_context():
-            # لایه ۱: تأیید هویت پایه (۰-۲۵)
+            # TODO: Translate -  لایه ۱: Confirm هویت پایه (۰-۲۵)
             layer1 = TrustScore(identity_score=25, expertise_score=0, social_score=0, dynamic_score=0)
             assert layer1.identity_score == 25
             assert layer1.total_score == 25
             
-            # لایه ۲: تأیید تخصصی (۰-۲۵)
+            # TODO: Translate -  لایه ۲: Confirm تخصصی (۰-۲۵)
             layer2 = TrustScore(identity_score=25, expertise_score=25, social_score=0, dynamic_score=0)
             assert layer2.expertise_score == 25
             assert layer2.total_score == 50
             
-            # لایه ۳: اعتبار اجتماعی (۰-۲۵)
+            # TODO: Translate -  لایه ۳: Credit اجتماعی (۰-۲۵)
             layer3 = TrustScore(identity_score=25, expertise_score=25, social_score=25, dynamic_score=0)
             assert layer3.social_score == 25
             assert layer3.total_score == 75
             
-            # لایه ۴: اعتبار پویا (۰-۲۵)
+            # TODO: Translate -  لایه ۴: Credit پویا (۰-۲۵)
             layer4 = TrustScore(identity_score=25, expertise_score=25, social_score=25, dynamic_score=25)
             assert layer4.dynamic_score == 25
             assert layer4.total_score == 100
     
     def test_trust_score_user_relationship(self, app, sample_user):
-        """تست رابطه کاربر با Trust Score"""
+        """TODO: Translate - تست Relationship User با Trust Score"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -857,15 +857,15 @@ class TestTrustScoreSystem:
 
 
 # ============================================================================
-# تست‌های Integration
+# TODO: Translate -  تست‌های Integration
 # ============================================================================
 
 class TestIntegrationFlows:
-    """تست‌های Integration برای جریان‌های کامل"""
+    """TODO: Translate - تست‌های Integration برای جریان‌های Complete"""
     
     def test_full_registration_to_dashboard_flow(self, client):
-        """تست جریان کامل از ثبت‌نام تا داشبورد"""
-        # 1. ثبت‌نام
+        """TODO: Translate - تست جریان Complete از Registration تا داشبوReject"""
+        #  1. Registration
         response = client.post('/users/register', data={
             'username': 'integrationuser',
             'email': 'integration@example.com',
@@ -881,7 +881,7 @@ class TestIntegrationFlows:
         
         assert response.status_code == 200
         
-        # 2. ورود
+        #  2. Login
         response = client.post('/users/login', data={
             'username': 'integrationuser',
             'password': 'SecurePass123!'
@@ -889,14 +889,14 @@ class TestIntegrationFlows:
         
         assert response.status_code == 200
         
-        # 3. مشاهده داشبورد
+        # TODO: Translate -  3. مشاهده داشبوReject
         response = client.get('/users/profile')
         assert response.status_code == 200
     
     def test_trust_score_full_progression_flow(self, app, client):
-        """تست جریان کامل پیشرفت Trust Score"""
+        """TODO: Translate - تست جریان Complete پیشرفت Trust Score"""
         with app.app_context():
-            # ایجاد کاربر جدید
+            # TODO: Translate -  Create User جدید
             user = User(
                 username='progressionuser',
                 email='progression@example.com',
@@ -910,26 +910,26 @@ class TestIntegrationFlows:
             db.session.add(trust_score)
             db.session.commit()
             
-            # مرحله 1: تکمیل پروفایل (+10)
+            # TODO: Translate -  مرحله 1: تکمیل پروFile (+10)
             trust_score.add_score_change(10, 'profile_completion', 'تکمیل پروفایل')
             assert trust_score.total_score == 10
             
-            # مرحله 2: آپلود مدارک (+15)
+            # TODO: Translate -  مرحله 2: Upload مدارک (+15)
             trust_score.add_score_change(15, 'document_upload', 'آپلود پاسپورت')
             assert trust_score.total_score == 25
             assert trust_score.get_badge() == "Bronze 🥉"
             
-            # مرحله 3: تأیید تخصص (+20)
+            # TODO: Translate -  مرحله 3: Confirm تخصص (+20)
             trust_score.add_score_change(20, 'expertise_verification', 'تأیید تخصص')
             assert trust_score.total_score == 45
             assert trust_score.get_badge() == "Bronze 🥉"
             
-            # مرحله 4: فعالیت اجتماعی (+15)
+            # TODO: Translate -  مرحله 4: Activeیت اجتماعی (+15)
             trust_score.add_score_change(15, 'social_activity', 'فعالیت در شبکه')
             assert trust_score.total_score == 60
             assert trust_score.get_badge() == "Silver 🥈"
             
-            # مرحله 5: تعاملات موفق (+25)
+            # TODO: Translate -  مرحله 5: تعاملات Success (+25)
             trust_score.add_score_change(25, 'successful_trades', 'معاملات موفق')
             assert trust_score.total_score == 85
             assert trust_score.get_badge() == "Gold 🥇"
@@ -937,15 +937,15 @@ class TestIntegrationFlows:
             db.session.commit()
     
     def test_document_upload_and_verification_flow(self, app, client, sample_user):
-        """تست جریان آپلود و تأیید مدرک"""
+        """TODO: Translate - تست جریان Upload و Confirm مدرک"""
         with app.test_client() as c:
-            # لاگین
+            # TODO: Translate -  لاگین
             c.post('/users/login', data={
                 'username': 'testuser',
                 'password': 'TestPass123!'
             })
             
-            # آپلود مدرک
+            # TODO: Translate -  Upload مدرک
             data = {
                 'document': (BytesIO(b'PDF content'), 'passport.pdf')
             }
@@ -956,14 +956,14 @@ class TestIntegrationFlows:
             
             assert response.status_code == 200
             
-            # بررسی در دیتابیس
+            # TODO: Translate -  Check در دیتابیس
             with app.app_context():
                 user = db.session.get(User, sample_user.id)
                 assert len(user.verification_documents) >= 0
 
 
 # ============================================================================
-# اجرای تست‌ها
+# TODO: Translate -  اجرای تست‌ها
 # ============================================================================
 
 if __name__ == '__main__':

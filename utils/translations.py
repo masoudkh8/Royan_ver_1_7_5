@@ -10,8 +10,8 @@ class Translator:
         self.load_translations()
     
     def load_translations(self):
-        """بارگذاری فایل ترجمه"""
-        # بارگذاری ترجمه‌های JSON (برای سازگاری با عقب)
+        """TODO: Translate - بارگذاری File ترجمه"""
+        # TODO: Translate -  بارگذاری ترجمه‌های JSON (برای سازگاری با عقب)
         translations_path = os.path.join(os.path.dirname(__file__), '..', 'translations', f'{self.lang}.json')
         try:
             with open(translations_path, 'r', encoding='utf-8') as f:
@@ -19,7 +19,7 @@ class Translator:
         except FileNotFoundError:
             self.translations = {}
         
-        # بارگذاری ترجمه‌های gettext (.mo فایل)
+        # TODO: Translate -  بارگذاری ترجمه‌های gettext (.mo File)
         translations_dir = os.path.join(os.path.dirname(__file__), '..', 'translations')
         try:
             self.translator = gettext.translation('messages', localedir=translations_dir, languages=[self.lang])
@@ -28,7 +28,7 @@ class Translator:
             self.translator = None
     
     def get(self, key, default=None):
-        """دریافت ترجمه با کلید تودرتو (مثلاً 'common.login')"""
+        """TODO: Translate - دریافت ترجمه با Key تودرتو (مثلاً 'common.login')"""
         keys = key.split('.')
         value = self.translations
         for k in keys:
@@ -39,17 +39,17 @@ class Translator:
         return value
     
     def gettext(self, message):
-        """ترجمه متن با استفاده از gettext"""
+        """TODO: Translate - ترجمه متن با استفاده از gettext"""
         if self.translator:
             return self.translator.gettext(message)
         return message
     
     def t(self, key, **kwargs):
-        """ترجمه کلید و جایگزینی متغیرها"""
-        # اول سعی کن از gettext استفاده کنی (برای متن‌های مستقیم)
+        """TODO: Translate - ترجمه Key و جایگزینی Variableها"""
+        # TODO: Translate -  اول سعی کن از gettext استفاده کنی (برای متن‌های مستقیم)
         text = self.gettext(key)
         
-        # اگر ترجمه‌ای پیدا نشد، از JSON استفاده کن
+        # TODO: Translate -  اگر ترجمه‌ای پیدا نشد، از JSON استفاده کن
         if text == key:
             text = self.get(key)
         
@@ -58,9 +58,9 @@ class Translator:
                 text = text.replace(f'{{{k}}}', str(v))
         return text
 
-# نمونه جهانی
+# TODO: Translate -  نمونه جهانی
 translator = Translator('fa')
 
 def t(key, **kwargs):
-    """تابع کمکی برای استفاده در تمپلیت‌ها"""
+    """TODO: Translate - Function کمکی برای استفاده در تمپلیت‌ها"""
     return translator.t(key, **kwargs)

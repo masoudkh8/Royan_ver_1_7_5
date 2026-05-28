@@ -15,7 +15,7 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     is_read = db.Column(db.Boolean, default=False)
 
-    # رابطه‌ها
+    # TODO: Translate -  Relationship‌ها
     sender = db.relationship('User', foreign_keys=[sender_id], backref='sent_messages')
     receiver = db.relationship('User', foreign_keys=[receiver_id], backref='received_messages')
     rfq_proposal_rel = db.relationship('RFQProposal', foreign_keys=[rfq_proposal_id], backref='proposal_messages_list')

@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 
-# مسیر فایل‌ها
+# TODO: Translate -  Path File‌ها
 po_file = "translations/fa/LC_MESSAGES/messages.po"
 mo_file = "translations/fa/LC_MESSAGES/messages.mo"
 
@@ -17,13 +17,13 @@ def compile_po_to_mo(po_path, mo_path):
         return False
 
     try:
-        # ایجاد پوشه مقصد اگر وجود ندارد
+        # TODO: Translate -  Create پوشه مقصد اگر وجود نداReject
         os.makedirs(os.path.dirname(mo_path), exist_ok=True)
 
-        # تلاش برای استفاده از babel اگر نصب باشد
+        # TODO: Translate -  تلاش برای استفاده از babel اگر نصب باشد
         try:
             from babel.messages import pofile, mofile
-            # استفاده از babel برای کامپایل
+            # TODO: Translate -  استفاده از babel برای کامپایل
             catalog = pofile.read_po(open(po_path, 'rb'))
             mo_data = mofile.write_mo(catalog)
             with open(mo_path, 'wb') as f:
@@ -33,12 +33,12 @@ def compile_po_to_mo(po_path, mo_path):
                 print(f"✅ فایل MO با موفقیت ساخته شد (با Babel): {mo_path}")
                 return True
         except ImportError:
-            pass  # اگر babel نصب نبود، از روش جایگزین استفاده می‌کنیم
+            pass  # TODO: Translate -  اگر babel نصب نبود، از روش جایگزین استفاده می‌کنیم
         except Exception as babel_error:
             print(f"⚠️ خطا در Babel: {babel_error}، استفاده از روش جایگزین...")
 
-        # روش جایگزین: خواندن فایل PO و نوشتن باینری MO به صورت دستی
-        # این یک پیاده‌سازی ساده‌شده است
+        # TODO: Translate -  روش جایگزین: Read File PO و Write باینری MO به صورت دستی
+        # TODO: Translate -  این یک پیاده‌سازی ساده‌شده است
         import struct
         import hashlib
         
@@ -67,14 +67,14 @@ def compile_po_to_mo(po_path, mo_path):
         if current_msgid is not None:
             translations[current_msgid] = current_msgstr
         
-        # نوشتن فایل MO به فرمت باینری ساده
-        # هدر فایل MO
-        magic = 0x950412de  # جادویی برای فایل‌های MO
+        # TODO: Translate -  Write File MO به فرمت باینری ساده
+        # TODO: Translate -  هدر File MO
+        magic = 0x950412de  # TODO: Translate -  جادویی برای File‌های MO
         revision = 0
         num_strings = len(translations)
         
-        # محاسبه آفست‌ها
-        header_size = 28  # اندازه هدر ثابت
+        # TODO: Translate -  محاسبه آفست‌ها
+        header_size = 28  # TODO: Translate -  اندازه هدر ثابت
         key_table_offset = header_size
         value_table_offset = key_table_offset + (num_strings * 8)
         
@@ -86,7 +86,7 @@ def compile_po_to_mo(po_path, mo_path):
         value_offsets = []
         
         for key, value in sorted(translations.items()):
-            if not key:  # کلید خالی را رد کن
+            if not key:  # TODO: Translate -  Key خالی را Reject کن
                 continue
             
             key_bytes = key.encode('utf-8')
@@ -101,30 +101,30 @@ def compile_po_to_mo(po_path, mo_path):
             value_offsets.append((len(value_bytes), current_offset))
             current_offset += len(value_bytes)
         
-        # ساخت باینری
-        binary_data = struct.pack('<I', magic)  # جادویی
-        binary_data += struct.pack('<I', revision)  # نسخه
-        binary_data += struct.pack('<I', num_strings)  # تعداد رشته‌ها
-        binary_data += struct.pack('<I', key_table_offset)  # آفست جدول کلیدها
-        binary_data += struct.pack('<I', value_table_offset)  # آفست جدول مقادیر
-        binary_data += struct.pack('<I', 0)  # اندازه جدول هش (0 برای ساده)
-        binary_data += struct.pack('<I', 0)  # آفست جدول هش
+        # TODO: Translate -  ساخت باینری
+        binary_data = struct.pack('<I', magic)  # TODO: Translate -  جادویی
+        binary_data += struct.pack('<I', revision)  # TODO: Translate -  نسخه
+        binary_data += struct.pack('<I', num_strings)  # TODO: Translate -  تعداد String‌ها
+        binary_data += struct.pack('<I', key_table_offset)  # TODO: Translate -  آفست Table Keyها
+        binary_data += struct.pack('<I', value_table_offset)  # TODO: Translate -  آفست Table مقادیر
+        binary_data += struct.pack('<I', 0)  # TODO: Translate -  اندازه Table هش (0 برای ساده)
+        binary_data += struct.pack('<I', 0)  # TODO: Translate -  آفست Table هش
         
-        # جدول کلیدها (طول، آفست)
+        # TODO: Translate -  Table Keyها (طول، آفست)
         for length, offset in key_offsets:
             binary_data += struct.pack('<I', length)
             binary_data += struct.pack('<I', offset)
         
-        # جدول مقادیر (طول، آفست)
+        # TODO: Translate -  Table مقادیر (طول، آفست)
         for length, offset in value_offsets:
             binary_data += struct.pack('<I', length)
             binary_data += struct.pack('<I', offset)
         
-        # داده‌های کلیدها
+        # TODO: Translate -  Data‌های Keyها
         for key_bytes in keys_data:
             binary_data += key_bytes
         
-        # داده‌های مقادیر
+        # TODO: Translate -  Data‌های مقادیر
         for value_bytes in values_data:
             binary_data += value_bytes
         

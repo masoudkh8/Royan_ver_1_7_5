@@ -8,12 +8,12 @@ import os
 from datetime import datetime
 
 def extract_texts_from_html(filepath):
-    """استخراج متن‌های قابل مشاهده از فایل HTML"""
+    """TODO: Translate - استخراج متن‌های قابل مشاهده از File HTML"""
     texts = []
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # استخراج متن بین تگ‌ها (بدون متغیرهای Jinja2)
+    # TODO: Translate -  استخراج متن بین تگ‌ها (بدون Variableهای Jinja2)
     pattern = r'>([^<>{}%]+?)<'
     matches = re.findall(pattern, content)
     
@@ -31,12 +31,12 @@ def extract_texts_from_html(filepath):
     return texts
 
 def extract_flash_messages(filepath):
-    """استخراج پیام‌های flash از فایل Python"""
+    """TODO: Translate - استخراج Message‌های flash از File Python"""
     messages = []
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # پیدا کردن تمام flash() ها
+    # TODO: Translate -  پیدا کRejectن تمام flash() ها
     patterns = [
         r'flash\([\'"]([^\'"]+)[\'"]',
         r"flash\([\"']([^\"']+)[\"']",
@@ -51,10 +51,10 @@ def extract_flash_messages(filepath):
     return messages
 
 def extract_all_texts(workspace):
-    """استخراج تمام متن‌ها از پروژه"""
+    """TODO: Translate - استخراج تمام متن‌ها از پروژه"""
     all_texts = {}
     
-    # استخراج از تمپلیت‌ها
+    # TODO: Translate -  استخراج از تمپلیت‌ها
     templates_dir = os.path.join(workspace, 'templates')
     print("=== در حال استخراج متن از تمپلیت‌ها ===")
     for root, dirs, files in os.walk(templates_dir):
@@ -69,7 +69,7 @@ def extract_all_texts(workspace):
                     all_texts[rel_path].extend(texts)
                     print(f"  ✓ {rel_path}: {len(texts)} متن")
     
-    # استخراج پیام‌های flash از routes
+    # TODO: Translate -  استخراج Message‌های flash از routes
     routes_dir = os.path.join(workspace, 'routes')
     print("\n=== در حال استخراج پیام‌های flash از routeها ===")
     flash_messages = {}
@@ -85,7 +85,7 @@ def extract_all_texts(workspace):
                     flash_messages[rel_path].extend(messages)
                     print(f"  ✓ {rel_path}: {len(messages)} پیام")
     
-    # استخراج از app.py
+    # TODO: Translate -  استخراج از app.py
     app_file = os.path.join(workspace, 'app.py')
     if os.path.exists(app_file):
         messages = extract_flash_messages(app_file)
@@ -96,19 +96,19 @@ def extract_all_texts(workspace):
     return all_texts, flash_messages
 
 def update_po_file(po_file, all_texts, flash_messages):
-    """به‌روزرسانی فایل PO با متن‌های جدید"""
+    """TODO: Translate - Update File PO با متن‌های جدید"""
     
-    # خواندن فایل PO فعلی
+    # TODO: Translate -  Read File PO فعلی
     existing_msgids = set()
     if os.path.exists(po_file):
         with open(po_file, 'r', encoding='utf-8') as f:
             content = f.read()
-            # پیدا کردن تمام msgidهای موجود
+            # TODO: Translate -  پیدا کRejectن تمام msgidهای موجود
             pattern = r'^msgid "(.*?)"$'
             matches = re.findall(pattern, content, re.MULTILINE)
             existing_msgids = set(matches)
     
-    # جمع‌آوری تمام متن‌های یکتا
+    # TODO: Translate -  جمع‌آوری تمام متن‌های یکتا
     all_unique_texts = set()
     for filepath, texts in all_texts.items():
         all_unique_texts.update(texts)
@@ -120,7 +120,7 @@ def update_po_file(po_file, all_texts, flash_messages):
     print(f"متن‌های موجود در PO: {len(existing_msgids)}")
     print(f"متن‌های کل استخراج شده: {len(all_unique_texts)}")
     
-    # پیدا کردن متن‌های جدید
+    # TODO: Translate -  پیدا کRejectن متن‌های جدید
     new_texts = all_unique_texts - existing_msgids
     print(f"متن‌های جدید نیازمند ترجمه: {len(new_texts)}")
     
@@ -131,7 +131,7 @@ def update_po_file(po_file, all_texts, flash_messages):
             f.write(f"\n# Added on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             
             for text in sorted(new_texts):
-                # فرار دادن کاراکترهای خاص
+                # TODO: Translate -  فرار دادن کاراکترهای خاص
                 escaped_text = text.replace('\\', '\\\\').replace('"', '\\"')
                 f.write(f'\n#: templates/\nmsgid "{escaped_text}"\n')
                 f.write('msgstr ""\n')
@@ -148,10 +148,10 @@ def main():
     
     print("🔍 شروع استخراج متن‌ها از پروژه...\n")
     
-    # استخراج تمام متن‌ها
+    # TODO: Translate -  استخراج تمام متن‌ها
     all_texts, flash_messages = extract_all_texts(workspace)
     
-    # به‌روزرسانی فایل PO
+    #  Update File PO
     new_count = update_po_file(po_file, all_texts, flash_messages)
     
     print(f"\n✅ فرآیند تکمیل شد!")

@@ -6,17 +6,17 @@ from extensions import mail
 from models import User
 
 def generate_verification_token(user):
-    """توکن امن بر اساس ایمیل کاربر تولید می‌کند"""
+    """TODO: Translate - Token امن بر اساس ایمیل User تولید می‌کند"""
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-    # ✅ اصلاح حیاتی: فقط رشته ایمیل سریالایز می‌شود، نه کل آبجکت User
+    # TODO: Translate -  ✅ اصلاح حیاتی: فقط String ایمیل سریالایز می‌شود، نه کل آبجکت User
     return serializer.dumps(user.email, salt='email-verify-salt')
 
 def verify_email_token(token_string):
-    """توکن را بررسی کرده و کاربر مربوطه را برمی‌گرداند"""
+    """TODO: Translate - Token را Check کRejectه و User مربوطه را برمی‌گRejectاند"""
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
     try:
-        # بازیابی ایمیل از توکن
-        email = serializer.loads(token_string, salt='email-verify-salt', max_age=86400) # اعتبار ۲۴ ساعت
+        # TODO: Translate -  بازیابی ایمیل از Token
+        email = serializer.loads(token_string, salt='email-verify-salt', max_age=86400) # TODO: Translate -  Credit ۲۴ ساعت
         user = User.query.filter_by(email=email).first()
 
         if not user:
@@ -31,7 +31,7 @@ def verify_email_token(token_string):
         current_app.logger.error(f"Token verification error: {e}")
         return None, "Token verification error."
 def send_verification_email(user, token_string):
-    """قالب ایمیل را رندر و ارسال می‌کند"""
+    """TODO: Translate - Template ایمیل را رندر و ارسال می‌کند"""
     verify_url = url_for('users.verify_email_route', token=token_string, _external=True)
     
     html_body = render_template(

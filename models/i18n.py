@@ -1,5 +1,5 @@
 # models/i18n.py
-# بخش ۱۳: چندزبانه و بومی‌سازی (i18n & Localization)
+# TODO: Translate -  Section ۱۳: چندزبانه و بومی‌سازی (i18n & Localization)
 
 from . import db
 from datetime import datetime
@@ -21,7 +21,7 @@ class JSONB(db.TypeDecorator):
         return value
 
 class Language(db.Model):
-    """اطلاعات زبان‌های پشتیبانی‌شده"""
+    """TODO: Translate - Information زبان‌های پشتیبانی‌شده"""
     __tablename__ = 'languages'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -49,7 +49,7 @@ class Language(db.Model):
 
 
 class TranslationKey(db.Model):
-    """کلیدهای ترجمه برای تمام متون پلتفرم"""
+    """TODO: Translate - Keyهای ترجمه برای تمام متون پلتفرم"""
     __tablename__ = 'translation_keys'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -72,7 +72,7 @@ class TranslationKey(db.Model):
 
 
 class Translation(db.Model):
-    """مقادیر ترجمه‌شده"""
+    """TODO: Translate - مقادیر ترجمه‌شده"""
     __tablename__ = 'translations'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -95,7 +95,7 @@ class Translation(db.Model):
 
 
 class LocalizationSettings(db.Model):
-    """تنظیمات بومی‌سازی برای هر کاربر"""
+    """TODO: Translate - Settings بومی‌سازی برای هر User"""
     __tablename__ = 'localization_settings'
     
     id = db.Column(db.Integer, primary_key=True)

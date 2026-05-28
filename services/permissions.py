@@ -45,9 +45,9 @@ class Permission(Enum):
     PUBLIC_VIEW_PRODUCTS = 'public.view_products'
     PUBLIC_VIEW_ABOUT = 'public.view_about'
 
-# تعریف دسترسی‌های پیش‌فرض برای هر نقش (Default Role Policies)
+# TODO: Translate -  تعریف Access‌های Default برای هر Role (Default Role Policies)
 DEFAULT_ROLE_PERMISSIONS = {
-    'guest': [  # کاربران غیر احراز هویت
+    'guest': [  # TODO: Translate -  Userان غیر Authentication
         Permission.PUBLIC_VIEW_PRODUCTS,
         Permission.PUBLIC_VIEW_ABOUT,
     ],
@@ -62,7 +62,7 @@ DEFAULT_ROLE_PERMISSIONS = {
     'producer': [
         Permission.ORDER_VIEW,
         Permission.ORDER_EDIT,
-        Permission.LOGISTICS_VIEW_ASSIGNED, # تولیدکننده هم می‌تواند وضعیت لجستیک سفارش خودش را ببیند
+        Permission.LOGISTICS_VIEW_ASSIGNED, # TODO: Translate -  تولیدکننده هم می‌تواند Status لجستیک Order خودش را ببیند
         Permission.DASHBOARD_VIEW_STATS,
         Permission.PROFILE_EDIT,
     ],
@@ -70,14 +70,14 @@ DEFAULT_ROLE_PERMISSIONS = {
         Permission.LOGISTICS_VIEW_ASSIGNED,
         Permission.LOGISTICS_UPDATE_STATUS,
         Permission.LOGISTICS_ASSIGN_DRIVER,
-        Permission.ORDER_VIEW, # برای دیدن جزئیات سفارش جهت حمل
+        Permission.ORDER_VIEW, # TODO: Translate -  برای دیدن جزئیات Order جهت حمل
         Permission.DASHBOARD_VIEW_STATS,
     ],
     'legal': [
         Permission.LEGAL_VIEW_CONTRACTS,
         Permission.LEGAL_APPROVE_DOCS,
         Permission.LEGAL_REJECT_DOCS,
-        Permission.ORDER_VIEW, # مشاهده سفارش مرتبط با قرارداد
+        Permission.ORDER_VIEW, # TODO: Translate -  مشاهده Order مرتبط با قراRejectاد
     ],
     'tech_partner': [
         Permission.TECH_VIEW_INSPECTIONS,
@@ -101,7 +101,7 @@ DEFAULT_ROLE_PERMISSIONS = {
         Permission.FINANCE_VIEW_WALLET,
     ],
     'admin': [
-        perm for perm in Permission # دسترسی به همه چیز
+        perm for perm in Permission # TODO: Translate -  Access به همه چیز
     ]
 }
 

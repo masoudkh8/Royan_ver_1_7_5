@@ -9,7 +9,7 @@ with app.app_context():
     try:
         msg = Message(
             subject='🧪 Test Email from Metisma',
-            recipients=['msdkhlj110@gmail.com'],  # ایمیل خودتان برای تست
+            recipients=['msdkhlj110@gmail.com'],  # TODO: Translate -  ایمیل خودتان برای تست
             body='If you receive this, your email configuration is working! ✅',
             sender=app.config.get('MAIL_DEFAULT_SENDER')
         )

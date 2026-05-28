@@ -1,5 +1,5 @@
 # models/ai_chat.py
-# بخش ۱: هسته هوش مصنوعی و مشاوره هوشمند (AI Core)
+# TODO: Translate -  Section ۱: هسته هوش مصTypeی و مشاوره هوشمند (AI Core)
 
 from . import db
 from datetime import datetime
@@ -29,27 +29,27 @@ class Conversation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # موضوع مکالمه
+    # TODO: Translate -  موضوع مکالمه
     topic = db.Column(db.String(200))
     category = db.Column(db.String(100))
     
-    # زبان مکالمه
+    # TODO: Translate -  زبان مکالمه
     language = db.Column(db.String(10), default='fa')
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(50), default='active')
     is_resolved = db.Column(db.Boolean, default=False)
     
-    # امتیاز کاربر
+    #  Score User
     user_rating = db.Column(db.Integer)
     user_feedback = db.Column(db.Text)
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     ended_at = db.Column(db.DateTime)
     
-    # روابط
+    # TODO: Translate -  روابط
     messages = db.relationship('ChatMessage', backref='conversation', lazy='dynamic', cascade='all, delete-orphan')
     user = db.relationship('User', backref='conversations')
     
@@ -74,7 +74,7 @@ class ChatMessage(db.Model):
     
     message_type = db.Column(db.String(50), default='text')
     
-    # داده‌های ساختاریافته
+    # TODO: Translate -  Data‌های ساختاریافته
     msg_data = db.Column(JSONB, default=dict)
     sources = db.Column(db.JSON)
     

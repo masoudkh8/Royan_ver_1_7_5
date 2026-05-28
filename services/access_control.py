@@ -70,7 +70,7 @@ def permission_required(*permissions):
             
             user_permissions = get_user_permissions(current_user)
             
-            # بررسی اینکه آیا کاربر حداقل یکی از مجوزهای مورد نیاز را دارد
+            # TODO: Translate -  Check اینکه آیا User حداقل یکی از Permissionهای موReject نیاز را داReject
             has_permission = any(perm in user_permissions for perm in permissions)
             
             if not has_permission:
@@ -112,7 +112,7 @@ def get_user_permissions(user):
             pass
     
     if profile and profile.custom_permissions:
-        # اگر کاربر مجوزهای دستی تنظیم کرده باشد
+        # TODO: Translate -  اگر User Permissionهای دستی تنظیم کRejectه باشد
         from services.permissions import Permission as PermEnum
         custom_perms = []
         
@@ -123,25 +123,25 @@ def get_user_permissions(user):
             else:
                 perm_strings = profile.custom_permissions
             
-            if perm_strings:  # اگر لیست خالی نباشد
+            if perm_strings:  # TODO: Translate -  اگر List خالی نباشد
                 for perm_str in perm_strings:
                     try:
-                        # پشتیبانی از هر دو فرمت: رشته و شیء Permission
+                        # TODO: Translate -  پشتیبانی از هر دو فرمت: String و شیء Permission
                         if isinstance(perm_str, PermEnum):
                             custom_perms.append(perm_str)
                         else:
                             perm = PermEnum(str(perm_str))
                             custom_perms.append(perm)
                     except ValueError:
-                        continue  # نادیده گرفتن مجوزهای نامعتبر
+                        continue  # TODO: Translate -  نادیده گرفتن Permissionهای نامعتبر
                 
-                # اگر مجوز سفارشی معتبر وجود داشت، برگردان
+                # TODO: Translate -  اگر Permission Orderی معتبر وجود داشت، برگRejectان
                 if custom_perms:
                     return custom_perms
         except (json.JSONDecodeError, TypeError, AttributeError):
-            pass  # اگر JSON نامعتبر بود، از پیش‌فرض استفاده کن
+            pass  # TODO: Translate -  اگر JSON نامعتبر بود، از Default استفاده کن
     
-    # استفاده از مجوزهای پیش‌فرض نقش
+    # TODO: Translate -  استفاده از Permissionهای Default Role
     role_name = user.role.value if user.role else 'guest'
     return DEFAULT_ROLE_PERMISSIONS.get(role_name, [])
 
@@ -172,7 +172,7 @@ def get_role_permissions(role):
     """
     from models.user import Role
     
-    # تبدیل به رشته اگر Role object باشد
+    # TODO: Translate -  تبدیل به String اگر Role object باشد
     if isinstance(role, Role):
         role_name = role.value
     else:
@@ -200,7 +200,7 @@ def service_module_enabled(service_name, user=None):
     if not user.is_authenticated:
         return False
     
-    # نگاشت نام سرویس به مجوز مربوطه
+    # TODO: Translate -  نگاشت نام Service به Permission مربوطه
     service_permission_map = {
         'order': Permission.ORDER_VIEW,
         'logistics': Permission.LOGISTICS_VIEW_ASSIGNED,

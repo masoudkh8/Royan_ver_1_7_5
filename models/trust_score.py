@@ -17,36 +17,36 @@ class TrustScore(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     
-    # لایه ۱: تأیید هویت پایه (۰-۲۵ امتیاز)
-    identity_verified = db.Column(db.Boolean, default=False)  # مدارک ثبت شرکت
+    # TODO: Translate -  لایه ۱: Confirm هویت پایه (۰-۲۵ Score)
+    identity_verified = db.Column(db.Boolean, default=False)  # TODO: Translate -  مدارک ثبت شرکت
     identity_score = db.Column(db.Integer, default=0)  # 0-25
     
-    # لایه ۲: تأیید تخصصی (۰-۲۵ امتیاز)
-    expertise_verified = db.Column(db.Boolean, default=False)  # گواهی محصول، سابقه صادرات
+    # TODO: Translate -  لایه ۲: Confirm تخصصی (۰-۲۵ Score)
+    expertise_verified = db.Column(db.Boolean, default=False)  # TODO: Translate -  گواهی Product، سابقه صادرات
     expertise_score = db.Column(db.Integer, default=0)  # 0-25
     
-    # لایه ۳: اعتبار اجتماعی (۰-۲۵ امتیاز)
-    social_score = db.Column(db.Integer, default=0)  # 0-25 (نظرات، معاملات موفق)
+    # TODO: Translate -  لایه ۳: Credit اجتماعی (۰-۲۵ Score)
+    social_score = db.Column(db.Integer, default=0)  # TODO: Translate -  0-25 (Commentات، معاملات Success)
     
-    # لایه ۴: اعتبار پویا (۰-۲۵ امتیاز)
-    dynamic_score = db.Column(db.Integer, default=0)  # 0-25 (سرعت پاسخگویی، دقت تحویل)
+    # TODO: Translate -  لایه ۴: Credit پویا (۰-۲۵ Score)
+    dynamic_score = db.Column(db.Integer, default=0)  # TODO: Translate -  0-25 (سرعت Responseگویی، دقت تحویل)
     
-    # امتیاز کل (۰-۱۰۰)
+    # TODO: Translate -  Score کل (۰-۱۰۰)
     total_score = db.Column(db.Integer, default=0)
     
-    # تاریخچه تغییرات
+    # TODO: Translate -  Dateچه تغییرات
     last_updated = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz), onupdate=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    #  Relationship
     user = db.relationship('User', back_populates='trust_score')
     
     def calculate_total(self):
-        """محاسبه خودکار امتیاز کل"""
+        """TODO: Translate - محاسبه خودکار Score کل"""
         self.total_score = self.identity_score + self.expertise_score + self.social_score + self.dynamic_score
         return self.total_score
     
     def get_badge(self):
-        """دریافت نشان اعتبار بر اساس امتیاز"""
+        """TODO: Translate - دریافت نشان Credit بر اساس Score"""
         score = self.total_score or 0
         if score >= 90:
             return "Platinum 🏆"

@@ -14,57 +14,57 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class UserBadge(db.Model):
-    """نشان‌های افتخار کاربران"""
+    """TODO: Translate - نشان‌های افتخار Userان"""
     __tablename__ = 'user_badges'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     badge_type = db.Column(db.String(50), nullable=False)  # e.g., 'export_expert', 'top_seller'
-    badge_name = db.Column(db.String(100), nullable=False)  # e.g., 'متخصص صادرات به عمان'
+    badge_name = db.Column(db.String(100), nullable=False)  # TODO: Translate -  e.g., 'متخصص صادرات به عمان'
     badge_icon = db.Column(db.String(20))  # emoji or icon name
     earned_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     description = db.Column(db.Text)
     
-    # رابطه
+    #  Relationship
     user = db.relationship('User', back_populates='badges')
 
 
 class UserProgress(db.Model):
-    """داشبورد پیشرفت شخصی کاربران"""
+    """TODO: Translate - داشبوReject پیشرفت شخصی Userان"""
     __tablename__ = 'user_progress'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     
-    # امتیاز کل گیمیفیکیشن
+    # TODO: Translate -  Score کل گیمیفیکیشن
     total_points = db.Column(db.Integer, default=0)
     
-    # سطح کاربر (Level)
+    # TODO: Translate -  سطح User (Level)
     level = db.Column(db.Integer, default=1)
     
-    # پیشرفت به سطح بعدی (۰-۱۰۰ درصد)
+    # TODO: Translate -  پیشرفت به سطح بعدی (۰-۱۰۰ درصد)
     progress_to_next_level = db.Column(db.Integer, default=0)
     
-    # آمار فعالیت‌ها
+    # TODO: Translate -  آمار Activeیت‌ها
     completed_profile = db.Column(db.Boolean, default=False)
     successful_trades = db.Column(db.Integer, default=0)
-    content_created = db.Column(db.Integer, default=0)  # تعداد محتوای مفید
-    referrals = db.Column(db.Integer, default=0)  # تعداد معرفی‌های موفق
+    content_created = db.Column(db.Integer, default=0)  # TODO: Translate -  تعداد محتوای مفید
+    referrals = db.Column(db.Integer, default=0)  # TODO: Translate -  تعداد معرفی‌های Success
     
-    # آخرین فعالیت
+    # TODO: Translate -  آخرین Activeیت
     last_activity = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    #  Relationship
     user = db.relationship('User', back_populates='progress')
     
     def calculate_level(self):
-        """محاسبه سطح بر اساس امتیاز کل"""
-        # فرمول ساده: هر ۱۰۰۰ امتیاز = ۱ سطح
+        """TODO: Translate - محاسبه سطح بر اساس Score کل"""
+        # TODO: Translate -  فرمول ساده: هر ۱۰۰۰ Score = ۱ سطح
         self.level = (self.total_points // 1000) + 1
         return self.level
     
     def get_next_actions(self):
-        """پیشنهاد ۳ اقدام بعدی برای ارتقا"""
+        """TODO: Translate - پیشنهاد ۳ اقدام بعدی برای ارتقا"""
         actions = []
         if not self.completed_profile:
             actions.append("تکمیل پروفایل شرکتی (+۲۰۰ امتیاز)")
@@ -78,7 +78,7 @@ class UserProgress(db.Model):
 
 
 class SeasonalChallenge(db.Model):
-    """چالش‌های فصلی با پاداش‌های ملموس"""
+    """TODO: Translate - چالش‌های فصلی با پاداش‌های ملموس"""
     __tablename__ = 'seasonal_challenges'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -90,22 +90,22 @@ class SeasonalChallenge(db.Model):
     reward_value = db.Column(db.String(100))  # e.g., '20% off logistics'
     is_active = db.Column(db.Boolean, default=True)
     
-    # شرکت‌کنندگان
+    # TODO: Translate -  شرکت‌کنندگان
     participants = db.relationship('ChallengeParticipant', back_populates='challenge', cascade='all, delete-orphan')
 
 
 class ChallengeParticipant(db.Model):
-    """شرکت‌کنندگان در چالش‌های فصلی"""
+    """TODO: Translate - شرکت‌کنندگان در چالش‌های فصلی"""
     __tablename__ = 'challenge_participants'
     
     id = db.Column(db.Integer, primary_key=True)
     challenge_id = db.Column(db.Integer, db.ForeignKey('seasonal_challenges.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    progress = db.Column(db.Integer, default=0)  # درصد پیشرفت
+    progress = db.Column(db.Integer, default=0)  # TODO: Translate -  درصد پیشرفت
     completed = db.Column(db.Boolean, default=False)
     reward_claimed = db.Column(db.Boolean, default=False)
     joined_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # روابط
+    # TODO: Translate -  روابط
     challenge = db.relationship('SeasonalChallenge', back_populates='participants')
     user = db.relationship('User', backref='challenge_participations')

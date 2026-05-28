@@ -1,5 +1,5 @@
 # models/data_intelligence.py
-# بخش ۸: دیتا و هوش تجاری (Data & Intelligence Layer)
+# TODO: Translate -  Section ۸: دیتا و هوش تجاری (Data & Intelligence Layer)
 
 from . import db
 from datetime import datetime
@@ -21,7 +21,7 @@ class JSONB(db.TypeDecorator):
         return value
 
 class MarketTrend(db.Model):
-    """روندهای بازار و تحلیل‌های کلان"""
+    """TODO: Translate - روندهای بازار و تحلیل‌های کلان"""
     __tablename__ = 'market_trends'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -59,7 +59,7 @@ class MarketTrend(db.Model):
 
 
 class CompetitorAnalysis(db.Model):
-    """تحلیل رقبا"""
+    """TODO: Translate - تحلیل رقبا"""
     __tablename__ = 'competitor_analyses'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -86,7 +86,7 @@ class CompetitorAnalysis(db.Model):
 
 
 class DemandForecast(db.Model):
-    """پیش‌بینی تقاضا با AI"""
+    """TODO: Translate - پیش‌بینی تقاضا با AI"""
     __tablename__ = 'demand_forecasts'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -124,7 +124,7 @@ class DemandForecast(db.Model):
 
 
 class TradeStatistic(db.Model):
-    """آمار و ارقام تجاری کلان"""
+    """TODO: Translate - آمار و ارقام تجاری کلان"""
     __tablename__ = 'trade_statistics'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -157,7 +157,7 @@ class TradeStatistic(db.Model):
 
 
 class CustomReport(db.Model):
-    """گزارش‌های سفارشی کاربران"""
+    """TODO: Translate - گزارش‌های Orderی Userان"""
     __tablename__ = 'custom_reports'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -192,7 +192,7 @@ class CustomReport(db.Model):
 
 
 class DataAlert(db.Model):
-    """هشدارهای خودکار بر اساس تغییرات داده"""
+    """TODO: Translate - Alertهای خودکار بر اساس تغییرات Data"""
     __tablename__ = 'data_alerts'
     
     id = db.Column(db.Integer, primary_key=True)

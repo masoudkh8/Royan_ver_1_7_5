@@ -1,5 +1,5 @@
 # models/product.py
-# بخش ۹: Marketplace Core - مدیریت محصولات و مارکت‌پلیس
+# TODO: Translate -  Section ۹: Marketplace Core - مدیریت Productات و مارکت‌پلیس
 
 from . import db
 from datetime import datetime
@@ -13,15 +13,15 @@ class ProductStatus(Enum):
     SUSPENDED = 'suspended'
 
 class ProductCategory(Enum):
-    AGRICULTURE = 'agriculture'  # کشاورزی
-    FOOD = 'food'  # مواد غذایی
-    PETROCHEMICAL = 'petrochemical'  # پتروشیمی
-    MINERAL = 'mineral'  # معدنی
-    TEXTILE = 'textile'  # نساجی
-    HANDICRAFT = 'handicraft'  # صنایع دستی
-    INDUSTRIAL = 'industrial'  # صنعتی
-    TECHNOLOGY = 'technology'  # فناوری
-    OTHER = 'other'  # سایر
+    AGRICULTURE = 'agriculture'  # TODO: Translate -  کشاورزی
+    FOOD = 'food'  # TODO: Translate -  مواد غذایی
+    PETROCHEMICAL = 'petrochemical'  # TODO: Translate -  پتروشیمی
+    MINERAL = 'mineral'  # TODO: Translate -  معدنی
+    TEXTILE = 'textile'  # TODO: Translate -  نساجی
+    HANDICRAFT = 'handicraft'  # TODO: Translate -  صنایع دستی
+    INDUSTRIAL = 'industrial'  # TODO: Translate -  صنعتی
+    TECHNOLOGY = 'technology'  # TODO: Translate -  فناوری
+    OTHER = 'other'  # TODO: Translate -  سایر
 
 class Product(db.Model):
     """
@@ -32,64 +32,64 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # اطلاعات پایه
-    name_fa = db.Column(db.String(200), nullable=False)  # نام فارسی
-    name_en = db.Column(db.String(200))  # نام انگلیسی
-    name_ar = db.Column(db.String(200))  # نام عربی
+    # TODO: Translate -  Information پایه
+    name_fa = db.Column(db.String(200), nullable=False)  # TODO: Translate -  نام فارسی
+    name_en = db.Column(db.String(200))  # TODO: Translate -  نام انگلیسی
+    name_ar = db.Column(db.String(200))  # TODO: Translate -  نام عربی
     
-    description_fa = db.Column(db.Text)  # توضیحات فارسی
-    description_en = db.Column(db.Text)  # توضیحات انگلیسی
-    description_ar = db.Column(db.Text)  # توضیحات عربی
+    description_fa = db.Column(db.Text)  # TODO: Translate -  توضیحات فارسی
+    description_en = db.Column(db.Text)  # TODO: Translate -  توضیحات انگلیسی
+    description_ar = db.Column(db.Text)  # TODO: Translate -  توضیحات عربی
     
     category = db.Column(db.Enum(ProductCategory), default=ProductCategory.OTHER)
-    hs_code = db.Column(db.String(20))  # کد تعرفه گمرکی
+    hs_code = db.Column(db.String(20))  # TODO: Translate -  کد تعرفه گمرکی
     
-    # قیمت‌گذاری
-    price = db.Column(db.Numeric(15, 2))  # قیمت
-    currency = db.Column(db.String(3), default='USD')  # ارز
-    price_type = db.Column(db.String(50))  # مثلاً: per ton, per piece
+    # TODO: Translate -  Price‌گذاری
+    price = db.Column(db.Numeric(15, 2))  #  Price
+    currency = db.Column(db.String(3), default='USD')  # TODO: Translate -  ارز
+    price_type = db.Column(db.String(50))  # TODO: Translate -  مثلاً: per ton, per piece
     
-    # موجودی و سفارش
-    min_order_quantity = db.Column(db.Numeric(15, 2), default=1)  # حداقل سفارش
-    max_order_quantity = db.Column(db.Numeric(15, 2))  # حداکثر سفارش
-    available_quantity = db.Column(db.Numeric(15, 2))  # موجودی
-    unit = db.Column(db.String(20), default='unit')  # واحد اندازه‌گیری
+    # TODO: Translate -  موجودی و Order
+    min_order_quantity = db.Column(db.Numeric(15, 2), default=1)  # TODO: Translate -  حداقل Order
+    max_order_quantity = db.Column(db.Numeric(15, 2))  # TODO: Translate -  حداکثر Order
+    available_quantity = db.Column(db.Numeric(15, 2))  # TODO: Translate -  موجودی
+    unit = db.Column(db.String(20), default='unit')  # TODO: Translate -  واحد اندازه‌گیری
     
-    # مشخصات فنی
-    specifications = db.Column(db.JSON)  # مشخصات فنی به صورت JSON
-    certifications = db.Column(db.JSON)  # گواهی‌نامه‌ها
+    # TODO: Translate -  مشخصات فنی
+    specifications = db.Column(db.JSON)  # TODO: Translate -  مشخصات فنی به صورت JSON
+    certifications = db.Column(db.JSON)  # TODO: Translate -  گواهی‌نامه‌ها
     
-    # رسانه
-    images = db.Column(db.JSON)  # لیست تصاویر
-    videos = db.Column(db.JSON)  # لیست ویدیوها
-    catalog_file = db.Column(db.String(500))  # فایل کاتالوگ
+    # TODO: Translate -  رسانه
+    images = db.Column(db.JSON)  # TODO: Translate -  List تصاویر
+    videos = db.Column(db.JSON)  # TODO: Translate -  List ویدیوها
+    catalog_file = db.Column(db.String(500))  # TODO: Translate -  File کاتالوگ
     
-    # وضعیت و زمان‌بندی
+    # TODO: Translate -  Status و Time‌بندی
     status = db.Column(db.Enum(ProductStatus), default=ProductStatus.DRAFT)
-    is_featured = db.Column(db.Boolean, default=False)  # محصول ویژه
-    is_export_ready = db.Column(db.Boolean, default=False)  # آماده صادرات
+    is_featured = db.Column(db.Boolean, default=False)  # TODO: Translate -  Product ویژه
+    is_export_ready = db.Column(db.Boolean, default=False)  # TODO: Translate -  آماده صادرات
     
-    # بازارها
-    target_markets = db.Column(db.JSON)  # لیست کشورهای هدف
-    domestic_available = db.Column(db.Boolean, default=True)  # موجود در بازار داخلی
-    international_available = db.Column(db.Boolean, default=False)  # موجود در بازار بین‌الملل
+    # TODO: Translate -  بازارها
+    target_markets = db.Column(db.JSON)  # TODO: Translate -  List کشورهای هدف
+    domestic_available = db.Column(db.Boolean, default=True)  # TODO: Translate -  موجود در بازار داخلی
+    international_available = db.Column(db.Boolean, default=False)  # TODO: Translate -  موجود در بازار بین‌الملل
     
-    # لجستیک
-    packaging_details = db.Column(db.Text)  # جزئیات بسته‌بندی
-    delivery_time_days = db.Column(db.Integer)  # زمان تحویل (روز)
-    port_of_loading = db.Column(db.String(100))  # بندر بارگیری
+    # TODO: Translate -  لجستیک
+    packaging_details = db.Column(db.Text)  # TODO: Translate -  جزئیات بسته‌بندی
+    delivery_time_days = db.Column(db.Integer)  # TODO: Translate -  Time تحویل (روز)
+    port_of_loading = db.Column(db.String(100))  # TODO: Translate -  بندر بارگیری
     
-    # آمار
+    # TODO: Translate -  آمار
     view_count = db.Column(db.Integer, default=0)
     inquiry_count = db.Column(db.Integer, default=0)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     company = db.relationship('User', backref=db.backref('products', lazy='dynamic'))
     
-    # ایندکس‌ها برای جستجو
+    # TODO: Translate -  ایندکس‌ها برای جستجو
     __table_args__ = (
         db.Index('idx_product_category', 'category'),
         db.Index('idx_product_status', 'status'),
@@ -107,7 +107,7 @@ class Product(db.Model):
             'status': self.status.value if self.status else None,
             'is_export_ready': self.is_export_ready,
             'target_markets': self.target_markets,
-            'images': self.images[:3] if self.images else [],  # ۳ تصویر اول
+            'images': self.images[:3] if self.images else [],  # TODO: Translate -  ۳ تصویر اول
             'company_name': self.company.company_name if self.company else None,
             'trust_score': self.company.trust_score.score if self.company and self.company.trust_score else None,
         }
@@ -128,27 +128,27 @@ class RFQ(db.Model):
     description = db.Column(db.Text, nullable=False)
     product_category = db.Column(db.Enum(ProductCategory))
     
-    # جزئیات سفارش
+    # TODO: Translate -  جزئیات Order
     quantity = db.Column(db.Numeric(15, 2), nullable=False)
     unit = db.Column(db.String(20))
     target_price = db.Column(db.Numeric(15, 2))
     currency = db.Column(db.String(3), default='USD')
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     delivery_deadline = db.Column(db.Date)
-    delivery_location = db.Column(db.String(200))  # محل تحویل
+    delivery_location = db.Column(db.String(200))  # TODO: Translate -  محل تحویل
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='open')  # open, closed, in_negotiation, completed
-    is_anonymous = db.Column(db.Boolean, default=False)  # عدم نمایش خریدار
+    is_anonymous = db.Column(db.Boolean, default=False)  # TODO: Translate -  عدم View Purchaseار
     
-    # مهلت پاسخ
+    # TODO: Translate -  مهلت Response
     deadline = db.Column(db.DateTime)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     buyer = db.relationship('User', backref=db.backref('rfqs', lazy='dynamic'))
     proposals = db.relationship('RFQProposal', backref='rfq', lazy='dynamic', cascade='all, delete-orphan')
     
@@ -175,28 +175,28 @@ class RFQProposal(db.Model):
     rfq_id = db.Column(db.Integer, db.ForeignKey('rfqs.id'), nullable=False, index=True)
     supplier_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # پیشنهاد
+    # TODO: Translate -  پیشنهاد
     offered_price = db.Column(db.Numeric(15, 2), nullable=False)
     currency = db.Column(db.String(3), default='USD')
     quantity_offered = db.Column(db.Numeric(15, 2))
     
-    # شرایط
+    # TODO: Translate -  شرایط
     delivery_time_days = db.Column(db.Integer)
-    payment_terms = db.Column(db.Text)  # شرایط پرداخت
+    payment_terms = db.Column(db.Text)  # TODO: Translate -  شرایط Payment
     additional_notes = db.Column(db.Text)
     
-    # ضمیمه‌ها
+    # TODO: Translate -  ضمیمه‌ها
     product_catalog = db.Column(db.String(500))
     certificates = db.Column(db.JSON)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='pending')  # pending, accepted, rejected, withdrawn
     is_winner = db.Column(db.Boolean, default=False)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     supplier = db.relationship('User', backref=db.backref('rfq_proposals', lazy='dynamic'))
     
     def to_dict(self):
@@ -220,7 +220,7 @@ class ProductComparison(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    products = db.Column(db.JSON, nullable=False)  # لیست ID محصولات برای مقایسه
+    products = db.Column(db.JSON, nullable=False)  # TODO: Translate -  List ID Productات برای مقایسه
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     

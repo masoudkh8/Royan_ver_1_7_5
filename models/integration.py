@@ -1,5 +1,5 @@
 # models/integration.py
-# بخش ۱۱: Integration Layer - یکپارچه‌سازی با سرویس‌های خارجی
+# TODO: Translate -  Section ۱۱: Integration Layer - یکپارچه‌سازی با Service‌های خارجی
 
 from . import db
 from datetime import datetime, timedelta
@@ -50,27 +50,27 @@ class ExternalIntegration(db.Model):
     
     integration_type = db.Column(db.Enum(IntegrationType), nullable=False)
     
-    # اطلاعات اتصال
-    access_token = db.Column(db.Text)  # توکن دسترسی (رمزنگاری‌شده)
-    refresh_token = db.Column(db.Text)  # توکن تازه‌سازی
+    # TODO: Translate -  Information اتصال
+    access_token = db.Column(db.Text)  # TODO: Translate -  Token Access (رمزنگاری‌شده)
+    refresh_token = db.Column(db.Text)  # TODO: Translate -  Token تازه‌سازی
     token_expires_at = db.Column(db.DateTime)
     
-    api_key = db.Column(db.String(200))  # کلید API
-    api_secret = db.Column(db.Text)  # راز API (رمزنگاری‌شده)
+    api_key = db.Column(db.String(200))  #  Key API
+    api_secret = db.Column(db.Text)  # TODO: Translate -  راز API (رمزنگاری‌شده)
     
-    webhook_url = db.Column(db.String(500))  # URL وب‌هوک دریافتی
+    webhook_url = db.Column(db.String(500))  # TODO: Translate -  URL وب‌هوک دریافتی
     
-    # تنظیمات
-    settings = db.Column(db.JSON)  # تنظیمات خاص هر интеграция
+    #  Settings
+    settings = db.Column(db.JSON)  # TODO: Translate -  Settings خاص هر интеграция
     is_enabled = db.Column(db.Boolean, default=True)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.Enum(IntegrationStatus), default=IntegrationStatus.PENDING)
     last_sync_at = db.Column(db.DateTime)
     last_error = db.Column(db.Text)
     error_count = db.Column(db.Integer, default=0)
     
-    # آمار
+    # TODO: Translate -  آمار
     total_calls = db.Column(db.Integer, default=0)
     successful_calls = db.Column(db.Integer, default=0)
     failed_calls = db.Column(db.Integer, default=0)
@@ -78,7 +78,7 @@ class ExternalIntegration(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     user = db.relationship('User', backref=db.backref('integrations', lazy='dynamic'))
     logs = db.relationship('IntegrationLog', backref='integration', lazy='dynamic', cascade='all, delete-orphan')
     webhooks = db.relationship('WebhookSubscription', backref='integration', lazy='dynamic', cascade='all, delete-orphan')
@@ -107,16 +107,16 @@ class IntegrationLog(db.Model):
     integration_id = db.Column(db.Integer, db.ForeignKey('external_integrations.id'), nullable=False, index=True)
     
     operation_type = db.Column(db.String(50))  # sync, send, receive, update
-    endpoint = db.Column(db.String(300))  # endpoint فراخوانی‌شده
+    endpoint = db.Column(db.String(300))  # TODO: Translate -  endpoint فراخوانی‌شده
     
-    request_data = db.Column(db.JSON)  # داده‌های ارسالی
-    response_data = db.Column(db.JSON)  # داده‌های دریافتی
+    request_data = db.Column(db.JSON)  # TODO: Translate -  Data‌های ارسالی
+    response_data = db.Column(db.JSON)  # TODO: Translate -  Data‌های دریافتی
     
     status_code = db.Column(db.Integer)
     success = db.Column(db.Boolean, default=False)
     error_message = db.Column(db.Text)
     
-    duration_ms = db.Column(db.Integer)  # مدت زمان اجرا (میلی‌ثانیه)
+    duration_ms = db.Column(db.Integer)  # TODO: Translate -  مدت Time اجرا (میلی‌ثانیه)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
@@ -135,20 +135,20 @@ class WebhookSubscription(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     integration_id = db.Column(db.Integer, db.ForeignKey('external_integrations.id'))
     
-    # URL مقصد
+    # TODO: Translate -  URL مقصد
     webhook_url = db.Column(db.String(500), nullable=False)
     
-    # رویدادهای مشترک‌شده
-    events = db.Column(db.JSON, nullable=False)  # لیست WebhookEvent
+    # TODO: Translate -  رویDataای مشترک‌شده
+    events = db.Column(db.JSON, nullable=False)  #  List WebhookEvent
     
-    # امنیت
-    secret_key = db.Column(db.String(64), unique=True)  # کلید امضای وب‌هوک
+    # TODO: Translate -  امنیت
+    secret_key = db.Column(db.String(64), unique=True)  # TODO: Translate -  Key امضای وب‌هوک
     signature_algorithm = db.Column(db.String(20), default='HMAC-SHA256')
     
-    # وضعیت
+    #  Status
     is_active = db.Column(db.Boolean, default=True)
     
-    # آمار
+    # TODO: Translate -  آمار
     total_deliveries = db.Column(db.Integer, default=0)
     successful_deliveries = db.Column(db.Integer, default=0)
     failed_deliveries = db.Column(db.Integer, default=0)
@@ -183,16 +183,16 @@ class WebhookDelivery(db.Model):
     event_type = db.Column(db.String(100), nullable=False)
     payload = db.Column(db.JSON, nullable=False)
     
-    # وضعیت تحویل
+    # TODO: Translate -  Status تحویل
     status = db.Column(db.String(20), default='pending')  # pending, success, failed, retrying
     attempts = db.Column(db.Integer, default=0)
     max_attempts = db.Column(db.Integer, default=5)
     
-    # پاسخ
+    #  Response
     response_status = db.Column(db.Integer)
     response_body = db.Column(db.Text)
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     scheduled_at = db.Column(db.DateTime, default=datetime.utcnow)
     delivered_at = db.Column(db.DateTime)
     next_retry_at = db.Column(db.DateTime)
@@ -223,26 +223,26 @@ class LinkedInProfile(db.Model):
     linkedin_id = db.Column(db.String(50), unique=True)
     linkedin_url = db.Column(db.String(300))
     
-    # اطلاعات پروفایل
+    # TODO: Translate -  Information پروFile
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
     headline = db.Column(db.String(300))
     summary = db.Column(db.Text)
     industry = db.Column(db.String(100))
     
-    # شرکت
+    # TODO: Translate -  شرکت
     company_name = db.Column(db.String(200))
     company_linkedin_url = db.Column(db.String(300))
     position = db.Column(db.String(100))
     
-    # شبکه
+    # TODO: Translate -  شبکه
     connections_count = db.Column(db.Integer)
     followers_count = db.Column(db.Integer)
     
-    # مهارت‌ها
+    # TODO: Translate -  مهارت‌ها
     skills = db.Column(db.JSON)
     
-    # آخرین همگام‌سازی
+    # TODO: Translate -  آخرین همگام‌سازی
     last_synced_at = db.Column(db.DateTime)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -272,13 +272,13 @@ class LinkedInPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     profile_id = db.Column(db.Integer, db.ForeignKey('linkedin_profiles.id'), nullable=False, index=True)
     
-    post_id = db.Column(db.String(50))  # ID پست در لینکدین
+    post_id = db.Column(db.String(50))  # TODO: Translate -  ID Post در لینکدین
     post_url = db.Column(db.String(500))
     
     content = db.Column(db.Text)
-    media_urls = db.Column(db.JSON)  # تصاویر/ویدیوها
+    media_urls = db.Column(db.JSON)  # TODO: Translate -  تصاویر/ویدیوها
     
-    # آمار
+    # TODO: Translate -  آمار
     likes_count = db.Column(db.Integer, default=0)
     comments_count = db.Column(db.Integer, default=0)
     shares_count = db.Column(db.Integer, default=0)
@@ -313,11 +313,11 @@ class WhatsAppContact(db.Model):
     
     whatsapp_business_id = db.Column(db.String(50))
     
-    # وضعیت
+    #  Status
     is_verified = db.Column(db.Boolean, default=False)
     last_message_at = db.Column(db.DateTime)
     
-    # تگ‌ها
+    # TODO: Translate -  تگ‌ها
     tags = db.Column(db.JSON)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -344,10 +344,10 @@ class LogisticsProvider(db.Model):
     api_endpoint = db.Column(db.String(500))
     api_key = db.Column(db.String(200))
     
-    supported_countries = db.Column(db.JSON)  # کشورهای تحت پوشش
-    supported_services = db.Column(db.JSON)  # خدمات قابل ارائه
+    supported_countries = db.Column(db.JSON)  # TODO: Translate -  کشورهای تحت پوشش
+    supported_services = db.Column(db.JSON)  # TODO: Translate -  خدمات قابل ارائه
     
-    # تنظیمات
+    #  Settings
     settings = db.Column(db.JSON)
     is_active = db.Column(db.Boolean, default=True)
     
@@ -375,32 +375,32 @@ class LogisticsQuote(db.Model):
     provider_id = db.Column(db.Integer, db.ForeignKey('logistics_providers.id'), nullable=False, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # مسیر
+    #  Path
     origin_country = db.Column(db.String(50), nullable=False)
     origin_city = db.Column(db.String(100))
     destination_country = db.Column(db.String(50), nullable=False)
     destination_city = db.Column(db.String(100))
     
-    # محموله
+    # TODO: Translate -  محموله
     weight_kg = db.Column(db.Numeric(10, 2))
     volume_m3 = db.Column(db.Numeric(10, 2))
     cargo_type = db.Column(db.String(50))  # container, bulk, pallet, etc.
     
-    # خدمات
+    # TODO: Translate -  خدمات
     service_type = db.Column(db.String(50))  # sea, air, land, rail
     incoterms = db.Column(db.String(10))  # FOB, CIF, EXW, etc.
     
-    # قیمت
+    #  Price
     base_price = db.Column(db.Numeric(12, 2))
-    additional_fees = db.Column(db.JSON)  # هزینه‌های اضافی
+    additional_fees = db.Column(db.JSON)  # TODO: Translate -  هزینه‌های اضافی
     total_price = db.Column(db.Numeric(12, 2))
     currency = db.Column(db.String(3), default='USD')
     
-    # زمان
-    estimated_days = db.Column(db.Integer)  # روزهای تخمینی
+    #  Time
+    estimated_days = db.Column(db.Integer)  # TODO: Translate -  روزهای تخمینی
     valid_until = db.Column(db.DateTime)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='quoted')  # quoted, booked, cancelled
     booking_reference = db.Column(db.String(100))
     
@@ -429,7 +429,7 @@ class APICache(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     cache_key = db.Column(db.String(200), unique=True, nullable=False)
-    source = db.Column(db.String(50))  # منبع داده
+    source = db.Column(db.String(50))  # TODO: Translate -  منبع Data
     
     data = db.Column(db.JSON, nullable=False)
     
@@ -440,7 +440,7 @@ class APICache(db.Model):
     
     @classmethod
     def get_valid(cls, key):
-        """دریافت داده معتبر از کش"""
+        """TODO: Translate - دریافت Data معتبر از کش"""
         record = cls.query.filter_by(cache_key=key).first()
         if record and record.expires_at > datetime.utcnow():
             return record.data

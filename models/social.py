@@ -20,10 +20,10 @@ class Follow(db.Model):
     following_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # سطح دسترسی: public فقط پست‌های عمومی، connection دسترسی کامل‌تر
+    # TODO: Translate -  سطح Access: public فقط Post‌های عمومی، connection Access Complete‌تر
     connection_type = db.Column(db.String(20), default='public')  # public, connection, premium
     
-    # جلوگیری از فالو تکراری
+    # TODO: Translate -  جلوگیری از فالو تکراری
     __table_args__ = (
         db.UniqueConstraint('follower_id', 'following_id', name='uq_follow_user_pair'),
     )
@@ -37,7 +37,7 @@ class Follow(db.Model):
     
     @classmethod
     def is_following(cls, follower_id, following_id):
-        """بررسی اینکه آیا کاربر A کاربر B را دنبال می‌کند"""
+        """TODO: Translate - Check اینکه آیا User A User B را دنبال می‌کند"""
         return cls.query.filter_by(
             follower_id=follower_id,
             following_id=following_id
@@ -45,12 +45,12 @@ class Follow(db.Model):
     
     @classmethod
     def get_followers_count(cls, user_id):
-        """تعداد دنبال‌کنندگان یک کاربر"""
+        """TODO: Translate - تعداد دنبال‌کنندگان یک User"""
         return cls.query.filter_by(following_id=user_id).count()
     
     @classmethod
     def get_following_count(cls, user_id):
-        """تعداد افرادی که کاربر دنبال می‌کند"""
+        """TODO: Translate - تعداد افرادی که User دنبال می‌کند"""
         return cls.query.filter_by(follower_id=user_id).count()
 
 
@@ -64,27 +64,27 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # محتوا
-    content = db.Column(db.Text, nullable=False)  # متن پست
+    # TODO: Translate -  محتوا
+    content = db.Column(db.Text, nullable=False)  # TODO: Translate -  متن Post
     visibility = db.Column(db.String(20), default='public')  # public, followers_only, private
     
-    # رسانه‌ها (JSON برای ذخیره لیست فایل‌ها)
-    # مثال: {"images": ["url1", "url2"], "files": ["file1.pdf"]}
+    # TODO: Translate -  رسانه‌ها (JSON برای Save List File‌ها)
+    # TODO: Translate -  مثال: {"images": ["url1", "url2"], "files": ["file1.pdf"]}
     media = db.Column(db.JSON, default=dict)
     
-    # تگ‌کردن محصولات یا شرکت‌ها
-    tagged_products = db.Column(db.JSON, default=list)  # لیست product_ids
-    tagged_companies = db.Column(db.JSON, default=list)  # لیست company_ids
+    # TODO: Translate -  تگ‌کRejectن Productات یا شرکت‌ها
+    tagged_products = db.Column(db.JSON, default=list)  #  List product_ids
+    tagged_companies = db.Column(db.JSON, default=list)  #  List company_ids
     
-    # آمار تعاملات (برای بهینه‌سازی، از Redis هم می‌توان استفاده کرد)
+    # TODO: Translate -  آمار تعاملات (برای بهینه‌سازی، از Redis هم می‌توان استفاده کReject)
     likes_count = db.Column(db.Integer, default=0)
     comments_count = db.Column(db.Integer, default=0)
     shares_count = db.Column(db.Integer, default=0)
     views_count = db.Column(db.Integer, default=0)
     
-    # وضعیت
-    is_pinned = db.Column(db.Boolean, default=False)  # سنجاق شده توسط ادمین
-    is_featured = db.Column(db.Boolean, default=False)  # پست برگزیده پلتفرم
+    #  Status
+    is_pinned = db.Column(db.Boolean, default=False)  # TODO: Translate -  سنجاق شده توسط ادمین
+    is_featured = db.Column(db.Boolean, default=False)  # TODO: Translate -  Post برگزیده پلتفرم
     is_edited = db.Column(db.Boolean, default=False)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
@@ -93,13 +93,13 @@ class Post(db.Model):
     # Relationships
     author = db.relationship('User', back_populates='posts')
     comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan', lazy='dynamic')
-    # likes relationship حذف شد چون در مدل Like با primaryjoin سفارشی تعریف شده است
+    # TODO: Translate -  likes relationship Delete شد چون در Model Like با primaryjoin Orderی تعریف شده است
     
     def __repr__(self):
         return f"<Post {self.id} by {self.author_id}>"
     
     def to_dict(self, include_author=True):
-        """تبدیل پست به دیکشنری برای API"""
+        """TODO: Translate - تبدیل Post به Dictionary برای API"""
         data = {
             'id': self.id,
             'content': self.content,
@@ -126,7 +126,7 @@ class Post(db.Model):
                 'role_display': self.author.role_display_name,
             }
             
-            # اضافه کردن اطلاعات پروفایل اگر موجود باشد
+            # TODO: Translate -  اضافه کRejectن Information پروFile اگر موجود باشد
             if hasattr(self.author, 'profile') and self.author.profile:
                 profile = self.author.profile
                 data['author']['bio'] = profile.bio
@@ -140,31 +140,31 @@ class Post(db.Model):
         دریافت فید اخبار برای یک کاربر
         الگوریتم ساده: پست‌های کسانی که فالو کرده + پست‌های برگزیده
         """
-        # کوئری برای پیدا کردن کاربرانی که این کاربر دنبال می‌کند
+        # TODO: Translate -  کوئری برای پیدا کRejectن Userانی که این User دنبال می‌کند
         following_subquery = db.session.query(Follow.following_id).filter_by(
             follower_id=user_id
         ).subquery()
         
-        # پست‌های کاربران فالو شده
+        # TODO: Translate -  Post‌های Userان فالو شده
         followed_posts = cls.query.filter(
             cls.author_id.in_(following_subquery),
             cls.visibility.in_(['public', 'followers_only'])
         )
         
-        # پست‌های برگزیده پلتفرم
+        # TODO: Translate -  Post‌های برگزیده پلتفرم
         if include_featured:
             featured_posts = cls.query.filter_by(is_featured=True, visibility='public')
-            # ترکیب دو کوئری (با حذف تکراری‌ها)
+            # TODO: Translate -  ترکیب دو کوئری (با Delete تکراری‌ها)
             all_posts = followed_posts.union(featured_posts)
         else:
             all_posts = followed_posts
         
-        # مرتب‌سازی بر اساس زمان (جدیدترین اول)
+        # TODO: Translate -  مرتب‌سازی بر اساس Time (جدیدترین اول)
         return all_posts.order_by(cls.created_at.desc()).limit(limit).all()
     
     @classmethod
     def get_public_posts(cls, limit=50):
-        """دریافت پست‌های عمومی برای نمایش در پروفایل عمومی"""
+        """TODO: Translate - دریافت Post‌های عمومی برای View در پروFile عمومی"""
         return cls.query.filter_by(visibility='public').order_by(
             cls.created_at.desc()
         ).limit(limit).all()
@@ -179,16 +179,16 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False, index=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)  # برای پاسخ به کامنت‌ها
+    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)  # TODO: Translate -  برای Response به کامنت‌ها
     
     content = db.Column(db.Text, nullable=False)
     
-    # آمار
+    # TODO: Translate -  آمار
     likes_count = db.Column(db.Integer, default=0)
     
-    # وضعیت
+    #  Status
     is_edited = db.Column(db.Boolean, default=False)
-    is_deleted = db.Column(db.Boolean, default=False)  # نرم‌دیلیت برای حفظ زنجیره مکالمه
+    is_deleted = db.Column(db.Boolean, default=False)  # TODO: Translate -  نرم‌دیلیت برای حفظ زنجیره مکالمه
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -202,7 +202,7 @@ class Comment(db.Model):
         return f"<Comment {self.id} on Post {self.post_id}>"
     
     def to_dict(self, include_author=True):
-        """تبدیل کامنت به دیکشنری"""
+        """TODO: Translate - تبدیل کامنت به Dictionary"""
         data = {
             'id': self.id,
             'post_id': self.post_id,
@@ -236,20 +236,20 @@ class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # نوع آیتم مورد لایک: 'post' یا 'comment'
-    target_type = db.Column(db.String(20), nullable=False)  # 'post' یا 'comment'
-    target_id = db.Column(db.Integer, nullable=False, index=True)  # post_id یا comment_id
+    # TODO: Translate -  Type آیتم موReject Like: 'post' یا 'comment'
+    target_type = db.Column(db.String(20), nullable=False)  # TODO: Translate -  'post' یا 'comment'
+    target_id = db.Column(db.Integer, nullable=False, index=True)  # TODO: Translate -  post_id یا comment_id
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # جلوگیری از لایک تکراری
+    # TODO: Translate -  جلوگیری از Like تکراری
     __table_args__ = (
         db.UniqueConstraint('user_id', 'target_type', 'target_id', name='uq_like_user_target'),
     )
     
     # Relationships
     user = db.relationship('User', backref='likes')
-    # post relationship با primaryjoin سفارشی برای پلی‌مورفیک
+    # TODO: Translate -  post relationship با primaryjoin Orderی برای پلی‌مورفیک
     post = db.relationship('Post', 
                           primaryjoin="and_(Like.target_type=='post', Like.target_id==Post.id)",
                           foreign_keys=[target_id],
@@ -260,7 +260,7 @@ class Like(db.Model):
     
     @classmethod
     def is_liked(cls, user_id, target_type, target_id):
-        """بررسی اینکه آیا کاربر آیتم را لایک کرده است"""
+        """TODO: Translate - Check اینکه آیا User آیتم را Like کRejectه است"""
         return cls.query.filter_by(
             user_id=user_id,
             target_type=target_type,
@@ -269,14 +269,14 @@ class Like(db.Model):
     
     @classmethod
     def get_likes_count(cls, target_type, target_id):
-        """تعداد لایک‌های یک آیتم"""
+        """TODO: Translate - تعداد Like‌های یک آیتم"""
         return cls.query.filter_by(
             target_type=target_type,
             target_id=target_id
         ).count()
 
 
-# به‌روزرسانی relationshipهای User
+# TODO: Translate -  Update relationshipهای User
 def update_user_relationships():
     """
     افزودن relationshipهای جدید به کلاس User
@@ -284,7 +284,7 @@ def update_user_relationships():
     """
     from .user import User
     
-    # اضافه کردن relationshipهای social به User
+    # TODO: Translate -  اضافه کRejectن relationshipهای social به User
     if not hasattr(User, 'posts'):
         User.posts = db.relationship('Post', back_populates='author', cascade='all, delete-orphan', lazy='dynamic')
     
@@ -296,11 +296,11 @@ def update_user_relationships():
         User.followers = db.relationship('Follow', foreign_keys='Follow.following_id', 
                                         back_populates='following', cascade='all, delete-orphan')
     
-    # Propertyهای کمکی
+    # TODO: Translate -  Propertyهای کمکی
     if not hasattr(User, 'followed_posts'):
         @property
         def followed_posts(self):
-            """دریافت پست‌های کاربران فالو شده"""
+            """TODO: Translate - دریافت Post‌های Userان فالو شده"""
             following_ids = [f.following_id for f in self.following]
             return Post.query.filter(Post.author_id.in_(following_ids)).order_by(Post.created_at.desc())
         
@@ -309,7 +309,7 @@ def update_user_relationships():
     if not hasattr(User, 'followers_count'):
         @property
         def followers_count(self):
-            """تعداد دنبال‌کنندگان"""
+            """TODO: Translate - تعداد دنبال‌کنندگان"""
             return Follow.get_followers_count(self.id)
         
         User.followers_count = followers_count
@@ -317,7 +317,7 @@ def update_user_relationships():
     if not hasattr(User, 'following_count'):
         @property
         def following_count(self):
-            """تعداد افرادی که دنبال می‌کند"""
+            """TODO: Translate - تعداد افرادی که دنبال می‌کند"""
             return Follow.get_following_count(self.id)
         
         User.following_count = following_count

@@ -11,17 +11,17 @@ from enum import Enum
 
 
 class UserRole(str, Enum):
-    """۱۰ نقش تخصصی اکوسیستم متیسما - هماهنگ با models.user.Role"""
-    PRODUCER = 'producer'              # تولیدکننده/صادرکننده
-    BUYER = 'buyer'                    # واردکننده/خریدار
-    BROKER = 'broker'                  # کارگزار تجاری
-    CORPORATE_AGENT = 'corporate_agent' # نماینده شرکتی
-    LOGISTICS = 'logistics'            # خدمات لجستیک و بیمه
-    LEGAL = 'legal'                    # خدمات حقوقی و انطباق
-    TECH_PARTNER = 'tech_partner'      # شریک فناوری
-    INVESTOR = 'investor'              # سرمایه‌گذار مالی
-    ADMIN = 'admin'                    # مدیریت سیستم
-    MODERATOR = 'moderator'            # ناظر محتوا
+    """TODO: Translate - ۱۰ Role تخصصی اکوSystem متیسما - هماهنگ با models.user.Role"""
+    PRODUCER = 'producer'              # TODO: Translate -  تولیدکننده/صادرکننده
+    BUYER = 'buyer'                    # TODO: Translate -  واRejectکننده/Purchaseار
+    BROKER = 'broker'                  # TODO: Translate -  کارگزار تجاری
+    CORPORATE_AGENT = 'corporate_agent' # TODO: Translate -  نماینده شرکتی
+    LOGISTICS = 'logistics'            # TODO: Translate -  خدمات لجستیک و بیمه
+    LEGAL = 'legal'                    # TODO: Translate -  خدمات حقوقی و انطباق
+    TECH_PARTNER = 'tech_partner'      # TODO: Translate -  شریک فناوری
+    INVESTOR = 'investor'              # TODO: Translate -  سرمایه‌گذار مالی
+    ADMIN = 'admin'                    # TODO: Translate -  مدیریت System
+    MODERATOR = 'moderator'            # TODO: Translate -  ناظر محتوا
 
 
 # ============================================
@@ -29,7 +29,7 @@ class UserRole(str, Enum):
 # ============================================
 
 class UserRegister(BaseModel):
-    """اسکمای ثبت‌نام کاربر با انتخاب نقش"""
+    """TODO: Translate - اسکمای Registration User با انتخاب Role"""
     username: str = Field(..., min_length=3, max_length=64)
     email: EmailStr
     password: str = Field(..., min_length=8)
@@ -49,13 +49,13 @@ class UserRegister(BaseModel):
 
 
 class UserLogin(BaseModel):
-    """اسکمای ورود کاربر"""
+    """TODO: Translate - اسکمای Login User"""
     username: str
     password: str
 
 
 class TokenResponse(BaseModel):
-    """پاسخ احراز هویت"""
+    """Response Authentication"""
     access_token: str
     token_type: str = "bearer"
     user_id: int
@@ -69,7 +69,7 @@ class TokenResponse(BaseModel):
 # ============================================
 
 class UserProfileBase(BaseModel):
-    """پایه پروفایل کاربری"""
+    """TODO: Translate - پایه پروFile Userی"""
     full_name: Optional[str] = Field(None, max_length=100)
     headline: Optional[str] = Field(None, max_length=200)
     bio: Optional[str] = Field(None, max_length=2000)
@@ -83,12 +83,12 @@ class UserProfileBase(BaseModel):
 
 
 class UserProfileCreate(UserProfileBase):
-    """ایجاد پروفایل جدید"""
+    """TODO: Translate - Create پروFile جدید"""
     pass
 
 
 class UserProfileUpdate(BaseModel):
-    """به‌روزرسانی پروفایل - تمام فیلدها اختیاری"""
+    """TODO: Translate - Update پروFile - تمام Fieldها Optional"""
     full_name: Optional[str] = Field(None, max_length=100)
     headline: Optional[str] = Field(None, max_length=200)
     bio: Optional[str] = Field(None, max_length=2000)
@@ -110,7 +110,7 @@ class UserProfileUpdate(BaseModel):
 
 
 class UserProfileResponse(UserProfileBase):
-    """پاسخ پروفایل کاربری"""
+    """TODO: Translate - Response پروFile Userی"""
     id: int
     user_id: int
     avatar: Optional[str] = 'default_avatar.png'
@@ -130,7 +130,7 @@ class UserProfileResponse(UserProfileBase):
 # ============================================
 
 class PostCreate(BaseModel):
-    """ایجاد پست جدید"""
+    """TODO: Translate - Create Post جدید"""
     body: str = Field(..., min_length=1, max_length=10000)
     post_type: str = Field(default='text', pattern='^(text|image|article|product_link)$')
     media_url: Optional[str] = Field(None, max_length=512)
@@ -141,7 +141,7 @@ class PostCreate(BaseModel):
 
 
 class PostUpdate(BaseModel):
-    """به‌روزرسانی پست"""
+    """Update Post"""
     body: Optional[str] = Field(None, min_length=1, max_length=10000)
     media_url: Optional[str] = Field(None, max_length=512)
     link_url: Optional[str] = Field(None, max_length=512)
@@ -152,7 +152,7 @@ class PostUpdate(BaseModel):
 
 
 class PostResponse(BaseModel):
-    """پاسخ پست"""
+    """Response Post"""
     id: int
     body: str
     post_type: str
@@ -173,13 +173,13 @@ class PostResponse(BaseModel):
 # ============================================
 
 class CommentCreate(BaseModel):
-    """ایجاد کامنت"""
+    """TODO: Translate - Create کامنت"""
     body: str = Field(..., min_length=1, max_length=5000)
-    parent_id: Optional[int] = None  # برای پاسخ به کامنت دیگر
+    parent_id: Optional[int] = None  # TODO: Translate -  برای Response به کامنت دیگر
 
 
 class CommentResponse(BaseModel):
-    """پاسخ کامنت"""
+    """TODO: Translate - Response کامنت"""
     id: int
     body: str
     timestamp: datetime
@@ -196,7 +196,7 @@ class CommentResponse(BaseModel):
 # ============================================
 
 class ConnectionResponse(BaseModel):
-    """پاسخ وضعیت اتصال"""
+    """TODO: Translate - Response Status اتصال"""
     follower_id: int
     followed_id: int
     connection_type: str = 'public'
@@ -207,7 +207,7 @@ class ConnectionResponse(BaseModel):
 
 
 class FollowStatus(BaseModel):
-    """وضعیت فالو"""
+    """TODO: Translate - Status فالو"""
     is_following: bool
     followers_count: int
     following_count: int
@@ -218,20 +218,20 @@ class FollowStatus(BaseModel):
 # ============================================
 
 class FeedPost(PostResponse):
-    """پست فید با اطلاعات تکمیلی"""
+    """TODO: Translate - Post فید با Information تکمیلی"""
     is_liked_by_user: bool = False
     is_following_author: bool = False
 
 
 class LikeAction(BaseModel):
-    """اکشن لایک"""
+    """TODO: Translate - اکشن Like"""
     success: bool
     likes_count: int
     is_liked: bool
 
 
 class CommentAction(BaseModel):
-    """اکشن کامنت"""
+    """TODO: Translate - اکشن کامنت"""
     success: bool
     comment_id: int
     message: str = "کامنت با موفقیت ثبت شد"
@@ -242,7 +242,7 @@ class CommentAction(BaseModel):
 # ============================================
 
 class PublicProfileResponse(BaseModel):
-    """پروفایل عمومی برای نمایش به عموم (SEO)"""
+    """TODO: Translate - پروFile عمومی برای View به عموم (SEO)"""
     username: str
     role: str
     full_name: Optional[str] = None
@@ -271,7 +271,7 @@ class PublicProfileResponse(BaseModel):
 # ============================================
 
 class UserAdminUpdate(BaseModel):
-    """به‌روزرسانی کاربر توسط ادمین"""
+    """TODO: Translate - Update User توسط ادمین"""
     is_active: Optional[bool] = None
     is_verified: Optional[bool] = None
     role: Optional[UserRole] = None
@@ -282,7 +282,7 @@ class UserAdminUpdate(BaseModel):
 
 
 class BulkUserAction(BaseModel):
-    """اکشن گروهی روی کاربران"""
+    """TODO: Translate - اکشن گروهی روی Userان"""
     user_ids: List[int]
     action: str  # 'activate', 'deactivate', 'verify', 'assign_role'
-    role: Optional[UserRole] = None  # فقط برای assign_role
+    role: Optional[UserRole] = None  # TODO: Translate -  فقط برای assign_role

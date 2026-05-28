@@ -44,17 +44,17 @@ socketio = SocketIO(
 
 
 def get_locale():
-    # اولویت ۱: زبان انتخاب‌شده توسط کاربر در session
+    # TODO: Translate -  اولویت ۱: زبان انتخاب‌شده توسط User در session
     if 'lang' in session:
         return session['lang']
 
-    # اولویت ۲: پارامتر URL (برای تغییرات لحظه‌ای)
+    # TODO: Translate -  اولویت ۲: پارامتر URL (برای تغییرات لحظه‌ای)
     lang = request.args.get('lang')
     if lang and lang in ['fa', 'en']:
-        session['lang'] = lang  # ذخیره برای جلسات بعدی
+        session['lang'] = lang  # TODO: Translate -  Save برای جلسات بعدی
         return lang
 
-    # اولویت ۳: زبان مرورگر
+    # TODO: Translate -  اولویت ۳: زبان مرورگر
     return request.accept_languages.best_match(['fa', 'en'], 'fa')
 
 def setup_logging(app):
@@ -245,9 +245,9 @@ def create_app():
 
 
     # =============================================================================
-    # ✅ CLI Command: Load Ports from JSON (با پشتیبانی از PostgreSQL)
+    # TODO: Translate -  ✅ CLI Command: Load Ports from JSON (با پشتیبانی از PostgreSQL)
     # =============================================================================
-    from sqlalchemy.dialects.postgresql import insert as pg_insert  # ← این خط را اضافه کنید
+    from sqlalchemy.dialects.postgresql import insert as pg_insert  # TODO: Translate -  ← این خط را اضافه کنید
 
     @app.cli.command("load-ports")
     @click.option('--file', '-f',
@@ -314,7 +314,7 @@ def create_app():
                     return
 
                 if ports_to_insert:
-                    # ✅ استفاده از ON CONFLICT DO NOTHING برای PostgreSQL
+                    # TODO: Translate -  ✅ استفاده از ON CONFLICT DO NOTHING برای PostgreSQL
                     stmt = pg_insert(Port).values(ports_to_insert)
                     stmt = stmt.on_conflict_do_nothing(index_elements=['name', 'country'])
 
@@ -489,8 +489,8 @@ def create_app():
     from api_docs import init_api_docs
 
     app.register_blueprint(users_bp, url_prefix='/users')
-    # Blueprint از permissions_routes به دلیل استفاده از همان users_bp در آن فایل، نیاز به ثبت جداگانه ندارد
-    # تمام routeهای permissions_routes تحت همان users_bp ثبت شده‌اند
+    # TODO: Translate -  Blueprint از permissions_routes به دلیل استفاده از همان users_bp در آن File، نیاز به ثبت جداگانه نداReject
+    # TODO: Translate -  تمام routeهای permissions_routes تحت همان users_bp ثبت شده‌اند
     app.register_blueprint(root_bp)
     
     # Initialize admin blueprints (includes permission management)

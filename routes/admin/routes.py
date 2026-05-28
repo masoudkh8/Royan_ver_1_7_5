@@ -26,7 +26,7 @@ def make_session_permanent():
 
 
 # ---------------------------------------
-# Decorator: فقط ادمین دسترسی داشته باشه
+# TODO: Translate -  Decorator: فقط ادمین Access داشته باشه
 # ---------------------------------------
 
 
@@ -35,9 +35,9 @@ def admin_index():
     return redirect(url_for('admin.login'))
 
 def admin_required(f):
-    @wraps(f)  # ✅ این خط مشکل رو حل می‌کنه
+    @wraps(f)  # TODO: Translate -  ✅ این خط مشکل رو حل می‌کنه
     def decorated_function(*args, **kwargs):
-        # ✅ اول چک کن کاربر وارد شده باشد
+        # TODO: Translate -  ✅ اول چک کن User واReject شده باشد
         if not current_user.is_authenticated:
             flash("❌ Please log in first.")
             return redirect(url_for('users.login'))
@@ -51,27 +51,27 @@ def admin_required(f):
 
 
 # ---------------------------------------
-# داشبورد ادمین
+# TODO: Translate -  داشبوReject ادمین
 # ---------------------------------------
 @admin_bp.route('/dashboard')
 @login_required
 @admin_required
 def dashboard():
-    """داشبورد ادمین با نمایش آمار و نوتیفیکیشن‌های جدید"""
+    """TODO: Translate - داشبوReject ادمین با View آمار و نوتیفیکیشن‌های جدید"""
     from models.auth import ActivityLog
     
     total_users = User.query.count()
     premium_requests = PremiumRequest.query.count()
     pending_requests = PremiumRequest.query.filter_by(status='pending').count()
     
-    # شمارش مدارک آپلود شده برای بررسی (کاربرانی که مدارک دارند اما هنوز تأیید نشده‌اند)
+    # TODO: Translate -  شمارش مدارک Upload شده برای Check (Userانی که مدارک دارند اما هنوز Confirm نشده‌اند)
     users_with_pending_docs = User.query.filter(
         User.verification_documents != None,
         User.verification_documents != '[]',
         User.is_verified == False
     ).count()
     
-    # دریافت نوتیفیکیشن‌های خوانده‌نشده ادمین
+    # TODO: Translate -  دریافت نوتیفیکیشن‌های خوانده‌نشده ادمین
     from models.notification import Notification
     unread_notifications = Notification.query.filter_by(
         user_id=current_user.id,
@@ -96,7 +96,7 @@ def dashboard():
 
 
 # ---------------------------------------
-# مدیریت کاربران
+# TODO: Translate -  مدیریت Userان
 # ---------------------------------------
 
 @admin_bp.route('/users')
@@ -119,7 +119,7 @@ def manage_users():
         error_out=False
     )
 
-    # ✅ محاسبه تعداد در بک‌اند
+    # TODO: Translate -  ✅ محاسبه تعداد در بک‌اند
     total_active = User.query.filter_by(is_active=True).count()
     total_inactive = User.query.filter_by(is_active=False).count()
 
@@ -131,7 +131,7 @@ def manage_users():
         total_inactive=total_inactive
     )
 # ---------------------------------------
-# تغییر نقش کاربر
+# TODO: Translate -  تغییر Role User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/role', methods=['POST'])
 @admin_required
@@ -156,7 +156,7 @@ def change_user_role(user_id):
 
 
 # ---------------------------------------
-# درخواست‌های ارتقاء به کاربر ویژه
+# TODO: Translate -  Request‌های ارتقاء به User ویژه
 # ---------------------------------------
 @admin_bp.route('/premium_requests')
 @admin_required
@@ -176,7 +176,7 @@ def premium_requests():
 
 
 # ---------------------------------------
-# تأیید یا رد درخواست ارتقاء (یکپارچه‌سازی approve و reject)
+# TODO: Translate -  Confirm یا Reject Request ارتقاء (یکپارچه‌سازی approve و reject)
 # ---------------------------------------
 @admin_bp.route('/premium_request/<int:req_id>/review', methods=['POST'])
 @admin_required
@@ -187,17 +187,17 @@ def review_premium_request(req_id):
     if action == 'approve':
         req.status = 'approved'
         req.user.is_premium = True
-        # ارتقای لایه عضویت به VERIFIED (لایه ۲)
+        # TODO: Translate -  ارتقای لایه عضویت به VERIFIED (لایه ۲)
         from models.user import MembershipTier
         req.user.membership_tier = MembershipTier.VERIFIED
-        # تأیید KYC
+        #  Confirm KYC
         req.user.is_kyc_verified = True
-        # افزایش امتیاز اعتماد (Trust Score)
+        # TODO: Translate -  افزایش Score Trust (Trust Score)
         req.user.trust_score_value = min(100, req.user.trust_score_value + 20)
-        # ثبت زمان پریمیوم شدن
+        # TODO: Translate -  ثبت Time پریمیوم شدن
         req.user.premium_since = datetime.now(tehran_tz)
         
-        # ذخیره مدارک در فیلد verification_documents
+        # TODO: Translate -  Save مدارک در Field verification_documents
         import json
         docs = {
             'passport': req.passport_file,
@@ -222,7 +222,7 @@ def review_premium_request(req_id):
 
 
 # ---------------------------------------
-# تأیید درخواست ارتقاء (قدیمی - برای سازگاری)
+# TODO: Translate -  Confirm Request ارتقاء (قدیمی - برای سازگاری)
 # ---------------------------------------
 @admin_bp.route('/approve_premium/<int:req_id>', methods=['POST'])
 @admin_required
@@ -230,12 +230,12 @@ def approve_premium(req_id):
     req = PremiumRequest.query.get_or_404(req_id)
     req.status = 'approved'
     req.user.is_premium = True
-    # ارتقای لایه عضویت به VERIFIED (لایه ۲)
+    # TODO: Translate -  ارتقای لایه عضویت به VERIFIED (لایه ۲)
     from models.user import MembershipTier
     req.user.membership_tier = MembershipTier.VERIFIED
-    # تأیید KYC
+    #  Confirm KYC
     req.user.is_kyc_verified = True
-    # ثبت زمان پریمیوم شدن
+    # TODO: Translate -  ثبت Time پریمیوم شدن
     req.user.premium_since = datetime.now(tehran_tz)
     db.session.commit()
 
@@ -244,7 +244,7 @@ def approve_premium(req_id):
 
 
 # ---------------------------------------
-# رد درخواست ارتقاء (قدیمی - برای سازگاری)
+# TODO: Translate -  Reject Request ارتقاء (قدیمی - برای سازگاری)
 # ---------------------------------------
 @admin_bp.route('/reject_premium/<int:req_id>', methods=['POST'])
 @admin_required
@@ -258,7 +258,7 @@ def reject_premium(req_id):
 
 
 # ---------------------------------------
-# مشاهده جزئیات درخواست
+# TODO: Translate -  مشاهده جزئیات Request
 # ---------------------------------------
 @admin_bp.route('/premium_request/<int:req_id>')
 @admin_required
@@ -268,14 +268,14 @@ def view_premium_request(req_id):
 
 
 # ---------------------------------------
-# مشاهده مدارک کاربر
+# TODO: Translate -  مشاهده مدارک User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/documents')
 @admin_required
 def view_user_documents(user_id):
     user = User.query.get_or_404(user_id)
     
-    # دریافت مدارک از فیلد verification_documents (JSON format)
+    # TODO: Translate -  دریافت مدارک از Field verification_documents (JSON format)
     import json
     documents = json.loads(user.verification_documents) if user.verification_documents else []
     
@@ -283,12 +283,12 @@ def view_user_documents(user_id):
 
 
 # ---------------------------------------
-# مشاهده همه مدارک کاربران برای بررسی
+# TODO: Translate -  مشاهده همه مدارک Userان برای Check
 # ---------------------------------------
 @admin_bp.route('/documents')
 @admin_required
 def view_all_documents():
-    """نمایش لیست تمام کاربرانی که مدارک آپلود کرده‌اند"""
+    """TODO: Translate - View List تمام Userانی که مدارک Upload کRejectه‌اند"""
     page = request.args.get('page', 1, type=int)
     per_page = 15
     status_filter = request.args.get('status', 'pending')  # pending, approved, rejected, all
@@ -309,7 +309,7 @@ def view_all_documents():
         error_out=False
     )
     
-    # آمار
+    # TODO: Translate -  آمار
     total_pending = User.query.filter(
         User.verification_documents != None,
         User.verification_documents != '[]',
@@ -330,7 +330,7 @@ def view_all_documents():
 
 
 # ---------------------------------------
-# تأیید مدارک کاربر
+# TODO: Translate -  Confirm مدارک User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/verify_documents', methods=['POST'])
 @admin_required
@@ -339,12 +339,12 @@ def verify_user_documents(user_id):
     user.is_verified = True
     user.is_kyc_verified = True
     
-    # اگر کاربر مدارک کامل دارد، لایه عضویت را ارتقا بده
+    # TODO: Translate -  اگر User مدارک Complete داReject، لایه عضویت را ارتقا بده
     from models.user import MembershipTier
     if user.verification_documents and user.verification_documents != '[]':
         user.membership_tier = MembershipTier.VERIFIED
     
-    # ایجاد نوتیفیکیشن برای کاربر
+    # TODO: Translate -  Create نوتیفیکیشن برای User
     from models.notification import Notification
     notification = Notification(
         user_id=user.id,
@@ -357,7 +357,7 @@ def verify_user_documents(user_id):
     )
     db.session.add(notification)
     
-    # افزایش TrustScore
+    # TODO: Translate -  افزایش TrustScore
     if user.trust_score:
         user.trust_score_value = min(100, user.trust_score_value + 20)
     
@@ -367,17 +367,17 @@ def verify_user_documents(user_id):
 
 
 # ---------------------------------------
-# رد مدارک کاربر
+# TODO: Translate -  Reject مدارک User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/reject_documents', methods=['POST'])
 @admin_required
 def reject_user_documents(user_id):
     user = User.query.get_or_404(user_id)
-    # می‌توانیم مدارک را پاک کنیم یا فقط وضعیت را تغییر دهیم
-    # در اینجا فقط وضعیت را به False تغییر می‌دهیم
+    # TODO: Translate -  می‌توانیم مدارک را پاک کنیم یا فقط Status را تغییر دهیم
+    # TODO: Translate -  در اینجا فقط Status را به False تغییر می‌دهیم
     user.is_verified = False
     
-    # ایجاد نوتیفیکیشن برای کاربر
+    # TODO: Translate -  Create نوتیفیکیشن برای User
     from models.notification import Notification
     notification = Notification(
         user_id=user.id,
@@ -396,7 +396,7 @@ def reject_user_documents(user_id):
 
 
 # ---------------------------------------
-# حذف کاربر (با احتیاط)
+# TODO: Translate -  Delete User (با احتیاط)
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/delete', methods=['POST'])
 @admin_required
@@ -409,7 +409,7 @@ def delete_user(user_id):
     user = User.query.get_or_404(user_id)
     username = user.username
 
-    # حذف درخواست ارتقاء اگر وجود داشت
+    # TODO: Translate -  Delete Request ارتقاء اگر وجود داشت
     req = PremiumRequest.query.filter_by(user_id=user.id).first()
     if req:
         db.session.delete(req)
@@ -424,7 +424,7 @@ def delete_user(user_id):
 
 
 # ---------------------------------------
-# غیرفعال‌سازی کاربر
+# TODO: Translate -  غیرActive‌سازی User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/deactivate', methods=['POST'])
 @admin_required
@@ -445,7 +445,7 @@ def deactivate_user(user_id):
 
 
 # ---------------------------------------
-# فعال‌سازی کاربر
+# TODO: Translate -  Active‌سازی User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/activate', methods=['POST'])
 @admin_required
@@ -458,7 +458,7 @@ def activate_user(user_id):
 
 
 # ---------------------------------------
-# تغییر وضعیت ویژه (Premium) کاربر
+# TODO: Translate -  تغییر Status ویژه (Premium) User
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/toggle_premium', methods=['POST'])
 @admin_required
@@ -470,7 +470,7 @@ def toggle_premium(user_id):
     user = User.query.get_or_404(user_id)
     user.is_premium = not user.is_premium
     
-    # اگر کاربر پریمیوم شد، لایه عضویت را ارتقا بده
+    # TODO: Translate -  اگر User پریمیوم شد، لایه عضویت را ارتقا بده
     if user.is_premium:
         from models.user import MembershipTier
         user.membership_tier = MembershipTier.VERIFIED
@@ -488,12 +488,12 @@ def toggle_premium(user_id):
 
 
 # ---------------------------------------
-# چت ادمین با کاربران
+# TODO: Translate -  Chat ادمین با Userان
 # ---------------------------------------
 @admin_bp.route('/chat')
 @admin_required
 def admin_chat_list():
-    """لیست کاربران برای چت - نمایش همه کاربران فعال (ویژه و غیر ویژه)"""
+    """TODO: Translate - List Userان برای Chat - View همه Userان Active (ویژه و غیر ویژه)"""
     users = User.query.filter(
         User.id != current_user.id,
         User.is_active == True
@@ -504,26 +504,26 @@ def admin_chat_list():
 @admin_bp.route('/chat/<int:user_id>', methods=['GET', 'POST'])
 @admin_required
 def admin_chat_with_user(user_id):
-    """چت ادمین با یک کاربر خاص"""
+    """TODO: Translate - Chat ادمین با یک User خاص"""
     user = User.query.get_or_404(user_id)
     
     if user.id == current_user.id:
         flash("❌ You cannot chat with yourself.", "error")
         return redirect(url_for('admin.admin_chat_list'))
     
-    # دریافت پیام‌های بین ادمین و این کاربر
+    # TODO: Translate -  دریافت Message‌های بین ادمین و این User
     messages = Message.query.filter(
         ((Message.sender_id == current_user.id) & (Message.receiver_id == user.id)) |
         ((Message.sender_id == user.id) & (Message.receiver_id == current_user.id))
     ).order_by(Message.created_at.asc()).all()
     
-    # علامت‌گذاری پیام‌های دریافتی به عنوان خوانده شده
+    # TODO: Translate -  علامت‌گذاری Message‌های دریافتی به عنوان خوانده شده
     for m in messages:
         if m.receiver_id == current_user.id and not m.is_read:
             m.is_read = True
     db.session.commit()
     
-    # ارسال پیام
+    # TODO: Translate -  ارسال Message
     if request.method == 'POST':
         content = request.form.get('content', '').strip()
         if content:
@@ -534,7 +534,7 @@ def admin_chat_with_user(user_id):
             )
             db.session.add(msg)
             
-            # ایجاد اعلان برای کاربر
+            # TODO: Translate -  Create Notification برای User
             notification = Notification(
                 user_id=user.id,
                 message=f"📩 You received a new message from Admin."
@@ -548,16 +548,16 @@ def admin_chat_with_user(user_id):
     return render_template('admin/chat_with_user.html', user=user, messages=messages)
 
 
-# صفحه ورود
+#  Page Login
 @admin_bp.route('/login')
 def login():
-    # اگر اولین ادمین وجود ندارد، به صفحه ساخت ادمین هدایت کن
+    # TODO: Translate -  اگر اولین ادمین وجود نداReject، به Page ساخت ادمین هدایت کن
     admin_exists = User.query.filter_by(role=Role.ADMIN).first()
     if not admin_exists:
         return redirect(url_for('admin.create_first_admin'))
     return render_template('admin/login.html', current_year=datetime.now().year)
 
-# پردازش ورود
+# TODO: Translate -  پRejectازش Login
 @admin_bp.route('/login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
@@ -581,11 +581,11 @@ def login_post():
 
 
 # ---------------------------------------
-# ساخت اولین ادمین (فقط زمانی که هیچ ادمینی وجود ندارد)
+# TODO: Translate -  ساخت اولین ادمین (فقط Timeی که هیچ ادمینی وجود نداReject)
 # ---------------------------------------
 @admin_bp.route('/create-first-admin', methods=['GET', 'POST'])
 def create_first_admin():
-    # بررسی اینکه آیا ادمینی وجود دارد یا خیر
+    # TODO: Translate -  Check اینکه آیا ادمینی وجود داReject یا خیر
     admin_exists = User.query.filter_by(role=Role.ADMIN).first()
     
     if admin_exists:
@@ -598,7 +598,7 @@ def create_first_admin():
         password = request.form.get('password', '')
         confirm_password = request.form.get('confirm_password', '')
         
-        # اعتبارسنجی
+        # TODO: Translate -  Creditسنجی
         errors = []
         
         if not username or len(username) < 3:
@@ -613,11 +613,11 @@ def create_first_admin():
         if password != confirm_password:
             errors.append("Passwords do not match.")
         
-        # بررسی تکراری بودن ایمیل
+        # TODO: Translate -  Check تکراری بودن ایمیل
         if User.query.filter_by(email=email).first():
             errors.append("This email is already registered.")
         
-        # بررسی تکراری بودن نام کاربری
+        # TODO: Translate -  Check تکراری بودن نام Userی
         if User.query.filter_by(username=username).first():
             errors.append("This username is already taken.")
         
@@ -629,7 +629,7 @@ def create_first_admin():
                                  email=email,
                                  current_year=datetime.now().year)
         
-        # ساخت کاربر ادمین
+        # TODO: Translate -  ساخت User ادمین
         from werkzeug.security import generate_password_hash
         from models.user import MembershipTier
         
@@ -650,7 +650,7 @@ def create_first_admin():
         db.session.add(admin_user)
         db.session.commit()
         
-        # لاگ فعالیت
+        # TODO: Translate -  لاگ Activeیت
         from models.auth import ActivityLog
         activity = ActivityLog(
             activity_type='first_admin_created',

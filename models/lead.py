@@ -1,5 +1,5 @@
 # models/lead.py
-# بخش ۱۲: Admin & CRM - مدیریت مشتریان و لیدها
+# TODO: Translate -  Section ۱۲: Admin & CRM - مدیریت مشتریان و لیدها
 
 from . import db
 from datetime import datetime, timedelta
@@ -7,27 +7,27 @@ from enum import Enum
 import uuid
 
 class LeadStatus(Enum):
-    NEW = 'new'  # جدید
-    CONTACTED = 'contacted'  # تماس گرفته‌شده
-    QUALIFIED = 'qualified'  # واجد شرایط
-    PROPOSAL_SENT = 'proposal_sent'  # ارسال پیشنهاد
-    NEGOTIATION = 'negotiation'  # در مذاکره
-    WON = 'won'  # برنده‌شده
-    LOST = 'lost'  # باخته‌شده
-    COLD = 'cold'  # سرد
+    NEW = 'new'  # TODO: Translate -  جدید
+    CONTACTED = 'contacted'  # TODO: Translate -  تماس گرفته‌شده
+    QUALIFIED = 'qualified'  # TODO: Translate -  واجد شرایط
+    PROPOSAL_SENT = 'proposal_sent'  # TODO: Translate -  ارسال پیشنهاد
+    NEGOTIATION = 'negotiation'  # TODO: Translate -  در مذاکره
+    WON = 'won'  # TODO: Translate -  برنده‌شده
+    LOST = 'lost'  # TODO: Translate -  باخته‌شده
+    COLD = 'cold'  # TODO: Translate -  سReject
 
 class LeadSource(Enum):
-    WEBSITE = 'website'  # وب‌سایت
-    REFERRAL = 'referral'  # معرفی
-    LINKEDIN = 'linkedin'  # لینکدین
-    INSTAGRAM = 'instagram'  # اینستاگرام
-    TELEGRAM = 'telegram'  # تلگرام
-    WHATSAPP = 'whatsapp'  # واتس‌اپ
-    EMAIL_CAMPAIGN = 'email_campaign'  # کمپین ایمیل
-    WEBINAR = 'webinar'  # وبینار
-    TRADE_SHOW = 'trade_show'  # نمایشگاه تجاری
-    MARKETPLACE = 'marketplace'  # مارکت‌پلیس
-    OTHER = 'other'  # سایر
+    WEBSITE = 'website'  # TODO: Translate -  وب‌سایت
+    REFERRAL = 'referral'  # TODO: Translate -  معرفی
+    LINKEDIN = 'linkedin'  # TODO: Translate -  لینکدین
+    INSTAGRAM = 'instagram'  # TODO: Translate -  اینستاگرام
+    TELEGRAM = 'telegram'  # TODO: Translate -  تلگرام
+    WHATSAPP = 'whatsapp'  # TODO: Translate -  واتس‌اپ
+    EMAIL_CAMPAIGN = 'email_campaign'  # TODO: Translate -  کمپین ایمیل
+    WEBINAR = 'webinar'  # TODO: Translate -  وبینار
+    TRADE_SHOW = 'trade_show'  # TODO: Translate -  Viewگاه تجاری
+    MARKETPLACE = 'marketplace'  # TODO: Translate -  مارکت‌پلیس
+    OTHER = 'other'  # TODO: Translate -  سایر
 
 class LeadPriority(Enum):
     LOW = 'low'
@@ -36,12 +36,12 @@ class LeadPriority(Enum):
     URGENT = 'urgent'
 
 class PipelineStage(Enum):
-    AWARENESS = 'awareness'  # آگاهی
-    INTEREST = 'interest'  # علاقه
-    EVALUATION = 'evaluation'  # ارزیابی
-    DECISION = 'decision'  # تصمیم‌گیری
-    PURCHASE = 'purchase'  # خرید
-    RETENTION = 'retention'  # حفظ مشتری
+    AWARENESS = 'awareness'  # TODO: Translate -  آگاهی
+    INTEREST = 'interest'  # TODO: Translate -  علاقه
+    EVALUATION = 'evaluation'  # TODO: Translate -  ارزیابی
+    DECISION = 'decision'  # TODO: Translate -  تصمیم‌گیری
+    PURCHASE = 'purchase'  #  Purchase
+    RETENTION = 'retention'  # TODO: Translate -  حفظ مشتری
 
 class CommunicationChannel(Enum):
     EMAIL = 'email'
@@ -61,13 +61,13 @@ class Lead(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     
-    # شناسه یکتا
+    # TODO: Translate -  شناسه یکتا
     lead_id = db.Column(db.String(36), default=lambda: str(uuid.uuid4()), unique=True)
     
-    # اطلاعات تماس
+    # TODO: Translate -  Information تماس
     company_name = db.Column(db.String(200))
-    contact_person = db.Column(db.String(100))  # شخص تماس
-    position = db.Column(db.String(100))  # سمت
+    contact_person = db.Column(db.String(100))  # TODO: Translate -  شخص تماس
+    position = db.Column(db.String(100))  # TODO: Translate -  سمت
     
     email = db.Column(db.String(120))
     phone = db.Column(db.String(20))
@@ -76,56 +76,56 @@ class Lead(db.Model):
     linkedin_url = db.Column(db.String(300))
     website = db.Column(db.String(300))
     
-    # آدرس
+    # TODO: Translate -  آدرس
     country = db.Column(db.String(50))
     city = db.Column(db.String(100))
     address = db.Column(db.Text)
     
-    # منبع و وضعیت
+    # TODO: Translate -  منبع و Status
     source = db.Column(db.Enum(LeadSource), default=LeadSource.WEBSITE)
     status = db.Column(db.Enum(LeadStatus), default=LeadStatus.NEW)
     priority = db.Column(db.Enum(LeadPriority), default=LeadPriority.MEDIUM)
     
-    # اختصاص به کارشناس فروش
+    # TODO: Translate -  اختصاص به کارشناس Sale
     assigned_to = db.Column(db.Integer, db.ForeignKey('user.id'), index=True)
     
-    # اطلاعات کسب‌وکار
-    industry = db.Column(db.String(100))  # صنعت
-    company_size = db.Column(db.String(50))  # اندازه شرکت
-    annual_revenue = db.Column(db.String(50))  # درآمد سالانه
+    # TODO: Translate -  Information کسب‌وکار
+    industry = db.Column(db.String(100))  # TODO: Translate -  صنعت
+    company_size = db.Column(db.String(50))  # TODO: Translate -  اندازه شرکت
+    annual_revenue = db.Column(db.String(50))  # TODO: Translate -  درآمد سالانه
     
-    # نیازها
-    interested_products = db.Column(db.JSON)  # محصولات مورد علاقه
-    target_markets = db.Column(db.JSON)  # بازارهای هدف
-    requirements = db.Column(db.Text)  # نیازمندی‌ها
-    budget_range = db.Column(db.String(50))  # محدوده بودجه
-    timeline = db.Column(db.String(50))  # زمان‌بندی مورد نظر
+    # TODO: Translate -  نیازها
+    interested_products = db.Column(db.JSON)  # TODO: Translate -  Productات موReject علاقه
+    target_markets = db.Column(db.JSON)  # TODO: Translate -  بازارهای هدف
+    requirements = db.Column(db.Text)  # TODO: Translate -  نیازمندی‌ها
+    budget_range = db.Column(db.String(50))  # TODO: Translate -  محدوده بودجه
+    timeline = db.Column(db.String(50))  # TODO: Translate -  Time‌بندی موReject Comment
     
-    # پایپ‌لاین
+    # TODO: Translate -  پایپ‌لاین
     pipeline_stage = db.Column(db.Enum(PipelineStage), default=PipelineStage.AWARENESS)
-    deal_value = db.Column(db.Numeric(15, 2))  # ارزش معامله احتمالی
+    deal_value = db.Column(db.Numeric(15, 2))  # TODO: Translate -  ارزش معامله احتمالی
     currency = db.Column(db.String(3), default='USD')
-    probability = db.Column(db.Integer, default=10)  # احتمال موفقیت (درصد)
+    probability = db.Column(db.Integer, default=10)  # TODO: Translate -  احتمال Successیت (درصد)
     
-    # امتیازدهی
-    lead_score = db.Column(db.Integer, default=0)  # امتیاز لید
+    # TODO: Translate -  Scoreدهی
+    lead_score = db.Column(db.Integer, default=0)  # TODO: Translate -  Score لید
     
-    # آخرین تعامل
+    # TODO: Translate -  آخرین تعامل
     last_contact_date = db.Column(db.DateTime)
     next_follow_up = db.Column(db.DateTime)
     
-    # توضیحات
+    # TODO: Translate -  توضیحات
     notes = db.Column(db.Text)
-    internal_notes = db.Column(db.Text)  # یادداشت‌های داخلی
+    internal_notes = db.Column(db.Text)  # TODO: Translate -  یادداشت‌های داخلی
     
-    # تبدیل به مشتری
+    # TODO: Translate -  تبدیل به مشتری
     converted_to_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     converted_at = db.Column(db.DateTime)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # روابط
+    # TODO: Translate -  روابط
     assignee = db.relationship('User', foreign_keys=[assigned_to], backref=db.backref('assigned_leads', lazy='dynamic'))
     converter = db.relationship('User', foreign_keys=[converted_to_user_id], backref=db.backref('converted_leads', lazy='dynamic'))
     
@@ -163,26 +163,26 @@ class LeadInteraction(db.Model):
     lead_id = db.Column(db.Integer, db.ForeignKey('leads.id'), nullable=False, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
     
-    # نوع تعامل
+    # TODO: Translate -  Type تعامل
     interaction_type = db.Column(db.String(50), nullable=False)  # call, email, meeting, message
     channel = db.Column(db.Enum(CommunicationChannel))
     
-    # موضوع و محتوا
+    # TODO: Translate -  موضوع و محتوا
     subject = db.Column(db.String(200))
     description = db.Column(db.Text)
     
-    # نتیجه
-    outcome = db.Column(db.Text)  # نتیجه تعامل
+    # TODO: Translate -  نتیجه
+    outcome = db.Column(db.Text)  # TODO: Translate -  نتیجه تعامل
     sentiment = db.Column(db.String(20))  # positive, neutral, negative
     
-    # فایل‌های ضمیمه
-    attachments = db.Column(db.JSON)  # لیست فایل‌ها
+    # TODO: Translate -  File‌های ضمیمه
+    attachments = db.Column(db.JSON)  # TODO: Translate -  List File‌ها
     
-    # زمان
+    #  Time
     occurred_at = db.Column(db.DateTime, default=datetime.utcnow)
-    duration_minutes = db.Column(db.Integer)  # مدت (برای تماس/جلسه)
+    duration_minutes = db.Column(db.Integer)  # TODO: Translate -  مدت (برای تماس/Session)
     
-    # بعدی
+    # TODO: Translate -  بعدی
     follow_up_required = db.Column(db.Boolean, default=False)
     follow_up_date = db.Column(db.DateTime)
     
@@ -219,15 +219,15 @@ class LeadTask(db.Model):
     priority = db.Column(db.String(20), default='medium')  # low, medium, high
     task_type = db.Column(db.String(50))  # call, email, proposal, meeting, research
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     due_date = db.Column(db.DateTime)
     completed_at = db.Column(db.DateTime)
     
-    # وضعیت
+    #  Status
     is_completed = db.Column(db.Boolean, default=False)
     status = db.Column(db.String(20), default='pending')  # pending, in_progress, completed, cancelled
     
-    # یادآوری
+    # TODO: Translate -  یادآوری
     reminder_enabled = db.Column(db.Boolean, default=False)
     reminder_time = db.Column(db.DateTime)
     
@@ -263,35 +263,35 @@ class Campaign(db.Model):
     
     description = db.Column(db.Text)
     
-    # نوع کمپین
+    # TODO: Translate -  Type کمپین
     campaign_type = db.Column(db.String(50))  # email, social_media, content, webinar, ads
     channel = db.Column(db.Enum(CommunicationChannel))
     
-    # هدف
-    objective = db.Column(db.Text)  # هدف کمپین
-    target_audience = db.Column(db.JSON)  # مخاطبان هدف
+    # TODO: Translate -  هدف
+    objective = db.Column(db.Text)  # TODO: Translate -  هدف کمپین
+    target_audience = db.Column(db.JSON)  # TODO: Translate -  مخاطبان هدف
     
-    # زمان‌بندی
+    # TODO: Translate -  Time‌بندی
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date)
     
-    # وضعیت
+    #  Status
     status = db.Column(db.String(20), default='draft')  # draft, active, paused, completed
     
-    # بودجه
+    # TODO: Translate -  بودجه
     budget = db.Column(db.Numeric(15, 2))
     currency = db.Column(db.String(3), default='USD')
     actual_cost = db.Column(db.Numeric(15, 2), default=0)
     
-    # آمار
+    # TODO: Translate -  آمار
     total_recipients = db.Column(db.Integer, default=0)
     opens = db.Column(db.Integer, default=0)
     clicks = db.Column(db.Integer, default=0)
     conversions = db.Column(db.Integer, default=0)
     leads_generated = db.Column(db.Integer, default=0)
     
-    # محتوا
-    email_template = db.Column(db.Text)  # قالب ایمیل
+    # TODO: Translate -  محتوا
+    email_template = db.Column(db.Text)  # TODO: Translate -  Template ایمیل
     landing_page_url = db.Column(db.String(500))
     
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -326,15 +326,15 @@ class CampaignLead(db.Model):
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaigns.id'), nullable=False, index=True)
     lead_id = db.Column(db.Integer, db.ForeignKey('leads.id'), nullable=False, index=True)
     
-    # وضعیت در کمپین
+    # TODO: Translate -  Status در کمپین
     status = db.Column(db.String(20), default='sent')  # sent, opened, clicked, converted
     
-    # تعامل
+    # TODO: Translate -  تعامل
     opened_at = db.Column(db.DateTime)
     clicked_at = db.Column(db.DateTime)
     converted_at = db.Column(db.DateTime)
     
-    # امتیاز
+    #  Score
     engagement_score = db.Column(db.Integer, default=0)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -351,10 +351,10 @@ class CampaignAnalytics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaigns.id'), nullable=False, index=True)
     
-    # تاریخ
+    #  Date
     date = db.Column(db.Date, nullable=False)
     
-    # آمار روزانه
+    # TODO: Translate -  آمار روزانه
     sent = db.Column(db.Integer, default=0)
     delivered = db.Column(db.Integer, default=0)
     opened = db.Column(db.Integer, default=0)
@@ -363,7 +363,7 @@ class CampaignAnalytics(db.Model):
     unsubscribed = db.Column(db.Integer, default=0)
     converted = db.Column(db.Integer, default=0)
     
-    # هزینه
+    # TODO: Translate -  هزینه
     daily_cost = db.Column(db.Numeric(10, 2), default=0)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -389,7 +389,7 @@ class EmailTemplate(db.Model):
     template_type = db.Column(db.String(50))  # welcome, follow_up, proposal, newsletter
     category = db.Column(db.String(50))
     
-    variables = db.Column(db.JSON)  # متغیرهای قابل استفاده
+    variables = db.Column(db.JSON)  # TODO: Translate -  Variableهای قابل استفاده
     
     is_active = db.Column(db.Boolean, default=True)
     usage_count = db.Column(db.Integer, default=0)
@@ -418,12 +418,12 @@ class AutomationRule(db.Model):
     name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
     
-    # شرط
+    # TODO: Translate -  شرط
     trigger_type = db.Column(db.String(50))  # lead_created, status_changed, no_response, date_based
-    conditions = db.Column(db.JSON)  # شرایط اجرا
+    conditions = db.Column(db.JSON)  # TODO: Translate -  شرایط اجرا
     
-    # عملیات
-    actions = db.Column(db.JSON)  # اقدامات خودکار
+    # TODO: Translate -  عملیات
+    actions = db.Column(db.JSON)  # TODO: Translate -  اقدامات خودکار
     
     is_active = db.Column(db.Boolean, default=True)
     execution_count = db.Column(db.Integer, default=0)

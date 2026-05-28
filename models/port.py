@@ -11,8 +11,8 @@ class Port(db.Model):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-    # ✅ ۱. جلوگیری از تکراری در سطح دیتابیس
-    # ✅ ۲. ایندکس مختصات برای جستجوی شعاعی/جغرافیایی سریع‌تر
+    # TODO: Translate -  ✅ ۱. جلوگیری از تکراری در سطح دیتابیس
+    # TODO: Translate -  ✅ ۲. ایندکس مختصات برای جستجوی شعاعی/جغرافیایی سریع‌تر
     __table_args__ = (
         UniqueConstraint('name', 'country', name='uq_port_name_country'),
         Index('idx_port_location', 'latitude', 'longitude'),

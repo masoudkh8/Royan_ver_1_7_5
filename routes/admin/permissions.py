@@ -26,7 +26,7 @@ def permission_dashboard():
     roles = Role
     permissions = Permission
     
-    # دریافت مجوزهای پیش‌فرض برای هر نقش و تبدیل به لیست مقادیر رشته‌ای (Build permission matrix)
+    # TODO: Translate -  دریافت Permissionهای Default برای هر Role و تبدیل به List مقادیر String‌ای (Build permission matrix)
     role_perms_cache = {}
     for role in roles:
         perms = get_role_permissions(role)
@@ -215,7 +215,7 @@ def preview_user_menu(user_id):
 
     visible_modules = []
     for module in available_modules:
-        # بررسی دسترسی (Check access)
+        #  Check Access (Check access)
         has_access = module['perm'].value in base_perms_values
         if custom_perms and module['perm'].value in custom_perms:
             has_access = True  # Custom access
