@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import flash, redirect, url_for, request, abort
 from flask_login import current_user
+import json
 from models.user import Role, UserProfile
 from services.permissions import Permission, DEFAULT_ROLE_PERMISSIONS
 
@@ -90,6 +91,9 @@ def get_user_permissions(user):
     1. اگر کاربر مجوزهای سفارشی در پروفایل خود دارد، از آن‌ها استفاده می‌شود.
     2. اگر مجوز سفارشی وجود ندارد، از مجوزهای پیش‌فرض نقش (DEFAULT_ROLE_PERMISSIONS) استفاده می‌شود.
     3. اگر کاربر مهمان است، مجوزهای guest بازگردانده می‌شود.
+    
+    Returns:
+        لیستی از اشیاء Permission (Enum)
     """
     if not user.is_authenticated:
         return DEFAULT_ROLE_PERMISSIONS.get('guest', [])
@@ -101,13 +105,21 @@ def get_user_permissions(user):
         # اگر کاربر مجوزهای دستی تنظیم کرده باشد
         from services.permissions import Permission as PermEnum
         custom_perms = []
-        for perm_str in profile.custom_permissions:
-            try:
-                perm = PermEnum(perm_str)
-                custom_perms.append(perm)
-            except ValueError:
-                continue  # نادیده گرفتن مجوزهای نامعتبر
-        return custom_perms
+        try:
+            perm_strings = json.loads(profile.custom_permissions)
+            if isinstance(perm_strings, list):
+                for perm_str in perm_strings:
+                    try:
+                        perm = PermEnum(perm_str)
+                        custom_perms.append(perm)
+                    except ValueError:
+                        continue  # نادیده گرفتن مجوزهای نامعتبر
+        except (json.JSONDecodeError, TypeError):
+            # اگر JSON معتبر نبود، به مجوزهای پیش‌فرض نقش برگرد
+            pass
+        
+        if custom_perms:
+            return custom_perms
     
     # استفاده از مجوزهای پیش‌فرض نقش
     role_name = user.role.value if user.role else 'guest'

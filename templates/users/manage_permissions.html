@@ -452,8 +452,8 @@
                     مدیریت مجوزهای دسترسی
                 </h2>
                 <p class="mb-0">
-                    {% if request.args.get('target_user_id') %}
-                        تنظیم دسترسی‌های کاربر انتخاب شده
+                    {% if target_user %}
+                        تنظیم دسترسی‌های کاربر: <strong>{{ target_user.username }}</strong> ({{ target_user.role_display_name }})
                     {% else %}
                         مشاهده و مدیریت دسترسی‌های نقش {{ current_user_obj.role_display_name }}
                     {% endif %}
@@ -476,10 +476,10 @@
                     <label for="target_user" class="font-weight-bold mb-2" style="color: #2d3748; font-size: 0.95rem;">
                         <i class="fas fa-user-circle ml-1 text-primary"></i>انتخاب کاربر:
                     </label>
-                    <select name="target_user_id" id="target_user" class="form-select" onchange="this.form.submit()">
+                    <select name="user_id" id="target_user" class="form-select" onchange="this.form.submit()">
                         <option value="">-- کاربر را انتخاب کنید --</option>
                         {% for user in users_list %}
-                        <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>
+                        <option value="{{ user.id }}" {% if target_user and target_user.id == user.id %}selected{% endif %}>
                             {{ user.username }} - {{ user.role_display_name }}
                         </option>
                         {% endfor %}
@@ -497,8 +497,8 @@
 
     <!-- فرم اصلی -->
     <form method="POST" id="permissionsForm">
-        {% if request.args.get('target_user_id') %}
-        <input type="hidden" name="target_user_id" value="{{ request.args.get('target_user_id') }}">
+        {% if target_user %}
+        <input type="hidden" name="target_user_id" value="{{ target_user.id }}">
         {% endif %}
 
         <!-- شبکه کارت‌های مجوز -->

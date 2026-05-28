@@ -22,10 +22,18 @@ def manage_permissions():
     """
     from models.user import UserProfile
     
-    profile = UserProfile.query.filter_by(user_id=current_user.id).first()
+    # تعیین کاربر هدف (برای ادمین، می‌تواند کاربر دیگری باشد)
+    target_user_id = request.args.get('user_id', request.form.get('target_user_id', current_user.id))
+    try:
+        target_user_id = int(target_user_id)
+    except (ValueError, TypeError):
+        target_user_id = current_user.id
     
-    # دریافت مجوزهای پیش‌فرض نقش کاربر
-    default_perms = DEFAULT_ROLE_PERMISSIONS.get(current_user.role.value, [])
+    target_user = User.query.get_or_404(target_user_id)
+    profile = UserProfile.query.filter_by(user_id=target_user.id).first()
+    
+    # دریافت مجوزهای پیش‌فرض نقش کاربر هدف
+    default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value, [])
     
     # دریافت مجوزهای سفارشی (اگر وجود داشته باشد)
     custom_perms = []
@@ -55,27 +63,24 @@ def manage_permissions():
         categories[cat].append(perm)
     
     if request.method == 'POST':
-        target_user_id = request.form.get('target_user_id', current_user.id)
-        target_user = User.query.get_or_404(target_user_id)
-        target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
-        
         # دریافت مجوزهای انتخاب شده از فرم
         selected_permissions = request.form.getlist('permissions')
         
         if selected_permissions:
             # ذخیره به صورت JSON
-            if not target_profile.custom_permissions:
-                target_profile.custom_permissions = json.dumps(selected_permissions)
-            else:
-                target_profile.custom_permissions = json.dumps(selected_permissions)
+            if not profile:
+                profile = UserProfile(user_id=target_user.id)
+                db.session.add(profile)
+            profile.custom_permissions = json.dumps(selected_permissions)
             flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد.", "success")
         else:
             # اگر هیچ مجوزی انتخاب نشده، از مجوزهای پیش‌فرض استفاده شود
-            target_profile.custom_permissions = None
+            if profile:
+                profile.custom_permissions = None
             flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
         
         db.session.commit()
-        return redirect(url_for('users.manage_permissions'))
+        return redirect(url_for('users.manage_permissions', user_id=target_user.id))
     
     # اگر کاربر ادمین است، لیست کاربران را برای انتخاب بفرست
     users_list = []
@@ -87,7 +92,8 @@ def manage_permissions():
                          default_perms=default_perms,
                          custom_perms=custom_perms,
                          users_list=users_list,
-                         current_user_obj=current_user)
+                         current_user_obj=current_user,
+                         target_user=target_user)
 
 
 def _get_permission_category(permission):
