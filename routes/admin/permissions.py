@@ -226,7 +226,11 @@ def preview_user_menu(user_id):
             has_access = True # دسترسی سفارشی
             
         if has_access:
-            visible_modules.append(module)
+            visible_modules.append({
+                'id': module['id'],
+                'name': module['name'],
+                'perm': module['perm'].value  # Convert Permission enum to string value
+            })
             
     return jsonify({
         'username': user.username,
