@@ -2,112 +2,347 @@
 
 {% block title %}مدیریت مجوزهای {{ user.username }}{% endblock %}
 
+{% block extra_css %}
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --danger-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+        --border-radius: 20px;
+    }
+    
+    .perm-page-header {
+        background: var(--primary-gradient);
+        border-radius: var(--border-radius);
+        padding: 2.5rem 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .user-info-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        border: none;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    
+    .user-info-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .user-info-card .card-header {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        padding: 1.25rem 1.5rem;
+        font-weight: 700;
+    }
+    
+    .perm-list-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        border: none;
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+    
+    .perm-list-card .card-header {
+        padding: 1.25rem 1.5rem;
+        font-weight: 700;
+        border: none;
+    }
+    
+    .perm-item {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .perm-item:hover {
+        background: white;
+        border-color: #667eea;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        transform: translateX(5px);
+    }
+    
+    .perm-value {
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 0.95rem;
+    }
+    
+    .perm-form-control {
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .perm-form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+        outline: none;
+    }
+    
+    .btn-grant {
+        background: var(--success-gradient);
+        border: none;
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-grant:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        color: white;
+    }
+    
+    .btn-revoke {
+        background: var(--danger-gradient);
+        border: none;
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-revoke:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
+        color: white;
+    }
+    
+    .badge-perm {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+    
+    .badge-default {
+        background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
+        color: #22543d;
+    }
+    
+    .badge-custom {
+        background: linear-gradient(135deg, #fef3c7 0%, #f6e05e 100%);
+        color: #744210;
+    }
+    
+    @media (max-width: 768px) {
+        .perm-page-header {
+            padding: 1.5rem 1rem;
+        }
+        
+        .perm-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .btn-grant, .btn-revoke {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>مدیریت مجوزهای کاربر: {{ user.username }}</h2>
-        <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-secondary">بازگشت به پنل</a>
+<div class="container-fluid px-3 py-4">
+    <div class="perm-page-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h2 class="mb-2"><i class="fas fa-user-shield ml-2"></i>مدیریت مجوزهای کاربر</h2>
+                <p class="mb-0 opacity-90">{{ user.username }} - {{ user.role_display_name }}</p>
+            </div>
+            <a href="{{ url_for('admin_perms.permission_dashboard') }}" class="btn btn-light btn-lg" style="border-radius: 14px; font-weight: 700;">
+                <i class="fas fa-arrow-right ml-2"></i>بازگشت به پنل
+            </a>
+        </div>
     </div>
 
     <div class="row">
         <!-- اطلاعات کاربر -->
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-info text-white">اطلاعات کاربر</div>
-                <div class="card-body">
-                    <p><strong>نام کاربری:</strong> {{ user.username }}</p>
-                    <p><strong>نقش:</strong> <span class="badge badge-primary">{{ user.role.value }}</span></p>
-                    <p><strong>ایمیل:</strong> {{ user.email }}</p>
-                    <p><strong>تاریخ عضویت:</strong> {{ user.created_at.strftime('%Y/%m/%d') if user.created_at else '-' }}</p>
+        <div class="col-lg-4 mb-4">
+            <div class="user-info-card h-100">
+                <div class="card-header">
+                    <i class="fas fa-id-card ml-2"></i>اطلاعات کاربر
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">نام کاربری:</label>
+                        <div class="font-weight-bold text-dark">{{ user.username }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">نقش:</label>
+                        <span class="badge badge-primary p-2" style="font-size: 0.9rem;">{{ user.role_display_name }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">ایمیل:</label>
+                        <div class="text-dark"><i class="fas fa-envelope ml-1"></i>{{ user.email }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">تاریخ عضویت:</label>
+                        <div class="text-dark"><i class="fas fa-calendar ml-1"></i>{{ user.created_at.strftime('%Y/%m/%d') if user.created_at else '-' }}</div>
+                    </div>
+                    {% if user.profile and user.profile.get_custom_permissions() %}
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted small">مجوزهای سفارشی:</span>
+                            <span class="badge badge-custom">{{ user.profile.get_custom_permissions()|length }} مورد</span>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
         <!-- مجوزهای پایه (ارث‌بری از نقش) -->
-        <div class="col-md-8">
-            <div class="card mb-3">
+        <div class="col-lg-8 mb-4">
+            <div class="perm-list-card">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">مجوزهای پایه (از نقش {{ user.role.value }})</h5>
+                    <h5 class="mb-0"><i class="fas fa-check-circle ml-2"></i>مجوزهای پایه (از نقش {{ user.role.value }})</h5>
                 </div>
-                <div class="card-body">
-                    <ul class="list-group">
+                <div class="card-body p-4">
+                    <div class="row">
                         {% for perm in base_perms %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ perm.value }}
-                            <span class="badge badge-success">فعال (پیش‌فرض)</span>
-                        </li>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="perm-item">
+                                <span class="perm-value">{{ perm.value }}</span>
+                                <span class="badge-perm badge-default">پیش‌فرض</span>
+                            </div>
+                        </div>
                         {% else %}
-                        <li class="list-group-item text-muted">هیچ مجوز پیش‌فرضی برای این نقش تعریف نشده است.</li>
+                        <div class="col-12">
+                            <div class="alert alert-muted text-center">هیچ مجوز پیش‌فرضی برای این نقش تعریف نشده است.</div>
+                        </div>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- مجوزهای سفارشی (استثناها) -->
-    <div class="card">
-        <div class="card-header bg-warning text-dark">
-            <h5 class="mb-0">مجوزهای سفارشی (اعطا/حذف دستی)</h5>
+    <!-- مجوزهای سفارشی (اعطا/حذف دستی) -->
+    <div class="perm-list-card">
+        <div class="card-header" style="background: var(--warning-gradient); color: white;">
+            <h5 class="mb-0"><i class="fas fa-key ml-2"></i>مدیریت مجوزهای سفارشی</h5>
         </div>
-        <div class="card-body">
-            <p class="text-muted small">
+        <div class="card-body p-4">
+            <p class="text-muted small mb-4">
+                <i class="fas fa-info-circle ml-1"></i>
                 در این بخش می‌توانید مجوزهایی را به صورت استثنا به کاربر اعطا کنید یا مجوزهای پیش‌فرض او را لغو نمایید.
             </p>
 
-            <form method="POST" class="mb-4">
-                <div class="form-row align-items-end">
-                    <div class="col-md-6">
-                        <label for="permission">انتخاب مجوز:</label>
-                        <select name="permission" id="permission" class="form-control" required>
+            <form method="POST" class="mb-5">
+                <div class="row align-items-end">
+                    <div class="col-lg-6 mb-3">
+                        <label for="permission" class="form-label font-weight-bold mb-2">انتخاب مجوز:</label>
+                        <select name="permission" id="permission" class="form-control perm-form-control" required>
                             <option value="">-- انتخاب مجوز --</option>
                             {% for perm in all_permissions %}
-                            <option value="{{ perm.name }}">{{ perm.value }}</option>
+                            <option value="{{ perm.value }}">{{ perm.name }} ({{ perm.value }})</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <button type="submit" name="action" value="grant" class="btn btn-success btn-block">اعطا کردن (+)</button>
+                    <div class="col-lg-3 mb-3">
+                        <button type="submit" name="action" value="grant" class="btn btn-grant w-100">
+                            <i class="fas fa-plus-circle ml-2"></i>اعطا کردن
+                        </button>
                     </div>
-                    <div class="col-md-3">
-                        <button type="submit" name="action" value="revoke" class="btn btn-danger btn-block">حذف کردن (-)</button>
+                    <div class="col-lg-3 mb-3">
+                        <button type="submit" name="action" value="revoke" class="btn btn-revoke w-100">
+                            <i class="fas fa-minus-circle ml-2"></i>حذف کردن
+                        </button>
                     </div>
                 </div>
             </form>
 
-            <h6>لیست مجوزهای سفارشی فعلی:</h6>
-            <ul class="list-group">
+            <h6 class="font-weight-bold mb-3"><i class="fas fa-list ml-2"></i>لیست مجوزهای سفارشی فعلی:</h6>
+            <div class="row">
                 {% for perm in custom_perms %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ perm.value }}
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="permission" value="{{ perm.name }}">
-                        <button type="submit" name="action" value="revoke" class="btn btn-sm btn-outline-danger">حذف</button>
-                    </form>
-                </li>
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="perm-item">
+                        <span class="perm-value">{{ perm }}</span>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="permission" value="{{ perm }}">
+                            <button type="submit" name="action" value="revoke" class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
                 {% else %}
-                <li class="list-group-item text-muted">هیچ مجوز سفارشی برای این کاربر ثبت نشده است.</li>
+                <div class="col-12">
+                    <div class="alert alert-muted text-center">
+                        <i class="fas fa-info-circle ml-1"></i>
+                        هیچ مجوز سفارشی برای این کاربر ثبت نشده است.
+                    </div>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
 
     <!-- پیش‌نمایش نهایی -->
-    <div class="card mt-4">
-        <div class="card-header bg-primary text-white">پیش‌نمایش دسترسی نهایی</div>
-        <div class="card-body">
-            <p>کاربر پس از ذخیره تغییرات، به مجموع مجوزهای زیر دسترسی خواهد داشت:</p>
-            <div id="finalPermsList" class="alert alert-light border">
-                <ul class="mb-0">
-                    {% set all_perms = base_perms + custom_perms %}
-                    {% set unique_perms = [] %}
-                    {% for perm in all_perms %}
-                        {% if perm not in unique_perms %}
-                            {% set _ = unique_perms.append(perm) %}
-                            <li>{{ perm.value }}</li>
+    <div class="perm-list-card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-eye ml-2"></i>پیش‌نمایش دسترسی نهایی</h5>
+        </div>
+        <div class="card-body p-4">
+            <p class="mb-3">کاربر پس از ذخیره تغییرات، به مجموع مجوزهای زیر دسترسی خواهد داشت:</p>
+            <div class="alert alert-light border" style="border-radius: 14px;">
+                <div class="row">
+                    {% set all_perms = [] %}
+                    {% for perm in base_perms %}
+                        {% if perm.value not in all_perms %}
+                            {% set _ = all_perms.append(perm.value) %}
                         {% endif %}
                     {% endfor %}
-                </ul>
+                    {% for perm in custom_perms %}
+                        {% if perm not in all_perms %}
+                            {% set _ = all_perms.append(perm) %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if all_perms %}
+                        {% for perm_value in all_perms %}
+                        <div class="col-md-6 col-lg-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check text-success ml-2"></i>
+                                <span class="perm-value small">{{ perm_value }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-muted text-center">هیچ مجوزی تعریف نشده است.</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="text-left mt-3">
+                <span class="badge badge-primary p-2">
+                    <i class="fas fa-layer-group ml-1"></i>
+                    مجموع مجوزها: {{ all_perms|length }}
+                </span>
             </div>
         </div>
     </div>

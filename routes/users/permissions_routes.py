@@ -36,25 +36,23 @@ def manage_permissions():
         target_user_id = current_user.id
     
     target_user = User.query.get_or_404(target_user_id)
-    target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
+    
+    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
+    # این بخش تضمین می‌کند که کاربران تازه‌ثبت‌نام‌کرده بدون پروفایل، به مشکلی برنخورند
+    if not target_user.profile:
+        target_profile = UserProfile(user_id=target_user.id)
+        db.session.add(target_profile)
+        db.session.commit()  # کامیت فوری برای اطمینان از وجود پروفایل
+        flash(f"پروفایل کاربر {target_user.username} به صورت خودکار ایجاد شد.", "info")
+    else:
+        target_profile = target_user.profile
+    # ===========================================
     
     # دریافت مجوزهای پیش‌فرض نقش کاربر هدف
     default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
     
-    # دریافت مجوزهای سفارشی (اگر وجود داشته باشد)
-    custom_perms = []
-    if target_profile and target_profile.custom_permissions:
-        try:
-            if isinstance(target_profile.custom_permissions, str):
-                custom_perms = json.loads(target_profile.custom_permissions)
-            else:
-                custom_perms = target_profile.custom_permissions
-            
-            # اطمینان از اینکه custom_perms یک لیست است
-            if not isinstance(custom_perms, list):
-                custom_perms = []
-        except (json.JSONDecodeError, TypeError, AttributeError):
-            custom_perms = []
+    # دریافت مجوزهای سفارشی با استفاده از متد جدید مدل
+    custom_perms = target_profile.get_custom_permissions() if target_profile else []
     
     # تبدیل به فرمت مناسب برای نمایش
     all_permissions = [
@@ -89,31 +87,22 @@ def manage_permissions():
         # دریافت لیست مجوزهای انتخاب شده از فرم
         selected_permissions = request.form.getlist('permissions')
         
-        # ایجاد یا به‌روزرسانی پروفایل
-        if not target_profile:
-            target_profile = UserProfile(user_id=target_user.id)
-            db.session.add(target_profile)
+        # اعتبارسنجی و فیلتر کردن مجوزهای معتبر
+        valid_permissions = []
+        for perm_value in selected_permissions:
+            try:
+                # اطمینان از معتبر بودن مجوز
+                Permission(perm_value)
+                valid_permissions.append(perm_value)
+            except ValueError:
+                continue  # نادیده گرفتن مجوزهای نامعتبر
         
-        if selected_permissions:
-            # ذخیره به صورت JSON - فقط مقادیر معتبر
-            valid_permissions = []
-            for perm_value in selected_permissions:
-                try:
-                    # اطمینان از معتبر بودن مجوز
-                    Permission(perm_value)
-                    valid_permissions.append(perm_value)
-                except ValueError:
-                    continue  # نادیده گرفتن مجوزهای نامعتبر
-            
-            if valid_permissions:
-                target_profile.custom_permissions = json.dumps(valid_permissions)
-                flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
-            else:
-                target_profile.custom_permissions = None
-                flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
+        # استفاده از متدهای جدید مدل برای ذخیره مجوزها
+        if valid_permissions:
+            target_profile.set_custom_permissions(valid_permissions)
+            flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
         else:
-            # اگر هیچ مجوزی انتخاب نشده، از مجوزهای پیش‌فرض استفاده شود
-            target_profile.custom_permissions = None
+            target_profile.set_custom_permissions([])
             flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
         
         db.session.commit()
@@ -126,7 +115,7 @@ def manage_permissions():
     
     return render_template('users/manage_permissions.html',
                          categories=categories,
-                         default_perms=default_perms,
+                         default_perms=[p.value for p in default_perms],  # تبدیل به لیست رشته‌ها
                          custom_perms=custom_perms,
                          users_list=users_list,
                          current_user_obj=current_user,
