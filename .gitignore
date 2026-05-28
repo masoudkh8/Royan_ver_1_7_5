@@ -1,1 +1,4 @@
-Nothing should be ignored in this case, as the changes only include source code files (.html, .py) and not any build artifacts, dependencies, or temporary files.
+```html
+templates/admin/permission_dashboard.html
+templates/users/manage_permissions.html
+```

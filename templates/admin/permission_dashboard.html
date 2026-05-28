@@ -4,260 +4,516 @@
 
 {% block extra_css %}
 <style>
-    /* استایل‌های اختصاصی داشبورد مدیریت مجوزها */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        --warning-gradient: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+        --info-gradient: linear-gradient(135deg, #4299e1 0%, #2b6cb0 100%);
+        --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        --card-hover-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        --transition: all 0.3s ease;
+    }
+
+    body {
+        background: #f7fafc;
+    }
+
+    /* هدر داشبورد */
     .permission-dashboard {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
         color: white;
         box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
     }
-    
+
+    .permission-dashboard::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+    }
+
     .permission-dashboard h2 {
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 0.5rem;
+        font-size: 2rem;
+        position: relative;
+        z-index: 1;
     }
-    
+
+    .permission-dashboard p {
+        opacity: 0.95;
+        font-size: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* کارت‌های آمار */
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
     .stat-card {
         background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        height: 100%;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        text-align: center;
         border: none;
+        position: relative;
+        overflow: hidden;
     }
-    
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--stat-color, var(--primary-gradient));
+    }
+
     .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        transform: translateY(-8px);
+        box-shadow: var(--card-hover-shadow);
     }
-    
+
+    .stat-card:nth-child(1) { --stat-color: #667eea; }
+    .stat-card:nth-child(2) { --stat-color: #48bb78; }
+    .stat-card:nth-child(3) { --stat-color: #f6ad55; }
+    .stat-card:nth-child(4) { --stat-color: #4299e1; }
+
     .stat-card .icon {
-        font-size: 2.5rem;
+        font-size: 3rem;
         margin-bottom: 1rem;
+        display: inline-block;
+        transition: var(--transition);
     }
-    
+
+    .stat-card:hover .icon {
+        transform: scale(1.2) rotate(10deg);
+    }
+
     .stat-card .value {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 2.5rem;
+        font-weight: 800;
         color: #2d3748;
+        margin-bottom: 0.5rem;
     }
-    
+
     .stat-card .label {
         color: #718096;
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 0.95rem;
+        font-weight: 600;
     }
-    
+
+    /* تب‌ها */
+    .tabs-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .nav-tabs {
+        border-bottom: 3px solid #edf2f7;
+        padding: 0 1.5rem;
+        background: #f7fafc;
+    }
+
     .nav-tabs .nav-link {
         border: none;
-        color: #4a5568;
-        font-weight: 600;
-        padding: 1rem 1.5rem;
-        border-radius: 10px 10px 0 0;
-        transition: all 0.3s ease;
+        color: #718096;
+        font-weight: 700;
+        padding: 1.25rem 2rem;
+        border-radius: 12px 12px 0 0;
+        transition: var(--transition);
+        margin-bottom: -3px;
+        border-bottom: 3px solid transparent;
     }
-    
-    .nav-tabs .nav-link.active {
-        background: #667eea;
-        color: white;
-        border: none;
-    }
-    
+
     .nav-tabs .nav-link:hover:not(.active) {
         background: #edf2f7;
+        color: #4a5568;
     }
-    
-    .tab-content {
+
+    .nav-tabs .nav-link.active {
         background: white;
-        border-radius: 0 0 15px 15px;
-        padding: 2rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        color: #667eea;
+        border-bottom-color: #667eea;
     }
-    
+
+    .nav-tabs .nav-link i {
+        margin-left: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .tab-content {
+        padding: 2.5rem;
+    }
+
+    /* ماتریس دسترسی */
+    .matrix-container {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--card-shadow);
+        overflow-x: auto;
+    }
+
     .permission-matrix {
         border-collapse: separate;
         border-spacing: 0;
         width: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        min-width: 800px;
     }
-    
+
     .permission-matrix thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: var(--primary-gradient);
         color: white;
     }
-    
+
     .permission-matrix th,
     .permission-matrix td {
-        padding: 1rem;
+        padding: 1.25rem;
         text-align: center;
         border: 1px solid #e2e8f0;
     }
-    
+
     .permission-matrix th:first-child,
     .permission-matrix td:first-child {
         text-align: right;
-        font-weight: 600;
+        font-weight: 700;
         background: #f7fafc;
-        min-width: 200px;
+        min-width: 250px;
+        position: sticky;
+        left: 0;
+        z-index: 10;
     }
-    
+
+    .permission-matrix th:first-child {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .permission-matrix tbody tr {
+        transition: var(--transition);
+    }
+
     .permission-matrix tbody tr:hover {
         background: #f7fafc;
+        transform: scale(1.01);
     }
-    
+
     .badge-permission {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
         font-size: 1.2rem;
-        transition: all 0.2s ease;
+        transition: var(--transition);
+        cursor: pointer;
     }
-    
+
+    .badge-permission:hover {
+        transform: scale(1.2);
+    }
+
     .badge-permission.granted {
-        background: #c6f6d5;
+        background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
         color: #22543d;
+        box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
     }
-    
+
     .badge-permission.denied {
-        background: #fed7d7;
+        background: linear-gradient(135deg, #fed7d7, #feb2b2);
         color: #742a2a;
+        box-shadow: 0 2px 8px rgba(246, 173, 85, 0.3);
     }
-    
+
+    /* نشان نقش‌ها */
     .role-badge {
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
+        padding: 0.5rem 1.25rem;
+        border-radius: 25px;
+        font-weight: 700;
         font-size: 0.85rem;
         display: inline-block;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    
-    .role-admin { background: #fed7d7; color: #742a2a; }
-    .role-logistics { background: #bee3f8; color: #2a4365; }
-    .role-legal { background: #fef3c7; color: #744210; }
-    .role-tech { background: #e9d8fd; color: #44337a; }
-    .role-investor { background: #c6f6d5; color: #22543d; }
-    .role-producer { background: #feebc8; color: #7c2d12; }
-    .role-buyer { background: #fed7e2; color: #831843; }
-    
+
+    .role-admin { background: linear-gradient(135deg, #fed7d7, #fc8181); color: #742a2a; }
+    .role-logistics { background: linear-gradient(135deg, #bee3f8, #63b3ed); color: #2a4365; }
+    .role-legal { background: linear-gradient(135deg, #fef3c7, #f6ad55); color: #744210; }
+    .role-tech { background: linear-gradient(135deg, #e9d8fd, #b794f4); color: #44337a; }
+    .role-investor { background: linear-gradient(135deg, #c6f6d5, #68d391); color: #22543d; }
+    .role-producer { background: linear-gradient(135deg, #feebc8, #f6ad55); color: #7c2d12; }
+    .role-buyer { background: linear-gradient(135deg, #fed7e2, #f687b3); color: #831843; }
+
+    /* دکمه‌ها */
     .action-btn {
-        padding: 0.5rem 1.2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: var(--transition);
         border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
     }
-    
+
     .action-btn-primary {
-        background: #667eea;
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .action-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         color: white;
     }
-    
-    .action-btn-primary:hover {
-        background: #5a67d8;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+
+    .btn-refresh {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: var(--transition);
     }
-    
+
+    .btn-refresh:hover {
+        background: #667eea;
+        color: white;
+        transform: rotate(180deg);
+    }
+
+    /* فیلتر و جستجو */
     .filter-select {
         border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        font-weight: 600;
+        transition: var(--transition);
+        background: white;
     }
-    
+
     .filter-select:focus {
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         outline: none;
     }
-    
-    .preview-box {
-        background: #f7fafc;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-top: 1.5rem;
-        border: 2px dashed #cbd5e0;
-    }
-    
-    .module-item {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
-    }
-    
-    .module-item:hover {
-        transform: translateX(5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    .module-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 1rem;
-        font-size: 1.2rem;
-    }
-    
-    .category-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin-right: 0.5rem;
-    }
-    
-    .cat-order { background: #fed7d7; color: #742a2a; }
-    .cat-logistics { background: #bee3f8; color: #2a4365; }
-    .cat-legal { background: #fef3c7; color: #744210; }
-    .cat-finance { background: #c6f6d5; color: #22543d; }
-    .cat-tech { background: #e9d8fd; color: #44337a; }
-    .cat-dashboard { background: #feebc8; color: #7c2d12; }
-    .cat-profile { background: #fed7e2; color: #831843; }
-    .cat-public { background: #e2e8f0; color: #2d3748; }
-    
+
     .search-box {
         position: relative;
         margin-bottom: 1.5rem;
     }
-    
+
     .search-box input {
         width: 100%;
-        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        padding: 1rem 1.25rem 1rem 3rem;
         border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
+        border-radius: 14px;
+        font-size: 1rem;
+        transition: var(--transition);
+        background: white;
     }
-    
+
     .search-box input:focus {
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         outline: none;
     }
-    
+
     .search-box i {
         position: absolute;
-        right: 1rem;
+        right: 1.25rem;
         top: 50%;
         transform: translateY(-50%);
         color: #a0aec0;
+        font-size: 1.1rem;
+    }
+
+    /* پیش‌نمایش ماژول‌ها */
+    .preview-box {
+        background: linear-gradient(135deg, #f7fafc, #edf2f7);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-top: 1.5rem;
+        border: 3px dashed #cbd5e0;
+    }
+
+    .module-item {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: var(--transition);
+        border: 2px solid transparent;
+    }
+
+    .module-item:hover {
+        transform: translateX(10px);
+        border-color: #667eea;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+    }
+
+    .module-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1rem;
+        font-size: 1.5rem;
+        background: #edf2f7;
+        transition: var(--transition);
+    }
+
+    .module-item:hover .module-icon {
+        background: #667eea;
+        color: white;
+        transform: rotate(10deg);
+    }
+
+    /* نشان دسته‌بندی */
+    .category-badge {
+        padding: 0.35rem 0.875rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-left: 0.5rem;
+        display: inline-block;
+    }
+
+    .cat-order { background: linear-gradient(135deg, #fed7d7, #fc8181); color: #742a2a; }
+    .cat-logistics { background: linear-gradient(135deg, #bee3f8, #63b3ed); color: #2a4365; }
+    .cat-legal { background: linear-gradient(135deg, #fef3c7, #f6ad55); color: #744210; }
+    .cat-finance { background: linear-gradient(135deg, #c6f6d5, #68d391); color: #22543d; }
+    .cat-tech { background: linear-gradient(135deg, #e9d8fd, #b794f4); color: #44337a; }
+    .cat-dashboard { background: linear-gradient(135deg, #feebc8, #f6ad55); color: #7c2d12; }
+    .cat-profile { background: linear-gradient(135deg, #fed7e2, #f687b3); color: #831843; }
+    .cat-public { background: linear-gradient(135deg, #e2e8f0, #a0aec0); color: #2d3748; }
+
+    /* کارت‌های عملیات */
+    .action-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: var(--card-shadow);
+        border: none;
+        height: 100%;
+        transition: var(--transition);
+    }
+
+    .action-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-hover-shadow);
+    }
+
+    .action-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid #edf2f7;
+    }
+
+    .action-card-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-left: 1rem;
+        color: white;
+    }
+
+    .icon-warning { background: var(--warning-gradient); }
+    .icon-info { background: var(--info-gradient); }
+
+    /* راهنما */
+    .guide-alert {
+        background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+        border-radius: 14px;
+        padding: 1.5rem;
+        border: none;
+        margin-top: 1.5rem;
+    }
+
+    .guide-alert i {
+        font-size: 1.5rem;
+        margin-left: 0.75rem;
+    }
+
+    /* ریسپانسیو */
+    @media (max-width: 768px) {
+        .permission-dashboard {
+            padding: 1.5rem;
+        }
+
+        .permission-dashboard h2 {
+            font-size: 1.5rem;
+        }
+
+        .stats-row {
+            grid-template-columns: 1fr;
+        }
+
+        .nav-tabs {
+            padding: 0 1rem;
+            overflow-x: auto;
+        }
+
+        .nav-tabs .nav-link {
+            padding: 1rem;
+            white-space: nowrap;
+        }
+
+        .tab-content {
+            padding: 1.5rem;
+        }
+
+        .permission-matrix {
+            font-size: 0.85rem;
+        }
+
+        .permission-matrix th,
+        .permission-matrix td {
+            padding: 0.75rem;
+        }
+    }
+
+    /* انیمیشن */
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .stat-card:hover .icon {
+        animation: pulse 0.5s ease;
     }
 </style>
 {% endblock %}
@@ -265,74 +521,65 @@
 {% block content %}
 <div class="container-fluid mt-4">
     <!-- هدر داشبورد -->
-    <div class="permission-dashboard mb-4">
+    <div class="permission-dashboard">
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h2><i class="fas fa-shield-alt ml-2"></i>پنل مدیریت دسترسی‌ها و مجوزها</h2>
-                <p class="mb-0 opacity-75">مدیریت متمرکز نقش‌ها، مجوزها و دسترسی‌های کاربران</p>
+                <p class="mb-0">مدیریت متمرکز نقش‌ها، مجوزها و دسترسی‌های کاربران</p>
             </div>
             <div class="col-md-4 text-left">
-                <div class="d-flex justify-content-end gap-2">
-                    <button class="btn btn-light action-btn" onclick="location.reload()">
-                        <i class="fas fa-sync-alt ml-1"></i>به‌روزرسانی
-                    </button>
-                </div>
+                <button class="btn btn-refresh" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
             </div>
         </div>
     </div>
     
     <!-- کارت‌های آمار -->
-    <div class="row mb-4">
-        <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
-                <div class="icon">🎭</div>
-                <div class="value">{{ roles|length }}</div>
-                <div class="label">نقش‌های کاربری</div>
-            </div>
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="icon">🎭</div>
+            <div class="value">{{ roles|length }}</div>
+            <div class="label">نقش‌های کاربری</div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
-                <div class="icon">🔐</div>
-                <div class="value">{{ permissions|length }}</div>
-                <div class="label">مجوزهای تعریف‌شده</div>
-            </div>
+        <div class="stat-card">
+            <div class="icon">🔐</div>
+            <div class="value">{{ permissions|length }}</div>
+            <div class="label">مجوزهای تعریف‌شده</div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
-                <div class="icon">👥</div>
-                <div class="value">{{ users|length }}</div>
-                <div class="label">کاربران فعال</div>
-            </div>
+        <div class="stat-card">
+            <div class="icon">👥</div>
+            <div class="value">{{ users|length }}</div>
+            <div class="label">کاربران فعال</div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
-                <div class="icon">⚙️</div>
-                <div class="value">{{ matrix|length }}</div>
-                <div class="label">سیستم‌های فعال</div>
-            </div>
+        <div class="stat-card">
+            <div class="icon">⚙️</div>
+            <div class="value">{{ matrix|length }}</div>
+            <div class="label">سیستم‌های فعال</div>
         </div>
     </div>
 
     <!-- تب‌های ناوبری -->
-    <ul class="nav nav-tabs mb-0" id="permTabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="matrix-tab" data-toggle="tab" href="#matrix" role="tab">
-                <i class="fas fa-table ml-1"></i>ماتریس دسترسی نقش‌ها
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">
-                <i class="fas fa-users ml-1"></i>مدیریت کاربران خاص
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">
-                <i class="fas fa-eye ml-1"></i>پیش‌نمایش منو
-            </a>
-        </li>
-    </ul>
-    
-    <div class="tab-content" id="permTabsContent">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs" id="permTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="matrix-tab" data-toggle="tab" href="#matrix" role="tab">
+                    <i class="fas fa-table"></i>ماتریس دسترسی نقش‌ها
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">
+                    <i class="fas fa-users"></i>مدیریت کاربران خاص
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">
+                    <i class="fas fa-eye"></i>پیش‌نمایش منو
+                </a>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="permTabsContent">
         
         <!-- تب ۱: ماتریس دسترسی نقش‌ها -->
         <div class="tab-pane fade show active" id="matrix" role="tabpanel">
@@ -503,6 +750,18 @@
             </div>
         </div>
     </div>
+    </div> <!-- پایان tab-content -->
+</div>
+
+<!-- راهنما -->
+<div class="guide-alert mt-4">
+    <i class="fas fa-lightbulb"></i>
+    <strong>راهنمای سریع:</strong>
+    <ul class="mb-0 mt-2" style="padding-right: 1.5rem;">
+        <li>برای مشاهده جزئیات هر نقش، روی دکمه ویرایش در تب "مدیریت کاربران خاص" کلیک کنید.</li>
+        <li>از ماتریس دسترسی برای مشاهده سریع مجوزهای هر نقش استفاده کنید.</li>
+        <li>پیش‌نمایش منو به شما نشان می‌دهد که هر کاربر چه سرویس‌هایی را خواهد دید.</li>
+    </ul>
 </div>
 
 <script>
