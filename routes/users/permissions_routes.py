@@ -1,5 +1,6 @@
 
 from flask import render_template, redirect, url_for, flash, request, jsonify
+from flask.views import MethodView
 from flask_login import login_required, current_user
 from models import db
 from models.user import User, UserProfile, Role
@@ -12,12 +13,133 @@ import json
 from . import users_bp
 
 
+# ============================================
+# پیاده‌سازی با استفاده از MethodView (CBV)
+# ============================================
+
+class ManagePermissionsView(MethodView):
+    """نمای مبتنی بر کلاس برای مدیریت مجوزها"""
+    
+    decorators = [login_required, role_required(Role.ADMIN)]
+    
+    def get(self):
+        """نمایش صفحه مدیریت مجوزها"""
+        from models.user import UserProfile
+        import json
+        
+        target_user_id = request.args.get('target_user_id')
+        
+        if target_user_id:
+            try:
+                target_user_id = int(target_user_id)
+            except (ValueError, TypeError):
+                target_user_id = current_user.id
+        else:
+            target_user_id = current_user.id
+        
+        target_user = User.query.get_or_404(target_user_id)
+        
+        # ایجاد خودکار پروفایل اگر وجود ندارد
+        if not target_user.profile:
+            target_profile = UserProfile(user_id=target_user.id)
+            db.session.add(target_profile)
+            db.session.commit()
+            flash(f"پروفایل کاربر {target_user.username} به صورت خودکار ایجاد شد.", "info")
+        else:
+            target_profile = target_user.profile
+        
+        default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
+        custom_perms = target_profile.get_custom_permissions() if target_profile else []
+        
+        all_permissions = [
+            {
+                'value': perm.value,
+                'name': perm.name,
+                'category': _get_permission_category(perm),
+                'is_enabled': perm.value in custom_perms if custom_perms else perm in default_perms
+            }
+            for perm in Permission
+        ]
+        
+        categories = {}
+        for perm in all_permissions:
+            cat = perm['category']
+            if cat not in categories:
+                categories[cat] = []
+            categories[cat].append(perm)
+        
+        users_list = User.query.order_by(User.username).all() if current_user.role == Role.ADMIN else []
+        
+        return render_template('users/manage_permissions.html',
+                             categories=categories,
+                             default_perms=[p.value for p in default_perms],
+                             custom_perms=custom_perms,
+                             users_list=users_list,
+                             current_user_obj=current_user,
+                             target_user=target_user)
+    
+    def post(self):
+        """ذخیره تغییرات مجوزها"""
+        from flask_wtf.csrf import validate_csrf
+        from wtforms.validators import ValidationError
+        from models.user import UserProfile
+        
+        try:
+            validate_csrf(request.form.get('csrf_token'))
+        except ValidationError:
+            flash("خطای امنیتی: توکن CSRF نامعتبر است.", "error")
+            return redirect(url_for('users.manage_permissions'))
+        
+        target_user_id = request.form.get('target_user_id') or current_user.id
+        
+        try:
+            target_user_id = int(target_user_id)
+        except (ValueError, TypeError):
+            target_user_id = current_user.id
+        
+        target_user = User.query.get_or_404(target_user_id)
+        
+        if not target_user.profile:
+            target_profile = UserProfile(user_id=target_user.id)
+            db.session.add(target_profile)
+            db.session.commit()
+        else:
+            target_profile = target_user.profile
+        
+        selected_permissions = request.form.getlist('permissions')
+        
+        valid_permissions = []
+        for perm_value in selected_permissions:
+            try:
+                Permission(perm_value)
+                valid_permissions.append(perm_value)
+            except ValueError:
+                continue
+        
+        if valid_permissions:
+            target_profile.set_custom_permissions(valid_permissions)
+            flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
+        else:
+            target_profile.set_custom_permissions([])
+            flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
+        
+        db.session.commit()
+        return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
+
+# ثبت View به عنوان route
+users_bp.add_url_rule(
+    '/profile/permissions-cbv',
+    view_func=ManagePermissionsView.as_view('manage_permissions_cbv'),
+    methods=['GET', 'POST']
+)
+
+
 @users_bp.route('/profile/permissions', methods=['GET', 'POST'])
 @login_required
 @role_required(Role.ADMIN)
 def manage_permissions():
     """
-    مدیریت مجوزهای سفارشی برای کاربر.
+    مدیریت مجوزهای سفارشی برای کاربر - FBV (Function Based View)
     فقط ادمین می‌تواند برای هر کاربر مجوزهای خاصی را فعال/غیرفعال کند.
     """
     from models.user import UserProfile
@@ -38,15 +160,13 @@ def manage_permissions():
     target_user = User.query.get_or_404(target_user_id)
     
     # === ایجاد خودکار پروفایل اگر وجود ندارد ===
-    # این بخش تضمین می‌کند که کاربران تازه‌ثبت‌نام‌کرده بدون پروفایل، به مشکلی برنخورند
     if not target_user.profile:
         target_profile = UserProfile(user_id=target_user.id)
         db.session.add(target_profile)
-        db.session.commit()  # کامیت فوری برای اطمینان از وجود پروفایل
+        db.session.commit()
         flash(f"پروفایل کاربر {target_user.username} به صورت خودکار ایجاد شد.", "info")
     else:
         target_profile = target_user.profile
-    # ===========================================
     
     # دریافت مجوزهای پیش‌فرض نقش کاربر هدف
     default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
