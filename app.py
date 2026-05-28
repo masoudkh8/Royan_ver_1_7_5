@@ -459,6 +459,28 @@ def create_app():
     def inject_socketio():
         return {'send_notification': send_notification}
 
+    # =============================================================================
+    # ✅ Inject Permission Functions for Templates
+    # =============================================================================
+    @app.context_processor
+    def inject_permission_functions():
+        """
+        Make permission checking functions available in all Jinja2 templates.
+        This allows templates to use:
+            - has_permission(user, permission) 
+            - service_module_enabled(service_name, user)
+            - Permission enum class
+        """
+        from services.access_control import has_permission as _has_permission
+        from services.access_control import service_module_enabled as _service_module_enabled
+        from services.permissions import Permission
+        
+        return {
+            'has_permission': _has_permission,
+            'service_module_enabled': _service_module_enabled,
+            'Permission': Permission
+        }
+
     # Register blueprints
     from routes.magazine import magazine_bp
     from routes.exhibition import exhibition_bp

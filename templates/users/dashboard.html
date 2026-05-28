@@ -101,11 +101,11 @@
             </div>
         </div>
 
-        <!-- کارت‌های داشبورد -->
+        <!-- کارت‌های داشبورد مبتنی بر مجوزها -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             
-            <!-- کارت: مدیریت مجوزها (فقط برای ادمین) -->
-            {% if current_user.role.value == 'admin' %}
+            <!-- کارت: مدیریت مجوزها (فقط اگر کاربر مجوز admin داشته باشد) -->
+            {% if has_permission(current_user, Permission.ORDER_EDIT) and current_user.role.value == 'admin' %}
             <div class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl p-5 shadow border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg col-span-1 md:col-span-2 lg:col-span-3">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -130,7 +130,8 @@
             </div>
             {% endif %}
             
-            <!-- کارت: سفارشات -->
+            <!-- کارت: سفارشات (نمایش بر اساس مجوز ORDER_VIEW) -->
+            {% if service_module_enabled('order', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2">
@@ -151,9 +152,10 @@
                     View Orders →
                 </a>
             </div>
+            {% endif %}
 
-            <!-- کارت: مدیریت سفارشات (فقط برای Producer) -->
-            {% if current_user.role.value == 'producer' %}
+            <!-- کارت: مدیریت سفارشات (فقط اگر کاربر مجوز ORDER_EDIT داشته باشد) -->
+            {% if has_permission(current_user, Permission.ORDER_EDIT) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -171,7 +173,8 @@
             </div>
             {% endif %}
 
-            <!-- کارت: چت هوشمند -->
+            <!-- کارت: چت هوشمند (نمایش بر اساس مجوز) -->
+            {% if service_module_enabled('dashboard', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -195,8 +198,10 @@
                     </a>
                 {% endif %}
             </div>
+            {% endif %}
 
-            <!-- کارت: پشتیبانی -->
+            <!-- کارت: پشتیبانی (همیشه نمایش داده می‌شود) -->
+            {% if service_module_enabled('dashboard', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -212,8 +217,10 @@
                     Contact Support →
                 </a>
             </div>
+            {% endif %}
 
-            <!-- کارت: نقشه بنادر (پریمیوم) -->
+            <!-- کارت: نقشه بنادر (نمایش بر اساس مجوز logistics) -->
+            {% if service_module_enabled('logistics', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
@@ -237,6 +244,7 @@
                     </a>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- کارت: ارتقا به پریمیوم -->
             {% if not current_user.is_premium %}
