@@ -26,10 +26,16 @@ def permission_dashboard():
     roles = Role
     permissions = Permission
     
-    # ساخت ماتریس دسترسی‌ها
+    # دریافت مجوزهای پیش‌فرض برای هر نقش و تبدیل به لیست مقادیر رشته‌ای
+    role_perms_cache = {}
+    for role in roles:
+        perms = get_role_permissions(role)
+        role_perms_cache[role.name] = [p.value if hasattr(p, 'value') else p for p in perms]
+    
+    # ساخت ماتریس دسترسی‌ها با مقایسه صحیح مقادیر رشته‌ای
     matrix = {}
     for role in roles:
-        matrix[role.name] = {perm.name: perm in get_role_permissions(role) for perm in permissions}
+        matrix[role.name] = {perm.name: perm.value in role_perms_cache[role.name] for perm in permissions}
     
     # دریافت تمام کاربران برای نمایش در تب‌های دیگر
     all_users = User.query.order_by(User.username).all()
@@ -88,11 +94,13 @@ class ManageUserPermissionsView(MethodView):
             flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
         
         base_perms = get_role_permissions(user.role)
+        # تبدیل مجوزهای پایه به لیست مقادیر رشته‌ای برای مقایسه صحیح
+        base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
         custom_perms = user.profile.get_custom_permissions() if user.profile else []
         
         return render_template('admin/manage_user_perms.html', 
                                user=user, 
-                               base_perms=base_perms, 
+                               base_perms=base_perms_values, 
                                custom_perms=custom_perms,
                                all_permissions=Permission)
     
@@ -184,11 +192,13 @@ def manage_user_permissions(user_id):
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
     
     base_perms = get_role_permissions(user.role)
+    # تبدیل مجوزهای پایه به لیست مقادیر رشته‌ای برای مقایسه صحیح
+    base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
     
     return render_template('admin/manage_user_perms.html', 
                            user=user, 
-                           base_perms=base_perms, 
+                           base_perms=base_perms_values, 
                            custom_perms=custom_perms,
                            all_permissions=Permission)
 
@@ -217,11 +227,14 @@ def preview_user_menu(user_id):
     
     # دریافت مجوزهای سفارشی کاربر
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
+    
+    # دریافت مجوزهای پیش‌فرض نقش و تبدیل به لیست مقادیر رشته‌ای
+    base_perms_values = [p.value if hasattr(p, 'value') else p for p in get_role_permissions(user.role)]
 
     visible_modules = []
     for module in available_modules:
         # بررسی دسترسی
-        has_access = module['perm'] in get_role_permissions(user.role)
+        has_access = module['perm'].value in base_perms_values
         if custom_perms and module['perm'].value in custom_perms:
             has_access = True # دسترسی سفارشی
             
