@@ -1,6 +1,6 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}مدیریت مجوزهای دسترسی{% endblock %}
+{% block title %}Access Permissions Management{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -603,33 +603,33 @@
 {% block content %}
 <div class="permissions-page">
     <div class="container">
-        <!-- هدر صفحه -->
+        <!-- Page Header -->
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h2><i class="fas fa-shield-alt ml-2"></i>مدیریت مجوزهای دسترسی</h2>
-                    <p class="mb-0 opacity-75">تنظیم و مدیریت دسترسی‌های کاربران به صورت ریزدانه و پیشرفته</p>
+                    <h2><i class="fas fa-shield-alt ml-2"></i>Access Permissions Management</h2>
+                    <p class="mb-0 opacity-75">Fine-grained and advanced user access management</p>
                 </div>
                 <div class="col-md-4 text-left">
                     <span class="user-badge">
                         <i class="fas fa-user-shield"></i>
-                        پنل ادمین
+                        Admin Panel
                     </span>
                 </div>
             </div>
         </div>
         
         {% if current_user_obj.role.value == 'admin' %}
-        <!-- انتخاب کاربر -->
+        <!-- Select User -->
         <div class="user-selector-card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-users ml-2"></i>انتخاب کاربر برای مدیریت مجوزها</h5>
+                <h5 class="mb-0"><i class="fas fa-users ml-2"></i>Select User for Permission Management</h5>
             </div>
             <div class="card-body p-4">
                 <form method="GET" action="{{ url_for('users.manage_permissions') }}">
                     <div class="row align-items-end">
                         <div class="col-md-8">
-                            <label for="target_user" class="form-label font-weight-bold mb-2">کاربر مورد نظر:</label>
+                            <label for="target_user" class="form-label font-weight-bold mb-2">Target User:</label>
                             <select name="target_user_id" id="target_user" class="form-control filter-select">
                                 {% for user in users_list %}
                                 <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>
@@ -642,7 +642,7 @@
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-permission btn-save w-100">
                                 <i class="fas fa-sync-alt"></i>
-                                بارگذاری مجوزها
+                                Load Permissions
                             </button>
                         </div>
                     </div>
@@ -651,16 +651,16 @@
         </div>
         {% endif %}
         
-        <!-- کارت مجوزها -->
+        <!-- Permissions Card -->
         <div class="permission-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                     <i class="fas fa-key ml-2"></i>
                     {% if request.args.get('target_user_id') %}
-                        مجوزهای کاربر: 
+                        User Permissions: 
                         <span class="role-badge role-{{ target_user.role.value|lower }}">{{ target_user.username }}</span>
                     {% else %}
-                        مجوزهای پیش‌فرض نقش شما
+                        Your Role Default Permissions
                         <span class="role-badge role-{{ current_user_obj.role.value|lower }}">{{ current_user_obj.role_display_name }}</span>
                     {% endif %}
                 </h5>
@@ -668,10 +668,10 @@
                     <span class="status-badge {% if custom_perms %}status-enabled{% else %}status-disabled{% endif %}">
                         {% if custom_perms %}
                             <i class="fas fa-check-circle"></i>
-                            مجوزهای سفارشی فعال
+                            Custom Permissions Enabled
                         {% else %}
                             <i class="fas fa-clock"></i>
-                            استفاده از پیش‌فرض
+                            Using Default
                         {% endif %}
                     </span>
                 </div>
@@ -687,27 +687,27 @@
                     {% set cat_class = 'cat-' + category|lower|replace(' ', '-') %}
                     <div class="category-section">
                         <div class="category-header">
-                            {% if category == 'سفارشات' %}
+                            {% if category == 'Orders' %}
                                 <div class="category-icon" style="background: #fed7d7;">📦</div>
-                            {% elif category == 'لجستیک' %}
+                            {% elif category == 'Logistics' %}
                                 <div class="category-icon" style="background: #bee3f8;">🚚</div>
-                            {% elif category == 'حقوقی' %}
+                            {% elif category == 'Legal' %}
                                 <div class="category-icon" style="background: #fef3c7;">⚖️</div>
-                            {% elif category == 'مالی' %}
+                            {% elif category == 'Finance' %}
                                 <div class="category-icon" style="background: #c6f6d5;">💰</div>
-                            {% elif category == 'سرمایه‌گذاری' %}
+                            {% elif category == 'Investment' %}
                                 <div class="category-icon" style="background: #fef3c7;">📈</div>
-                            {% elif category == 'فنی' %}
+                            {% elif category == 'Technical' %}
                                 <div class="category-icon" style="background: #e9d8fd;">🔧</div>
-                            {% elif category == 'داشبورد' %}
+                            {% elif category == 'Dashboard' %}
                                 <div class="category-icon" style="background: #feebc8;">📊</div>
-                            {% elif category == 'پروفایل' %}
+                            {% elif category == 'Profile' %}
                                 <div class="category-icon" style="background: #fed7e2;">👤</div>
                             {% else %}
                                 <div class="category-icon" style="background: #e2e8f0;">📌</div>
                             {% endif %}
                             <h6 class="category-title">{{ category }} 
-                                <span class="badge {{ cat_class }} mr-2">{{ permissions|length }} مجوز</span>
+                                <span class="badge {{ cat_class }} mr-2">{{ permissions|length }} Permissions</span>
                             </h6>
                         </div>
                         <div class="row">
@@ -738,61 +738,61 @@
                     <div class="action-buttons">
                         <button type="submit" class="btn btn-permission btn-save">
                             <i class="fas fa-save"></i>
-                            ذخیره تغییرات
+                            Save Changes
                         </button>
                         <a href="{{ url_for('users.manage_permissions', target_user_id=request.args.get('target_user_id') or current_user.id) }}" 
                            class="btn btn-permission btn-reset">
                             <i class="fas fa-undo"></i>
-                            بازنشانی به پیش‌فرض
+                            Reset to Default
                         </a>
                         <a href="{{ url_for('users.dashboard') }}" class="btn btn-permission btn-cancel">
                             <i class="fas fa-times"></i>
-                            انصراف
+                            Cancel
                         </a>
                     </div>
                     {% else %}
                     <div class="info-alert">
                         <i class="fas fa-info-circle"></i>
-                        <strong>توجه:</strong> فقط مدیر سیستم می‌تواند مجوزها را تغییر دهد. شما در حال مشاهده مجوزهای پیش‌فرض نقش خود هستید.
+                        <strong>Note:</strong> Only system administrator can change permissions. You are viewing your role's default permissions.
                     </div>
                     {% endif %}
                 </form>
             </div>
         </div>
         
-        <!-- راهنما -->
+        <!-- Guide -->
         <div class="guide-card">
             <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-book ml-2"></i>راهنمای سیستم مجوزها</h5>
+                <h5 class="mb-0"><i class="fas fa-book ml-2"></i>Permissions System Guide</h5>
             </div>
             <div class="card-body p-0">
                 <ul class="guide-list">
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>مجوزهای پیش‌فرض:</strong>
-                            هر نقش کاربری مجموعه‌ای از مجوزهای پیش‌فرض دارد که بر اساس وظایف آن نقش تعریف شده است.
+                            <strong>Default Permissions:</strong>
+                            Each user role has a set of default permissions defined based on that role's duties.
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>مجوزهای سفارشی:</strong>
-                            مدیر سیستم می‌تواند برای هر کاربر، مجوزهای خاصی را فعال یا غیرفعال کند. این مجوزها جایگزین مجوزهای پیش‌فرض می‌شوند.
+                            <strong>Custom Permissions:</strong>
+                            System administrator can enable or disable specific permissions for each user. These permissions replace the default permissions.
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>کاربران غیر احراز هویت:</strong>
-                            فقط به مجوزهای عمومی (مشاهده محصولات و درباره ما) دسترسی دارند.
+                            <strong>Unauthenticated Users:</strong>
+                            Only have access to public permissions (view products and about us).
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>تغییر نقش:</strong>
-                            با تغییر نقش کاربر، مجوزهای پیش‌فرض او نیز تغییر می‌کند مگر اینکه مجوزهای سفارشی تنظیم شده باشد.
+                            <strong>Role Change:</strong>
+                            When changing a user's role, their default permissions also change unless custom permissions are set.
                         </div>
                     </li>
                 </ul>
@@ -802,20 +802,20 @@
 </div>
 
 <script>
-// تأیید قبل از بازنشانی
+// Confirm before reset
 document.querySelectorAll('.btn-reset').forEach(btn => {
     btn.addEventListener('click', function(e) {
-        if (!confirm('آیا مطمئن هستید که می‌خواهید مجوزها را به حالت پیش‌فرض بازگردانید؟')) {
+        if (!confirm('Are you sure you want to reset permissions to default?')) {
             e.preventDefault();
         }
     });
 });
 
-// نمایش تعداد مجوزهای انتخاب شده
+// Display count of selected permissions
 function updateSelectedCount() {
     const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
     const total = document.querySelectorAll('input[name="permissions"]').length;
-    console.log(`مجوزهای انتخاب شده: ${checked} از ${total}`);
+    console.log(`Selected Permissions: ${checked} of ${total}`);
 }
 
 document.querySelectorAll('input[name="permissions"]').forEach(checkbox => {
