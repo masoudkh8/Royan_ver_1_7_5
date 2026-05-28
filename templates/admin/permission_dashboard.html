@@ -649,7 +649,7 @@
                     <button class="btn btn-light action-btn action-btn-primary" onclick="location.reload()">
                         <i class="fas fa-sync-alt ml-1"></i>به‌روزرسانی
                     </button>
-                    <a href="{{ url_for('admin.admin_perms.manage_permissions', user_id=current_user.id) }}" 
+                    <a href="{{ url_for('users.manage_permissions', target_user_id=current_user.id) }}" 
                        class="btn btn-light action-btn action-btn-success">
                         <i class="fas fa-user-cog ml-1"></i>مدیریت کاربران
                     </a>
