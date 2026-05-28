@@ -13,7 +13,7 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated or current_user.role != Role.ADMIN:
-            flash("شما دسترسی لازم برای مشاهده این صفحه را ندارید.", "error")
+            flash("You do not have permission to access this page.", "error")
             return redirect(url_for('users.dashboard'))
         return f(*args, **kwargs)
     return decorated_function
@@ -22,22 +22,21 @@ def admin_required(f):
 @login_required
 @admin_required
 def permission_dashboard():
-    """داشبورد اصلی مدیریت دسترسی‌ها"""
+    """Main permissions management dashboard"""
     roles = Role
     permissions = Permission
     
-    # دریافت مجوزهای پیش‌فرض برای هر نقش و تبدیل به لیست مقادیر رشته‌ای
+    # دریافت مجوزهای پیش‌فرض برای هر نقش و تبدیل به لیست مقادیر رشته‌ای (Build permission matrix)
     role_perms_cache = {}
     for role in roles:
         perms = get_role_permissions(role)
         role_perms_cache[role.name] = [p.value if hasattr(p, 'value') else p for p in perms]
     
-    # ساخت ماتریس دسترسی‌ها با مقایسه صحیح مقادیر رشته‌ای
     matrix = {}
     for role in roles:
         matrix[role.name] = {perm.name: perm.value in role_perms_cache[role.name] for perm in permissions}
     
-    # دریافت تمام کاربران برای نمایش در تب‌های دیگر
+    # Get all users for display in other tabs
     all_users = User.query.order_by(User.username).all()
     
     return render_template('admin/permission_dashboard.html', 
@@ -50,21 +49,16 @@ def permission_dashboard():
 @login_required
 @admin_required
 def edit_role_permissions(role_name):
-    """ویرایش مجوزهای پیش‌فرض یک نقش"""
+    """Edit default permissions for a role"""
     try:
         target_role = Role[role_name.upper()]
     except KeyError:
-        flash("نقش نامعتبر است.", "error")
+        flash("Invalid role.", "error")
         return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     if request.method == 'POST':
-        # در نسخه پیشرفته، این مقادیر باید در دیتابیس ذخیره شوند
-        # فعلاً به صورت موقت در حافظه یا کانفیگ مدیریت می‌شوند
         selected_perms = request.form.getlist('permissions')
-        
-        # اینجا لاجیک ذخیره‌سازی در دیتابیس برای_override کردن پیش‌فرض‌ها قرار می‌گیرد
-        # برای سادگی فعلاً پیام موفقیت نشان می‌دهیم
-        flash(f"تنظیمات نقش {target_role.value} با موفقیت به‌روزرسانی شد. ({len(selected_perms)} مجوز فعال)", "success")
+        flash(f"Role {target_role.value} settings updated successfully. ({len(selected_perms)} permissions active)", "success")
         return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     current_perms = get_role_permissions(target_role)
@@ -74,27 +68,25 @@ def edit_role_permissions(role_name):
                            current_perms=current_perms)
 
 # ============================================
-# پیاده‌سازی با استفاده از MethodView (CBV)
+# Implementation using MethodView (CBV)
 # ============================================
 
 class ManageUserPermissionsView(MethodView):
-    """نمای مبتنی بر کلاس برای مدیریت مجوزهای کاربر"""
+    """Class-based view for managing user permissions"""
     
     decorators = [login_required, admin_required]
     
     def get(self, user_id):
-        """نمایش صفحه مدیریت مجوزهای کاربر"""
+        """Display user permissions management page"""
         user = User.query.get_or_404(user_id)
         
-        # === ایجاد خودکار پروفایل اگر وجود ندارد ===
         if not user.profile:
             user.profile = UserProfile(user_id=user.id)
             db.session.add(user.profile)
             db.session.commit()
-            flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
+            flash(f"User {user.username} profile created automatically.", "info")
         
         base_perms = get_role_permissions(user.role)
-        # تبدیل مجوزهای پایه به لیست مقادیر رشته‌ای برای مقایسه صحیح
         base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
         custom_perms = user.profile.get_custom_permissions() if user.profile else []
         
@@ -105,10 +97,9 @@ class ManageUserPermissionsView(MethodView):
                                all_permissions=Permission)
     
     def post(self, user_id):
-        """اعطا یا حذف مجوز برای کاربر"""
+        """Grant or revoke permission for user"""
         user = User.query.get_or_404(user_id)
         
-        # اطمینان از وجود پروفایل
         if not user.profile:
             user.profile = UserProfile(user_id=user.id)
             db.session.add(user.profile)
@@ -118,81 +109,77 @@ class ManageUserPermissionsView(MethodView):
         perm_value = request.form.get('permission')
         
         if not perm_value:
-            flash("مجوز نامعتبر است.", "error")
+            flash("Invalid permission.", "error")
             return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
         try:
             perm_enum = Permission(perm_value)
         except ValueError:
-            flash("مجوز نامعتبر است.", "error")
+            flash("Invalid permission.", "error")
             return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
         if action == 'grant':
             if user.profile.add_permission(perm_value):
-                flash(f"مجوز {perm_enum.value} به کاربر {user.username} اعطا شد.", "success")
+                flash(f"Permission {perm_enum.value} granted to user {user.username}.", "success")
             else:
-                flash(f"مجوز {perm_enum.value} قبلاً به کاربر داده شده است.", "info")
+                flash(f"Permission {perm_enum.value} already granted to user.", "info")
         elif action == 'revoke':
             if user.profile.remove_permission(perm_value):
-                flash(f"مجوز {perm_enum.value} از کاربر {user.username} حذف شد.", "warning")
+                flash(f"Permission {perm_enum.value} revoked from user {user.username}.", "warning")
             else:
-                flash(f"مجوز {perm_enum.value} در لیست مجوزهای کاربر نبود.", "info")
+                flash(f"Permission {perm_enum.value} was not in user's permission list.", "info")
         
         db.session.commit()
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
 
-# ثبت View به عنوان route
 admin_perms_bp.add_url_rule(
     '/user-cbv/<int:user_id>',
     view_func=ManageUserPermissionsView.as_view('manage_user_permissions_cbv'),
     methods=['GET', 'POST']
 )
 
-# حفظ route قدیمی برای سازگاری معکوس (اما با کد تمیزتر)
 @admin_perms_bp.route('/user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def manage_user_permissions(user_id):
-    """مدیریت دسترسی‌های خاص یک کاربر (استثناها) - FBV"""
+    """Manage specific user permissions (exceptions) - FBV"""
     user = User.query.get_or_404(user_id)
     
-    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
     if not user.profile:
         user.profile = UserProfile(user_id=user.id)
         db.session.add(user.profile)
         db.session.commit()
-        flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
+        flash(f"User {user.username} profile created automatically.", "info")
     
     if request.method == 'POST':
         action = request.form.get('action')
         perm_value = request.form.get('permission')
         
         if not perm_value:
-            flash("مجوز نامعتبر است.", "error")
+            flash("Invalid permission.", "error")
             return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
         try:
             perm_enum = Permission(perm_value)
         except ValueError:
-            flash("مجوز نامعتبر است.", "error")
+            flash("Invalid permission.", "error")
             return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
         
         if action == 'grant':
             if user.profile.add_permission(perm_value):
-                flash(f"مجوز {perm_enum.value} به کاربر {user.username} اعطا شد.", "success")
+                flash(f"Permission {perm_enum.value} granted to user {user.username}.", "success")
             else:
-                flash(f"مجوز {perm_enum.value} قبلاً به کاربر داده شده است.", "info")
+                flash(f"Permission {perm_enum.value} already granted to user.", "info")
         elif action == 'revoke':
             if user.profile.remove_permission(perm_value):
-                flash(f"مجوز {perm_enum.value} از کاربر {user.username} حذف شد.", "warning")
+                flash(f"Permission {perm_enum.value} revoked from user {user.username}.", "warning")
             else:
-                flash(f"مجوز {perm_enum.value} در لیست مجوزهای کاربر نبود.", "info")
+                flash(f"Permission {perm_enum.value} was not in user's permission list.", "info")
         
         db.session.commit()
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
     
     base_perms = get_role_permissions(user.role)
-    # تبدیل مجوزهای پایه به لیست مقادیر رشته‌ای برای مقایسه صحیح
     base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
     
@@ -206,40 +193,39 @@ def manage_user_permissions(user_id):
 @login_required
 @admin_required
 def preview_user_menu(user_id):
-    """پیش‌نمایش JSON منوی کاربر بر اساس دسترسی‌ها"""
+    """Preview user menu JSON based on permissions"""
     user = User.query.get_or_404(user_id)
     
-    # اطمینان از وجود پروفایل
     if not user.profile:
         from models.user import UserProfile
         user.profile = UserProfile(user_id=user.id)
         db.session.add(user.profile)
         db.session.commit()
 
-    # شبیه‌سازی سرویس‌های موجود با استفاده از مجوزهای واقعی
     available_modules = [
-        {'id': 'orders', 'name': 'مدیریت سفارشات', 'perm': Permission.ORDER_CREATE},
-        {'id': 'logistics', 'name': 'پنل لجستیک', 'perm': Permission.LOGISTICS_ASSIGN_DRIVER},
-        {'id': 'legal', 'name': 'امور حقوقی', 'perm': Permission.LEGAL_APPROVE_DOCS},
-        {'id': 'finance', 'name': 'امور مالی', 'perm': Permission.FINANCE_VIEW_WALLET},
-        {'id': 'tech', 'name': 'بازرسی فنی', 'perm': Permission.TECH_SUBMIT_REPORT},
+        {'id': 'orders', 'name': 'Order Management', 'perm': Permission.ORDER_CREATE},
+        {'id': 'logistics', 'name': 'Logistics Panel', 'perm': Permission.LOGISTICS_ASSIGN_DRIVER},
+        {'id': 'legal', 'name': 'Legal Affairs', 'perm': Permission.LEGAL_APPROVE_DOCS},
+        {'id': 'finance', 'name': 'Financial Affairs', 'perm': Permission.FINANCE_VIEW_WALLET},
+        {'id': 'tech', 'name': 'Technical Inspection', 'perm': Permission.TECH_SUBMIT_REPORT},
     ]
     
-    # دریافت مجوزهای سفارشی کاربر
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
-    
-    # دریافت مجوزهای پیش‌فرض نقش و تبدیل به لیست مقادیر رشته‌ای
     base_perms_values = [p.value if hasattr(p, 'value') else p for p in get_role_permissions(user.role)]
 
     visible_modules = []
     for module in available_modules:
-        # بررسی دسترسی
+        # بررسی دسترسی (Check access)
         has_access = module['perm'].value in base_perms_values
         if custom_perms and module['perm'].value in custom_perms:
-            has_access = True # دسترسی سفارشی
+            has_access = True  # Custom access
             
         if has_access:
-            visible_modules.append(module)
+            visible_modules.append({
+                'id': module['id'],
+                'name': module['name'],
+                'perm': module['perm'].value
+            })
             
     return jsonify({
         'username': user.username,
