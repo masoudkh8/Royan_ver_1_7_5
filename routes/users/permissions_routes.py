@@ -59,15 +59,18 @@ def manage_permissions():
         target_user = User.query.get_or_404(target_user_id)
         target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
         
+        # اگر پروفایل وجود نداشت، یکی ایجاد کن
+        if not target_profile:
+            target_profile = UserProfile(user_id=target_user.id)
+            db.session.add(target_profile)
+            db.session.flush()  # برای دریافت ID قبل از commit
+        
         # دریافت مجوزهای انتخاب شده از فرم
         selected_permissions = request.form.getlist('permissions')
         
         if selected_permissions:
             # ذخیره به صورت JSON
-            if not target_profile.custom_permissions:
-                target_profile.custom_permissions = json.dumps(selected_permissions)
-            else:
-                target_profile.custom_permissions = json.dumps(selected_permissions)
+            target_profile.custom_permissions = json.dumps(selected_permissions)
             flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد.", "success")
         else:
             # اگر هیچ مجوزی انتخاب نشده، از مجوزهای پیش‌فرض استفاده شود
@@ -150,9 +153,11 @@ def dashboard():
     return render_template('users/dashboard.html', 
                          modules=modules, 
                          stats=stats,
+                         user=current_user,
                          user_role=current_user.role.value,
                          unread_notifications=unread_notifications,
-                         document_status=document_status)
+                         document_status=document_status,
+                         pending_orders=stats.get('pending_orders', 0))
 
 
 def _get_user_stats(user):
