@@ -94,7 +94,7 @@ def init_socketio(app):
         
         notification_id = data.get('notification_id')
         if notification_id:
-            notification = Notification.query.get(notification_id)
+            notification = db.session.get(Notification, notification_id)
             if notification and notification.user_id == current_user.id:
                 notification.is_read = True
                 db.session.commit()

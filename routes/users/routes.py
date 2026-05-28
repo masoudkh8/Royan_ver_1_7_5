@@ -839,7 +839,7 @@ def place_order():
                 return redirect(url_for('users.place_order'))
 
             seller_id = int(seller_id_str)
-            seller = User.query.get(seller_id)
+            seller = db.session.get(User, seller_id)
 
             if not seller:
                 flash("❌ The desired seller was not found.")
@@ -1232,7 +1232,7 @@ def chat():
     # ✅ فقط کاربران ویژه می‌تونن به لیست چت دسترسی داشته باشن و با کاربران دیگر چت کنن
     # اما کاربران غیر ویژه می‌تونن پیام‌های ادمین رو ببینن
     receiver_id = request.args.get('receiver_id', type=int)
-    receiver = User.query.get(receiver_id) if receiver_id else None
+    receiver = db.session.get(User, receiver_id) if receiver_id else None
     
     # بررسی اینکه آیا کاربر جاری غیر ویژه است و سعی دارد به چت دسترسی پیدا کند
     if not current_user.is_premium:

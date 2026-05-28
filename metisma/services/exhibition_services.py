@@ -36,7 +36,7 @@ class ExhibitionService:
     @staticmethod
     def get_exhibition_details(exhibition_id: str) -> Optional[Exhibition]:
         """Get detailed information about an exhibition."""
-        return Exhibition.query.get(exhibition_id)
+        return db.session.get(Exhibition, exhibition_id)
     
     @staticmethod
     def record_exhibition_visit(exhibition_id: str, user_id: str) -> Optional[ExhibitionVisit]:
@@ -75,7 +75,7 @@ class ExhibitionService:
     @staticmethod
     def get_exhibition_stats(exhibition_id: str) -> dict:
         """Get statistics for an exhibition."""
-        exhibition = Exhibition.query.get(exhibition_id)
+        exhibition = db.session.get(Exhibition, exhibition_id)
         if not exhibition:
             return {}
         
@@ -109,13 +109,13 @@ class BoothService:
     @staticmethod
     def get_booth_details(booth_id: str) -> Optional[Booth]:
         """Get detailed information about a booth."""
-        return Booth.query.get(booth_id)
+        return db.session.get(Booth, booth_id)
     
     @staticmethod
     def record_booth_visit(booth_id: str, user_id: str, duration_seconds: int = 0) -> Optional[BoothVisit]:
         """Record a user's visit to a booth."""
         try:
-            booth = Booth.query.get(booth_id)
+            booth = db.session.get(Booth, booth_id)
             if not booth:
                 return None
             
@@ -161,7 +161,7 @@ class BoothService:
             db.session.add(interaction)
             
             # Update booth interaction count
-            booth = Booth.query.get(booth_id)
+            booth = db.session.get(Booth, booth_id)
             if booth:
                 booth.total_interactions = (booth.total_interactions or 0) + 1
                 db.session.commit()
@@ -178,7 +178,7 @@ class BoothService:
                           topic: str, notes: Optional[str] = None) -> Optional[BoothAppointment]:
         """Create an appointment with a booth owner."""
         try:
-            booth = Booth.query.get(booth_id)
+            booth = db.session.get(Booth, booth_id)
             if not booth:
                 return None
             
@@ -230,7 +230,7 @@ class BoothService:
     @staticmethod
     def update_appointment_status(appointment_id: str, status: str) -> bool:
         """Update appointment status."""
-        appointment = BoothAppointment.query.get(appointment_id)
+        appointment = db.session.get(BoothAppointment, appointment_id)
         if not appointment:
             return False
         
@@ -241,7 +241,7 @@ class BoothService:
     @staticmethod
     def get_booth_stats(booth_id: str) -> dict:
         """Get statistics for a booth."""
-        booth = Booth.query.get(booth_id)
+        booth = db.session.get(Booth, booth_id)
         if not booth:
             return {}
         
@@ -313,7 +313,7 @@ class GamificationService:
         ).limit(limit).all()
         
         for visit in visits:
-            booth = Booth.query.get(visit.booth_id)
+            booth = db.session.get(Booth, visit.booth_id)
             activities.append({
                 'type': 'booth_visit',
                 'timestamp': visit.visited_at.isoformat(),
@@ -329,7 +329,7 @@ class GamificationService:
         ).limit(limit).all()
         
         for interaction in interactions:
-            booth = Booth.query.get(interaction.booth_id)
+            booth = db.session.get(Booth, interaction.booth_id)
             activities.append({
                 'type': f'interaction_{interaction.interaction_type}',
                 'timestamp': interaction.created_at.isoformat(),

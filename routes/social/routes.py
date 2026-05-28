@@ -375,7 +375,7 @@ def add_comment(post_id):
     
     # If replying to another comment, notify the original comment author
     if parent_id:
-        parent_comment = Comment.query.get(parent_id)
+        parent_comment = db.session.get(Comment, parent_id)
         if parent_comment and parent_comment.author_id != current_user.id:
             notification_data = {
                 'title': t_('social.new_reply_notification'),

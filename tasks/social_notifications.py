@@ -115,7 +115,7 @@ def calculate_feed_score_for_user(user_id):
     scored_posts = []
     for post in posts:
         # Calculate score based on TrustScore and engagement
-        author = User.query.get(post.author_id)
+        author = db.session.get(User, post.author_id)
         trust_score = author.trust_score if hasattr(author, 'trust_score') else 50
         
         # Score formula: TrustScore + engagement bonuses
