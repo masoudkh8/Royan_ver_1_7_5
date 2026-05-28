@@ -26,10 +26,15 @@ def permission_dashboard():
     roles = Role
     permissions = Permission
     
-    # Build permission matrix
+    # دریافت مجوزهای پیش‌فرض برای هر نقش و تبدیل به لیست مقادیر رشته‌ای (Build permission matrix)
+    role_perms_cache = {}
+    for role in roles:
+        perms = get_role_permissions(role)
+        role_perms_cache[role.name] = [p.value if hasattr(p, 'value') else p for p in perms]
+    
     matrix = {}
     for role in roles:
-        matrix[role.name] = {perm.name: perm in get_role_permissions(role) for perm in permissions}
+        matrix[role.name] = {perm.name: perm.value in role_perms_cache[role.name] for perm in permissions}
     
     # Get all users for display in other tabs
     all_users = User.query.order_by(User.username).all()
@@ -52,12 +57,7 @@ def edit_role_permissions(role_name):
         return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     if request.method == 'POST':
-        # In advanced version, these values should be saved to database
-        # For now, temporarily managed in memory or config
         selected_perms = request.form.getlist('permissions')
-        
-        # Database storage logic for overriding defaults goes here
-        # For simplicity, we show success message
         flash(f"Role {target_role.value} settings updated successfully. ({len(selected_perms)} permissions active)", "success")
         return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
@@ -80,7 +80,6 @@ class ManageUserPermissionsView(MethodView):
         """Display user permissions management page"""
         user = User.query.get_or_404(user_id)
         
-        # === Auto-create profile if it doesn't exist ===
         if not user.profile:
             user.profile = UserProfile(user_id=user.id)
             db.session.add(user.profile)
@@ -88,11 +87,12 @@ class ManageUserPermissionsView(MethodView):
             flash(f"User {user.username} profile created automatically.", "info")
         
         base_perms = get_role_permissions(user.role)
+        base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
         custom_perms = user.profile.get_custom_permissions() if user.profile else []
         
         return render_template('admin/manage_user_perms.html', 
                                user=user, 
-                               base_perms=base_perms, 
+                               base_perms=base_perms_values, 
                                custom_perms=custom_perms,
                                all_permissions=Permission)
     
@@ -100,7 +100,6 @@ class ManageUserPermissionsView(MethodView):
         """Grant or revoke permission for user"""
         user = User.query.get_or_404(user_id)
         
-        # Ensure profile exists
         if not user.profile:
             user.profile = UserProfile(user_id=user.id)
             db.session.add(user.profile)
@@ -133,14 +132,12 @@ class ManageUserPermissionsView(MethodView):
         db.session.commit()
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
 
-# Register View as route
 admin_perms_bp.add_url_rule(
     '/user-cbv/<int:user_id>',
     view_func=ManageUserPermissionsView.as_view('manage_user_permissions_cbv'),
     methods=['GET', 'POST']
 )
 
-# Keep old route for backward compatibility (but with cleaner code)
 @admin_perms_bp.route('/user/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -148,7 +145,6 @@ def manage_user_permissions(user_id):
     """Manage specific user permissions (exceptions) - FBV"""
     user = User.query.get_or_404(user_id)
     
-    # === Auto-create profile if it doesn't exist ===
     if not user.profile:
         user.profile = UserProfile(user_id=user.id)
         db.session.add(user.profile)
@@ -184,11 +180,12 @@ def manage_user_permissions(user_id):
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
     
     base_perms = get_role_permissions(user.role)
+    base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
     
     return render_template('admin/manage_user_perms.html', 
                            user=user, 
-                           base_perms=base_perms, 
+                           base_perms=base_perms_values, 
                            custom_perms=custom_perms,
                            all_permissions=Permission)
 
@@ -199,14 +196,12 @@ def preview_user_menu(user_id):
     """Preview user menu JSON based on permissions"""
     user = User.query.get_or_404(user_id)
     
-    # Ensure profile exists
     if not user.profile:
         from models.user import UserProfile
         user.profile = UserProfile(user_id=user.id)
         db.session.add(user.profile)
         db.session.commit()
 
-    # Simulate existing services using real permissions
     available_modules = [
         {'id': 'orders', 'name': 'Order Management', 'perm': Permission.ORDER_CREATE},
         {'id': 'logistics', 'name': 'Logistics Panel', 'perm': Permission.LOGISTICS_ASSIGN_DRIVER},
@@ -215,13 +210,13 @@ def preview_user_menu(user_id):
         {'id': 'tech', 'name': 'Technical Inspection', 'perm': Permission.TECH_SUBMIT_REPORT},
     ]
     
-    # Get user's custom permissions
     custom_perms = user.profile.get_custom_permissions() if user.profile else []
+    base_perms_values = [p.value if hasattr(p, 'value') else p for p in get_role_permissions(user.role)]
 
     visible_modules = []
     for module in available_modules:
-        # Check access
-        has_access = module['perm'] in get_role_permissions(user.role)
+        # بررسی دسترسی (Check access)
+        has_access = module['perm'].value in base_perms_values
         if custom_perms and module['perm'].value in custom_perms:
             has_access = True  # Custom access
             
@@ -229,7 +224,7 @@ def preview_user_menu(user_id):
             visible_modules.append({
                 'id': module['id'],
                 'name': module['name'],
-                'perm': module['perm'].value  # Convert Permission enum to string value
+                'perm': module['perm'].value
             })
             
     return jsonify({

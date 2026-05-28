@@ -51,12 +51,15 @@ class ManagePermissionsView(MethodView):
         default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
         custom_perms = target_profile.get_custom_permissions() if target_profile else []
         
+        # تبدیل مجوزهای پیش‌فرض به لیست رشته‌ها برای مقایسه صحیح
+        default_perms_values = [p.value if hasattr(p, 'value') else p for p in default_perms]
+        
         all_permissions = [
             {
                 'value': perm.value,
                 'name': perm.name,
                 'category': _get_permission_category(perm),
-                'is_enabled': perm.value in custom_perms if custom_perms else perm in default_perms
+                'is_enabled': perm.value in custom_perms if custom_perms else perm.value in default_perms_values
             }
             for perm in Permission
         ]
@@ -174,13 +177,16 @@ def manage_permissions():
     # دریافت مجوزهای سفارشی با استفاده از متد جدید مدل
     custom_perms = target_profile.get_custom_permissions() if target_profile else []
     
+    # تبدیل مجوزهای پیش‌فرض به لیست رشته‌ها برای مقایسه صحیح
+    default_perms_values = [p.value if hasattr(p, 'value') else p for p in default_perms]
+    
     # تبدیل به فرمت مناسب برای نمایش
     all_permissions = [
         {
             'value': perm.value,
             'name': perm.name,
             'category': _get_permission_category(perm),
-            'is_enabled': perm.value in custom_perms if custom_perms else perm in default_perms
+            'is_enabled': perm.value in custom_perms if custom_perms else perm.value in default_perms_values
         }
         for perm in Permission
     ]
