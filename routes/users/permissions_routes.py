@@ -13,6 +13,27 @@ import json
 from . import users_bp
 
 
+def _get_permission_category(permission):
+    """تعیین دسته‌بندی هر مجوز - تابع کمکی مشترک بین CBV و FBV"""
+    category_map = {
+        'ORDER': 'سفارشات',
+        'LOGISTICS': 'لجستیک',
+        'LEGAL': 'حقوقی',
+        'FINANCE': 'مالی',
+        'INVESTMENT': 'سرمایه‌گذاری',
+        'TECH': 'فنی',
+        'DASHBOARD': 'داشبورد',
+        'PROFILE': 'پروفایل',
+        'PUBLIC': 'عمومی',
+    }
+    
+    for prefix, category in category_map.items():
+        if permission.name.startswith(prefix):
+            return category
+    
+    return 'سایر'
+
+
 # ============================================
 # پیاده‌سازی با استفاده از MethodView (CBV)
 # ============================================
@@ -245,28 +266,8 @@ def manage_permissions():
                          custom_perms=custom_perms,
                          users_list=users_list,
                          current_user_obj=current_user,
-                         target_user=target_user)
-
-
-def _get_permission_category(permission):
-    """تعیین دسته‌بندی هر مجوز"""
-    category_map = {
-        'ORDER': 'سفارشات',
-        'LOGISTICS': 'لجستیک',
-        'LEGAL': 'حقوقی',
-        'FINANCE': 'مالی',
-        'INVESTMENT': 'سرمایه‌گذاری',
-        'TECH': 'فنی',
-        'DASHBOARD': 'داشبورد',
-        'PROFILE': 'پروفایل',
-        'PUBLIC': 'عمومی',
-    }
-    
-    for prefix, category in category_map.items():
-        if permission.name.startswith(prefix):
-            return category
-    
-    return 'سایر'
+                         target_user=target_user,
+                         get_permission_category=_get_permission_category)
 
 
 @users_bp.route('/dashboard')
