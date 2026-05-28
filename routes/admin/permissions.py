@@ -73,37 +73,48 @@ def manage_user_permissions(user_id):
     """مدیریت دسترسی‌های خاص یک کاربر (استثناها)"""
     user = User.query.get_or_404(user_id)
     
+    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
+    if not user.profile:
+        from models.user import UserProfile
+        user.profile = UserProfile(user_id=user.id)
+        db.session.add(user.profile)
+        db.session.commit()
+        flash(f"پروفایل کاربر {user.username} به صورت خودکار ایجاد شد.", "info")
+    # ===========================================
+    
     if request.method == 'POST':
         action = request.form.get('action')
-        perm_name = request.form.get('permission')
+        perm_value = request.form.get('permission')  # دریافت permission value به صورت رشته
         
-        if not perm_name or perm_name not in Permission.__members__:
+        if not perm_value:
             flash("مجوز نامعتبر است.", "error")
             return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
-            
-        perm_enum = Permission[perm_name]
         
-        if not user.profile:
-            # ایجاد پروفایل اگر وجود ندارد
-            user.profile = UserProfile(user_id=user.id)
-            db.session.add(user.profile)
-            db.session.commit()
-            
+        # اعتبارسنجی مجوز
+        try:
+            perm_enum = Permission(perm_value)
+        except ValueError:
+            flash("مجوز نامعتبر است.", "error")
+            return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
+        
+        # استفاده از متدهای جدید مدل برای مدیریت مجوزها
         if action == 'grant':
-            if perm_enum not in user.profile.custom_permissions:
-                user.profile.custom_permissions.append(perm_enum)
+            if user.profile.add_permission(perm_value):
                 flash(f"مجوز {perm_enum.value} به کاربر {user.username} اعطا شد.", "success")
+            else:
+                flash(f"مجوز {perm_enum.value} قبلاً به کاربر داده شده است.", "info")
         elif action == 'revoke':
-            if perm_enum in user.profile.custom_permissions:
-                user.profile.custom_permissions.remove(perm_enum)
+            if user.profile.remove_permission(perm_value):
                 flash(f"مجوز {perm_enum.value} از کاربر {user.username} حذف شد.", "warning")
-                
+            else:
+                flash(f"مجوز {perm_enum.value} در لیست مجوزهای کاربر نبود.", "info")
+        
         db.session.commit()
         return redirect(url_for('admin.admin_perms.manage_user_permissions', user_id=user.id))
     
     # محاسبه مجوزهای نهایی کاربر
     base_perms = get_role_permissions(user.role)
-    custom_perms = user.profile.custom_permissions if user.profile else []
+    custom_perms = user.profile.get_custom_permissions() if user.profile else []
     
     return render_template('admin/manage_user_perms.html', 
                            user=user, 
@@ -118,6 +129,13 @@ def preview_user_menu(user_id):
     """پیش‌نمایش JSON منوی کاربر بر اساس دسترسی‌ها"""
     user = User.query.get_or_404(user_id)
     
+    # اطمینان از وجود پروفایل
+    if not user.profile:
+        from models.user import UserProfile
+        user.profile = UserProfile(user_id=user.id)
+        db.session.add(user.profile)
+        db.session.commit()
+
     # شبیه‌سازی سرویس‌های موجود با استفاده از مجوزهای واقعی
     available_modules = [
         {'id': 'orders', 'name': 'مدیریت سفارشات', 'perm': Permission.ORDER_CREATE},
@@ -127,11 +145,14 @@ def preview_user_menu(user_id):
         {'id': 'tech', 'name': 'بازرسی فنی', 'perm': Permission.TECH_SUBMIT_REPORT},
     ]
     
+    # دریافت مجوزهای سفارشی کاربر
+    custom_perms = user.profile.get_custom_permissions() if user.profile else []
+
     visible_modules = []
     for module in available_modules:
         # بررسی دسترسی
         has_access = module['perm'] in get_role_permissions(user.role)
-        if user.profile and module['perm'] in user.profile.custom_permissions:
+        if custom_perms and module['perm'].value in custom_perms:
             has_access = True # دسترسی سفارشی
             
         if has_access:

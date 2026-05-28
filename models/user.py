@@ -5,6 +5,7 @@ from flask_login import UserMixin
 from enum import Enum
 from datetime import datetime
 import pytz
+import json
 
 tehran_tz = pytz.timezone('Asia/Tehran')
 
@@ -129,6 +130,83 @@ class UserProfile(db.Model):
     user = db.relationship('User', back_populates='profile')
     # company relationship will be established when Company model is created
     # documents and endorsements can be added as separate models if needed
+    
+    def get_custom_permissions(self):
+        """
+        دریافت لیست مجوزهای سفارشی به صورت لیستی از رشته‌ها
+        اگر پروفایل وجود نداشته باشد یا custom_permissions خالی باشد، لیست خالی برمی‌گرداند
+        """
+        if not self.custom_permissions:
+            return []
+        try:
+            if isinstance(self.custom_permissions, str):
+                perms = json.loads(self.custom_permissions)
+                return perms if isinstance(perms, list) else []
+            elif isinstance(self.custom_permissions, list):
+                return self.custom_permissions
+            else:
+                return []
+        except (json.JSONDecodeError, TypeError):
+            return []
+    
+    def set_custom_permissions(self, permissions_list):
+        """
+        تنظیم مجوزهای سفارشی به صورت لیستی از رشته‌های permission value
+        Args:
+            permissions_list: لیستی از رشته‌ها مانند ['order.view', 'logistics.update_status']
+        """
+        if not permissions_list or len(permissions_list) == 0:
+            self.custom_permissions = None
+        else:
+            # اطمینان از اینکه فقط رشته‌های معتبر ذخیره شوند
+            valid_perms = [str(p) for p in permissions_list if p]
+            self.custom_permissions = json.dumps(valid_perms, ensure_ascii=False)
+    
+    def add_permission(self, permission_value):
+        """
+        اضافه کردن یک مجوز به مجوزهای سفارشی
+        Args:
+            permission_value: رشته مجوز مانند 'order.view'
+        Returns:
+            bool: True اگر موفقیت‌آمیز بود، False در غیر این صورت
+        """
+        try:
+            current_perms = self.get_custom_permissions()
+            if permission_value not in current_perms:
+                current_perms.append(permission_value)
+                self.set_custom_permissions(current_perms)
+                return True
+            return False
+        except Exception:
+            return False
+    
+    def remove_permission(self, permission_value):
+        """
+        حذف یک مجوز از مجوزهای سفارشی
+        Args:
+            permission_value: رشته مجوز مانند 'order.view'
+        Returns:
+            bool: True اگر مجوز حذف شد، False اگر وجود نداشت
+        """
+        try:
+            current_perms = self.get_custom_permissions()
+            if permission_value in current_perms:
+                current_perms.remove(permission_value)
+                self.set_custom_permissions(current_perms)
+                return True
+            return False
+        except Exception:
+            return False
+    
+    def has_permission(self, permission_value):
+        """
+        بررسی وجود یک مجوز در مجوزهای سفارشی
+        Args:
+            permission_value: رشته مجوز مانند 'order.view'
+        Returns:
+            bool: True اگر مجوز وجود دارد
+        """
+        return permission_value in self.get_custom_permissions()
 
 
 # جدول واسط برای اتصالات (Follow System) - باید قبل از کلاس User تعریف شود
