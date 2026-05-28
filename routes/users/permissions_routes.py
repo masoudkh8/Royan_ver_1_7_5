@@ -21,18 +21,39 @@ def manage_permissions():
     فقط ادمین می‌تواند برای هر کاربر مجوزهای خاصی را فعال/غیرفعال کند.
     """
     from models.user import UserProfile
+    import json
     
-    profile = UserProfile.query.filter_by(user_id=current_user.id).first()
+    # دریافت target_user_id از query parameter یا form
+    target_user_id = request.args.get('target_user_id') or request.form.get('target_user_id')
     
-    # دریافت مجوزهای پیش‌فرض نقش کاربر
-    default_perms = DEFAULT_ROLE_PERMISSIONS.get(current_user.role.value, [])
+    # اگر target_user_id مشخص نشده، از کاربر فعلی استفاده کن (فقط برای مشاهده)
+    if target_user_id:
+        try:
+            target_user_id = int(target_user_id)
+        except (ValueError, TypeError):
+            target_user_id = current_user.id
+    else:
+        target_user_id = current_user.id
+    
+    target_user = User.query.get_or_404(target_user_id)
+    target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
+    
+    # دریافت مجوزهای پیش‌فرض نقش کاربر هدف
+    default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
     
     # دریافت مجوزهای سفارشی (اگر وجود داشته باشد)
     custom_perms = []
-    if profile and profile.custom_permissions:
+    if target_profile and target_profile.custom_permissions:
         try:
-            custom_perms = json.loads(profile.custom_permissions)
-        except (json.JSONDecodeError, TypeError):
+            if isinstance(target_profile.custom_permissions, str):
+                custom_perms = json.loads(target_profile.custom_permissions)
+            else:
+                custom_perms = target_profile.custom_permissions
+            
+            # اطمینان از اینکه custom_perms یک لیست است
+            if not isinstance(custom_perms, list):
+                custom_perms = []
+        except (json.JSONDecodeError, TypeError, AttributeError):
             custom_perms = []
     
     # تبدیل به فرمت مناسب برای نمایش
@@ -55,30 +76,48 @@ def manage_permissions():
         categories[cat].append(perm)
     
     if request.method == 'POST':
-        target_user_id = request.form.get('target_user_id', current_user.id)
-        target_user = User.query.get_or_404(target_user_id)
-        target_profile = UserProfile.query.filter_by(user_id=target_user.id).first()
+        # بررسی CSRF Token
+        from flask_wtf.csrf import validate_csrf
+        from wtforms.validators import ValidationError
         
-        # اگر پروفایل وجود نداشت، یکی ایجاد کن
+        try:
+            validate_csrf(request.form.get('csrf_token'))
+        except ValidationError:
+            flash("خطای امنیتی: توکن CSRF نامعتبر است.", "error")
+            return redirect(url_for('users.manage_permissions'))
+        
+        # دریافت لیست مجوزهای انتخاب شده از فرم
+        selected_permissions = request.form.getlist('permissions')
+        
+        # ایجاد یا به‌روزرسانی پروفایل
         if not target_profile:
             target_profile = UserProfile(user_id=target_user.id)
             db.session.add(target_profile)
-            db.session.flush()  # برای دریافت ID قبل از commit
-        
-        # دریافت مجوزهای انتخاب شده از فرم
-        selected_permissions = request.form.getlist('permissions')
         
         if selected_permissions:
-            # ذخیره به صورت JSON
-            target_profile.custom_permissions = json.dumps(selected_permissions)
-            flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد.", "success")
+            # ذخیره به صورت JSON - فقط مقادیر معتبر
+            valid_permissions = []
+            for perm_value in selected_permissions:
+                try:
+                    # اطمینان از معتبر بودن مجوز
+                    Permission(perm_value)
+                    valid_permissions.append(perm_value)
+                except ValueError:
+                    continue  # نادیده گرفتن مجوزهای نامعتبر
+            
+            if valid_permissions:
+                target_profile.custom_permissions = json.dumps(valid_permissions)
+                flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
+            else:
+                target_profile.custom_permissions = None
+                flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
         else:
             # اگر هیچ مجوزی انتخاب نشده، از مجوزهای پیش‌فرض استفاده شود
             target_profile.custom_permissions = None
             flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
         
         db.session.commit()
-        return redirect(url_for('users.manage_permissions'))
+        return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
     
     # اگر کاربر ادمین است، لیست کاربران را برای انتخاب بفرست
     users_list = []
@@ -90,7 +129,8 @@ def manage_permissions():
                          default_perms=default_perms,
                          custom_perms=custom_perms,
                          users_list=users_list,
-                         current_user_obj=current_user)
+                         current_user_obj=current_user,
+                         target_user=target_user)
 
 
 def _get_permission_category(permission):
