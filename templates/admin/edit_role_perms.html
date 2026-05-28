@@ -1,6 +1,6 @@
 {% extends "base_pwa.html" %}
 
-{% block title %}ویرایش مجوزهای نقش {{ role.value }}{% endblock %}
+{% block title %}Edit Role Permissions: {{ role.value }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -414,23 +414,23 @@
 {% block content %}
 <div class="edit-permissions-page">
     <div class="container">
-        <!-- هدر صفحه -->
+        <!-- Page Header -->
         <div class="edit-permissions-header">
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <h2>
                         <i class="fas fa-user-shield ml-2"></i>
-                        ویرایش مجوزهای نقش: 
+                        Edit Role Permissions: 
                         <span class="role-badge-large">{{ role.value }}</span>
                     </h2>
                     <p class="header-description mb-0">
                         <i class="fas fa-info-circle ml-1"></i>
-                        دسترسی‌های این نقش را تنظیم کنید. تغییرات روی تمام کاربران با این نقش تأثیر می‌گذارد.
+                        Configure permissions for this role. Changes will affect all users with this role.
                     </p>
                 </div>
                 <div class="col-md-4 text-left">
                     <a href="{{ url_for('admin.admin_perms.permission_dashboard') }}" class="btn btn-light action-btn" style="border-radius: 12px; padding: 0.75rem 1.5rem; font-weight: 600;">
-                        <i class="fas fa-arrow-right ml-1"></i>بازگشت به داشبورد
+                        <i class="fas fa-arrow-right ml-1"></i>Back to Dashboard
                     </a>
                 </div>
             </div>
@@ -440,15 +440,15 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             
             {% set categories = {
-                'ORDER': {'title': 'مدیریت سفارشات', 'subtitle': 'ایجاد، ویرایش و مدیریت سفارشات', 'icon': '📦', 'gradient': '#fed7d7'},
-                'LOGISTICS': {'title': 'لجستیک و حمل‌ونقل', 'subtitle': 'تخصیص راننده و پیگیری مرسولات', 'icon': '🚚', 'gradient': '#bee3f8'},
-                'LEGAL': {'title': 'امور حقوقی', 'subtitle': 'بررسی قراردادها و مدارک قانونی', 'icon': '⚖️', 'gradient': '#fef3c7'},
-                'FINANCE': {'title': 'امور مالی', 'subtitle': 'کیف پول، تراکنش‌ها و گزارش‌های مالی', 'icon': '💰', 'gradient': '#c6f6d5'},
-                'INVESTMENT': {'title': 'سرمایه‌گذاری', 'subtitle': 'پورتفوی و فرصت‌های سرمایه‌گذاری', 'icon': '📈', 'gradient': '#e9d8fd'},
-                'TECH': {'title': 'بازرسی فنی', 'subtitle': 'گزارش‌های فنی و بازرسی کالا', 'icon': '🔧', 'gradient': '#feebc8'},
-                'DASHBOARD': {'title': 'داشبورد', 'subtitle': 'نمایش آمار و اطلاعات کلی', 'icon': '📊', 'gradient': '#fed7e2'},
-                'PROFILE': {'title': 'پروفایل', 'subtitle': 'مدیریت اطلاعات شخصی', 'icon': '👤', 'gradient': '#e2e8f0'},
-                'PUBLIC': {'title': 'عمومی', 'subtitle': 'دسترسی‌های پایه سیستم', 'icon': '🌐', 'gradient': '#cbd5e0'}
+                'ORDER': {'title': 'Order Management', 'subtitle': 'Create, edit and manage orders', 'icon': '📦', 'gradient': '#fed7d7'},
+                'LOGISTICS': {'title': 'Logistics and Transportation', 'subtitle': 'Driver assignment and shipment tracking', 'icon': '🚚', 'gradient': '#bee3f8'},
+                'LEGAL': {'title': 'Legal Affairs', 'subtitle': 'Review contracts and legal documents', 'icon': '⚖️', 'gradient': '#fef3c7'},
+                'FINANCE': {'title': 'Finance', 'subtitle': 'Wallet, transactions and financial reports', 'icon': '💰', 'gradient': '#c6f6d5'},
+                'INVESTMENT': {'title': 'Investment', 'subtitle': 'Portfolio and investment opportunities', 'icon': '📈', 'gradient': '#e9d8fd'},
+                'TECH': {'title': 'Technical Inspection', 'subtitle': 'Technical reports and commodity inspection', 'icon': '🔧', 'gradient': '#feebc8'},
+                'DASHBOARD': {'title': 'Dashboard', 'subtitle': 'Display statistics and general information', 'icon': '📊', 'gradient': '#fed7e2'},
+                'PROFILE': {'title': 'Profile', 'subtitle': 'Manage personal information', 'icon': '👤', 'gradient': '#e2e8f0'},
+                'PUBLIC': {'title': 'Public', 'subtitle': 'Basic system access', 'icon': '🌐', 'gradient': '#cbd5e0'}
             } %}
             
             <div class="permission-groups-container">
@@ -473,7 +473,7 @@
                                 </div>
                             </div>
                             <button type="button" class="select-all-btn" onclick="toggleCategory('{{ category }}')">
-                                <i class="fas fa-check-square"></i>انتخاب همه
+                                <i class="fas fa-check-square"></i>Select All
                             </button>
                         </div>
                         
@@ -497,19 +497,19 @@
                 {% endfor %}
             </div>
             
-            <!-- نوار اقدام -->
+            <!-- Action Bar -->
             <div class="action-bar-fixed">
                 <div class="action-buttons-row">
                     <div class="stats-counter">
                         <span class="stats-number" id="countValue">{{ current_perms|length }}</span>
-                        <span class="stats-label">مجوز فعال انتخاب شده</span>
+                        <span class="stats-label">Active permissions selected</span>
                     </div>
                     <div style="display: flex; gap: 1rem;">
                         <button type="button" class="btn-action btn-cancel" onclick="window.history.back()">
-                            <i class="fas fa-times"></i>انصراف
+                            <i class="fas fa-times"></i>Cancel
                         </button>
                         <button type="submit" class="btn-action btn-save">
-                            <i class="fas fa-save"></i>ذخیره تغییرات
+                            <i class="fas fa-save"></i>Save Changes
                         </button>
                     </div>
                 </div>
@@ -521,21 +521,21 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="info-alert-content">
-                <strong>توجه مهم:</strong>
-                <p>این تغییرات روی تمام کاربرانی که نقش <strong>{{ role.value }}</strong> را دارند تأثیر می‌گذارد، 
-                   مگر اینکه برای کاربر خاصی مجوز سفارشی تعریف کرده باشید. قبل از ذخیره، مطمئن شوید که مجوزهای لازم حفظ شده‌اند.</p>
+                <strong>Important Notice:</strong>
+                <p>These changes will affect all users who have the role <strong>{{ role.value }}</strong>, 
+                   unless you have defined custom permissions for specific users. Before saving, make sure necessary permissions are preserved.</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// به‌روزرسانی شمارنده مجوزهای انتخاب‌شده
+// Update selected permissions counter
 function updateCount() {
     const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
     document.getElementById('countValue').textContent = checked;
     
-    // انیمیشن برای شمارنده
+    // Animation for counter
     const counter = document.querySelector('.stats-number');
     counter.style.transform = 'scale(1.1)';
     setTimeout(() => {
@@ -543,7 +543,7 @@ function updateCount() {
     }, 200);
 }
 
-// تغییر وضعیت چک‌باکس با کلیک روی کارت
+// Toggle checkbox state by clicking on card
 function toggleCheckbox(label) {
     if (event.target.tagName !== 'INPUT' && !event.target.classList.contains('permission-code-badge')) {
         const checkbox = label.querySelector('input[type="checkbox"]');
@@ -553,7 +553,7 @@ function toggleCheckbox(label) {
     }
 }
 
-// انتخاب/عدم انتخاب همه مجوزهای یک دسته
+// Select/deselect all permissions in a category
 function toggleCategory(category) {
     const checkboxes = document.querySelectorAll(`input[name="permissions"][value^="${category}_"]`);
     const allChecked = Array.from(checkboxes).every(cb => cb.checked);
@@ -566,21 +566,21 @@ function toggleCategory(category) {
     updateCount();
 }
 
-// جلوگیری از ارسال فرم خالی
+// Prevent empty form submission
 document.getElementById('permissionsForm').addEventListener('submit', function(e) {
     const checked = document.querySelectorAll('input[name="permissions"]:checked').length;
     if (checked === 0) {
         e.preventDefault();
-        showCustomAlert('حداقل یک مجوز باید انتخاب شود', 'warning');
+        showCustomAlert('At least one permission must be selected', 'warning');
     } else {
-        // نمایش پیام تأیید
-        if (!confirm(`آیا از ذخیره ${checked} مجوز اطمینان دارید؟`)) {
+        // Show confirmation message
+        if (!confirm(`Are you sure you want to save ${checked} permissions?`)) {
             e.preventDefault();
         }
     }
 });
 
-// نمایش پیام سفارشی
+// Display custom message
 function showCustomAlert(message, type = 'info') {
     const alertClass = {
         'success': 'alert-success',
@@ -605,7 +605,7 @@ function showCustomAlert(message, type = 'info') {
     }, 5000);
 }
 
-// به‌روزرسانی اولیه شمارنده و اضافه کردن event listenerها
+// Initial counter update and add event listeners
 document.addEventListener('DOMContentLoaded', function() {
     updateCount();
     
@@ -616,7 +616,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // اضافه کردن افکت hover برای کارت‌ها
+    // Add hover effect for cards
     document.querySelectorAll('.permission-checkbox-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateX(6px)';
