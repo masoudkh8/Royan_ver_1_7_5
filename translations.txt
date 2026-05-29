@@ -1,0 +1,16 @@
+Translation Log - permission_dashboard.html
+============================================
+
+Line 721: "جستجو در مجوزها و نقش‌ها..." → "Search in permissions and roles..."
+Line 729: "برای Edit Access‌های Each Role، of دکمه‌های زیر جدول استفاده کنید." → "To edit each role's access, use the buttons below the table."
+Line 757: "دسترسی دارد" → "has access"
+Line 761: "بدون دسترسی" → "no access"
+Line 814: "این Permissions به صورت استثنا به Access‌های پیش‌فرض Role اضافه می‌شوند و اولویت بالاتری دارند." → "These permissions are exceptionally added to the role's default access and have higher priority."
+Line 840: "در این بخش می‌توانید Usersی که دارای Permissionsی سفارشی هستند را View and Management کنید." → "In this section you can view and manage users who have custom permissions."
+Line 879: "این ابزار برای تست and بررسی صحت تنظیمات Permissions بسیار مفید است." → "This tool is very useful for testing and verifying permission settings."
+Line 904: "پیش‌نمایش بر اساس Permissionsی Role User به علاوه هرگونه مجوز سفارشی اعطا شده نمایش داده می‌شود." → "The preview is displayed based on the user's role permissions plus any granted custom permissions."
+Line 971: "هیچ ماژولی قابل View نیست" → "No module is visible"
+Line 1002: "خطا در بارگذاری اطلاعات" → "Error loading information"
+Line 1036: "این قابلیت به زودی اضافه خواهد شد" → "This feature will be added soon"
+
+Note: HTML comments (<!-- -->) and JavaScript comments (//) with Persian text were left unchanged as per instructions.
