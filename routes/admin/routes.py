@@ -57,21 +57,21 @@ def admin_required(f):
 @login_required
 @admin_required
 def dashboard():
-    """داشبورد ادمین با نمایش آمار و نوتیفیکیشن‌های جدید"""
+    """Admin dashboard with statistics and new notifications"""
     from models.auth import ActivityLog
     
     total_users = User.query.count()
     premium_requests = PremiumRequest.query.count()
     pending_requests = PremiumRequest.query.filter_by(status='pending').count()
     
-    # شمارش مدارک آپلود شده برای بررسی (کاربرانی که مدارک دارند اما هنوز تأیید نشده‌اند)
+    # Count uploaded documents for review (users who have documents but are not yet verified)
     users_with_pending_docs = User.query.filter(
         User.verification_documents != None,
         User.verification_documents != '[]',
         User.is_verified == False
     ).count()
     
-    # دریافت نوتیفیکیشن‌های خوانده‌نشده ادمین
+    # Get unread admin notifications
     from models.notification import Notification
     unread_notifications = Notification.query.filter_by(
         user_id=current_user.id,
@@ -283,12 +283,12 @@ def view_user_documents(user_id):
 
 
 # ---------------------------------------
-# مشاهده همه مدارک کاربران برای بررسی
+# View all user documents for review
 # ---------------------------------------
 @admin_bp.route('/documents')
 @admin_required
 def view_all_documents():
-    """نمایش لیست تمام کاربرانی که مدارک آپلود کرده‌اند"""
+    """Display list of all users who have uploaded documents"""
     page = request.args.get('page', 1, type=int)
     per_page = 15
     status_filter = request.args.get('status', 'pending')  # pending, approved, rejected, all
@@ -309,7 +309,7 @@ def view_all_documents():
         error_out=False
     )
     
-    # آمار
+    # Statistics
     total_pending = User.query.filter(
         User.verification_documents != None,
         User.verification_documents != '[]',
@@ -330,7 +330,7 @@ def view_all_documents():
 
 
 # ---------------------------------------
-# تأیید مدارک کاربر
+# Verify user documents
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/verify_documents', methods=['POST'])
 @admin_required
@@ -339,12 +339,12 @@ def verify_user_documents(user_id):
     user.is_verified = True
     user.is_kyc_verified = True
     
-    # اگر کاربر مدارک کامل دارد، لایه عضویت را ارتقا بده
+    # If user has complete documents, upgrade membership tier
     from models.user import MembershipTier
     if user.verification_documents and user.verification_documents != '[]':
         user.membership_tier = MembershipTier.VERIFIED
     
-    # ایجاد نوتیفیکیشن برای کاربر
+    # Create notification for user
     from models.notification import Notification
     notification = Notification(
         user_id=user.id,
@@ -352,32 +352,32 @@ def verify_user_documents(user_id):
         actor_id=current_user.id,
         related_id=user.id,
         related_type='document_verified',
-        title='✅ مدارک شما تأیید شد',
-        message=f'مدارک تأیید هویت شما با موفقیت تأیید شد. امتیاز اعتماد شما افزایش یافت.'
+        title='✅ Your documents have been verified',
+        message=f'Your identity verification documents have been successfully verified. Your trust score has been increased.'
     )
     db.session.add(notification)
     
-    # افزایش TrustScore
+    # Increase TrustScore
     if user.trust_score:
         user.trust_score_value = min(100, user.trust_score_value + 20)
     
     db.session.commit()
-    flash(f"✅ مدارک کاربر '{user.username}' با موفقیت تأیید شد.", "success")
+    flash(f"✅ Documents of user '{user.username}' have been successfully verified.", "success")
     return redirect(url_for('admin.view_user_documents', user_id=user_id))
 
 
 # ---------------------------------------
-# رد مدارک کاربر
+# Reject user documents
 # ---------------------------------------
 @admin_bp.route('/user/<int:user_id>/reject_documents', methods=['POST'])
 @admin_required
 def reject_user_documents(user_id):
     user = User.query.get_or_404(user_id)
-    # می‌توانیم مدارک را پاک کنیم یا فقط وضعیت را تغییر دهیم
-    # در اینجا فقط وضعیت را به False تغییر می‌دهیم
+    # We can delete documents or just change status
+    # Here we just change status to False
     user.is_verified = False
     
-    # ایجاد نوتیفیکیشن برای کاربر
+    # Create notification for user
     from models.notification import Notification
     notification = Notification(
         user_id=user.id,
@@ -385,13 +385,13 @@ def reject_user_documents(user_id):
         actor_id=current_user.id,
         related_id=user.id,
         related_type='document_rejected',
-        title='⚠️ مدارک شما رد شد',
-        message=f'مدارک تأیید هویت شما مورد تأیید قرار نگرفت. لطفاً مدارک صحیح را آپلود کنید.'
+        title='⚠️ Your documents have been rejected',
+        message=f'Your identity verification documents were not approved. Please upload correct documents.'
     )
     db.session.add(notification)
     
     db.session.commit()
-    flash(f"⚠️ مدارک کاربر '{user.username}' رد شد.", "warning")
+    flash(f"⚠️ Documents of user '{user.username}' have been rejected.", "warning")
     return redirect(url_for('admin.view_user_documents', user_id=user_id))
 
 
@@ -488,12 +488,12 @@ def toggle_premium(user_id):
 
 
 # ---------------------------------------
-# چت ادمین با کاربران
+# Admin chat with users
 # ---------------------------------------
 @admin_bp.route('/chat')
 @admin_required
 def admin_chat_list():
-    """لیست کاربران برای چت - نمایش همه کاربران فعال (ویژه و غیر ویژه)"""
+    """User list for chat - display all active users (premium and non-premium)"""
     users = User.query.filter(
         User.id != current_user.id,
         User.is_active == True
@@ -504,7 +504,7 @@ def admin_chat_list():
 @admin_bp.route('/chat/<int:user_id>', methods=['GET', 'POST'])
 @admin_required
 def admin_chat_with_user(user_id):
-    """چت ادمین با یک کاربر خاص"""
+    """Admin chat with a specific user"""
     user = User.query.get_or_404(user_id)
     
     if user.id == current_user.id:

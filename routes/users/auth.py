@@ -258,11 +258,11 @@ def confirm_email(token):
     return redirect(url_for('users.upload_documents'))
 
 
-# ==================== فراموشی رمز عبور ====================
+# ==================== Password Recovery ====================
 
 @users_bp.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
-    """درخواست بازیابی رمز عبور"""
+    """Password recovery request"""
     if request.method == 'POST':
         email = request.form.get('email')
         
@@ -272,16 +272,16 @@ def forgot_password():
         
         user = User.query.filter_by(email=email).first()
         
-        # حتی اگر کاربر وجود نداشت، برای امنیت پیام یکسان نشان بده
+        # Even if user doesn't exist, show same message for security
         if user:
-            # ایجاد توکن بازیابی
+            # Create recovery token
             token = PasswordResetToken.create_for_user(
                 user=user,
                 ip_address=request.remote_addr,
                 expiry_hours=1
             )
             
-            # ارسال ایمیل
+            # Send email
             reset_url = url_for('users.reset_password', token=token, _external=True)
             
             msg = Message(
@@ -319,8 +319,8 @@ def forgot_password():
 
 @users_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    """بازیابی رمز عبور با توکن"""
-    # هش کردن توکن برای مقایسه
+    """Password recovery with token"""
+    # Hash token for comparison
     token_hash = hashlib.sha256(token.encode()).hexdigest()
     
     reset_token = PasswordResetToken.query.filter_by(
@@ -349,19 +349,19 @@ def reset_password(token):
             flash("❌ Password and repeat do not match.", "error")
             return redirect(url_for('users.reset_password', token=token))
         
-        # بررسی تاریخچه رمز عبور
+        # Check password history
         import json
         if user.password_history:
             try:
                 history = json.loads(user.password_history)
-                # بررسی نکنیم که رمز فعلی در تاریخچه نباشد (اختیاری)
+                # Don't check if current password is in history (optional)
             except:
                 pass
         
-        # تنظیم رمز عبور جدید
+        # Set new password
         user.set_password(password)
         
-        # ذخیره رمز قبلی در تاریخچه
+        # Save previous password to history
         if user.password_history:
             try:
                 history = json.loads(user.password_history)
@@ -371,26 +371,26 @@ def reset_password(token):
             history = []
         
         history.append(user.password_hash)
-        # فقط ۵ رمز آخر را نگه دار
+        # Keep only last 5 passwords
         user.password_history = json.dumps(history[-5:])
         
-        # ریست کردن تلاش‌های ناموفق
+        # Reset failed attempts
         user.failed_login_attempts = 0
         user.locked_until = None
         
-        # استفاده از توکن
+        # Use token
         reset_token.mark_as_used()
         
-        # لاگ فعالیت
+        # Log activity
         ActivityLog.log_activity(
             user_id=user.id,
             activity_type='password_reset_completed',
-            description='بازیابی موفق رمز عبور',
+            description='Successful password recovery',
             request=request,
             status='success'
         )
         
-        # خروج از تمام نشست‌ها به جز نشست فعلی
+        # Logout all sessions except current
         LoginSession.logout_all_sessions(user.id)
         
         flash("✅ Your password has been changed successfully. Please log in.", "success")
@@ -399,14 +399,14 @@ def reset_password(token):
     return render_template('users/reset_password.html', token=token, user=user)
 
 
-# ==================== تأیید دو مرحله‌ای (2FA) ====================
+# ==================== Two-Factor Authentication (2FA) ====================
 
 import pyotp
 
 @users_bp.route('/enable_2fa', methods=['GET', 'POST'])
 @login_required
 def enable_2fa():
-    """فعال‌سازی احراز هویت دو مرحله‌ای"""
+    """Enable two-factor authentication"""
     if current_user.two_factor_enabled:
         flash("⚠️ Two-factor authentication is already enabled.", "warning")
         return redirect(url_for('users.profile'))
@@ -422,17 +422,17 @@ def enable_2fa():
         totp = pyotp.TOTP(secret)
         
         if totp.verify(code):
-            # ذخیره秘密 و فعال‌سازی
+            # Save secret and enable
             current_user.two_factor_secret = secret
             current_user.two_factor_enabled = True
             
-            # تولید کدهای پشتیبان
+            # Generate backup codes
             backup_codes = [str(random.randint(100000, 999999)) for _ in range(10)]
             current_user.backup_codes = json.dumps(backup_codes)
             
             db.session.commit()
             
-            # پاک کردن session
+            # Clear session
             session.pop('2fa_secret', None)
             session['backup_codes'] = backup_codes
             
@@ -449,11 +449,11 @@ def enable_2fa():
         else:
             flash("❌ The code entered is not valid.", "error")
     
-    # تولید secret جدید
+    # Generate new secret
     secret = pyotp.random_base32()
     session['2fa_secret'] = secret
     
-    # تولید URI برای QR Code
+    # Generate URI for QR Code
     uri = pyotp.totp.TOTP(secret).provisioning_uri(
         name=current_user.email,
         issuer_name="Metisma"
@@ -465,7 +465,7 @@ def enable_2fa():
 @users_bp.route('/show_backup_codes')
 @login_required
 def show_backup_codes():
-    """نمایش کدهای پشتیبان"""
+    """Display backup codes"""
     backup_codes = session.get('backup_codes')
     if not backup_codes:
         flash("⚠️ No backup codes found.", "warning")
@@ -477,7 +477,7 @@ def show_backup_codes():
 @users_bp.route('/disable_2fa', methods=['POST'])
 @login_required
 def disable_2fa():
-    """غیرفعال‌سازی احراز هویت دو مرحله‌ای"""
+    """Disable two-factor authentication"""
     if not current_user.two_factor_enabled:
         flash("⚠️ Two-factor authentication is not enabled.", "warning")
         return redirect(url_for('users.profile'))
@@ -522,12 +522,12 @@ def disable_2fa():
     return redirect(url_for('users.profile'))
 
 
-# ==================== تأیید 2FA هنگام ورود ====================
+# ==================== 2FA Verification During Login ====================
 
 @users_bp.route('/verify_2fa_login', methods=['GET', 'POST'])
 def verify_2fa_login():
-    """صفحه تأیید کد 2FA هنگام ورود"""
-    # بررسی وجود کاربر در session
+    """2FA code verification page during login"""
+    # Check for user in session
     user_id = session.get('2fa_pending_user_id')
     if not user_id:
         flash("❌ No pending login found. Please log in first.", "warning")
@@ -535,7 +535,7 @@ def verify_2fa_login():
     
     user = db.session.get(User, user_id)
     if not user or not user.two_factor_enabled:
-        # اگر 2FA غیرفعال شد، به پروفایل برگرد
+        # If 2FA was disabled, return to login
         session.pop('2fa_pending_user_id', None)
         session.pop('2fa_remember_me', None)
         return redirect(url_for('users.login'))
@@ -611,12 +611,12 @@ def verify_2fa_login():
     return render_template('users/verify_2fa_login.html', user=user)
 
 
-# ==================== مدیریت نشست‌ها ====================
+# ==================== Session Management ====================
 
 @users_bp.route('/sessions')
 @login_required
 def manage_sessions():
-    """مدیریت نشست‌های فعال"""
+    """Manage active sessions"""
     sessions = LoginSession.query.filter_by(
         user_id=current_user.id,
         is_active=True
@@ -628,7 +628,7 @@ def manage_sessions():
 @users_bp.route('/sessions/<int:session_id>/revoke', methods=['POST'])
 @login_required
 def revoke_session(session_id):
-    """لغو یک نشست خاص"""
+    """Revoke a specific session"""
     login_session = LoginSession.query.filter_by(
         id=session_id,
         user_id=current_user.id
@@ -639,7 +639,7 @@ def revoke_session(session_id):
         ActivityLog.log_activity(
             user_id=current_user.id,
             activity_type='session_revoked',
-            description=f'لغو نشست {session_id}',
+            description=f'Revoke session {session_id}',
             request=request,
             status='success'
         )
@@ -653,7 +653,7 @@ def revoke_session(session_id):
 @users_bp.route('/sessions/revoke_all', methods=['POST'])
 @login_required
 def revoke_all_sessions():
-    """لغو تمام نشست‌ها"""
+    """Revoke all sessions"""
     LoginSession.logout_all_sessions(current_user.id)
     
     ActivityLog.log_activity(
@@ -668,12 +668,12 @@ def revoke_all_sessions():
     return redirect(url_for('users.manage_sessions'))
 
 
-# ==================== فعالیت‌های کاربر ====================
+# ==================== User Activities ====================
 
 @users_bp.route('/activity_log')
 @login_required
 def activity_log():
-    """نمایش لاگ فعالیت‌های کاربر"""
+    """Display user activity log"""
     page = request.args.get('page', 1, type=int)
     activities = ActivityLog.query.filter_by(
         user_id=current_user.id
