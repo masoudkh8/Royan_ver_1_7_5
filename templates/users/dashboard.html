@@ -5,7 +5,7 @@
 {% block content %}
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-6xl mx-auto">
-        <!-- دکمه بازگشت به صفحه اصلی -->
+        <!-- Return to Home Page -->
         <div class="mb-6 flex items-center justify-between">
             <a href="{{ url_for('users.profile') }}" 
                class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
@@ -20,12 +20,12 @@
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                 </svg>
-                مدیریت مجوزها
+                Manage Permissions
             </a>
             {% endif %}
         </div>
         
-        <!-- هدر پروفایل کاربر -->
+        <!-- User Profile Header -->
         <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-6 mb-6 transition-all duration-300">
             <div class="flex flex-col sm:flex-row items-center gap-4">
                 <div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl font-bold text-dark-900 shadow-lg shadow-gold/30">
@@ -45,17 +45,17 @@
                         </span>
                     {% endif %}
                     
-                    <!-- نمایش وضعیت تأیید هویت -->
+                    <!-- Display Identity Verification Status -->
                     <div class="mt-3 flex items-center gap-2 text-sm">
                         {% if user.is_premium or document_status == 'approved' %}
                             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-medium">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                 </svg>
-                                هویت تأیید شده ✅
+                                Identity Verified ✅
                             </span>
                             <a href="{{ url_for('users.view_my_documents') }}" class="text-gold hover:text-gold-dark underline text-xs font-medium">
-                                مشاهده مدارک
+                                View Documents
                             </a>
                         {% elif document_status == 'pending' %}
                             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 font-medium">
@@ -63,20 +63,20 @@
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                در حال بررسی ⏳
+                                Under Review ⏳
                             </span>
                             <a href="{{ url_for('users.view_my_documents') }}" class="text-gold hover:text-gold-dark underline text-xs font-medium">
-                                مشاهده وضعیت
+                                View Status
                             </a>
                         {% else %}
                             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 font-medium">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                                 </svg>
-                                نیاز به آپلود مدارک ⚠️
+                                Need to Upload Documents ⚠️
                             </span>
                             <a href="{{ url_for('users.upgrade_to_premium') }}" class="text-gold hover:text-gold-dark underline text-xs font-medium">
-                                شروع فرآیند
+                                Start Process
                             </a>
                         {% endif %}
                     </div>
@@ -104,7 +104,7 @@
         <!-- کارت‌های داشبورد مبتنی بر مجوزها -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             
-            <!-- کارت: مدیریت مجوزها (فقط اگر کاربر مجوز admin داشته باشد) -->
+            <!-- Card: Permissions Management (only if user has admin permission) -->
             {% if has_permission(current_user, Permission.ORDER_EDIT) and current_user.role.value == 'admin' %}
             <div class="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl p-5 shadow border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg col-span-1 md:col-span-2 lg:col-span-3">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -113,8 +113,8 @@
                             🔐
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900 dark:text-white text-lg">مدیریت مجوزهای دسترسی</h3>
-                            <p class="text-gray-600 dark:text-slate-400 text-sm">تنظیم دسترسی‌های ماژولار برای کاربران مختلف بر اساس نقش و خدمات</p>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-lg">Access Permissions Management</h3>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm">Configure modular access for different users based on role and services</p>
                         </div>
                     </div>
                     <a href="{{ url_for('users.manage_permissions') }}" 
@@ -124,13 +124,13 @@
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
-                        مدیریت مجوزها
+                        Manage Permissions
                     </a>
                 </div>
             </div>
             {% endif %}
             
-            <!-- کارت: سفارشات (نمایش بر اساس مجوز ORDER_VIEW) -->
+            <!-- Card: Orders (display based on ORDER_VIEW permission) -->
             {% if service_module_enabled('order', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center justify-between mb-4">
@@ -154,7 +154,7 @@
             </div>
             {% endif %}
 
-            <!-- کارت: مدیریت سفارشات (فقط اگر کاربر مجوز ORDER_EDIT داشته باشد) -->
+            <!-- Card: Manage Orders (only if user has ORDER_EDIT permission) -->
             {% if has_permission(current_user, Permission.ORDER_EDIT) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
@@ -173,7 +173,7 @@
             </div>
             {% endif %}
 
-            <!-- کارت: چت هوشمند (نمایش بر اساس مجوز) -->
+            <!-- Card: Smart Chat (display based on permission) -->
             {% if service_module_enabled('dashboard', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
@@ -200,7 +200,7 @@
             </div>
             {% endif %}
 
-            <!-- کارت: پشتیبانی (همیشه نمایش داده می‌شود) -->
+            <!-- Card: Support (always displayed) -->
             {% if service_module_enabled('dashboard', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
@@ -219,7 +219,7 @@
             </div>
             {% endif %}
 
-            <!-- کارت: نقشه بنادر (نمایش بر اساس مجوز logistics) -->
+            <!-- Card: Port Map (display based on logistics permission) -->
             {% if service_module_enabled('logistics', current_user) %}
             <div class="bg-white dark:bg-dark-800 rounded-xl p-5 shadow border border-gray-200 dark:border-dark-700 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
@@ -246,7 +246,7 @@
             </div>
             {% endif %}
 
-            <!-- کارت: ارتقا به پریمیوم -->
+            <!-- Card: Upgrade to Premium -->
             {% if not current_user.is_premium %}
             <div class="bg-gradient-to-br from-gold/10 to-gold-dark/10 dark:from-gold/20 dark:to-gold-dark/20 rounded-xl p-5 shadow border border-gold/30 transition-all duration-300 hover:shadow-lg col-span-1 md:col-span-2 lg:col-span-3">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -268,7 +268,7 @@
                 </div>
             </div>
             {% else %}
-            <!-- کارت وضعیت پریمیوم -->
+            <!-- Premium Status Card -->
             <div class="bg-gradient-to-br from-gold/10 to-gold-dark/10 dark:from-gold/20 dark:to-gold-dark/20 rounded-xl p-5 shadow border border-gold/30 transition-all duration-300 col-span-1 md:col-span-2 lg:col-span-3">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dark-900 font-bold shadow-lg">

@@ -726,7 +726,7 @@
             <div class="alert alert-info mb-3">
                 <i class="fas fa-info-circle ml-2"></i>
                 <strong>Guide:</strong> ✅ indicates authorized access and ❌ indicates no access. 
-                برای Edit Access‌های Each Role، of دکمه‌های زیر جدandل استفاده کنید.
+                Use the buttons below the table to edit each role's access.
             </div>
             
             <div class="table-responsive">
@@ -945,11 +945,11 @@ function loadPreview() {
     const userId = document.getElementById('previewUserSelect').value;
     
     if (!userId) {
-        showAlert('لطفاً یک کاربر انتخاب کنید', 'warning');
+        showAlert('Please select a user', 'warning');
         return;
     }
 
-    // نمایش حالت لandدینگ
+    // Display loading state
     document.getElementById('previewResult').style.display = 'none';
     document.getElementById('previewPlaceholder').innerHTML = `
         <div class="spinner-border text-primary" role="status">
