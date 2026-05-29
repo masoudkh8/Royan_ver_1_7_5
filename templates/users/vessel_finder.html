@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </div>
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Vessel Finder</h2>
+            <h2class="text-2xl font-bold text-gray-900 dark:text-white">Vessel Finde>{{ _("Vessel Finder") }}</h2>
             <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">Track ships in real-time using their unique IMO number</p>
         </div>
 
@@ -22,10 +22,10 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <div>
-                <label for="imo" class="form-label">IMO Number</label>
+                <labelfor="imo" class="form-label">IMO Number>{{ _("IMO Number") }}</label>
                 <input id="imo" name="imo" type="text" maxlength="7" required
                        class="form-input tracking-widest font-mono"
-                       placeholder="e.g., 9395044"
+                       placeholder="{{ _("e.g., 9395044") }}"
                        pattern="[0-9]{7}"
                        inputmode="numeric">
                 <p class="mt-1 text-xs text-gray-500 dark:text-slate-500">The IMO (International Maritime Organization) identifier is a unique 7-digit code assigned to each vessel.</p>

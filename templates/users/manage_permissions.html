@@ -629,7 +629,7 @@
                 <form method="GET" action="{{ url_for('users.manage_permissions') }}">
                     <div class="row align-items-end">
                         <div class="col-md-8">
-                            <label for="target_user" class="form-label font-weight-bold mb-2">Target User:</label>
+                            <labelfor="target_user" class="form-label font-weight-bold mb-2">Target User:>{{ _("Target User:") }}</label>
                             <select name="target_user_id" id="target_user" class="form-control filter-select">
                                 {% for user in users_list %}
                                 <option value="{{ user.id }}" {% if request.args.get('target_user_id')|int == user.id %}selected{% endif %}>

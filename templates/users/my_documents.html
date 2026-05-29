@@ -8,7 +8,7 @@
         
         <!-- هدر -->
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📄 My Verified Documents</h1>
+            <h1class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📄 My Verified Document>{{ _("📄 My Verified Documents") }}</h1>
             <a href="{{ url_for('users.profile') }}" class="text-sm text-gray-600 dark:text-slate-400 hover:text-gold transition">← Back to Profile</a>
         </div>
 
@@ -22,7 +22,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold text-green-900 dark:text-green-300">Premium Level 1 - Verified ✅</h2>
+                    <h2class="text-xl font-bold text-green-900 dark:text-green-300">Premium Level 1 - Verified >{{ _("Premium Level 1 - Verified ✅") }}</h2>
                     <p class="text-green-700 dark:text-green-400 text-sm">Your identity has been verified. All documents are confirmed.</p>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold text-yellow-900 dark:text-yellow-300">Under Review ⏳</h2>
+                    <h2class="text-xl font-bold text-yellow-900 dark:text-yellow-300">Under Review >{{ _("Under Review ⏳") }}</h2>
                     <p class="text-yellow-700 dark:text-yellow-400 text-sm">Admin is reviewing your documents. This usually takes 24-48 hours.</p>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold text-red-900 dark:text-red-300">Request Rejected ❌</h2>
+                    <h2class="text-xl font-bold text-red-900 dark:text-red-300">Request Rejected >{{ _("Request Rejected ❌") }}</h2>
                     <p class="text-red-700 dark:text-red-400 text-sm">{% if req.notes %}{{ req.notes }}{% else %}Please contact support for more information.{% endif %}</p>
                 </div>
             </div>

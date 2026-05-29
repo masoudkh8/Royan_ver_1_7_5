@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                 </svg>
             </div>
-            <h2 class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upgrade to Premium</h2>
+            <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upgrade to Premiu>{{ _("Upgrade to Premium") }}</h2>
             <p class="text-3xl font-bold text-gold mt-2">US$1,000</p>
             <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">Please upload the receipt after making the payment.</p>
         </div>
@@ -55,7 +55,7 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             
             <div>
-                <label for="receipt" class="form-label">Upload Payment Receipt</label>
+                <labelfor="receipt" class="form-label">Upload Payment Receipt>{{ _("Upload Payment Receipt") }}</label>
                 <input id="receipt" name="receipt" type="file" accept="image/*,.pdf" required
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
@@ -64,7 +64,7 @@
             </div>
 
             <!-- دکمه ارسال -->
-            <button type="submit"
+            <buttontype="submit"
                     class="w-full flex justify-center py-3.5 px-6 rounded-xl shadow-lg text-sm font-bold text-dark-900 
                            bg-gradient-to-r from-gold to-gold-dark 
                            hover:from-gold-light hover:to-gold 
@@ -72,7 +72,7 @@
                            transform hover:scale-[1.02] active:scale-[0.98] 
                            transition-all duration-200">
                 Upload Receipt & Send
-            </button>
+            >{{ _("Upload Receipt & Send") }}</button>
         </form>
 
         <!-- لینک بازگشت -->

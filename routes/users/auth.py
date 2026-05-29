@@ -7,6 +7,7 @@ import secrets
 import hashlib
 from datetime import datetime, timedelta
 from flask import render_template, flash, redirect, url_for, request, current_app, session
+from flask_babel import gettext
 from flask_login import login_required, current_user, login_user, logout_user
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from flask_mail import Message
@@ -79,7 +80,7 @@ def send_sms(phone, message):
 @login_required
 def verify_phone():
     if not current_user.phone or not current_user.phone.strip():
-        flash("❌ Please enter your mobile number in your profile first.")
+        flash(gettext("❌ Please enter your mobile number in your profile first."))
         return redirect(url_for('users.profile'))
 
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
@@ -96,7 +97,7 @@ def verify_phone():
 
     # اگر شماره قبلاً تأیید شده، به مرحله بعد برو
     if req.phone_verified:
-        flash("✅ Your mobile number has already been verified.")
+        flash(gettext("✅ Your mobile number has already been verified."))
         return redirect(url_for('users.verify_email'))  # ✅ به ایمیل برو، نه payment_confirmation
 
     if request.method == 'POST':
@@ -106,23 +107,23 @@ def verify_phone():
             db.session.commit()
             try:
                 send_sms(current_user.phone, f"Verification code: {code}")
-                flash("New code sent.")
+                flash(gettext("New code sent."))
             except Exception as e:
                 current_app.logger.error(f"SMS failed: {e}")
-                flash("❌ There was a problem sending the code.")
+                flash(gettext("❌ There was a problem sending the code."))
             return redirect(url_for('users.verify_phone'))
 
         code = request.form.get('code', '').strip()
         if not code:
-            flash("Please enter the code.")
+            flash(gettext("Please enter the code."))
         elif code == req.phone_verification_code:
             req.phone_verified = True
             req.phone_verification_code = None
             db.session.commit()
-            flash("✅ Mobile number successfully verified.")
+            flash(gettext("✅ Mobile number successfully verified."))
             return redirect(url_for('users.verify_email'))  # ✅ بعد از تأیید شماره، به ایمیل برو
         else:
-            flash("❌ The code is invalid.")
+            flash(gettext("❌ The code is invalid."))
 
     # ارسال اولیه کد
     if not req.phone_verification_code:
@@ -131,10 +132,10 @@ def verify_phone():
         db.session.commit()
         try:
             send_sms(current_user.phone, f"Verification code: {code}")
-            flash("A verification code has been sent to your number.")
+            flash(gettext("A verification code has been sent to your number."))
         except Exception as e:
             current_app.logger.error(f"SMS failed: {e}")
-            flash("❌ There was a problem sending the code.")
+            flash(gettext("❌ There was a problem sending the code."))
 
     return render_template('users/verify_phone.html', req=req)
 
@@ -158,7 +159,7 @@ def show_verify_email_page():  # ← تغییر: نام تابع جدید
 
     # اگر درخواستی وجود ندارد، کاربر باید ابتدا فرآیند را شروع کند
     if not req:
-        flash("Please start the premium verification process first.", "error")
+        flash(gettext("Please start the premium verification process first."), "error")
         return redirect(url_for('users.upgrade_to_premium'))
 
     # حذف شرط phone_verified - مستقیماً به تأیید ایمیل می‌رویم
@@ -171,10 +172,10 @@ def show_verify_email_page():  # ← تغییر: نام تابع جدید
 
     if not req.email_verification_token:
         if send_email_verification(current_user):
-            flash("Confirmation email sent.")
+            flash(gettext("Confirmation email sent."))
         else:
             print('....... ❌❌')
-            flash("❌ There was an error sending the email.")
+            flash(gettext("❌ There was an error sending the email."))
             return render_template('users/verify_email.html', req=req)
 
     return render_template('users/verify_email.html', req=req)
@@ -226,24 +227,24 @@ def confirm_email(token):
     try:
         email = s.loads(token, salt='email-verify-salt', max_age=86400)
     except SignatureExpired:
-        flash("❌ The link has expired.")
+        flash(gettext("❌ The link has expired."))
 
     #     return redirect(url_for('users.verify_email'))
     # except BadSignature:
-    #     flash("❌ The link is invalid.")
+    #     flash(gettext("❌ The link is invalid."))
     #     return redirect(url_for('users.upgrade_to_premium'))
         return redirect(url_for('users.show_verify_email_page'))
     except BadSignature:
-        flash("❌ The link is invalid.")
+        flash(gettext("❌ The link is invalid."))
         return redirect(url_for('users.show_verify_email_page'))
 
     if email != current_user.email:
-        flash("❌ This link is not for you.")
+        flash(gettext("❌ This link is not for you."))
         return redirect(url_for('users.login'))
 
     req = PremiumRequest.query.filter_by(user_id=current_user.id).order_by(PremiumRequest.submitted_at.desc()).first()
     if not req:
-        flash("❌ No request found.")
+        flash(gettext("❌ No request found."))
         return redirect(url_for('users.upgrade_to_premium'))
 
     if not req.email_verified:
@@ -253,7 +254,7 @@ def confirm_email(token):
         current_user.is_email_verified = True
 
         db.session.commit()
-        flash("✅ Email has been verified.")
+        flash(gettext("✅ Email has been verified."))
 
     return redirect(url_for('users.upload_documents'))
 
@@ -267,7 +268,7 @@ def forgot_password():
         email = request.form.get('email')
         
         if not email:
-            flash("❌ Please enter your email.", "error")
+            flash(gettext("❌ Please enter your email."), "error")
             return redirect(url_for('users.forgot_password'))
         
         user = User.query.filter_by(email=email).first()
@@ -311,7 +312,7 @@ def forgot_password():
                     status='failed'
                 )
         
-        flash("✅ If your email is registered in the system, a recovery link will be sent to you.", "info")
+        flash(gettext("✅ If your email is registered in the system, a recovery link will be sent to you."), "info")
         return redirect(url_for('users.login'))
     
     return render_template('users/forgot_password.html')
@@ -329,12 +330,12 @@ def reset_password(token):
     ).first()
     
     if not reset_token or not reset_token.is_valid():
-        flash("❌ The recovery link is invalid or expired.", "error")
+        flash(gettext("❌ The recovery link is invalid or expired."), "error")
         return redirect(url_for('users.forgot_password'))
     
     user = db.session.get(User, reset_token.user_id)
     if not user:
-        flash("❌ User not found.", "error")
+        flash(gettext("❌ User not found."), "error")
         return redirect(url_for('users.login'))
     
     if request.method == 'POST':
@@ -342,11 +343,11 @@ def reset_password(token):
         confirm_password = request.form.get('confirm_password')
         
         if not password or len(password) < 8:
-            flash("❌ Password must be at least 8 characters long.", "error")
+            flash(gettext("❌ Password must be at least 8 characters long."), "error")
             return redirect(url_for('users.reset_password', token=token))
         
         if password != confirm_password:
-            flash("❌ Password and repeat do not match.", "error")
+            flash(gettext("❌ Password and repeat do not match."), "error")
             return redirect(url_for('users.reset_password', token=token))
         
         # Check password history
@@ -393,7 +394,7 @@ def reset_password(token):
         # Logout all sessions except current
         LoginSession.logout_all_sessions(user.id)
         
-        flash("✅ Your password has been changed successfully. Please log in.", "success")
+        flash(gettext("✅ Your password has been changed successfully. Please log in."), "success")
         return redirect(url_for('users.login'))
     
     return render_template('users/reset_password.html', token=token, user=user)
@@ -408,7 +409,7 @@ import pyotp
 def enable_2fa():
     """Enable two-factor authentication"""
     if current_user.two_factor_enabled:
-        flash("⚠️ Two-factor authentication is already enabled.", "warning")
+        flash(gettext("⚠️ Two-factor authentication is already enabled."), "warning")
         return redirect(url_for('users.profile'))
     
     if request.method == 'POST':
@@ -416,7 +417,7 @@ def enable_2fa():
         secret = session.get('2fa_secret')
         
         if not secret or not code:
-            flash("❌ The information is incomplete.", "error")
+            flash(gettext("❌ The information is incomplete."), "error")
             return redirect(url_for('users.enable_2fa'))
         
         totp = pyotp.TOTP(secret)
@@ -444,10 +445,10 @@ def enable_2fa():
                 status='success'
             )
 
-            flash("✅ Two-factor authentication enabled. Save backup codes!", "success")
+            flash(gettext("✅ Two-factor authentication enabled. Save backup codes!"), "success")
             return redirect(url_for('users.show_backup_codes'))
         else:
-            flash("❌ The code entered is not valid.", "error")
+            flash(gettext("❌ The code entered is not valid."), "error")
     
     # Generate new secret
     secret = pyotp.random_base32()
@@ -468,7 +469,7 @@ def show_backup_codes():
     """Display backup codes"""
     backup_codes = session.get('backup_codes')
     if not backup_codes:
-        flash("⚠️ No backup codes found.", "warning")
+        flash(gettext("⚠️ No backup codes found."), "warning")
         return redirect(url_for('users.profile'))
     
     return render_template('users/show_backup_codes.html', codes=backup_codes)
@@ -479,7 +480,7 @@ def show_backup_codes():
 def disable_2fa():
     """Disable two-factor authentication"""
     if not current_user.two_factor_enabled:
-        flash("⚠️ Two-factor authentication is not enabled.", "warning")
+        flash(gettext("⚠️ Two-factor authentication is not enabled."), "warning")
         return redirect(url_for('users.profile'))
     
     code = request.form.get('code')
@@ -515,9 +516,9 @@ def disable_2fa():
             status='success'
         )
 
-        flash("✅ Two-factor authentication disabled.", "success")
+        flash(gettext("✅ Two-factor authentication disabled."), "success")
     else:
-        flash("❌ The code entered is not valid.", "error")
+        flash(gettext("❌ The code entered is not valid."), "error")
     
     return redirect(url_for('users.profile'))
 
@@ -530,7 +531,7 @@ def verify_2fa_login():
     # Check for user in session
     user_id = session.get('2fa_pending_user_id')
     if not user_id:
-        flash("❌ No pending login found. Please log in first.", "warning")
+        flash(gettext("❌ No pending login found. Please log in first."), "warning")
         return redirect(url_for('users.login'))
     
     user = db.session.get(User, user_id)
@@ -595,10 +596,10 @@ def verify_2fa_login():
             response = redirect(url_for('users.profile'))
             response.set_cookie('session_token', session_token, httponly=True, secure=True, samesite='Lax')
             
-            flash("✅ Welcome! Two-factor authentication successful.", "success")
+            flash(gettext("✅ Welcome! Two-factor authentication successful."), "success")
             return response
         else:
-            flash("❌ The code entered is not valid. Please try again.", "error")
+            flash(gettext("❌ The code entered is not valid. Please try again."), "error")
             ActivityLog.log_activity(
                 user_id=user.id,
                 activity_type='login_2fa_failed',
@@ -643,9 +644,9 @@ def revoke_session(session_id):
             request=request,
             status='success'
         )
-        flash("✅ Session successfully canceled.", "success")
+        flash(gettext("✅ Session successfully canceled."), "success")
     else:
-        flash("❌ Session not found.", "error")
+        flash(gettext("❌ Session not found."), "error")
     
     return redirect(url_for('users.manage_sessions'))
 
@@ -664,7 +665,7 @@ def revoke_all_sessions():
         status='success'
     )
 
-    flash("✅ All sessions have been canceled.", "success")
+    flash(gettext("✅ All sessions have been canceled."), "success")
     return redirect(url_for('users.manage_sessions'))
 
 

@@ -548,7 +548,7 @@
         class="theme-toggle fixed bottom-6 left-6 z-50 p-3.5 rounded-full 
                bg-white dark:bg-dark-700 shadow-lg border border-gray-200 dark:border-dark-600 
                hover:shadow-xl transition-all duration-300" 
-        aria-label="Toggle Dark Mode" title="Toggle Theme">
+        aria-label="Toggle Dark Mode" title="{{ _("Toggle Theme") }}">
   
   <!-- آیکون ماه (نمایش در حالت لایت) -->
   <svg id="icon-moon" class="w-5 h-5 text-gray-700 dark:hidden transition-transform duration-300" 
@@ -572,7 +572,7 @@
    rel="noopener noreferrer"
    class="group fixed bottom-6 right-6 z-50 inline-flex items-center justify-center"
    aria-label="Chat with Support on WhatsApp"
-   title="Chat with Support">
+   title="{{ _("Chat with Support") }}">
   
   <!-- Tooltip -->
 {#  <span class="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 dark:bg-dark-700 text-white text-xs font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">#}
@@ -606,7 +606,7 @@
   <!-- لایه لودینگ اولیه با لوگو بزرگ و نوار پیشرفت Gmail-style -->
   <div id="loading" class="fixed inset-0 z-[100] flex items-center justify-center bg-gray-50 dark:bg-dark-900 transition-colors">
     <div class="logo-container">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Metisma Logo" class="logo-image">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ _("Metisma Logo") }}" class="logo-image">
       <div class="progress-bar-container">
         <div class="progress-bar"></div>
       </div>
@@ -621,16 +621,16 @@
     <a href="/" class="flex items-center gap-3 group">
       <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gold to-gold-dark 
                   flex items-center justify-center text-lg shadow-lg shadow-gold/20 group-hover:scale-105 transition">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Metisma Logo" class="h-12 sm:h-16 w-auto object-contain flex-shrink-0">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ _("Metisma Logo") }}" class="h-12 sm:h-16 w-auto object-contain flex-shrink-0">
       </div>
       <span class="text-xl font-bold text-gray-900 dark:text-gold tracking-tight">Metisma</span>
     </a>
 
     <!-- منوی ناوبری دسکتاپ - طراحی مینیمال و حرفه‌ای -->
     <nav class="hidden lg:flex items-center gap-4 text-sm font-medium">
-      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Home</a>
-      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">About</a>
-      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Contact</a>
+      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Home>{{ _("Home") }}</a>
+      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">About>{{ _("About") }}</a>
+      <a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Contact>{{ _("Contact") }}</a>
       
       <!-- دسته‌بندی‌های خدمات با استایل مینیمال -->
       <div class="flex items-center gap-1">
@@ -648,9 +648,9 @@
           <div class="absolute left-0 mt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
             <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
               <ul class="py-1">
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Trade Assurance</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Payment & Escrow</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Trade Credit</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Trade Assurance>{{ _("Trade Assurance") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Payment & Escrow>{{ _("Payment & Escrow") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-trade-light)] hover:text-[var(--color-trade-hover)] transition">Trade Credit>{{ _("Trade Credit") }}</a></li>
               </ul>
             </div>
           </div>
@@ -670,8 +670,8 @@
           <div class="absolute left-0 mt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
             <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
               <ul class="py-1">
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-logistics-light)] hover:text-[var(--color-logistics-hover)] transition">Smart Logistics</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-logistics-light)] hover:text-[var(--color-logistics-hover)] transition">Smart Map</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-logistics-light)] hover:text-[var(--color-logistics-hover)] transition">Smart Logistics>{{ _("Smart Logistics") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-logistics-light)] hover:text-[var(--color-logistics-hover)] transition">Smart Map>{{ _("Smart Map") }}</a></li>
               </ul>
             </div>
           </div>
@@ -691,10 +691,10 @@
           <div class="absolute left-0 mt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
             <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
               <ul class="py-1">
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">Market Analytics</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">AI Consultant</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">AI Core</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">Business Intelligence</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">Market Analytics>{{ _("Market Analytics") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">AI Consultant>{{ _("AI Consultant") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">AI Core>{{ _("AI Core") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-analytics-light)] hover:text-[var(--color-analytics-hover)] transition">Business Intelligence>{{ _("Business Intelligence") }}</a></li>
               </ul>
             </div>
           </div>
@@ -714,10 +714,10 @@
           <div class="absolute left-0 mt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
             <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
               <ul class="py-1">
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">CRM</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Marketplace</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Consortium</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Trust Score</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">CRM>{{ _("CRM") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Marketplace>{{ _("Marketplace") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Consortium>{{ _("Consortium") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-tools-light)] hover:text-[var(--color-tools-hover)] transition">Trust Score>{{ _("Trust Score") }}</a></li>
               </ul>
             </div>
           </div>
@@ -737,9 +737,9 @@
           <div class="absolute left-0 mt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
             <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
               <ul class="py-1">
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Trade Academy</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Gamification</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Trade Media</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Trade Academy>{{ _("Trade Academy") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Gamification>{{ _("Gamification") }}</a></li>
+                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-[var(--color-learning-light)] hover:text-[var(--color-learning-hover)] transition">Trade Media>{{ _("Trade Media") }}</a></li>
               </ul>
             </div>
           </div>
@@ -761,8 +761,8 @@
         <div class="absolute right-0 mt-2 w-24 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
           <div class="bg-white dark:bg-dark-800 rounded-lg shadow-xl border border-gray-100 dark:border-gold/10 overflow-hidden">
             <!-- ✅ FIX #4: Language links now work with backend session -->
-            <a href="?lang=fa" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('fa')">فارسی</a>
-            <a href="?lang=en" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('en')">English</a>
+            <a href="?lang=fa" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('fa')">فارسی>{{ _("فارسی") }}</a>
+            <a href="?lang=en" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition" onclick="setLanguage('en')">English>{{ _("English") }}</a>
           </div>
         </div>
       </div>
@@ -770,7 +770,7 @@
       <!-- دکمه Dark Mode -->
       <button onclick="toggleDarkMode()" 
               class="theme-toggle p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20" 
-              aria-label="Toggle Dark Mode" title="Toggle Theme">
+              aria-label="Toggle Dark Mode" title="{{ _("Toggle Theme") }}">
         <!-- آیکون ماه (نمایش در حالت لایت) -->
         <svg id="icon-moon-desktop" class="w-5 h-5 text-gray-600 dark:text-slate-400 dark:hidden transition-transform duration-300" 
              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -856,52 +856,52 @@
           <div id="servicesSubmenu" class="services-submenu pl-1 pr-0.5 pb-3">
             <!-- Trade & Finance -->
             <div class="service-category trade mb-3">
-              <h4 class="text-gold">Trade & Finance</h4>
+              <h4class="text-gold">Trade & Financ>{{ _("Trade & Finance") }}</h4>
               <ul class="space-y-0.5">
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Trade Assurance</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Payment & Escrow</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Trade Credit</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Trade Assurance>{{ _("Trade Assurance") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Payment & Escrow>{{ _("Payment & Escrow") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-gold/5">Trade Credit>{{ _("Trade Credit") }}</a></li>
               </ul>
             </div>
             
             <!-- Logistics -->
             <div class="service-category logistics mb-3">
-              <h4 class="text-blue-500">Logistics</h4>
+              <h4class="text-blue-500">Logistic>{{ _("Logistics") }}</h4>
               <ul class="space-y-0.5">
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-blue-500/5">Smart Logistics</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-blue-500/5">Smart Map</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-blue-500/5">Smart Logistics>{{ _("Smart Logistics") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-blue-500/5">Smart Map>{{ _("Smart Map") }}</a></li>
               </ul>
             </div>
             
             <!-- Analytics & AI -->
             <div class="service-category analytics mb-3">
-              <h4 class="text-purple-500">Analytics & AI</h4>
+              <h4class="text-purple-500">Analytics & A>{{ _("Analytics & AI") }}</h4>
               <ul class="space-y-0.5">
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">Market Analytics</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">AI Consultant</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">AI Core</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">Business Intelligence</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">Market Analytics>{{ _("Market Analytics") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">AI Consultant>{{ _("AI Consultant") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">AI Core>{{ _("AI Core") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-purple-500/5">Business Intelligence>{{ _("Business Intelligence") }}</a></li>
               </ul>
             </div>
             
             <!-- Business Tools -->
             <div class="service-category business mb-3">
-              <h4 class="text-green-500">Business Tools</h4>
+              <h4class="text-green-500">Business Tool>{{ _("Business Tools") }}</h4>
               <ul class="space-y-0.5">
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">CRM</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Marketplace</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Consortium</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Trust Score</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">CRM>{{ _("CRM") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Marketplace>{{ _("Marketplace") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Consortium>{{ _("Consortium") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-green-500/5">Trust Score>{{ _("Trust Score") }}</a></li>
               </ul>
             </div>
             
             <!-- Learning & Engagement -->
             <div class="service-category learning mb-2">
-              <h4 class="text-orange-500">Learning & Engagement</h4>
+              <h4class="text-orange-500">Learning & Engagemen>{{ _("Learning & Engagement") }}</h4>
               <ul class="space-y-0.5">
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Trade Academy</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Gamification</a></li>
-                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Trade Media</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Trade Academy>{{ _("Trade Academy") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Gamification>{{ _("Gamification") }}</a></li>
+                <li><a href="#" class="service-link text-sm text-gray-600 dark:text-slate-400 hover:text-gold hover:bg-orange-500/5">Trade Media>{{ _("Trade Media") }}</a></li>
               </ul>
             </div>
           </div>
@@ -1090,9 +1090,9 @@
   <section class="relative z-20 py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white dark:from-dark-900 dark:to-dark-800 transition-colors">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
+        <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           TrustScore™ Verification System
-        </h2>
+       >{{ _("TrustScore™ Verification System") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
           Our proprietary trust metric ensures only verified, elite traders gain access to the network
         </p>
@@ -1128,25 +1128,25 @@
         <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-300">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🛡️</div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">100% Verified Members</h3>
+            <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">100% Verified Member>{{ _("100% Verified Members") }}</h3>
             <p class="text-sm text-gray-600 dark:text-slate-400">Every member undergoes rigorous verification through our TrustScore™ system</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-400">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🤖</div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">24/7 AI-Powered Insights</h3>
+            <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">24/7 AI-Powered Insight>{{ _("24/7 AI-Powered Insights") }}</h3>
             <p class="text-sm text-gray-600 dark:text-slate-400">Continuous monitoring and scoring based on real-time trade data</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-500">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">✨</div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">0 Spam Guarantee</h3>
+            <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">0 Spam Guarante>{{ _("0 Spam Guarantee") }}</h3>
             <p class="text-sm text-gray-600 dark:text-slate-400">Our exclusive network ensures zero tolerance for unverified solicitations</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-500">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🌐</div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Global Recognition</h3>
+            <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">Global Recognitio>{{ _("Global Recognition") }}</h3>
             <p class="text-sm text-gray-600 dark:text-slate-400">TrustScore™ is recognized by leading trade organizations worldwide</p>
           </div>
         </div>
@@ -1176,7 +1176,7 @@
       
       <!-- هدر بخش: عنوان و توضیحات -->
       <div class="text-center mb-12 sm:mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">Platform Services</h2>
+        <h2class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">Platform Service>{{ _("Platform Services") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
           Intelligent solutions for global trade expansion, from consultation to execution
         </p>
@@ -1190,7 +1190,7 @@
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤖</div>
-          <h3 class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">AI Consultant</h3>
+          <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">AI Consultan>{{ _("AI Consultant") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Smart export advisor: Customs rules, tariffs, and logistics routing
           </p>
@@ -1200,7 +1200,7 @@
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤝</div>
-          <h3 class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Consortium</h3>
+          <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Consortiu>{{ _("Consortium") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Smart consortium formation and contract management system
           </p>
@@ -1210,7 +1210,7 @@
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">✅</div>
-          <h3 class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trust Score</h3>
+          <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trust Scor>{{ _("Trust Score") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Multi-layer verification system and dynamic trust scoring
           </p>
@@ -1220,7 +1220,7 @@
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">💰</div>
-          <h3 class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trade Credit</h3>
+          <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trade Credi>{{ _("Trade Credit") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Smart trade credit system and financial facilities
           </p>
@@ -1231,7 +1231,7 @@
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🗺️</div>
-          <h3 class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Smart Map</h3>
+          <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Smart Ma>{{ _("Smart Map") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Interactive logistics map: Geopolitical risks and export opportunities
           </p>
@@ -1241,7 +1241,7 @@
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏪</div>
-          <h3 class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Marketplace</h3>
+          <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Marketplac>{{ _("Marketplace") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             B2B marketplace and RFQ system for purchase requests
           </p>
@@ -1251,7 +1251,7 @@
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">💳</div>
-          <h3 class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Escrow</h3>
+          <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Escro>{{ _("Escrow") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Secure financial layer and Escrow for international transactions
           </p>
@@ -1262,7 +1262,7 @@
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🧠</div>
-          <h3 class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">AI Core</h3>
+          <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">AI Cor>{{ _("AI Core") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Advanced AI engine for analyzing global trade data patterns
           </p>
@@ -1272,7 +1272,7 @@
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📊</div>
-          <h3 class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">Business Intelligence</h3>
+          <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">Business Intelligenc>{{ _("Business Intelligence") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Analytical dashboards and smart business reporting tools
           </p>
@@ -1282,7 +1282,7 @@
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">👥</div>
-          <h3 class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">CRM</h3>
+          <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">CR>{{ _("CRM") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Customer relationship management and trade lead tracking
           </p>
@@ -1293,7 +1293,7 @@
                     border-l-4 border-[var(--color-tools)] hover:border-[var(--color-tools-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-tools-light)] border border-[var(--color-tools)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏆</div>
-          <h3 class="text-[var(--color-tools)] font-bold text-center mb-2 text-base">Gamification</h3>
+          <h3class="text-[var(--color-tools)] font-bold text-center mb-2 text-base">Gamificatio>{{ _("Gamification") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Reward system and points for active user engagement
           </p>
@@ -1304,7 +1304,7 @@
                     border-l-4 border-[var(--color-learning)] hover:border-[var(--color-learning-hover)] transition-all duration-300 group">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🎓</div>
-          <h3 class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Academy</h3>
+          <h3class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Academ>{{ _("Academy") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Specialized courses for international trade and export
           </p>
@@ -1314,7 +1314,7 @@
                     border-l-4 border-[var(--color-learning)] hover:border-[var(--color-learning-hover)] transition-all duration-300 group sm:col-span-2 lg:col-span-1">
           <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
                       flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📰</div>
-          <h3 class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Trade Media</h3>
+          <h3class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Trade Medi>{{ _("Trade Media") }}</h3>
           <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
             Specialized magazine and analytical media for global markets
           </p>
@@ -1328,9 +1328,9 @@
   <section class="relative z-20 py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white to-gray-50 dark:from-dark-800 dark:to-dark-900 transition-colors">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
+        <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Exclusive Membership Levels
-        </h2>
+       >{{ _("Exclusive Membership Levels") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
           Choose your tier in the invitation-only network of elite traders
         </p>
@@ -1340,7 +1340,7 @@
         <!-- Bronze Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-200">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-3xl">🥉</div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Bronze</h3>
+          <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Bronz>{{ _("Bronze") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Entry-level access for emerging traders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
             <li>✓ Basic Market Access</li>
@@ -1356,7 +1356,7 @@
         <!-- Silver Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-300">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-3xl">🥈</div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Silver</h3>
+          <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Silve>{{ _("Silver") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Enhanced tools for growing businesses</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
             <li>✓ Full Market Access</li>
@@ -1376,7 +1376,7 @@
             Most Popular
           </div>
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl">🥇</div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Gold</h3>
+          <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Gol>{{ _("Gold") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Premium access for established traders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
             <li>✓ Unlimited Market Access</li>
@@ -1394,7 +1394,7 @@
         <!-- Platinum Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-500">
           <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-3xl">💎</div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Platinum</h3>
+          <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Platinu>{{ _("Platinum") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Invite-only for industry leaders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
             <li>✓ All Gold Features</li>
@@ -1416,9 +1416,9 @@
   <section class="relative z-20 py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-dark-900 transition-colors">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
+        <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Your Journey Starts Here
-        </h2>
+       >{{ _("Your Journey Starts Here") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
           Four simple steps to join the exclusive network of verified global traders
         </p>
@@ -1430,7 +1430,7 @@
           <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
             📝
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">1. Request Access</h3>
+          <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">1. Request Acces>{{ _("1. Request Access") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400">
             Submit your application with basic professional information and trade credentials
           </p>
@@ -1441,7 +1441,7 @@
           <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
             🔍
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">2. Complete Verification</h3>
+          <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">2. Complete Verificatio>{{ _("2. Complete Verification") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400">
             Our AI-powered system verifies your credentials and calculates your initial TrustScore™
           </p>
@@ -1452,7 +1452,7 @@
           <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
             🤝
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">3. Build Your Network</h3>
+          <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">3. Build Your Networ>{{ _("3. Build Your Network") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400">
             Connect with verified members, join exclusive groups, and access curated opportunities
           </p>
@@ -1463,7 +1463,7 @@
           <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
             📈
           </div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">4. Execute Deals</h3>
+          <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">4. Execute Deal>{{ _("4. Execute Deals") }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400">
             Leverage AI insights, secure financing, and close deals with confidence in our trusted ecosystem
           </p>
@@ -1482,9 +1482,9 @@
   <section class="relative z-20 py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-dark-800 transition-colors">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
+        <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Trusted by Professionals Worldwide
-        </h2>
+       >{{ _("Trusted by Professionals Worldwide") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
           Join elite traders from leading global organizations
         </p>
@@ -1514,7 +1514,7 @@
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">AK</div>
             <div>
-              <h4 class="font-bold text-gray-900 dark:text-white">Ali Karimi</h4>
+              <h4class="font-bold text-gray-900 dark:text-white">Ali Karim>{{ _("Ali Karimi") }}</h4>
               <p class="text-xs text-gray-500 dark:text-slate-400">Export Director, Tehran</p>
             </div>
           </div>
@@ -1528,7 +1528,7 @@
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">SM</div>
             <div>
-              <h4 class="font-bold text-gray-900 dark:text-white">Sarah Mitchell</h4>
+              <h4class="font-bold text-gray-900 dark:text-white">Sarah Mitchel>{{ _("Sarah Mitchell") }}</h4>
               <p class="text-xs text-gray-500 dark:text-slate-400">Trade Manager, Dubai</p>
             </div>
           </div>
@@ -1542,7 +1542,7 @@
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">MR</div>
             <div>
-              <h4 class="font-bold text-gray-900 dark:text-white">Michael Rodriguez</h4>
+              <h4class="font-bold text-gray-900 dark:text-white">Michael Rodrigue>{{ _("Michael Rodriguez") }}</h4>
               <p class="text-xs text-gray-500 dark:text-slate-400">CEO, Santiago</p>
             </div>
           </div>
@@ -1558,7 +1558,7 @@
   <!-- بخش شرکت‌های همکار با اسلایدر چرخشی -->
   <section class="py-16 bg-white dark:bg-dark-800/50 backdrop-blur-sm border-t border-gray-200 dark:border-gold/10 transition-colors">
     <div class="container mx-auto px-6 text-center">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-gold mb-3">Trusted Partners</h3>
+        <h3class="text-2xl font-bold text-gray-900 dark:text-gold mb-3">Trusted Partner>{{ _("Trusted Partners") }}</h3>
         <p class="text-gray-600 dark:text-slate-400 mb-10 text-sm">
             Collaborating with leading organizations worldwide
         </p>
@@ -1574,20 +1574,20 @@
             <div id="partner-slider" class="flex whitespace-nowrap gap-8 sm:gap-12 animate-marquee hover:[animation-play-state:paused]">
                 
                 <!-- مجموعه اول لوگوها -->
-                <img src="/static/images/partners/partner1.png" alt="Partner 1" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner2.png" alt="Partner 2" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner3.png" alt="Partner 3" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner4.png" alt="Partner 4" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner5.png" alt="Partner 5" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner6.png" alt="Partner 6" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner1.png" alt="{{ _("Partner 1") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner2.png" alt="{{ _("Partner 2") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner3.png" alt="{{ _("Partner 3") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner4.png" alt="{{ _("Partner 4") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner5.png" alt="{{ _("Partner 5") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner6.png" alt="{{ _("Partner 6") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
 
                 <!-- مجموعه دوم (تکرار برای حلقه بی‌پایان) -->
-                <img src="/static/images/partners/partner1.png" alt="Partner 1" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner2.png" alt="Partner 2" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner3.png" alt="Partner 3" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner4.png" alt="Partner 4" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner5.png" alt="Partner 5" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
-                <img src="/static/images/partners/partner6.png" alt="Partner 6" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner1.png" alt="{{ _("Partner 1") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner2.png" alt="{{ _("Partner 2") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner3.png" alt="{{ _("Partner 3") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner4.png" alt="{{ _("Partner 4") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner5.png" alt="{{ _("Partner 5") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
+                <img src="/static/images/partners/partner6.png" alt="{{ _("Partner 6") }}" class="partner-logo h-12 object-contain w-32 flex-shrink-0">
                 
             </div>
         </div>
@@ -1604,7 +1604,7 @@
           <div class="flex items-center gap-3 mb-4">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark 
                         flex items-center justify-center text-lg">
-              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Metisma Logo" class="h-10 w-auto object-contain">
+              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ _("Metisma Logo") }}" class="h-10 w-auto object-contain">
             </div>
             <span class="text-xl font-bold text-gray-900 dark:text-gold">Metisma</span>
           </div>
@@ -1616,23 +1616,23 @@
         
         <!-- لینک‌های دسترسی سریع -->
         <div>
-          <h4 class="text-gray-900 dark:text-white font-bold mb-4 text-sm">Quick Links</h4>
+          <h4class="text-gray-900 dark:text-white font-bold mb-4 text-sm">Quick Link>{{ _("Quick Links") }}</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Services</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Smart Map</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Consortium</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Academy</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Services>{{ _("Services") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Smart Map>{{ _("Smart Map") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Consortium>{{ _("Consortium") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Academy>{{ _("Academy") }}</a></li>
           </ul>
         </div>
         
         <!-- لینک‌های حقوقی -->
         <div>
-          <h4 class="text-gray-900 dark:text-white font-bold mb-4 text-sm">Legal</h4>
+          <h4class="text-gray-900 dark:text-white font-bold mb-4 text-sm">Lega>{{ _("Legal") }}</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Privacy Policy</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Terms of Service</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Support</a></li>
-            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Contact Us</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Privacy Policy>{{ _("Privacy Policy") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Terms of Service>{{ _("Terms of Service") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Support>{{ _("Support") }}</a></li>
+            <li><a href="#" class="text-gray-600 dark:text-slate-400 hover:text-gold transition">Contact Us>{{ _("Contact Us") }}</a></li>
           </ul>
         </div>
         

@@ -3,6 +3,7 @@ Metisma Exhibition Routes - MVP Version
 Interactive Booths, Virtual Tours, and Appointments
 """
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, session
+from flask_babel import gettext
 from flask_login import login_required, current_user
 from datetime import datetime, timedelta
 from sqlalchemy import desc, func
@@ -97,7 +98,7 @@ def book_appointment(booth_id):
     try:
         appointment_time = datetime.fromisoformat(appointment_time_str.replace('Z', '+00:00'))
     except:
-        flash('Invalid time format.', 'error')
+        flash(gettext('Invalid time format.'), 'error')
         return redirect(url_for('exhibition.booth_detail', booth_id=booth_id))
     
     # Check availability (simple check for MVP)
@@ -108,7 +109,7 @@ def book_appointment(booth_id):
     ).first()
     
     if existing:
-        flash('This time slot is already booked. Please choose another time.', 'warning')
+        flash(gettext('This time slot is already booked. Please choose another time.'), 'warning')
         return redirect(url_for('exhibition.booth_detail', booth_id=booth_id))
     
     appointment = BoothAppointment(
@@ -133,7 +134,7 @@ def book_appointment(booth_id):
     
     db.session.commit()
     
-    flash('Your appointment has been successfully booked!', 'success')
+    flash(gettext('Your appointment has been successfully booked!'), 'success')
     return redirect(url_for('exhibition.booth_detail', booth_id=booth_id))
 
 @exhibition_bp.route('/booth/<uuid:booth_id>/interact', methods=['POST'])
@@ -197,7 +198,7 @@ def create_booth():
         )
         db.session.add(booth)
         db.session.commit()
-        flash('Your booth has been created successfully!', 'success')
+        flash(gettext('Your booth has been created successfully!'), 'success')
         return redirect(url_for('exhibition.booth_detail', booth_id=booth.id))
     
     exhibitions = Exhibition.query.filter_by(status='active').all()

@@ -39,8 +39,8 @@
             <form method="POST" class="p-4 border-t border-gray-200 dark:border-dark-700">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="flex gap-3">
-                    <input type="text" name="content" required class="form-input flex-1" placeholder="Type your message...">
-                    <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg">Send</button>
+                    <input type="text" name="content" required class="form-input flex-1" placeholder="{{ _("Type your message...") }}">
+                    <buttontype="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-lg">Send>{{ _("Send") }}</button>
                 </div>
             </form>
         </div>

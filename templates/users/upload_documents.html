@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                 </svg>
             </div>
-            <h2 class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upload Documents</h2>
+            <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upload Document>{{ _("Upload Documents") }}</h2>
             <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">To complete the upgrade process, please upload clear scans or photos.</p>
         </div>
 
@@ -23,7 +23,7 @@
             
             <!-- پاسپورت -->
             <div>
-                <label for="passport" class="form-label">Passport Copy *</label>
+                <labelfor="passport" class="form-label">Passport Copy *>{{ _("Passport Copy *") }}</label>
                 <input id="passport" name="passport_file" type="file" accept=".pdf,image/*" required
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
@@ -33,7 +33,7 @@
 
             <!-- لایسنس شرکت -->
             <div>
-                <label for="license" class="form-label">Company License *</label>
+                <labelfor="license" class="form-label">Company License *>{{ _("Company License *") }}</label>
                 <input id="license" name="license_file" type="file" accept=".pdf,image/*" required
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
@@ -43,7 +43,7 @@
 
             <!-- دکمه ادامه -->
             <div class="pt-4">
-                <button type="submit"
+                <buttontype="submit"
                         class="w-full flex justify-center py-3.5 px-6 rounded-xl shadow-lg text-sm font-bold text-dark-900 
                                bg-gradient-to-r from-gold to-gold-dark 
                                hover:from-gold-light hover:to-gold 
@@ -51,7 +51,7 @@
                                transform hover:scale-[1.02] active:scale-[0.98] 
                                transition-all duration-200">
                     Upload & Continue to Payment
-                </button>
+                >{{ _("Upload & Continue to Payment") }}</button>
             </div>
         </form>
 

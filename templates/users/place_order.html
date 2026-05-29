@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                 </svg>
             </div>
-            <h2 class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Place New Order</h2>
+            <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Place New Orde>{{ _("Place New Order") }}</h2>
             <p class="text-gray-600 dark:text-slate-400 text-sm">Complete your export or import order details</p>
         </div>
 
@@ -23,7 +23,7 @@
             
             <!-- محصول -->
             <div>
-                <label for="product" class="form-label">Product *</label>
+                <labelfor="product" class="form-label">Product *>{{ _("Product *") }}</label>
                 <select id="product" name="product" required class="form-input cursor-pointer">
                     <option value="" disabled selected>Select product...</option>
                     <option value="wheat">🌾 Wheat</option>
@@ -38,38 +38,38 @@
             <!-- گرید مقدار و قیمت -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="quantity" class="form-label">Quantity (Tons) *</label>
+                    <labelfor="quantity" class="form-label">Quantity (Tons) *>{{ _("Quantity (Tons) *") }}</label>
                     <input id="quantity" name="quantity" type="number" min="1" step="0.1" required
                            class="form-input"
-                           placeholder="e.g., 50">
+                           placeholder="{{ _("e.g., 50") }}">
                 </div>
                 <div>
-                    <label for="price" class="form-label">Price per Ton (USD) *</label>
+                    <labelfor="price" class="form-label">Price per Ton (USD) *>{{ _("Price per Ton (USD) *") }}</label>
                     <input id="price" name="price" type="number" min="1" step="0.01" required
                            class="form-input"
-                           placeholder="e.g., 350.00">
+                           placeholder="{{ _("e.g., 350.00") }}">
                 </div>
             </div>
 
             <!-- بنادر مبدأ و مقصد -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label for="origin_port" class="form-label">Origin Port *</label>
+                    <labelfor="origin_port" class="form-label">Origin Port *>{{ _("Origin Port *") }}</label>
                     <input id="origin_port" name="origin_port" type="text" required
                            class="form-input"
-                           placeholder="e.g., Bandar Abbas">
+                           placeholder="{{ _("e.g., Bandar Abbas") }}">
                 </div>
                 <div>
-                    <label for="destination_port" class="form-label">Destination Port *</label>
+                    <labelfor="destination_port" class="form-label">Destination Port *>{{ _("Destination Port *") }}</label>
                     <input id="destination_port" name="destination_port" type="text" required
                            class="form-input"
-                           placeholder="e.g., Sohar">
+                           placeholder="{{ _("e.g., Sohar") }}">
                 </div>
             </div>
 
             <!-- انتخاب تولیدکننده -->
             <div>
-                <label for="producer" class="form-label">Select Producer *</label>
+                <labelfor="producer" class="form-label">Select Producer *>{{ _("Select Producer *") }}</label>
                 <select id="producer" name="seller_id" required class="form-input cursor-pointer">
                     <option value="" disabled selected>Choose a verified producer...</option>
                     {% for seller in sellers %}
@@ -85,12 +85,12 @@
                 <label for="notes" class="form-label">Additional Notes <span class="text-gray-400">(Optional)</span></label>
                 <textarea id="notes" name="notes" rows="3"
                           class="form-input resize-none"
-                          placeholder="Specify quality, packaging, delivery terms, etc."></textarea>
+                          placeholder="{{ _("Specify quality, packaging, delivery terms, etc.") }}"></textarea>
             </div>
 
             <!-- دکمه ثبت -->
             <div class="pt-4">
-                <button type="submit"
+                <buttontype="submit"
                         class="w-full flex justify-center py-3.5 px-6 rounded-xl shadow-lg text-sm font-bold text-dark-900 
                                bg-gradient-to-r from-gold to-gold-dark 
                                hover:from-gold-light hover:to-gold 
@@ -98,7 +98,7 @@
                                transform hover:scale-[1.02] active:scale-[0.98] 
                                transition-all duration-200">
                     Place Order
-                </button>
+                >{{ _("Place Order") }}</button>
             </div>
         </form>
 

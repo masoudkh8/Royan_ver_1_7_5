@@ -718,7 +718,7 @@
                     <i class="fas fa-grid-2 ml-2"></i>Default Role Access Table
                 </h5>
                 <div class="search-box" style="width: 350px;">
-                    <input type="text" id="matrixSearch" placeholder="Search in permissions and roles..." onkeyup="filterMatrix()">
+                    <input type="text" id="matrixSearch" placeholder="{{ _("Search in permissions and roles...") }}" onkeyup="filterMatrix()">
                     <i class="fas fa-search"></i>
                 </div>
             </div>
@@ -754,11 +754,11 @@
                             {% for role in roles %}
                             <td>
                                 {% if matrix[role.name][perm.name] %}
-                                    <span class="badge-permission granted" title="{{ role.value }}: has access">
+                                    <span class="badge-permission granted" title="{{ _("{{ role.value }}: has access") }}">
                                         <i class="fas fa-check"></i>
                                     </span>
                                 {% else %}
-                                    <span class="badge-permission denied" title="{{ role.value }}: no access">
+                                    <span class="badge-permission denied" title="{{ _("{{ role.value }}: no access") }}">
                                         <i class="fas fa-times"></i>
                                     </span>
                                 {% endif %}
@@ -795,7 +795,7 @@
                             <form method="GET" action="{{ url_for('admin.admin_perms.manage_user_permissions', user_id=0) }}"
                                   class="mb-4">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                                <label class="font-weight-bold mb-2">Select User:</label>
+                                <labelclass="font-weight-bold mb-2">Select User:>{{ _("Select User:") }}</label>
                                 <select name="user_id" class="form-control filter-select" required 
                                         onchange="this.form.submit()">
                                     <option value="">-- Select a user --</option>
@@ -882,7 +882,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="font-weight-bold mb-2">Select user for preview:</label>
+                                <labelclass="font-weight-bold mb-2">Select user for preview:>{{ _("Select user for preview:") }}</label>
                                 <select id="previewUserSelect" class="form-control filter-select">
                                     <option value="">-- Select a user --</option>
                                     {% for user in users %}

@@ -5,6 +5,7 @@ Includes: Public Profile, News Feed, Follow/Unfollow, Like, Comment, Share
 """
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, current_app
+from flask_babel import gettext
 from flask_login import login_required, current_user
 from models import db
 from models.user import User, UserProfile

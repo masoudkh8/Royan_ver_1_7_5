@@ -73,12 +73,12 @@
                                 {% if not session.is_current %}
                                 <form method="POST" action="{{ url_for('users.revoke_session', session_id=session.id) }}" 
                                       onsubmit="return confirm('Are you sure you want to log out this device?')">
-                                    <button type="submit" 
+                                    <buttontype="submit" 
                                             class="px-4 py-2 border border-red-300 dark:border-red-700 text-red-700 dark:text-red-300 
                                                    rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 
                                                    transition duration-150 ease-in-out text-sm font-medium">
                                         Log Out Device
-                                    </button>
+                                    >{{ _("Log Out Device") }}</button>
                                 </form>
                                 {% else %}
                                 <span class="text-sm text-gray-400 dark:text-gray-500 italic">Current Device</span>
@@ -112,7 +112,7 @@
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                     </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No sessions found</h3>
+                    <h3class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No sessions foun>{{ _("No sessions found") }}</h3>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                         No active devices found.
                     </p>
@@ -121,9 +121,9 @@
 
                 <!-- Security Tips -->
                 <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                    <h4 class="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                    <h4class="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
                         💡 Security Tips:
-                    </h4>
+                   >{{ _("💡 Security Tips:") }}</h4>
                     <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
                         <li>Regularly check your active devices</li>
                         <li>If you see an unknown device, log it out immediately</li>

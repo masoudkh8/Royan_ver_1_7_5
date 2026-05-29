@@ -7,9 +7,9 @@
 <section class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-12">
     <div class="container mx-auto px-4">
         <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            <h1class="text-4xl md:text-5xl font-bold mb-4">
                 📊 Metisma Trading Hall
-            </h1>
+           >{{ _("📊 Metisma Trading Hall") }}</h1>
             <p class="text-xl mb-6 opacity-90">
                 Fast, Secure and Transparent Digital Currency Pair Trading
             </p>
@@ -40,7 +40,7 @@
 <!-- Trending Pairs -->
 <section class="py-8 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">🔥 Top Performing Pairs</h2>
+        <h2class="text-2xl font-bold mb-6 text-gray-800">🔥 Top Performing Pair>{{ _("🔥 Top Performing Pairs") }}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             {% for pair in trending %}
@@ -63,7 +63,7 @@
 <!-- All Trading Pairs Table -->
 <section class="py-8">
     <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">📋 All Markets</h2>
+        <h2class="text-2xl font-bold mb-6 text-gray-800">📋 All Market>{{ _("📋 All Markets") }}</h2>
         
         <div class="bg-white rounded-xl shadow overflow-hidden">
             <table class="w-full">
@@ -113,7 +113,7 @@
 <!-- CTA Section -->
 <section class="py-12 bg-gradient-to-r from-green-600 to-blue-600 text-white">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Start Trading?</h2>
+        <h2class="text-3xl font-bold mb-4">Ready to Start Trading>{{ _("Ready to Start Trading?") }}</h2>
         <p class="text-xl mb-8 opacity-90">Create your account now and make your first trade</p>
         
         {% if current_user.is_authenticated %}
