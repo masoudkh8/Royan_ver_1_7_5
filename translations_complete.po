@@ -1,0 +1,2710 @@
+# Metisma Platform - Persian to English Translation Dictionary
+# Copyright (C) 2024 Metisma
+# This file is distributed under the same license as the Metisma project.
+# 
+# This file contains all Persian words/phrases with their English translations
+# extracted from various documentation and translation files in the project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Metisma Platform 1.0\n"
+"Report-Msgid-Bugs-To: support@metisma.com\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0330\n"
+"Last-Translator: Metisma Team\n"
+"Language: en\n"
+"Language-Team: Persian to English\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Metisma Translation Extractor\n"
+
+msgid "=== در حال استخراج متن از تمپلیت‌ها ==="
+msgstr "=== Extracting texts from templates ==="
+
+msgid "API"
+msgstr "API"
+
+msgid "Line 10: نوتیفیکیشن‌های جدید"
+msgstr "New Notifications"
+
+msgid "Line 38: آمار کلی"
+msgstr "General Statistics"
+
+msgid "Line 58: دسترسی سریع"
+msgstr "Quick Actions"
+
+msgid "fallback برای حالت آفلاین کامل (اختیاری)"
+msgstr "fallback for complete offline mode (optional)"
+
+msgid "lockout"
+msgstr "Lockout"
+
+msgid "{new_count} متن جدید به فایل PO اضافه شد"
+msgstr "{new_count} new texts added to PO file"
+
+msgid "آب"
+msgstr "Water"
+
+msgid "آبان"
+msgstr "Aban"
+
+msgid "آتش"
+msgstr "Fire"
+
+msgid "آتش بس"
+msgstr "Ceasefire"
+
+msgid "آخر هفته"
+msgstr "Weekend"
+
+msgid "آخرین"
+msgstr "Last"
+
+msgid "آخرین ورود"
+msgstr "Last Login"
+
+msgid "آدرس"
+msgstr "Address"
+
+msgid "آذر"
+msgstr "Azar"
+
+msgid "آرشیو"
+msgstr "Archived"
+
+msgid "آزاده"
+msgstr "Freed Captive"
+
+msgid "آشنا"
+msgstr "Acquaintance"
+
+msgid "آماده شروع معامله هستید؟"
+msgstr "Ready to Start Trading?"
+
+msgid "آمار"
+msgstr "Statistics"
+
+msgid "آموزش"
+msgstr "Tutorial"
+
+msgid "آپلود"
+msgstr "Upload"
+
+msgid "آپلود مدارک"
+msgstr "Document Upload"
+
+msgid "آپلود پاسپورت"
+msgstr "Passport Upload"
+
+msgid "آیا از ذخیره {{ count }} مجوز اطمینان دارید؟"
+msgstr "Are you sure you want to save {{ count }} permissions?"
+
+msgid "آیا شما هم غرفه‌دار هستید؟"
+msgstr "Are You an Exhibitor?"
+
+msgid "آیا مطمئن هستید؟"
+msgstr "Are you sure?"
+
+msgid "آیکون"
+msgstr "Icon"
+
+msgid "آیکون خورشید (نمایش در حالت دارک)"
+msgstr "Sun icon (displayed in dark mode)"
+
+msgid "آیکون ماه (نمایش در حالت لایت)"
+msgstr "Moon icon (displayed in light mode)"
+
+msgid "اتحادیه"
+msgstr "Union"
+
+msgid "اجاره"
+msgstr "Rent"
+
+msgid "احراز هویت"
+msgstr "Authentication"
+
+msgid "اخراج"
+msgstr "Firing"
+
+msgid "اخطار"
+msgstr "Warning"
+
+msgid "اداره"
+msgstr "Department"
+
+msgid "ادمین"
+msgstr "Admin"
+
+msgid "اردیبهشت"
+msgstr "Ordibehesht"
+
+msgid "ارز"
+msgstr "Currency"
+
+msgid "ارسال"
+msgstr "Send"
+
+msgid "از"
+msgstr "of"
+
+msgid "ازکارافتاده"
+msgstr "Disabled"
+
+msgid "استاد"
+msgstr "Professor"
+
+msgid "استان"
+msgstr "Province"
+
+msgid "استایل"
+msgstr "Style"
+
+msgid "استایل لودینگ: انیمیشن محو شدن"
+msgstr "Loading style: Fade out animation"
+
+msgid "استایل لوگوهای همکاران: فیلتر دارک‌مود و افکت هاور"
+msgstr "Partner logos style: dark mode filter and hover effect"
+
+msgid "استایل‌های ضروری برای کانواس Three.js و لایه‌بندی"
+msgstr "Essential styles for Three.js canvas and layering"
+
+msgid "استبداد"
+msgstr "Despotism"
+
+msgid "استثمار"
+msgstr "Exploitation"
+
+msgid "استخدام"
+msgstr "Hiring"
+
+msgid "استخراج تمام متن‌ها از پروژه"
+msgstr "Extract all texts from project"
+
+msgid "استخراج متن‌های قابل مشاهده از فایل HTML"
+msgstr "Extract visible texts from HTML file"
+
+msgid "استخراج پیام‌های flash از فایل Python"
+msgstr "Extract flash messages from Python file"
+
+msgid "استراحت"
+msgstr "Rest"
+
+msgid "استعمار"
+msgstr "Colonialism"
+
+msgid "اسفند"
+msgstr "Esfand"
+
+msgid "اسکرول‌بار سفارشی برای زیبایی بیشتر"
+msgstr "Custom scrollbar for better aesthetics"
+
+msgid "اسیر"
+msgstr "Captive"
+
+msgid "اشتغال"
+msgstr "Employment"
+
+msgid "اصلاح"
+msgstr "Correction"
+
+msgid "اضافه کردن افکت hover برای کارت‌ها"
+msgstr "Add hover effect for cards"
+
+msgid "اطلاعات"
+msgstr "Information"
+
+msgid "اطلاعات کاربر"
+msgstr "User Information"
+
+msgid "اعتراض"
+msgstr "Protest"
+
+msgid "اعتصاب"
+msgstr "Strike"
+
+msgid "اعتقاد"
+msgstr "Belief"
+
+msgid "اعدام"
+msgstr "Execution"
+
+msgid "اعلان"
+msgstr "Notification"
+
+msgid "اعمال"
+msgstr "Apply"
+
+msgid "افزودن"
+msgstr "Add"
+
+msgid "افزودن کاربر جدید"
+msgstr "Add New User"
+
+msgid "افزونه"
+msgstr "Plugin"
+
+msgid "افکت هاور کارت‌ها: حرکت به بالا و سایه طلایی"
+msgstr "Card hover effect: upward movement and golden shadow"
+
+msgid "اقدامات ادمین"
+msgstr "Admin Actions"
+
+msgid "امام"
+msgstr "Imam"
+
+msgid "امامزاده"
+msgstr "Shrine"
+
+msgid "امانی"
+msgstr "Escrow"
+
+msgid "امتیاز"
+msgstr "Points"
+
+msgid "امتیاز اعتماد"
+msgstr "Trust Score"
+
+msgid "امروز"
+msgstr "Today"
+
+msgid "امن و شفاف"
+msgstr "Secure and Transparent"
+
+msgid "امنیت"
+msgstr "Security"
+
+msgid "امور حقوقی"
+msgstr "Legal Affairs"
+
+msgid "امور مالی"
+msgstr "Finance"
+
+msgid "امید"
+msgstr "Hope"
+
+msgid "انتخاب"
+msgstr "Select"
+
+msgid "انتخاب مجوزها"
+msgstr "Select Permissions"
+
+msgid "انتخاب نقش"
+msgstr "Select Role"
+
+msgid "انتخاب همه"
+msgstr "Select All"
+
+msgid "انتخاب/عدم انتخاب همه مجوزهای یک دسته"
+msgstr "Select/deselect all permissions in a category"
+
+msgid "انتقال"
+msgstr "Transfer"
+
+msgid "انجمن"
+msgstr "Association"
+
+msgid "انجیل"
+msgstr "Gospel"
+
+msgid "اندازه"
+msgstr "Size"
+
+msgid "انرژی"
+msgstr "Energy"
+
+msgid "انصراف"
+msgstr "Cancel"
+
+msgid "انقضا"
+msgstr "Expiration"
+
+msgid "انقلاب"
+msgstr "Revolution"
+
+msgid "انیمیشن آکاردئون خدمات موبایل - حرفه‌ای و نرم"
+msgstr "Mobile services accordion animation - professional and smooth"
+
+msgid "انیمیشن دکمه تغییر تم"
+msgstr "Theme toggle button animation"
+
+msgid "انیمیشن دکمه همبرگری منوی موبایل"
+msgstr "Mobile menu hamburger button animation"
+
+msgid "انیمیشن لوگو و نوار پیشرفت Gmail-style"
+msgstr "Logo animation and Gmail-style progress bar"
+
+msgid "انیمیشن مارکی برای اسلایدر لوگوها"
+msgstr "Marquee animation for logo slider"
+
+msgid "اولین"
+msgstr "First"
+
+msgid "اولین معامله خود را انجام دهید"
+msgstr "Make Your First Trade"
+
+msgid "اگر output.css لود نشد، از CDN استفاده کن (فقط برای توسعه)"
+msgstr "If output.css fails to load, use CDN (for development only)"
+
+msgid "ایثارگر"
+msgstr "Self-sacrificing"
+
+msgid "ایجاد"
+msgstr "Create"
+
+msgid "ایجاد اپلیکیشن با تنظیمات تست"
+msgstr "Create application with test settings"
+
+msgid "ایجاد غرفه جدید"
+msgstr "Create New Booth"
+
+msgid "ایجاد کاربر نمونه برای تست‌ها"
+msgstr "Create sample user for tests"
+
+msgid "ایجاد کلاینت تست"
+msgstr "Create test client"
+
+msgid "ایجاد، ویرایش و مدیریت سفارشات"
+msgstr "Create, edit and manage orders"
+
+msgid "ایمان"
+msgstr "Faith"
+
+msgid "ایمیل"
+msgstr "Email"
+
+msgid "این بخش تکسچرهای لوکال را لود می‌کند"
+msgstr "This section loads local textures"
+
+msgid "این تغییرات روی تمام کاربرانی که نقش {{ role.value }} را دارند تأثیر می‌گذارد، مگر اینکه برای کاربر خاصی مجوز سفارشی تعریف کرده باشید. قبل از ذخیره، مطمئن شوید که مجوزهای لازم حفظ شده‌اند."
+msgstr "These changes will affect all users who have the role {{ role.value }}, unless you have defined custom permissions for specific users. Before saving, make sure necessary permissions are preserved."
+
+msgid "این ماه"
+msgstr "This Month"
+
+msgid "این هفته"
+msgstr "This Week"
+
+msgid "بارگذاری"
+msgstr "Loading"
+
+msgid "بارگذاری Metisma"
+msgstr "Loading Metisma"
+
+msgid "بارگذاری فایل ترجمه"
+msgstr "Load translation file"
+
+msgid "باز"
+msgstr "Open"
+
+msgid "باز کردن قفل"
+msgstr "Unlock"
+
+msgid "بازار"
+msgstr "Market"
+
+msgid "بازار جهانی"
+msgstr "Global Market"
+
+msgid "بازارچه"
+msgstr "Bazaar"
+
+msgid "بازداشت"
+msgstr "Detention"
+
+msgid "بازدیدها"
+msgstr "Visits"
+
+msgid "بازدیدکننده"
+msgstr "Visitor"
+
+msgid "بازرس"
+msgstr "Auditor"
+
+msgid "بازرسی فنی"
+msgstr "Technical Inspection"
+
+msgid "بازنشانی"
+msgstr "Reset"
+
+msgid "بازنشانی رمز عبور"
+msgstr "Reset Password"
+
+msgid "بازنشستگی"
+msgstr "Retirement"
+
+msgid "بازگردانی"
+msgstr "Restore"
+
+msgid "بازگشت"
+msgstr "Back"
+
+msgid "بازگشت به داشبورد"
+msgstr "Back to Dashboard"
+
+msgid "بازیابی"
+msgstr "Recover"
+
+msgid "باغ"
+msgstr "Garden"
+
+msgid "بالا"
+msgstr "Top"
+
+msgid "باکتری"
+msgstr "Bacteria"
+
+msgid "باگ"
+msgstr "Bug"
+
+msgid "بخش"
+msgstr "Section"
+
+msgid "بدنسازی"
+msgstr "Bodybuilding"
+
+msgid "بدهی"
+msgstr "Debt"
+
+msgid "برادر"
+msgstr "Brother"
+
+msgid "برای Edit Access‌های Each Role، of دکمه‌های زیر جدول استفاده کنید."
+msgstr "Use the buttons below the table to edit each role's access."
+
+msgid "برج"
+msgstr "Tower"
+
+msgid "برداشت"
+msgstr "Withdrawal"
+
+msgid "بررسی قراردادها و مدارک قانونی"
+msgstr "Review contracts and legal documents"
+
+msgid "برنامه"
+msgstr "Application"
+
+msgid "برند"
+msgstr "Brand"
+
+msgid "بروزرسانی"
+msgstr "Update"
+
+msgid "برچسب"
+msgstr "Tag"
+
+msgid "بستن"
+msgstr "Close"
+
+msgid "بسکتبال"
+msgstr "Basketball"
+
+msgid "بعدی"
+msgstr "Next"
+
+msgid "بله"
+msgstr "Yes"
+
+msgid "بنیاد"
+msgstr "Foundation"
+
+msgid "بهار"
+msgstr "Spring"
+
+msgid "بهبود"
+msgstr "Improvement"
+
+msgid "بهمن"
+msgstr "Bahman"
+
+msgid "به‌روزرسانی"
+msgstr "Update"
+
+msgid "به‌روزرسانی اولیه شمارنده و اضافه کردن event listenerها"
+msgstr "Initial counter update and add event listeners"
+
+msgid "به‌روزرسانی شمارنده مجوزهای انتخاب‌شده"
+msgstr "Update selected permissions counter"
+
+msgid "به‌روزرسانی فایل PO با متن‌های جدید"
+msgstr "Update PO file with new texts"
+
+msgid "بوتهیک"
+msgstr "Boutique"
+
+msgid "بیداری"
+msgstr "Wakefulness"
+
+msgid "بیشتر"
+msgstr "More"
+
+msgid "بیمار"
+msgstr "Sick"
+
+msgid "بیمارستان"
+msgstr "Hospital"
+
+msgid "بیماری"
+msgstr "Disease"
+
+msgid "بیوه"
+msgstr "Widow"
+
+msgid "بیکاری"
+msgstr "Unemployment"
+
+msgid "بیگانه"
+msgstr "Stranger"
+
+msgid "تأیید تخصص"
+msgstr "Expertise Verification"
+
+msgid "تأیید مدارک"
+msgstr "Approve Documents"
+
+msgid "تأیید هویت"
+msgstr "Identity Verification"
+
+msgid "تئاتر"
+msgstr "Theater"
+
+msgid "تابستان"
+msgstr "Summer"
+
+msgid "تابع کمکی برای استفاده در تمپلیت‌ها"
+msgstr "Helper function for use in templates"
+
+msgid "تاریخ"
+msgstr "Date"
+
+msgid "تاریخ ایجاد"
+msgstr "Created Date"
+
+msgid "تاریخ به‌روزرسانی"
+msgstr "Updated Date"
+
+msgid "تالار معاملاتی"
+msgstr "Trading Hall"
+
+msgid "تالار معاملاتی متیما"
+msgstr "Metisma Trading Hall"
+
+msgid "تامین کننده"
+msgstr "Supplier"
+
+msgid "تایید"
+msgstr "Confirm"
+
+msgid "تایید شده"
+msgstr "Approved"
+
+msgid "تجارت"
+msgstr "Trade"
+
+msgid "تجارت بین‌الملل"
+msgstr "International Trade"
+
+msgid "تجربه"
+msgstr "Experience"
+
+msgid "تجمع"
+msgstr "Rally"
+
+msgid "تحقیق"
+msgstr "Research"
+
+msgid "تحلیل"
+msgstr "Analysis"
+
+msgid "تحول"
+msgstr "Transformation"
+
+msgid "تخصص"
+msgstr "Expertise"
+
+msgid "تخصیص راننده و پیگیری مرسولات"
+msgstr "Driver assignment and shipment tracking"
+
+msgid "تراکنش"
+msgstr "Transaction"
+
+msgid "ترجمه متن با استفاده از gettext"
+msgstr "Translate text using gettext"
+
+msgid "ترجمه کلید و جایگزینی متغیرها"
+msgstr "Translate key and replace variables"
+
+msgid "ترس"
+msgstr "Fear"
+
+msgid "ترسو"
+msgstr "Coward"
+
+msgid "تست Rate Limit روی endpoint ثبت‌نام"
+msgstr "Test Rate Limit on registration endpoint"
+
+msgid "تست اعتبارسنجی حجم فایل"
+msgstr "Test file size validation"
+
+msgid "تست اعتبارسنجی قدرت رمز عبور"
+msgstr "Test password strength validation"
+
+msgid "تست امنیت هش کردن رمز عبور"
+msgstr "Test password hashing security"
+
+msgid "تست ایجاد خودکار پروفایل پس از ثبت‌نام"
+msgstr "Test automatic profile creation after registration"
+
+msgid "تست ایجاد خودکار پروفایل کاربر"
+msgstr "Test automatic user profile creation"
+
+msgid "تست ایجاد کاربر با فیلدهای تخصصی"
+msgstr "Test creating user with specialized fields"
+
+msgid "تست به‌روزرسانی لینک‌های اجتماعی"
+msgstr "Test updating social links"
+
+msgid "تست تابع انتخابگر زبان"
+msgstr "Test language selector function"
+
+msgid "تست تغییر زبان به انگلیسی"
+msgstr "Test switching language to English"
+
+msgid "تست تغییر زبان به فارسی"
+msgstr "Test switching language to Persian"
+
+msgid "تست تولید نام امن فایل"
+msgstr "Test secure filename generation"
+
+msgid "تست تولید کد دعوت انحصاری"
+msgstr "Test exclusive invite code generation"
+
+msgid "تست ثبت بلوپرینت زبان"
+msgstr "Test language blueprint registration"
+
+msgid "تست جریان آپلود و تأیید مدرک"
+msgstr "Test document upload and verification flow"
+
+msgid "تست جریان کامل آپلود مدرک"
+msgstr "Test complete document upload flow"
+
+msgid "تست جریان کامل از ثبت‌نام تا داشبورد"
+msgstr "Test complete flow from registration to dashboard"
+
+msgid "تست جریان کامل پیشرفت Trust Score"
+msgstr "Test complete Trust Score progression flow"
+
+msgid "تست جفت‌های کلید-ترجمه"
+msgstr "Test key-translation pairs"
+
+msgid "تست جلوگیری از Directory Traversal"
+msgstr "Test preventing Directory Traversal"
+
+msgid "تست جلوگیری از SQL Injection"
+msgstr "Test preventing SQL Injection"
+
+msgid "تست جلوگیری از XSS در پروفایل"
+msgstr "Test preventing XSS in profile"
+
+msgid "تست جلوگیری از ایمیل تکراری"
+msgstr "Test preventing duplicate email"
+
+msgid "تست جهت متن فارسی"
+msgstr "Test Persian text direction"
+
+msgid "تست خالی نبودن فایل ترجمه"
+msgstr "Test translation file is not empty"
+
+msgid "تست در دسترس بودن تابع ترجمه"
+msgstr "Test translation function availability"
+
+msgid "تست دکوریتور role_required با نقش اشتباه"
+msgstr "Test role_required decorator with wrong role"
+
+msgid "تست دکوریتور role_required با کاربر لاگین شده"
+msgstr "Test role_required decorator with logged-in user"
+
+msgid "تست دکوریتور role_required بدون لاگین"
+msgstr "Test role_required decorator without login"
+
+msgid "تست ذخیره JSON مدارک"
+msgstr "Test JSON document storage"
+
+msgid "تست رابطه کاربر با Trust Score"
+msgstr "Test user relationship with Trust Score"
+
+msgid "تست ردیابی تاریخچه تغییرات امتیاز"
+msgstr "Test tracking score change history"
+
+msgid "تست رندر شدن داشبورد"
+msgstr "Test dashboard rendering"
+
+msgid "تست سطوح بج‌های اعتماد"
+msgstr "Test trust badge levels"
+
+msgid "تست عدم تطابق رمز عبور"
+msgstr "Test password mismatch"
+
+msgid "تست لایه اول: بررسی پسوند فایل"
+msgstr "Test first layer: file extension check"
+
+msgid "تست لایه دوم: بررسی حجم فایل"
+msgstr "Test second layer: file size check"
+
+msgid "تست لایه سوم: تولید نام امن فایل"
+msgstr "Test third layer: secure filename generation"
+
+msgid "تست محاسبه وظایف pending در داشبورد"
+msgstr "Test pending tasks calculation in dashboard"
+
+msgid "تست محتوای RTL در ترجمه‌ها"
+msgstr "Test RTL content in translations"
+
+msgid "تست مدارک تأیید هویت کاربر"
+msgstr "Test user identity verification documents"
+
+msgid "تست مرحله ۱: اطلاعات پایه"
+msgstr "Test step 1: basic information"
+
+msgid "تست مرحله ۲: اطلاعات حرفه‌ای"
+msgstr "Test step 2: professional information"
+
+msgid "تست مرحله ۳: امنیت و پذیرش شرایط"
+msgstr "Test step 3: security and terms acceptance"
+
+msgid "تست مقادیر enum نقش‌های کاربری"
+msgstr "Test user role enum values"
+
+msgid "تست مقداردهی Flask-Babel"
+msgstr "Test Flask-Babel initialization"
+
+msgid "تست مقداردهی اولیه امتیاز اعتماد"
+msgstr "Test initial Trust Score assignment"
+
+msgid "تست وجود دکوریتور Rate Limit روی routeها"
+msgstr "Test Rate Limit decorator existence on routes"
+
+msgid "تست وجود فایل‌های ترجمه"
+msgstr "Test translation files exist"
+
+msgid "تست وجود مسیر تغییر زبان"
+msgstr "Test set language route exists"
+
+msgid "تست ویجت‌های داشبورد برای Buyer"
+msgstr "Test dashboard widgets for Buyer"
+
+msgid "تست ویجت‌های داشبورد برای Producer"
+msgstr "Test dashboard widgets for Producer"
+
+msgid "تست ویرایش پروفایل"
+msgstr "Test profile editing"
+
+msgid "تست پارامتر زبان در URL"
+msgstr "Test language parameter in URL"
+
+msgid "تست پایداری زبان در session"
+msgstr "Test language persistence in session"
+
+msgid "تست پسوند فایل‌های مجاز برای آپلود"
+msgstr "Test allowed file extensions for upload"
+
+msgid "تست پیشرفت امتیاز اعتماد"
+msgstr "Test Trust Score progression"
+
+msgid "تست پیش‌فرض بودن زبان فارسی"
+msgstr "Test Persian language as default"
+
+msgid "تست پیکربندی Rate Limiting"
+msgstr "Test Rate Limiting configuration"
+
+msgid "تست چهار لایه امتیازدهی"
+msgstr "Test four scoring layers"
+
+msgid "تست کد زبان نامعتبر"
+msgstr "Test invalid language code"
+
+msgid "تست‌های Integration برای جریان‌های کامل"
+msgstr "Integration Tests for Complete Flows"
+
+msgid "تست‌های آپلود امن مدارک با اعتبارسنجی چندلایه"
+msgstr "Secure Document Upload Tests with Multi-layer Validation"
+
+msgid "تست‌های امنیت و کنترل دسترسی"
+msgstr "Security and Access Control Tests"
+
+msgid "تست‌های داشبورد هوشمند نقش‌محور"
+msgstr "Smart Role-Based Dashboard Tests"
+
+msgid "تست‌های سیستم امتیاز اعتماد با سطوح Bronze/Silver/Gold/Platinum"
+msgstr "Trust Score System Tests with Bronze/Silver/Gold/Platinum Levels"
+
+msgid "تست‌های سیستم ثبت‌نام ۳ مرحله‌ای هوشمند"
+msgstr "Smart 3-Step Registration System Tests"
+
+msgid "تست‌های سیستم چندزبانه"
+msgstr "Multilingual System Tests"
+
+msgid "تست‌های فایل‌های ترجمه"
+msgstr "Translation Files Tests"
+
+msgid "تست‌های محدودیت نرخ درخواست"
+msgstr "Request Rate Limiting Tests"
+
+msgid "تست‌های مدل کاربر با فیلدهای تخصصی"
+msgstr "User Model Tests with Specialized Fields"
+
+msgid "تست‌های مسیرهای زبان"
+msgstr "Language Routes Tests"
+
+msgid "تست‌های پروفایل کاربری و آپلود مدارک"
+msgstr "User Profile and Document Upload Tests"
+
+msgid "تست‌های پشتیبانی از راست‌چین"
+msgstr "RTL Support Tests"
+
+msgid "تست‌های یکپارچگی Flask-Babel"
+msgstr "Flask-Babel Integration Tests"
+
+msgid "تصویر"
+msgstr "Image"
+
+msgid "تظاهرات"
+msgstr "Demonstration"
+
+msgid "تعادل"
+msgstr "Balance"
+
+msgid "تعداد"
+msgstr "Count"
+
+msgid "تعطیل"
+msgstr "Closed"
+
+msgid "تعطیلات"
+msgstr "Vacation"
+
+msgid "تعهد"
+msgstr "Commitment"
+
+msgid "تغییر"
+msgstr "Change"
+
+msgid "تغییر رمز عبور"
+msgstr "Change Password"
+
+msgid "تغییر زبان کاربر"
+msgstr "Change user language"
+
+msgid "تغییر نام"
+msgstr "Rename"
+
+msgid "تغییر وضعیت چک‌باکس با کلیک روی کارت"
+msgstr "Toggle checkbox state by clicking on card"
+
+msgid "تغییرات"
+msgstr "Changes"
+
+msgid "تقدیرنامه"
+msgstr "Certificate of Appreciation"
+
+msgid "تماس"
+msgstr "Call"
+
+msgid "تماس با ما"
+msgstr "Contact Us"
+
+msgid "تماس تصویری"
+msgstr "Video Call"
+
+msgid "تماس تلفنی"
+msgstr "Phone Call"
+
+msgid "تماشاخانه"
+msgstr "Theater"
+
+msgid "تندرستی"
+msgstr "Wellness"
+
+msgid "تنظیم دسترسی‌های ماژولار برای کاربران مختلف بر اساس نقش و خدمات"
+msgstr "Configure modular access for different users based on role and services"
+
+msgid "تنظیمات"
+msgstr "Settings"
+
+msgid "تنظیمات پیشرفته"
+msgstr "Advanced Settings"
+
+msgid "تنیس"
+msgstr "Tennis"
+
+msgid "توجه مهم:"
+msgstr "Important Notice:"
+
+msgid "تورات"
+msgstr "Torah"
+
+msgid "توسعه"
+msgstr "Development"
+
+msgid "توسعه‌دهنده"
+msgstr "Developer"
+
+msgid "توضیحات"
+msgstr "Description"
+
+msgid "توقیف"
+msgstr "Seizure"
+
+msgid "تولد"
+msgstr "Birthday"
+
+msgid "تکرار رمز عبور"
+msgstr "Confirm Password"
+
+msgid "تکمیل اطلاعات پروفایل"
+msgstr "Complete Profile Information"
+
+msgid "تکمیل بیوگرافی"
+msgstr "Complete Biography"
+
+msgid "تکمیل شده"
+msgstr "Completed"
+
+msgid "تکمیل پروفایل"
+msgstr "Complete Profile"
+
+msgid "تکیه"
+msgstr "Tekyeh"
+
+msgid "تیر"
+msgstr "Tir"
+
+msgid "تیم"
+msgstr "Team"
+
+msgid "ثانیه"
+msgstr "Second"
+
+msgid "ثبت نام"
+msgstr "Register"
+
+msgid "ثبت‌نام"
+msgstr "Register"
+
+msgid "ثروتمند"
+msgstr "Rich"
+
+msgid "جابجایی"
+msgstr "Move"
+
+msgid "جانباز"
+msgstr "Veteran"
+
+msgid "جانوران"
+msgstr "Animals"
+
+msgid "جایزه"
+msgstr "Prize"
+
+msgid "جدول"
+msgstr "Table"
+
+msgid "جریمه"
+msgstr "Fine"
+
+msgid "جزئیات"
+msgstr "Details"
+
+msgid "جزئیات کاربر"
+msgstr "User Details"
+
+msgid "جستجو"
+msgstr "Search"
+
+msgid "جستجوی پیشرفته"
+msgstr "Advanced Search"
+
+msgid "جشن"
+msgstr "Celebration"
+
+msgid "جشنواره"
+msgstr "Festival"
+
+msgid "جفت‌ارزهای دیجیتال"
+msgstr "Digital Currency Pairs"
+
+msgid "جلسه"
+msgstr "Meeting"
+
+msgid "جلوگیری از ارسال فرم خالی"
+msgstr "Prevent empty form submission"
+
+msgid "جمع کل"
+msgstr "Total"
+
+msgid "جمعه"
+msgstr "Friday"
+
+msgid "جنس"
+msgstr "Material"
+
+msgid "جنگ"
+msgstr "War"
+
+msgid "جهت"
+msgstr "Direction"
+
+msgid "جوان"
+msgstr "Youth"
+
+msgid "حج"
+msgstr "Hajj"
+
+msgid "حجم معاملات"
+msgstr "Trading Volume"
+
+msgid "حداقل"
+msgstr "Minimum"
+
+msgid "حداقل یک مجوز باید انتخاب شود"
+msgstr "At least one permission must be selected"
+
+msgid "حداکثر"
+msgstr "Maximum"
+
+msgid "حذف"
+msgstr "Delete"
+
+msgid "حذف کاربر"
+msgstr "Delete User"
+
+msgid "حرفه"
+msgstr "Profession"
+
+msgid "حرکت"
+msgstr "Movement"
+
+msgid "حریف"
+msgstr "Opponent"
+
+msgid "حریم خصوصی"
+msgstr "Privacy Policy"
+
+msgid "حسینیه"
+msgstr "Hussainiya"
+
+msgid "حق"
+msgstr "Right"
+
+msgid "خاطره"
+msgstr "Memory"
+
+msgid "خاله"
+msgstr "Aunt (Maternal)"
+
+msgid "خالی کردن"
+msgstr "Empty"
+
+msgid "خانه"
+msgstr "Home"
+
+msgid "خاک"
+msgstr "Soil"
+
+msgid "خبر"
+msgstr "News"
+
+msgid "خداحافظ"
+msgstr "Goodbye"
+
+msgid "خدمت"
+msgstr "Service"
+
+msgid "خرداد"
+msgstr "Khordad"
+
+msgid "خروج"
+msgstr "Logout"
+
+msgid "خرید"
+msgstr "Purchase"
+
+msgid "خرید"
+msgstr "Buy"
+
+msgid "خشم"
+msgstr "Anger"
+
+msgid "خصوصی"
+msgstr "Private"
+
+msgid "خطا"
+msgstr "Error"
+
+msgid "خطر"
+msgstr "Danger"
+
+msgid "خواب"
+msgstr "Sleep"
+
+msgid "خواهر"
+msgstr "Sister"
+
+msgid "خوش آمدید"
+msgstr "Welcome"
+
+msgid "خونریزی"
+msgstr "Bloodshed"
+
+msgid "خویشاوند"
+msgstr "Relative"
+
+msgid "خیابان"
+msgstr "Street"
+
+msgid "خیر"
+msgstr "No"
+
+msgid "دارو"
+msgstr "Medicine"
+
+msgid "داروخانه"
+msgstr "Pharmacy"
+
+msgid "داشبورد"
+msgstr "Dashboard"
+
+msgid "داشبورد هوشمند"
+msgstr "Smart Dashboard"
+
+msgid "داماد"
+msgstr "Son-in-law"
+
+msgid "دانش آموز"
+msgstr "Pupil"
+
+msgid "دانشجو"
+msgstr "Student"
+
+msgid "دانشگاه"
+msgstr "University"
+
+msgid "دانلود"
+msgstr "Download"
+
+msgid "دایی"
+msgstr "Uncle (Maternal)"
+
+msgid "دختر"
+msgstr "Girl"
+
+msgid "در انتظار"
+msgstr "Pending"
+
+msgid "در حال بررسی"
+msgstr "Under review"
+
+msgid "در حال پردازش"
+msgstr "Processing"
+
+msgid "درباره ما"
+msgstr "About Us"
+
+msgid "درخواست کار"
+msgstr "Job Application"
+
+msgid "درس"
+msgstr "Lesson"
+
+msgid "درمان"
+msgstr "Treatment"
+
+msgid "دریافت"
+msgstr "Receive"
+
+msgid "دریافت"
+msgstr "Receipt"
+
+msgid "دریافت ترجمه با کلید تودرتو (مثلاً"
+msgstr "Get translation with nested key (e.g."
+
+msgid "دستاورد"
+msgstr "Achievement"
+
+msgid "دستاوردها"
+msgstr "Achievements"
+
+msgid "دسترسی‌ها"
+msgstr "Access Rights"
+
+msgid "دسترسی‌های این نقش را تنظیم کنید. تغییرات روی تمام کاربران با این نقش تأثیر می‌گذارد."
+msgstr "Configure permissions for this role. Changes will affect all users with this role."
+
+msgid "دسترسی‌های پایه سیستم"
+msgstr "Basic system access"
+
+msgid "دسته‌بندی"
+msgstr "Category"
+
+msgid "دستور زیر را اجرا کنید تا فایل MO ساخته شود:"
+msgstr "Run the following command to build the MO file:"
+
+msgid "دستگیری"
+msgstr "Arrest"
+
+msgid "دشمن"
+msgstr "Enemy"
+
+msgid "دعا"
+msgstr "Supplication"
+
+msgid "دفتر"
+msgstr "Office"
+
+msgid "دفتر سفارشات"
+msgstr "Order Book"
+
+msgid "دقیقه"
+msgstr "Minute"
+
+msgid "دلیر"
+msgstr "Brave"
+
+msgid "دوره"
+msgstr "Course"
+
+msgid "دوره عدم فعالیت"
+msgstr "Inactivity Period"
+
+msgid "دوست"
+msgstr "Friend"
+
+msgid "دوشنبه"
+msgstr "Monday"
+
+msgid "دولت"
+msgstr "Government"
+
+msgid "دویدن"
+msgstr "Running"
+
+msgid "دکتر"
+msgstr "Doctor"
+
+msgid "دکمه بازگشت به صفحه اصلی"
+msgstr "Return to home page button"
+
+msgid "دکمه تغییر تم شناور (گوشه پایین چپ)"
+msgstr "Floating theme toggle button (bottom left corner)"
+
+msgid "دکمه تغییر تم شناور با آیکون‌های SVG ماه/خورشید"
+msgstr "Floating theme toggle button with SVG moon/sun icons"
+
+msgid "دکمه شناور واتس‌اپ برای پشتیبانی (گوشه پایین راست)"
+msgstr "Floating WhatsApp button for support (bottom right corner)"
+
+msgid "دی"
+msgstr "Dey"
+
+msgid "دیدگاه‌ها"
+msgstr "Views"
+
+msgid "دیروز"
+msgstr "Yesterday"
+
+msgid "ذخیره"
+msgstr "Save"
+
+msgid "ذخیره تغییرات"
+msgstr "Save Changes"
+
+msgid "رابط"
+msgstr "Interface"
+
+msgid "راهنما"
+msgstr "Help"
+
+msgid "راهنمایی"
+msgstr "Guidance"
+
+msgid "راهپیمایی"
+msgstr "March"
+
+msgid "رتبه‌بندی"
+msgstr "Ranking"
+
+msgid "رد"
+msgstr "Rejection"
+
+msgid "رد شده"
+msgstr "Rejected"
+
+msgid "رد مدارک"
+msgstr "Reject Documents"
+
+msgid "رزومه"
+msgstr "Resume"
+
+msgid "رسول"
+msgstr "Messenger"
+
+msgid "رسید"
+msgstr "Receipt"
+
+msgid "رشد"
+msgstr "Growth"
+
+msgid "رفع مسدودیت"
+msgstr "Unblock"
+
+msgid "رفیق"
+msgstr "Companion"
+
+msgid "رقابت"
+msgstr "Competition"
+
+msgid "رقیب"
+msgstr "Rival"
+
+msgid "رمز عبور جدید"
+msgstr "New Password"
+
+msgid "رمزنگاری"
+msgstr "Encryption"
+
+msgid "رنگ"
+msgstr "Color"
+
+msgid "روزنامه"
+msgstr "Newspaper"
+
+msgid "روزهای کاری"
+msgstr "Working Days"
+
+msgid "رویای"
+msgstr "Dream"
+
+msgid "زبور"
+msgstr "Psalms"
+
+msgid "زمان"
+msgstr "Time"
+
+msgid "زمستان"
+msgstr "Winter"
+
+msgid "زن"
+msgstr "Woman"
+
+msgid "زنجیره تامین"
+msgstr "Supply Chain"
+
+msgid "زندانی"
+msgstr "Prisoner"
+
+msgid "زیارت"
+msgstr "Pilgrimage"
+
+msgid "زیان"
+msgstr "Loss"
+
+msgid "سابقه"
+msgstr "Record"
+
+msgid "ساختمان"
+msgstr "Building"
+
+msgid "سازمان"
+msgstr "Organization"
+
+msgid "ساعات کاری"
+msgstr "Working Hours"
+
+msgid "ساعت"
+msgstr "Hour"
+
+msgid "سال"
+msgstr "Year"
+
+msgid "سال جاری"
+msgstr "Current Year"
+
+msgid "سالم"
+msgstr "Healthy"
+
+msgid "سالمند"
+msgstr "Elderly"
+
+msgid "سالگرد"
+msgstr "Anniversary"
+
+msgid "ستم"
+msgstr "Tyranny"
+
+msgid "سخت‌افزار"
+msgstr "Hardware"
+
+msgid "سرعت"
+msgstr "Speed"
+
+msgid "سرمایه"
+msgstr "Capital"
+
+msgid "سرمایه‌گذاری"
+msgstr "Investment"
+
+msgid "سرور"
+msgstr "Server"
+
+msgid "سطح"
+msgstr "Level"
+
+msgid "سطح دسترسی"
+msgstr "Access Level"
+
+msgid "سفارش"
+msgstr "Order"
+
+msgid "سفارش خرید"
+msgstr "Buy Order"
+
+msgid "سفارش فروش"
+msgstr "Sell Order"
+
+msgid "سفر"
+msgstr "Travel"
+
+msgid "سلام"
+msgstr "Hello"
+
+msgid "سلامتی"
+msgstr "Health"
+
+msgid "سلسله مراتب"
+msgstr "Tier"
+
+msgid "سمینار"
+msgstr "Seminar"
+
+msgid "سه‌شنبه"
+msgstr "Tuesday"
+
+msgid "سوال"
+msgstr "Question"
+
+msgid "سوالات متداول"
+msgstr "FAQ"
+
+msgid "سود"
+msgstr "Profit"
+
+msgid "سوغاتی"
+msgstr "Souvenir"
+
+msgid "سوپرمارکت"
+msgstr "Supermarket"
+
+msgid "سکه"
+msgstr "Coin"
+
+msgid "سکون"
+msgstr "Stillness"
+
+msgid "سیاحت"
+msgstr "Sightseeing"
+
+msgid "سیستم"
+msgstr "System"
+
+msgid "سینما"
+msgstr "Cinema"
+
+msgid "شادی"
+msgstr "Happiness"
+
+msgid "شب بخیر"
+msgstr "Good Night"
+
+msgid "شبکه"
+msgstr "Network"
+
+msgid "شبکه تجاری"
+msgstr "Business Network"
+
+msgid "شتاب"
+msgstr "Acceleration"
+
+msgid "شجاعت"
+msgstr "Courage"
+
+msgid "شرایط استفاده"
+msgstr "Terms of Use"
+
+msgid "شرایط استفاده"
+msgstr "Terms of Service"
+
+msgid "شروع فرآیند"
+msgstr "Start process"
+
+msgid "شرکت"
+msgstr "Company"
+
+msgid "شرکت در نمایشگاه"
+msgstr "Participate in Exhibition"
+
+msgid "شریک"
+msgstr "Partner"
+
+msgid "شریک تجاری"
+msgstr "Business Partner"
+
+msgid "شغل"
+msgstr "Job"
+
+msgid "شلاق"
+msgstr "Lash"
+
+msgid "شماره"
+msgstr "Number"
+
+msgid "شنا"
+msgstr "Swimming"
+
+msgid "شناسه"
+msgstr "ID"
+
+msgid "شنبه"
+msgstr "Saturday"
+
+msgid "شهر"
+msgstr "City"
+
+msgid "شهریور"
+msgstr "Shahrivar"
+
+msgid "شهید"
+msgstr "Martyr"
+
+msgid "شورا"
+msgstr "Council"
+
+msgid "شورش"
+msgstr "Rebellion"
+
+msgid "شکایت"
+msgstr "Complaint"
+
+msgid "شکل"
+msgstr "Shape"
+
+msgid "صاحب خانه"
+msgstr "Homeowner"
+
+msgid "صادرات"
+msgstr "Export"
+
+msgid "صبح بخیر"
+msgstr "Good Morning"
+
+msgid "صدا"
+msgstr "Audio"
+
+msgid "صعودی"
+msgstr "Ascending"
+
+msgid "صفحه"
+msgstr "Page"
+
+msgid "صلح"
+msgstr "Peace"
+
+msgid "ضبط"
+msgstr "Confiscation"
+
+msgid "ضعیف"
+msgstr "Weak"
+
+msgid "ضمانت"
+msgstr "Guarantee"
+
+msgid "طبقه"
+msgstr "Floor"
+
+msgid "طبیعت"
+msgstr "Nature"
+
+msgid "طلاق"
+msgstr "Divorce"
+
+msgid "طلب"
+msgstr "Credit"
+
+msgid "ظاهر کردن"
+msgstr "Show"
+
+msgid "ظلم"
+msgstr "Oppression"
+
+msgid "عبادت"
+msgstr "Worship"
+
+msgid "عدالت"
+msgstr "Justice"
+
+msgid "عدم تعادل"
+msgstr "Imbalance"
+
+msgid "عروس"
+msgstr "Daughter-in-law"
+
+msgid "عروسی"
+msgstr "Wedding"
+
+msgid "عصر بخیر"
+msgstr "Good Afternoon"
+
+msgid "عفونت"
+msgstr "Infection"
+
+msgid "عمره"
+msgstr "Umrah"
+
+msgid "عملیات"
+msgstr "Actions"
+
+msgid "عمه"
+msgstr "Aunt (Paternal)"
+
+msgid "عمو"
+msgstr "Uncle (Paternal)"
+
+msgid "عمومی"
+msgstr "General"
+
+msgid "عمومی"
+msgstr "Public"
+
+msgid "عمومی و خصوصی"
+msgstr "Public and Private"
+
+msgid "عنوان"
+msgstr "Title"
+
+msgid "عهد"
+msgstr "Covenant"
+
+msgid "عید"
+msgstr "Holiday"
+
+msgid "غرفه"
+msgstr "Booth"
+
+msgid "غرفه فعال"
+msgstr "Active Booths"
+
+msgid "غرفه ویژه"
+msgstr "Featured Booth"
+
+msgid "غرفه‌دار"
+msgstr "Exhibitor"
+
+msgid "غریبه"
+msgstr "Stranger"
+
+msgid "غم"
+msgstr "Sadness"
+
+msgid "غنی"
+msgstr "Wealthy"
+
+msgid "غیرفعال"
+msgstr "Inactive"
+
+msgid "غیرفعال کردن انتخاب متن روی دکمه‌ها برای تجربه کاربری بهتر"
+msgstr "Disable text selection on buttons for better UX"
+
+msgid "فارسی"
+msgstr "Persian"
+
+msgid "فاصله"
+msgstr "Distance"
+
+msgid "فامیل"
+msgstr "Family Member"
+
+msgid "فاکتور"
+msgstr "Invoice"
+
+msgid "فایل"
+msgstr "File"
+
+msgid "فایل PO را ویرایش کنید و ترجمه‌ها را وارد کنید"
+msgstr "Edit the PO file and enter translations"
+
+msgid "فایل messages.mo وجود ندارد"
+msgstr "messages.mo file does not exist"
+
+msgid "فایل messages.po وجود ندارد"
+msgstr "messages.po file does not exist"
+
+msgid "فایل ترجمه خیلی کوچک است"
+msgstr "Translation file is too small"
+
+msgid "فایل ترجمه فاقد ترجمه‌ها است"
+msgstr "Translation file lacks translations"
+
+msgid "فایل ترجمه فاقد کاراکترهای فارسی است"
+msgstr "Translation file lacks Persian characters"
+
+msgid "فایل: {po_file}"
+msgstr "File: {po_file}"
+
+msgid "فراموشی رمز عبور"
+msgstr "Forgot Password"
+
+msgid "فردا"
+msgstr "Tomorrow"
+
+msgid "فرصت طلایی"
+msgstr "Golden Opportunity"
+
+msgid "فرضیه"
+msgstr "Hypothesis"
+
+msgid "فروردین"
+msgstr "Farvardin"
+
+msgid "فروش"
+msgstr "Sale"
+
+msgid "فروش"
+msgstr "Sell"
+
+msgid "فروشنده"
+msgstr "Seller"
+
+msgid "فروشگاه"
+msgstr "Store"
+
+msgid "فریم‌ورک Tailwind CSS"
+msgstr "Tailwind CSS Framework"
+
+msgid "فضای سبز"
+msgstr "Green Space"
+
+msgid "فعال"
+msgstr "Active"
+
+msgid "فعالیت در شبکه"
+msgstr "Network Activity"
+
+msgid "فقیر"
+msgstr "Poor"
+
+msgid "فوتبال"
+msgstr "Football"
+
+msgid "فونت"
+msgstr "Font"
+
+msgid "فونت وزیر برای پشتیبانی از اعداد و کاراکترهای خاص"
+msgstr "Vazir font for supporting numbers and special characters"
+
+msgid "فونت وزیر برای پشتیبانی از اعداد و کاراکترهای خاص"
+msgstr "Vazir font for supporting special characters and numbers"
+
+msgid "فیلتر"
+msgstr "Filter"
+
+msgid "قالب"
+msgstr "Template"
+
+msgid "قبلی"
+msgstr "Previous"
+
+msgid "قتل"
+msgstr "Murder"
+
+msgid "قدرت"
+msgstr "Power"
+
+msgid "قرآن"
+msgstr "Quran"
+
+msgid "قرارداد"
+msgstr "Contract"
+
+msgid "قفل"
+msgstr "Lock"
+
+msgid "قوانین"
+msgstr "Rules"
+
+msgid "قول"
+msgstr "Promise"
+
+msgid "قوی"
+msgstr "Strong"
+
+msgid "قیمت"
+msgstr "Price"
+
+msgid "قیمت لحظه‌ای"
+msgstr "Real-time Price"
+
+msgid "لایه لودینگ اولیه (ساده‌شده)"
+msgstr "Initial loading layer (simplified)"
+
+msgid "لجستیک و حمل‌ونقل"
+msgstr "Logistics and Transportation"
+
+msgid "لطفاً یک کاربر انتخاب کنید"
+msgstr "Please select a user"
+
+msgid "لغو"
+msgstr "Cancel"
+
+msgid "لغو شده"
+msgstr "Cancelled"
+
+msgid "لوح تقدیر"
+msgstr "Plaque"
+
+msgid "لوگو و نام برند"
+msgstr "Logo and brand name"
+
+msgid "لیست"
+msgstr "List"
+
+msgid "لیست مدارک"
+msgstr "List of Documents"
+
+msgid "لیست کاربران"
+msgstr "User List"
+
+msgid "لینک"
+msgstr "Link"
+
+msgid "مادر"
+msgstr "Mother"
+
+msgid "مادربزرگ"
+msgstr "Grandmother"
+
+msgid "مال"
+msgstr "Mall"
+
+msgid "مالیات"
+msgstr "Tax"
+
+msgid "ماه"
+msgstr "Month"
+
+msgid "ماژول"
+msgstr "Module"
+
+msgid "مبدا"
+msgstr "Origin"
+
+msgid "متن"
+msgstr "Text"
+
+msgid "متن‌های جدید نیازمند ترجمه: {len(new_texts)}"
+msgstr "New texts requiring translation: {len(new_texts)}"
+
+msgid "متن‌های موجود در PO: {len(existing_msgids)}"
+msgstr "Existing texts in PO: {len(existing_msgids)}"
+
+msgid "متن‌های کل استخراج شده: {len(all_unique_texts)}"
+msgstr "Total extracted texts: {len(all_unique_texts)}"
+
+msgid "متیما"
+msgstr "Metisma"
+
+msgid "مجتمع"
+msgstr "Complex"
+
+msgid "مجله"
+msgstr "Magazine"
+
+msgid "مجوز"
+msgstr "Authorization"
+
+msgid "مجوز فعال انتخاب شده"
+msgstr "Active permissions selected"
+
+msgid "مجوزها"
+msgstr "Permissions"
+
+msgid "محتاج"
+msgstr "Needy"
+
+msgid "محتوا"
+msgstr "Content"
+
+msgid "محصول"
+msgstr "Product"
+
+msgid "محله"
+msgstr "Neighborhood"
+
+msgid "محیط زیست"
+msgstr "Environment"
+
+msgid "مخفی کردن"
+msgstr "Hide"
+
+msgid "مدارک User"
+msgstr "Documents of User"
+
+msgid "مدارک User"
+msgstr "User Documents"
+
+msgid "مدارک این کاربر قبلاً تأیید شده است"
+msgstr "This user's documents have already been approved"
+
+msgid "مدال"
+msgstr "Medal"
+
+msgid "مدت اعتبار"
+msgstr "Validity Period"
+
+msgid "مدرسه"
+msgstr "School"
+
+msgid "مدیر"
+msgstr "Admin"
+
+msgid "مدیریت"
+msgstr "Management"
+
+msgid "مدیریت اطلاعات شخصی"
+msgstr "Manage personal information"
+
+msgid "مدیریت سفارشات"
+msgstr "Order Management"
+
+msgid "مدیریت مجوزها"
+msgstr "Manage Permissions"
+
+msgid "مدیریت مجوزهای دسترسی"
+msgstr "Access permissions management"
+
+msgid "مدیریت مجوزهای کاربر"
+msgstr "Manage User Permissions"
+
+msgid "مدیریت کاربران"
+msgstr "Manage Users"
+
+msgid "مذهب"
+msgstr "Religion"
+
+msgid "مراسم"
+msgstr "Ceremony"
+
+msgid "مرتب‌سازی"
+msgstr "Sort"
+
+msgid "مرخصی"
+msgstr "Leave"
+
+msgid "مرد"
+msgstr "Man"
+
+msgid "مرداد"
+msgstr "Mordad"
+
+msgid "مرکز"
+msgstr "Center"
+
+msgid "مرکز خرید"
+msgstr "Shopping Center"
+
+msgid "مسئولیت"
+msgstr "Responsibility"
+
+msgid "مسابقات"
+msgstr "Competitions"
+
+msgid "مسابقه"
+msgstr "Contest"
+
+msgid "مسافرت"
+msgstr "Trip"
+
+msgid "مستاجر"
+msgstr "Tenant"
+
+msgid "مستندات"
+msgstr "Documentation"
+
+msgid "مسجد"
+msgstr "Mosque"
+
+msgid "مسدود کردن"
+msgstr "Block"
+
+msgid "مسیر"
+msgstr "Path"
+
+msgid "مشاهده غرفه"
+msgstr "View Booth"
+
+msgid "مشاهده مدارک"
+msgstr "View documents"
+
+msgid "مشاهده وضعیت"
+msgstr "View status"
+
+msgid "مشتری"
+msgstr "Customer"
+
+msgid "مصاحبه"
+msgstr "Interview"
+
+msgid "مصادره"
+msgstr "Forfeiture"
+
+msgid "مطالب مرتبط"
+msgstr "Related Posts"
+
+msgid "معاملات موفق"
+msgstr "Successful Transactions"
+
+msgid "معامله"
+msgstr "Deal"
+
+msgid "معامله"
+msgstr "Trade"
+
+msgid "معامله سریع"
+msgstr "Fast Trade"
+
+msgid "معبد"
+msgstr "Temple"
+
+msgid "معلق"
+msgstr "Suspended"
+
+msgid "معلم"
+msgstr "Teacher"
+
+msgid "مغازه"
+msgstr "Shop"
+
+msgid "مقاله"
+msgstr "Article"
+
+msgid "مقایسه"
+msgstr "Compare"
+
+msgid "مقررات"
+msgstr "Regulations"
+
+msgid "مقصد"
+msgstr "Destination"
+
+msgid "منبع"
+msgstr "Source"
+
+msgid "منطقه"
+msgstr "Region"
+
+msgid "منوی ناوبری دسکتاپ"
+msgstr "Desktop navigation menu"
+
+msgid "منوی کشویی خدمات"
+msgstr "Services dropdown menu"
+
+msgid "مهارت"
+msgstr "Skill"
+
+msgid "مهر"
+msgstr "Mehr"
+
+msgid "مهمان"
+msgstr "Guest"
+
+msgid "موجودی"
+msgstr "Balance"
+
+msgid "موزه"
+msgstr "Museum"
+
+msgid "موسسه"
+msgstr "Institute"
+
+msgid "موفقیت"
+msgstr "Success"
+
+msgid "موفقیت آمیز"
+msgstr "Successful"
+
+msgid "موقعیت"
+msgstr "Location"
+
+msgid "میانسال"
+msgstr "Middle-aged"
+
+msgid "میانگین"
+msgstr "Average"
+
+msgid "میدان"
+msgstr "Square"
+
+msgid "میزبان"
+msgstr "Host"
+
+msgid "میکروب"
+msgstr "Germ"
+
+msgid "می‌توانید از این Codeها عکس بگیرید یا آن‌ها را در یک مدیر رمز عبور مانند LastPass یا 1Password ذخیره کنید."
+msgstr "You can take a picture of these codes or store them in a password manager like LastPass or 1Password."
+
+msgid "می‌توانید از این Codeها عکس بگیرید یا آن‌ها را در یک مدیر رمز عبور مانند LastPass یا 1Password ذخیره کنید."
+msgstr "You can take a photo of these codes or store them in a password manager like LastPass or 1Password."
+
+msgid "ناامیدی"
+msgstr "Despair"
+
+msgid "ناحیه"
+msgstr "District"
+
+msgid "نادار"
+msgstr "Needy"
+
+msgid "ناظر"
+msgstr "Moderator"
+
+msgid "نام"
+msgstr "Name"
+
+msgid "نام خانوادگی"
+msgstr "Last Name"
+
+msgid "نام کاربری"
+msgstr "Username"
+
+msgid "نامزدی"
+msgstr "Engagement"
+
+msgid "نامه"
+msgstr "Letter"
+
+msgid "نتیجه"
+msgstr "Result"
+
+msgid "نتیجه"
+msgstr "Grandson/Granddaughter"
+
+msgid "نرم‌افزار"
+msgstr "Software"
+
+msgid "نزولی"
+msgstr "Descending"
+
+msgid "نسخه"
+msgstr "Version"
+
+msgid "نشان"
+msgstr "Badge"
+
+msgid "نظرات"
+msgstr "Comments"
+
+msgid "نظریه"
+msgstr "Theory"
+
+msgid "نقش"
+msgstr "Role"
+
+msgid "نقشه"
+msgstr "Map"
+
+msgid "نمای جدول"
+msgstr "Table View"
+
+msgid "نمای شبکه"
+msgstr "Grid View"
+
+msgid "نمای کارت"
+msgstr "Card View"
+
+msgid "نمایش"
+msgstr "Show"
+
+msgid "نمایش"
+msgstr "View"
+
+msgid "نمایش آمار و اطلاعات کلی"
+msgstr "Display statistics and general information"
+
+msgid "نمایش حالت لودینگ"
+msgstr "Display loading state"
+
+msgid "نمایش همه"
+msgstr "Show All"
+
+msgid "نمایش وضعیت تأیید هویت"
+msgstr "Display identity verification status"
+
+msgid "نمایش پیام سفارشی"
+msgstr "Display custom message"
+
+msgid "نمایشگاه"
+msgstr "Exhibition"
+
+msgid "نمایشگاه آنلاین"
+msgstr "Online Exhibition"
+
+msgid "نمایشگاه ویژه"
+msgstr "Featured Exhibition"
+
+msgid "نماینده"
+msgstr "Representative"
+
+msgid "نمودار"
+msgstr "Chart"
+
+msgid "نوجوان"
+msgstr "Teenager"
+
+msgid "نوزاد"
+msgstr "Infant"
+
+msgid "نوع"
+msgstr "Type"
+
+msgid "نوه"
+msgstr "Grandchild"
+
+msgid "نیاز به آپلود مدارک"
+msgstr "Need to upload documents"
+
+msgid "نیایش"
+msgstr "Prayer"
+
+msgid "نیرو"
+msgstr "Force"
+
+msgid "هدر سایت: چسبان به بالا با افکت شیشه‌ای"
+msgstr "Site header: sticky at top with glass effect"
+
+msgid "هدر صفحه"
+msgstr "Page Header"
+
+msgid "هدر پروفایل کاربر"
+msgstr "User profile header"
+
+msgid "هدیه"
+msgstr "Gift"
+
+msgid "هزینه"
+msgstr "Cost"
+
+msgid "هشدار"
+msgstr "Warning"
+
+msgid "هفته"
+msgstr "Week"
+
+msgid "هماهنگی"
+msgstr "Coordination"
+
+msgid "همایش"
+msgstr "Symposium"
+
+msgid "همسایه"
+msgstr "Neighbor"
+
+msgid "همه"
+msgstr "All"
+
+msgid "همکار"
+msgstr "Partner"
+
+msgid "همکار"
+msgstr "Colleague"
+
+msgid "همکاری"
+msgstr "Cooperation"
+
+msgid "همین امروز غرفه مجازی خود را ایجاد کنید"
+msgstr "Create Your Virtual Booth Today"
+
+msgid "همین حالا حساب کاربری خود را ایجاد کنید"
+msgstr "Create Your Account Now"
+
+msgid "هوا"
+msgstr "Air"
+
+msgid "هویت تأیید شده"
+msgstr "Identity verified"
+
+msgid "هیپرمارکت"
+msgstr "Hypermarket"
+
+msgid "هیچ داده‌ای یافت نشد"
+msgstr "No data found"
+
+msgid "هیچ مدرکی آپلود نشده است"
+msgstr "No document has been uploaded"
+
+msgid "هیچکدام"
+msgstr "None"
+
+msgid "واحد"
+msgstr "Unit"
+
+msgid "واردات"
+msgstr "Import"
+
+msgid "واریز"
+msgstr "Deposit"
+
+msgid "والیبال"
+msgstr "Volleyball"
+
+msgid "واکسن"
+msgstr "Vaccine"
+
+msgid "ورزش"
+msgstr "Sport"
+
+msgid "ورود"
+msgstr "Login"
+
+msgid "ورود به نمایشگاه"
+msgstr "Enter Exhibition"
+
+msgid "ورودی‌ها"
+msgstr "Entries"
+
+msgid "وزارت"
+msgstr "Ministry"
+
+msgid "وزن"
+msgstr "Weight"
+
+msgid "وضعیت"
+msgstr "Status"
+
+msgid "وظیفه"
+msgstr "Duty"
+
+msgid "ولی"
+msgstr "Saint"
+
+msgid "ویدیو"
+msgstr "Video"
+
+msgid "ویرایش"
+msgstr "Edit"
+
+msgid "ویرایش مجوزهای نقش {{ role.value }}"
+msgstr "Edit Role Permissions: {{ role.value }}"
+
+msgid "ویرایش مجوزهای نقش:"
+msgstr "Edit Role Permissions:"
+
+msgid "ویرایش کاربر"
+msgstr "Edit User"
+
+msgid "ویروس"
+msgstr "Virus"
+
+msgid "ویژگی"
+msgstr "Feature"
+
+msgid "پاداش"
+msgstr "Reward"
+
+msgid "پارک"
+msgstr "Park"
+
+msgid "پاسخ"
+msgstr "Answer"
+
+msgid "پاک کردن"
+msgstr "Clear"
+
+msgid "پایگاه داده"
+msgstr "Database"
+
+msgid "پاییز"
+msgstr "Autumn/Fall"
+
+msgid "پایین"
+msgstr "Bottom"
+
+msgid "پدر"
+msgstr "Father"
+
+msgid "پدربزرگ"
+msgstr "Grandfather"
+
+msgid "پذیرش"
+msgstr "Acceptance"
+
+msgid "پرداخت"
+msgstr "Payment"
+
+msgid "پرستار"
+msgstr "Nurse"
+
+msgid "پروفایل"
+msgstr "Profile"
+
+msgid "پسر"
+msgstr "Boy"
+
+msgid "پشتیبان"
+msgstr "Support"
+
+msgid "پشتیبانی"
+msgstr "Support"
+
+msgid "پشتیبانی واتس‌اپ"
+msgstr "WhatsApp Support"
+
+msgid "پشتیبان‌گیری"
+msgstr "Backup"
+
+msgid "پلاک"
+msgstr "Plate"
+
+msgid "پنجشنبه"
+msgstr "Thursday"
+
+msgid "پورتفوی و فرصت‌های سرمایه‌گذاری"
+msgstr "Portfolio and investment opportunities"
+
+msgid "پژوهش"
+msgstr "Study"
+
+msgid "پیاده‌روی"
+msgstr "Walking"
+
+msgid "پیام"
+msgstr "Message"
+
+msgid "پیامبر"
+msgstr "Prophet"
+
+msgid "پیامک"
+msgstr "SMS"
+
+msgid "پیر"
+msgstr "Old"
+
+msgid "پیشرفت"
+msgstr "Progress"
+
+msgid "پیشنهاد"
+msgstr "Suggestion"
+
+msgid "پیشه"
+msgstr "Trade"
+
+msgid "پیشگیری"
+msgstr "Prevention"
+
+msgid "پیمان"
+msgstr "Treaty"
+
+msgid "چالش"
+msgstr "Challenge"
+
+msgid "چاپ"
+msgstr "Print"
+
+msgid "چاپ Codeها"
+msgstr "Print Codes"
+
+msgid "چهارشنبه"
+msgstr "Wednesday"
+
+msgid "کابوس"
+msgstr "Nightmare"
+
+msgid "کاتالوگ"
+msgstr "Catalog"
+
+msgid "کار"
+msgstr "Work"
+
+msgid "کاربر"
+msgstr "User"
+
+msgid "کاربر عادی"
+msgstr "Normal User"
+
+msgid "کاربران"
+msgstr "Users"
+
+msgid "کارت‌های داشبورد مبتنی بر مجوزها"
+msgstr "Dashboard cards based on permissions"
+
+msgid "کارمزد"
+msgstr "Fee"
+
+msgid "کارمزد معامله"
+msgstr "Trading Fee"
+
+msgid "کارگاه"
+msgstr "Workshop"
+
+msgid "کتاب"
+msgstr "Book"
+
+msgid "کتابخانه"
+msgstr "Library"
+
+msgid "کتابخانه Three.js (لود لوکال - بدون تغییر)"
+msgstr "Three.js Library (loaded locally - unchanged)"
+
+msgid "کد"
+msgstr "Code"
+
+msgid "کد کره زمین واقعی - نسخه آفلاین"
+msgstr "Real globe code - offline version"
+
+msgid "کد کره زمین واقعی - نسخه آفلاین (بدون تغییر)"
+msgstr "Real globe code - offline version (unchanged)"
+
+msgid "کشتار"
+msgstr "Massacre"
+
+msgid "کشف فرصت‌های تجاری در غرفه‌های مجازی تعاملی"
+msgstr "Discover Business Opportunities in Interactive Virtual Booths"
+
+msgid "کشور"
+msgstr "Country"
+
+msgid "کلاس"
+msgstr "Class"
+
+msgid "کلاینت"
+msgstr "Client"
+
+msgid "کلمه عبور"
+msgstr "Password"
+
+msgid "کلید"
+msgstr "Key"
+
+msgid "کلیدواژه"
+msgstr "Keyword"
+
+msgid "کلیسا"
+msgstr "Church"
+
+msgid "کلینیک"
+msgstr "Clinic"
+
+msgid "کمتر"
+msgstr "Less"
+
+msgid "کمک"
+msgstr "Help"
+
+msgid "کمیته"
+msgstr "Committee"
+
+msgid "کنسرت"
+msgstr "Concert"
+
+msgid "کنفرانس"
+msgstr "Conference"
+
+msgid "کنیسه"
+msgstr "Synagogue"
+
+msgid "کودک"
+msgstr "Child"
+
+msgid "کوهنوردی"
+msgstr "Mountaineering"
+
+msgid "کوچه"
+msgstr "Alley"
+
+msgid "کپی"
+msgstr "Copy"
+
+msgid "کیف پول"
+msgstr "Wallet"
+
+msgid "کیف پول، تراکنش‌ها و گزارش‌های مالی"
+msgstr "Wallet, transactions and financial reports"
+
+msgid "کیفیت"
+msgstr "Quality"
+
+msgid "گالری"
+msgstr "Gallery"
+
+msgid "گردشگری"
+msgstr "Tourism"
+
+msgid "گردهمایی"
+msgstr "Gathering"
+
+msgid "گروه"
+msgstr "Group"
+
+msgid "گزارش"
+msgstr "Report"
+
+msgid "گزارش‌ها"
+msgstr "Reports"
+
+msgid "گزارش‌های فنی و بازرسی کالا"
+msgstr "Technical reports and commodity inspection"
+
+msgid "گزینه ۲: فونت سیستم به‌عنوان fallback (سریع‌ترین راه)"
+msgstr "Option 2: System font as fallback (fastest way)"
+
+msgid "گیاهان"
+msgstr "Plants"
+
+msgid "یادآوری"
+msgstr "Reminder"
+
+msgid "یادداشت"
+msgstr "Note"
+
+msgid "یادگاری"
+msgstr "Memento"
+
+msgid "یار"
+msgstr "Friend"
+
+msgid "یافته"
+msgstr "Finding"
+
+msgid "یتیم"
+msgstr "Orphan"
+
+msgid "یکشنبه"
+msgstr "Sunday"
+
+msgid "⚠️ فایل ترجمه برای زبان {self.lang} یافت نشد. از ترجمه پیش‌فرض استفاده می‌شود."
+msgstr "⚠️ Translation file for language {self.lang} not found. Using default translation."
+
+msgid "✓ app.py: {len(messages)} پیام"
+msgstr "✓ app.py: {len(messages)} messages"
+
+msgid "✓ {rel_path}: {len(messages)} پیام"
+msgstr "✓ {rel_path}: {len(messages)} messages"
+
+msgid "✓ {rel_path}: {len(texts)} متن"
+msgstr "✓ {rel_path}: {len(texts)} texts"
+
+msgid "✓ متن‌های جدید با موفقیت اضافه شدند"
+msgstr "✓ New texts successfully added"
+
+msgid "✓ هیچ متن جدیدی یافت نشد"
+msgstr "✓ No new texts found"
+
