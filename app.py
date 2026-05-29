@@ -50,12 +50,12 @@ def get_locale():
 
     # اولویت ۲: پارامتر URL (برای تغییرات لحظه‌ای)
     lang = request.args.get('lang')
-    if lang and lang in ['fa', 'en']:
+    if lang and lang in ['fa_IR', 'en']:
         session['lang'] = lang  # ذخیره برای جلسات بعدی
         return lang
 
     # اولویت ۳: زبان مرورگر
-    return request.accept_languages.best_match(['fa', 'en'], 'fa')
+    return request.accept_languages.best_match(['fa_IR', 'en'], 'fa_IR')
 
 def setup_logging(app):
     """Setup structured logging configuration for the application."""

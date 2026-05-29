@@ -1,9 +1,1 @@
-```
-# Compiled translation files
-*.mo
-
-# Environment files
-.env
-.env.local
-*.env.*
-```
+Nothing should be ignored based on the provided file changes, as they only include source files (.py) and translation files (.po).
