@@ -195,7 +195,7 @@ def place_order():
     matched = try_match_order(order)
     
     if matched:
-        flash(gettext(f'Your order of {float(amount)} was executed successfully!'), 'success')
+        flash(gettext('Your order of %(amount)s was executed successfully!') % {'amount': float(amount)}, 'success')
     else:
         flash(gettext('Your order has been placed in the order book.'), 'info')
     
@@ -300,7 +300,7 @@ def create_pair():
         db.session.add(pair)
         db.session.commit()
         
-        flash(gettext(f'Trading pair {symbol} created successfully.'), 'success')
+        flash(gettext('Trading pair %(symbol)s created successfully.') % {'symbol': symbol}, 'success')
         return redirect(url_for('trading.market'))
     
     return render_template('trading/create_pair.html')

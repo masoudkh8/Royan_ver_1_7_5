@@ -330,14 +330,14 @@ def register():
                     flash(gettext("✅ Registration successful! Verification email sent."), "success")
                 else:
                     print(f"  → ❌ Email failed: {error_msg}")
-                    flash(gettext(f"⚠️ Account created but email failed: {error_msg}"), "warning")
+                    flash(gettext("⚠️ Account created but email failed: %(error)s") % {'error': error_msg}, "warning")
 
             except Exception as email_error:
                 # خطای اختصاصی بخش ایمیل
                 print(f"  → 💥 Email subsystem error: {email_error}")
                 import traceback
                 traceback.print_exc()
-                flash(gettext(f"⚠️ Account created but email system error: {str(email_error)}"), "warning")
+                flash(gettext("⚠️ Account created but email system error: %(error)s") % {'error': str(email_error)}, "warning")
 
             return redirect(url_for('users.login'))
 
@@ -347,7 +347,7 @@ def register():
             print(f"💥 CRITICAL ERROR in register: {e}")
             import traceback
             traceback.print_exc()  # چاپ کامل خطا در کنسول
-            flash(gettext(f"❌ Registration error: {str(e)}"), "error")  # نمایش خطا به کاربر (فقط برای تست)
+            flash(gettext("❌ Registration error: %(error)s") % {'error': str(e)}, "error")  # نمایش خطا به کاربر (فقط برای تست)
             return redirect(url_for('users.register'))
 
     return render_template('users/register.html', roles=Role)
@@ -382,7 +382,7 @@ def login():
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
                 lock_time = user.locked_until.strftime('%Y-%m-%d %H:%M')
-                flash(gettext(f"❌ Your account is locked until {lock_time} due to failed attempts."))
+                flash(gettext("❌ Your account is locked until %(lock_time)s due to failed attempts.") % {'lock_time': lock_time})
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='login_blocked',
@@ -488,7 +488,7 @@ def login():
                     )
                     
                     remaining_attempts = 5 - user.failed_login_attempts
-                    flash(gettext(f"❌ Incorrect email or password. {remaining_attempts} more attempts before account is locked."))
+                    flash(gettext("❌ Incorrect email or password. %(attempts)s more attempts before account is locked.") % {'attempts': remaining_attempts})
             else:
                 # کاربر وجود ندارد - برای امنیت پیام کلی نمایش می‌دهیم
                 flash(gettext("❌ Incorrect email or password."))
@@ -531,7 +531,7 @@ def edit_profile():
         if profile_file and profile_file.filename != '':
             is_valid, error_msg = validate_file(profile_file, image_only=True)
             if not is_valid:
-                flash(gettext(f"❌ {error_msg}"), "error")
+                flash(gettext("❌ %(error)s") % {'error': error_msg}, "error")
             else:
                 upload_folder = current_app.config.get('PROFILE_UPLOAD_FOLDER', 'static/uploads/profiles')
                 os.makedirs(upload_folder, exist_ok=True)
@@ -991,7 +991,7 @@ def cancel_order(order_id):
             print(f"Celery not available: {e}")
 
         db.session.commit()
-        flash(gettext(f"🗑️ Order #{order_id} has been cancelled."))
+        flash(gettext("🗑️ Order #%(order_id)s has been cancelled.") % {'order_id': order_id})
     else:
         flash(gettext("⚠️ This order cannot be cancelled as it has already been processed."))
 
@@ -1098,7 +1098,7 @@ def reject_order(order_id):
 
 
         db.session.commit()
-        flash(gettext(f"🗑️ Order #{order_id} rejected."))
+        flash(gettext("🗑️ Order #%(order_id)s rejected.") % {'order_id': order_id})
     else:
         flash(gettext("⚠️ This order has already changed status."))
 
@@ -1693,7 +1693,7 @@ def upload_documents():
         if passport_file and passport_file.filename != '':
             is_valid, error_msg = validate_file(passport_file)
             if not is_valid:
-                flash(gettext(f"❌ {error_msg}"), "error")
+                flash(gettext("❌ %(error)s") % {'error': error_msg}, "error")
                 return redirect(url_for('users.upload_documents'))
 
             filename = secure_filename(f"passport.+{passport_file.filename.rsplit('.', 1)[1].lower()}")
@@ -1707,7 +1707,7 @@ def upload_documents():
         if license_file and license_file.filename != '':
             is_valid, error_msg = validate_file(license_file)
             if not is_valid:
-                flash(gettext(f"❌ {error_msg}"), "error")
+                flash(gettext("❌ %(error)s") % {'error': error_msg}, "error")
                 return redirect(url_for('users.upload_documents'))
 
             filename = secure_filename(f"license.+{license_file.filename.rsplit('.', 1)[1].lower()}")
@@ -1874,7 +1874,7 @@ def verify_email(token):
     user, error_msg = verify_email_token(token)
 
     if not user:
-        flash(gettext(f"❌ {error_msg}"), "error")
+        flash(gettext("❌ %(error)s") % {'error': error_msg}, "error")
         return redirect(url_for('users.resend_verification'))
 
     # 2. اگر قبلاً تایید شده
@@ -1937,7 +1937,7 @@ def resend_verification():
         if success:
             flash(gettext("📧 New verification email sent! Please check your inbox."), "success")
         else:
-            flash(gettext(f"⚠️ Failed to send email: {error}"), "error")
+            flash(gettext("⚠️ Failed to send email: %(error)s") % {'error': error}, "error")
 
         return redirect(url_for('users.login'))
 
