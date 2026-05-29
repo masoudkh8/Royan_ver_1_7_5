@@ -111,7 +111,7 @@
                     <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                     </svg>
-                    {{ t_('social.trust_score') }} - Trust Core
+                    Trust Score - Trust Core
                 </h3>
                 {% if current_user.trust_score and current_user.trust_score.total_score >= 75 %}
                     <span class="px-3 py-1 rounded-full bg-gold/20 text-gold text-sm font-bold">
@@ -131,7 +131,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Total Score -->
                 <div class="bg-gradient-to-br from-gold/10 to-gold-dark/10 dark:from-gold/20 dark:to-gold-dark/20 rounded-xl p-4 text-center border border-gold/30">
-                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">{{ t_('social.total_score') }}</p>
+                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">Total Score</p>
                     <p class="text-3xl font-bold text-gold">
                         {{ current_user.trust_score.total_score if current_user.trust_score else current_user.trust_score_value or 0 }}
                     </p>
@@ -140,7 +140,7 @@
                 
                 <!-- Identity Score -->
                 <div class="bg-white dark:bg-dark-700 rounded-xl p-4 text-center border border-gray-200 dark:border-dark-600">
-                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">{{ t_('social.identity_verified') }}</p>
+                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">Identity Verified</p>
                     <p class="text-2xl font-bold {% if current_user.trust_score and current_user.trust_score.identity_score >= 20 %}text-green-600{% elif current_user.trust_score and current_user.trust_score.identity_score >= 10 %}text-yellow-600{% else %}text-red-600{% endif %}">
                         {{ current_user.trust_score.identity_score if current_user.trust_score else 0 }}
                     </p>
@@ -149,7 +149,7 @@
                 
                 <!-- Expertise Score -->
                 <div class="bg-white dark:bg-dark-700 rounded-xl p-4 text-center border border-gray-200 dark:border-dark-600">
-                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">{{ t_('social.expertise_verified') }}</p>
+                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">Expertise Verified</p>
                     <p class="text-2xl font-bold {% if current_user.trust_score and current_user.trust_score.expertise_score >= 20 %}text-green-600{% elif current_user.trust_score and current_user.trust_score.expertise_score >= 10 %}text-yellow-600{% else %}text-red-600{% endif %}">
                         {{ current_user.trust_score.expertise_score if current_user.trust_score else 0 }}
                     </p>
@@ -158,7 +158,7 @@
                 
                 <!-- Social & Dynamic Score -->
                 <div class="bg-white dark:bg-dark-700 rounded-xl p-4 text-center border border-gray-200 dark:border-dark-600">
-                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">{{ t_('social.social_dynamic') }}</p>
+                    <p class="text-sm text-gray-600 dark:text-slate-400 mb-2">Social & Dynamic</p>
                     <p class="text-2xl font-bold {% if current_user.trust_score and (current_user.trust_score.social_score + current_user.trust_score.dynamic_score) >= 30 %}text-green-600{% elif current_user.trust_score and (current_user.trust_score.social_score + current_user.trust_score.dynamic_score) >= 15 %}text-yellow-600{% else %}text-red-600{% endif %}">
                         {{ (current_user.trust_score.social_score + current_user.trust_score.dynamic_score) if current_user.trust_score else 0 }}
                     </p>
@@ -169,7 +169,7 @@
             <!-- Progress Bar -->
             <div class="mt-4">
                 <div class="flex justify-between text-sm mb-1">
-                    <span class="text-gray-600 dark:text-slate-400">{{ t_('social.trust_progress') }}</span>
+                    <span class="text-gray-600 dark:text-slate-400">Trust Progress</span>
                     <span class="font-bold text-gold">
                         {{ current_user.trust_score.total_score if current_user.trust_score else current_user.trust_score_value or 0 }}%
                     </span>
@@ -184,7 +184,7 @@
             <!-- Tips -->
             <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
                 <p class="text-sm text-blue-800 dark:text-blue-200">
-                    <strong>💡 {{ t_('common.tip') }}:</strong> {{ t_('social.trust_tip') }}
+                    <strong>💡 Tip:</strong> Increase your trust score by completing documents and activities
                 </p>
             </div>
         </div>
