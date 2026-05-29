@@ -6,11 +6,11 @@
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-4xl mx-auto space-y-6">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📎 مدارک User {{ user.username }}</h1>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📎 Documents of User {{ user.username }}</h1>
             <a href="{{ url_for('admin.manage_users') }}" class="text-sm text-gray-600 dark:text-slate-400 hover:text-gold transition">← Back to User Management</a>
         </div>
 
-        <!-- اطلاعات کاربر -->
+        <!-- User Information -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 p-5">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">👤 User Information</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <!-- لیست مدارک -->
+        <!-- List of Documents -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 p-5">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">📁 List of Uploaded Documents</h2>
             
@@ -66,7 +66,7 @@
             {% endif %}
         </div>
 
-        <!-- اقدامات ادمین -->
+        <!-- Admin Actions -->
         <div class="flex flex-col sm:flex-row gap-3">
             {% if not user.is_verified %}
             <form method="POST" action="{{ url_for('admin.verify_user_documents', user_id=user.id) }}" class="flex-1">
