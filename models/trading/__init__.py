@@ -81,27 +81,27 @@ class TradingPair(db.Model):
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     
-    base_asset = db.Column(db.String(50), nullable=False)  # ارز پایه
-    quote_asset = db.Column(db.String(50), nullable=False)  # ارز قیمت
-    symbol = db.Column(db.String(20), unique=True, nullable=False)  # نماد نمایشی
+    base_asset = db.Column(db.String(50), nullable=False)  # Base Currency
+    quote_asset = db.Column(db.String(50), nullable=False)  # Quote Currency
+    symbol = db.Column(db.String(20), unique=True, nullable=False)  # Display Symbol
     
-    # مشخصات معامله
+    # Trade Specifications
     min_order_size = db.Column(db.Numeric(20, 8), nullable=False)
     max_order_size = db.Column(db.Numeric(20, 8), nullable=False)
-    price_precision = db.Column(db.Integer, default=2)  # دقت قیمت
-    quantity_precision = db.Column(db.Integer, default=8)  # دقت مقدار
+    price_precision = db.Column(db.Integer, default=2)  # Price Precision
+    quantity_precision = db.Column(db.Integer, default=8)  # Quantity Precision
     
-    # وضعیت
+    # Status
     is_active = db.Column(db.Boolean, default=True)
     is_featured = db.Column(db.Boolean, default=False)
     
-    # محدودیت‌ها
-    trading_hours = db.Column(db.JSON, default={})  # ساعات مجاز معامله
-    allowed_user_levels = db.Column(db.JSON, default=[])  # سطوح کاربری مجاز
+    # Limits/Restrictions
+    trading_hours = db.Column(db.JSON, default={})  # Allowed Trading Hours
+    allowed_user_levels = db.Column(db.JSON, default=[])  # Allowed User Levels
     
-    # آمار بازار (۲۴ ساعته)
+    # Market Statistics (24 hours)
     last_price = db.Column(db.Numeric(20, 8))
-    price_change_24h = db.Column(db.Numeric(10, 4))  # درصد تغییر
+    price_change_24h = db.Column(db.Numeric(10, 4))  # Percentage Change
     volume_24h = db.Column(db.Numeric(20, 8), default=0)
     high_24h = db.Column(db.Numeric(20, 8))
     low_24h = db.Column(db.Numeric(20, 8))
@@ -129,26 +129,26 @@ class TradingWallet(db.Model):
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     user_id = db.Column(UUID_TYPE, nullable=False, unique=True)
     
-    # موجودی‌ها به صورت JSONB: {"USDT": 1000.50, "BTC": 0.05}
+    # Balances as JSONB: {"USDT": 1000.50, "BTC": 0.05}
     balances = db.Column(db.JSON, default={})
-    locked_balances = db.Column(db.JSON, default={})  # موجودی قفل‌شده در سفارش‌ها
+    locked_balances = db.Column(db.JSON, default={})  # Locked Balances in Orders
     
-    # اعتبار
+    # Credit
     credit_limit = db.Column(db.Numeric(20, 8), default=0)
     used_credit = db.Column(db.Numeric(20, 8), default=0)
     
-    # آمار معاملاتی
+    # Trading Statistics
     total_trades = db.Column(db.Integer, default=0)
     total_volume = db.Column(db.Numeric(30, 8), default=0)
     
-    # وضعیت
+    # Status
     is_active = db.Column(db.Boolean, default=True)
     is_verified = db.Column(db.Boolean, default=False)
     
-    # مدیریت ریسک
+    # Risk Management
     risk_level = db.Column(db.String(20), default='low')  # low, medium, high
-    daily_loss_limit = db.Column(db.Numeric(20, 8))  # حد ضرر روزانه
-    daily_loss_current = db.Column(db.Numeric(20, 8), default=0)  # ضرر فعلی امروز
+    daily_loss_limit = db.Column(db.Numeric(20, 8))  # Daily Loss Limit
+    daily_loss_current = db.Column(db.Numeric(20, 8), default=0)  # Current Loss Today
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -180,19 +180,19 @@ class TradingWalletTransaction(db.Model):
     balance_before = db.Column(db.Numeric(20, 8), nullable=False)
     balance_after = db.Column(db.Numeric(20, 8), nullable=False)
     
-    # ارجاع به سفارش یا معامله مرتبط
+    # Reference to Related Order or Trade
     related_order_id = db.Column(UUID_TYPE)
     related_trade_id = db.Column(UUID_TYPE)
     
     description = db.Column(db.Text)
-    reference_id = db.Column(db.String(100))  # شناسه مرجع خارجی
+    reference_id = db.Column(db.String(100))  # External Reference ID
     
     status = db.Column(db.String(50), default='completed')
     extra_data = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
-    # رابطه
+    # Relationship
     wallet = db.relationship('TradingWallet', backref='transactions')
     
     __table_args__ = (
@@ -218,39 +218,39 @@ class TradeOrder(db.Model):
     user_id = db.Column(UUID_TYPE, nullable=False)
     trading_pair_id = db.Column(UUID_TYPE, db.ForeignKey('trading_pairs.id'), nullable=False)
     
-    # نوع سفارش
+    # Order Type
     type_id = db.Column(db.Integer, db.ForeignKey('order_type_enum.id'), nullable=False)
     order_type = db.relationship('OrderType', backref='orders')
     
-    # سمت سفارش
+    # Order Side
     side_id = db.Column(db.Integer, db.ForeignKey('order_side_enum.id'), nullable=False)
     side = db.relationship('OrderSide', backref='orders')
     
-    # قیمت و مقدار
-    price = db.Column(db.Numeric(20, 8))  # برای Limit orders
+    # Price and Quantity
+    price = db.Column(db.Numeric(20, 8))  # for Limit orders
     quantity = db.Column(db.Numeric(20, 8), nullable=False)
     filled_quantity = db.Column(db.Numeric(20, 8), default=0)
     remaining_quantity = db.Column(db.Numeric(20, 8), nullable=False)
     
-    # قیمت‌های شرطی
-    stop_price = db.Column(db.Numeric(20, 8))  # برای Stop orders
-    trigger_price = db.Column(db.Numeric(20, 8))  # قیمتی که سفارش فعال شده
+    # Conditional Prices
+    stop_price = db.Column(db.Numeric(20, 8))  # for Stop orders
+    trigger_price = db.Column(db.Numeric(20, 8))  # Price at which order is activated
     
-    # وضعیت
+    # Status
     status_id = db.Column(db.Integer, db.ForeignKey('order_status_enum.id'), default=1)
     status = db.relationship('OrderStatus', backref='orders')
     
-    # زمان‌بندی
+    # Timing/Scheduling
     time_in_force = db.Column(db.String(20), default='GTC')  # GTC, IOC, FOK
     expires_at = db.Column(db.DateTime)
     
-    # مالی
-    fee_rate = db.Column(db.Numeric(10, 6), default=0.001)  # کارمزد
+    # Financial
+    fee_rate = db.Column(db.Numeric(10, 6), default=0.001)  # Fee
     total_fee = db.Column(db.Numeric(20, 8), default=0)
     average_fill_price = db.Column(db.Numeric(20, 8))
     
-    # متادیتا
-    client_order_id = db.Column(db.String(100), unique=True)  # شناسه سفارش از سمت کلاینت
+    # Metadata
+    client_order_id = db.Column(db.String(100), unique=True)  # Client Order ID
     notes = db.Column(db.Text)
     extra_data = db.Column(db.JSON, default={})
     
@@ -259,7 +259,7 @@ class TradeOrder(db.Model):
     filled_at = db.Column(db.DateTime)
     cancelled_at = db.Column(db.DateTime)
     
-    # روابط
+    # Relationships
     trading_pair = db.relationship('TradingPair', backref='orders')
     
     __table_args__ = (
@@ -286,26 +286,26 @@ class Trade(db.Model):
     
     trading_pair_id = db.Column(UUID_TYPE, db.ForeignKey('trading_pairs.id'), nullable=False)
     
-    # سفارش‌های طرفین
+    # Orders of Both Parties
     maker_order_id = db.Column(UUID_TYPE, db.ForeignKey('trade_orders.id'), nullable=False)
     taker_order_id = db.Column(UUID_TYPE, db.ForeignKey('trade_orders.id'), nullable=False)
     
-    # اطلاعات معامله
+    # Trade Information
     price = db.Column(db.Numeric(20, 8), nullable=False)
     quantity = db.Column(db.Numeric(20, 8), nullable=False)
     quote_amount = db.Column(db.Numeric(20, 8), nullable=False)  # price * quantity
     
-    # کارمزدها
+    # Fees
     maker_fee = db.Column(db.Numeric(20, 8), default=0)
     taker_fee = db.Column(db.Numeric(20, 8), default=0)
     
-    # نقش‌ها
+    # Roles
     maker_user_id = db.Column(UUID_TYPE, nullable=False)
     taker_user_id = db.Column(UUID_TYPE, nullable=False)
     
     executed_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
-    # روابط
+    # Relationships
     trading_pair = db.relationship('TradingPair', backref='trades')
     maker_order = db.relationship('TradeOrder', foreign_keys=[maker_order_id], backref='maker_trades')
     taker_order = db.relationship('TradeOrder', foreign_keys=[taker_order_id], backref='taker_trades')
@@ -325,21 +325,21 @@ class Trade(db.Model):
 
 class MarketData(db.Model):
     """
-    داده‌های تاریخی بازار برای نمودارها
-    کندل‌های قیمتی (OHLCV)
+    Historical Market Data for Charts
+    Price Candles (OHLCV)
     """
     __tablename__ = 'market_data'
     
     id = db.Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     trading_pair_id = db.Column(UUID_TYPE, db.ForeignKey('trading_pairs.id'), nullable=False)
     
-    # تایم‌فریم
+    # Timeframe
     timeframe = db.Column(db.String(10), nullable=False)  # 1m, 5m, 1h, 1d, etc.
     
-    # زمان شروع کندل
+    # Candle Start Time
     timestamp = db.Column(db.DateTime, nullable=False)
     
-    # داده‌های OHLCV
+    # OHLCV Data
     open_price = db.Column(db.Numeric(20, 8), nullable=False)
     high_price = db.Column(db.Numeric(20, 8), nullable=False)
     low_price = db.Column(db.Numeric(20, 8), nullable=False)
@@ -347,16 +347,16 @@ class MarketData(db.Model):
     volume = db.Column(db.Numeric(20, 8), default=0)
     quote_volume = db.Column(db.Numeric(30, 8), default=0)
     
-    # تعداد معاملات
+    # Number of Trades
     trade_count = db.Column(db.Integer, default=0)
     
-    # داده‌های اضافی
+    # Additional Data
     vwap = db.Column(db.Numeric(20, 8))  # Volume Weighted Average Price
     extra_data = db.Column(db.JSON, default={})
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # رابطه
+    # Relationship
     trading_pair = db.relationship('TradingPair', backref='market_data')
     
     __table_args__ = (
@@ -383,7 +383,7 @@ class TradingSetting(db.Model):
     description_fa = db.Column(db.Text)
     description_en = db.Column(db.Text)
     
-    is_public = db.Column(db.Boolean, default=False)  # آیا کاربران می‌توانند ببینند
+    is_public = db.Column(db.Boolean, default=False)  # Can Users View
     category = db.Column(db.String(50), default='general')
     
     updated_by = db.Column(UUID_TYPE)
@@ -410,47 +410,47 @@ def init_trading_db(app=None):
     if app:
         db.init_app(app)
     
-    # ایجاد انواع سفارش
+    # Create Order Types
     order_types = ['market', 'limit', 'stop_limit', 'stop_market']
     for otype in order_types:
         existing = OrderType.query.filter_by(order_type=otype).first()
         if not existing:
             db.session.add(OrderType(order_type=otype))
     
-    # ایجاد سمت‌های سفارش
+    # Create Order Sides
     sides = ['buy', 'sell']
     for side in sides:
         existing = OrderSide.query.filter_by(side=side).first()
         if not existing:
             db.session.add(OrderSide(side=side))
     
-    # ایجاد وضعیت‌های سفارش
+    # Create Order Statuses
     statuses = ['pending', 'partially_filled', 'filled', 'cancelled', 'rejected', 'expired']
     for status in statuses:
         existing = OrderStatus.query.filter_by(status=status).first()
         if not existing:
             db.session.add(OrderStatus(status=status))
     
-    # ایجاد تنظیمات پیش‌فرض
+    # Create Default Settings
     default_settings = [
         {
             'key': 'trading_enabled',
             'value': True,
-            'desc_fa': 'فعال بودن تالار معاملاتی',
+            'desc_fa': 'Trading Hall Enabled',
             'desc_en': 'Trading hall enabled',
             'category': 'general'
         },
         {
             'key': 'default_fee_rate',
             'value': 0.001,
-            'desc_fa': 'کارمزد پیش‌فرض معاملات',
+            'desc_fa': 'Default Trading Fee',
             'desc_en': 'Default trading fee rate',
             'category': 'fees'
         },
         {
             'key': 'max_orders_per_user',
             'value': 100,
-            'desc_fa': 'حداکثر سفارش‌های باز برای هر کاربر',
+            'desc_fa': 'Maximum Open Orders Per User',
             'desc_en': 'Maximum open orders per user',
             'category': 'limits'
         }
