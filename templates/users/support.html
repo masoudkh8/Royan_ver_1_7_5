@@ -11,8 +11,8 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
             </svg>
-            Back to Dashboard
-        </a>
+            {{ _('Back to Dashboard
+        ') }}</a>
     </div>
     
     {% if not current_user.is_premium %}
@@ -27,14 +27,14 @@
                     </div>
                     <h2class="text-xl font-bold text-gray-900 dark:text-white">Support - Contact Admi>{{ _("Support - Contact Admin") }}</h2>
                 </div>
-                <p class="text-gray-600 dark:text-slate-400 mb-4">This section allows non-premium users to receive messages from the admin. You can request assistance here.</p>
+                <{{ _('p class="text-gray-600 dark:text-slate-400 mb-4">') }}This section allows non-premium users to receive messages from the admin. You can request assistance here.</p>
                 
                 <div class="bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p class="text-sm text-gray-700 dark:text-slate-300">Upgrade to premium for full chat access.</p>
-                    <a href="{{ url_for('users.upgrade_to_premium') }}" 
+                    <{{ _('p class="text-sm text-gray-700 dark:text-slate-300">') }}Upgrade to premium for full chat access.</p>
+                    <{{ _('a href="') }}{{ url_for('users.upgrade_to_premium') }}{{ _('" 
                        class="px-5 py-2 rounded-lg bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm 
                               hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] 
-                              transition-all duration-200 shadow">
+                              transition-all duration-200 shadow">') }}
                         🌟 Upgrade Now
                     </a>
                 </div>
@@ -44,12 +44,12 @@
             <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 flex flex-col overflow-hidden">
                 <div class="p-4 border-b border-gray-200 dark:border-dark-700 bg-gray-50 dark:bg-dark-700/50">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">
+                        <{{ _('div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">') }}
                             A
                         </div>
                         <div>
-                            <p class="font-bold text-gray-900 dark:text-white">Admin Support</p>
-                            <p class="text-xs text-gold">👤 System Admin</p>
+                            <{{ _('p class="font-bold text-gray-900 dark:text-white">') }}Admin Support</p>
+                            <{{ _('p class="text-xs text-gold">') }}👤 System Admin</p>
                         </div>
                     </div>
                 </div>
@@ -59,11 +59,11 @@
                         {% for m in messages %}
                         <div class="flex {% if m.sender_id == current_user.id %}justify-end{% else %}justify-start{% endif %}">
                             <div class="max-w-[80%] {% if m.sender_id == current_user.id %}bg-gray-100 dark:bg-dark-700 text-gray-900 dark:text-white{% else %}bg-gold/10 border border-gold/20 text-gray-900 dark:text-white{% endif %} rounded-2xl px-4 py-2.5 shadow-sm">
-                                <p class="text-sm">{{ m.content }}</p>
+                                <{{ _('p class="text-sm">') }}{{ m.content }}</p>
                                 <p class="text-[10px] text-gray-500 dark:text-slate-400 mt-1 {% if m.sender_id == current_user.id %}text-right{% endif %}">
                                     {{ m.created_at.strftime('%d/%m/%Y %H:%M') }}
                                     {% if m.sender_id != current_user.id and not m.is_read %}
-                                        <span class="text-gold ml-1">● New</span>
+                                        <{{ _('span class="text-gold ml-1">') }}● New</span>
                                     {% endif %}
                                 </p>
                             </div>
@@ -71,7 +71,7 @@
                         {% endfor %}
                     {% else %}
                         <div class="flex items-center justify-center h-full text-gray-500 dark:text-slate-400">
-                            <p>No messages yet. Send a message to start.</p>
+                            <{{ _('p>') }}No messages yet. Send a message to start.</{{ _('p>') }}
                         </div>
                     {% endif %}
                 </div>
@@ -96,8 +96,8 @@
     {% else %}
         <!-- حالت پریمیوم (استفاده از چت کامل) -->
         <div class="text-center py-12">
-            <p class="text-gray-600 dark:text-slate-400 mb-4">You have full chat access. Please use the chat section.</p>
-            <a href="{{ url_for('users.chat') }}" class="text-gold hover:text-gold-light font-medium">Go to Chat →</a>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 mb-4">') }}You have full chat access. Please use the chat section.</p>
+            <{{ _('a href="') }}{{ url_for('users.chat') }}{{ _('" class="text-gold hover:text-gold-light font-medium">') }}Go to Chat →</a>
         </div>
     {% endif %}
 </div>

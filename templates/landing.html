@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Metisma - Intelligent Global Trade Platform</title>
+  <title>{{ _('Metisma - Intelligent Global Trade Platform') }}</title>
   
   <script>
     // ✅ FIX #2: Auto-detect and set language/direction on page load
@@ -548,7 +548,7 @@
         class="theme-toggle fixed bottom-6 left-6 z-50 p-3.5 rounded-full 
                bg-white dark:bg-dark-700 shadow-lg border border-gray-200 dark:border-dark-600 
                hover:shadow-xl transition-all duration-300" 
-        aria-label="Toggle Dark Mode" title="{{ _("Toggle Theme") }}">
+        aria-label="{{ _(''Toggle Dark Mode'') }}" title="{{ _("Toggle Theme") }}">
   
   <!-- آیکون ماه (نمایش در حالت لایت) -->
   <svg id="icon-moon" class="w-5 h-5 text-gray-700 dark:hidden transition-transform duration-300" 
@@ -571,7 +571,7 @@
    target="_blank" 
    rel="noopener noreferrer"
    class="group fixed bottom-6 right-6 z-50 inline-flex items-center justify-center"
-   aria-label="Chat with Support on WhatsApp"
+   aria-label="{{ _(''Chat with Support on WhatsApp'') }}"
    title="{{ _("Chat with Support") }}">
   
   <!-- Tooltip -->
@@ -623,7 +623,7 @@
                   flex items-center justify-center text-lg shadow-lg shadow-gold/20 group-hover:scale-105 transition">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ _("Metisma Logo") }}" class="h-12 sm:h-16 w-auto object-contain flex-shrink-0">
       </div>
-      <span class="text-xl font-bold text-gray-900 dark:text-gold tracking-tight">Metisma</span>
+      <{{ _('span class="text-xl font-bold text-gray-900 dark:text-gold tracking-tight">') }}Metisma</span>
     </a>
 
     <!-- منوی ناوبری دسکتاپ - طراحی مینیمال و حرفه‌ای -->
@@ -640,7 +640,7 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span>Trade</span>
+            <{{ _('span>') }}Trade</{{ _('span>') }}
             <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -662,7 +662,7 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
             </svg>
-            <span>Logistics</span>
+            <{{ _('span>') }}Logistics</{{ _('span>') }}
             <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -683,7 +683,7 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
             </svg>
-            <span>Analytics</span>
+            <{{ _('span>') }}Analytics</{{ _('span>') }}
             <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -706,7 +706,7 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
             </svg>
-            <span>Tools</span>
+            <{{ _('span>') }}Tools</{{ _('span>') }}
             <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -729,7 +729,7 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
             </svg>
-            <span>Learn</span>
+            <{{ _('span>') }}Learn</{{ _('span>') }}
             <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -753,7 +753,7 @@
       <!-- انتخابگر زبان -->
       <div class="relative group">
         <button class="flex items-center gap-1 px-2.5 py-2 text-xs font-medium rounded-xl bg-gray-50 dark:bg-dark-800/50 border border-gray-200 dark:border-gold/10 hover:border-gold/30 transition">
-          <span class="text-gray-600 dark:text-slate-400">EN</span>
+          <{{ _('span class="text-gray-600 dark:text-slate-400">') }}EN</span>
           <svg class="w-3 h-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -770,7 +770,7 @@
       <!-- دکمه Dark Mode -->
       <button onclick="toggleDarkMode()" 
               class="theme-toggle p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20" 
-              aria-label="Toggle Dark Mode" title="{{ _("Toggle Theme") }}">
+              aria-label="{{ _(''Toggle Dark Mode'') }}" title="{{ _("Toggle Theme") }}">
         <!-- آیکون ماه (نمایش در حالت لایت) -->
         <svg id="icon-moon-desktop" class="w-5 h-5 text-gray-600 dark:text-slate-400 dark:hidden transition-transform duration-300" 
              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -790,12 +790,12 @@
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
         </svg>
-        <span>Apply for Membership</span>
+        <{{ _('span>') }}Apply for Membership</{{ _('span>') }}
       </a>
       
       <!-- دکمه منوی موبایل (همبرگری) -->
       <button id="mobileMenuBtn" class="lg:hidden p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20" 
-              aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+              aria-label="{{ _(''Menu'') }}" aria-expanded="false" aria-controls="mobileMenu">
         <div class="w-6 h-5 flex flex-col justify-between">
           <span class="hamburger-line h-0.5 w-full bg-gray-600 dark:bg-slate-300 rounded-full"></span>
           <span class="hamburger-line h-0.5 w-full bg-gray-600 dark:bg-slate-300 rounded-full"></span>
@@ -816,8 +816,8 @@
       
       <!-- هدر منو: عنوان و دکمه بستن -->
       <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gold/10">
-        <span class="text-lg font-bold text-gray-900 dark:text-gold">Menu</span>
-        <button id="closeMenuBtn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-700 transition" aria-label="Close Menu">
+        <{{ _('span class="text-lg font-bold text-gray-900 dark:text-gold">') }}Menu</span>
+        <button id="closeMenuBtn" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-700 transition" aria-label="{{ _(''Close Menu'') }}">
           <svg class="w-5 h-5 text-gray-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
@@ -828,7 +828,7 @@
       <button onclick="toggleDarkMode()" 
               class="theme-toggle w-full flex items-center justify-between px-4 py-3 rounded-xl mb-4 
                      bg-gray-100 dark:bg-dark-700 hover:bg-gray-200 dark:hover:bg-dark-600 transition">
-        <span class="text-sm font-medium text-gray-700 dark:text-slate-300">Dark Mode</span>
+        <{{ _('span class="text-sm font-medium text-gray-700 dark:text-slate-300">') }}Dark Mode</span>
         <div class="relative w-12 h-6 bg-gray-300 dark:bg-gold rounded-full transition-colors">
           <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white dark:bg-dark-800 rounded-full transition-transform transform translate-x-0 dark:translate-x-6 shadow-md"></div>
         </div>
@@ -838,16 +838,16 @@
       <nav class="flex-1 space-y-1">
         <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-dark-700 hover:text-gold transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-          Home
-        </a>
+          {{ _('Home
+        ') }}</a>
         
         <!-- آکاردئون خدمات با دسته‌بندی حرفه‌ای برای موبایل -->
         <div class="space-y-1">
           <button onclick="toggleServicesAccordion()" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-dark-700 hover:text-gold transition active:scale-[0.98]">
             <div class="flex items-center gap-3">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              Services
-            </div>
+              {{ _('Services
+            ') }}</div>
             <svg id="servicesArrow" class="w-4 h-4 services-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
@@ -915,13 +915,13 @@
             <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
-            <span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">About Us</span>
+            <{{ _('span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">') }}About Us</span>
           </a>
           <a href="/contact" class="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-dark-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition group">
             <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
             </svg>
-            <span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">Contact Us</span>
+            <{{ _('span class="text-xs font-medium text-gray-600 dark:text-slate-400 group-hover:text-blue-900 dark:group-hover:text-blue-300">') }}Contact Us</span>
           </a>
         </div>
         
@@ -932,13 +932,13 @@
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
           </svg>
-          <span class="text-sm font-medium">Chat with Support</span>
+          <{{ _('span class="text-sm font-medium">') }}Chat with Support</span>
         </a>
       </nav>
       
       <!-- فوتر منو: فقط لینک‌های ضروری -->
       <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gold/10">
-        <p class="text-xs text-gray-500 dark:text-slate-500 text-center mb-3">Quick Links</p>
+        <{{ _('p class="text-xs text-gray-500 dark:text-slate-500 text-center mb-3">') }}Quick Links</p>
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <!-- دکمه اول: درخواست دسترسی انحصاری -->
               <a href="/users/login" class="group relative w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl
@@ -949,7 +949,7 @@
                         hover:shadow-xl hover:shadow-gold/40
                         hover:scale-[1.03] active:scale-[0.98]
                         transition-all duration-300 ease-out overflow-hidden no-select">
-                <span class="relative z-10">Request Exclusive Access</span>
+                <{{ _('span class="relative z-10">') }}Request Exclusive Access</span>
                 <!-- افکت درخشش طلایی هنگام هاور -->
                 <span class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"></span>
               </a>
@@ -963,7 +963,7 @@
                         hover:shadow-xl hover:shadow-gold/40
                         hover:scale-[1.03] active:scale-[0.98]
                         transition-all duration-300 ease-out overflow-hidden no-select">
-                <span class="relative z-10">Apply for Membership</span>
+                <{{ _('span class="relative z-10">') }}Apply for Membership</span>
                 <span class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"></span>
               </a>
             </div>
@@ -1013,7 +1013,7 @@
                     hover:shadow-xl hover:shadow-gold/40
                     hover:scale-[1.03] active:scale-[0.98]
                     transition-all duration-300 ease-out overflow-hidden no-select">
-            <span class="relative z-10">Request Exclusive Access</span>
+            <{{ _('span class="relative z-10">') }}Request Exclusive Access</span>
             <!-- افکت درخشش طلایی هنگام هاور -->
             <span class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"></span>
           </a>
@@ -1027,22 +1027,22 @@
                     hover:shadow-xl hover:shadow-gold/40
                     hover:scale-[1.03] active:scale-[0.98]
                     transition-all duration-300 ease-out overflow-hidden no-select">
-            <span class="relative z-10">Apply for Membership</span>
+            <{{ _('span class="relative z-10">') }}Apply for Membership</span>
             <span class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"></span>
           </a>
         </div>
 {#      <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">#}
 {#          <!-- دکمه اول: درخواست دسترسی انحصاری -->#}
-{#          <a href="/users/login" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl#}
+{#          <{{ _('a href="/users/login" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl#}
 {#                    bg-gold/50 border-2 border-gold text-gold font-bold text-base#}
 {#                    shadow-xl shadow-gold/30 hover:shadow-gold/50 hover:scale-[1.02] active:scale-[0.98]#}
-{#                    transition no-select gold-glow-hover">#}
+{#                    transition no-select gold-glow-hover">') }}#}
 {#            Request Exclusive Access#}
 {#          </a>#}
-{#          <a href="/users/register" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl#}
+{#          <{{ _('a href="/users/register" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-2xl#}
 {#                  bg-gold/50 border-2 border-gold text-gold font-bold text-base#}
 {#                  hover:bg-gold/60 hover:scale-[1.02] active:scale-[0.98]#}
-{#                  transition no-select gold-glow-hover">#}
+{#                  transition no-select gold-glow-hover">') }}#}
 {#          Apply for Membership#}
 {#          </a>#}
 {#      </div>#}
@@ -1050,18 +1050,18 @@
       <!-- آمار و ارقام (نمایش در دسکتاپ) -->
       <div class="hidden sm:flex items-center gap-8 mt-4 text-sm text-gray-600 dark:text-slate-400">
         <div class="text-center">
-          <span class="block text-2xl font-bold text-gold">500+</span>
-          <span>Active Brokers</span>
+          <{{ _('span class="block text-2xl font-bold text-gold">') }}500+</span>
+          <{{ _('span>') }}Active Brokers</{{ _('span>') }}
         </div>
         <div class="w-px h-10 bg-gray-300 dark:bg-gold/20"></div>
         <div class="text-center">
-          <span class="block text-2xl font-bold text-gold">80+</span>
-          <span>Countries Covered</span>
+          <{{ _('span class="block text-2xl font-bold text-gold">') }}80+</span>
+          <{{ _('span>') }}Countries Covered</{{ _('span>') }}
         </div>
         <div class="w-px h-10 bg-gray-300 dark:bg-gold/20"></div>
         <div class="text-center">
-          <span class="block text-2xl font-bold text-gold">AI</span>
-          <span>Smart Consultant</span>
+          <{{ _('span class="block text-2xl font-bold text-gold">') }}AI</span>
+          <{{ _('span>') }}Smart Consultant</{{ _('span>') }}
         </div>
       </div>
 
@@ -1093,7 +1093,7 @@
         <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           TrustScore™ Verification System
        >{{ _("TrustScore™ Verification System") }}</h2>
-        <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">') }}
           Our proprietary trust metric ensures only verified, elite traders gain access to the network
         </p>
       </div>
@@ -1115,11 +1115,11 @@
               </defs>
             </svg>
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-              <span id="trustscore-value" class="text-5xl font-bold text-gold">0</span>
-              <span class="text-sm text-gray-500 dark:text-slate-400">TrustScore™</span>
+              <{{ _('span id="trustscore-value" class="text-5xl font-bold text-gold">') }}0</span>
+              <{{ _('span class="text-sm text-gray-500 dark:text-slate-400">') }}TrustScore™</span>
             </div>
           </div>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}
             AI-powered verification based on trade history, credentials, and network endorsements
           </p>
         </div>
@@ -1127,27 +1127,27 @@
         <!-- TrustScore Benefits -->
         <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-300">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🛡️</div>
+            <{{ _('div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">') }}🛡️</div>
             <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">100% Verified Member>{{ _("100% Verified Members") }}</h3>
-            <p class="text-sm text-gray-600 dark:text-slate-400">Every member undergoes rigorous verification through our TrustScore™ system</p>
+            <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}Every member undergoes rigorous verification through our TrustScore™ system</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-400">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🤖</div>
+            <{{ _('div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">') }}🤖</div>
             <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">24/7 AI-Powered Insight>{{ _("24/7 AI-Powered Insights") }}</h3>
-            <p class="text-sm text-gray-600 dark:text-slate-400">Continuous monitoring and scoring based on real-time trade data</p>
+            <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}Continuous monitoring and scoring based on real-time trade data</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-500">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">✨</div>
+            <{{ _('div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">') }}✨</div>
             <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">0 Spam Guarante>{{ _("0 Spam Guarantee") }}</h3>
-            <p class="text-sm text-gray-600 dark:text-slate-400">Our exclusive network ensures zero tolerance for unverified solicitations</p>
+            <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}Our exclusive network ensures zero tolerance for unverified solicitations</p>
           </div>
           
           <div class="glass-card rounded-2xl p-6 fade-in-up delay-500">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">🌐</div>
+            <{{ _('div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-2xl mb-4">') }}🌐</div>
             <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">Global Recognitio>{{ _("Global Recognition") }}</h3>
-            <p class="text-sm text-gray-600 dark:text-slate-400">TrustScore™ is recognized by leading trade organizations worldwide</p>
+            <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}TrustScore™ is recognized by leading trade organizations worldwide</p>
           </div>
         </div>
       </div>
@@ -1158,14 +1158,14 @@
   <div class="relative z-20 w-full bg-gray-100/50 dark:bg-gold/5 border-y border-gray-200 dark:border-gold/15 overflow-hidden transition-colors">
     <div class="ticker-wrap whitespace-nowrap py-2.5">
       <div class="animate-ticker inline-block text-sm">
-        <span class="mx-8 text-gray-600 dark:text-slate-400">🔍 <span class="text-gold font-semibold">Tehran, Oranges:</span> Customs Clearance Active</span>
-        <span class="mx-8 text-gray-600 dark:text-slate-400">📢 New Route: <span class="text-gold font-semibold">Bandar Abbas → Sohar</span> is now active</span>
-        <span class="mx-8 text-gray-600 dark:text-slate-400">📉 Oman Customs Tariffs <span class="text-gold font-semibold">Reduced by 5%</span></span>
-        <span class="mx-8 text-gray-600 dark:text-slate-400">⚠️ Alert: <span class="text-gold font-semibold">Germany</span> import regulations change next month</span>
-        <span class="mx-8 text-gray-600 dark:text-slate-400">✅ 3 new <span class="text-gold font-semibold">Saffron</span> buyers registered in Frankfurt</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">🔍 <{{ _('span class="text-gold font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">📢 {{ _('New Route: ') }}<{{ _('span class="text-gold font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">📉 {{ _('Oman Customs Tariffs ') }}<{{ _('span class="text-gold font-semibold">') }}Reduced by 5%</span></span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">⚠️ {{ _('Alert: ') }}<{{ _('span class="text-gold font-semibold">') }}Germany</span> {{ _('import regulations change next month') }}</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">✅ 3 {{ _('new ') }}<{{ _('span class="text-gold font-semibold">') }}Saffron</span> {{ _('buyers registered in Frankfurt') }}</span>
         <!-- تکرار آیتم‌ها برای حلقه بی‌پایان و نرم -->
-        <span class="mx-8 text-gray-600 dark:text-slate-400">🔍 <span class="text-gold font-semibold">Tehran, Oranges:</span> Customs Clearance Active</span>
-        <span class="mx-8 text-gray-600 dark:text-slate-400">📢 New Route: <span class="text-gold font-semibold">Bandar Abbas → Sohar</span> is now active</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">🔍 <{{ _('span class="text-gold font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
+        <span class="mx-8 text-gray-600 dark:text-slate-400">📢 {{ _('New Route: ') }}<{{ _('span class="text-gold font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
       </div>
     </div>
   </div>
@@ -1177,7 +1177,7 @@
       <!-- هدر بخش: عنوان و توضیحات -->
       <div class="text-center mb-12 sm:mb-16">
         <h2class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">Platform Service>{{ _("Platform Services") }}</h2>
-        <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">') }}
           Intelligent solutions for global trade expansion, from consultation to execution
         </p>
       </div>
@@ -1188,40 +1188,40 @@
         <!-- Trade & Finance Group -->
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤖</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🤖') }}</div>
           <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">AI Consultan>{{ _("AI Consultant") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Smart export advisor: Customs rules, tariffs, and logistics routing
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤝</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🤝') }}</div>
           <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Consortiu>{{ _("Consortium") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Smart consortium formation and contract management system
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">✅</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}✅') }}</div>
           <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trust Scor>{{ _("Trust Score") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Multi-layer verification system and dynamic trust scoring
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-trade)] hover:border-[var(--color-trade-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">💰</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-trade-light)] border border-[var(--color-trade)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}💰') }}</div>
           <h3class="text-[var(--color-trade)] font-bold text-center mb-2 text-base">Trade Credi>{{ _("Trade Credit") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Smart trade credit system and financial facilities
           </p>
         </div>
@@ -1229,30 +1229,30 @@
         <!-- Logistics Group -->
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🗺️</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🗺️') }}</div>
           <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Smart Ma>{{ _("Smart Map") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Interactive logistics map: Geopolitical risks and export opportunities
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏪</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🏪') }}</div>
           <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Marketplac>{{ _("Marketplace") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             B2B marketplace and RFQ system for purchase requests
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-logistics)] hover:border-[var(--color-logistics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">💳</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-logistics-light)] border border-[var(--color-logistics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}💳') }}</div>
           <h3class="text-[var(--color-logistics)] font-bold text-center mb-2 text-base">Escro>{{ _("Escrow") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Secure financial layer and Escrow for international transactions
           </p>
         </div>
@@ -1260,30 +1260,30 @@
         <!-- Analytics & AI Group -->
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🧠</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🧠') }}</div>
           <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">AI Cor>{{ _("AI Core") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Advanced AI engine for analyzing global trade data patterns
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📊</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}📊') }}</div>
           <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">Business Intelligenc>{{ _("Business Intelligence") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Analytical dashboards and smart business reporting tools
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-analytics)] hover:border-[var(--color-analytics-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">👥</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-analytics-light)] border border-[var(--color-analytics)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}👥') }}</div>
           <h3class="text-[var(--color-analytics)] font-bold text-center mb-2 text-base">CR>{{ _("CRM") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Customer relationship management and trade lead tracking
           </p>
         </div>
@@ -1291,10 +1291,10 @@
         <!-- Business Tools Group -->
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-tools)] hover:border-[var(--color-tools-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-tools-light)] border border-[var(--color-tools)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏆</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-tools-light)] border border-[var(--color-tools)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🏆') }}</div>
           <h3class="text-[var(--color-tools)] font-bold text-center mb-2 text-base">Gamificatio>{{ _("Gamification") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Reward system and points for active user engagement
           </p>
         </div>
@@ -1302,20 +1302,20 @@
         <!-- Learning & Engagement Group -->
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-learning)] hover:border-[var(--color-learning-hover)] transition-all duration-300 group">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🎓</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}🎓') }}</div>
           <h3class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Academ>{{ _("Academy") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Specialized courses for international trade and export
           </p>
         </div>
         
         <div class="feature-card p-5 sm:p-6 rounded-2xl bg-white dark:bg-dark-800/60 backdrop-blur-sm 
                     border-l-4 border-[var(--color-learning)] hover:border-[var(--color-learning-hover)] transition-all duration-300 group sm:col-span-2 lg:col-span-1">
-          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
-                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📰</div>
+          <{{ _('div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-[var(--color-learning-light)] border border-[var(--color-learning)]/20 
+                      flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">{{ _('\') }}📰') }}</div>
           <h3class="text-[var(--color-learning)] font-bold text-center mb-2 text-base">Trade Medi>{{ _("Trade Media") }}</h3>
-          <p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-xs sm:text-sm text-center leading-relaxed">') }}
             Specialized magazine and analytical media for global markets
           </p>
         </div>
@@ -1331,7 +1331,7 @@
         <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Exclusive Membership Levels
        >{{ _("Exclusive Membership Levels") }}</h2>
-        <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">') }}
           Choose your tier in the invitation-only network of elite traders
         </p>
       </div>
@@ -1339,72 +1339,72 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Bronze Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-200">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-3xl">🥉</div>
+          <{{ _('div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center text-3xl">') }}🥉</div>
           <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Bronz>{{ _("Bronze") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Entry-level access for emerging traders</p>
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400 mb-4">') }}Entry-level access for emerging traders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
-            <li>✓ Basic Market Access</li>
-            <li>✓ Limited AI Insights</li>
-            <li>✓ Community Forum</li>
-            <li>✓ TrustScore™ Tracking</li>
+            <{{ _('li>') }}✓ Basic Market Access</{{ _('li>') }}
+            <{{ _('li>') }}✓ Limited AI Insights</{{ _('li>') }}
+            <{{ _('li>') }}✓ Community Forum</{{ _('li>') }}
+            <{{ _('li>') }}✓ TrustScore™ Tracking</{{ _('li>') }}
           </ul>
-          <a href="{{ url_for('users.register') }}" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-amber-700 text-amber-700 font-semibold hover:bg-amber-700 hover:text-white transition">
+          <{{ _('a href="') }}{{ url_for('users.register') }}{{ _('" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-amber-700 text-amber-700 font-semibold hover:bg-amber-700 hover:text-white transition">') }}
             Request Access
           </a>
         </div>
         
         <!-- Silver Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-300">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-3xl">🥈</div>
+          <{{ _('div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-3xl">') }}🥈</div>
           <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Silve>{{ _("Silver") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Enhanced tools for growing businesses</p>
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400 mb-4">') }}Enhanced tools for growing businesses</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
-            <li>✓ Full Market Access</li>
-            <li>✓ Advanced AI Analytics</li>
-            <li>✓ Priority Support</li>
-            <li>✓ Trade Verification</li>
-            <li>✓ Network Introductions</li>
+            <{{ _('li>') }}✓ Full Market Access</{{ _('li>') }}
+            <{{ _('li>') }}✓ Advanced AI Analytics</{{ _('li>') }}
+            <{{ _('li>') }}✓ Priority Support</{{ _('li>') }}
+            <{{ _('li>') }}✓ Trade Verification</{{ _('li>') }}
+            <{{ _('li>') }}✓ Network Introductions</{{ _('li>') }}
           </ul>
-          <a href="{{ url_for('users.register') }}" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-gray-500 text-gray-500 font-semibold hover:bg-gray-500 hover:text-white transition">
+          <{{ _('a href="') }}{{ url_for('users.register') }}{{ _('" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-gray-500 text-gray-500 font-semibold hover:bg-gray-500 hover:text-white transition">') }}
             Apply for Membership
           </a>
         </div>
         
         <!-- Gold Tier (Featured) -->
         <div class="membership-card glass-card rounded-3xl p-8 text-center relative fade-in-up delay-400 gold-glow-hover" style="border: 2px solid #d4af37;">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-gold to-gold-dark text-dark-900 text-xs font-bold rounded-full uppercase tracking-wide">
+          <{{ _('div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-gold to-gold-dark text-dark-900 text-xs font-bold rounded-full uppercase tracking-wide">') }}
             Most Popular
           </div>
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl">🥇</div>
+          <{{ _('div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl">') }}🥇</div>
           <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Gol>{{ _("Gold") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Premium access for established traders</p>
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400 mb-4">') }}Premium access for established traders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
-            <li>✓ Unlimited Market Access</li>
-            <li>✓ Real-time AI Insights</li>
-            <li>✓ Dedicated Account Manager</li>
-            <li>✓ Verified Badge</li>
-            <li>✓ Exclusive Deal Flow</li>
-            <li>✓ Trade Finance Access</li>
+            <{{ _('li>') }}✓ Unlimited Market Access</{{ _('li>') }}
+            <{{ _('li>') }}✓ Real-time AI Insights</{{ _('li>') }}
+            <{{ _('li>') }}✓ Dedicated Account Manager</{{ _('li>') }}
+            <{{ _('li>') }}✓ Verified Badge</{{ _('li>') }}
+            <{{ _('li>') }}✓ Exclusive Deal Flow</{{ _('li>') }}
+            <{{ _('li>') }}✓ Trade Finance Access</{{ _('li>') }}
           </ul>
-          <a href="{{ url_for('users.register') }}" class="inline-block w-full px-6 py-3 rounded-xl bg-gradient-to-br from-gold to-gold-dark text-dark-900 font-bold hover:shadow-lg transition">
+          <{{ _('a href="') }}{{ url_for('users.register') }}{{ _('" class="inline-block w-full px-6 py-3 rounded-xl bg-gradient-to-br from-gold to-gold-dark text-dark-900 font-bold hover:shadow-lg transition">') }}
             Begin Application
           </a>
         </div>
         
         <!-- Platinum Tier -->
         <div class="membership-card glass-card rounded-3xl p-6 text-center fade-in-up delay-500">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-3xl">💎</div>
+          <{{ _('div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-3xl">') }}💎</div>
           <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">Platinu>{{ _("Platinum") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Invite-only for industry leaders</p>
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400 mb-4">') }}Invite-only for industry leaders</p>
           <ul class="text-sm text-gray-600 dark:text-slate-400 space-y-2 mb-6">
-            <li>✓ All Gold Features</li>
-            <li>✓ White-Glove Concierge</li>
-            <li>✓ Private Deal Rooms</li>
-            <li>✓ Custom Integrations</li>
-            <li>✓ Board Advisory Access</li>
-            <li>✓ Global Events Access</li>
+            <{{ _('li>') }}✓ All Gold Features</{{ _('li>') }}
+            <{{ _('li>') }}✓ White-Glove Concierge</{{ _('li>') }}
+            <{{ _('li>') }}✓ Private Deal Rooms</{{ _('li>') }}
+            <{{ _('li>') }}✓ Custom Integrations</{{ _('li>') }}
+            <{{ _('li>') }}✓ Board Advisory Access</{{ _('li>') }}
+            <{{ _('li>') }}✓ Global Events Access</{{ _('li>') }}
           </ul>
-          <a href="{{ url_for('users.register') }}" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-slate-400 text-slate-400 font-semibold hover:bg-slate-400 hover:text-white transition">
+          <{{ _('a href="') }}{{ url_for('users.register') }}{{ _('" class="inline-block w-full px-6 py-3 rounded-xl border-2 border-slate-400 text-slate-400 font-semibold hover:bg-slate-400 hover:text-white transition">') }}
             Invitation Only
           </a>
         </div>
@@ -1419,7 +1419,7 @@
         <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Your Journey Starts Here
        >{{ _("Your Journey Starts Here") }}</h2>
-        <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">') }}
           Four simple steps to join the exclusive network of verified global traders
         </p>
       </div>
@@ -1427,51 +1427,51 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Step 1 -->
         <div class="journey-step text-center fade-in-up delay-200">
-          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
+          <{{ _('div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">') }}
             📝
           </div>
           <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">1. Request Acces>{{ _("1. Request Access") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}
             Submit your application with basic professional information and trade credentials
           </p>
         </div>
         
         <!-- Step 2 -->
         <div class="journey-step text-center fade-in-up delay-300">
-          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
+          <{{ _('div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">') }}
             🔍
           </div>
           <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">2. Complete Verificatio>{{ _("2. Complete Verification") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}
             Our AI-powered system verifies your credentials and calculates your initial TrustScore™
           </p>
         </div>
         
         <!-- Step 3 -->
         <div class="journey-step text-center fade-in-up delay-400">
-          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
+          <{{ _('div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">') }}
             🤝
           </div>
           <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">3. Build Your Networ>{{ _("3. Build Your Network") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}
             Connect with verified members, join exclusive groups, and access curated opportunities
           </p>
         </div>
         
         <!-- Step 4 -->
         <div class="journey-step text-center fade-in-up delay-500">
-          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">
+          <{{ _('div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-3xl shadow-lg shadow-gold/30">') }}
             📈
           </div>
           <h3class="text-lg font-bold text-gray-900 dark:text-white mb-3">4. Execute Deal>{{ _("4. Execute Deals") }}</h3>
-          <p class="text-sm text-gray-600 dark:text-slate-400">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-400">') }}
             Leverage AI insights, secure financing, and close deals with confidence in our trusted ecosystem
           </p>
         </div>
       </div>
       
       <div class="text-center mt-12 fade-in-up delay-500">
-        <a href="{{ url_for('users.register') }}" class="inline-flex items-center px-8 py-4 rounded-2xl bg-gradient-to-br from-gold to-gold-dark text-dark-900 font-bold text-lg shadow-xl shadow-gold/30 hover:shadow-gold/50 hover:scale-105 transition gold-glow-hover">
+        <{{ _('a href="') }}{{ url_for('users.register') }}{{ _('" class="inline-flex items-center px-8 py-4 rounded-2xl bg-gradient-to-br from-gold to-gold-dark text-dark-900 font-bold text-lg shadow-xl shadow-gold/30 hover:shadow-gold/50 hover:scale-105 transition gold-glow-hover">') }}
           Begin Your Application
         </a>
       </div>
@@ -1485,26 +1485,26 @@
         <h2class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 fade-in-up">
           Trusted by Professionals Worldwide
        >{{ _("Trusted by Professionals Worldwide") }}</h2>
-        <p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto text-lg fade-in-up delay-100">') }}
           Join elite traders from leading global organizations
         </p>
       </div>
       
       <!-- Social Proof Logos -->
       <div class="mb-12 fade-in-up delay-200">
-        <p class="text-center text-sm text-gray-500 dark:text-slate-500 mb-6 uppercase tracking-wide font-semibold">
+        <{{ _('p class="text-center text-sm text-gray-500 dark:text-slate-500 mb-6 uppercase tracking-wide font-semibold">') }}
           Trusted by professionals from leading organizations
         </p>
         <div class="flex flex-wrap justify-center items-center gap-8 opacity-70">
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">Goldman Sachs</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">•</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">Maersk</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">•</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">DHL</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">•</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">Cargill</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">•</span>
-          <span class="text-lg font-bold text-gray-400 dark:text-slate-600">Trafigura</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}Goldman Sachs</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}•</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}Maersk</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}•</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}DHL</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}•</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}Cargill</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}•</span>
+          <{{ _('span class="text-lg font-bold text-gray-400 dark:text-slate-600">') }}Trafigura</span>
         </div>
       </div>
       
@@ -1512,44 +1512,44 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="testimonial-card rounded-2xl p-6 fade-in-up delay-300">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">AK</div>
+            <{{ _('div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">') }}AK</div>
             <div>
               <h4class="font-bold text-gray-900 dark:text-white">Ali Karim>{{ _("Ali Karimi") }}</h4>
-              <p class="text-xs text-gray-500 dark:text-slate-400">Export Director, Tehran</p>
+              <{{ _('p class="text-xs text-gray-500 dark:text-slate-400">') }}Export Director, Tehran</p>
             </div>
           </div>
-          <p class="text-sm text-gray-600 dark:text-slate-300 italic">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-300 italic">') }}
             "Metisma's TrustScore™ system gave me instant credibility with international buyers. Closed 3 major deals in my first month."
           </p>
-          <div class="mt-4 flex text-gold">★★★★★</div>
+          <{{ _('div class="mt-4 flex text-gold">') }}★★★★★</div>
         </div>
         
         <div class="testimonial-card rounded-2xl p-6 fade-in-up delay-400">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">SM</div>
+            <{{ _('div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">') }}SM</div>
             <div>
               <h4class="font-bold text-gray-900 dark:text-white">Sarah Mitchel>{{ _("Sarah Mitchell") }}</h4>
-              <p class="text-xs text-gray-500 dark:text-slate-400">Trade Manager, Dubai</p>
+              <{{ _('p class="text-xs text-gray-500 dark:text-slate-400">') }}Trade Manager, Dubai</p>
             </div>
           </div>
-          <p class="text-sm text-gray-600 dark:text-slate-300 italic">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-300 italic">') }}
             "The exclusive network is real. Quality connections, zero spam. The AI insights have transformed how we identify opportunities."
           </p>
-          <div class="mt-4 flex text-gold">★★★★★</div>
+          <{{ _('div class="mt-4 flex text-gold">') }}★★★★★</div>
         </div>
         
         <div class="testimonial-card rounded-2xl p-6 fade-in-up delay-500">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">MR</div>
+            <{{ _('div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-white font-bold mr-4">') }}MR</div>
             <div>
               <h4class="font-bold text-gray-900 dark:text-white">Michael Rodrigue>{{ _("Michael Rodriguez") }}</h4>
-              <p class="text-xs text-gray-500 dark:text-slate-400">CEO, Santiago</p>
+              <{{ _('p class="text-xs text-gray-500 dark:text-slate-400">') }}CEO, Santiago</p>
             </div>
           </div>
-          <p class="text-sm text-gray-600 dark:text-slate-300 italic">
+          <{{ _('p class="text-sm text-gray-600 dark:text-slate-300 italic">') }}
             "Gold membership paid for itself within weeks. The verified badge opens doors that were previously closed to us."
           </p>
-          <div class="mt-4 flex text-gold">★★★★★</div>
+          <{{ _('div class="mt-4 flex text-gold">') }}★★★★★</div>
         </div>
       </div>
     </div>
@@ -1559,7 +1559,7 @@
   <section class="py-16 bg-white dark:bg-dark-800/50 backdrop-blur-sm border-t border-gray-200 dark:border-gold/10 transition-colors">
     <div class="container mx-auto px-6 text-center">
         <h3class="text-2xl font-bold text-gray-900 dark:text-gold mb-3">Trusted Partner>{{ _("Trusted Partners") }}</h3>
-        <p class="text-gray-600 dark:text-slate-400 mb-10 text-sm">
+        <{{ _('p class="text-gray-600 dark:text-slate-400 mb-10 text-sm">') }}
             Collaborating with leading organizations worldwide
         </p>
 
@@ -1606,9 +1606,9 @@
                         flex items-center justify-center text-lg">
               <img src="{{ url_for('static', filename='images/logo.png') }}" alt="{{ _("Metisma Logo") }}" class="h-10 w-auto object-contain">
             </div>
-            <span class="text-xl font-bold text-gray-900 dark:text-gold">Metisma</span>
+            <{{ _('span class="text-xl font-bold text-gray-900 dark:text-gold">') }}Metisma</span>
           </div>
-          <p class="text-gray-600 dark:text-slate-400 text-sm leading-relaxed max-w-md">
+          <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm leading-relaxed max-w-md">') }}
             Intelligent B2B platform connecting producers to global markets 
             with AI-powered tools, verified networks, and end-to-end trade services.
           </p>
@@ -1639,7 +1639,7 @@
       </div>
       
       <!-- کپی‌رایت -->
-      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gold/10 text-center text-xs text-gray-500 dark:text-slate-500">
+      <{{ _('div class="mt-12 pt-8 border-t border-gray-200 dark:border-gold/10 text-center text-xs text-gray-500 dark:text-slate-500">') }}
         © 2026 Metisma. All rights reserved.
       </div>
     </div>

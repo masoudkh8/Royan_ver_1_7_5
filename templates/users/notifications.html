@@ -22,15 +22,15 @@
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    Back to Dashboard
-                </a>
+                    {{ _('Back to Dashboard
+                ') }}</a>
                 <a href="{{ url_for('users.profile') }}" 
                    class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    Return
-                </a>
+                    {{ _('Return
+                ') }}</a>
             </div>
         </div>
         
@@ -52,8 +52,8 @@
                             
                             <!-- محتوا -->
                             <div class="flex-1 min-w-0">
-                                <p class="text-gray-900 dark:text-white text-sm leading-relaxed">{{ n.message }}</p>
-                                <p class="text-xs text-gray-500 dark:text-slate-400 mt-2">
+                                <{{ _('p class="text-gray-900 dark:text-white text-sm leading-relaxed">') }}{{ n.message }}</p>
+                                <{{ _('p class="text-xs text-gray-500 dark:text-slate-400 mt-2">') }}
                                     {{ n.created_at.strftime('%d/%m/%Y %H:%M') }}
                                 </p>
                             </div>
@@ -88,7 +88,7 @@
                         </svg>
                     </div>
                     <h3class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No Notification>{{ _("No Notifications") }}</h3>
-                    <p class="text-gray-600 dark:text-slate-400 text-sm">You're all caught up! New notifications will appear here.</p>
+                    <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm">') }}You're all caught up! New notifications will appear here.</p>
                 </div>
             {% endif %}
         </div>

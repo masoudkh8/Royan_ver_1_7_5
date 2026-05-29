@@ -6,7 +6,7 @@
     <div class="w-full max-w-lg bg-white dark:bg-dark-800 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-dark-700 transition-all duration-300">
         <div class="text-center mb-6">
             <h2class="text-2xl font-bold text-gray-900 dark:text-white">Advertising Reques>{{ _("Advertising Request") }}</h2>
-            <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">To register an advertisement in the magazine, complete the form below.</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm mt-2">') }}To register an advertisement in the magazine, complete the form below.</p>
         </div>
         <form method="POST" class="space-y-4">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -33,13 +33,13 @@
             <div>
                 <labelfor="ad_type" class="form-label">Type of Advertisement *>{{ _("Type of Advertisement *") }}</label>
                 <select id="ad_type" name="ad_type" required class="form-input cursor-pointer">
-                    <option value="" disabled selected>Choose...</option>
-                    <option value="full_page">Full Page</option>
-                    <option value="half_page">Half Page</option>
-                    <option value="quarter_page">Quarter Page</option>
-                    <option value="back_cover">Back Cover</option>
-                    <option value="inner_cover">Inner Cover</option>
-                    <option value="banner">Advertising Banner</option>
+                    <{{ _('option value="" disabled selected>') }}Choose...</option>
+                    <{{ _('option value="full_page">') }}Full Page</option>
+                    <{{ _('option value="half_page">') }}Half Page</option>
+                    <{{ _('option value="quarter_page">') }}Quarter Page</option>
+                    <{{ _('option value="back_cover">') }}Back Cover</option>
+                    <{{ _('option value="inner_cover">') }}Inner Cover</option>
+                    <{{ _('option value="banner">') }}Advertising Banner</option>
                 </select>
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -50,11 +50,11 @@
                 <div>
                     <labelfor="duration" class="form-label">Publication Duration *>{{ _("Publication Duration *") }}</label>
                     <select id="duration" name="duration" required class="form-input cursor-pointer">
-                        <option value="" disabled selected>Choose...</option>
-                        <option value="1_issue">1 Issue</option>
-                        <option value="3_issues">3 Issues</option>
-                        <option value="6_issues">6 Issues</option>
-                        <option value="annual">Annual (12 Issues)</option>
+                        <{{ _('option value="" disabled selected>') }}Choose...</option>
+                        <{{ _('option value="1_issue">') }}1 Issue</option>
+                        <{{ _('option value="3_issues">') }}3 Issues</option>
+                        <{{ _('option value="6_issues">') }}6 Issues</option>
+                        <{{ _('option value="annual">') }}Annual (12 Issues)</option>
                     </select>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <buttontype="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold shadow transition transform hover:scale-[1.02] active:scale-[0.98]">Submit Advertising Request>{{ _("Submit Advertising Request") }}</button>
         </form>
         <div class="text-center mt-6 pt-4 border-t border-gray-200 dark:border-dark-700">
-            <a href="{{ url_for('magazine.index') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">← Return to Magazine Home</a>
+            <{{ _('a href="') }}{{ url_for('magazine.index') }}{{ _('" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">') }}← Return to Magazine Home</a>
         </div>
     </div>
 </div>

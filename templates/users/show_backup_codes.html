@@ -13,7 +13,7 @@
                     </svg>
                 </div>
                 <h2class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Backup Code>{{ _("Backup Codes") }}</h2>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <{{ _('p class="mt-2 text-sm text-gray-600 dark:text-gray-400">') }}
                     Save these codes in a secure location
                 </p>
             </div>
@@ -32,10 +32,10 @@
                    >{{ _("⚠️ Very Important!") }}</h3>
                     <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
                         <ul class="list-disc list-inside space-y-1">
-                            <li>These codes are shown only once</li>
-                            <li>Each code can be used only once</li>
-                            <li>If you lose access to your phone, these are your only way to log in</li>
-                            <li>Store them in a secure place away from others</li>
+                            <{{ _('li>') }}These codes are shown only once</{{ _('li>') }}
+                            <{{ _('li>') }}Each code can be used only once</{{ _('li>') }}
+                            <{{ _('li>') }}If you lose access to your phone, these are your only way to log in</{{ _('li>') }}
+                            <{{ _('li>') }}Store them in a secure place away from others</{{ _('li>') }}
                         </ul>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for code in codes %}
             <div class="bg-gray-50 dark:bg-gray-700 px-6 py-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Code {{ loop.index }}</p>
-                <p class="text-2xl font-mono font-bold text-gray-900 dark:text-white tracking-wider">{{ code }}</p>
+                <{{ _('p class="text-xs text-gray-500 dark:text-gray-400 mb-1">') }}Code {{ loop.index }}</p>
+                <{{ _('p class="text-2xl font-mono font-bold text-gray-900 dark:text-white tracking-wider">') }}{{ code }}</p>
             </div>
             {% endfor %}
         </div>
@@ -62,8 +62,8 @@
                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                 </svg>
-                Print Codes
-            </button>
+                {{ _('Print Codes
+            ') }}</button>
             
             <form method="POST" action="{{ url_for('users.profile') }}" class="flex-1">
                 <buttontype="submit"
@@ -80,8 +80,8 @@
 
         <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <p class="text-sm text-blue-800 dark:text-blue-200">
-                <strong>💡 Tip:</strong> You can take a picture of these codes or store them in a password manager like LastPass or 1Password.
-            </p>
+                <strong>{{ _('💡 Tip:') }}</strong> {{ _('You can take a picture of these codes or store them in a password manager like LastPass or 1Password.
+            ') }}</p>
         </div>
     </div>
 </div>

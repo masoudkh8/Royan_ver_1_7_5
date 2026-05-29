@@ -15,7 +15,7 @@
             <!-- Header -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-body text-center">
-                    <h4>{{ user.company_name or user.username }}</h4>
+                    <{{ _('h4>') }}{{ user.company_name or user.username }}</{{ _('h4>') }}
                     <p class="text-muted mb-0">
                         <strong>{{ following|length }}</strong> {{ t_('social.following') }}
                     </p>
@@ -25,7 +25,7 @@
             <!-- Following List -->
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h6 class="mb-0">{{ t_('social.following') }}</h6>
+                    <{{ _('h6 class="mb-0">') }}{{ t_('social.following') }}</h6>
                 </div>
                 <div class="card-body p-0">
                     {% if following %}
@@ -36,18 +36,18 @@
                                 {% if follow.following.profile and follow.following.profile.avatar_url %}
                                     <img src="{{ follow.following.profile.avatar_url }}" alt="{{ _("{{ follow.following.username }}") }}" class="rounded-circle me-2" width="50" height="50" style="object-fit: cover;">
                                 {% else %}
-                                    <div class="rounded-circle bg-secondary me-2 d-flex align-items-center justify-content-center text-white" style="width: 50px; height: 50px;">
+                                    <{{ _('div class="rounded-circle bg-secondary me-2 d-flex align-items-center justify-content-center text-white" style="width: 50px; height: 50px;">') }}
                                         {{ follow.following.username[0]|upper }}
                                     </div>
                                 {% endif %}
                                 <div>
-                                    <a href="{{ url_for('social.public_profile', username=follow.following.username) }}" class="fw-bold text-dark text-decoration-none d-block">
+                                    <{{ _('a href="') }}{{ url_for('social.public_profile', username=follow.following.username) }}{{ _('" class="fw-bold text-dark text-decoration-none d-block">') }}
                                         {{ follow.following.company_name or follow.following.username }}
                                     </a>
                                     <small class="text-muted">
                                         @{{ follow.following.username }}
                                         {% if follow.following.trust_score %}
-                                            · <span class="badge badge-sm {% if follow.following.trust_score >= 70 %}bg-success{% elif follow.following.trust_score >= 40 %}bg-warning{% else %}bg-danger{% endif %}">{{ follow.following.trust_score }}</span>
+                                            · <{{ _('span class="badge badge-sm {% if follow.following.trust_score >') }}= 70 %}bg-success{% elif follow.following.trust_score >= 40 %}bg-warning{% else %}bg-danger{% endif %}">{{ follow.following.trust_score }}</span>
                                         {% endif %}
                                     </small>
                                 </div>
@@ -70,7 +70,7 @@
                     {% else %}
                     <div class="p-4 text-center text-muted">
                         <i class="fas fa-user-slash fa-2x mb-2"></i>
-                        <p>{{ t_('social.no_posts_yet')|replace('posts', 'users') }}</p>
+                        <{{ _('p>') }}{{ t_('social.no_posts_yet')|replace('posts', 'users') }}</{{ _('p>') }}
                     </div>
                     {% endif %}
                 </div>

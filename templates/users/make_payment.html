@@ -14,8 +14,8 @@
                 </svg>
             </div>
             <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upgrade to Premiu>{{ _("Upgrade to Premium") }}</h2>
-            <p class="text-3xl font-bold text-gold mt-2">US$1,000</p>
-            <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">Please upload the receipt after making the payment.</p>
+            <{{ _('p class="text-3xl font-bold text-gold mt-2">') }}US$1,000</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm mt-2">') }}Please upload the receipt after making the payment.</p>
         </div>
 
         <!-- اطلاعات حساب شرکت -->
@@ -24,28 +24,28 @@
                 <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                 </svg>
-                Company Account Information
-            </h3>
+                {{ _('Company Account Information
+            ') }}</h3>
             <div class="space-y-3 text-sm">
                 <div class="flex justify-between">
-                    <span class="text-gray-600 dark:text-slate-400">Bank Name:</span>
-                    <span class="font-medium text-gray-900 dark:text-white">Bank of China</span>
+                    <{{ _('span class="text-gray-600 dark:text-slate-400">') }}Bank Name:</span>
+                    <{{ _('span class="font-medium text-gray-900 dark:text-white">') }}Bank of China</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-gray-600 dark:text-slate-400">Account Number:</span>
-                    <span class="font-medium text-gray-900 dark:text-white">1234567890</span>
+                    <{{ _('span class="text-gray-600 dark:text-slate-400">') }}Account Number:</span>
+                    <{{ _('span class="font-medium text-gray-900 dark:text-white">') }}1234567890</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-gray-600 dark:text-slate-400">Account Holder:</span>
-                    <span class="font-medium text-gray-900 dark:text-white">Royan Export Co.</span>
+                    <{{ _('span class="text-gray-600 dark:text-slate-400">') }}Account Holder:</span>
+                    <{{ _('span class="font-medium text-gray-900 dark:text-white">') }}Royan Export Co.</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-gray-600 dark:text-slate-400">IBAN:</span>
-                    <span class="font-medium text-gray-900 dark:text-white">US1234567890123456789012</span>
+                    <{{ _('span class="text-gray-600 dark:text-slate-400">') }}IBAN:</span>
+                    <{{ _('span class="font-medium text-gray-900 dark:text-white">') }}US1234567890123456789012</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-gray-600 dark:text-slate-400">SWIFT:</span>
-                    <span class="font-medium text-gray-900 dark:text-white">BOFAUS3N</span>
+                    <{{ _('span class="text-gray-600 dark:text-slate-400">') }}SWIFT:</span>
+                    <{{ _('span class="font-medium text-gray-900 dark:text-white">') }}BOFAUS3N</span>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
                               hover:file:bg-gold/20 dark:file:bg-gold/20 dark:file:text-gold-light">
-                <p class="mt-1 text-xs text-gray-500 dark:text-slate-500">Upload a photo or PDF file of your payment receipt.</p>
+                <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-slate-500">') }}Upload a photo or PDF file of your payment receipt.</p>
             </div>
 
             <!-- دکمه ارسال -->
@@ -84,8 +84,8 @@
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    View Payment Status
-                </a>
+                    {{ _('View Payment Status
+                ') }}</a>
             {% else %}
                 <!-- اگر رسید پرداخت آپلود نشده، بازگشت به مراحل ارتقاء -->
                 <a href="{{ url_for('users.upgrade_to_premium') }}" 
@@ -93,8 +93,8 @@
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    Return to Upgrade Steps
-                </a>
+                    {{ _('Return to Upgrade Steps
+                ') }}</a>
             {% endif %}
         </div>
     </div>

@@ -16,28 +16,28 @@
         <!-- عنوان و پیام -->
         <h2class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Verify Your Emai>{{ _("Verify Your Email") }}</h2>
         <p class="text-gray-600 dark:text-slate-400 mb-6">
-            A confirmation email has been sent to <span class="font-semibold text-gold">{{ current_user.email }}</span>. Please check your inbox and click the verification link.
-        </p>
+            {{ _('A confirmation email has been sent to ') }}<{{ _('span class="font-semibold text-gold">') }}{{ current_user.email }}</span>. {{ _('Please check your inbox and click the verification link.
+        ') }}</p>
         
         <!-- راهنما -->
         <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-6 text-left text-sm text-blue-700 dark:text-blue-300">
-            💡 If you don't see the email, please check your <strong>Spam/Junk</strong> folder.
-        </div>
+            💡 {{ _('If you don't see the email, please check your ') }}<strong>{{ _('Spam/Junk') }}</strong> {{ _('folder.
+        ') }}</div>
         
         <!-- دکمه‌ها -->
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="{{ url_for('users.upload_documents') }}" 
+            <{{ _('a href="') }}{{ url_for('users.upload_documents') }}{{ _('" 
                class="inline-flex items-center justify-center px-6 py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 
                       bg-gradient-to-r from-gold to-gold-dark 
                       hover:from-gold-light hover:to-gold 
                       transform hover:scale-[1.02] active:scale-[0.98] 
-                      transition-all duration-200">
+                      transition-all duration-200">') }}
                 Continue to Documents
             </a>
-            <a href="{{ url_for('users.upgrade_to_premium') }}" 
+            <{{ _('a href="') }}{{ url_for('users.upgrade_to_premium') }}{{ _('" 
                class="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-gray-300 dark:border-dark-600 
                       text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 
-                      font-medium text-sm transition">
+                      font-medium text-sm transition">') }}
                 Return
             </a>
         </div>

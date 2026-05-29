@@ -7,19 +7,19 @@
 <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-4">
-            <a href="{{ url_for('exhibition.hall') }}" class="text-white hover:text-blue-200">
+            <{{ _('a href="') }}{{ url_for('exhibition.hall') }}{{ _('" class="text-white hover:text-blue-200">') }}
                 ← Back to Exhibition Hall
             </a>
             {% if booth.is_featured %}
-            <span class="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
+            <{{ _('span class="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">') }}
                 ⭐ Featured Booth
             </span>
             {% endif %}
         </div>
         
         <div class="text-center">
-            <h1 class="text-4xl font-bold mb-2">{{ booth.title_en }}</h1>
-            <p class="text-xl opacity-90">Booth #{{ booth.booth_number }}</p>
+            <{{ _('h1 class="text-4xl font-bold mb-2">') }}{{ booth.title_en }}</h1>
+            <{{ _('p class="text-xl opacity-90">') }}Booth #{{ booth.booth_number }}</p>
         </div>
     </div>
 </section>
@@ -31,12 +31,12 @@
         <div class="lg:col-span-2 space-y-6">
             <!-- Gallery -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-6xl">
+                <{{ _('div class="h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-6xl">') }}
                     🏪
                 </div>
                 <div class="p-6">
                     <h2class="text-2xl font-bold mb-4 text-gray-800">About This Boot>{{ _("About This Booth") }}</h2>
-                    <p class="text-gray-600 leading-relaxed">{{ booth.description_en or 'No description available.' }}</p>
+                    <{{ _('p class="text-gray-600 leading-relaxed">') }}{{ booth.description_en or 'No description available.' }}</p>
                 </div>
             </div>
             
@@ -47,8 +47,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {% for product in booth.featured_products %}
                     <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                        <h3 class="font-bold text-gray-800">{{ product.name }}</h3>
-                        <p class="text-sm text-gray-600 mt-1">{{ product.description[:80] }}...</p>
+                        <{{ _('h3 class="font-bold text-gray-800">') }}{{ product.name }}</h3>
+                        <{{ _('p class="text-sm text-gray-600 mt-1">') }}{{ product.description[:80] }}...</p>
                     </div>
                     {% endfor %}
                 </div>
@@ -60,7 +60,7 @@
             <div class="bg-white rounded-xl shadow-lg p-6">
                 <h2class="text-2xl font-bold mb-4 text-gray-800">🎥 Virtual Tou>{{ _("🎥 Virtual Tour") }}</h2>
                 <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                    <p class="text-gray-500">Virtual tour will be available soon</p>
+                    <{{ _('p class="text-gray-500">') }}Virtual tour will be available soon</p>
                 </div>
             </div>
             {% endif %}
@@ -75,19 +75,19 @@
                 <div class="space-y-3">
                     {% if booth.contact_info.email %}
                     <div class="flex items-center text-gray-600">
-                        <span class="mr-2">📧</span>
-                        <span>{{ booth.contact_info.email }}</span>
+                        <{{ _('span class="mr-2">') }}📧</span>
+                        <{{ _('span>') }}{{ booth.contact_info.email }}</{{ _('span>') }}
                     </div>
                     {% endif %}
                     {% if booth.contact_info.phone %}
                     <div class="flex items-center text-gray-600">
-                        <span class="mr-2">📱</span>
-                        <span>{{ booth.contact_info.phone }}</span>
+                        <{{ _('span class="mr-2">') }}📱</span>
+                        <{{ _('span>') }}{{ booth.contact_info.phone }}</{{ _('span>') }}
                     </div>
                     {% endif %}
                 </div>
                 {% else %}
-                <p class="text-gray-500">Contact information not available</p>
+                <{{ _('p class="text-gray-500">') }}Contact information not available</p>
                 {% endif %}
             </div>
             
@@ -117,7 +117,7 @@
                     <h4class="font-bold text-sm text-gray-700 mb-2">Available Time Slots>{{ _("Available Time Slots:") }}</h4>
                     <div class="space-y-2">
                         {% for slot in upcoming_slots %}
-                        <div class="text-sm text-gray-600">
+                        <{{ _('div class="text-sm text-gray-600">') }}
                             {{ slot.scheduled_time.strftime('%Y-%m-%d %H:%M') }}
                         </div>
                         {% endfor %}
@@ -142,7 +142,7 @@
                         💾 Save Booth
                     >{{ _("💾 Save Booth") }}</button>
                     {% else %}
-                    <a href="{{ url_for('users.login') }}" class="block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover:bg-gray-200 transition-colors text-center">
+                    <{{ _('a href="') }}{{ url_for('users.login') }}{{ _('" class="block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover:bg-gray-200 transition-colors text-center">') }}
                         Login to Interact
                     </a>
                     {% endif %}
@@ -154,16 +154,16 @@
                 <h3class="text-xl font-bold mb-4">Booth Statistic>{{ _("Booth Statistics") }}</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between">
-                        <span>Views:</span>
-                        <span class="font-bold">{{ booth.view_count }}</span>
+                        <{{ _('span>') }}Views:</{{ _('span>') }}
+                        <{{ _('span class="font-bold">') }}{{ booth.view_count }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Interactions:</span>
-                        <span class="font-bold">{{ booth.interaction_count }}</span>
+                        <{{ _('span>') }}Interactions:</{{ _('span>') }}
+                        <{{ _('span class="font-bold">') }}{{ booth.interaction_count }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Leads:</span>
-                        <span class="font-bold">{{ booth.lead_count }}</span>
+                        <{{ _('span>') }}Leads:</{{ _('span>') }}
+                        <{{ _('span class="font-bold">') }}{{ booth.lead_count }}</span>
                     </div>
                 </div>
             </div>
@@ -177,12 +177,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for related in related_booths %}
             <a href="{{ url_for('exhibition.booth_detail', booth_id=related.id) }}" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div class="h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl">
+                <{{ _('div class="h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl">') }}
                     🏪
                 </div>
                 <div class="p-4">
-                    <h3 class="font-bold text-gray-800">{{ related.title_en }}</h3>
-                    <p class="text-sm text-gray-600 mt-1">Booth #{{ related.booth_number }}</p>
+                    <{{ _('h3 class="font-bold text-gray-800">') }}{{ related.title_en }}</h3>
+                    <{{ _('p class="text-sm text-gray-600 mt-1">') }}Booth #{{ related.booth_number }}</p>
                 </div>
             </a>
             {% endfor %}

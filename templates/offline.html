@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline - Metisma</title>
+    <title>{{ _('Offline - Metisma') }}</title>
     
     <style>
         @font-face {
@@ -59,7 +59,7 @@
             <h1class="text-3xl font-bold text-gray-900 dark:text-white mb-3">You're Offlin>{{ _("You're Offline") }}</h1>
             
             <!-- Message -->
-            <p class="text-gray-600 dark:text-slate-400 mb-6 leading-relaxed">
+            <{{ _('p class="text-gray-600 dark:text-slate-400 mb-6 leading-relaxed">') }}
                 It looks like you've lost your internet connection. Don't worry, you can still access some cached content.
             </p>
             
@@ -69,13 +69,13 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    What you can do:
-                </h3>
+                    {{ _('What you can do:
+                ') }}</h3>
                 <ul class="text-sm text-slate-300 dark:text-slate-400 space-y-1.5 list-disc list-inside">
-                    <li>Check your network connection</li>
-                    <li>Try refreshing the page</li>
-                    <li>Access previously cached pages</li>
-                    <li>Enable airplane mode and back</li>
+                    <{{ _('li>') }}Check your network connection</{{ _('li>') }}
+                    <{{ _('li>') }}Try refreshing the page</{{ _('li>') }}
+                    <{{ _('li>') }}Access previously cached pages</{{ _('li>') }}
+                    <{{ _('li>') }}Enable airplane mode and back</{{ _('li>') }}
                 </ul>
             </div>
             
@@ -86,8 +86,8 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    Try Again
-                </span>
+                    {{ _('Try Again
+                ') }}</span>
             </button>
             
             <!-- Home Link -->
@@ -98,7 +98,7 @@
         </div>
         
         <!-- Footer Info -->
-        <p class="text-center text-xs text-gray-500 dark:text-slate-500 mt-6">
+        <{{ _('p class="text-center text-xs text-gray-500 dark:text-slate-500 mt-6">') }}
             Metisma Platform • Some features may be limited offline
         </p>
     </div>

@@ -21,8 +21,8 @@
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
-                        Edit Profile
-                    </a>
+                        {{ _('Edit Profile
+                    ') }}</a>
                 </div>
                 {% endif %}
             </div>
@@ -39,7 +39,7 @@
                                      class="h-full w-full object-cover">
                             {% else %}
                                 <div class="h-full w-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center">
-                                    <span class="text-4xl sm:text-5xl font-bold text-gold-dark">
+                                    <{{ _('span class="text-4xl sm:text-5xl font-bold text-gold-dark">') }}
                                         {{ (profile_user.company_name or profile_user.username)[0].upper() }}
                                     </span>
                                 </div>
@@ -53,7 +53,7 @@
                                 <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                                 </svg>
-                                <span class="text-sm font-bold text-gray-900 dark:text-white">{{ profile_user.trust_score.score }}</span>
+                                <{{ _('span class="text-sm font-bold text-gray-900 dark:text-white">') }}{{ profile_user.trust_score.score }}</span>
                             </div>
                         </div>
                         {% endif %}
@@ -61,10 +61,10 @@
                     
                     <!-- Name and Role -->
                     <div class="mt-4 sm:mt-0 sm:ml-6 flex-1">
-                        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        <{{ _('h1 class="text-3xl font-bold text-gray-900 dark:text-white">') }}
                             {{ profile_user.company_name or profile_user.username }}
                         </h1>
-                        <p class="text-lg text-gold-dark font-medium mt-1">
+                        <{{ _('p class="text-lg text-gold-dark font-medium mt-1">') }}
                             {{ profile_user.role_display_name }}
                         </p>
                         <div class="flex items-center gap-4 mt-2 text-sm text-gray-600 dark:text-slate-400">
@@ -97,8 +97,8 @@
                                     <svg class="w-5 h-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
                                     </svg>
-                                    Follow
-                                </button>
+                                    {{ _('Follow
+                                ') }}</button>
                             </form>
                             {% else %}
                             <form action="{{ url_for('social.unfollow_user', user_id=profile_user.id) }}" method="POST" class="inline">
@@ -108,8 +108,8 @@
                                     <svg class="w-5 h-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
                                     </svg>
-                                    Following
-                                </button>
+                                    {{ _('Following
+                                ') }}</button>
                             </form>
                             {% endif %}
                             
@@ -120,8 +120,8 @@
                                 </svg>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('users.login') }}" 
-                               class="px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold rounded-xl hover:shadow-lg transition-all duration-200">
+                            <{{ _('a href="') }}{{ url_for('users.login') }}{{ _('" 
+                               class="px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold rounded-xl hover:shadow-lg transition-all duration-200">') }}
                                 Login / Register
                             </a>
                         {% endif %}
@@ -131,16 +131,16 @@
                 <!-- Network Stats -->
                 <div class="flex gap-6 mt-6 pt-6 border-t border-gray-200 dark:border-dark-700">
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-gold-dark">{{ profile_user.followers_count if profile_user.followers_count else 0 }}</div>
-                        <div class="text-sm text-gray-600 dark:text-slate-400">Followers</div>
+                        <{{ _('div class="text-2xl font-bold text-gold-dark">') }}{{ profile_user.followers_count if profile_user.followers_count else 0 }}</div>
+                        <{{ _('div class="text-sm text-gray-600 dark:text-slate-400">') }}Followers</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-gold-dark">{{ profile_user.following_count if profile_user.following_count else 0 }}</div>
-                        <div class="text-sm text-gray-600 dark:text-slate-400">Following</div>
+                        <{{ _('div class="text-2xl font-bold text-gold-dark">') }}{{ profile_user.following_count if profile_user.following_count else 0 }}</div>
+                        <{{ _('div class="text-sm text-gray-600 dark:text-slate-400">') }}Following</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-gold-dark">{{ profile_posts|length }}</div>
-                        <div class="text-sm text-gray-600 dark:text-slate-400">Posts</div>
+                        <{{ _('div class="text-2xl font-bold text-gold-dark">') }}{{ profile_posts|length }}</div>
+                        <{{ _('div class="text-sm text-gray-600 dark:text-slate-400">') }}Posts</div>
                     </div>
                 </div>
                 
@@ -148,7 +148,7 @@
                 {% if profile_user.profile and profile_user.profile.bio %}
                 <div class="mt-6">
                     <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">Abou>{{ _("About") }}</h3>
-                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    <{{ _('p class="text-gray-700 dark:text-gray-300 leading-relaxed">') }}
                         {{ profile_user.profile.bio }}
                     </p>
                 </div>
@@ -161,14 +161,14 @@
                     <div class="flex flex-wrap gap-2">
                         {% if profile_user.profile.main_products %}
                             {% for product in profile_user.profile.main_products.split(',')[:5] %}
-                            <span class="px-3 py-1.5 bg-gold/10 text-gold-dark rounded-lg text-sm font-medium">
+                            <{{ _('span class="px-3 py-1.5 bg-gold/10 text-gold-dark rounded-lg text-sm font-medium">') }}
                                 {{ product.strip() }}
                             </span>
                             {% endfor %}
                         {% endif %}
                         {% if profile_user.profile.specialization_sectors %}
                             {% for sector in profile_user.profile.specialization_sectors.split(',')[:3] %}
-                            <span class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">
+                            <{{ _('span class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">') }}
                                 {{ sector.strip() }}
                             </span>
                             {% endfor %}
@@ -197,8 +197,8 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
-                            LinkedIn
-                        </a>
+                            {{ _('LinkedIn
+                        ') }}</a>
                         {% endif %}
                         {% if profile_user.profile.telegram %}
                         <a href="https://t.me/{{ profile_user.profile.telegram }}" target="_blank" 
@@ -215,8 +215,8 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297a11.815 11.815 0 00-8.414-3.487c-6.52 0-11.823 5.303-11.825 11.825 0 2.088.545 4.126 1.578 5.927l-1.786 6.538 6.694-1.756a11.81 11.81 0 005.946 1.606c6.52 0 11.823-5.303 11.825-11.825 0-3.165-1.232-6.14-3.468-8.377"/>
                             </svg>
-                            WhatsApp
-                        </a>
+                            {{ _('WhatsApp
+                        ') }}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -235,16 +235,16 @@
                         <!-- Post Header -->
                         <div class="flex items-start gap-3 mb-3">
                             <div class="h-10 w-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center flex-shrink-0">
-                                <span class="text-lg font-bold text-gold-dark">
+                                <{{ _('span class="text-lg font-bold text-gold-dark">') }}
                                     {{ (profile_user.company_name or profile_user.username)[0].upper() }}
                                 </span>
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center gap-2">
-                                    <span class="font-bold text-gray-900 dark:text-white">
+                                    <{{ _('span class="font-bold text-gray-900 dark:text-white">') }}
                                         {{ profile_user.company_name or profile_user.username }}
                                     </span>
-                                    <span class="text-xs text-gray-500 dark:text-slate-400">
+                                    <{{ _('span class="text-xs text-gray-500 dark:text-slate-400">') }}
                                         {{ post.created_at.strftime('%Y/%m/%d %H:%M') if post.created_at else 'N/A' }}
                                     </span>
                                 </div>
@@ -253,15 +253,15 @@
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
-                                    Public
-                                </span>
+                                    {{ _('Public
+                                ') }}</span>
                                 {% endif %}
                             </div>
                         </div>
                         
                         <!-- Post Content -->
                         <div class="ml-13">
-                            <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line mb-3">
+                            <{{ _('p class="text-gray-700 dark:text-gray-300 whitespace-pre-line mb-3">') }}
                                 {{ post.content }}
                             </p>
                             
@@ -324,9 +324,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                         </svg>
                     </div>
-                    <p class="text-gray-600 dark:text-slate-400 text-lg">No posts published yet</p>
+                    <{{ _('p class="text-gray-600 dark:text-slate-400 text-lg">') }}No posts published yet</p>
                     {% if current_user.is_authenticated and current_user.id == profile_user.id %}
-                    <p class="text-gray-500 dark:text-slate-500 text-sm mt-2">Publish your first post!</p>
+                    <{{ _('p class="text-gray-500 dark:text-slate-500 text-sm mt-2">') }}Publish your first post!</p>
                     {% endif %}
                 </div>
             {% endif %}

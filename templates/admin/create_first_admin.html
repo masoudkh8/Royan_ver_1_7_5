@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create First Admin | Metisma</title>
+    <title>{{ _('Create First Admin | Metisma') }}</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -285,7 +285,7 @@
                     <i class="fas fa-shield-halved"></i>
                 </div>
                 <h1class="auth-title">Create First Admi>{{ _("Create First Admin") }}</h1>
-                <p class="auth-subtitle">
+                <{{ _('p class="auth-subtitle">') }}
                     Initialize the admin system by creating the first administrator account.
                     This account will have full access to all system features.
                 </p>
@@ -295,9 +295,9 @@
             <div class="warning-badge">
                 <i class="fas fa-triangle-exclamation"></i>
                 <span>
-                    <strong>Important:</strong> This action can only be performed once. 
+                    <strong>{{ _('Important:') }}</strong> {{ _('This action can only be performed once. 
                     Make sure to use secure credentials and store them safely.
-                </span>
+                ') }}</span>
             </div>
             
             <!-- Flash Messages -->
@@ -318,8 +318,8 @@
                 <!-- Username -->
                 <div class="form-group">
                     <label class="form-label" for="username">
-                        <i class="fas fa-user me-1"></i> Username
-                    </label>
+                        <i class="fas fa-user me-1"></i> {{ _('Username
+                    ') }}</label>
                     <div class="input-icon">
                         <i class="fas fa-user"></i>
                         <input 
@@ -339,8 +339,8 @@
                 <!-- Email -->
                 <div class="form-group">
                     <label class="form-label" for="email">
-                        <i class="fas fa-envelope me-1"></i> Email Address
-                    </label>
+                        <i class="fas fa-envelope me-1"></i> {{ _('Email Address
+                    ') }}</label>
                     <div class="input-icon">
                         <i class="fas fa-envelope"></i>
                         <input 
@@ -359,8 +359,8 @@
                 <!-- Password -->
                 <div class="form-group">
                     <label class="form-label" for="password">
-                        <i class="fas fa-lock me-1"></i> Password
-                    </label>
+                        <i class="fas fa-lock me-1"></i> {{ _('Password
+                    ') }}</label>
                     <div class="input-icon">
                         <i class="fas fa-lock"></i>
                         <input 
@@ -381,8 +381,8 @@
                 <!-- Confirm Password -->
                 <div class="form-group">
                     <label class="form-label" for="confirm_password">
-                        <i class="fas fa-lock me-1"></i> Confirm Password
-                    </label>
+                        <i class="fas fa-lock me-1"></i> {{ _('Confirm Password
+                    ') }}</label>
                     <div class="input-icon">
                         <i class="fas fa-lock"></i>
                         <input 
@@ -401,37 +401,37 @@
                 <!-- Submit Button -->
                 <button type="submit" class="btn-submit">
                     <i class="fas fa-user-plus me-2"></i>
-                    Create Admin Account
-                </button>
+                    {{ _('Create Admin Account
+                ') }}</button>
             </form>
             
             <!-- Security Info -->
             <div class="security-info">
                 <div class="security-item">
                     <i class="fas fa-check-circle"></i>
-                    <span>Password encrypted with bcrypt</span>
+                    <{{ _('span>') }}Password encrypted with bcrypt</{{ _('span>') }}
                 </div>
                 <div class="security-item">
                     <i class="fas fa-check-circle"></i>
-                    <span>Full admin privileges granted</span>
+                    <{{ _('span>') }}Full admin privileges granted</{{ _('span>') }}
                 </div>
                 <div class="security-item">
                     <i class="fas fa-check-circle"></i>
-                    <span>Activity logged for security</span>
+                    <{{ _('span>') }}Activity logged for security</{{ _('span>') }}
                 </div>
                 <div class="security-item">
                     <i class="fas fa-check-circle"></i>
-                    <span>KYC verified automatically</span>
+                    <{{ _('span>') }}KYC verified automatically</{{ _('span>') }}
                 </div>
             </div>
             
             <!-- Footer -->
             <div class="footer-text">
                 <p>
-                    Already have an admin account? 
-                    <a href="{{ url_for('admin.login') }}">Login here</a>
+                    {{ _('Already have an admin account? 
+                    ') }}<a href="{{ url_for('admin.login') }}">{{ _('Login here') }}</a>
                 </p>
-                <p class="mt-2">
+                <{{ _('p class="mt-2">') }}
                     &copy; {{ current_year }} Metisma. All rights reserved.
                 </p>
             </div>
@@ -466,8 +466,8 @@
             if (/[0-9]/.test(password)) strength++;
             if (/[^a-zA-Z0-9]/.test(password)) strength++;
             
-            // Display feedback
-            if (strength <= 2) {
+            // {{ _('Display feedback
+            if (strength ') }}<= 2) {
                 strengthIndicator.textContent = '⚠️ Weak password - Add more character types';
                 strengthIndicator.style.color = '#ef4444';
             } else if (strength <= 4) {

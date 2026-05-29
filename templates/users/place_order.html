@@ -14,7 +14,7 @@
                 </svg>
             </div>
             <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Place New Orde>{{ _("Place New Order") }}</h2>
-            <p class="text-gray-600 dark:text-slate-400 text-sm">Complete your export or import order details</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm">') }}Complete your export or import order details</p>
         </div>
 
         <!-- فرم ثبت سفارش -->
@@ -25,13 +25,13 @@
             <div>
                 <labelfor="product" class="form-label">Product *>{{ _("Product *") }}</label>
                 <select id="product" name="product" required class="form-input cursor-pointer">
-                    <option value="" disabled selected>Select product...</option>
-                    <option value="wheat">🌾 Wheat</option>
-                    <option value="rice">🍚 Rice</option>
-                    <option value="sugar">🍬 Sugar</option>
-                    <option value="corn">🌽 Corn</option>
-                    <option value="steel">🏗️ Steel</option>
-                    <option value="other">📦 Other</option>
+                    <{{ _('option value="" disabled selected>') }}Select product...</option>
+                    <{{ _('option value="wheat">') }}🌾 Wheat</option>
+                    <{{ _('option value="rice">') }}🍚 Rice</option>
+                    <{{ _('option value="sugar">') }}🍬 Sugar</option>
+                    <{{ _('option value="corn">') }}🌽 Corn</option>
+                    <{{ _('option value="steel">') }}🏗️ Steel</option>
+                    <{{ _('option value="other">') }}📦 Other</option>
                 </select>
             </div>
 
@@ -71,9 +71,9 @@
             <div>
                 <labelfor="producer" class="form-label">Select Producer *>{{ _("Select Producer *") }}</label>
                 <select id="producer" name="seller_id" required class="form-input cursor-pointer">
-                    <option value="" disabled selected>Choose a verified producer...</option>
+                    <{{ _('option value="" disabled selected>') }}Choose a verified producer...</option>
                     {% for seller in sellers %}
-                    <option value="{{ seller.id }}">
+                    <{{ _('option value="') }}{{ seller.id }}">
                         {{ seller.username }} {% if seller.company_name %}({{ seller.company_name }}){% endif %} - {{ seller.country }}
                     </option>
                     {% endfor %}
@@ -82,7 +82,7 @@
 
             <!-- توضیحات اضافی -->
             <div>
-                <label for="notes" class="form-label">Additional Notes <span class="text-gray-400">(Optional)</span></label>
+                <label for="notes" class="form-label">{{ _('Additional Notes ') }}<{{ _('span class="text-gray-400">') }}(Optional)</span></label>
                 <textarea id="notes" name="notes" rows="3"
                           class="form-input resize-none"
                           placeholder="{{ _("Specify quality, packaging, delivery terms, etc.") }}"></textarea>
@@ -109,8 +109,8 @@
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Return to Profile
-            </a>
+                {{ _('Return to Profile
+            ') }}</a>
         </div>
     </div>
 </div>

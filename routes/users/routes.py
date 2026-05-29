@@ -259,9 +259,9 @@ def register():
         
         # Strong password check (Request 2)
         if not password or len(password) < 8:
-            errors.append("Password must be at least 8 characters long.")
+            errors.append(gettext("Password must be at least 8 characters long."))
         elif password != confirm_password:
-            errors.append("Passwords do not match.")
+            errors.append(gettext("Passwords do not match."))
         else:
             # Password strength check
             has_upper = any(c.isupper() for c in password)
@@ -269,7 +269,7 @@ def register():
             has_digit = any(c.isdigit() for c in password)
             
             if not (has_upper and has_lower and has_digit):
-                errors.append("Password should contain uppercase, lowercase, and numbers for better security.")
+                errors.append(gettext("Password should contain uppercase, lowercase, and numbers for better security."))
         
         # Role check
         if not role or not Role.has_value(role):
