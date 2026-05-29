@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Metisma 1.0\n"
 "Report-Msgid-Bugs-To: support@metisma.com\n"
-"POT-Creation-Date: 2026-05-29 19:24+0000\n"
+"POT-Creation-Date: 2026-05-29 20:19+0000\n"
 "PO-Revision-Date: 2024-01-01 00:00+0330\n"
 "Last-Translator: Metisma Team\n"
-"Language-Team: Persian\n"
 "Language: fa_IR\n"
+"Language-Team: Persian\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: routes/admin/permissions.py:17
@@ -129,21 +129,20 @@ msgstr "لطفاً فیلدهای الزامی را پر کنید."
 
 #: routes/magazine/routes.py:69
 msgid ""
-"Your sponsorship request has been successfully submitted. We will contact "
-"you soon."
+"Your sponsorship request has been successfully submitted. We will contact"
+" you soon."
 msgstr "درخواست حمایت شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
 
 #: routes/magazine/routes.py:106
 msgid ""
-"Your advertising request has been successfully submitted. We will contact "
-"you soon."
-msgstr ""
-"درخواست تبلیغاتی شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
+"Your advertising request has been successfully submitted. We will contact"
+" you soon."
+msgstr "درخواست تبلیغاتی شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
 
 #: routes/magazine/routes.py:138
 msgid ""
-"Your annual subscription has been successfully registered. Information will "
-"be sent soon."
+"Your annual subscription has been successfully registered. Information "
+"will be sent soon."
 msgstr "اشتراک سالانه شما با موفقیت ثبت شد. اطلاعات به زودی ارسال خواهد شد."
 
 #: routes/trading/routes.py:158
@@ -247,10 +246,11 @@ msgstr "لطفاً کد را وارد کنید."
 
 #: routes/users/auth.py:315
 msgid ""
-"✅ If your email is registered in the system, a recovery link will be sent to"
-" you."
+"✅ If your email is registered in the system, a recovery link will be sent"
+" to you."
 msgstr ""
-"✅ اگر ایمیل شما در سیستم ثبت شده باشد، لینک بازیابی برای شما ارسال خواهد شد."
+"✅ اگر ایمیل شما در سیستم ثبت شده باشد، لینک بازیابی برای شما ارسال خواهد "
+"شد."
 
 #: routes/users/auth.py:333
 msgid "❌ The recovery link is invalid or expired."
@@ -383,7 +383,8 @@ msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دو
 
 #: routes/users/routes.py:219
 msgid ""
-"You already have an account. Please log out first to register a new account."
+"You already have an account. Please log out first to register a new "
+"account."
 msgstr "شما قبلاً حساب دارید. لطفاً ابتدا خارج شوید تا حساب جدیدی ثبت کنید."
 
 #: routes/users/routes.py:242
@@ -424,13 +425,12 @@ msgid ""
 "❌ Please verify your email before logging in. Check your inbox for the "
 "verification link."
 msgstr ""
-"❌ لطفاً قبل از ورود، ایمیل خود را تأیید کنید. صندوق ورودی خود را برای لینک "
-"تأیید بررسی کنید."
+"❌ لطفاً قبل از ورود، ایمیل خود را تأیید کنید. صندوق ورودی خود را برای "
+"لینک تأیید بررسی کنید."
 
 #: routes/users/routes.py:438
 msgid "✅ Password verified. Please enter your 2FA code."
-msgstr ""
-"✅ رمز عبور تأیید شد. لطفاً کد احراز هویت دو مرحله‌ای خود را وارد کنید."
+msgstr "✅ رمز عبور تأیید شد. لطفاً کد احراز هویت دو مرحله‌ای خود را وارد کنید."
 
 #: routes/users/routes.py:456
 msgid "✅ Welcome!"
@@ -494,8 +494,7 @@ msgid ""
 msgstr "🗑️ حساب شما با موفقیت حذف شد. از همکاری شما سپاسگزاریم."
 
 #: routes/users/routes.py:681
-msgid ""
-"❌ An error occurred while deleting the account. Please contact support."
+msgid "❌ An error occurred while deleting the account. Please contact support."
 msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:710
@@ -594,7 +593,8 @@ msgstr "❌ دسترسی محدود: فقط کاربران ویژه می‌تو�
 #: routes/users/routes.py:1256
 msgid "❌ Access denied: Non-special users can only view messages from admin."
 msgstr ""
-"❌ دسترسی رد شد: کاربران غیر ویژه فقط می‌توانند پیام‌های مدیر را مشاهده کنند."
+"❌ دسترسی رد شد: کاربران غیر ویژه فقط می‌توانند پیام‌های مدیر را مشاهده "
+"کنند."
 
 #: routes/users/routes.py:1268
 msgid "❌ This user is not special and you cannot chat with him/her."
@@ -687,8 +687,7 @@ msgstr "مدارک با موفقیت آپلود شدند."
 
 #: routes/users/routes.py:1726
 msgid "❌ No files were found to upload. Please select files and try again."
-msgstr ""
-"❌ فایلی برای آپلود یافت نشد. لطفاً فایل‌ها را انتخاب و دوباره تلاش کنید."
+msgstr "❌ فایلی برای آپلود یافت نشد. لطفاً فایل‌ها را انتخاب و دوباره تلاش کنید."
 
 #: routes/users/routes.py:1738
 msgid "No verification request found."
@@ -808,25 +807,24 @@ msgstr "💬 شروع چت"
 #: templates/email/password_reset.html:253
 #: templates/email/verify_email.html:246 templates/email/verify_email.html:253
 #: templates/exhibition/booth_detail.html:10
-#: templates/exhibition/booth_detail.html:145
-#: templates/exhibition/hall.html:74 templates/exhibition/hall.html:139
-#: templates/exhibition/hall.html:143 templates/magazine/advertisement.html:68
-#: templates/magazine/index.html:12 templates/magazine/index.html:13
-#: templates/magazine/index.html:14 templates/magazine/sponsorship.html:36
-#: templates/magazine/subscribe.html:76 templates/trading/market.html:53
-#: templates/trading/market.html:100 templates/trading/market.html:120
-#: templates/trading/market.html:124 templates/users/chat.html:19
-#: templates/users/dashboard.html:57 templates/users/dashboard.html:68
-#: templates/users/dashboard.html:78 templates/users/dashboard.html:85
-#: templates/users/dashboard.html:90 templates/users/dashboard.html:95
-#: templates/users/dashboard.html:150 templates/users/dashboard.html:169
-#: templates/users/dashboard.html:189 templates/users/dashboard.html:195
-#: templates/users/dashboard.html:215 templates/users/dashboard.html:235
-#: templates/users/dashboard.html:241 templates/users/dashboard.html:262
-#: templates/users/enable_2fa.html:92 templates/users/my_documents.html:12
-#: templates/users/my_documents.html:89 templates/users/my_documents.html:109
-#: templates/users/my_documents.html:129 templates/users/post_detail.html:36
-#: templates/users/producer_orders.html:114
+#: templates/exhibition/booth_detail.html:145 templates/exhibition/hall.html:74
+#: templates/exhibition/hall.html:139 templates/exhibition/hall.html:143
+#: templates/magazine/advertisement.html:68 templates/magazine/index.html:12
+#: templates/magazine/index.html:13 templates/magazine/index.html:14
+#: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
+#: templates/trading/market.html:53 templates/trading/market.html:100
+#: templates/trading/market.html:120 templates/trading/market.html:124
+#: templates/users/chat.html:19 templates/users/dashboard.html:57
+#: templates/users/dashboard.html:68 templates/users/dashboard.html:78
+#: templates/users/dashboard.html:85 templates/users/dashboard.html:90
+#: templates/users/dashboard.html:95 templates/users/dashboard.html:150
+#: templates/users/dashboard.html:169 templates/users/dashboard.html:189
+#: templates/users/dashboard.html:195 templates/users/dashboard.html:215
+#: templates/users/dashboard.html:235 templates/users/dashboard.html:241
+#: templates/users/dashboard.html:262 templates/users/enable_2fa.html:92
+#: templates/users/my_documents.html:12 templates/users/my_documents.html:89
+#: templates/users/my_documents.html:109 templates/users/my_documents.html:129
+#: templates/users/post_detail.html:36 templates/users/producer_orders.html:114
 #: templates/users/producer_orders.html:136
 #: templates/users/profile_edit.html:147 templates/users/profile_edit.html:166
 #: templates/users/profile_edit.html:183 templates/users/profile_edit.html:198
@@ -850,15 +848,15 @@ msgstr ""
 
 #: templates/admin/chat.html:15
 msgid ""
-"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-"
-"dark/20 flex items-center justify-center text-gold font-bold flex-"
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
+"gold-dark/20 flex items-center justify-center text-gold font-bold flex-"
 "shrink-0\">"
 msgstr ""
 
 #: templates/admin/chat.html:18
 msgid ""
-"p class=\"font-medium text-gray-900 dark:text-white truncate group-"
-"hover:text-gold transition\">"
+"p class=\"font-medium text-gray-900 dark:text-white truncate group-hover"
+":text-gold transition\">"
 msgstr ""
 
 #: templates/admin/chat.html:19
@@ -869,8 +867,8 @@ msgstr ""
 
 #: templates/admin/chat.html:20
 msgid ""
-"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gold/10 text-"
-"gold\">"
+"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gold/10 "
+"text-gold\">"
 msgstr ""
 
 #: templates/admin/chat.html:22
@@ -884,8 +882,8 @@ msgstr ""
 #: templates/admin/chat_with_user.html:9 templates/users/chat.html:48
 #: templates/users/chat.html:74 templates/users/support.html:47
 msgid ""
-"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-"
-"dark/20 flex items-center justify-center text-gold font-bold\">"
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
+"gold-dark/20 flex items-center justify-center text-gold font-bold\">"
 msgstr ""
 
 #: templates/admin/chat_with_user.html:11
@@ -949,7 +947,8 @@ msgstr "ورود"
 #: templates/admin/create_first_admin.html:298
 msgid ""
 "This action can only be performed once. \n"
-"                    Make sure to use secure credentials and store them safely.\n"
+"                    Make sure to use secure credentials and store them "
+"safely.\n"
 "                "
 msgstr ""
 
@@ -1122,8 +1121,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:69
 msgid ""
-"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs "
-"font-bold rounded-full flex items-center justify-center\">"
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-"
+"xs font-bold rounded-full flex items-center justify-center\">"
 msgstr ""
 
 #: templates/admin/dashboard.html:73
@@ -1134,8 +1133,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:76
 msgid ""
-"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white text-"
-"xs font-bold rounded-full flex items-center justify-center\">"
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white "
+"text-xs font-bold rounded-full flex items-center justify-center\">"
 msgstr ""
 
 #: templates/admin/dashboard.html:80
@@ -1146,8 +1145,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:84
 msgid ""
-"div class=\"p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 "
-"dark:text-green-400 group-hover:scale-110 transition\">"
+"div class=\"p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-"
+"green-600 dark:text-green-400 group-hover:scale-110 transition\">"
 msgstr ""
 
 #: templates/admin/edit_role_perms.html:423
@@ -1162,7 +1161,8 @@ msgstr ""
 
 #: templates/admin/edit_role_perms.html:428
 msgid ""
-"Configure permissions for this role. Changes will affect all users with this role.\n"
+"Configure permissions for this role. Changes will affect all users with "
+"this role.\n"
 "                    "
 msgstr ""
 
@@ -1255,14 +1255,14 @@ msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
 msgid ""
-"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-"
-"green-200 dark:border-green-800"
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
+"border-green-200 dark:border-green-800"
 msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
 msgid ""
-"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 "
-"dark:border-red-800"
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-"
+"red-200 dark:border-red-800"
 msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
@@ -1374,7 +1374,8 @@ msgstr ""
 
 #: templates/admin/manage_user_perms.html:253
 msgid ""
-"In this section, you can exceptionally grant permissions to the user or revoke their default permissions.\n"
+"In this section, you can exceptionally grant permissions to the user or "
+"revoke their default permissions.\n"
 "            "
 msgstr ""
 
@@ -1465,8 +1466,9 @@ msgstr ""
 #: templates/admin/premium_requests.html:25
 #: templates/admin/premium_requests.html:26
 msgid ""
-"bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border border-"
-"gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700"
+"bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border "
+"border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-"
+"dark-700"
 msgstr ""
 
 #: templates/admin/manage_users.html:21
@@ -1497,8 +1499,8 @@ msgstr ""
 #: templates/admin/manage_users.html:38
 #: templates/admin/premium_requests.html:38
 msgid ""
-"th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-"
-"right\">"
+"th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 "
+"text-right\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:44
@@ -1548,8 +1550,8 @@ msgstr ""
 
 #: templates/admin/manage_users.html:76
 msgid ""
-"span class=\"px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-"
-"green-700 dark:text-green-400 text-xs font-medium\">"
+"span class=\"px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 "
+"text-green-700 dark:text-green-400 text-xs font-medium\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:78
@@ -1560,14 +1562,14 @@ msgstr ""
 
 #: templates/admin/manage_users.html:84
 msgid ""
-"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gold/10 "
-"hover:text-gold transition\">"
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gold/10"
+" hover:text-gold transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:89
 msgid ""
-"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gray-100 "
-"dark:hover:bg-dark-600 transition\">"
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-"
+"gray-100 dark:hover:bg-dark-600 transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:92
@@ -1583,15 +1585,15 @@ msgstr ""
 #: templates/admin/manage_users.html:106 templates/admin/manage_users.html:112
 #: templates/admin/manage_users.html:116
 msgid ""
-"\" class=\"px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border border-"
-"gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover:bg-"
-"dark-700 transition\">"
+"\" class=\"px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border "
+"border-gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover"
+":bg-dark-700 transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:110
 msgid ""
-"span class=\"px-3 py-1.5 rounded-lg bg-gold text-dark-900 font-medium text-"
-"sm\">"
+"span class=\"px-3 py-1.5 rounded-lg bg-gold text-dark-900 font-medium "
+"text-sm\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:114
@@ -1622,8 +1624,8 @@ msgstr ""
 
 #: templates/admin/premium_requests.html:48
 msgid ""
-"span class=\"px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 "
-"text-yellow-700 dark:text-yellow-400 text-xs font-medium\">"
+"span class=\"px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30"
+" text-yellow-700 dark:text-yellow-400 text-xs font-medium\">"
 msgstr ""
 
 #: templates/admin/premium_requests.html:50
@@ -1698,13 +1700,13 @@ msgstr ""
 #: templates/admin/view_all_documents.html:45
 msgid ""
 "\" \n"
-"                       class=\"px-3 py-1.5 rounded-lg text-sm font-medium transition"
+"                       class=\"px-3 py-1.5 rounded-lg text-sm font-medium"
+" transition"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:38
 #: templates/users/producer_orders.html:43
-msgid ""
-"bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
+msgid "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:38
@@ -1753,20 +1755,20 @@ msgstr "کیف پول"
 #: templates/admin/view_all_documents.html:62
 #: templates/admin/view_all_documents.html:63
 msgid ""
-"th class=\"px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-"
-"slate-400 uppercase tracking-wider\">"
+"th class=\"px-4 py-3 text-right text-xs font-medium text-gray-500 dark"
+":text-slate-400 uppercase tracking-wider\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:64
 msgid ""
-"th class=\"px-4 py-3 text-center text-xs font-medium text-gray-500 "
-"dark:text-slate-400 uppercase tracking-wider\">"
+"th class=\"px-4 py-3 text-center text-xs font-medium text-gray-500 dark"
+":text-slate-400 uppercase tracking-wider\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:73
 msgid ""
-"div class=\"w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark "
-"flex items-center justify-center text-sm font-bold text-dark-900\">"
+"div class=\"w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark"
+" flex items-center justify-center text-sm font-bold text-dark-900\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:77
@@ -1787,16 +1789,16 @@ msgstr ""
 
 #: templates/admin/view_all_documents.html:92
 msgid ""
-"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs "
-"font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-"
-"green-400\">"
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
+"xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark"
+":text-green-400\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:96
 msgid ""
-"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs "
-"font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-"
-"yellow-400\">"
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
+"xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark"
+":text-yellow-400\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:101
@@ -1806,7 +1808,9 @@ msgstr ""
 #: templates/admin/view_all_documents.html:105
 msgid ""
 "\" \n"
-"                                   class=\"inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark transition text-sm font-medium\">"
+"                                   class=\"inline-flex items-center gap-1"
+" px-3 py-1.5 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark "
+"transition text-sm font-medium\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:113
@@ -1819,7 +1823,9 @@ msgstr ""
 #: templates/admin/view_all_documents.html:138
 msgid ""
 "\" \n"
-"               class=\"px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition\">"
+"               class=\"px-4 py-2 rounded-lg border border-gray-300 dark"
+":border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 "
+"dark:hover:bg-dark-700 transition\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:133
@@ -1950,7 +1956,8 @@ msgstr ""
 #: templates/admin/view_premium_request.html:70
 #: templates/admin/view_premium_request.html:79
 msgid ""
-"p class=\"text-xs text-blue-600 dark:text-blue-400 group-hover:underline\">"
+"p class=\"text-xs text-blue-600 dark:text-blue-400 group-"
+"hover:underline\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:64
@@ -2088,8 +2095,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:14
 msgid ""
-"span class=\"bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs "
-"font-bold\">"
+"span class=\"bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs"
+" font-bold\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:21
@@ -2102,8 +2109,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:34
 msgid ""
-"div class=\"h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex items-"
-"center justify-center text-white text-6xl\">"
+"div class=\"h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex "
+"items-center justify-center text-white text-6xl\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:38
@@ -2192,8 +2199,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:145
 msgid ""
-"\" class=\"block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover:bg-"
-"gray-200 transition-colors text-center\">"
+"\" class=\"block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover"
+":bg-gray-200 transition-colors text-center\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:154
@@ -2212,8 +2219,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:180
 msgid ""
-"div class=\"h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-"
-"center justify-center text-white text-4xl\">"
+"div class=\"h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex "
+"items-center justify-center text-white text-4xl\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:12
@@ -2253,8 +2260,8 @@ msgstr ""
 
 #: templates/exhibition/hall.html:57
 msgid ""
-"span class=\"absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 py-1 "
-"rounded-full text-xs font-bold\">"
+"span class=\"absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 "
+"py-1 rounded-full text-xs font-bold\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:65
@@ -2272,7 +2279,8 @@ msgstr ""
 #: templates/exhibition/hall.html:74
 msgid ""
 "\" \n"
-"                           class=\"bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors\">"
+"                           class=\"bg-blue-600 text-white px-4 py-2 "
+"rounded-lg text-sm hover:bg-blue-700 transition-colors\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:87
@@ -2360,8 +2368,8 @@ msgid "Type of Advertisement *"
 msgstr "نوع تبلیغ"
 
 #: templates/magazine/advertisement.html:36
-#: templates/magazine/advertisement.html:53
-#: templates/users/place_order.html:28 templates/users/place_order.html:74
+#: templates/magazine/advertisement.html:53 templates/users/place_order.html:28
+#: templates/users/place_order.html:74
 msgid "option value=\"\" disabled selected>"
 msgstr ""
 
@@ -2448,15 +2456,15 @@ msgstr ""
 
 #: templates/magazine/index.html:12 templates/magazine/index.html:13
 msgid ""
-"\" class=\"px-5 py-2.5 rounded-xl border border-gold/30 text-gold hover:bg-"
-"gold/10 font-medium text-sm transition\">"
+"\" class=\"px-5 py-2.5 rounded-xl border border-gold/30 text-gold hover"
+":bg-gold/10 font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/magazine/index.html:14
 msgid ""
-"\" class=\"px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-dark "
-"text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold shadow "
-"transition transform hover:scale-[1.02]\">"
+"\" class=\"px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-dark"
+" text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold "
+"shadow transition transform hover:scale-[1.02]\">"
 msgstr ""
 
 #: templates/magazine/index.html:19
@@ -2474,8 +2482,8 @@ msgstr ""
 
 #: templates/magazine/index.html:31
 msgid ""
-"span class=\"absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gold text-"
-"dark-900 text-xs font-bold\">"
+"span class=\"absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gold "
+"text-dark-900 text-xs font-bold\">"
 msgstr ""
 
 #: templates/magazine/index.html:35
@@ -2516,8 +2524,8 @@ msgstr "مجله ایماژه"
 
 #: templates/magazine/subscribe.html:16
 msgid ""
-"div class=\"absolute top-0 right-0 bg-gold text-dark-900 text-xs font-bold "
-"px-3 py-1 rounded-bl-lg\">"
+"div class=\"absolute top-0 right-0 bg-gold text-dark-900 text-xs font-"
+"bold px-3 py-1 rounded-bl-lg\">"
 msgstr ""
 
 #: templates/magazine/subscribe.html:17
@@ -2602,7 +2610,8 @@ msgstr ""
 #: templates/trading/market.html:53
 msgid ""
 "\" \n"
-"                   class=\"block mt-3 text-center bg-green-600 text-white py-2 rounded hover:bg-green-700 text-sm\">"
+"                   class=\"block mt-3 text-center bg-green-600 text-white"
+" py-2 rounded hover:bg-green-700 text-sm\">"
 msgstr ""
 
 #: templates/trading/market.html:66
@@ -2641,7 +2650,8 @@ msgstr ""
 #: templates/trading/market.html:100
 msgid ""
 "\" \n"
-"                               class=\"text-blue-600 hover:text-blue-800 font-medium\">"
+"                               class=\"text-blue-600 hover:text-blue-800 "
+"font-medium\">"
 msgstr ""
 
 #: templates/trading/market.html:116
@@ -2650,21 +2660,21 @@ msgstr ""
 
 #: templates/trading/market.html:120 templates/trading/market.html:124
 msgid ""
-"\" class=\"inline-block bg-white text-green-600 px-8 py-4 rounded-lg font-"
-"bold text-lg hover:bg-gray-100 transition-colors\">"
+"\" class=\"inline-block bg-white text-green-600 px-8 py-4 rounded-lg "
+"font-bold text-lg hover:bg-gray-100 transition-colors\">"
 msgstr ""
 
 #: templates/users/account_settings.html:16
 msgid ""
 "div class=\"w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-"
-"indigo-600 flex items-center justify-center text-white text-3xl font-bold "
-"shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30\">"
+"indigo-600 flex items-center justify-center text-white text-3xl font-bold"
+" shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30\">"
 msgstr ""
 
 #: templates/users/account_settings.html:26
 msgid ""
-"h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white"
-" mb-2\">"
+"h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-"
+"white mb-2\">"
 msgstr ""
 
 #: templates/users/account_settings.html:29
@@ -2702,8 +2712,8 @@ msgid ""
 "mb-2\">"
 msgstr ""
 
-#: templates/users/account_settings.html:261
-#: templates/users/enable_2fa.html:62 templates/users/verify_2fa_login.html:32
+#: templates/users/account_settings.html:261 templates/users/enable_2fa.html:62
+#: templates/users/verify_2fa_login.html:32
 msgid "000000"
 msgstr ""
 
@@ -2728,10 +2738,12 @@ msgstr ""
 #: templates/users/chat.html:19
 msgid ""
 "\" \n"
-"                   class=\"inline-flex items-center justify-center px-6 py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 \n"
+"                   class=\"inline-flex items-center justify-center px-6 "
+"py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 \n"
 "                          bg-gradient-to-r from-gold to-gold-dark \n"
 "                          hover:from-gold-light hover:to-gold \n"
-"                          transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                          transform hover:scale-[1.02] "
+"active:scale-[0.98] \n"
 "                          transition-all duration-200\">"
 msgstr ""
 
@@ -2807,9 +2819,9 @@ msgstr "مدیریت سفارشات"
 
 #: templates/users/dashboard.html:31
 msgid ""
-"div class=\"w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-dark "
-"flex items-center justify-center text-2xl font-bold text-dark-900 shadow-lg "
-"shadow-gold/30\">"
+"div class=\"w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-"
+"dark flex items-center justify-center text-2xl font-bold text-dark-900 "
+"shadow-lg shadow-gold/30\">"
 msgstr ""
 
 #: templates/users/dashboard.html:35
@@ -2828,13 +2840,17 @@ msgstr ""
 #: templates/users/dashboard.html:85
 msgid ""
 "\" \n"
-"                       class=\"px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-center\">"
+"                       class=\"px-4 py-2 rounded-lg border border-"
+"gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-"
+"gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-"
+"center\">"
 msgstr ""
 
 #: templates/users/dashboard.html:90 templates/users/dashboard.html:95
 msgid ""
 "\" \n"
-"                           class=\"px-4 py-2 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark transition text-sm font-medium text-center\">"
+"                           class=\"px-4 py-2 rounded-lg bg-gold text-"
+"dark-900 hover:bg-gold-dark transition text-sm font-medium text-center\">"
 msgstr ""
 
 #: templates/users/dashboard.html:112
@@ -2875,7 +2891,8 @@ msgstr ""
 #: templates/users/dashboard.html:150
 msgid ""
 "\"\n"
-"                   class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
+"                   class=\"inline-flex items-center gap-2 text-gold hover"
+":text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:166
@@ -2885,7 +2902,8 @@ msgstr "مدیریت سفارشات"
 #: templates/users/dashboard.html:169 templates/users/dashboard.html:215
 msgid ""
 "\" \n"
-"                   class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
+"                   class=\"inline-flex items-center gap-2 text-gold hover"
+":text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:185
@@ -2897,7 +2915,8 @@ msgstr "چت هوشمند"
 #: templates/users/producer_orders.html:136
 msgid ""
 "\" \n"
-"                       class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
+"                       class=\"inline-flex items-center gap-2 text-gold "
+"hover:text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:212
@@ -2911,8 +2930,9 @@ msgstr "🌍 جستجوی بندر"
 
 #: templates/users/dashboard.html:254 templates/users/dashboard.html:274
 msgid ""
-"div class=\"w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark "
-"flex items-center justify-center text-dark-900 font-bold shadow-lg\">"
+"div class=\"w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-"
+"dark flex items-center justify-center text-dark-900 font-bold shadow-"
+"lg\">"
 msgstr ""
 
 #: templates/users/dashboard.html:258
@@ -2922,9 +2942,12 @@ msgstr ""
 #: templates/users/dashboard.html:262
 msgid ""
 "\" \n"
-"                       class=\"px-6 py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
-"                              hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] \n"
-"                              transition-all duration-200 shadow-lg whitespace-nowrap\">"
+"                       class=\"px-6 py-3 rounded-xl bg-gradient-to-r "
+"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold "
+"transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                              transition-all duration-200 shadow-lg "
+"whitespace-nowrap\">"
 msgstr ""
 
 #: templates/users/dashboard.html:278
@@ -2942,8 +2965,7 @@ msgstr "ورود به حساب"
 msgid "Enable Two-Factor Authentication"
 msgstr "امنیت و احراز هویت"
 
-#: templates/users/enable_2fa.html:16
-#: templates/users/show_backup_codes.html:16
+#: templates/users/enable_2fa.html:16 templates/users/show_backup_codes.html:16
 msgid "p class=\"mt-2 text-sm text-gray-600 dark:text-gray-400\">"
 msgstr ""
 
@@ -2978,21 +3000,22 @@ msgid ""
 "                "
 msgstr "امنیت و احراز هویت"
 
-#: templates/users/enable_2fa.html:87
-#: templates/users/show_backup_codes.html:83
+#: templates/users/enable_2fa.html:87 templates/users/show_backup_codes.html:83
 msgid "💡 Tip:"
 msgstr ""
 
 #: templates/users/enable_2fa.html:87
 msgid ""
-"After activation, store backup codes in a secure location. These codes are used for emergencies.\n"
+"After activation, store backup codes in a secure location. These codes "
+"are used for emergencies.\n"
 "            "
 msgstr ""
 
 #: templates/users/enable_2fa.html:92
 msgid ""
 "\" \n"
-"               class=\"font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300\">"
+"               class=\"font-medium text-gray-600 hover:text-gray-500 dark"
+":text-gray-400 dark:hover:text-gray-300\">"
 msgstr ""
 
 #: templates/users/make_payment.html:16
@@ -3305,15 +3328,16 @@ msgstr "آپلود مدارک"
 #: templates/users/my_documents.html:84 templates/users/my_documents.html:104
 #: templates/users/my_documents.html:124
 msgid ""
-"div class=\"w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-"
-"center justify-center text-2xl\">"
+"div class=\"w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex "
+"items-center justify-center text-2xl\">"
 msgstr ""
 
 #: templates/users/my_documents.html:89 templates/users/my_documents.html:109
 #: templates/users/my_documents.html:129
 msgid ""
 "\" target=\"_blank\"\n"
-"                       class=\"px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition\">"
+"                       class=\"px-4 py-2 rounded-lg bg-blue-600 text-"
+"white text-sm font-medium hover:bg-blue-700 transition\">"
 msgstr ""
 
 #: templates/users/my_documents.html:97 templates/users/my_documents.html:117
@@ -3372,11 +3396,11 @@ msgstr "✅ فیش پرداخت دریافت شد"
 
 #: templates/users/payment_confirmation.html:19
 msgid ""
-"Your premium upgrade request has been received. Our team will review your "
-"documents within "
+"Your premium upgrade request has been received. Our team will review your"
+" documents within "
 msgstr ""
-"درخواست ارتقاء شما دریافت شد. تیم مدیریت به زودی مدارک شما را بررسی کرده و "
-"نتیجه را از طریق ایمیل اطلاع‌رسانی خواهد کرد."
+"درخواست ارتقاء شما دریافت شد. تیم مدیریت به زودی مدارک شما را بررسی کرده "
+"و نتیجه را از طریق ایمیل اطلاع‌رسانی خواهد کرد."
 
 #: templates/users/payment_confirmation.html:19
 #: templates/users/verify_phone.html:18
@@ -3599,16 +3623,20 @@ msgstr "تأیید"
 
 #: templates/users/producer_orders.html:107
 msgid ""
-"div class=\"text-center py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-dark-700 "
-"text-gray-600 dark:text-slate-400 text-sm\">"
+"div class=\"text-center py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-"
+"dark-700 text-gray-600 dark:text-slate-400 text-sm\">"
 msgstr ""
 
 #: templates/users/producer_orders.html:114
 msgid ""
 "\" \n"
-"                                   class=\"inline-flex items-center justify-center gap-1 py-2 px-4 rounded-lg border border-gray-300 dark:border-dark-600 \n"
-"                                          text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 \n"
-"                                          font-medium text-xs transition\">"
+"                                   class=\"inline-flex items-center "
+"justify-center gap-1 py-2 px-4 rounded-lg border border-gray-300 dark"
+":border-dark-600 \n"
+"                                          text-gray-700 dark:text-"
+"slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 \n"
+"                                          font-medium text-xs "
+"transition\">"
 msgstr ""
 
 #: templates/users/producer_orders.html:134
@@ -3635,14 +3663,14 @@ msgstr ""
 
 #: templates/users/profile_edit.html:18
 msgid ""
-"bg-red-100 border border-red-400 text-red-700 dark:bg-red-900/30 "
-"dark:border-red-700 dark:text-red-400"
+"bg-red-100 border border-red-400 text-red-700 dark:bg-red-900/30 dark"
+":border-red-700 dark:text-red-400"
 msgstr ""
 
 #: templates/users/profile_edit.html:18
 msgid ""
-"bg-blue-100 border border-blue-400 text-blue-700 dark:bg-blue-900/30 "
-"dark:border-blue-700 dark:text-blue-400"
+"bg-blue-100 border border-blue-400 text-blue-700 dark:bg-blue-900/30 dark"
+":border-blue-700 dark:text-blue-400"
 msgstr ""
 
 # Registration Steps
@@ -3750,7 +3778,10 @@ msgstr "ذخیره تغییرات"
 #: templates/users/profile_edit.html:147
 msgid ""
 "\"\n"
-"                   class=\"flex-1 bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-slate-300 py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-dark-600 transition duration-200 font-medium text-center shadow-md\">"
+"                   class=\"flex-1 bg-gray-200 dark:bg-dark-700 text-"
+"gray-700 dark:text-slate-300 py-3 px-4 rounded-lg hover:bg-gray-300 "
+"dark:hover:bg-dark-600 transition duration-200 font-medium text-center "
+"shadow-md\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:164
@@ -3764,7 +3795,8 @@ msgstr ""
 #: templates/users/profile_edit.html:166
 msgid ""
 "\" class=\"text-xs text-indigo-700 dark:text-indigo-300 underline font-"
-"medium mt-1 inline-block hover:text-indigo-900 dark:hover:text-indigo-200\">"
+"medium mt-1 inline-block hover:text-indigo-900 dark:hover:text-"
+"indigo-200\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:181
@@ -3778,7 +3810,8 @@ msgstr ""
 #: templates/users/profile_edit.html:183
 msgid ""
 "\" class=\"text-xs text-yellow-700 dark:text-yellow-300 underline font-"
-"medium mt-1 inline-block hover:text-yellow-900 dark:hover:text-yellow-200\">"
+"medium mt-1 inline-block hover:text-yellow-900 dark:hover:text-"
+"yellow-200\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:196
@@ -3791,8 +3824,9 @@ msgstr ""
 
 #: templates/users/profile_edit.html:198
 msgid ""
-"\" class=\"text-xs text-green-700 dark:text-green-300 underline font-medium "
-"mt-1 inline-block hover:text-green-900 dark:hover:text-green-200\">"
+"\" class=\"text-xs text-green-700 dark:text-green-300 underline font-"
+"medium mt-1 inline-block hover:text-green-900 dark:hover:text-"
+"green-200\">"
 msgstr ""
 
 #: templates/users/show_backup_codes.html:15
@@ -3825,7 +3859,8 @@ msgstr "آپلود و ادامه"
 
 #: templates/users/show_backup_codes.html:83
 msgid ""
-"You can take a picture of these codes or store them in a password manager like LastPass or 1Password.\n"
+"You can take a picture of these codes or store them in a password manager"
+" like LastPass or 1Password.\n"
 "            "
 msgstr ""
 
@@ -3848,8 +3883,10 @@ msgstr ""
 #: templates/users/support.html:34
 msgid ""
 "\" \n"
-"                       class=\"px-5 py-2 rounded-lg bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
-"                              hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                       class=\"px-5 py-2 rounded-lg bg-gradient-to-r "
+"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold "
+"transform hover:scale-[1.02] active:scale-[0.98] \n"
 "                              transition-all duration-200 shadow\">"
 msgstr ""
 
@@ -3935,14 +3972,14 @@ msgstr ""
 
 #: templates/users/verify_phone.html:26
 msgid ""
-"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border "
-"border-green-200 dark:border-green-800"
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
+"border border-green-200 dark:border-green-800"
 msgstr ""
 
 #: templates/users/verify_phone.html:26
 msgid ""
-"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-"
-"red-200 dark:border-red-800"
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border "
+"border-red-200 dark:border-red-800"
 msgstr ""
 
 #: templates/users/verify_phone.html:26
@@ -4003,14 +4040,15 @@ msgstr ""
 #: templates/users/vessel_finder.html:101
 #: templates/users/vessel_finder.html:105
 msgid ""
-"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right "
-"font-mono\">"
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right"
+" font-mono\">"
 msgstr ""
 
 #: templates/users/vessel_finder.html:85 templates/users/vessel_finder.html:89
 #: templates/users/vessel_finder.html:93 templates/users/vessel_finder.html:97
 msgid ""
-"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right\">"
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-"
+"right\">"
 msgstr ""
 
 #~ msgid "Register"
@@ -4335,3 +4373,4 @@ msgstr ""
 
 #~ msgid "Investor Description"
 #~ msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
+
