@@ -282,7 +282,7 @@ def register():
         # If there are errors, return to form
         if errors:
             for error in errors:
-                flash(error)
+                flash(gettext(error))
             return redirect(url_for('users.register'))
         # Create new user - DEBUG VERSION
         try:
@@ -381,7 +381,8 @@ def login():
         # بررسی قفل بودن حساب
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
-                flash(gettext(f"❌ Your account is locked until {user.locked_until.strftime(\'%Y-%m-%d %H:%M\')} due to failed attempts."))
+                lock_time = user.locked_until.strftime('%Y-%m-%d %H:%M')
+                flash(gettext(f"❌ Your account is locked until {lock_time} due to failed attempts."))
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='login_blocked',
