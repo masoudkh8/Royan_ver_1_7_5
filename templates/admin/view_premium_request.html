@@ -6,13 +6,13 @@
 <div class="min-h-[calc(100vh-4rem)] px-4 py-8">
     <div class="max-w-3xl mx-auto space-y-6">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📄 Upgrade Request Details</h1>
+            <h1class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">📄 Upgrade Request Detail>{{ _("📄 Upgrade Request Details") }}</h1>
             <a href="{{ url_for('admin.premium_requests') }}" class="text-sm text-gray-600 dark:text-slate-400 hover:text-gold transition">← Back to Requests</a>
         </div>
 
         <!-- اطلاعات کاربر -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 p-5">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">👤 User Information</h2>
+            <h2class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">👤 User Informatio>{{ _("👤 User Information") }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <div class="p-3 rounded-lg bg-gray-50 dark:bg-dark-700/50"><span class="text-gray-500 dark:text-slate-400">Username:</span> <span class="font-medium text-gray-900 dark:text-white ml-1">{{ req.user.username }}</span></div>
                 <div class="p-3 rounded-lg bg-gray-50 dark:bg-dark-700/50"><span class="text-gray-500 dark:text-slate-400">Email:</span> <span class="font-medium text-gray-900 dark:text-white ml-1">{{ req.user.email }}</span></div>
@@ -26,7 +26,7 @@
 
         <!-- وضعیت مراحل -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 p-5">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">✅ Step Verification Status</h2>
+            <h2class="text-lg font-semibold text-gray-900 dark:text-white mb-3">✅ Step Verification Statu>{{ _("✅ Step Verification Status") }}</h2>
             <div class="space-y-3">
                 <div class="flex items-center justify-between p-3 rounded-lg {% if req.phone_verified %}bg-green-50 dark:bg-green-900/20{% else %}bg-gray-50 dark:bg-dark-700/50{% endif %}">
                     <span class="font-medium text-gray-700 dark:text-slate-300">📱 Mobile Verification</span>
@@ -53,7 +53,7 @@
 
         <!-- مدارک آپلود شده -->
         <div class="bg-white dark:bg-dark-800 rounded-xl shadow border border-gray-200 dark:border-dark-700 p-5">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">📎 Uploaded Documents</h2>
+            <h2class="text-lg font-semibold text-gray-900 dark:text-white mb-3">📎 Uploaded Document>{{ _("📎 Uploaded Documents") }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {% if req.passport_file %}
                 <a href="{{ url_for('static', filename='uploads/documents/user_' + req.user.id|string +'_'+ req.user.username|string+ '/' + req.passport_file) }}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition group">
@@ -94,12 +94,12 @@
             <form method="POST" action="{{ url_for('admin.review_premium_request', req_id=req.id) }}" class="flex-1">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="action" value="approve">
-                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-sm hover:from-green-600 hover:to-green-700 shadow-lg transition transform hover:scale-[1.02] active:scale-[0.98]">✅ Confirm Request</button>
+                <buttontype="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-sm hover:from-green-600 hover:to-green-700 shadow-lg transition transform hover:scale-[1.02] active:scale-[0.98]">✅ Confirm Request>{{ _("✅ Confirm Request") }}</button>
             </form>
             <form method="POST" action="{{ url_for('admin.review_premium_request', req_id=req.id) }}" class="flex-1">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="action" value="reject">
-                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-sm hover:from-red-600 hover:to-red-700 shadow-lg transition transform hover:scale-[1.02] active:scale-[0.98]">❌ Reject Request</button>
+                <buttontype="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-sm hover:from-red-600 hover:to-red-700 shadow-lg transition transform hover:scale-[1.02] active:scale-[0.98]">❌ Reject Request>{{ _("❌ Reject Request") }}</button>
             </form>
         </div>
         {% endif %}

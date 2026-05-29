@@ -14,7 +14,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v3m-3-3h6M6 10h12M6 6h12M6 14h12M6 18h12" />
                 </svg>
             </div>
-            <h2 class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Welcome</h2>
+            <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Welcom>{{ _("Welcome") }}</h2>
             <p class="text-gray-600 dark:text-slate-400">Log in to the Metisma platform</p>
         </div>
 
@@ -25,21 +25,21 @@
             <div class="space-y-4">
                 <!-- فیلد ایمیل -->
                 <div>
-                    <label for="email" class="form-label">Email</label>
+                    <labelfor="email" class="form-label">Email>{{ _("Email") }}</label>
                     <input id="email" name="email" type="email" required
                            class="form-input"
-                           placeholder="you@example.com"
+                           placeholder="{{ _("you@example.com") }}"
                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     <p class="mt-1 text-xs text-gray-500 dark:text-slate-400 hidden" id="emailError"></p>
                 </div>
                 
                 <!-- فیلد رمز عبور با دکمه نمایش -->
                 <div>
-                    <label for="password" class="form-label">Password</label>
+                    <labelfor="password" class="form-label">Password>{{ _("Password") }}</label>
                     <div class="relative">
                         <input id="password" name="password" type="password" required
                                class="form-input pr-12"
-                               placeholder="••••••••" minlength="8">
+                               placeholder="{{ _("••••••••") }}" minlength="8">
                         <button type="button" onclick="togglePassword()" 
                                 class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-dark-600 transition"
                                 aria-label="Toggle password visibility">
@@ -58,9 +58,9 @@
                 <div class="flex items-center">
                     <input id="remember" name="remember" type="checkbox"
                            class="h-4 w-4 rounded border-gray-300 dark:border-dark-600 text-gold focus:ring-gold dark:bg-dark-700">
-                    <label for="remember" class="ml-2 block text-sm text-gray-700 dark:text-slate-300">
+                    <labelfor="remember" class="ml-2 block text-sm text-gray-700 dark:text-slate-300">
                         Remember me
-                    </label>
+                    >{{ _("Remember me") }}</label>
                 </div>
                  <a href="{{ url_for('users.forgot_password') }}" class="text-sm text-gold hover:text-gold-light transition">
                     Forgot password?

@@ -284,7 +284,7 @@
                 <div class="auth-logo floating">
                     <i class="fas fa-shield-halved"></i>
                 </div>
-                <h1 class="auth-title">Create First Admin</h1>
+                <h1class="auth-title">Create First Admi>{{ _("Create First Admin") }}</h1>
                 <p class="auth-subtitle">
                     Initialize the admin system by creating the first administrator account.
                     This account will have full access to all system features.
@@ -327,7 +327,7 @@
                             class="form-control" 
                             id="username" 
                             name="username" 
-                            placeholder="Choose a username"
+                            placeholder="{{ _("Choose a username") }}"
                             value="{{ username or '' }}"
                             required
                             minlength="3"
@@ -348,7 +348,7 @@
                             class="form-control" 
                             id="email" 
                             name="email" 
-                            placeholder="admin@example.com"
+                            placeholder="{{ _("admin@example.com") }}"
                             value="{{ email or '' }}"
                             required
                             autocomplete="email"
@@ -368,7 +368,7 @@
                             class="form-control" 
                             id="password" 
                             name="password" 
-                            placeholder="Minimum 8 characters"
+                            placeholder="{{ _("Minimum 8 characters") }}"
                             required
                             minlength="8"
                             autocomplete="new-password"
@@ -390,7 +390,7 @@
                             class="form-control" 
                             id="confirm_password" 
                             name="confirm_password" 
-                            placeholder="Re-enter your password"
+                            placeholder="{{ _("Re-enter your password") }}"
                             required
                             minlength="8"
                             autocomplete="new-password"

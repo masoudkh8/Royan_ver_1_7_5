@@ -7,9 +7,9 @@
 <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
     <div class="container mx-auto px-4">
         <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            <h1class="text-4xl md:text-5xl font-bold mb-4">
                 🏛️ Metisma Online Exhibition
-            </h1>
+           >{{ _("🏛️ Metisma Online Exhibition") }}</h1>
             <p class="text-xl mb-8 opacity-90">
                 Discover Business Opportunities in Interactive Virtual Booths
             </p>
@@ -36,9 +36,9 @@
 <!-- Featured Booths -->
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+        <h2class="text-3xl font-bold text-center mb-8 text-gray-800">
             ⭐ Featured Booths
-        </h2>
+       >{{ _("⭐ Featured Booths") }}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for booth in featured_booths %}
@@ -46,7 +46,7 @@
                 <!-- Booth Image -->
                 <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative">
                     {% if booth.image_url %}
-                    <img src="{{ booth.image_url }}" alt="{{ booth.title_fa }}" class="w-full h-full object-cover">
+                    <img src="{{ booth.image_url }}" alt="{{ _("{{ booth.title_fa }}") }}" class="w-full h-full object-cover">
                     {% else %}
                     <div class="w-full h-full flex items-center justify-center text-white text-6xl">
                         🏪
@@ -84,7 +84,7 @@
         <div class="text-center mt-8">
             <a href="#" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition-colors">
                 View All Booths →
-            </a>
+            >{{ _("View All Booths →") }}</a>
         </div>
     </div>
 </section>
@@ -92,9 +92,9 @@
 <!-- Active Exhibitions -->
 <section class="py-12">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+        <h2class="text-3xl font-bold text-center mb-8 text-gray-800">
             📅 Active Exhibitions
-        </h2>
+       >{{ _("📅 Active Exhibitions") }}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for exhibition in exhibitions %}
@@ -121,7 +121,7 @@
                     </span>
                     <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                         Enter Exhibition →
-                    </a>
+                    >{{ _("Enter Exhibition →") }}</a>
                 </div>
             </div>
             {% endfor %}
@@ -132,7 +132,7 @@
 <!-- CTA Section -->
 <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Are You an Exhibitor?</h2>
+        <h2class="text-3xl font-bold mb-4">Are You an Exhibitor>{{ _("Are You an Exhibitor?") }}</h2>
         <p class="text-xl mb-8 opacity-90">Create your virtual booth today and connect with thousands of visitors</p>
         
         {% if current_user.is_authenticated %}

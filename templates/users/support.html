@@ -25,7 +25,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-white">Support - Contact Admin</h2>
+                    <h2class="text-xl font-bold text-gray-900 dark:text-white">Support - Contact Admi>{{ _("Support - Contact Admin") }}</h2>
                 </div>
                 <p class="text-gray-600 dark:text-slate-400 mb-4">This section allows non-premium users to receive messages from the admin. You can request assistance here.</p>
                 
@@ -81,13 +81,13 @@
                     <div class="flex gap-3">
                         <input type="text" name="content" required
                                class="form-input flex-1"
-                               placeholder="Type your message to admin...">
-                        <button type="submit"
+                               placeholder="{{ _("Type your message to admin...") }}">
+                        <buttontype="submit"
                                 class="px-6 py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm 
                                        hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] 
                                        transition-all duration-200 shadow-lg">
                             Send
-                        </button>
+                        >{{ _("Send") }}</button>
                     </div>
                 </form>
             </div>

@@ -38,7 +38,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                             <div class="d-flex align-items-center">
                                 {% if user.profile and user.profile.avatar_url %}
-                                    <img src="{{ user.profile.avatar_url }}" alt="{{ user.username }}" class="rounded-circle me-2" width="40" height="40" style="object-fit: cover;">
+                                    <img src="{{ user.profile.avatar_url }}" alt="{{ _("{{ user.username }}") }}" class="rounded-circle me-2" width="40" height="40" style="object-fit: cover;">
                                 {% else %}
                                     <div class="rounded-circle bg-secondary me-2 d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
                                         {{ user.username[0]|upper }}
@@ -110,7 +110,7 @@
             {/* Trending Tags */}
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-white">
-                    <h6 class="mb-0">Trending Tags</h6>
+                    <h6class="mb-0">Trending Tag>{{ _("Trending Tags") }}</h6>
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-wrap gap-2">
