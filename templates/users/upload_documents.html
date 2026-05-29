@@ -55,11 +55,19 @@
             </div>
         </form>
 
-        <!-- لینک بازگشت -->
+        <!-- لینک بازگشت - با توجه به وضعیت مدارک -->
         <div class="text-center pt-6 border-t border-gray-200 dark:border-dark-700">
-            <a href="{{ url_for('users.upgrade_to_premium') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
-                ← Return to Upgrade Steps
-            </a>
+            {% if req and req.passport_file and req.license_file %}
+                <!-- اگر مدارک آپلود شده، بازگشت به صفحه مشاهده مدارک -->
+                <a href="{{ url_for('users.view_my_documents') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    ← View Document Status
+                </a>
+            {% else %}
+                <!-- اگر مدارک آپلود نشده، بازگشت به مراحل ارتقاء -->
+                <a href="{{ url_for('users.upgrade_to_premium') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    ← Return to Upgrade Steps
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>

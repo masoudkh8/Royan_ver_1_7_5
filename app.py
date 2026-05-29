@@ -384,11 +384,13 @@ def create_app():
     os.makedirs(Config.PROFILE_UPLOAD_FOLDER, exist_ok=True)
     os.makedirs(Config.MAGAZINE_UPLOAD_FOLDER, exist_ok=True)
 
-    # Inject translator from utils
-    from utils.translations import translator
+    # Inject translator from utils (dynamically based on user's language)
     @app.context_processor
     def inject_translator():
-        return {'t': translator.t, 't_': translator.t}
+        from utils.translations import Translator
+        lang = session.get('lang', 'fa')
+        current_translator = Translator(lang)
+        return {'t': current_translator.t, 't_': current_translator.t}
 
     # ✅ Inject current_locale for all templates (FIXES UndefinedError)
     @app.context_processor

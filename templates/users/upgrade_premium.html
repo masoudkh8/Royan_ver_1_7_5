@@ -49,6 +49,19 @@
                 </button>
             </form>
         </div>
+        {% elif req and not (req.passport_file and req.license_file) %}
+        <!-- اگر درخواست وجود دارد اما مدارک آپلود نشده، دکمه ادامه نمایش داده شود -->
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg border border-gray-200 dark:border-dark-700 p-8 mb-6 text-center">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Continue Your Premium Journey</h3>
+            <p class="text-gray-600 dark:text-slate-400 mb-6">You have started the verification process but haven't uploaded your documents yet.</p>
+            
+            <a href="{{ url_for('users.upload_documents') }}" 
+               class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-lg 
+                      hover:from-gold-light hover:to-gold transform hover:scale-105 active:scale-95 
+                      transition-all duration-200 shadow-xl">
+                📄 Upload Documents Now
+            </a>
+        </div>
         {% endif %}
 
         <!-- نوار پیشرفت (Progress Bar) -->

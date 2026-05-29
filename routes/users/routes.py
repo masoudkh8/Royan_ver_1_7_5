@@ -1606,8 +1606,11 @@ def upgrade_to_premium():
             flash("✅ You have already become a special user.")
             return redirect(url_for('users.profile'))
         elif req.status == 'pending':
-            flash("⚠️ Your request is being reviewed.")
-            return redirect(url_for('users.payment_confirmation',now=datetime.now()))
+            # فقط اگر مدارک آپلود شده باشند، کاربر در حال بررسی است
+            if req.passport_file and req.license_file and req.payment_receipt:
+                flash("⚠️ Your request is under review by admin.")
+                return redirect(url_for('users.view_my_documents'))
+            # اگر مدارک آپلود نشده، اجازه ادامه فرآیند را بده
 
     # ارسال `req` به تمپلیت
     return render_template('users/upgrade_premium.html', req=req, requests=requests)
@@ -1635,8 +1638,11 @@ def start_upgrade():
     ).first()
     
     if existing_pending:
-        flash("You already have a pending verification request.", "info")
-        return redirect(url_for('users.upgrade_to_premium'))
+        # اگر مدارک آپلود شده باشند، کاربر در حال بررسی است
+        if existing_pending.passport_file and existing_pending.license_file and existing_pending.payment_receipt:
+            flash("You already have a pending verification request.", "info")
+            return redirect(url_for('users.upgrade_to_premium'))
+        # اگر مدارک آپلود نشده، اجازه ادامه فرآیند را بده
     
     # ایجاد درخواست جدید فقط اگر هیچ درخواست فعالی وجود ندارد
     req = PremiumRequest(user_id=current_user.id, requested_phone=current_user.phone or '')
@@ -1743,7 +1749,8 @@ def make_payment():
         flash("Please upload your documents first.", "error")
         return redirect(url_for('users.upload_documents'))
 
-    if req.payment_verified:
+    # اگر رسید پرداخت قبلاً آپلود شده و تأیید شده، کاربر نباید بتواند دوباره آپلود کند
+    if req.payment_verified and req.payment_receipt:
         return redirect(url_for('users.payment_confirmation',now=datetime.now()))
 
 
