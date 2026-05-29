@@ -3,35 +3,35 @@ import os
 import importlib.util
 
 print("=" * 50)
-print("🔍 بررسی ساختار پروژه")
+print("🔍 Checking project structure")
 print("=" * 50)
 
-# لیست فایل‌های پایتون در روت
+# List of Python files in root
 py_files = [f for f in os.listdir('.') if f.endswith('.py')]
-print(f"\n📄 فایل‌های .py موجود: {py_files}")
+print(f"\n📄 Available .py files: {py_files}")
 
-# بررسی هر فایل
+# Check each file
 for file in py_files:
-    module_name = file[:-3]  # حذف .py
+    module_name = file[:-3]  # Remove .py
     try:
         spec = importlib.util.spec_from_file_location(module_name, file)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         
-        # بررسی وجود متغیرهای رایج فلوریان
+        # Check for common Flask variables
         flask_vars = ['app', 'application', 'flask_app']
         found = [var for var in flask_vars if hasattr(module, var)]
         
         if found:
-            print(f"\n✅ فایل {file}:")
-            print(f"   متغیرهای پیدا شده: {found}")
+            print(f"\n✅ File {file}:")
+            print(f"   Variables found: {found}")
             
-            # بررسی نوع متغیر
+            # Check variable type
             for var in found:
                 obj = getattr(module, var)
-                print(f"   {var} نوع: {type(obj).__name__}")
+                print(f"   {var} type: {type(obj).__name__}")
                 
     except Exception as e:
-        print(f"\n❌ فایل {file}: خطا - {e}")
+        print(f"\n❌ File {file}: Error - {e}")
 
 print("\n" + "=" * 50)
