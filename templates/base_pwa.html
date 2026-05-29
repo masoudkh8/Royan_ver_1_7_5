@@ -100,13 +100,13 @@
     </style>
 
 
-    <!-- فریم‌ورک Tailwind CSS -->
+    <!-- Tailwind CSS Framework -->
 
     <link href="/static/css/output.css" rel="stylesheet">
 
-    <!-- fallback برای حالت آفلاین کامل (اختیاری): -->
+    <!-- fallback for complete offline mode (optional): -->
     <script>
-        // اگر output.css لود نشد، از CDN استفاده کن (فقط برای توسعه)
+        // If output.css fails to load, use CDN (for development only)
         window.addEventListener('load', function () {
             const link = document.querySelector('link[href*="output.css"]');
             if (!link || link.sheet === null) {
@@ -119,7 +119,7 @@
     </script>
 
 
-    <!-- کتابخانه Three.js (لود لوکال - بدون تغییر) -->
+    <!-- Three.js Library (loaded locally - unchanged) -->
     <script src="/static/js/three.min.js"></script>
 
     <!-- PWA Manifest -->
