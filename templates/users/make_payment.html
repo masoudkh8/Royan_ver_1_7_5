@@ -77,13 +77,25 @@
 
         <!-- لینک بازگشت -->
         <div class="text-center pt-6 border-t border-gray-200 dark:border-dark-700">
-            <a href="{{ url_for('users.upgrade_to_premium') }}" 
-               class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                </svg>
-                Return
-            </a>
+            {% if req and req.payment_receipt %}
+                <!-- اگر رسید پرداخت آپلود شده، بازگشت به صفحه مشاهده وضعیت -->
+                <a href="{{ url_for('users.view_my_documents') }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    View Payment Status
+                </a>
+            {% else %}
+                <!-- اگر رسید پرداخت آپلود نشده، بازگشت به مراحل ارتقاء -->
+                <a href="{{ url_for('users.upgrade_to_premium') }}" 
+                   class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Return to Upgrade Steps
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>
