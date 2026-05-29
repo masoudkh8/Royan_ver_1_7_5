@@ -2,43 +2,43 @@ import os
 import sys
 import subprocess
 
-# مسیر فایل‌ها
+# File paths
 po_file = "translations/fa/LC_MESSAGES/messages.po"
 mo_file = "translations/fa/LC_MESSAGES/messages.mo"
 
 def compile_po_to_mo(po_path, mo_path):
     """
-    کامپایل فایل PO به MO با استفاده از کتابخانه استاندارد پایتون (بدون نیاز به نصب gettext روی سیستم)
-    این تابع از ماژول داخلی babel برای کامپایل استفاده می‌کند اگر موجود باشد،
-    در غیر این صورت از پیاده‌سازی خالص پایتون استفاده می‌کند.
+    Compile PO file to MO using Python standard library (no need to install gettext on system)
+    This function uses the internal babel module for compilation if available,
+    otherwise uses pure Python implementation.
     """
     if not os.path.exists(po_path):
-        print(f"❌ فایل {po_path} یافت نشد.")
+        print(f"❌ File {po_path} not found.")
         return False
 
     try:
-        # ایجاد پوشه مقصد اگر وجود ندارد
+        # Create destination directory if it doesn't exist
         os.makedirs(os.path.dirname(mo_path), exist_ok=True)
 
-        # تلاش برای استفاده از babel اگر نصب باشد
+        # Try to use babel if installed
         try:
             from babel.messages import pofile, mofile
-            # استفاده از babel برای کامپایل
+            # Use babel for compilation
             catalog = pofile.read_po(open(po_path, 'rb'))
             mo_data = mofile.write_mo(catalog)
             with open(mo_path, 'wb') as f:
                 f.write(mo_data)
             
             if os.path.exists(mo_path) and os.path.getsize(mo_path) > 0:
-                print(f"✅ فایل MO با موفقیت ساخته شد (با Babel): {mo_path}")
+                print(f"✅ MO file successfully created (with Babel): {mo_path}")
                 return True
         except ImportError:
-            pass  # اگر babel نصب نبود، از روش جایگزین استفاده می‌کنیم
+            pass  # If babel is not installed, use alternative method
         except Exception as babel_error:
-            print(f"⚠️ خطا در Babel: {babel_error}، استفاده از روش جایگزین...")
+            print(f"⚠️ Error in Babel: {babel_error}, using alternative method...")
 
-        # روش جایگزین: خواندن فایل PO و نوشتن باینری MO به صورت دستی
-        # این یک پیاده‌سازی ساده‌شده است
+        # Alternative method: Read PO file and write binary MO manually
+        # This is a simplified implementation
         import struct
         import hashlib
         
@@ -67,14 +67,14 @@ def compile_po_to_mo(po_path, mo_path):
         if current_msgid is not None:
             translations[current_msgid] = current_msgstr
         
-        # نوشتن فایل MO به فرمت باینری ساده
-        # هدر فایل MO
-        magic = 0x950412de  # جادویی برای فایل‌های MO
+        # Write MO file in simple binary format
+        # MO file header
+        magic = 0x950412de  # Magic number for MO files
         revision = 0
         num_strings = len(translations)
         
-        # محاسبه آفست‌ها
-        header_size = 28  # اندازه هدر ثابت
+        # Calculate offsets
+        header_size = 28  # Fixed header size
         key_table_offset = header_size
         value_table_offset = key_table_offset + (num_strings * 8)
         
@@ -86,7 +86,7 @@ def compile_po_to_mo(po_path, mo_path):
         value_offsets = []
         
         for key, value in sorted(translations.items()):
-            if not key:  # کلید خالی را رد کن
+            if not key:  # Skip empty key
                 continue
             
             key_bytes = key.encode('utf-8')
@@ -101,30 +101,30 @@ def compile_po_to_mo(po_path, mo_path):
             value_offsets.append((len(value_bytes), current_offset))
             current_offset += len(value_bytes)
         
-        # ساخت باینری
-        binary_data = struct.pack('<I', magic)  # جادویی
-        binary_data += struct.pack('<I', revision)  # نسخه
-        binary_data += struct.pack('<I', num_strings)  # تعداد رشته‌ها
-        binary_data += struct.pack('<I', key_table_offset)  # آفست جدول کلیدها
-        binary_data += struct.pack('<I', value_table_offset)  # آفست جدول مقادیر
-        binary_data += struct.pack('<I', 0)  # اندازه جدول هش (0 برای ساده)
-        binary_data += struct.pack('<I', 0)  # آفست جدول هش
+        # Build binary
+        binary_data = struct.pack('<I', magic)  # Magic
+        binary_data += struct.pack('<I', revision)  # Revision
+        binary_data += struct.pack('<I', num_strings)  # Number of strings
+        binary_data += struct.pack('<I', key_table_offset)  # Key table offset
+        binary_data += struct.pack('<I', value_table_offset)  # Value table offset
+        binary_data += struct.pack('<I', 0)  # Hash table size (0 for simple)
+        binary_data += struct.pack('<I', 0)  # Hash table offset
         
-        # جدول کلیدها (طول، آفست)
+        # Key table (length, offset)
         for length, offset in key_offsets:
             binary_data += struct.pack('<I', length)
             binary_data += struct.pack('<I', offset)
         
-        # جدول مقادیر (طول، آفست)
+        # Value table (length, offset)
         for length, offset in value_offsets:
             binary_data += struct.pack('<I', length)
             binary_data += struct.pack('<I', offset)
         
-        # داده‌های کلیدها
+        # Key data
         for key_bytes in keys_data:
             binary_data += key_bytes
         
-        # داده‌های مقادیر
+        # Value data
         for value_bytes in values_data:
             binary_data += value_bytes
         
@@ -132,20 +132,20 @@ def compile_po_to_mo(po_path, mo_path):
             f.write(binary_data)
         
         if os.path.exists(mo_path) and os.path.getsize(mo_path) > 0:
-            print(f"✅ فایل MO با موفقیت ساخته شد (روش خالص پایتون): {mo_path}")
+            print(f"✅ MO file successfully created (pure Python method): {mo_path}")
             return True
         else:
-            print("❌ فایل MO ساخته نشد یا خالی است.")
+            print("❌ MO file was not created or is empty.")
             return False
             
     except Exception as e:
-        print(f"❌ خطا در هنگام کامپایل: {e}")
+        print(f"❌ Error during compilation: {e}")
         import traceback
         traceback.print_exc()
         return False
 
 if __name__ == "__main__":
-    print(f"🔄 در حال کامپایل {po_file} به {mo_file}...")
+    print(f"🔄 Compiling {po_file} to {mo_file}...")
     success = compile_po_to_mo(po_file, mo_file)
     if not success:
         sys.exit(1)
