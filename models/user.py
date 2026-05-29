@@ -357,49 +357,49 @@ class User(db.Model, UserMixin):
     
     @property
     def role_display_name(self):
-        """دریافت نام نمایشی فارسی نقش کاربر"""
+        """Get Persian display name of user role"""
         return Role.get_display_name(self.role.value) if self.role else None
     
     @property
     def tier_display_name(self):
-        """دریافت نام نمایشی فارسی لایه عضویت"""
-        return MembershipTier.get_display_name(self.membership_tier.value) if self.membership_tier else 'بازدیدکننده'
+        """Get Persian display name of membership tier"""
+        return MembershipTier.get_display_name(self.membership_tier.value) if self.membership_tier else 'Visitor'
     
     @property
     def is_core_member(self):
-        """آیا کاربر جزو اعضای اصلی باشگاه نخبگان است؟"""
+        """Is the user among the core members of the elite club?"""
         return self.role.value in Role.get_core_roles() if self.role else False
     
     @property
     def is_admin_or_moderator(self):
-        """آیا کاربر دسترسی مدیریتی دارد؟"""
+        """Does the user have administrative access?"""
         return self.role.value in ['admin', 'moderator'] if self.role else False
     
     def can_access_tier(self, required_tier: MembershipTier) -> bool:
-        """بررسی دسترسی هوشمند بر اساس لایه باشگاه"""
+        """Smart access check based on club tier"""
         if not self.membership_tier or not required_tier:
             return False
         return MembershipTier.get_hierarchy_level(self.membership_tier.value) >= MembershipTier.get_hierarchy_level(required_tier.value)
     
     def generate_invite_code(self):
-        """تولید کد دعوت منحصر به فرد"""
+        """Generate unique invite code"""
         import secrets
         if not self.invite_code:
             self.invite_code = f"{self.username.upper()[:4]}-{secrets.token_hex(4)}"
         return self.invite_code
     
     def follow(self, user):
-        """دنبال کردن کاربر دیگر"""
+        """Follow another user"""
         if not self.is_following(user):
             self.followed.append(user)
     
     def unfollow(self, user):
-        """آنفالو کردن کاربر"""
+        """Unfollow user"""
         if self.is_following(user):
             self.followed.remove(user)
     
     def is_following(self, user):
-        """آیا این کاربر، کاربر دیگر را دنبال می‌کند؟"""
+        """Is this user following another user?"""
         return self.followed.filter(
             connections.c.followed_id == user.id).count() > 0
     
