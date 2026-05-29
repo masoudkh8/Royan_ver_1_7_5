@@ -1,1 +1,51 @@
-Nothing should be ignored in this case, as the changes consist only of source code files (.py, .txt) without any build artifacts, dependencies, or temporary files that need to be ignored.
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+*.egg-info/
+dist/
+build/
+*.so
+*.dylib
+*.dll
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing and coverage
+.coverage
+coverage/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# Security and secrets
+secrets/
+*.key
+*.pem
+*.crt
+*.cert
+```

@@ -159,8 +159,8 @@ def notify_user_follow(follower_id, followed_user_id):
     
     notification_data = {
         'type': 'follow',
-        'title': 'دنبال‌کننده جدید',
-        'message': f'کاربر شما را دنبال کرد',
+        'title': 'New Follower',
+        'message': 'User followed you',
         'actor_id': follower_id,
         'url': url_for('social.public_profile', username='_username_', _external=True),
         'created_at': datetime.now(tehran_tz).isoformat()
@@ -175,8 +175,8 @@ def notify_post_like(liker_id, post_author_id, post_id):
     
     notification_data = {
         'type': 'like',
-        'title': 'پسند جدید',
-        'message': f'کاربر پست شما را پسندید',
+        'title': 'New Like',
+        'message': 'User liked your post',
         'actor_id': liker_id,
         'related_id': post_id,
         'related_type': 'post',
@@ -193,8 +193,8 @@ def notify_comment(commenter_id, post_author_id, post_id, comment_content):
     
     notification_data = {
         'type': 'comment',
-        'title': 'نظر جدید',
-        'message': f'کاربر روی پست شما نظر داد',
+        'title': 'New Comment',
+        'message': 'User commented on your post',
         'actor_id': commenter_id,
         'related_id': post_id,
         'related_type': 'post',
@@ -212,8 +212,8 @@ def notify_share(sharer_id, post_author_id, post_id):
     
     notification_data = {
         'type': 'share',
-        'title': 'اشتراک‌گذاری جدید',
-        'message': f'کاربر پست شما را اشتراک‌گذاری کرد',
+        'title': 'New Share',
+        'message': 'User shared your post',
         'actor_id': sharer_id,
         'related_id': post_id,
         'related_type': 'post',

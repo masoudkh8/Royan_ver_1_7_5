@@ -28,23 +28,23 @@ def seed_data():
         
         exhibitions_data = [
             {
-                'title_fa': 'نمایشگاه بین‌المللی فناوری',
+                'title_fa': 'International Technology Exhibition',
                 'title_en': 'International Technology Exhibition',
-                'description_fa': 'بزرگترین نمایشگاه فناوری در خاورمیانه',
+                'description_fa': 'The largest technology exhibition in the Middle East',
                 'description_en': 'The largest technology exhibition in the Middle East',
                 'status': 'active'
             },
             {
-                'title_fa': 'نمایشگاه صنایع پتروشیمی',
+                'title_fa': 'Petrochemical Industries Exhibition',
                 'title_en': 'Petrochemical Industries Exhibition',
-                'description_fa': 'نمایشگاه تخصصی صنایع پتروشیمی و انرژی',
+                'description_fa': 'Specialized exhibition for petrochemical and energy industries',
                 'description_en': 'Specialized exhibition for petrochemical and energy industries',
                 'status': 'active'
             },
             {
-                'title_fa': 'نمایشگاه کالاهای مصرفی',
+                'title_fa': 'Consumer Goods Exhibition',
                 'title_en': 'Consumer Goods Exhibition',
-                'description_fa': 'نمایشگاه محصولات مصرفی و خانگی',
+                'description_fa': 'Exhibition for consumer and household products',
                 'description_en': 'Exhibition for consumer and household products',
                 'status': 'active'
             }
@@ -77,16 +77,16 @@ def seed_data():
         print("\n🏪 Creating booths...")
         
         booth_titles = [
-            ('فناوری اطلاعات', 'Information Technology'),
-            ('هوش مصنوعی', 'Artificial Intelligence'),
-            ('بلاکچین', 'Blockchain'),
-            ('انرژی تجدیدپذیر', 'Renewable Energy'),
-            ('صنایع غذایی', 'Food Industries'),
-            ('داروسازی', 'Pharmaceuticals'),
-            ('خودروسازی', 'Automotive'),
-            ('نساجی', 'Textiles'),
-            ('ساختمان', 'Construction'),
-            ('کشاورزی', 'Agriculture')
+            ('Information Technology', 'Information Technology'),
+            ('Artificial Intelligence', 'Artificial Intelligence'),
+            ('Blockchain', 'Blockchain'),
+            ('Renewable Energy', 'Renewable Energy'),
+            ('Food Industries', 'Food Industries'),
+            ('Pharmaceuticals', 'Pharmaceuticals'),
+            ('Automotive', 'Automotive'),
+            ('Textiles', 'Textiles'),
+            ('Construction', 'Construction'),
+            ('Agriculture', 'Agriculture')
         ]
         
         booths = []
@@ -100,7 +100,7 @@ def seed_data():
             booth = Booth(
                 title_fa=title_fa,
                 title_en=title_en,
-                description_fa=f'غرفه تخصصی {title_fa} با محصولات نوین',
+                description_fa=f'Specialized booth for {title_fa} with modern products',
                 description_en=f'Specialized booth for {title_en} with modern products',
                 exhibition_id=exhibition.id,
                 owner_type='user',

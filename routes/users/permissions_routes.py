@@ -9,37 +9,37 @@ from services.access_control import role_required, permission_required, get_user
 import json
 
 # users_bp = Blueprint('users', __name__, url_prefix='/users')
-# استفاده از users_bp مشترک از __init__.py
+# Using shared users_bp from __init__.py
 from . import users_bp
 
 
 def _get_permission_category(permission):
-    """تعیین دسته‌بندی هر مجوز - تابع کمکی مشترک بین CBV و FBV"""
+    """Determine category of each permission - helper function shared between CBV and FBV"""
     category_map = {
-        'ORDER': 'سفارشات',
-        'LOGISTICS': 'لجستیک',
-        'LEGAL': 'حقوقی',
-        'FINANCE': 'مالی',
-        'INVESTMENT': 'سرمایه‌گذاری',
-        'TECH': 'فنی',
-        'DASHBOARD': 'داشبورد',
-        'PROFILE': 'پروفایل',
-        'PUBLIC': 'عمومی',
+        'ORDER': 'Orders',
+        'LOGISTICS': 'Logistics',
+        'LEGAL': 'Legal',
+        'FINANCE': 'Finance',
+        'INVESTMENT': 'Investment',
+        'TECH': 'Technical',
+        'DASHBOARD': 'Dashboard',
+        'PROFILE': 'Profile',
+        'PUBLIC': 'Public',
     }
     
     for prefix, category in category_map.items():
         if permission.name.startswith(prefix):
             return category
     
-    return 'سایر'
+    return 'Other'
 
 
 # ============================================
-# پیاده‌سازی با استفاده از MethodView (CBV)
+# Implementation using MethodView (CBV)
 # ============================================
 
 class ManagePermissionsView(MethodView):
-    """نمای مبتنی بر کلاس برای مدیریت مجوزها"""
+    """Class-based view for permissions management"""
     
     decorators = [login_required, role_required(Role.ADMIN)]
     
@@ -60,19 +60,19 @@ class ManagePermissionsView(MethodView):
         
         target_user = User.query.get_or_404(target_user_id)
         
-        # ایجاد خودکار پروفایل اگر وجود ندارد
+        # Auto-create profile if doesn't exist
         if not target_user.profile:
             target_profile = UserProfile(user_id=target_user.id)
             db.session.add(target_profile)
             db.session.commit()
-            flash(f"پروفایل کاربر {target_user.username} به صورت خودکار ایجاد شد.", "info")
+            flash(f"Profile for user {target_user.username} was automatically created.", "info")
         else:
             target_profile = target_user.profile
         
         default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
         custom_perms = target_profile.get_custom_permissions() if target_profile else []
         
-        # تبدیل مجوزهای پیش‌فرض به لیست رشته‌ها برای مقایسه صحیح
+        # Convert default permissions to string list for correct comparison
         default_perms_values = [p.value if hasattr(p, 'value') else p for p in default_perms]
         
         all_permissions = [
@@ -103,7 +103,7 @@ class ManagePermissionsView(MethodView):
                              target_user=target_user)
     
     def post(self):
-        """ذخیره تغییرات مجوزها"""
+        """Save permission changes"""
         from flask_wtf.csrf import validate_csrf
         from wtforms.validators import ValidationError
         from models.user import UserProfile
@@ -111,7 +111,7 @@ class ManagePermissionsView(MethodView):
         try:
             validate_csrf(request.form.get('csrf_token'))
         except ValidationError:
-            flash("خطای امنیتی: توکن CSRF نامعتبر است.", "error")
+            flash("Security error: Invalid CSRF token.", "error")
             return redirect(url_for('users.manage_permissions'))
         
         target_user_id = request.form.get('target_user_id') or current_user.id
@@ -142,10 +142,10 @@ class ManagePermissionsView(MethodView):
         
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
+            flash(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)", "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
+            flash(f"Permissions for user {target_user.username} reverted to default.", "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
@@ -163,16 +163,16 @@ users_bp.add_url_rule(
 @role_required(Role.ADMIN)
 def manage_permissions():
     """
-    مدیریت مجوزهای سفارشی برای کاربر - FBV (Function Based View)
-    فقط ادمین می‌تواند برای هر کاربر مجوزهای خاصی را فعال/غیرفعال کند.
+    Manage custom permissions for user - FBV (Function Based View)
+    Only admin can enable/disable specific permissions for any user.
     """
     from models.user import UserProfile
     import json
     
-    # دریافت target_user_id از query parameter یا form
+    # Get target_user_id from query parameter or form
     target_user_id = request.args.get('target_user_id') or request.form.get('target_user_id')
     
-    # اگر target_user_id مشخص نشده، از کاربر فعلی استفاده کن (فقط برای مشاهده)
+    # If target_user_id not specified, use current user (view only)
     if target_user_id:
         try:
             target_user_id = int(target_user_id)
@@ -183,25 +183,25 @@ def manage_permissions():
     
     target_user = User.query.get_or_404(target_user_id)
     
-    # === ایجاد خودکار پروفایل اگر وجود ندارد ===
+    # === Auto-create profile if doesn't exist ===
     if not target_user.profile:
         target_profile = UserProfile(user_id=target_user.id)
         db.session.add(target_profile)
         db.session.commit()
-        flash(f"پروفایل کاربر {target_user.username} به صورت خودکار ایجاد شد.", "info")
+        flash(f"Profile for user {target_user.username} was automatically created.", "info")
     else:
         target_profile = target_user.profile
     
-    # دریافت مجوزهای پیش‌فرض نقش کاربر هدف
+    # Get default permissions for target user's role
     default_perms = DEFAULT_ROLE_PERMISSIONS.get(target_user.role.value if target_user.role else 'guest', [])
     
-    # دریافت مجوزهای سفارشی با استفاده از متد جدید مدل
+    # Get custom permissions using new model method
     custom_perms = target_profile.get_custom_permissions() if target_profile else []
     
-    # تبدیل مجوزهای پیش‌فرض به لیست رشته‌ها برای مقایسه صحیح
+    # Convert default permissions to string list for correct comparison
     default_perms_values = [p.value if hasattr(p, 'value') else p for p in default_perms]
     
-    # تبدیل به فرمت مناسب برای نمایش
+    # Convert to appropriate format for display
     all_permissions = [
         {
             'value': perm.value,
@@ -212,7 +212,7 @@ def manage_permissions():
         for perm in Permission
     ]
     
-    # گروه‌بندی بر اساس دسته‌بندی
+    # Group by category
     categories = {}
     for perm in all_permissions:
         cat = perm['category']
@@ -221,48 +221,48 @@ def manage_permissions():
         categories[cat].append(perm)
     
     if request.method == 'POST':
-        # بررسی CSRF Token
+        # Check CSRF Token
         from flask_wtf.csrf import validate_csrf
         from wtforms.validators import ValidationError
         
         try:
             validate_csrf(request.form.get('csrf_token'))
         except ValidationError:
-            flash("خطای امنیتی: توکن CSRF نامعتبر است.", "error")
+            flash("Security error: Invalid CSRF token.", "error")
             return redirect(url_for('users.manage_permissions'))
         
-        # دریافت لیست مجوزهای انتخاب شده از فرم
+        # Get list of selected permissions from form
         selected_permissions = request.form.getlist('permissions')
         
-        # اعتبارسنجی و فیلتر کردن مجوزهای معتبر
+        # Validate and filter valid permissions
         valid_permissions = []
         for perm_value in selected_permissions:
             try:
-                # اطمینان از معتبر بودن مجوز
+                # Ensure permission is valid
                 Permission(perm_value)
                 valid_permissions.append(perm_value)
             except ValueError:
-                continue  # نادیده گرفتن مجوزهای نامعتبر
+                continue  # Ignore invalid permissions
         
-        # استفاده از متدهای جدید مدل برای ذخیره مجوزها
+        # Use new model methods to save permissions
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(f"مجوزهای کاربر {target_user.username} با موفقیت به‌روزرسانی شد. ({len(valid_permissions)} مجوز فعال)", "success")
+            flash(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)", "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(f"مجوزهای کاربر {target_user.username} به حالت پیش‌فرض بازگشت.", "info")
+            flash(f"Permissions for user {target_user.username} reverted to default.", "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
     
-    # اگر کاربر ادمین است، لیست کاربران را برای انتخاب بفرست
+    # If user is admin, send list of users for selection
     users_list = []
     if current_user.role == Role.ADMIN:
         users_list = User.query.order_by(User.username).all()
     
     return render_template('users/manage_permissions.html',
                          categories=categories,
-                         default_perms=[p.value for p in default_perms],  # تبدیل به لیست رشته‌ها
+                         default_perms=[p.value for p in default_perms],  # Convert to string list
                          custom_perms=custom_perms,
                          users_list=users_list,
                          current_user_obj=current_user,
@@ -274,12 +274,12 @@ def manage_permissions():
 @login_required
 def dashboard():
     """
-    داشبورد هوشمند که بر اساس نقش و مجوزهای کاربر، سرویس‌های مرتبط را نمایش می‌دهد.
+    Smart dashboard that displays relevant services based on user role and permissions.
     """
     from services.access_control import service_module_enabled
     from models.notification import Notification
     
-    # بررسی دسترسی به ماژول‌های مختلف
+    # Check access to various modules
     modules = {
         'order': service_module_enabled('order'),
         'logistics': service_module_enabled('logistics'),
@@ -290,13 +290,13 @@ def dashboard():
         'dashboard': service_module_enabled('dashboard'),
     }
     
-    # دریافت آمارهای مرتبط بر اساس نقش
+    # Get stats based on role
     stats = _get_user_stats(current_user)
     
-    # محاسبه تعداد اعلان‌های خوانده‌نشده
+    # Calculate unread notifications count
     unread_notifications = Notification.query.filter_by(user_id=current_user.id, is_read=False).count()
     
-    # تعیین وضعیت تأیید مدارک
+    # Determine document verification status
     import json
     verification_docs = json.loads(current_user.verification_documents) if current_user.verification_documents else []
     document_status = 'not_uploaded'
@@ -305,7 +305,7 @@ def dashboard():
         if current_user.is_verified:
             document_status = 'approved'
     
-    # ادغام داشبورد ماژولار در dashboard.html اصلی برای یکپارچگی
+    # Integrate modular dashboard into main dashboard.html for consistency
     return render_template('users/dashboard.html', 
                          modules=modules, 
                          stats=stats,
@@ -317,10 +317,10 @@ def dashboard():
 
 
 def _get_user_stats(user):
-    """دریافت آمارهای مرتبط با کاربر بر اساس نقش"""
+    """Get user-related statistics based on role"""
     stats = {}
     
-    # مثال: آمار سفارشات
+    # Example: Order statistics
     if user.role in [Role.BUYER, Role.PRODUCER, Role.BROKER]:
         from models.order import Order
         user_orders = Order.query.filter(
@@ -333,16 +333,16 @@ def _get_user_stats(user):
         stats['total_orders'] = len(user_orders)
         stats['pending_orders'] = len([o for o in user_orders if o.status.value == 'pending'])
     
-    # مثال: آمار لجستیک
+    # Example: Logistics statistics
     if user.role == Role.LOGISTICS:
         from models.order import Order
         logistics_orders = Order.query.filter_by(logistics_provider_id=user.id).all()
         stats['assigned_shipments'] = len(logistics_orders)
         stats['in_transit'] = len([o for o in logistics_orders if o.status.value == 'in_transit'])
     
-    # مثال: آمار سرمایه‌گذاری
+    # Example: Investment statistics
     if user.role == Role.INVESTOR:
-        stats['portfolio_value'] = 0  # TODO: محاسبه از مدل Investment
+        stats['portfolio_value'] = 0  # TODO: Calculate from Investment model
         stats['active_investments'] = 0
     
     return stats
@@ -352,7 +352,7 @@ def _get_user_stats(user):
 @login_required
 @role_required(Role.LOGISTICS, Role.ADMIN)
 def logistics_orders():
-    """نمایش سفارش‌های اختصاص یافته به ارائه‌دهنده لجستیک"""
+    """Display orders assigned to logistics provider"""
     from models.order import Order
     
     orders = Order.query.filter_by(logistics_provider_id=current_user.id).all()
@@ -363,7 +363,7 @@ def logistics_orders():
 @login_required
 @role_required(Role.LEGAL, Role.ADMIN)
 def legal_reviews():
-    """نمایش قراردادهای نیازمند بررسی حقوقی"""
+    """Display contracts requiring legal review"""
     from models.order import Order
     
     orders = Order.query.filter_by(legal_advisor_id=current_user.id).all()
@@ -374,7 +374,7 @@ def legal_reviews():
 @login_required
 @role_required(Role.TECH_PARTNER, Role.ADMIN)
 def technical_inspections():
-    """نمایش درخواست‌های بازرسی فنی"""
+    """Display technical inspection requests"""
     from models.order import Order
     
     orders = Order.query.filter_by(tech_partner_id=current_user.id).all()
@@ -385,8 +385,8 @@ def technical_inspections():
 @login_required
 @role_required(Role.INVESTOR, Role.ADMIN)
 def investment_portfolio():
-    """نمایش پورتفوی سرمایه‌گذاری"""
-    # TODO: پیاده‌سازی مدل Investment و ارتباط آن با کاربر
+    """Display investment portfolio"""
+    # TODO: Implement Investment model and its relationship with user
     investments = []  # Investment.query.filter_by(investor_id=current_user.id).all()
     return render_template('users/investment_portfolio.html', investments=investments)
 
@@ -395,7 +395,7 @@ def investment_portfolio():
 @login_required
 @role_required(Role.CORPORATE_AGENT, Role.ADMIN)
 def corporate_approvals():
-    """نمایش تأییدیه‌های شرکتی مورد نیاز"""
+    """Display required corporate approvals"""
     from models.order import Order
     
     orders = Order.query.filter_by(corporate_agent_id=current_user.id).all()
@@ -406,7 +406,7 @@ def corporate_approvals():
 @login_required
 @role_required(Role.BROKER, Role.ADMIN)
 def broker_commissions():
-    """نمایش کمیسیون‌های کارگزاری"""
+    """Display brokerage commissions"""
     from models.order import Order
     
     orders = Order.query.filter_by(broker_id=current_user.id).all()

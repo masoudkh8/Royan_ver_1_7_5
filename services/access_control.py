@@ -6,7 +6,7 @@ from services.permissions import Permission, DEFAULT_ROLE_PERMISSIONS
 
 def role_required(*roles):
     """
-    دکوریتور برای محدود کردن دسترسی بر اساس نقش کاربر.
+    Decorator to restrict access based on user role.
     
     Usage:
         @users_bp.route('/admin/panel')
@@ -25,16 +25,16 @@ def role_required(*roles):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not current_user.is_authenticated:
-                flash("لطفاً ابتدا وارد حساب کاربری خود شوید.", "error")
+                flash("Please log in to your account first.", "error")
                 return redirect(url_for('auth.login', next=request.url))
             
             if not hasattr(current_user, 'role') or current_user.role is None:
-                flash("نقش کاربری تعریف نشده است.", "error")
+                flash("User role is not defined.", "error")
                 return redirect(url_for('users.profile'))
             
             if current_user.role not in roles:
                 allowed_roles = [r.value for r in roles]
-                flash(f"دسترسی غیرمجاز. این صفحه فقط برای نقش‌های {', '.join(allowed_roles)} قابل دسترسی است.", "error")
+                flash(f"Unauthorized access. This page is only accessible to roles: {', '.join(allowed_roles)}.", "error")
                 abort(403)  # Forbidden
             
             return f(*args, **kwargs)
@@ -44,9 +44,9 @@ def role_required(*roles):
 
 def permission_required(*permissions):
     """
-    دکوریتور برای محدود کردن دسترسی بر اساس مجوزهای ریزدانه (Granular Permissions).
-    این دکوریتور انعطاف‌پذیری بیشتری نسبت به role_required دارد و می‌توانید
-    در پروفایل هر کاربر، مجوزها را شخصی‌سازی کنید.
+    Decorator to restrict access based on granular permissions.
+    This decorator provides more flexibility than role_required and allows
+    customizing permissions in each user's profile.
     
     Usage:
         @users_bp.route('/order/create')
@@ -65,17 +65,17 @@ def permission_required(*permissions):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if not current_user.is_authenticated:
-                flash("لطفاً ابتدا وارد حساب کاربری خود شوید.", "error")
+                flash("Please log in to your account first.", "error")
                 return redirect(url_for('auth.login', next=request.url))
             
             user_permissions = get_user_permissions(current_user)
             
-            # بررسی اینکه آیا کاربر حداقل یکی از مجوزهای مورد نیاز را دارد
+            # Check if user has at least one of the required permissions
             has_permission = any(perm in user_permissions for perm in permissions)
             
             if not has_permission:
                 perm_names = [p.value for p in permissions]
-                flash(f"دسترسی غیرمجاز. شما مجوز لازم ({', '.join(perm_names)}) را ندارید.", "error")
+                flash(f"Unauthorized access. You do not have the required permission ({', '.join(perm_names)}).", "error")
                 abort(403)
             
             return f(*args, **kwargs)
@@ -85,14 +85,14 @@ def permission_required(*permissions):
 
 def get_user_permissions(user):
     """
-    دریافت لیست مجوزهای یک کاربر.
-    اولویت‌بندی:
-    1. اگر کاربر مجوزهای سفارشی در پروفایل خود دارد، آن مجوزها به عنوان مجوزهای نهایی استفاده می‌شوند.
-    2. اگر مجوز سفارشی وجود ندارد، از مجوزهای پیش‌فرض نقش (DEFAULT_ROLE_PERMISSIONS) استفاده می‌شود.
-    3. اگر کاربر مهمان است، مجوزهای guest بازگردانده می‌شود.
+    Get list of user permissions.
+    Priority:
+    1. If user has custom permissions in their profile, those are used as final permissions.
+    2. If no custom permissions exist, default role permissions (DEFAULT_ROLE_PERMISSIONS) are used.
+    3. If user is guest, guest permissions are returned.
     
     Returns:
-        لیستی از اشیاء Permission
+        List of Permission objects
     """
     import json
     
@@ -112,7 +112,7 @@ def get_user_permissions(user):
             pass
     
     if profile and profile.custom_permissions:
-        # اگر کاربر مجوزهای دستی تنظیم کرده باشد
+        # If user has manually set permissions
         from services.permissions import Permission as PermEnum
         custom_perms = []
         
@@ -123,37 +123,37 @@ def get_user_permissions(user):
             else:
                 perm_strings = profile.custom_permissions
             
-            if perm_strings:  # اگر لیست خالی نباشد
+            if perm_strings:  # If list is not empty
                 for perm_str in perm_strings:
                     try:
-                        # پشتیبانی از هر دو فرمت: رشته و شیء Permission
+                        # Support both formats: string and Permission object
                         if isinstance(perm_str, PermEnum):
                             custom_perms.append(perm_str)
                         else:
                             perm = PermEnum(str(perm_str))
                             custom_perms.append(perm)
                     except ValueError:
-                        continue  # نادیده گرفتن مجوزهای نامعتبر
+                        continue  # Ignore invalid permissions
                 
-                # اگر مجوز سفارشی معتبر وجود داشت، برگردان
+                # If valid custom permissions exist, return them
                 if custom_perms:
                     return custom_perms
         except (json.JSONDecodeError, TypeError, AttributeError):
-            pass  # اگر JSON نامعتبر بود، از پیش‌فرض استفاده کن
+            pass  # If JSON is invalid, use default
     
-    # استفاده از مجوزهای پیش‌فرض نقش
+    # Use default role permissions
     role_name = user.role.value if user.role else 'guest'
     return DEFAULT_ROLE_PERMISSIONS.get(role_name, [])
 
 
 def has_permission(user, permission):
     """
-    بررسی ساده اینکه آیا یک کاربر مجوز خاصی دارد یا خیر.
-    مناسب برای استفاده در templateها.
+    Simple check if a user has a specific permission.
+    Suitable for use in templates.
     
     Usage in template:
         {% if has_permission(current_user, Permission.ORDER_CREATE) %}
-            <a href="/order/create">ثبت سفارش جدید</a>
+            <a href="/order/create">Create New Order</a>
         {% endif %}
     """
     user_permissions = get_user_permissions(user)
@@ -162,17 +162,17 @@ def has_permission(user, permission):
 
 def get_role_permissions(role):
     """
-    دریافت مجوزهای پیش‌فرض یک نقش خاص.
+    Get default permissions for a specific role.
     
     Args:
-        role: شیء Role یا رشته نام نقش
+        role: Role object or role name string
         
     Returns:
-        لیستی از مجوزهای Permission مربوط به آن نقش
+        List of Permission objects for that role
     """
     from models.user import Role
     
-    # تبدیل به رشته اگر Role object باشد
+    # Convert to string if Role object
     if isinstance(role, Role):
         role_name = role.value
     else:
@@ -183,15 +183,15 @@ def get_role_permissions(role):
 
 def service_module_enabled(service_name, user=None):
     """
-    بررسی اینکه آیا یک ماژول خدماتی برای کاربر فعال است یا خیر.
-    این تابع برای نمایش/مخفی کردن بخش‌های مختلف در UI بر اساس نقش و تنظیمات پروفایل استفاده می‌شود.
+    Check if a service module is enabled for the user.
+    This function is used to show/hide different sections in UI based on role and profile settings.
     
     Args:
-        service_name: نام سرویس (مثلاً 'logistics', 'legal', 'investment')
-        user: شیء کاربر (اگر None باشد، از current_user استفاده می‌کند)
+        service_name: Service name (e.g., 'logistics', 'legal', 'investment')
+        user: User object (if None, uses current_user)
     
     Returns:
-        Boolean: True اگر سرویس برای کاربر فعال باشد
+        Boolean: True if service is enabled for user
     """
     from flask_login import current_user as cu
     if user is None:
@@ -200,7 +200,7 @@ def service_module_enabled(service_name, user=None):
     if not user.is_authenticated:
         return False
     
-    # نگاشت نام سرویس به مجوز مربوطه
+    # Map service name to corresponding permission
     service_permission_map = {
         'order': Permission.ORDER_VIEW,
         'logistics': Permission.LOGISTICS_VIEW_ASSIGNED,
