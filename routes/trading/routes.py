@@ -3,6 +3,7 @@ Metisma Trading Routes - MVP Version
 Real-time Order Book, Trading Pairs, and Wallet Management
 """
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
+from flask_babel import gettext
 from flask_login import login_required, current_user
 from datetime import datetime, timedelta
 from sqlalchemy import desc, func, and_
@@ -154,12 +155,12 @@ def place_order():
     
     pair = TradingPair.query.filter_by(symbol=symbol, status='active').first()
     if not pair:
-        flash('Trading pair not found.', 'error')
+        flash(gettext('Trading pair not found.'), 'error')
         return redirect(url_for('trading.market'))
     
     # Validate amount
     if amount <= 0:
-        flash('Amount must be positive.', 'error')
+        flash(gettext('Amount must be positive.'), 'error')
         return redirect(url_for('trading.trading_pair_detail', symbol=symbol))
     
     # Check wallet balance for buy orders
@@ -173,7 +174,7 @@ def place_order():
         required_balance = amount * price
         # Convert to quote currency if needed (simplified)
         if wallet.balance_quote < required_balance:
-            flash('Insufficient balance.', 'error')
+            flash(gettext('Insufficient balance.'), 'error')
             return redirect(url_for('trading.trading_pair_detail', symbol=symbol))
     
     # Create order
@@ -194,9 +195,9 @@ def place_order():
     matched = try_match_order(order)
     
     if matched:
-        flash(f'Your order of {float(amount)} was executed successfully!', 'success')
+        flash(gettext(f'Your order of {float(amount)} was executed successfully!'), 'success')
     else:
-        flash('Your order has been placed in the order book.', 'info')
+        flash(gettext('Your order has been placed in the order book.'), 'info')
     
     return redirect(url_for('trading.wallet'))
 
@@ -263,17 +264,17 @@ def cancel_order(order_id):
     
     # Check ownership
     if order.user_id != current_user.id:
-        flash('You are not authorized to cancel this order.', 'error')
+        flash(gettext('You are not authorized to cancel this order.'), 'error')
         return redirect(url_for('trading.wallet'))
     
     if order.status != 'open':
-        flash('This order cannot be cancelled.', 'warning')
+        flash(gettext('This order cannot be cancelled.'), 'warning')
         return redirect(url_for('trading.wallet'))
     
     order.status = 'cancelled'
     db.session.commit()
     
-    flash('Order cancelled successfully.', 'success')
+    flash(gettext('Order cancelled successfully.'), 'success')
     return redirect(url_for('trading.wallet'))
 
 # --- Admin Routes (Simplified) ---
@@ -299,7 +300,7 @@ def create_pair():
         db.session.add(pair)
         db.session.commit()
         
-        flash(f'Trading pair {symbol} created successfully.', 'success')
+        flash(gettext(f'Trading pair {symbol} created successfully.'), 'success')
         return redirect(url_for('trading.market'))
     
     return render_template('trading/create_pair.html')

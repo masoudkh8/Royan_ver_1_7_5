@@ -1,40 +1,89 @@
 ```
-# Python
-__pycache__/
+# Compiled and build artifacts
 *.pyc
+__pycache__/
 *.pyo
 *.pyd
-*.py~
+*.so
+*.dylib
+*.dll
+*.exe
+*.o
+*.obj
+*.out
+*.class
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
 
 # Dependencies
-venv/
 .venv/
+venv/
 .env
 .env.local
 .env.*
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Build artifacts
-build/
+# Build directories
 dist/
-*.egg-info/
+build/
+target/
+.sconsign.dblite
+.pip-delete-this-directory.txt
+
+# Testing
+.coverage
+coverage/
+htmlcov/
+.nyc_output
+*.cover
+.hypothesis/
 
 # Logs
 *.log
+*.log.*
 
-# Editors
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
+*~
 .DS_Store
 Thumbs.db
+*.tmp
+*.temp
 
-# Testing
+# Python specific
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
 .coverage
-htmlcov/
 .coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
 .pytest_cache/
 .mypy_cache/
+.pyre/
+.pytype/
+celerybeat-schedule
+celerybeat.pid
+
+# Security
+secret_key
+secrets.json
 ```

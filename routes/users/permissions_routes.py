@@ -1,5 +1,6 @@
 
 from flask import render_template, redirect, url_for, flash, request, jsonify
+from flask_babel import gettext
 from flask.views import MethodView
 from flask_login import login_required, current_user
 from models import db
@@ -65,7 +66,7 @@ class ManagePermissionsView(MethodView):
             target_profile = UserProfile(user_id=target_user.id)
             db.session.add(target_profile)
             db.session.commit()
-            flash(f"Profile for user {target_user.username} was automatically created.", "info")
+            flash(gettext(f"Profile for user {target_user.username} was automatically created."), "info")
         else:
             target_profile = target_user.profile
         
@@ -111,7 +112,7 @@ class ManagePermissionsView(MethodView):
         try:
             validate_csrf(request.form.get('csrf_token'))
         except ValidationError:
-            flash("Security error: Invalid CSRF token.", "error")
+            flash(gettext("Security error: Invalid CSRF token."), "error")
             return redirect(url_for('users.manage_permissions'))
         
         target_user_id = request.form.get('target_user_id') or current_user.id
@@ -142,10 +143,10 @@ class ManagePermissionsView(MethodView):
         
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)", "success")
+            flash(gettext(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)"), "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(f"Permissions for user {target_user.username} reverted to default.", "info")
+            flash(gettext(f"Permissions for user {target_user.username} reverted to default."), "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
@@ -188,7 +189,7 @@ def manage_permissions():
         target_profile = UserProfile(user_id=target_user.id)
         db.session.add(target_profile)
         db.session.commit()
-        flash(f"Profile for user {target_user.username} was automatically created.", "info")
+        flash(gettext(f"Profile for user {target_user.username} was automatically created."), "info")
     else:
         target_profile = target_user.profile
     
@@ -228,7 +229,7 @@ def manage_permissions():
         try:
             validate_csrf(request.form.get('csrf_token'))
         except ValidationError:
-            flash("Security error: Invalid CSRF token.", "error")
+            flash(gettext("Security error: Invalid CSRF token."), "error")
             return redirect(url_for('users.manage_permissions'))
         
         # Get list of selected permissions from form
@@ -247,10 +248,10 @@ def manage_permissions():
         # Use new model methods to save permissions
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)", "success")
+            flash(gettext(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)"), "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(f"Permissions for user {target_user.username} reverted to default.", "info")
+            flash(gettext(f"Permissions for user {target_user.username} reverted to default."), "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
