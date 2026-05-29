@@ -132,13 +132,13 @@
 <body class="light-premium  dark:bg-dark-900 dark:text-slate-200 overflow-x-hidden min-h-screen flex flex-col transition-colors duration-300">
 
 
-<!-- ✅ دکمه تغییر تم شناور (گوشه پایین چپ) -->
+<!-- دکمه تغییر تم شناور (گوشه پایین چپ) -->
 <!-- ✅ دکمه تغییر تم شناور با آیکون‌های SVG ماه/خورشید -->
 <button onclick="toggleDarkMode()"
         class="theme-toggle fixed bottom-6 left-6 z-50 p-3.5 rounded-full 
                bg-white dark:bg-dark-700 shadow-lg border border-gray-200 dark:border-dark-600 
                hover:shadow-xl transition-all duration-300"
-        aria-label="{{ _(''Toggle Dark Mode'') }}" title="{{ _("Toggle Theme") }}">
+        aria-label="{{ _('Toggle Dark Mode') }}" title="{{ _('Toggle Theme') }}">
 
     <!-- آیکون ماه (نمایش در حالت لایت) -->
     <svg id="icon-moon" class="w-5 h-5 text-gray-700 dark:hidden transition-transform duration-300"
@@ -160,7 +160,7 @@
 <!-- لایه لودینگ اولیه (ساده‌شده) -->
 <div id="loading" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-dark-900">
     <div class="loader"></div>
-    <{{ _('p class="mt-4 text-gold text-sm font-medium">') }}Loading Metisma...</p>
+    <p class="mt-4 text-gold text-sm font-medium">Loading Metisma...</p>
 </div>
 
 <!-- هدر سایت: چسبان به بالا با افکت شیشه‌ای -->
@@ -171,20 +171,20 @@
     <a href="{{ url_for('root.main_page') }}" class="flex items-center gap-3 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold to-gold-dark
                   flex items-center justify-center shadow-lg shadow-gold/20 group-hover:scale-105 transition">
-            <img src="/static/images/logo.png" alt="{{ _("Metisma Logo") }}" class="h-8 w-auto object-contain">
+            <img src="/static/images/logo.png" alt="{{ _('Metisma Logo') }}" class="h-8 w-auto object-contain">
         </div>
-        <{{ _('span class="text-xl font-bold text-gold tracking-tight hidden sm:block">') }}Metisma</span>
+        <span class="text-xl font-bold text-gold tracking-tight hidden sm:block">Metisma</span>
     </a>
 
     <!-- منوی ناوبری دسکتاپ -->
     <nav class="hidden lg:flex items-center gap-1 text-sm font-medium">
-        <{{ _('a href="') }}{{ url_for('root.main_page') }}{{ _('" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">') }}Home</a>
+        <a href="{{ url_for('root.main_page') }}" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">{{ _('Home') }}</a>
         
         <!-- дропداун خدمات -->
         <div class="relative group">
             <button class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30 flex items-center gap-1.5">
-                {{ _('Services
-                ') }}<svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {{ _("Services") }}
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
             </button>
@@ -195,39 +195,34 @@
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
-                        {{ _('Trade Assurance
-                    ') }}</a>
+                        {{ _("Trade Assurance") }}</a>
                     <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-dark-700 hover:text-gold transition">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        Payment & {{ _('Escrow
-                    ') }}</a>
+                        Payment & {{ _("Escrow") }}</a>
                     <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-dark-700 hover:text-gold transition">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                         </svg>
-                        {{ _('Smart Logistics
-                    ') }}</a>
+                        {{ _("Smart Logistics") }}</a>
                     <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-dark-700 hover:text-gold transition">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
-                        {{ _('Market Analytics
-                    ') }}</a>
+                        {{ _("Market Analytics") }}</a>
                     <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-dark-700 hover:text-gold transition">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
-                        {{ _('Trade Academy
-                    ') }}</a>
+                        {{ _("Trade Academy") }}</a>
                 </div>
             </div>
         </div>
         
-        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">Smart Map>{{ _("Smart Map") }}</a>
-        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">Consortium>{{ _("Consortium") }}</a>
-        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">Academy>{{ _("Academy") }}</a>
+        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">{{ _("Smart Map") }}</a>
+        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">{{ _("Consortium") }}</a>
+        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">{{ _("Academy") }}</a>
     </nav>
 
     <!-- دکمه‌های سمت چپ هدر -->
@@ -260,7 +255,7 @@
                 </svg>
                 <!-- نشانگر اعلان خوانده نشده - نمایش تعداد -->
                 {% if unread_count and unread_count > 0 %}
-                <{{ _('span class="absolute -top-1 -right-1 min-w-[1.25rem] h-5 px-1.5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full border-2 border-white dark:border-dark-900 animate-pulse">') }}
+                <span class="absolute -top-1 -right-1 min-w-[1.25rem] h-5 px-1.5 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full border-2 border-white dark:border-dark-900 animate-pulse">') }}
                     {{ unread_count }}
                 </span>
                 {% endif %}
@@ -281,7 +276,7 @@
                 <button id="userMenuBtn" 
                         class="flex items-center gap-2 p-1.5 pr-3 rounded-xl hover:bg-dark-800/50 transition border border-transparent hover:border-gold/20"
                         aria-label="{{ _(''User Menu'') }}" aria-expanded="false">
-                    <{{ _('div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dark-900 font-bold text-sm">') }}
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dark-900 font-bold text-sm">') }}
                         {{ current_user.username[0]|upper }}
                     </div>
                     <svg class="w-4 h-4 text-slate-400 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -293,10 +288,10 @@
                 <div id="userMenuDropdown" 
                      class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-dark-800 rounded-xl shadow-2xl border border-gray-200 dark:border-dark-700 opacity-0 invisible pointer-events-none transition-all duration-200 transform translate-y-2 z-50">
                     <div class="p-3 border-b border-gray-200 dark:border-dark-700">
-                        <{{ _('p class="font-bold text-gray-900 dark:text-white">') }}{{ current_user.username }}</p>
-                        <{{ _('p class="text-xs text-slate-400">') }}{{ current_user.email }}</p>
+                        <p class="font-bold text-gray-900 dark:text-white">') }}{{ current_user.username }}</p>
+                        <p class="text-xs text-slate-400">') }}{{ current_user.email }}</p>
                         {% if current_user.is_premium %}
-                            <{{ _('span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[10px] font-bold">') }}
+                            <span class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[10px] font-bold">') }}
                                 🌟 Premium
                             </span>
                         {% endif %}
@@ -456,7 +451,7 @@
 
         <!-- هدر منو: عنوان و دکمه بستن -->
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-gold/10">
-            <{{ _('span class="text-lg font-bold text-gold">') }}Menu</span>
+            <span class="text-lg font-bold text-gold">') }}Menu</span>
             <button id="closeMenuBtn" class="p-2 rounded-lg hover:bg-dark-700 transition" aria-label="{{ _(''Close Menu'') }}">
                 <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -468,14 +463,14 @@
             <!-- بخش اطلاعات کاربر (فقط برای کاربران لاگین) -->
             <div class="mb-6 p-4 bg-dark-700/50 rounded-xl border border-gold/10">
                 <div class="flex items-center gap-3 mb-3">
-                    <{{ _('div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dark-900 font-bold text-lg">') }}
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dark-900 font-bold text-lg">') }}
                         {{ current_user.username[0]|upper }}
                     </div>
                     <div class="flex-1 min-w-0">
-                        <{{ _('p class="font-bold text-white truncate">') }}{{ current_user.username }}</p>
-                        <{{ _('p class="text-xs text-slate-400 truncate">') }}{{ current_user.email }}</p>
+                        <p class="font-bold text-white truncate">') }}{{ current_user.username }}</p>
+                        <p class="text-xs text-slate-400 truncate">') }}{{ current_user.email }}</p>
                         {% if current_user.is_premium %}
-                            <{{ _('span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[10px] font-bold">') }}
+                            <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[10px] font-bold">') }}
                                 🌟 Premium
                             </span>
                         {% endif %}
@@ -519,32 +514,27 @@
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
-                            {{ _('Trade Assurance
-                        ') }}</a>
+                            {{ _("Trade Assurance") }}</a>
                         <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-dark-700 hover:text-gold transition text-sm">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            Payment & {{ _('Escrow
-                        ') }}</a>
+                            Payment & {{ _("Escrow") }}</a>
                         <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-dark-700 hover:text-gold transition text-sm">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                             </svg>
-                            {{ _('Smart Logistics
-                        ') }}</a>
+                            {{ _("Smart Logistics") }}</a>
                         <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-dark-700 hover:text-gold transition text-sm">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
-                            {{ _('Market Analytics
-                        ') }}</a>
+                            {{ _("Market Analytics") }}</a>
                         <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-dark-700 hover:text-gold transition text-sm">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                             </svg>
-                            {{ _('Trade Academy
-                        ') }}</a>
+                            {{ _("Trade Academy") }}</a>
                     </div>
                 </div>
                 
@@ -750,22 +740,22 @@
   <div class="ticker-wrap whitespace-nowrap ">
     <div class="animate-ticker inline-flex items-center text-sm " dir="ltr">
       <!-- آیتم ۱ -->
-      <span class="mx-6 text-slate-400">🔍 <{{ _('span class="text-amber-400 font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
+      <span class="mx-6 text-slate-400">🔍 <span class="text-amber-400 font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
       <!-- آیتم ۲ -->
-      <span class="mx-6 text-slate-400">📢 {{ _('New Route: ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
+      <span class="mx-6 text-slate-400">📢 {{ _('New Route: ') }}<span class="text-amber-400 font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
       <!-- آیتم ۳ -->
-      <span class="mx-6 text-slate-400">📉 {{ _('Oman Customs Tariffs ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Reduced by 5%</span></span>
+      <span class="mx-6 text-slate-400">📉 {{ _('Oman Customs Tariffs ') }}<span class="text-amber-400 font-semibold">') }}Reduced by 5%</span></span>
       <!-- آیتم ۴ -->
-      <span class="mx-6 text-slate-400">⚠️ {{ _('Alert: ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Germany</span> {{ _('import regulations change next month') }}</span>
+      <span class="mx-6 text-slate-400">⚠️ {{ _('Alert: ') }}<span class="text-amber-400 font-semibold">') }}Germany</span> {{ _('import regulations change next month') }}</span>
       <!-- آیتم ۵ -->
-      <span class="mx-6 text-slate-400">✅ 3 {{ _('new ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Saffron</span> {{ _('buyers registered in Frankfurt') }}</span>
+      <span class="mx-6 text-slate-400">✅ 3 {{ _('new ') }}<span class="text-amber-400 font-semibold">') }}Saffron</span> {{ _('buyers registered in Frankfurt') }}</span>
 
       <!-- ⬇️ تکرار دقیقاً همان آیتم‌ها برای حلقه نرم -->
-      <span class="mx-6 text-slate-400">🔍 <{{ _('span class="text-amber-400 font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
-      <span class="mx-6 text-slate-400">📢 {{ _('New Route: ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
-      <span class="mx-6 text-slate-400">📉 {{ _('Oman Customs Tariffs ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Reduced by 5%</span></span>
-      <span class="mx-6 text-slate-400">⚠️ {{ _('Alert: ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Germany</span> {{ _('import regulations change next month') }}</span>
-      <span class="mx-6 text-slate-400">✅ 3 {{ _('new ') }}<{{ _('span class="text-amber-400 font-semibold">') }}Saffron</span> {{ _('buyers registered in Frankfurt') }}</span>
+      <span class="mx-6 text-slate-400">🔍 <span class="text-amber-400 font-semibold">') }}Tehran, Oranges:</span> {{ _('Customs Clearance Active') }}</span>
+      <span class="mx-6 text-slate-400">📢 {{ _('New Route: ') }}<span class="text-amber-400 font-semibold">') }}Bandar Abbas → Sohar</span> {{ _('is now active') }}</span>
+      <span class="mx-6 text-slate-400">📉 {{ _('Oman Customs Tariffs ') }}<span class="text-amber-400 font-semibold">') }}Reduced by 5%</span></span>
+      <span class="mx-6 text-slate-400">⚠️ {{ _('Alert: ') }}<span class="text-amber-400 font-semibold">') }}Germany</span> {{ _('import regulations change next month') }}</span>
+      <span class="mx-6 text-slate-400">✅ 3 {{ _('new ') }}<span class="text-amber-400 font-semibold">') }}Saffron</span> {{ _('buyers registered in Frankfurt') }}</span>
     </div>
   </div>
 </div>
@@ -823,7 +813,7 @@
               {% elif category in ['error','danger'] %} border-red-500 text-red-200
               {% elif category=='warning' %} border-yellow-500 text-yellow-200
               {% else %} border-blue-500 text-blue-200 {% endif %}">
-                    <{{ _('span class="text-sm">') }}{{ msg }}</span>
+                    <span class="text-sm">') }}{{ msg }}</span>
                     <buttononclick="this.parentElement.remove()" class="ml-2 hover:opacity-70">×>{{ _("×") }}</button>
                 </div>
             {% endfor %}
@@ -849,9 +839,9 @@
                         flex items-center justify-center text-lg">
                         <img src="/static/images/logo.png" alt="{{ _("Metisma Logo") }}" class="h-8 w-auto object-contain">
                     </div>
-                    <{{ _('span class="text-xl font-bold text-gold">') }}Metisma</span>
+                    <span class="text-xl font-bold text-gold">') }}Metisma</span>
                 </div>
-                <{{ _('p class="text-slate-400 text-sm leading-relaxed max-w-md">') }}
+                <p class="text-slate-400 text-sm leading-relaxed max-w-md">') }}
                     Intelligent B2B platform connecting producers to global markets
                     with AI-powered tools, verified networks, and end-to-end trade services.
                 </p>
@@ -862,7 +852,9 @@
                 <h4class="text-white font-bold mb-4 text-sm">Quick Link>{{ _("Quick Links") }}</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="#" class="text-slate-400 hover:text-gold transition">Services>{{ _("Services") }}</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-gold transition">Smart Map>{{ _("Smart Map") }}</a></li>
+                    <li><a href="#" class="text-slate-400 hover:text-gold transition">Smart Map</a>
+        <a href="#" class="px-4 py-2 text-slate-400 hover:text-gold transition rounded-lg hover:bg-dark-800/30">{{ _("Smart Map") }}</a>
+        <a href="#"</a></li>
                     <li><a href="#" class="text-slate-400 hover:text-gold transition">Consortium>{{ _("Consortium") }}</a></li>
                     <li><a href="#" class="text-slate-400 hover:text-gold transition">Academy>{{ _("Academy") }}</a></li>
                 </ul>
@@ -882,7 +874,7 @@
         </div>
 
         <!-- کپی‌رایت -->
-        <{{ _('div class="mt-12 pt-8 border-t border-gold/10 text-center text-xs text-slate-500">') }}
+        <div class="mt-12 pt-8 border-t border-gold/10 text-center text-xs text-slate-500">') }}
             © 2026 Metisma. All rights reserved.
         </div>
     </div>
@@ -891,7 +883,7 @@
 <!-- دکمه نصب PWA (در صورت نیاز) -->
 <button id="installPwaBtn"
         class="fixed bottom-6 right-6 bg-gold hover:bg-gold-light text-dark-900 px-4 py-2.5 rounded-full shadow-lg font-medium text-sm z-50 transition transform hover:-translate-y-1 hidden items-center gap-2">
-    <{{ _('span>') }}📥</{{ _('span>') }} Install App
+    <span>📥</span> Install App
 </button>
 <!-- اسکریپت‌های مشترک -->
 <!-- ✅ اسکریپت‌های جاوااسکریپت -->
