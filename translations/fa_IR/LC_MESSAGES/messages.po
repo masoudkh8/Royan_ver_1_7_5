@@ -22,7 +22,6 @@ msgid "You do not have permission to access this page."
 msgstr "شما مجوز دسترسی به این صفحه را ندارید."
 
 #: /workspace/routes/admin/permissions.py:57
-#, fuzzy
 msgid "Invalid role."
 msgstr "اطلاعات ورود نامعتبر است."
 
@@ -34,7 +33,6 @@ msgid "Invalid permission."
 msgstr "مجوز نامعتبر است."
 
 #: /workspace/routes/admin/routes.py:43
-#, fuzzy
 msgid "❌ Please log in first."
 msgstr "لطفاً ابتدا وارد شوید."
 
@@ -47,7 +45,6 @@ msgid "❌ The role is invalid."
 msgstr "❌ نقش نامعتبر است."
 
 #: /workspace/routes/admin/routes.py:218
-#, fuzzy
 msgid "⚠️ Invalid action."
 msgstr "اطلاعات ورود نامعتبر است."
 
@@ -84,22 +81,18 @@ msgid "❌ Access denied: Only admin can log in."
 msgstr "❌ دسترسی رد شد: فقط مدیر می‌تواند وارد شود."
 
 #: /workspace/routes/admin/routes.py:579
-#, fuzzy
 msgid "❌ The email or password is incorrect."
 msgstr "رمز عبور قدیمی نادرست است."
 
 #: /workspace/routes/admin/routes.py:593
-#, fuzzy
 msgid "⚠️ Admin already exists. Please log in."
 msgstr "ایمیل قبلاً ثبت شده است."
 
 #: /workspace/routes/admin/routes.py:664
-#, fuzzy
 msgid "✅ First admin account created successfully! Please log in."
 msgstr "حساب کاربری با موفقیت ایجاد شد."
 
 #: /workspace/routes/exhibition/routes.py:101
-#, fuzzy
 msgid "Invalid time format."
 msgstr "اطلاعات ورود نامعتبر است."
 
@@ -112,7 +105,6 @@ msgid "Your appointment has been successfully booked!"
 msgstr "قرار ملاقات شما با موفقیت رزرو شد!"
 
 #: /workspace/routes/exhibition/routes.py:201
-#, fuzzy
 msgid "Your booth has been created successfully!"
 msgstr "حساب کاربری با موفقیت ایجاد شد."
 
@@ -173,7 +165,6 @@ msgid "This order cannot be cancelled."
 msgstr "این سفارش قبلاً"
 
 #: /workspace/routes/trading/routes.py:277
-#, fuzzy
 msgid "Order cancelled successfully."
 msgstr "حساب کاربری با موفقیت ایجاد شد."
 
@@ -198,7 +189,6 @@ msgid "Please enter the code."
 msgstr "لطفاً کد را وارد کنید."
 
 #: /workspace/routes/users/auth.py:123
-#, fuzzy
 msgid "✅ Mobile number successfully verified."
 msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
@@ -235,7 +225,6 @@ msgid "❌ This link is not for you."
 msgstr "❌ این لینک برای شما نیست."
 
 #: /workspace/routes/users/auth.py:247
-#, fuzzy
 msgid "❌ No request found."
 msgstr "نتیجه‌ای یافت نشد."
 
@@ -264,12 +253,10 @@ msgid "❌ User not found."
 msgstr "کاربر یافت نشد."
 
 #: /workspace/routes/users/auth.py:346
-#, fuzzy
 msgid "❌ Password must be at least 8 characters long."
 msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
 #: /workspace/routes/users/auth.py:350
-#, fuzzy
 msgid "❌ Password and repeat do not match."
 msgstr "رمزهای عبور مطابقت ندارند."
 
@@ -335,7 +322,6 @@ msgid "Security error: Invalid CSRF token."
 msgstr "خطای امنیتی: توکن CSRF نامعتبر است."
 
 #: /workspace/routes/users/routes.py:67
-#, fuzzy
 msgid "Please log in first."
 msgstr "لطفاً ابتدا وارد شوید."
 
@@ -348,12 +334,10 @@ msgid "There is already an admin."
 msgstr "قبلاً یک مدیر وجود دارد."
 
 #: /workspace/routes/users/routes.py:145
-#, fuzzy
 msgid "❌ Please fill in all fields."
 msgstr "لطفاً ابتدا وارد شوید."
 
 #: /workspace/routes/users/routes.py:149
-#, fuzzy
 msgid "❌ Username must be at least 3 characters long."
 msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
@@ -362,17 +346,14 @@ msgid "❌ The email address is invalid."
 msgstr "❌ نقش نامعتبر است."
 
 #: /workspace/routes/users/routes.py:157
-#, fuzzy
 msgid "❌ The password must be at least 8 characters long."
 msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
 #: /workspace/routes/users/routes.py:161
-#, fuzzy
 msgid "❌ Username already taken."
 msgstr "نام کاربری قبلاً گرفته شده است."
 
 #: /workspace/routes/users/routes.py:165
-#, fuzzy
 msgid "❌ Email already used."
 msgstr "ایمیل قبلاً ثبت شده است."
 
@@ -395,7 +376,6 @@ msgid "reCAPTCHA verification failed. Please try again."
 msgstr "تأیید reCAPTCHA شکست خورد. لطفاً دوباره تلاش کنید."
 
 #: /workspace/routes/users/routes.py:262
-#, fuzzy
 msgid "Password must be at least 8 characters long."
 msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
@@ -404,7 +384,6 @@ msgid "Passwords do not match."
 msgstr "رمزهای عبور مطابقت ندارند."
 
 #: /workspace/routes/users/routes.py:272
-#, fuzzy
 msgid ""
 "Password should contain uppercase, lowercase, and numbers for better "
 "security."
@@ -415,7 +394,6 @@ msgid "Invalid role selected."
 msgstr "نقش نامعتبر انتخاب شده است."
 
 #: /workspace/routes/users/routes.py:280
-#, fuzzy
 msgid "Invalid phone number."
 msgstr "شماره تلفن"
 
@@ -450,27 +428,22 @@ msgid "❌ Incorrect email or password."
 msgstr "❌ ایمیل یا رمز عبور نادرست است."
 
 #: /workspace/routes/users/routes.py:554
-#, fuzzy
 msgid "✅ Profile picture updated successfully."
 msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
 #: /workspace/routes/users/routes.py:557
-#, fuzzy
 msgid "✅ Profile updated successfully."
 msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
 #: /workspace/routes/users/routes.py:592
-#, fuzzy
 msgid "❌ The current password is incorrect."
 msgstr "رمز عبور قدیمی نادرست است."
 
 #: /workspace/routes/users/routes.py:597
-#, fuzzy
 msgid "❌ New password must be at least 8 characters long."
 msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
 #: /workspace/routes/users/routes.py:602
-#, fuzzy
 msgid "❌ New password and repeat password do not match."
 msgstr "رمزهای عبور مطابقت ندارند."
 
@@ -685,7 +658,6 @@ msgid "Your documents are under review by admin."
 msgstr "مدارک شما در حال بررسی توسط مدیر است."
 
 #: /workspace/routes/users/routes.py:1723
-#, fuzzy
 msgid "✅ Documents uploaded successfully."
 msgstr "مدارک با موفقیت آپلود شدند."
 
@@ -698,7 +670,6 @@ msgid "No verification request found."
 msgstr "هیچ درخواستی یافت نشد."
 
 #: /workspace/routes/users/routes.py:1751
-#, fuzzy
 msgid "Please upload your documents first."
 msgstr "لطفاً ابتدا وارد شوید."
 
@@ -719,7 +690,6 @@ msgid "No account found with this email."
 msgstr "❌ داده‌ای برای این کشتی یافت نشد."
 
 #: /workspace/routes/users/routes.py:1914
-#, fuzzy
 msgid "✅ Your email is already verified."
 msgstr "ایمیل قبلاً ثبت شده است."
 
@@ -731,7 +701,7 @@ msgstr "📧 ایمیل تأیید جدید ارسال شد! لطفاً صندو
 #: /workspace/templates/base_pwa.html:360
 #: /workspace/templates/base_pwa.html:409
 msgid "Toggle Dark Mode"
-msgstr ""
+msgstr "تغییر حالت تاریک"
 
 #: /workspace/templates/base_pwa.html:141
 #: /workspace/templates/base_pwa.html:360
@@ -739,55 +709,54 @@ msgstr ""
 #: /workspace/templates/base_pwa.html:603
 #: /workspace/templates/base_pwa.html:699
 msgid "Toggle Theme"
-msgstr ""
+msgstr "تغییر تم"
 
 #: /workspace/templates/base_pwa.html:174
 #: /workspace/templates/base_pwa.html:816
 msgid "Metisma Logo"
-msgstr ""
+msgstr "لوگوی متیسم"
 
 #: /workspace/templates/base_pwa.html:181
 #: /workspace/templates/base_pwa.html:486
 #: /workspace/templates/base_pwa.html:624
 msgid "Home"
-msgstr ""
+msgstr "خانه"
 
 #: /workspace/templates/base_pwa.html:186
 #: /workspace/templates/base_pwa.html:497
 #: /workspace/templates/base_pwa.html:635
 msgid "Services"
-msgstr ""
+msgstr "خدمات"
 
 #: /workspace/templates/base_pwa.html:198
 #: /workspace/templates/base_pwa.html:508
 msgid "Trade Assurance"
-msgstr ""
+msgstr "تضمین تجارت"
 
 #: /workspace/templates/base_pwa.html:203
 #: /workspace/templates/base_pwa.html:513
 msgid "Escrow"
-msgstr ""
+msgstr "امانت‌داری"
 
 #: /workspace/templates/base_pwa.html:208
 #: /workspace/templates/base_pwa.html:518
 msgid "Smart Logistics"
-msgstr ""
+msgstr "لجستیک هوشمند"
 
 #: /workspace/templates/base_pwa.html:213
 #: /workspace/templates/base_pwa.html:523
 msgid "Market Analytics"
-msgstr ""
+msgstr "تحلیل بازار"
 
 #: /workspace/templates/base_pwa.html:218
 #: /workspace/templates/base_pwa.html:528
 msgid "Trade Academy"
-msgstr ""
+msgstr "آکادمی تجارت"
 
 #: /workspace/templates/base_pwa.html:223
 #: /workspace/templates/base_pwa.html:538
 #: /workspace/templates/base_pwa.html:656
 #: /workspace/templates/base_pwa.html:832
-#, fuzzy
 msgid "Smart Map"
 msgstr "چت هوشمند"
 
@@ -795,23 +764,22 @@ msgstr "چت هوشمند"
 #: /workspace/templates/base_pwa.html:545
 #: /workspace/templates/base_pwa.html:663
 msgid "Consortium"
-msgstr ""
+msgstr "کنسرسیوم"
 
 #: /workspace/templates/base_pwa.html:225
 #: /workspace/templates/base_pwa.html:552
 #: /workspace/templates/base_pwa.html:670
 msgid "Academy"
-msgstr ""
+msgstr "آکادمی"
 
 #: /workspace/templates/base_pwa.html:234
 msgid "Search..."
-msgstr ""
+msgstr "جستجو..."
 
 #: /workspace/templates/base_pwa.html:251
 #: /workspace/templates/base_pwa.html:335
 #: /workspace/templates/base_pwa.html:572
 #: /workspace/templates/users/notifications.html:17
-#, fuzzy
 msgid "Notifications"
 msgstr "تأیید هویت"
 
@@ -821,27 +789,23 @@ msgstr "تأیید هویت"
 #: /workspace/templates/base_pwa.html:581
 #: /workspace/templates/base_pwa.html:677
 #: /workspace/templates/users/dashboard.html:212
-#, fuzzy
 msgid "Support"
 msgstr "ورود"
 
 #: /workspace/templates/base_pwa.html:278
-#, fuzzy
 msgid "User Menu"
 msgstr "نام کاربری"
 
 #: /workspace/templates/base_pwa.html:311
-#, fuzzy
 msgid "My Profile"
 msgstr "ویرایش پروفایل"
 
 #: /workspace/templates/base_pwa.html:325
 msgid "Account Settings"
-msgstr ""
+msgstr "تنظیمات حساب"
 
 #: /workspace/templates/base_pwa.html:330
 #: /workspace/templates/base_pwa.html:564
-#, fuzzy
 msgid "My Orders"
 msgstr "سفارشات"
 
@@ -852,80 +816,75 @@ msgstr "ویرایش پروفایل"
 
 #: /workspace/templates/base_pwa.html:352
 #: /workspace/templates/base_pwa.html:612
-#, fuzzy
 msgid "Logout"
 msgstr "خروج"
 
 #: /workspace/templates/base_pwa.html:397
-#, fuzzy
 msgid "Log In"
 msgstr "ورود"
 
 #: /workspace/templates/base_pwa.html:403
-#, fuzzy
 msgid "Sign Up"
 msgstr "ورود به حساب"
 
 #: /workspace/templates/base_pwa.html:426
 msgid "Menu"
-msgstr ""
+msgstr "منو"
 
 #: /workspace/templates/base_pwa.html:448
 msgid "Close Menu"
-msgstr ""
+msgstr "بستن منو"
 
 #: /workspace/templates/base_pwa.html:473
-#, fuzzy
 msgid "Profile"
 msgstr "ویرایش پروفایل"
 
 #: /workspace/templates/base_pwa.html:474
 msgid "Settings"
-msgstr ""
+msgstr "تنظیمات"
 
 #: /workspace/templates/base_pwa.html:719
 #: /workspace/templates/base_pwa.html:730
 msgid "Customs Clearance Active"
-msgstr ""
+msgstr "ترخیص فعال است"
 
 #: /workspace/templates/base_pwa.html:721
 #: /workspace/templates/base_pwa.html:731
 msgid "New Route: "
-msgstr ""
+msgstr "مسیر جدید: "
 
 #: /workspace/templates/base_pwa.html:721
 #: /workspace/templates/base_pwa.html:731
 msgid "is now active"
-msgstr ""
+msgstr "اکنون فعال است"
 
 #: /workspace/templates/base_pwa.html:723
 #: /workspace/templates/base_pwa.html:732
 msgid "Oman Customs Tariffs "
-msgstr ""
+msgstr "تعرفه‌های گمرکی عمان "
 
 #: /workspace/templates/base_pwa.html:725
 #: /workspace/templates/base_pwa.html:733
 msgid "Alert: "
-msgstr ""
+msgstr "هشدار: "
 
 #: /workspace/templates/base_pwa.html:725
 #: /workspace/templates/base_pwa.html:733
 msgid "import regulations change next month"
-msgstr ""
+msgstr "مقررات واردات ماه آینده تغییر می‌کند"
 
 #: /workspace/templates/base_pwa.html:727
 #: /workspace/templates/base_pwa.html:734
 msgid "new "
-msgstr ""
+msgstr "جدید "
 
 #: /workspace/templates/base_pwa.html:727
 #: /workspace/templates/base_pwa.html:734
 msgid "buyers registered in Frankfurt"
-msgstr ""
+msgstr "خریداران ثبت‌شده در فرانکفورت"
 
 # Authentication & Registration
 #: /workspace/templates/offline.html:6
-#, fuzzy
 msgid "Offline - Metisma"
 msgstr "به متیسمای خوش آمدید"
 
@@ -975,7 +934,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/offline.html:96
-#, fuzzy
 msgid "← Back to Home"
 msgstr "بازگشت به بالا"
 
@@ -1158,7 +1116,7 @@ msgstr ""
 #: /workspace/templates/admin/chat_with_user.html:42
 #: /workspace/templates/users/chat.html:109
 msgid "Type your message..."
-msgstr ""
+msgstr "پیام خود را بنویسید..."
 
 #: /workspace/templates/admin/chat_with_user.html:43
 #: /workspace/templates/users/chat.html:115
@@ -1168,7 +1126,7 @@ msgstr "ارسال"
 
 #: /workspace/templates/admin/create_first_admin.html:6
 msgid "Create First Admin | Metisma"
-msgstr ""
+msgstr "ایجاد اولین مدیر | متیسم"
 
 #: /workspace/templates/admin/create_first_admin.html:287
 msgid "Create First Admin"
@@ -1179,7 +1137,6 @@ msgid "p class=\"auth-subtitle\">"
 msgstr ""
 
 #: /workspace/templates/admin/create_first_admin.html:298
-#, fuzzy
 msgid "Important:"
 msgstr "ورود"
 
@@ -1192,19 +1149,16 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/create_first_admin.html:321
-#, fuzzy
 msgid ""
 "Username\n"
 "                    "
 msgstr "نام کاربری"
 
 #: /workspace/templates/admin/create_first_admin.html:330
-#, fuzzy
 msgid "Choose a username"
 msgstr "نام کاربری"
 
 #: /workspace/templates/admin/create_first_admin.html:342
-#, fuzzy
 msgid ""
 "Email Address\n"
 "                    "
@@ -1213,10 +1167,9 @@ msgstr "آدرس"
 #: /workspace/templates/admin/create_first_admin.html:351
 #: /workspace/templates/admin/login.html:26
 msgid "admin@example.com"
-msgstr ""
+msgstr "admin@example.com"
 
 #: /workspace/templates/admin/create_first_admin.html:362
-#, fuzzy
 msgid ""
 "Password\n"
 "                    "
@@ -1224,22 +1177,19 @@ msgstr "رمز عبور"
 
 #: /workspace/templates/admin/create_first_admin.html:371
 msgid "Minimum 8 characters"
-msgstr ""
+msgstr "حداقل ۸ کاراکتر"
 
 #: /workspace/templates/admin/create_first_admin.html:384
-#, fuzzy
 msgid ""
 "Confirm Password\n"
 "                    "
 msgstr "تأیید رمز عبور"
 
 #: /workspace/templates/admin/create_first_admin.html:393
-#, fuzzy
 msgid "Re-enter your password"
 msgstr "بازنشانی رمز عبور"
 
 #: /workspace/templates/admin/create_first_admin.html:404
-#, fuzzy
 msgid ""
 "Create Admin Account\n"
 "                "
@@ -1266,14 +1216,12 @@ msgid "span>"
 msgstr ""
 
 #: /workspace/templates/admin/create_first_admin.html:431
-#, fuzzy
 msgid ""
 "Already have an admin account? \n"
 "                    "
 msgstr "حساب کاربری دارید؟"
 
 #: /workspace/templates/admin/create_first_admin.html:432
-#, fuzzy
 msgid "Login here"
 msgstr "ورود"
 
@@ -1293,7 +1241,6 @@ msgstr ""
 
 # Profile & Dashboard
 #: /workspace/templates/admin/dashboard.html:7
-#, fuzzy
 msgid ""
 "Admin Dashboard\n"
 "        "
@@ -1418,7 +1365,6 @@ msgstr ""
 
 # Profile & Dashboard
 #: /workspace/templates/admin/edit_role_perms.html:433
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "                    "
@@ -1437,7 +1383,6 @@ msgid "div class=\"group-subtitle\">"
 msgstr ""
 
 #: /workspace/templates/admin/edit_role_perms.html:476
-#, fuzzy
 msgid ""
 "Select All\n"
 "                            "
@@ -1460,14 +1405,12 @@ msgid "span class=\"stats-label\">"
 msgstr ""
 
 #: /workspace/templates/admin/edit_role_perms.html:509
-#, fuzzy
 msgid ""
 "Cancel\n"
 "                        "
 msgstr "انصراف"
 
 #: /workspace/templates/admin/edit_role_perms.html:512
-#, fuzzy
 msgid ""
 "Save Changes\n"
 "                        "
@@ -1488,7 +1431,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/login.html:10
-#, fuzzy
 msgid "Admin Panel"
 msgstr "تالار معاملات"
 
@@ -1565,7 +1507,6 @@ msgid "p class=\"mb-0 opacity-90\">"
 msgstr ""
 
 #: /workspace/templates/admin/manage_user_perms.html:178
-#, fuzzy
 msgid ""
 "Back to Panel\n"
 "            "
@@ -1573,14 +1514,12 @@ msgstr "بازگشت به بالا"
 
 # Registration Steps
 #: /workspace/templates/admin/manage_user_perms.html:188
-#, fuzzy
 msgid ""
 "User Information\n"
 "                "
 msgstr "مرحله ۱: اطلاعات پایه"
 
 #: /workspace/templates/admin/manage_user_perms.html:192
-#, fuzzy
 msgid "Username:"
 msgstr "نام کاربری"
 
@@ -1589,7 +1528,6 @@ msgid "div class=\"font-weight-bold text-dark\">"
 msgstr ""
 
 #: /workspace/templates/admin/manage_user_perms.html:196
-#, fuzzy
 msgid "Role:"
 msgstr "پروفایل"
 
@@ -1598,7 +1536,6 @@ msgid "span class=\"badge badge-primary p-2\" style=\"font-size: 0.9rem;\">"
 msgstr ""
 
 #: /workspace/templates/admin/manage_user_perms.html:200
-#, fuzzy
 msgid "Email:"
 msgstr "ایمیل"
 
@@ -1652,14 +1589,12 @@ msgid "option value=\""
 msgstr ""
 
 #: /workspace/templates/admin/manage_user_perms.html:270
-#, fuzzy
 msgid ""
 "Grant\n"
 "                        "
 msgstr "پیش‌نویس"
 
 #: /workspace/templates/admin/manage_user_perms.html:275
-#, fuzzy
 msgid ""
 "Revoke\n"
 "                        "
@@ -1700,7 +1635,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/manage_users.html:17
-#, fuzzy
 msgid "🔧 User Management"
 msgstr "نام کاربری"
 
@@ -1778,7 +1712,6 @@ msgid "td class=\"px-4 py-3 text-gray-600 dark:text-slate-400\">"
 msgstr ""
 
 #: /workspace/templates/admin/manage_users.html:52
-#, fuzzy
 msgid ""
 "Verified\n"
 "                                "
@@ -1879,7 +1812,6 @@ msgstr ""
 
 # Financial
 #: /workspace/templates/admin/premium_requests.html:23
-#, fuzzy
 msgid "All"
 msgstr "کیف پول"
 
@@ -1914,13 +1846,11 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/premium_requests.html:62
-#, fuzzy
 msgid "✅ Approve"
 msgstr "تصویب"
 
 #: /workspace/templates/admin/premium_requests.html:67
 #: /workspace/templates/users/producer_orders.html:104
-#, fuzzy
 msgid "❌ Reject"
 msgstr "رد کردن"
 
@@ -1937,7 +1867,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/view_all_documents.html:19
-#, fuzzy
 msgid ""
 "User Documents\n"
 "        "
@@ -1985,7 +1914,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/admin/view_all_documents.html:39
-#, fuzzy
 msgid ""
 "Pending\n"
 "                    "
@@ -1997,7 +1925,6 @@ msgid "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
 msgstr ""
 
 #: /workspace/templates/admin/view_all_documents.html:43
-#, fuzzy
 msgid ""
 "Approved\n"
 "                    "
@@ -2010,7 +1937,6 @@ msgstr ""
 
 # Financial
 #: /workspace/templates/admin/view_all_documents.html:47
-#, fuzzy
 msgid ""
 "All\n"
 "                    "
@@ -2116,7 +2042,6 @@ msgstr ""
 # Registration Steps
 #: /workspace/templates/admin/view_premium_request.html:15
 #: /workspace/templates/admin/view_user_documents.html:15
-#, fuzzy
 msgid "👤 User Information"
 msgstr "مرحله ۱: اطلاعات پایه"
 
@@ -2161,7 +2086,6 @@ msgid "span class=\"font-bold text-blue-600 dark:text-blue-400 ml-1\">"
 msgstr ""
 
 #: /workspace/templates/admin/view_premium_request.html:29
-#, fuzzy
 msgid "✅ Step Verification Status"
 msgstr "تأیید تخصص"
 
@@ -2203,7 +2127,6 @@ msgid "span class=\"text-red-600 dark:text-red-400\">"
 msgstr ""
 
 #: /workspace/templates/admin/view_premium_request.html:56
-#, fuzzy
 msgid "📎 Uploaded Documents"
 msgstr "آپلود مدارک"
 
@@ -2265,7 +2188,6 @@ msgid "span class=\"text-yellow-600 dark:text-yellow-400 font-medium\">"
 msgstr ""
 
 #: /workspace/templates/admin/view_user_documents.html:34
-#, fuzzy
 msgid "📁 List of Uploaded Documents"
 msgstr "آپلود مدارک"
 
@@ -2284,12 +2206,10 @@ msgid "p class=\"text-lg\">"
 msgstr ""
 
 #: /workspace/templates/admin/view_user_documents.html:74
-#, fuzzy
 msgid "✅ Approve Documents"
 msgstr "آپلود مدارک"
 
 #: /workspace/templates/admin/view_user_documents.html:78
-#, fuzzy
 msgid "❌ Reject Documents"
 msgstr "مدارک من"
 
@@ -2298,7 +2218,6 @@ msgid "p class=\"text-green-700 dark:text-green-400 font-medium\">"
 msgstr ""
 
 #: /workspace/templates/email/password_reset.html:7
-#, fuzzy
 msgid "Password Reset - Metisma"
 msgstr "لینک بازنشانی رمز عبور به ایمیل شما ارسال شد."
 
@@ -2384,7 +2303,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/exhibition/booth_detail.html:38
-#, fuzzy
 msgid "About This Booth"
 msgstr "این ماه"
 
@@ -2393,7 +2311,6 @@ msgid "p class=\"text-gray-600 leading-relaxed\">"
 msgstr ""
 
 #: /workspace/templates/exhibition/booth_detail.html:46
-#, fuzzy
 msgid "Featured Products"
 msgstr "محصولات"
 
@@ -2418,7 +2335,6 @@ msgstr ""
 
 # Registration Steps
 #: /workspace/templates/exhibition/booth_detail.html:73
-#, fuzzy
 msgid "Contact Information"
 msgstr "مرحله ۱: اطلاعات پایه"
 
@@ -2563,7 +2479,6 @@ msgid "View All Booths →"
 msgstr ""
 
 #: /workspace/templates/exhibition/hall.html:97
-#, fuzzy
 msgid "📅 Active Exhibitions"
 msgstr "نمایشگاه"
 
@@ -2590,7 +2505,6 @@ msgid "span class=\"text-sm text-gray-500\">"
 msgstr ""
 
 #: /workspace/templates/exhibition/hall.html:124
-#, fuzzy
 msgid "Enter Exhibition →"
 msgstr "نمایشگاه"
 
@@ -2625,21 +2539,18 @@ msgid "Name and Surname *"
 msgstr ""
 
 #: /workspace/templates/magazine/advertisement.html:19
-#, fuzzy
 msgid "Company / Brand"
 msgstr "نام شرکت"
 
 #: /workspace/templates/magazine/advertisement.html:25
 #: /workspace/templates/magazine/sponsorship.html:22
 #: /workspace/templates/magazine/subscribe.html:59
-#, fuzzy
 msgid "Email *"
 msgstr "ایمیل"
 
 #: /workspace/templates/magazine/advertisement.html:29
 #: /workspace/templates/magazine/sponsorship.html:26
 #: /workspace/templates/magazine/subscribe.html:64
-#, fuzzy
 msgid "Phone Number *"
 msgstr "شماره تلفن"
 
@@ -2708,7 +2619,6 @@ msgstr ""
 
 #: /workspace/templates/magazine/advertisement.html:62
 #: /workspace/templates/magazine/sponsorship.html:30
-#, fuzzy
 msgid "Message and Description"
 msgstr "مشاوران حقوقی و قراردادهای بین‌المللی"
 
@@ -2728,7 +2638,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/magazine/index.html:9
-#, fuzzy
 msgid "Imazhe Magazine"
 msgstr "مجله"
 
@@ -2751,7 +2660,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/magazine/index.html:19
-#, fuzzy
 msgid "📚 Published Issues"
 msgstr "منتشر شده"
 
@@ -2862,12 +2770,10 @@ msgid "Complete Postal Address *"
 msgstr ""
 
 #: /workspace/templates/magazine/subscribe.html:71
-#, fuzzy
 msgid "Complete Subscription"
 msgstr "تکمیل ثبت‌نام"
 
 #: /workspace/templates/trading/market.html:12
-#, fuzzy
 msgid "📊 Metisma Trading Hall"
 msgstr "تالار معاملات"
 
@@ -3044,7 +2950,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/users/chat.html:41
-#, fuzzy
 msgid ""
 "Contacts\n"
 "                    "
@@ -3059,7 +2964,6 @@ msgid "p class=\"text-xs text-gray-500 dark:text-slate-400 capitalize\">"
 msgstr ""
 
 #: /workspace/templates/users/chat.html:64
-#, fuzzy
 msgid ""
 "Return to Profile\n"
 "                    "
@@ -3105,7 +3009,6 @@ msgstr ""
 #: /workspace/templates/users/dashboard.html:15
 #: /workspace/templates/users/place_order.html:112
 #: /workspace/templates/users/producer_orders.html:27
-#, fuzzy
 msgid ""
 "Return to Profile\n"
 "            "
@@ -3259,7 +3162,6 @@ msgid "You're a Premium Member! 🌟"
 msgstr ""
 
 #: /workspace/templates/users/dashboard.html:295
-#, fuzzy
 msgid ""
 "Sign Out\n"
 "            "
@@ -3292,7 +3194,6 @@ msgid "p class=\"text-sm text-gray-600 dark:text-gray-300 mb-4\">"
 msgstr ""
 
 #: /workspace/templates/users/enable_2fa.html:53
-#, fuzzy
 msgid "6-digit verification code"
 msgstr "در انتظار تأیید"
 
@@ -3406,7 +3307,6 @@ msgid "p class=\"text-xs text-gray-400 dark:text-gray-500 mt-1\">"
 msgstr ""
 
 #: /workspace/templates/users/manage_sessions.html:81
-#, fuzzy
 msgid "Log Out Device"
 msgstr "خروج"
 
@@ -3421,7 +3321,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/users/manage_sessions.html:115
-#, fuzzy
 msgid "No sessions found"
 msgstr "نتیجه‌ای یافت نشد."
 
@@ -3458,7 +3357,6 @@ msgid "🛣️ Route Planner"
 msgstr ""
 
 #: /workspace/templates/users/map.html:215
-#, fuzzy
 msgid "Origin Country"
 msgstr "کشور"
 
@@ -3524,7 +3422,6 @@ msgstr ""
 
 # Status
 #: /workspace/templates/users/map.html:306
-#, fuzzy
 msgid "✅ Active Only"
 msgstr "فعال"
 
@@ -3541,7 +3438,6 @@ msgid "Selected Item"
 msgstr ""
 
 #: /workspace/templates/users/map.html:327
-#, fuzzy
 msgid "Legend"
 msgstr "ارسال"
 
@@ -3604,7 +3500,6 @@ msgid "⚠️ ${c.name}"
 msgstr ""
 
 #: /workspace/templates/users/my_documents.html:11
-#, fuzzy
 msgid "📄 My Verified Documents"
 msgstr "مدارک من"
 
@@ -3630,7 +3525,6 @@ msgid "p class=\"text-yellow-700 dark:text-yellow-400 text-sm\">"
 msgstr ""
 
 #: /workspace/templates/users/my_documents.html:64
-#, fuzzy
 msgid "Request Rejected ❌"
 msgstr "رد شده"
 
@@ -3639,7 +3533,6 @@ msgid "p class=\"text-red-700 dark:text-red-400 text-sm\">"
 msgstr ""
 
 #: /workspace/templates/users/my_documents.html:77
-#, fuzzy
 msgid ""
 "Uploaded Documents\n"
 "            "
@@ -3680,7 +3573,6 @@ msgstr ""
 
 # Profile & Dashboard
 #: /workspace/templates/users/notifications.html:25
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "                "
@@ -3705,7 +3597,6 @@ msgid "Mark all as read"
 msgstr ""
 
 #: /workspace/templates/users/notifications.html:90
-#, fuzzy
 msgid "No Notifications"
 msgstr "در انتظار تأیید"
 
@@ -3733,7 +3624,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/users/payment_confirmation.html:28
-#, fuzzy
 msgid ""
 "Payment Details\n"
 "            "
@@ -3744,14 +3634,12 @@ msgid "span class=\"font-medium text-green-600 dark:text-green-400\">"
 msgstr ""
 
 #: /workspace/templates/users/payment_confirmation.html:57
-#, fuzzy
 msgid ""
 "Back to Profile\n"
 "            "
 msgstr "بازگشت به بالا"
 
 #: /workspace/templates/users/payment_confirmation.html:66
-#, fuzzy
 msgid ""
 "Contact Support\n"
 "            "
@@ -3762,7 +3650,6 @@ msgid "Place New Order"
 msgstr "📝 ثبت سفارش جدید"
 
 #: /workspace/templates/users/place_order.html:26
-#, fuzzy
 msgid "Product *"
 msgstr "محصولات"
 
@@ -3823,7 +3710,6 @@ msgid "e.g., Sohar"
 msgstr ""
 
 #: /workspace/templates/users/place_order.html:72
-#, fuzzy
 msgid "Select Producer *"
 msgstr "نقش خود را انتخاب کنید"
 
@@ -3858,21 +3744,18 @@ msgid "p class=\"text-muted text-center py-4\">"
 msgstr ""
 
 #: /workspace/templates/users/post_detail.html:63
-#, fuzzy
 msgid ""
 "Telegram\n"
 "                    "
 msgstr "تلگرام"
 
 #: /workspace/templates/users/post_detail.html:66
-#, fuzzy
 msgid ""
 "Twitter\n"
 "                    "
 msgstr "فیلتر"
 
 #: /workspace/templates/users/post_detail.html:69
-#, fuzzy
 msgid ""
 "WhatsApp\n"
 "                    "
@@ -3905,24 +3788,20 @@ msgid "span class=\"text-gold font-semibold\">"
 msgstr ""
 
 #: /workspace/templates/users/producer_orders.html:60
-#, fuzzy
 msgid ""
 "Buyer Information\n"
 "                                    "
 msgstr "خریداران بین‌المللی و واردکنندگان"
 
 #: /workspace/templates/users/producer_orders.html:63
-#, fuzzy
 msgid "Name: "
 msgstr "نام کاربری"
 
 #: /workspace/templates/users/producer_orders.html:64
-#, fuzzy
 msgid "Company: "
 msgstr "نام شرکت"
 
 #: /workspace/templates/users/producer_orders.html:65
-#, fuzzy
 msgid "Country: "
 msgstr "کشور"
 
@@ -3937,7 +3816,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/users/producer_orders.html:96
-#, fuzzy
 msgid "✅ Confirm"
 msgstr "تأیید"
 
@@ -3991,19 +3869,16 @@ msgstr ""
 
 # Registration Steps
 #: /workspace/templates/users/profile_edit.html:35
-#, fuzzy
 msgid ""
 "Basic Information\n"
 "                "
 msgstr "مرحله ۱: اطلاعات پایه"
 
 #: /workspace/templates/users/profile_edit.html:42
-#, fuzzy
 msgid "Enter your company name"
 msgstr "نام شرکت"
 
 #: /workspace/templates/users/profile_edit.html:47
-#, fuzzy
 msgid "Country "
 msgstr "کشور"
 
@@ -4021,7 +3896,6 @@ msgid "+1 234 567 8900"
 msgstr ""
 
 #: /workspace/templates/users/profile_edit.html:70
-#, fuzzy
 msgid ""
 "Professional Information\n"
 "                "
@@ -4060,7 +3934,6 @@ msgid "https://yourcompany.com"
 msgstr ""
 
 #: /workspace/templates/users/profile_edit.html:112
-#, fuzzy
 msgid ""
 "Social Media Links\n"
 "                "
@@ -4079,7 +3952,6 @@ msgid "Telegram"
 msgstr "تلگرام"
 
 #: /workspace/templates/users/profile_edit.html:127
-#, fuzzy
 msgid "@username"
 msgstr "نام کاربری"
 
@@ -4088,7 +3960,6 @@ msgid "WhatsApp"
 msgstr "واتساپ"
 
 #: /workspace/templates/users/profile_edit.html:146
-#, fuzzy
 msgid "Save Changes ✓"
 msgstr "ذخیره تغییرات"
 
@@ -4183,7 +4054,6 @@ msgstr ""
 
 # Profile & Dashboard
 #: /workspace/templates/users/support.html:14
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "        "
@@ -4229,7 +4099,6 @@ msgid "Passport Copy *"
 msgstr "کپی پاسپورت"
 
 #: /workspace/templates/users/upload_documents.html:36
-#, fuzzy
 msgid "Company License *"
 msgstr "نام شرکت"
 
@@ -4307,7 +4176,6 @@ msgid ""
 msgstr ""
 
 #: /workspace/templates/users/verify_phone.html:39
-#, fuzzy
 msgid "Verification Code"
 msgstr "در انتظار تأیید"
 
@@ -4316,7 +4184,6 @@ msgid "123456"
 msgstr ""
 
 #: /workspace/templates/users/verify_phone.html:54
-#, fuzzy
 msgid "Verify Code"
 msgstr "تأیید شده"
 
@@ -4325,7 +4192,6 @@ msgid "Vessel Finder"
 msgstr "🌍 جستجوی کشتی"
 
 #: /workspace/templates/users/vessel_finder.html:25
-#, fuzzy
 msgid "IMO Number"
 msgstr "شماره تلفن"
 
@@ -4334,7 +4200,6 @@ msgid "e.g., 9395044"
 msgstr ""
 
 #: /workspace/templates/users/vessel_finder.html:44
-#, fuzzy
 msgid ""
 "Search Vessel\n"
 "            "
@@ -4375,326 +4240,326 @@ msgid ""
 "right\">"
 msgstr ""
 
-#~ msgid "Register"
-#~ msgstr "ثبت‌نام"
+ msgid "Register"
+ msgstr "ثبت‌نام"
 
-#~ msgid "Forgot Password?"
-#~ msgstr "رمز عبور را فراموش کرده‌اید؟"
+ msgid "Forgot Password?"
+ msgstr "رمز عبور را فراموش کرده‌اید؟"
 
-#~ msgid "Remember Me"
-#~ msgstr "مرا به خاطر بسپار"
+ msgid "Remember Me"
+ msgstr "مرا به خاطر بسپار"
 
-#~ msgid "Don't have an account?"
-#~ msgstr "حساب کاربری ندارید؟"
+ msgid "Don't have an account?"
+ msgstr "حساب کاربری ندارید؟"
 
-#~ msgid "Sign Up Now"
-#~ msgstr "همین حالا ثبت‌نام کنید"
+ msgid "Sign Up Now"
+ msgstr "همین حالا ثبت‌نام کنید"
 
-#~ msgid "Step 3: Security & Verification"
-#~ msgstr "مرحله ۳: امنیت و تأیید"
+ msgid "Step 3: Security & Verification"
+ msgstr "مرحله ۳: امنیت و تأیید"
 
-#~ msgid "Next Step"
-#~ msgstr "مرحله بعد"
+ msgid "Next Step"
+ msgstr "مرحله بعد"
 
-#~ msgid "Previous Step"
-#~ msgstr "مرحله قبل"
+ msgid "Previous Step"
+ msgstr "مرحله قبل"
 
-#~ msgid "Producer"
-#~ msgstr "تولیدکننده"
+ msgid "Producer"
+ msgstr "تولیدکننده"
 
-#~ msgid "Buyer"
-#~ msgstr "خریدار"
+ msgid "Buyer"
+ msgstr "خریدار"
 
-#~ msgid "Corporate Agent"
-#~ msgstr "نماینده شرکتی"
+ msgid "Corporate Agent"
+ msgstr "نماینده شرکتی"
 
-#~ msgid "Logistics Provider"
-#~ msgstr "ارائه‌دهنده خدمات لجستیک"
+ msgid "Logistics Provider"
+ msgstr "ارائه‌دهنده خدمات لجستیک"
 
-#~ msgid "Legal Advisor"
-#~ msgstr "مشاور حقوقی"
+ msgid "Legal Advisor"
+ msgstr "مشاور حقوقی"
 
-#~ msgid "Tech Partner"
-#~ msgstr "شریک فناوری"
+ msgid "Tech Partner"
+ msgstr "شریک فناوری"
 
-#~ msgid "Investor"
-#~ msgstr "سرمایه‌گذار"
+ msgid "Investor"
+ msgstr "سرمایه‌گذار"
 
-#~ msgid "Expertise Area"
-#~ msgstr "حوزه تخصصی"
+ msgid "Expertise Area"
+ msgstr "حوزه تخصصی"
 
-#~ msgid "City"
-#~ msgstr "شهر"
+ msgid "City"
+ msgstr "شهر"
 
 # Trust Score
-#~ msgid "Trust Score"
-#~ msgstr "امتیاز اعتماد"
+ msgid "Trust Score"
+ msgstr "امتیاز اعتماد"
 
-#~ msgid "Your Trust Score"
-#~ msgstr "امتیاز اعتماد شما"
+ msgid "Your Trust Score"
+ msgstr "امتیاز اعتماد شما"
 
-#~ msgid "Trust Level"
-#~ msgstr "سطح اعتماد"
+ msgid "Trust Level"
+ msgstr "سطح اعتماد"
 
-#~ msgid "Bronze"
-#~ msgstr "برنز"
+ msgid "Bronze"
+ msgstr "برنز"
 
-#~ msgid "Silver"
-#~ msgstr "نقره‌ای"
+ msgid "Silver"
+ msgstr "نقره‌ای"
 
-#~ msgid "Gold"
-#~ msgstr "طلایی"
+ msgid "Gold"
+ msgstr "طلایی"
 
-#~ msgid "Platinum"
-#~ msgstr "پلاتینیوم"
+ msgid "Platinum"
+ msgstr "پلاتینیوم"
 
-#~ msgid "Newcomer"
-#~ msgstr "تازه‌وارد"
+ msgid "Newcomer"
+ msgstr "تازه‌وارد"
 
-#~ msgid "Social Credibility"
-#~ msgstr "اعتبار اجتماعی"
+ msgid "Social Credibility"
+ msgstr "اعتبار اجتماعی"
 
-#~ msgid "Dynamic Score"
-#~ msgstr "امتیاز پویا"
+ msgid "Dynamic Score"
+ msgstr "امتیاز پویا"
 
-#~ msgid "Not Verified"
-#~ msgstr "تأیید نشده"
+ msgid "Not Verified"
+ msgstr "تأیید نشده"
 
 # Messages & Notifications
-#~ msgid "Success"
-#~ msgstr "موفقیت"
+ msgid "Success"
+ msgstr "موفقیت"
 
-#~ msgid "Error"
-#~ msgstr "خطا"
+ msgid "Error"
+ msgstr "خطا"
 
-#~ msgid "Warning"
-#~ msgstr "هشدار"
+ msgid "Warning"
+ msgstr "هشدار"
 
-#~ msgid "Info"
-#~ msgstr "اطلاعات"
+ msgid "Info"
+ msgstr "اطلاعات"
 
-#~ msgid "Access denied."
-#~ msgstr "دسترسی غیرمجاز."
+ msgid "Access denied."
+ msgstr "دسترسی غیرمجاز."
 
-#~ msgid "File type not allowed."
-#~ msgstr "نوع فایل مجاز نیست."
+ msgid "File type not allowed."
+ msgstr "نوع فایل مجاز نیست."
 
-#~ msgid "File size exceeds limit."
-#~ msgstr "حجم فایل از حد مجاز بیشتر است."
+ msgid "File size exceeds limit."
+ msgstr "حجم فایل از حد مجاز بیشتر است."
 
-#~ msgid "Too many requests. Please try again later."
-#~ msgstr "درخواست‌های زیادی ارسال شده است. لطفاً بعداً تلاش کنید."
+ msgid "Too many requests. Please try again later."
+ msgstr "درخواست‌های زیادی ارسال شده است. لطفاً بعداً تلاش کنید."
 
 # Forms & Validation
-#~ msgid "Required"
-#~ msgstr "الزامی"
+ msgid "Required"
+ msgstr "الزامی"
 
-#~ msgid "This field is required."
-#~ msgstr "این فیلد الزامی است."
+ msgid "This field is required."
+ msgstr "این فیلد الزامی است."
 
-#~ msgid "Enter a valid email address."
-#~ msgstr "یک آدرس ایمیل معتبر وارد کنید."
+ msgid "Enter a valid email address."
+ msgstr "یک آدرس ایمیل معتبر وارد کنید."
 
-#~ msgid "Please accept the terms and conditions."
-#~ msgstr "لطفاً شرایط و قوانین را بپذیرید."
+ msgid "Please accept the terms and conditions."
+ msgstr "لطفاً شرایط و قوانین را بپذیرید."
 
-#~ msgid "I agree to the Terms of Service"
-#~ msgstr "با شرایط خدمات موافقم"
+ msgid "I agree to the Terms of Service"
+ msgstr "با شرایط خدمات موافقم"
 
-#~ msgid "I agree to the Privacy Policy"
-#~ msgstr "با سیاست حریم خصوصی موافقم"
+ msgid "I agree to the Privacy Policy"
+ msgstr "با سیاست حریم خصوصی موافقم"
 
 # Navigation & Menu
-#~ msgid "Home"
-#~ msgstr "خانه"
+ msgid "Home"
+ msgstr "خانه"
 
-#~ msgid "Marketplace"
-#~ msgstr "بازار"
+ msgid "Marketplace"
+ msgstr "بازار"
 
-#~ msgid "Services"
-#~ msgstr "خدمات"
+ msgid "Services"
+ msgstr "خدمات"
 
-#~ msgid "Consortium"
-#~ msgstr "کنسرسیوم"
+ msgid "Consortium"
+ msgstr "کنسرسیوم"
 
-#~ msgid "Map"
-#~ msgstr "نقشه"
+ msgid "Map"
+ msgstr "نقشه"
 
-#~ msgid "Learning"
-#~ msgstr "یادگیری"
+ msgid "Learning"
+ msgstr "یادگیری"
 
-#~ msgid "Courses"
-#~ msgstr "دوره‌ها"
+ msgid "Courses"
+ msgstr "دوره‌ها"
 
-#~ msgid "Webinars"
-#~ msgstr "وبینارها"
+ msgid "Webinars"
+ msgstr "وبینارها"
 
-#~ msgid "CRM"
-#~ msgstr "مدیریت ارتباط با مشتری"
+ msgid "CRM"
+ msgstr "مدیریت ارتباط با مشتری"
 
-#~ msgid "Leads"
-#~ msgstr "سرنخ‌ها"
+ msgid "Leads"
+ msgstr "سرنخ‌ها"
 
-#~ msgid "Network"
-#~ msgstr "شبکه"
+ msgid "Network"
+ msgstr "شبکه"
 
-#~ msgid "News"
-#~ msgstr "اخبار"
+ msgid "News"
+ msgstr "اخبار"
 
-#~ msgid "Settings"
-#~ msgstr "تنظیمات"
+ msgid "Settings"
+ msgstr "تنظیمات"
 
-#~ msgid "Help"
-#~ msgstr "راهنما"
+ msgid "Help"
+ msgstr "راهنما"
 
-#~ msgid "About Us"
-#~ msgstr "درباره ما"
+ msgid "About Us"
+ msgstr "درباره ما"
 
-#~ msgid "Terms of Service"
-#~ msgstr "شرایط خدمات"
+ msgid "Terms of Service"
+ msgstr "شرایط خدمات"
 
-#~ msgid "Privacy Policy"
-#~ msgstr "سیاست حریم خصوصی"
+ msgid "Privacy Policy"
+ msgstr "سیاست حریم خصوصی"
 
 # Actions
-#~ msgid "View"
-#~ msgstr "مشاهده"
+ msgid "View"
+ msgstr "مشاهده"
 
-#~ msgid "Edit"
-#~ msgstr "ویرایش"
+ msgid "Edit"
+ msgstr "ویرایش"
 
-#~ msgid "Delete"
-#~ msgstr "حذف"
+ msgid "Delete"
+ msgstr "حذف"
 
-#~ msgid "Create"
-#~ msgstr "ایجاد"
+ msgid "Create"
+ msgstr "ایجاد"
 
-#~ msgid "Update"
-#~ msgstr "به‌روزرسانی"
+ msgid "Update"
+ msgstr "به‌روزرسانی"
 
-#~ msgid "Export"
-#~ msgstr "خروجی"
+ msgid "Export"
+ msgstr "خروجی"
 
-#~ msgid "Download"
-#~ msgstr "دانلود"
+ msgid "Download"
+ msgstr "دانلود"
 
-#~ msgid "Upload"
-#~ msgstr "آپلود"
+ msgid "Upload"
+ msgstr "آپلود"
 
-#~ msgid "Share"
-#~ msgstr "اشتراک‌گذاری"
+ msgid "Share"
+ msgstr "اشتراک‌گذاری"
 
-#~ msgid "Submit"
-#~ msgstr "ثبت"
+ msgid "Submit"
+ msgstr "ثبت"
 
-#~ msgid "Apply"
-#~ msgstr "درخواست"
+ msgid "Apply"
+ msgstr "درخواست"
 
-#~ msgid "Accept"
-#~ msgstr "پذیرفتن"
+ msgid "Accept"
+ msgstr "پذیرفتن"
 
 # Time & Dates
-#~ msgid "Today"
-#~ msgstr "امروز"
+ msgid "Today"
+ msgstr "امروز"
 
-#~ msgid "Yesterday"
-#~ msgstr "دیروز"
+ msgid "Yesterday"
+ msgstr "دیروز"
 
-#~ msgid "This Week"
-#~ msgstr "این هفته"
+ msgid "This Week"
+ msgstr "این هفته"
 
-#~ msgid "This Year"
-#~ msgstr "امسال"
+ msgid "This Year"
+ msgstr "امسال"
 
-#~ msgid "Created At"
-#~ msgstr "ایجاد شده در"
+ msgid "Created At"
+ msgstr "ایجاد شده در"
 
-#~ msgid "Updated At"
-#~ msgstr "به‌روزرسانی شده در"
+ msgid "Updated At"
+ msgstr "به‌روزرسانی شده در"
 
-#~ msgid "Last Login"
-#~ msgstr "آخرین ورود"
+ msgid "Last Login"
+ msgstr "آخرین ورود"
 
-#~ msgid "Date"
-#~ msgstr "تاریخ"
+ msgid "Date"
+ msgstr "تاریخ"
 
-#~ msgid "Time"
-#~ msgstr "زمان"
+ msgid "Time"
+ msgstr "زمان"
 
-#~ msgid "Inactive"
-#~ msgstr "غیرفعال"
+ msgid "Inactive"
+ msgstr "غیرفعال"
 
-#~ msgid "Archived"
-#~ msgstr "بایگانی شده"
+ msgid "Archived"
+ msgstr "بایگانی شده"
 
-#~ msgid "Balance"
-#~ msgstr "موجودی"
+ msgid "Balance"
+ msgstr "موجودی"
 
-#~ msgid "Transaction"
-#~ msgstr "تراکنش"
+ msgid "Transaction"
+ msgstr "تراکنش"
 
-#~ msgid "Transactions"
-#~ msgstr "تراکنش‌ها"
+ msgid "Transactions"
+ msgstr "تراکنش‌ها"
 
-#~ msgid "Deposit"
-#~ msgstr "واریز"
+ msgid "Deposit"
+ msgstr "واریز"
 
-#~ msgid "Withdraw"
-#~ msgstr "برداشت"
+ msgid "Withdraw"
+ msgstr "برداشت"
 
-#~ msgid "Invoice"
-#~ msgstr "فاکتور"
+ msgid "Invoice"
+ msgstr "فاکتور"
 
-#~ msgid "Credit"
-#~ msgstr "اعتبار"
+ msgid "Credit"
+ msgstr "اعتبار"
 
-#~ msgid "Debit"
-#~ msgstr "بدهی"
+ msgid "Debit"
+ msgstr "بدهی"
 
-#~ msgid "Trade Credit"
-#~ msgstr "اعتبار تجاری"
+ msgid "Trade Credit"
+ msgstr "اعتبار تجاری"
 
-#~ msgid "Escrow"
-#~ msgstr "امانت"
+ msgid "Escrow"
+ msgstr "امانت"
 
 # Miscellaneous
-#~ msgid "Loading..."
-#~ msgstr "در حال بارگذاری..."
+ msgid "Loading..."
+ msgstr "در حال بارگذاری..."
 
-#~ msgid "Show more"
-#~ msgstr "نمایش بیشتر"
+ msgid "Show more"
+ msgstr "نمایش بیشتر"
 
-#~ msgid "Show less"
-#~ msgstr "نمایش کمتر"
+ msgid "Show less"
+ msgstr "نمایش کمتر"
 
-#~ msgid "Copyright"
-#~ msgstr "حق کپی‌رایت"
+ msgid "Copyright"
+ msgstr "حق کپی‌رایت"
 
-#~ msgid "All rights reserved."
-#~ msgstr "تمامی حقوق محفوظ است."
+ msgid "All rights reserved."
+ msgstr "تمامی حقوق محفوظ است."
 
-#~ msgid "Made with"
-#~ msgstr "ساخته شده با"
+ msgid "Made with"
+ msgstr "ساخته شده با"
 
-#~ msgid "in Iran"
-#~ msgstr "در ایران"
+ msgid "in Iran"
+ msgstr "در ایران"
 
 # Roles Description
-#~ msgid "Producer Description"
-#~ msgstr "تولیدکنندگان کالا و خدمات صادراتی"
+ msgid "Producer Description"
+ msgstr "تولیدکنندگان کالا و خدمات صادراتی"
 
-#~ msgid "Broker Description"
-#~ msgstr "کارگزاران و واسطه‌های تجاری"
+ msgid "Broker Description"
+ msgstr "کارگزاران و واسطه‌های تجاری"
 
-#~ msgid "Corporate Agent Description"
-#~ msgstr "نمایندگان رسمی شرکت‌های بزرگ"
+ msgid "Corporate Agent Description"
+ msgstr "نمایندگان رسمی شرکت‌های بزرگ"
 
-#~ msgid "Logistics Provider Description"
-#~ msgstr "ارائه‌دهندگان خدمات حمل‌ونقل و لجستیک"
+ msgid "Logistics Provider Description"
+ msgstr "ارائه‌دهندگان خدمات حمل‌ونقل و لجستیک"
 
-#~ msgid "Tech Partner Description"
-#~ msgstr "شریک‌های فناوری و پلتفرم‌های دیجیتال"
+ msgid "Tech Partner Description"
+ msgstr "شریک‌های فناوری و پلتفرم‌های دیجیتال"
 
-#~ msgid "Investor Description"
-#~ msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
+ msgid "Investor Description"
+ msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
 
