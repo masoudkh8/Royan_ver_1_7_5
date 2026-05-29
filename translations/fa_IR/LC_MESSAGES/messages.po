@@ -9,17 +9,17 @@ msgstr ""
 "POT-Creation-Date: 2026-05-29 19:24+0000\n"
 "PO-Revision-Date: 2024-01-01 00:00+0330\n"
 "Last-Translator: Metisma Team\n"
-"Language: fa_IR\n"
 "Language-Team: Persian\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: routes/admin/permissions.py:17
 msgid "You do not have permission to access this page."
-msgstr ""
+msgstr "شما مجوز دسترسی به این صفحه را ندارید."
 
 #: routes/admin/permissions.py:57
 #, fuzzy
@@ -29,7 +29,7 @@ msgstr "اطلاعات ورود نامعتبر است."
 #: routes/admin/permissions.py:113 routes/admin/permissions.py:119
 #: routes/admin/permissions.py:160 routes/admin/permissions.py:166
 msgid "Invalid permission."
-msgstr ""
+msgstr "مجوز نامعتبر است."
 
 #: routes/admin/routes.py:43
 #, fuzzy
@@ -38,11 +38,11 @@ msgstr "لطفاً ابتدا وارد شوید."
 
 #: routes/admin/routes.py:47
 msgid "❌ Access denied: Only admin can access this page."
-msgstr ""
+msgstr "❌ دسترسی رد شد: فقط مدیر می‌تواند به این صفحه دسترسی داشته باشد."
 
 #: routes/admin/routes.py:144
 msgid "❌ The role is invalid."
-msgstr ""
+msgstr "❌ نقش نامعتبر است."
 
 #: routes/admin/routes.py:218
 #, fuzzy
@@ -51,35 +51,35 @@ msgstr "اطلاعات ورود نامعتبر است."
 
 #: routes/admin/routes.py:407
 msgid "❌ You cannot delete yourself."
-msgstr ""
+msgstr "❌ نمی‌توانید خودتان را حذف کنید."
 
 #: routes/admin/routes.py:434
 msgid "❌ You cannot deactivate yourself."
-msgstr ""
+msgstr "❌ نمی‌توانید خودتان را غیرفعال کنید."
 
 #: routes/admin/routes.py:439
 msgid "❌ You cannot deactivate another admin."
-msgstr ""
+msgstr "❌ نمی‌توانید مدیر دیگری را غیرفعال کنید."
 
 #: routes/admin/routes.py:468
 msgid "❌ You cannot change your own special status."
-msgstr ""
+msgstr "❌ نمی‌توانید خودتان را حذف کنید."
 
 #: routes/admin/routes.py:512
 msgid "❌ You cannot chat with yourself."
-msgstr ""
+msgstr "❌ نمی‌توانید خودتان را غیرفعال کنید."
 
 #: routes/admin/routes.py:546
 msgid "✅ Message sent to user."
-msgstr ""
+msgstr "هنوز پیامی ارسال نشده است."
 
 #: routes/admin/routes.py:572
 msgid "✅ Welcome, admin.!"
-msgstr ""
+msgstr "✅ خوش آمدید، مدیر!"
 
 #: routes/admin/routes.py:577
 msgid "❌ Access denied: Only admin can log in."
-msgstr ""
+msgstr "❌ دسترسی رد شد: فقط مدیر می‌تواند وارد شود."
 
 #: routes/admin/routes.py:579
 #, fuzzy
@@ -103,11 +103,11 @@ msgstr "اطلاعات ورود نامعتبر است."
 
 #: routes/exhibition/routes.py:112
 msgid "This time slot is already booked. Please choose another time."
-msgstr ""
+msgstr "این بازه زمانی قبلاً رزرو شده است. لطفاً زمان دیگری را انتخاب کنید."
 
 #: routes/exhibition/routes.py:137
 msgid "Your appointment has been successfully booked!"
-msgstr ""
+msgstr "قرار ملاقات شما با موفقیت رزرو شد!"
 
 #: routes/exhibition/routes.py:201
 #, fuzzy
@@ -116,58 +116,59 @@ msgstr "حساب کاربری با موفقیت ایجاد شد."
 
 #: routes/magazine/routes.py:26
 msgid "This issue has not been published yet."
-msgstr ""
+msgstr "این شماره هنوز منتشر نشده است."
 
 #: routes/magazine/routes.py:40
 msgid "Magazine file not found."
-msgstr ""
+msgstr "فایل مجله یافت نشد."
 
 #: routes/magazine/routes.py:55 routes/magazine/routes.py:89
 #: routes/magazine/routes.py:123
 msgid "Please fill in the required fields."
-msgstr ""
+msgstr "لطفاً فیلدهای الزامی را پر کنید."
 
 #: routes/magazine/routes.py:69
 msgid ""
-"Your sponsorship request has been successfully submitted. We will contact"
-" you soon."
-msgstr ""
+"Your sponsorship request has been successfully submitted. We will contact "
+"you soon."
+msgstr "درخواست حمایت شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
 
 #: routes/magazine/routes.py:106
 msgid ""
-"Your advertising request has been successfully submitted. We will contact"
-" you soon."
+"Your advertising request has been successfully submitted. We will contact "
+"you soon."
 msgstr ""
+"درخواست تبلیغاتی شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
 
 #: routes/magazine/routes.py:138
 msgid ""
-"Your annual subscription has been successfully registered. Information "
-"will be sent soon."
-msgstr ""
+"Your annual subscription has been successfully registered. Information will "
+"be sent soon."
+msgstr "اشتراک سالانه شما با موفقیت ثبت شد. اطلاعات به زودی ارسال خواهد شد."
 
 #: routes/trading/routes.py:158
 msgid "Trading pair not found."
-msgstr ""
+msgstr "فایل مجله یافت نشد."
 
 #: routes/trading/routes.py:163
 msgid "Amount must be positive."
-msgstr ""
+msgstr "مبلغ باید مثبت باشد."
 
 #: routes/trading/routes.py:177
 msgid "Insufficient balance."
-msgstr ""
+msgstr "موجودی ناکافی است."
 
 #: routes/trading/routes.py:200
 msgid "Your order has been placed in the order book."
-msgstr ""
+msgstr "سفارش شما هنوز ارسال نشده است."
 
 #: routes/trading/routes.py:267
 msgid "You are not authorized to cancel this order."
-msgstr ""
+msgstr "شما مجوز لغو این سفارش را ندارید."
 
 #: routes/trading/routes.py:271
 msgid "This order cannot be cancelled."
-msgstr ""
+msgstr "این سفارش قبلاً"
 
 #: routes/trading/routes.py:277
 #, fuzzy
@@ -176,23 +177,23 @@ msgstr "حساب کاربری با موفقیت ایجاد شد."
 
 #: routes/users/auth.py:83
 msgid "❌ Please enter your mobile number in your profile first."
-msgstr ""
+msgstr "❌ لطفاً ابتدا شماره موبایل خود را در پروفایل وارد کنید."
 
 #: routes/users/auth.py:100
 msgid "✅ Your mobile number has already been verified."
-msgstr ""
+msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
 
 #: routes/users/auth.py:110
 msgid "New code sent."
-msgstr ""
+msgstr "کد جدید ارسال شد."
 
 #: routes/users/auth.py:113 routes/users/auth.py:138
 msgid "❌ There was a problem sending the code."
-msgstr ""
+msgstr "❌ مشکلی در ارسال کد وجود داشت."
 
 #: routes/users/auth.py:118
 msgid "Please enter the code."
-msgstr ""
+msgstr "لطفاً کد را وارد کنید."
 
 #: routes/users/auth.py:123
 #, fuzzy
@@ -201,35 +202,35 @@ msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
 #: routes/users/auth.py:126
 msgid "❌ The code is invalid."
-msgstr ""
+msgstr "❌ کد نامعتبر است."
 
 #: routes/users/auth.py:135
 msgid "A verification code has been sent to your number."
-msgstr ""
+msgstr "یک کد تأیید به شماره شما ارسال شد."
 
 #: routes/users/auth.py:162 routes/users/routes.py:1665
 msgid "Please start the premium verification process first."
-msgstr ""
+msgstr "لطفاً ابتدا فرآیند تأیید ویژه را شروع کنید."
 
 #: routes/users/auth.py:175
 msgid "Confirmation email sent."
-msgstr ""
+msgstr "تأیید"
 
 #: routes/users/auth.py:178
 msgid "❌ There was an error sending the email."
-msgstr ""
+msgstr "❌ خطایی در ارسال ایمیل رخ داد."
 
 #: routes/users/auth.py:230
 msgid "❌ The link has expired."
-msgstr ""
+msgstr "❌ لینک منقضی شده است."
 
 #: routes/users/auth.py:238
 msgid "❌ The link is invalid."
-msgstr ""
+msgstr "❌ لینک نامعتبر است."
 
 #: routes/users/auth.py:242
 msgid "❌ This link is not for you."
-msgstr ""
+msgstr "❌ این لینک برای شما نیست."
 
 #: routes/users/auth.py:247
 #, fuzzy
@@ -238,25 +239,26 @@ msgstr "نتیجه‌ای یافت نشد."
 
 #: routes/users/auth.py:257
 msgid "✅ Email has been verified."
-msgstr ""
+msgstr "✅ ایمیل تأیید شده است."
 
 #: routes/users/auth.py:271
 msgid "❌ Please enter your email."
-msgstr ""
+msgstr "لطفاً کد را وارد کنید."
 
 #: routes/users/auth.py:315
 msgid ""
-"✅ If your email is registered in the system, a recovery link will be sent"
-" to you."
+"✅ If your email is registered in the system, a recovery link will be sent to"
+" you."
 msgstr ""
+"✅ اگر ایمیل شما در سیستم ثبت شده باشد، لینک بازیابی برای شما ارسال خواهد شد."
 
 #: routes/users/auth.py:333
 msgid "❌ The recovery link is invalid or expired."
-msgstr ""
+msgstr "❌ لینک نامعتبر است."
 
 #: routes/users/auth.py:338
 msgid "❌ User not found."
-msgstr ""
+msgstr "کاربر یافت نشد."
 
 #: routes/users/auth.py:346
 #, fuzzy
@@ -270,64 +272,64 @@ msgstr "رمزهای عبور مطابقت ندارند."
 
 #: routes/users/auth.py:397
 msgid "✅ Your password has been changed successfully. Please log in."
-msgstr ""
+msgstr "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید."
 
 #: routes/users/auth.py:412
 msgid "⚠️ Two-factor authentication is already enabled."
-msgstr ""
+msgstr "⚠️ احراز هویت دو مرحله‌ای قبلاً فعال شده است."
 
 #: routes/users/auth.py:420
 msgid "❌ The information is incomplete."
-msgstr ""
+msgstr "❌ این حساب غیرفعال است."
 
 #: routes/users/auth.py:448
 msgid "✅ Two-factor authentication enabled. Save backup codes!"
-msgstr ""
+msgstr "✅ احراز هویت دو مرحله‌ای فعال شد. کدهای پشتیبان را ذخیره کنید!"
 
 #: routes/users/auth.py:451 routes/users/auth.py:521
 msgid "❌ The code entered is not valid."
-msgstr ""
+msgstr "❌ کد نامعتبر است."
 
 #: routes/users/auth.py:472
 msgid "⚠️ No backup codes found."
-msgstr ""
+msgstr "❌ درخواستی یافت نشد."
 
 #: routes/users/auth.py:483
 msgid "⚠️ Two-factor authentication is not enabled."
-msgstr ""
+msgstr "⚠️ احراز هویت دو مرحله‌ای فعال نیست."
 
 #: routes/users/auth.py:519
 msgid "✅ Two-factor authentication disabled."
-msgstr ""
+msgstr "✅ احراز هویت دو مرحله‌ای غیرفعال شد."
 
 #: routes/users/auth.py:534
 msgid "❌ No pending login found. Please log in first."
-msgstr ""
+msgstr "❌ لطفاً ابتدا وارد شوید."
 
 #: routes/users/auth.py:599
 msgid "✅ Welcome! Two-factor authentication successful."
-msgstr ""
+msgstr "✅ خوش آمدید! احراز هویت دو مرحله‌ای موفقیت‌آمیز بود."
 
 #: routes/users/auth.py:602
 msgid "❌ The code entered is not valid. Please try again."
-msgstr ""
+msgstr "❌ درخواست به سرور زمان‌بندی شد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/auth.py:647
 msgid "✅ Session successfully canceled."
-msgstr ""
+msgstr "✅ سفارش با موفقیت ثبت شد."
 
 #: routes/users/auth.py:649
 msgid "❌ Session not found."
-msgstr ""
+msgstr "کاربر یافت نشد."
 
 #: routes/users/auth.py:668
 msgid "✅ All sessions have been canceled."
-msgstr ""
+msgstr "✅ همه نشست‌ها لغو شدند."
 
 #: routes/users/permissions_routes.py:115
 #: routes/users/permissions_routes.py:232
 msgid "Security error: Invalid CSRF token."
-msgstr ""
+msgstr "خطای امنیتی: توکن CSRF نامعتبر است."
 
 #: routes/users/routes.py:67
 #, fuzzy
@@ -336,11 +338,11 @@ msgstr "لطفاً ابتدا وارد شوید."
 
 #: routes/users/routes.py:71
 msgid "Unauthorized access. This section is for specific roles."
-msgstr ""
+msgstr "دسترسی غیرمجاز. این بخش مخصوص نقش‌های خاص است."
 
 #: routes/users/routes.py:136
 msgid "There is already an admin."
-msgstr ""
+msgstr "قبلاً یک مدیر وجود دارد."
 
 #: routes/users/routes.py:145
 #, fuzzy
@@ -354,7 +356,7 @@ msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
 #: routes/users/routes.py:153
 msgid "❌ The email address is invalid."
-msgstr ""
+msgstr "❌ نقش نامعتبر است."
 
 #: routes/users/routes.py:157
 #, fuzzy
@@ -373,21 +375,20 @@ msgstr "ایمیل قبلاً ثبت شده است."
 
 #: routes/users/routes.py:181
 msgid "✅ The first admin was created successfully. Please log in."
-msgstr ""
+msgstr "اولین مدیر ایجاد شد."
 
 #: routes/users/routes.py:186
 msgid "❌ An error occurred while creating the admin."
-msgstr ""
+msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:219
 msgid ""
-"You already have an account. Please log out first to register a new "
-"account."
-msgstr ""
+"You already have an account. Please log out first to register a new account."
+msgstr "شما قبلاً حساب دارید. لطفاً ابتدا خارج شوید تا حساب جدیدی ثبت کنید."
 
 #: routes/users/routes.py:242
 msgid "reCAPTCHA verification failed. Please try again."
-msgstr ""
+msgstr "تأیید reCAPTCHA شکست خورد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:262
 #, fuzzy
@@ -407,7 +408,7 @@ msgstr "رمز عبور باید شامل حروف بزرگ، کوچک و اعد
 
 #: routes/users/routes.py:276
 msgid "Invalid role selected."
-msgstr ""
+msgstr "نقش نامعتبر انتخاب شده است."
 
 #: routes/users/routes.py:280
 #, fuzzy
@@ -416,31 +417,34 @@ msgstr "شماره تلفن"
 
 #: routes/users/routes.py:330
 msgid "✅ Registration successful! Verification email sent."
-msgstr ""
+msgstr "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید."
 
 #: routes/users/routes.py:405
 msgid ""
 "❌ Please verify your email before logging in. Check your inbox for the "
 "verification link."
 msgstr ""
+"❌ لطفاً قبل از ورود، ایمیل خود را تأیید کنید. صندوق ورودی خود را برای لینک "
+"تأیید بررسی کنید."
 
 #: routes/users/routes.py:438
 msgid "✅ Password verified. Please enter your 2FA code."
 msgstr ""
+"✅ رمز عبور تأیید شد. لطفاً کد احراز هویت دو مرحله‌ای خود را وارد کنید."
 
 #: routes/users/routes.py:456
 msgid "✅ Welcome!"
-msgstr ""
+msgstr "✅ خوش آمدید!"
 
 #: routes/users/routes.py:477
 msgid ""
 "❌ Your account has been locked for 15 minutes due to too many failed "
 "attempts."
-msgstr ""
+msgstr "❌ حساب شما به دلیل تلاش‌های ناموفق زیاد به مدت ۱۵ دقیقه قفل شده است."
 
 #: routes/users/routes.py:494
 msgid "❌ Incorrect email or password."
-msgstr ""
+msgstr "❌ ایمیل یا رمز عبور نادرست است."
 
 #: routes/users/routes.py:554
 #, fuzzy
@@ -469,210 +473,212 @@ msgstr "رمزهای عبور مطابقت ندارند."
 
 #: routes/users/routes.py:607
 msgid "⚠️ New password must not be the same as previous password."
-msgstr ""
+msgstr "⚠️ رمز عبور جدید نباید همان رمز عبور قبلی باشد."
 
 #: routes/users/routes.py:618
 msgid "✅ Your password has been changed successfully."
-msgstr ""
+msgstr "👋 شما با موفقیت خارج شدید."
 
 #: routes/users/routes.py:623
 msgid "❌ An error occurred while changing the password. Please try again."
-msgstr ""
+msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:638
 msgid "⚠️ Please check the confirmation checkbox to delete the account."
-msgstr ""
+msgstr "⚠️ لطفاً برای حذف حساب، تیک تأیید را بزنید."
 
 #: routes/users/routes.py:675
 msgid ""
 "🗑️ Your account has been successfully deleted. Thank you for your "
 "cooperation."
-msgstr ""
+msgstr "🗑️ حساب شما با موفقیت حذف شد. از همکاری شما سپاسگزاریم."
 
 #: routes/users/routes.py:681
-msgid "❌ An error occurred while deleting the account. Please contact support."
-msgstr ""
+msgid ""
+"❌ An error occurred while deleting the account. Please contact support."
+msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:710
 msgid "👋 You have successfully logged out."
-msgstr ""
+msgstr "👋 شما با موفقیت خارج شدید."
 
 #: routes/users/routes.py:721
 msgid "❌ This account is inactive."
-msgstr ""
+msgstr "❌ این حساب غیرفعال است."
 
 #: routes/users/routes.py:823
 msgid "❌ Please enter the product name."
-msgstr ""
+msgstr "❌ لطفاً نام محصول را وارد کنید."
 
 #: routes/users/routes.py:827
 msgid "❌ Please select origin and destination."
-msgstr ""
+msgstr "❌ لطفاً مبدأ و مقصد را انتخاب کنید."
 
 #: routes/users/routes.py:837
 msgid "❌ Invalid quantity or price."
-msgstr ""
+msgstr "❌ مقدار یا قیمت نامعتبر است."
 
 #: routes/users/routes.py:842
 msgid "❌ The seller is invalid."
-msgstr ""
+msgstr "❌ فروشنده نامعتبر است."
 
 #: routes/users/routes.py:849
 msgid "❌ The desired seller was not found."
-msgstr ""
+msgstr "❌ فروشنده مورد نظر یافت نشد."
 
 #: routes/users/routes.py:853
 msgid "❌ The selected user is not a producer."
-msgstr ""
+msgstr "❌ کاربر انتخاب شده فروشنده نیست."
 
 #: routes/users/routes.py:910
 msgid "✅ Order successfully placed."
-msgstr ""
+msgstr "✅ سفارش با موفقیت ثبت شد."
 
 #: routes/users/routes.py:916
 msgid "❌ An error occurred while placing your order. Please try again."
-msgstr ""
+msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:946
 msgid "❌ You do not have permission to manage orders."
-msgstr ""
+msgstr "❌ شما مجوز مدیریت سفارشات را ندارید."
 
 #: routes/users/routes.py:961
 msgid "❌ You can only cancel your own orders."
-msgstr ""
+msgstr "❌ شما فقط می‌توانید سفارشات خودتان را لغو کنید."
 
 #: routes/users/routes.py:996
 msgid "⚠️ This order cannot be cancelled as it has already been processed."
-msgstr ""
+msgstr "⚠️این سفارش قبلاً تأیید یا رد شده است."
 
 #: routes/users/routes.py:1010 routes/users/routes.py:1063
 #: routes/users/routes.py:1119
 msgid "❌ Unauthorized access."
-msgstr ""
+msgstr "❌ دسترسی غیرمجاز."
 
 #: routes/users/routes.py:1047
 msgid "✅ The order was confirmed and the notification was sent"
-msgstr ""
+msgstr "✅ سفارش تأیید شد و اعلان ارسال گردید"
 
 #: routes/users/routes.py:1049
 msgid "⚠️This order has already been approved or rejected."
-msgstr ""
+msgstr "⚠️این سفارش قبلاً تأیید یا رد شده است."
 
 #: routes/users/routes.py:1103
 msgid "⚠️ This order has already changed status."
-msgstr ""
+msgstr "⚠️ این سفارش قبلاً تغییر وضعیت داده است."
 
 #: routes/users/routes.py:1123
 msgid "❌ You can only update your own orders."
-msgstr ""
+msgstr "❌ نمی‌توانید خودتان را حذف کنید."
 
 #: routes/users/routes.py:1158
 msgid "✅ Order status updated to In Transit"
-msgstr ""
+msgstr "✅ وضعیت سفارش به \"در حال انتقال\" به‌روزرسانی شد"
 
 #: routes/users/routes.py:1190
 msgid "✅ Order marked as Delivered"
-msgstr ""
+msgstr "✅ سفارش به عنوان \"تحویل شده\" علامت‌گذاری شد"
 
 #: routes/users/routes.py:1192
 msgid "⚠️ Cannot update order status at this stage."
-msgstr ""
+msgstr "⚠️ در این مرحله نمی‌توان وضعیت سفارش را به‌روزرسانی کرد."
 
 #: routes/users/routes.py:1230
 msgid "✅ All notifications marked as read"
-msgstr ""
+msgstr "✅ همه اعلان‌ها به عنوان خوانده شده علامت‌گذاری شدند"
 
 #: routes/users/routes.py:1247
 msgid "❌ Limited access: Only special users can send messages."
-msgstr ""
+msgstr "❌ دسترسی محدود: فقط کاربران ویژه می‌توانند چت کنند."
 
 #: routes/users/routes.py:1256
 msgid "❌ Access denied: Non-special users can only view messages from admin."
 msgstr ""
+"❌ دسترسی رد شد: کاربران غیر ویژه فقط می‌توانند پیام‌های مدیر را مشاهده کنند."
 
 #: routes/users/routes.py:1268
 msgid "❌ This user is not special and you cannot chat with him/her."
-msgstr ""
+msgstr "❌ این کاربر ویژه نیست و نمی‌توانید با او چت کنید."
 
 #: routes/users/routes.py:1292
 msgid "✉️ Message sent."
-msgstr ""
+msgstr "✉️ پیام ارسال شد."
 
 #: routes/users/routes.py:1321
 msgid "⚠️ No admin found to contact."
-msgstr ""
+msgstr "⚠️ مدیری برای تماس یافت نشد."
 
 #: routes/users/routes.py:1329
 msgid "❌ Please enter a message."
-msgstr ""
+msgstr "لطفاً کد را وارد کنید."
 
 #: routes/users/routes.py:1349
 msgid "✅ Your message was sent to support."
-msgstr ""
+msgstr "هنوز پیامی ارسال نشده است."
 
 #: routes/users/routes.py:1401
 msgid "❌ Access is only allowed for special users."
-msgstr ""
+msgstr "❌ دسترسی فقط برای کاربران ویژه مجاز است."
 
 #: routes/users/routes.py:1410
 msgid "❌ Please enter a valid 7-digit ID (IMO)."
-msgstr ""
+msgstr "❌ لطفاً یک شناسه ۷ رقمی معتبر وارد کنید (IMO)."
 
 #: routes/users/routes.py:1430
 msgid "⚠️ Network unavailable. Showing demo data."
-msgstr ""
+msgstr "⚠️ شبکه در دسترس نیست. نمایش داده‌های دموی."
 
 #: routes/users/routes.py:1446
 msgid "❌ No data found for this ship."
-msgstr ""
+msgstr "❌ داده‌ای برای این کشتی یافت نشد."
 
 #: routes/users/routes.py:1465
 msgid "❌ The request to the server was scheduled. Please try again."
-msgstr ""
+msgstr "❌ درخواست به سرور زمان‌بندی شد. لطفاً دوباره تلاش کنید."
 
 #: routes/users/routes.py:1467
 msgid "❌ An error occurred with the ship tracking service."
-msgstr ""
+msgstr "❌ خطایی در سرویس ردیابی کشتی رخ داد."
 
 #: routes/users/routes.py:1469
 msgid "❌ The received data is invalid."
-msgstr ""
+msgstr "❌ داده‌های دریافتی نامعتبر هستند."
 
 #: routes/users/routes.py:1480
 msgid "❌ Only special users can access the map."
-msgstr ""
+msgstr "❌ فقط کاربران ویژه می‌توانند به نقشه دسترسی داشته باشند."
 
 #: routes/users/routes.py:1494
 msgid "⚠️ No port data available."
-msgstr ""
+msgstr "⚠️ داده‌ای برای بندر موجود نیست."
 
 #: routes/users/routes.py:1608
 msgid "✅ You have already become a special user."
-msgstr ""
+msgstr "✅ شما قبلاً به کاربر ویژه تبدیل شده‌اید."
 
 #: routes/users/routes.py:1613
 msgid "⚠️ Your request is under review by admin."
-msgstr ""
+msgstr "⚠️ درخواست شما در حال بررسی است."
 
 #: routes/users/routes.py:1633
 msgid "You are already a Premium member. Your documents have been verified."
-msgstr ""
+msgstr "شما قبلاً عضو ویژه هستید. مدارک شما تأیید شده است."
 
 #: routes/users/routes.py:1645
 msgid "You already have a pending verification request."
-msgstr ""
+msgstr "شما قبلاً یک درخواست تأیید معلق دارید."
 
 #: routes/users/routes.py:1654
 msgid "The upgrade process has started. Please upload your documents."
-msgstr ""
+msgstr "فرآیند ارتقاء شروع شده است. لطفاً شماره موبایل خود را تأیید کنید."
 
 #: routes/users/routes.py:1670
 msgid "Your documents have been verified. You cannot modify them."
-msgstr ""
+msgstr "مدارک شما تأیید شده است. نمی‌توانید آن‌ها را تغییر دهید."
 
 #: routes/users/routes.py:1676
 msgid "Your documents are under review by admin."
-msgstr ""
+msgstr "مدارک شما در حال بررسی توسط مدیر است."
 
 #: routes/users/routes.py:1723
 #, fuzzy
@@ -682,10 +688,11 @@ msgstr "مدارک با موفقیت آپلود شدند."
 #: routes/users/routes.py:1726
 msgid "❌ No files were found to upload. Please select files and try again."
 msgstr ""
+"❌ فایلی برای آپلود یافت نشد. لطفاً فایل‌ها را انتخاب و دوباره تلاش کنید."
 
 #: routes/users/routes.py:1738
 msgid "No verification request found."
-msgstr ""
+msgstr "هیچ درخواستی یافت نشد."
 
 #: routes/users/routes.py:1751
 #, fuzzy
@@ -694,19 +701,19 @@ msgstr "لطفاً ابتدا وارد شوید."
 
 #: routes/users/routes.py:1774
 msgid "Payment receipt received. Reviewing..."
-msgstr ""
+msgstr "فیش پرداخت دریافت شد. در حال بررسی..."
 
 #: routes/users/routes.py:1882
 msgid "✅ Your email is already verified. You can login."
-msgstr ""
+msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
 
 #: routes/users/routes.py:1898
 msgid "🎉 Email verified successfully! Welcome to Metisma."
-msgstr ""
+msgstr "🎉 ایمیل با موفقیت تأیید شد! به متیما خوش آمدید."
 
 #: routes/users/routes.py:1910
 msgid "No account found with this email."
-msgstr ""
+msgstr "❌ داده‌ای برای این کشتی یافت نشد."
 
 #: routes/users/routes.py:1914
 #, fuzzy
@@ -715,7 +722,7 @@ msgstr "ایمیل قبلاً ثبت شده است."
 
 #: routes/users/routes.py:1938
 msgid "📧 New verification email sent! Please check your inbox."
-msgstr ""
+msgstr "📧 ایمیل تأیید جدید ارسال شد! لطفاً صندوق ورودی خود را بررسی کنید."
 
 # Authentication & Registration
 #: templates/offline.html:6
@@ -725,7 +732,7 @@ msgstr "به متیسمای خوش آمدید"
 
 #: templates/offline.html:59
 msgid "You're Offline"
-msgstr ""
+msgstr "نقش شما"
 
 #: templates/offline.html:62
 msgid "p class=\"text-gray-600 dark:text-slate-400 mb-6 leading-relaxed\">"
@@ -777,7 +784,7 @@ msgstr ""
 
 #: templates/admin/chat.html:7
 msgid "💬 Admin Chat"
-msgstr ""
+msgstr "💬 شروع چت"
 
 #: templates/admin/chat.html:8 templates/admin/chat_with_user.html:15
 #: templates/admin/dashboard.html:31 templates/admin/manage_users.html:69
@@ -801,24 +808,25 @@ msgstr ""
 #: templates/email/password_reset.html:253
 #: templates/email/verify_email.html:246 templates/email/verify_email.html:253
 #: templates/exhibition/booth_detail.html:10
-#: templates/exhibition/booth_detail.html:145 templates/exhibition/hall.html:74
-#: templates/exhibition/hall.html:139 templates/exhibition/hall.html:143
-#: templates/magazine/advertisement.html:68 templates/magazine/index.html:12
-#: templates/magazine/index.html:13 templates/magazine/index.html:14
-#: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
-#: templates/trading/market.html:53 templates/trading/market.html:100
-#: templates/trading/market.html:120 templates/trading/market.html:124
-#: templates/users/chat.html:19 templates/users/dashboard.html:57
-#: templates/users/dashboard.html:68 templates/users/dashboard.html:78
-#: templates/users/dashboard.html:85 templates/users/dashboard.html:90
-#: templates/users/dashboard.html:95 templates/users/dashboard.html:150
-#: templates/users/dashboard.html:169 templates/users/dashboard.html:189
-#: templates/users/dashboard.html:195 templates/users/dashboard.html:215
-#: templates/users/dashboard.html:235 templates/users/dashboard.html:241
-#: templates/users/dashboard.html:262 templates/users/enable_2fa.html:92
-#: templates/users/my_documents.html:12 templates/users/my_documents.html:89
-#: templates/users/my_documents.html:109 templates/users/my_documents.html:129
-#: templates/users/post_detail.html:36 templates/users/producer_orders.html:114
+#: templates/exhibition/booth_detail.html:145
+#: templates/exhibition/hall.html:74 templates/exhibition/hall.html:139
+#: templates/exhibition/hall.html:143 templates/magazine/advertisement.html:68
+#: templates/magazine/index.html:12 templates/magazine/index.html:13
+#: templates/magazine/index.html:14 templates/magazine/sponsorship.html:36
+#: templates/magazine/subscribe.html:76 templates/trading/market.html:53
+#: templates/trading/market.html:100 templates/trading/market.html:120
+#: templates/trading/market.html:124 templates/users/chat.html:19
+#: templates/users/dashboard.html:57 templates/users/dashboard.html:68
+#: templates/users/dashboard.html:78 templates/users/dashboard.html:85
+#: templates/users/dashboard.html:90 templates/users/dashboard.html:95
+#: templates/users/dashboard.html:150 templates/users/dashboard.html:169
+#: templates/users/dashboard.html:189 templates/users/dashboard.html:195
+#: templates/users/dashboard.html:215 templates/users/dashboard.html:235
+#: templates/users/dashboard.html:241 templates/users/dashboard.html:262
+#: templates/users/enable_2fa.html:92 templates/users/my_documents.html:12
+#: templates/users/my_documents.html:89 templates/users/my_documents.html:109
+#: templates/users/my_documents.html:129 templates/users/post_detail.html:36
+#: templates/users/producer_orders.html:114
 #: templates/users/producer_orders.html:136
 #: templates/users/profile_edit.html:147 templates/users/profile_edit.html:166
 #: templates/users/profile_edit.html:183 templates/users/profile_edit.html:198
@@ -842,15 +850,15 @@ msgstr ""
 
 #: templates/admin/chat.html:15
 msgid ""
-"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
-"gold-dark/20 flex items-center justify-center text-gold font-bold flex-"
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-"
+"dark/20 flex items-center justify-center text-gold font-bold flex-"
 "shrink-0\">"
 msgstr ""
 
 #: templates/admin/chat.html:18
 msgid ""
-"p class=\"font-medium text-gray-900 dark:text-white truncate group-hover"
-":text-gold transition\">"
+"p class=\"font-medium text-gray-900 dark:text-white truncate group-"
+"hover:text-gold transition\">"
 msgstr ""
 
 #: templates/admin/chat.html:19
@@ -861,8 +869,8 @@ msgstr ""
 
 #: templates/admin/chat.html:20
 msgid ""
-"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gold/10 "
-"text-gold\">"
+"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gold/10 text-"
+"gold\">"
 msgstr ""
 
 #: templates/admin/chat.html:22
@@ -876,8 +884,8 @@ msgstr ""
 #: templates/admin/chat_with_user.html:9 templates/users/chat.html:48
 #: templates/users/chat.html:74 templates/users/support.html:47
 msgid ""
-"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
-"gold-dark/20 flex items-center justify-center text-gold font-bold\">"
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-"
+"dark/20 flex items-center justify-center text-gold font-bold\">"
 msgstr ""
 
 #: templates/admin/chat_with_user.html:11
@@ -927,7 +935,7 @@ msgstr ""
 
 #: templates/admin/create_first_admin.html:287
 msgid "Create First Admin"
-msgstr ""
+msgstr "اولین مدیر ایجاد شد."
 
 #: templates/admin/create_first_admin.html:288
 msgid "p class=\"auth-subtitle\">"
@@ -941,8 +949,7 @@ msgstr "ورود"
 #: templates/admin/create_first_admin.html:298
 msgid ""
 "This action can only be performed once. \n"
-"                    Make sure to use secure credentials and store them "
-"safely.\n"
+"                    Make sure to use secure credentials and store them safely.\n"
 "                "
 msgstr ""
 
@@ -1115,8 +1122,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:69
 msgid ""
-"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-"
-"xs font-bold rounded-full flex items-center justify-center\">"
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-xs "
+"font-bold rounded-full flex items-center justify-center\">"
 msgstr ""
 
 #: templates/admin/dashboard.html:73
@@ -1127,8 +1134,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:76
 msgid ""
-"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white "
-"text-xs font-bold rounded-full flex items-center justify-center\">"
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white text-"
+"xs font-bold rounded-full flex items-center justify-center\">"
 msgstr ""
 
 #: templates/admin/dashboard.html:80
@@ -1139,8 +1146,8 @@ msgstr ""
 
 #: templates/admin/dashboard.html:84
 msgid ""
-"div class=\"p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-"
-"green-600 dark:text-green-400 group-hover:scale-110 transition\">"
+"div class=\"p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 "
+"dark:text-green-400 group-hover:scale-110 transition\">"
 msgstr ""
 
 #: templates/admin/edit_role_perms.html:423
@@ -1155,8 +1162,7 @@ msgstr ""
 
 #: templates/admin/edit_role_perms.html:428
 msgid ""
-"Configure permissions for this role. Changes will affect all users with "
-"this role.\n"
+"Configure permissions for this role. Changes will affect all users with this role.\n"
 "                    "
 msgstr ""
 
@@ -1249,14 +1255,14 @@ msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
 msgid ""
-"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
-"border-green-200 dark:border-green-800"
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-"
+"green-200 dark:border-green-800"
 msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
 msgid ""
-"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-"
-"red-200 dark:border-red-800"
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 "
+"dark:border-red-800"
 msgstr ""
 
 #: templates/admin/login.html:18 templates/users/vessel_finder.html:53
@@ -1281,11 +1287,11 @@ msgstr ""
 
 #: templates/admin/login.html:28
 msgid "Login to Admin Panel"
-msgstr ""
+msgstr "ورود مدیر - پنل مدیریت"
 
 #: templates/admin/login.html:32
 msgid "Return to Main Page"
-msgstr ""
+msgstr "← بازگشت به صفحه اصلی"
 
 #: templates/admin/login.html:34
 msgid "p class=\"text-center text-xs text-gray-500 dark:text-slate-500 mt-4\">"
@@ -1293,7 +1299,7 @@ msgstr ""
 
 #: templates/admin/manage_user_perms.html:174
 msgid "User Permission Management"
-msgstr ""
+msgstr "🔧 مدیریت کاربران"
 
 #: templates/admin/manage_user_perms.html:175
 msgid "p class=\"mb-0 opacity-90\">"
@@ -1368,8 +1374,7 @@ msgstr ""
 
 #: templates/admin/manage_user_perms.html:253
 msgid ""
-"In this section, you can exceptionally grant permissions to the user or "
-"revoke their default permissions.\n"
+"In this section, you can exceptionally grant permissions to the user or revoke their default permissions.\n"
 "            "
 msgstr ""
 
@@ -1412,7 +1417,7 @@ msgstr ""
 
 #: templates/admin/manage_user_perms.html:311
 msgid "Final Access Preview"
-msgstr ""
+msgstr "❌ دسترسی رد شد."
 
 #: templates/admin/manage_user_perms.html:314
 msgid "p class=\"mb-3\">"
@@ -1460,9 +1465,8 @@ msgstr ""
 #: templates/admin/premium_requests.html:25
 #: templates/admin/premium_requests.html:26
 msgid ""
-"bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border "
-"border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-"
-"dark-700"
+"bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border border-"
+"gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-dark-700"
 msgstr ""
 
 #: templates/admin/manage_users.html:21
@@ -1477,7 +1481,7 @@ msgstr ""
 
 #: templates/admin/manage_users.html:23
 msgid "All Users"
-msgstr ""
+msgstr "کل کاربران"
 
 #: templates/admin/manage_users.html:31 templates/admin/manage_users.html:32
 #: templates/admin/manage_users.html:33 templates/admin/manage_users.html:34
@@ -1493,8 +1497,8 @@ msgstr ""
 #: templates/admin/manage_users.html:38
 #: templates/admin/premium_requests.html:38
 msgid ""
-"th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 "
-"text-right\">"
+"th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-"
+"right\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:44
@@ -1525,7 +1529,7 @@ msgstr ""
 
 #: templates/admin/manage_users.html:61
 msgid "Yes"
-msgstr ""
+msgstr "✅ بله"
 
 #: templates/admin/manage_users.html:63
 msgid "span class=\"text-gray-500 dark:text-slate-500 text-xs\">"
@@ -1544,8 +1548,8 @@ msgstr ""
 
 #: templates/admin/manage_users.html:76
 msgid ""
-"span class=\"px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 "
-"text-green-700 dark:text-green-400 text-xs font-medium\">"
+"span class=\"px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-"
+"green-700 dark:text-green-400 text-xs font-medium\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:78
@@ -1556,14 +1560,14 @@ msgstr ""
 
 #: templates/admin/manage_users.html:84
 msgid ""
-"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gold/10"
-" hover:text-gold transition\">"
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gold/10 "
+"hover:text-gold transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:89
 msgid ""
-"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-"
-"gray-100 dark:hover:bg-dark-600 transition\">"
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gray-100 "
+"dark:hover:bg-dark-600 transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:92
@@ -1579,15 +1583,15 @@ msgstr ""
 #: templates/admin/manage_users.html:106 templates/admin/manage_users.html:112
 #: templates/admin/manage_users.html:116
 msgid ""
-"\" class=\"px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border "
-"border-gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover"
-":bg-dark-700 transition\">"
+"\" class=\"px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border border-"
+"gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover:bg-"
+"dark-700 transition\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:110
 msgid ""
-"span class=\"px-3 py-1.5 rounded-lg bg-gold text-dark-900 font-medium "
-"text-sm\">"
+"span class=\"px-3 py-1.5 rounded-lg bg-gold text-dark-900 font-medium text-"
+"sm\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:114
@@ -1596,7 +1600,7 @@ msgstr ""
 
 #: templates/admin/premium_requests.html:19
 msgid "📂 Premium Upgrade Requests"
-msgstr ""
+msgstr "📂 درخواست‌های ارتقاء به کاربر ویژه"
 
 #: templates/admin/premium_requests.html:23
 #: templates/admin/premium_requests.html:24
@@ -1618,8 +1622,8 @@ msgstr ""
 
 #: templates/admin/premium_requests.html:48
 msgid ""
-"span class=\"px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30"
-" text-yellow-700 dark:text-yellow-400 text-xs font-medium\">"
+"span class=\"px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 "
+"text-yellow-700 dark:text-yellow-400 text-xs font-medium\">"
 msgstr ""
 
 #: templates/admin/premium_requests.html:50
@@ -1694,13 +1698,13 @@ msgstr ""
 #: templates/admin/view_all_documents.html:45
 msgid ""
 "\" \n"
-"                       class=\"px-3 py-1.5 rounded-lg text-sm font-medium"
-" transition"
+"                       class=\"px-3 py-1.5 rounded-lg text-sm font-medium transition"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:38
 #: templates/users/producer_orders.html:43
-msgid "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
+msgid ""
+"bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:38
@@ -1749,20 +1753,20 @@ msgstr "کیف پول"
 #: templates/admin/view_all_documents.html:62
 #: templates/admin/view_all_documents.html:63
 msgid ""
-"th class=\"px-4 py-3 text-right text-xs font-medium text-gray-500 dark"
-":text-slate-400 uppercase tracking-wider\">"
+"th class=\"px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-"
+"slate-400 uppercase tracking-wider\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:64
 msgid ""
-"th class=\"px-4 py-3 text-center text-xs font-medium text-gray-500 dark"
-":text-slate-400 uppercase tracking-wider\">"
+"th class=\"px-4 py-3 text-center text-xs font-medium text-gray-500 "
+"dark:text-slate-400 uppercase tracking-wider\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:73
 msgid ""
-"div class=\"w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark"
-" flex items-center justify-center text-sm font-bold text-dark-900\">"
+"div class=\"w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark "
+"flex items-center justify-center text-sm font-bold text-dark-900\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:77
@@ -1783,16 +1787,16 @@ msgstr ""
 
 #: templates/admin/view_all_documents.html:92
 msgid ""
-"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
-"xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark"
-":text-green-400\">"
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs "
+"font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-"
+"green-400\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:96
 msgid ""
-"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
-"xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark"
-":text-yellow-400\">"
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs "
+"font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-"
+"yellow-400\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:101
@@ -1802,9 +1806,7 @@ msgstr ""
 #: templates/admin/view_all_documents.html:105
 msgid ""
 "\" \n"
-"                                   class=\"inline-flex items-center gap-1"
-" px-3 py-1.5 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark "
-"transition text-sm font-medium\">"
+"                                   class=\"inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark transition text-sm font-medium\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:113
@@ -1817,9 +1819,7 @@ msgstr ""
 #: templates/admin/view_all_documents.html:138
 msgid ""
 "\" \n"
-"               class=\"px-4 py-2 rounded-lg border border-gray-300 dark"
-":border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 "
-"dark:hover:bg-dark-700 transition\">"
+"               class=\"px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition\">"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:133
@@ -1828,7 +1828,7 @@ msgstr ""
 
 #: templates/admin/view_premium_request.html:9
 msgid "📄 Upgrade Request Details"
-msgstr ""
+msgstr "📄 جزئیات درخواست ارتقاء"
 
 #: templates/admin/view_premium_request.html:10
 #: templates/admin/view_user_documents.html:10
@@ -1950,8 +1950,7 @@ msgstr ""
 #: templates/admin/view_premium_request.html:70
 #: templates/admin/view_premium_request.html:79
 msgid ""
-"p class=\"text-xs text-blue-600 dark:text-blue-400 group-"
-"hover:underline\">"
+"p class=\"text-xs text-blue-600 dark:text-blue-400 group-hover:underline\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:64
@@ -1967,11 +1966,11 @@ msgstr ""
 
 #: templates/admin/view_premium_request.html:97
 msgid "✅ Confirm Request"
-msgstr ""
+msgstr "✅ تأیید شده"
 
 #: templates/admin/view_premium_request.html:102
 msgid "❌ Reject Request"
-msgstr ""
+msgstr "❌ رد شد"
 
 #: templates/admin/view_user_documents.html:9
 msgid ""
@@ -2028,7 +2027,7 @@ msgstr "لینک بازنشانی رمز عبور به ایمیل شما ارس�
 
 #: templates/email/password_reset.html:232
 msgid "Password Reset Request"
-msgstr ""
+msgstr "درخواست اسپانسرشیپ"
 
 #: templates/email/password_reset.html:238
 #: templates/email/verify_email.html:238
@@ -2053,7 +2052,7 @@ msgstr ""
 msgid ""
 "Important Security Information:\n"
 "                "
-msgstr ""
+msgstr "👤 اطلاعات کاربر"
 
 #: templates/email/password_reset.html:275
 #: templates/email/verify_email.html:275
@@ -2081,7 +2080,7 @@ msgstr ""
 msgid ""
 "Important Information:\n"
 "                "
-msgstr ""
+msgstr "اطلاعات حساب شرکت"
 
 #: templates/exhibition/booth_detail.html:10
 msgid "\" class=\"text-white hover:text-blue-200\">"
@@ -2089,8 +2088,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:14
 msgid ""
-"span class=\"bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs"
-" font-bold\">"
+"span class=\"bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs "
+"font-bold\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:21
@@ -2103,8 +2102,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:34
 msgid ""
-"div class=\"h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex "
-"items-center justify-center text-white text-6xl\">"
+"div class=\"h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex items-"
+"center justify-center text-white text-6xl\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:38
@@ -2161,7 +2160,7 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:105
 msgid "Message (Optional)"
-msgstr ""
+msgstr "تلفن (اختیاری)"
 
 #: templates/exhibition/booth_detail.html:111
 msgid "Request Appointment"
@@ -2169,7 +2168,7 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:117
 msgid "Available Time Slots:"
-msgstr ""
+msgstr "❌ فقط برای فروشندگان در دسترس است."
 
 #: templates/exhibition/booth_detail.html:120
 msgid "div class=\"text-sm text-gray-600\">"
@@ -2177,7 +2176,7 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:132
 msgid "Quick Actions"
-msgstr ""
+msgstr "اعلان‌ها"
 
 #: templates/exhibition/booth_detail.html:137
 msgid "👍 Like Booth"
@@ -2193,8 +2192,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:145
 msgid ""
-"\" class=\"block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover"
-":bg-gray-200 transition-colors text-center\">"
+"\" class=\"block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover:bg-"
+"gray-200 transition-colors text-center\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:154
@@ -2213,8 +2212,8 @@ msgstr ""
 
 #: templates/exhibition/booth_detail.html:180
 msgid ""
-"div class=\"h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex "
-"items-center justify-center text-white text-4xl\">"
+"div class=\"h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-"
+"center justify-center text-white text-4xl\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:12
@@ -2254,8 +2253,8 @@ msgstr ""
 
 #: templates/exhibition/hall.html:57
 msgid ""
-"span class=\"absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 "
-"py-1 rounded-full text-xs font-bold\">"
+"span class=\"absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 py-1 "
+"rounded-full text-xs font-bold\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:65
@@ -2273,8 +2272,7 @@ msgstr ""
 #: templates/exhibition/hall.html:74
 msgid ""
 "\" \n"
-"                           class=\"bg-blue-600 text-white px-4 py-2 "
-"rounded-lg text-sm hover:bg-blue-700 transition-colors\">"
+"                           class=\"bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors\">"
 msgstr ""
 
 #: templates/exhibition/hall.html:87
@@ -2325,7 +2323,7 @@ msgstr ""
 
 #: templates/magazine/advertisement.html:8
 msgid "Advertising Request"
-msgstr ""
+msgstr "بنر تبلیغاتی"
 
 #: templates/magazine/advertisement.html:9
 #: templates/magazine/sponsorship.html:9 templates/magazine/subscribe.html:9
@@ -2359,11 +2357,11 @@ msgstr "شماره تلفن"
 
 #: templates/magazine/advertisement.html:34
 msgid "Type of Advertisement *"
-msgstr ""
+msgstr "نوع تبلیغ"
 
 #: templates/magazine/advertisement.html:36
-#: templates/magazine/advertisement.html:53 templates/users/place_order.html:28
-#: templates/users/place_order.html:74
+#: templates/magazine/advertisement.html:53
+#: templates/users/place_order.html:28 templates/users/place_order.html:74
 msgid "option value=\"\" disabled selected>"
 msgstr ""
 
@@ -2427,7 +2425,7 @@ msgstr "مشاوران حقوقی و قراردادهای بین‌المللی"
 
 #: templates/magazine/advertisement.html:65
 msgid "Submit Advertising Request"
-msgstr ""
+msgstr "ثبت درخواست‌های تبلیغاتی"
 
 #: templates/magazine/advertisement.html:68
 #: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
@@ -2450,15 +2448,15 @@ msgstr ""
 
 #: templates/magazine/index.html:12 templates/magazine/index.html:13
 msgid ""
-"\" class=\"px-5 py-2.5 rounded-xl border border-gold/30 text-gold hover"
-":bg-gold/10 font-medium text-sm transition\">"
+"\" class=\"px-5 py-2.5 rounded-xl border border-gold/30 text-gold hover:bg-"
+"gold/10 font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/magazine/index.html:14
 msgid ""
-"\" class=\"px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-dark"
-" text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold "
-"shadow transition transform hover:scale-[1.02]\">"
+"\" class=\"px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-dark "
+"text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold shadow "
+"transition transform hover:scale-[1.02]\">"
 msgstr ""
 
 #: templates/magazine/index.html:19
@@ -2476,8 +2474,8 @@ msgstr ""
 
 #: templates/magazine/index.html:31
 msgid ""
-"span class=\"absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gold "
-"text-dark-900 text-xs font-bold\">"
+"span class=\"absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gold text-"
+"dark-900 text-xs font-bold\">"
 msgstr ""
 
 #: templates/magazine/index.html:35
@@ -2490,7 +2488,7 @@ msgstr ""
 
 #: templates/magazine/index.html:41
 msgid "Download Digital Version"
-msgstr ""
+msgstr "✓ دسترسی به نسخه دیجیتال"
 
 #: templates/magazine/index.html:48
 msgid "p class=\"text-4xl mb-4\">"
@@ -2498,11 +2496,11 @@ msgstr ""
 
 #: templates/magazine/index.html:49
 msgid "No issue has been published yet"
-msgstr ""
+msgstr "این شماره هنوز منتشر نشده است."
 
 #: templates/magazine/sponsorship.html:8
 msgid "Request for Sponsorship"
-msgstr ""
+msgstr "درخواست اسپانسرشیپ - مجله ایماژه"
 
 #: templates/magazine/sponsorship.html:18 templates/users/profile_edit.html:39
 msgid "Company Name"
@@ -2510,21 +2508,21 @@ msgstr "نام شرکت"
 
 #: templates/magazine/sponsorship.html:33
 msgid "Submit Sponsorship Request"
-msgstr ""
+msgstr "درخواست اسپانسرشیپ"
 
 #: templates/magazine/subscribe.html:8
 msgid "Imazhe Magazine Subscription"
-msgstr ""
+msgstr "مجله ایماژه"
 
 #: templates/magazine/subscribe.html:16
 msgid ""
-"div class=\"absolute top-0 right-0 bg-gold text-dark-900 text-xs font-"
-"bold px-3 py-1 rounded-bl-lg\">"
+"div class=\"absolute top-0 right-0 bg-gold text-dark-900 text-xs font-bold "
+"px-3 py-1 rounded-bl-lg\">"
 msgstr ""
 
 #: templates/magazine/subscribe.html:17
 msgid "Annual Subscription"
-msgstr ""
+msgstr "اشتراک سالانه"
 
 #: templates/magazine/subscribe.html:18 templates/magazine/subscribe.html:35
 msgid "span class=\"text-sm text-gray-500 dark:text-slate-400 font-normal\">"
@@ -2532,19 +2530,19 @@ msgstr ""
 
 #: templates/magazine/subscribe.html:20
 msgid "12 printed issues annually"
-msgstr ""
+msgstr "✓ ۱۲ شماره چاپی در سال"
 
 #: templates/magazine/subscribe.html:21 templates/magazine/subscribe.html:38
 msgid "Access to digital version"
-msgstr ""
+msgstr "✓ دسترسی به نسخه دیجیتال"
 
 #: templates/magazine/subscribe.html:22 templates/magazine/subscribe.html:39
 msgid "Free postage"
-msgstr ""
+msgstr "✓ پست رایگان"
 
 #: templates/magazine/subscribe.html:23
 msgid "Special discounts for events"
-msgstr ""
+msgstr "✓ تخفیف‌های ویژه برای رویدادها"
 
 #: templates/magazine/subscribe.html:27 templates/magazine/subscribe.html:43
 msgid "span class=\"peer-checked:hidden\">"
@@ -2556,11 +2554,11 @@ msgstr ""
 
 #: templates/magazine/subscribe.html:34
 msgid "6-Month Subscription"
-msgstr ""
+msgstr "اشتراک شش ماهه"
 
 #: templates/magazine/subscribe.html:37
 msgid "6 printed issues"
-msgstr ""
+msgstr "✓ ۶ شماره چاپی"
 
 #: templates/magazine/subscribe.html:68
 msgid "Complete Postal Address *"
@@ -2604,8 +2602,7 @@ msgstr ""
 #: templates/trading/market.html:53
 msgid ""
 "\" \n"
-"                   class=\"block mt-3 text-center bg-green-600 text-white"
-" py-2 rounded hover:bg-green-700 text-sm\">"
+"                   class=\"block mt-3 text-center bg-green-600 text-white py-2 rounded hover:bg-green-700 text-sm\">"
 msgstr ""
 
 #: templates/trading/market.html:66
@@ -2644,8 +2641,7 @@ msgstr ""
 #: templates/trading/market.html:100
 msgid ""
 "\" \n"
-"                               class=\"text-blue-600 hover:text-blue-800 "
-"font-medium\">"
+"                               class=\"text-blue-600 hover:text-blue-800 font-medium\">"
 msgstr ""
 
 #: templates/trading/market.html:116
@@ -2654,21 +2650,21 @@ msgstr ""
 
 #: templates/trading/market.html:120 templates/trading/market.html:124
 msgid ""
-"\" class=\"inline-block bg-white text-green-600 px-8 py-4 rounded-lg "
-"font-bold text-lg hover:bg-gray-100 transition-colors\">"
+"\" class=\"inline-block bg-white text-green-600 px-8 py-4 rounded-lg font-"
+"bold text-lg hover:bg-gray-100 transition-colors\">"
 msgstr ""
 
 #: templates/users/account_settings.html:16
 msgid ""
 "div class=\"w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-"
-"indigo-600 flex items-center justify-center text-white text-3xl font-bold"
-" shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30\">"
+"indigo-600 flex items-center justify-center text-white text-3xl font-bold "
+"shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30\">"
 msgstr ""
 
 #: templates/users/account_settings.html:26
 msgid ""
-"h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-"
-"white mb-2\">"
+"h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white"
+" mb-2\">"
 msgstr ""
 
 #: templates/users/account_settings.html:29
@@ -2706,8 +2702,8 @@ msgid ""
 "mb-2\">"
 msgstr ""
 
-#: templates/users/account_settings.html:261 templates/users/enable_2fa.html:62
-#: templates/users/verify_2fa_login.html:32
+#: templates/users/account_settings.html:261
+#: templates/users/enable_2fa.html:62 templates/users/verify_2fa_login.html:32
 msgid "000000"
 msgstr ""
 
@@ -2732,12 +2728,10 @@ msgstr ""
 #: templates/users/chat.html:19
 msgid ""
 "\" \n"
-"                   class=\"inline-flex items-center justify-center px-6 "
-"py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 \n"
+"                   class=\"inline-flex items-center justify-center px-6 py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 \n"
 "                          bg-gradient-to-r from-gold to-gold-dark \n"
 "                          hover:from-gold-light hover:to-gold \n"
-"                          transform hover:scale-[1.02] "
-"active:scale-[0.98] \n"
+"                          transform hover:scale-[1.02] active:scale-[0.98] \n"
 "                          transition-all duration-200\">"
 msgstr ""
 
@@ -2789,7 +2783,7 @@ msgstr ""
 
 #: templates/users/chat.html:127
 msgid "Select a Contact"
-msgstr ""
+msgstr "تماس‌های ویژه"
 
 #: templates/users/chat.html:128 templates/users/map.html:193
 #: templates/users/profile_edit.html:11
@@ -2809,13 +2803,13 @@ msgstr "ویرایش پروفایل"
 msgid ""
 "Manage Permissions\n"
 "            "
-msgstr ""
+msgstr "مدیریت سفارشات"
 
 #: templates/users/dashboard.html:31
 msgid ""
-"div class=\"w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-"
-"dark flex items-center justify-center text-2xl font-bold text-dark-900 "
-"shadow-lg shadow-gold/30\">"
+"div class=\"w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-dark "
+"flex items-center justify-center text-2xl font-bold text-dark-900 shadow-lg "
+"shadow-gold/30\">"
 msgstr ""
 
 #: templates/users/dashboard.html:35
@@ -2834,17 +2828,13 @@ msgstr ""
 #: templates/users/dashboard.html:85
 msgid ""
 "\" \n"
-"                       class=\"px-4 py-2 rounded-lg border border-"
-"gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-"
-"gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-"
-"center\">"
+"                       class=\"px-4 py-2 rounded-lg border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-center\">"
 msgstr ""
 
 #: templates/users/dashboard.html:90 templates/users/dashboard.html:95
 msgid ""
 "\" \n"
-"                           class=\"px-4 py-2 rounded-lg bg-gold text-"
-"dark-900 hover:bg-gold-dark transition text-sm font-medium text-center\">"
+"                           class=\"px-4 py-2 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark transition text-sm font-medium text-center\">"
 msgstr ""
 
 #: templates/users/dashboard.html:112
@@ -2855,19 +2845,19 @@ msgstr ""
 
 #: templates/users/dashboard.html:116
 msgid "Access Permissions Management"
-msgstr ""
+msgstr "🔧 مدیریت کاربران"
 
 #: templates/users/dashboard.html:127
 msgid ""
 "Manage Permissions\n"
 "                    "
-msgstr ""
+msgstr "مدیریت سفارشات"
 
 #: templates/users/dashboard.html:141
 msgid ""
 "Orders\n"
 "                    "
-msgstr ""
+msgstr "سفارشات"
 
 #: templates/users/dashboard.html:144
 msgid ""
@@ -2885,19 +2875,17 @@ msgstr ""
 #: templates/users/dashboard.html:150
 msgid ""
 "\"\n"
-"                   class=\"inline-flex items-center gap-2 text-gold hover"
-":text-gold-light font-medium text-sm transition\">"
+"                   class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:166
 msgid "Manage Orders"
-msgstr ""
+msgstr "مدیریت سفارشات"
 
 #: templates/users/dashboard.html:169 templates/users/dashboard.html:215
 msgid ""
 "\" \n"
-"                   class=\"inline-flex items-center gap-2 text-gold hover"
-":text-gold-light font-medium text-sm transition\">"
+"                   class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:185
@@ -2909,8 +2897,7 @@ msgstr "چت هوشمند"
 #: templates/users/producer_orders.html:136
 msgid ""
 "\" \n"
-"                       class=\"inline-flex items-center gap-2 text-gold "
-"hover:text-gold-light font-medium text-sm transition\">"
+"                       class=\"inline-flex items-center gap-2 text-gold hover:text-gold-light font-medium text-sm transition\">"
 msgstr ""
 
 #: templates/users/dashboard.html:212
@@ -2920,13 +2907,12 @@ msgstr "ورود"
 
 #: templates/users/dashboard.html:231
 msgid "Port Finder"
-msgstr ""
+msgstr "🌍 جستجوی بندر"
 
 #: templates/users/dashboard.html:254 templates/users/dashboard.html:274
 msgid ""
-"div class=\"w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-"
-"dark flex items-center justify-center text-dark-900 font-bold shadow-"
-"lg\">"
+"div class=\"w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark "
+"flex items-center justify-center text-dark-900 font-bold shadow-lg\">"
 msgstr ""
 
 #: templates/users/dashboard.html:258
@@ -2936,12 +2922,9 @@ msgstr ""
 #: templates/users/dashboard.html:262
 msgid ""
 "\" \n"
-"                       class=\"px-6 py-3 rounded-xl bg-gradient-to-r "
-"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
-"                              hover:from-gold-light hover:to-gold "
-"transform hover:scale-[1.02] active:scale-[0.98] \n"
-"                              transition-all duration-200 shadow-lg "
-"whitespace-nowrap\">"
+"                       class=\"px-6 py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                              transition-all duration-200 shadow-lg whitespace-nowrap\">"
 msgstr ""
 
 #: templates/users/dashboard.html:278
@@ -2957,9 +2940,10 @@ msgstr "ورود به حساب"
 
 #: templates/users/enable_2fa.html:15
 msgid "Enable Two-Factor Authentication"
-msgstr ""
+msgstr "امنیت و احراز هویت"
 
-#: templates/users/enable_2fa.html:16 templates/users/show_backup_codes.html:16
+#: templates/users/enable_2fa.html:16
+#: templates/users/show_backup_codes.html:16
 msgid "p class=\"mt-2 text-sm text-gray-600 dark:text-gray-400\">"
 msgstr ""
 
@@ -2992,29 +2976,28 @@ msgstr ""
 msgid ""
 "Enable Two-Factor Authentication\n"
 "                "
-msgstr ""
+msgstr "امنیت و احراز هویت"
 
-#: templates/users/enable_2fa.html:87 templates/users/show_backup_codes.html:83
+#: templates/users/enable_2fa.html:87
+#: templates/users/show_backup_codes.html:83
 msgid "💡 Tip:"
 msgstr ""
 
 #: templates/users/enable_2fa.html:87
 msgid ""
-"After activation, store backup codes in a secure location. These codes "
-"are used for emergencies.\n"
+"After activation, store backup codes in a secure location. These codes are used for emergencies.\n"
 "            "
 msgstr ""
 
 #: templates/users/enable_2fa.html:92
 msgid ""
 "\" \n"
-"               class=\"font-medium text-gray-600 hover:text-gray-500 dark"
-":text-gray-400 dark:hover:text-gray-300\">"
+"               class=\"font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300\">"
 msgstr ""
 
 #: templates/users/make_payment.html:16
 msgid "Upgrade to Premium"
-msgstr ""
+msgstr "🌟 ارتقاء به کاربر ویژه"
 
 #: templates/users/make_payment.html:17
 msgid "p class=\"text-3xl font-bold text-gold mt-2\">"
@@ -3024,7 +3007,7 @@ msgstr ""
 msgid ""
 "Company Account Information\n"
 "            "
-msgstr ""
+msgstr "اطلاعات حساب شرکت"
 
 #: templates/users/make_payment.html:31 templates/users/make_payment.html:35
 #: templates/users/make_payment.html:39 templates/users/make_payment.html:43
@@ -3037,7 +3020,7 @@ msgstr ""
 
 #: templates/users/make_payment.html:58
 msgid "Upload Payment Receipt"
-msgstr ""
+msgstr "آپلود فیش پرداخت"
 
 #: templates/users/make_payment.html:63
 #: templates/users/upload_documents.html:31
@@ -3048,7 +3031,7 @@ msgstr ""
 
 #: templates/users/make_payment.html:75
 msgid "Upload Receipt & Send"
-msgstr ""
+msgstr "آپلود فیش و ارسال"
 
 #: templates/users/make_payment.html:87
 msgid ""
@@ -3060,13 +3043,13 @@ msgstr ""
 msgid ""
 "Return to Upgrade Steps\n"
 "                "
-msgstr ""
+msgstr "شروع فرآیند ارتقاء"
 
 #: templates/users/manage_sessions.html:15
 msgid ""
 "Active Devices Management\n"
 "                "
-msgstr ""
+msgstr "🔧 مدیریت کاربران"
 
 #: templates/users/manage_sessions.html:17
 msgid "p class=\"mt-2 text-blue-100\">"
@@ -3080,7 +3063,7 @@ msgstr ""
 msgid ""
 "Current Device\n"
 "                                        "
-msgstr ""
+msgstr "خدمات ما"
 
 #: templates/users/manage_sessions.html:62
 msgid "p class=\"text-sm text-gray-500 dark:text-gray-400 mt-1\">"
@@ -3128,7 +3111,7 @@ msgstr ""
 
 #: templates/users/map.html:178
 msgid "☰ Layers"
-msgstr ""
+msgstr "✅ بله"
 
 #: templates/users/map.html:181
 msgid "⛶"
@@ -3153,7 +3136,7 @@ msgstr ""
 
 #: templates/users/map.html:219
 msgid "Destination Country"
-msgstr ""
+msgstr "مقصد"
 
 #: templates/users/map.html:220
 msgid "e.g., Germany, UAE..."
@@ -3238,11 +3221,11 @@ msgstr ""
 
 #: templates/users/map.html:386 templates/users/map.html:392
 msgid "copy; "
-msgstr ""
+msgstr "شرکت:"
 
 #: templates/users/map.html:386 templates/users/map.html:392
 msgid "CARTO"
-msgstr ""
+msgstr "چت"
 
 #: templates/users/map.html:495
 msgid "h3>"
@@ -3297,7 +3280,7 @@ msgstr ""
 
 #: templates/users/my_documents.html:50
 msgid "Under Review ⏳"
-msgstr ""
+msgstr "در حال بررسی"
 
 #: templates/users/my_documents.html:51
 msgid "p class=\"text-yellow-700 dark:text-yellow-400 text-sm\">"
@@ -3322,16 +3305,15 @@ msgstr "آپلود مدارک"
 #: templates/users/my_documents.html:84 templates/users/my_documents.html:104
 #: templates/users/my_documents.html:124
 msgid ""
-"div class=\"w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex "
-"items-center justify-center text-2xl\">"
+"div class=\"w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-"
+"center justify-center text-2xl\">"
 msgstr ""
 
 #: templates/users/my_documents.html:89 templates/users/my_documents.html:109
 #: templates/users/my_documents.html:129
 msgid ""
 "\" target=\"_blank\"\n"
-"                       class=\"px-4 py-2 rounded-lg bg-blue-600 text-"
-"white text-sm font-medium hover:bg-blue-700 transition\">"
+"                       class=\"px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition\">"
 msgstr ""
 
 #: templates/users/my_documents.html:97 templates/users/my_documents.html:117
@@ -3342,7 +3324,7 @@ msgstr ""
 msgid ""
 "Admin Notes\n"
 "            "
-msgstr ""
+msgstr "🔐 پنل مدیریت"
 
 #: templates/users/my_documents.html:147 templates/users/support.html:33
 msgid "p class=\"text-sm text-gray-700 dark:text-slate-300\">"
@@ -3365,7 +3347,7 @@ msgstr "داشبورد"
 msgid ""
 "Return\n"
 "                "
-msgstr ""
+msgstr "بازگشت"
 
 #: templates/users/notifications.html:55
 msgid "p class=\"text-gray-900 dark:text-white text-sm leading-relaxed\">"
@@ -3386,13 +3368,15 @@ msgstr "در انتظار تأیید"
 
 #: templates/users/payment_confirmation.html:17
 msgid "✅ Payment Received"
-msgstr ""
+msgstr "✅ فیش پرداخت دریافت شد"
 
 #: templates/users/payment_confirmation.html:19
 msgid ""
-"Your premium upgrade request has been received. Our team will review your"
-" documents within "
+"Your premium upgrade request has been received. Our team will review your "
+"documents within "
 msgstr ""
+"درخواست ارتقاء شما دریافت شد. تیم مدیریت به زودی مدارک شما را بررسی کرده و "
+"نتیجه را از طریق ایمیل اطلاع‌رسانی خواهد کرد."
 
 #: templates/users/payment_confirmation.html:19
 #: templates/users/verify_phone.html:18
@@ -3432,7 +3416,7 @@ msgstr "تماس با ما"
 
 #: templates/users/place_order.html:16
 msgid "Place New Order"
-msgstr ""
+msgstr "📝 ثبت سفارش جدید"
 
 #: templates/users/place_order.html:26
 #, fuzzy
@@ -3465,7 +3449,7 @@ msgstr ""
 
 #: templates/users/place_order.html:41
 msgid "Quantity (Tons) *"
-msgstr ""
+msgstr "مقدار (تن)"
 
 #: templates/users/place_order.html:44
 msgid "e.g., 50"
@@ -3473,7 +3457,7 @@ msgstr ""
 
 #: templates/users/place_order.html:47
 msgid "Price per Ton (USD) *"
-msgstr ""
+msgstr "قیمت هر تن (دلار آمریکا)"
 
 #: templates/users/place_order.html:50
 msgid "e.g., 350.00"
@@ -3481,7 +3465,7 @@ msgstr ""
 
 #: templates/users/place_order.html:57
 msgid "Origin Port *"
-msgstr ""
+msgstr "مبدأ:"
 
 #: templates/users/place_order.html:60
 msgid "e.g., Bandar Abbas"
@@ -3489,7 +3473,7 @@ msgstr ""
 
 #: templates/users/place_order.html:63
 msgid "Destination Port *"
-msgstr ""
+msgstr "مقصد"
 
 #: templates/users/place_order.html:66
 msgid "e.g., Sohar"
@@ -3514,7 +3498,7 @@ msgstr ""
 
 #: templates/users/place_order.html:101
 msgid "Place Order"
-msgstr ""
+msgstr "📝 ثبت سفارش جدید"
 
 #: templates/users/post_detail.html:21 templates/users/post_detail.html:59
 #: templates/users/post_detail.html:80
@@ -3552,7 +3536,7 @@ msgstr "واتساپ"
 
 #: templates/users/producer_orders.html:18
 msgid "Seller Panel"
-msgstr ""
+msgstr "پنل فروشنده"
 
 #: templates/users/producer_orders.html:42
 msgid "span class=\"font-bold text-gray-900 dark:text-white\">"
@@ -3600,7 +3584,7 @@ msgstr "کشور"
 
 #: templates/users/producer_orders.html:66
 msgid "Order Date: "
-msgstr ""
+msgstr "تاریخ:"
 
 #: templates/users/producer_orders.html:80
 msgid ""
@@ -3615,25 +3599,21 @@ msgstr "تأیید"
 
 #: templates/users/producer_orders.html:107
 msgid ""
-"div class=\"text-center py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-"
-"dark-700 text-gray-600 dark:text-slate-400 text-sm\">"
+"div class=\"text-center py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-dark-700 "
+"text-gray-600 dark:text-slate-400 text-sm\">"
 msgstr ""
 
 #: templates/users/producer_orders.html:114
 msgid ""
 "\" \n"
-"                                   class=\"inline-flex items-center "
-"justify-center gap-1 py-2 px-4 rounded-lg border border-gray-300 dark"
-":border-dark-600 \n"
-"                                          text-gray-700 dark:text-"
-"slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 \n"
-"                                          font-medium text-xs "
-"transition\">"
+"                                   class=\"inline-flex items-center justify-center gap-1 py-2 px-4 rounded-lg border border-gray-300 dark:border-dark-600 \n"
+"                                          text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 \n"
+"                                          font-medium text-xs transition\">"
 msgstr ""
 
 #: templates/users/producer_orders.html:134
 msgid "No Orders Received"
-msgstr ""
+msgstr "سفارش دریافت نشده"
 
 #: templates/users/producer_orders.html:135
 msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-6\">"
@@ -3655,14 +3635,14 @@ msgstr ""
 
 #: templates/users/profile_edit.html:18
 msgid ""
-"bg-red-100 border border-red-400 text-red-700 dark:bg-red-900/30 dark"
-":border-red-700 dark:text-red-400"
+"bg-red-100 border border-red-400 text-red-700 dark:bg-red-900/30 "
+"dark:border-red-700 dark:text-red-400"
 msgstr ""
 
 #: templates/users/profile_edit.html:18
 msgid ""
-"bg-blue-100 border border-blue-400 text-blue-700 dark:bg-blue-900/30 dark"
-":border-blue-700 dark:text-blue-400"
+"bg-blue-100 border border-blue-400 text-blue-700 dark:bg-blue-900/30 "
+"dark:border-blue-700 dark:text-blue-400"
 msgstr ""
 
 # Registration Steps
@@ -3770,10 +3750,7 @@ msgstr "ذخیره تغییرات"
 #: templates/users/profile_edit.html:147
 msgid ""
 "\"\n"
-"                   class=\"flex-1 bg-gray-200 dark:bg-dark-700 text-"
-"gray-700 dark:text-slate-300 py-3 px-4 rounded-lg hover:bg-gray-300 "
-"dark:hover:bg-dark-600 transition duration-200 font-medium text-center "
-"shadow-md\">"
+"                   class=\"flex-1 bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-slate-300 py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-dark-600 transition duration-200 font-medium text-center shadow-md\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:164
@@ -3787,8 +3764,7 @@ msgstr ""
 #: templates/users/profile_edit.html:166
 msgid ""
 "\" class=\"text-xs text-indigo-700 dark:text-indigo-300 underline font-"
-"medium mt-1 inline-block hover:text-indigo-900 dark:hover:text-"
-"indigo-200\">"
+"medium mt-1 inline-block hover:text-indigo-900 dark:hover:text-indigo-200\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:181
@@ -3802,8 +3778,7 @@ msgstr ""
 #: templates/users/profile_edit.html:183
 msgid ""
 "\" class=\"text-xs text-yellow-700 dark:text-yellow-300 underline font-"
-"medium mt-1 inline-block hover:text-yellow-900 dark:hover:text-"
-"yellow-200\">"
+"medium mt-1 inline-block hover:text-yellow-900 dark:hover:text-yellow-200\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:196
@@ -3816,14 +3791,13 @@ msgstr ""
 
 #: templates/users/profile_edit.html:198
 msgid ""
-"\" class=\"text-xs text-green-700 dark:text-green-300 underline font-"
-"medium mt-1 inline-block hover:text-green-900 dark:hover:text-"
-"green-200\">"
+"\" class=\"text-xs text-green-700 dark:text-green-300 underline font-medium "
+"mt-1 inline-block hover:text-green-900 dark:hover:text-green-200\">"
 msgstr ""
 
 #: templates/users/show_backup_codes.html:15
 msgid "Backup Codes"
-msgstr ""
+msgstr "جلد پشت"
 
 #: templates/users/show_backup_codes.html:32
 msgid "⚠️ Very Important!"
@@ -3843,16 +3817,15 @@ msgstr ""
 msgid ""
 "Print Codes\n"
 "            "
-msgstr ""
+msgstr "ارسال مجدد کد"
 
 #: templates/users/show_backup_codes.html:77
 msgid "Got it, Continue"
-msgstr ""
+msgstr "آپلود و ادامه"
 
 #: templates/users/show_backup_codes.html:83
 msgid ""
-"You can take a picture of these codes or store them in a password manager"
-" like LastPass or 1Password.\n"
+"You can take a picture of these codes or store them in a password manager like LastPass or 1Password.\n"
 "            "
 msgstr ""
 
@@ -3875,10 +3848,8 @@ msgstr ""
 #: templates/users/support.html:34
 msgid ""
 "\" \n"
-"                       class=\"px-5 py-2 rounded-lg bg-gradient-to-r "
-"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
-"                              hover:from-gold-light hover:to-gold "
-"transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                       class=\"px-5 py-2 rounded-lg bg-gradient-to-r from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold transform hover:scale-[1.02] active:scale-[0.98] \n"
 "                              transition-all duration-200 shadow\">"
 msgstr ""
 
@@ -3900,7 +3871,7 @@ msgstr "آپلود مدارک"
 
 #: templates/users/upload_documents.html:26
 msgid "Passport Copy *"
-msgstr ""
+msgstr "کپی پاسپورت"
 
 #: templates/users/upload_documents.html:36
 #, fuzzy
@@ -3909,11 +3880,11 @@ msgstr "نام شرکت"
 
 #: templates/users/upload_documents.html:54
 msgid "Upload & Continue to Payment"
-msgstr ""
+msgstr "آپلود و ادامه"
 
 #: templates/users/verify_2fa_login.html:17
 msgid "Two-Factor Authentication"
-msgstr ""
+msgstr "امنیت و احراز هویت"
 
 #: templates/users/verify_2fa_login.html:19
 msgid "p class=\"text-sm text-gray-500 dark:text-slate-500 mt-2\">"
@@ -3921,7 +3892,7 @@ msgstr ""
 
 #: templates/users/verify_2fa_login.html:29
 msgid "Authentication Code"
-msgstr ""
+msgstr "امنیت و احراز هویت"
 
 #: templates/users/verify_2fa_login.html:34
 #: templates/users/verify_2fa_login.html:53
@@ -3936,7 +3907,7 @@ msgstr ""
 
 #: templates/users/verify_2fa_login.html:49
 msgid "Backup Code"
-msgstr ""
+msgstr "جلد پشت"
 
 #: templates/users/verify_2fa_login.html:52
 msgid "Enter your 8-digit backup code"
@@ -3952,7 +3923,7 @@ msgstr ""
 
 #: templates/users/verify_phone.html:16
 msgid "Verify Mobile Number"
-msgstr ""
+msgstr "شماره IMO"
 
 #: templates/users/verify_phone.html:18
 msgid "Enter the 6-digit code sent to "
@@ -3964,14 +3935,14 @@ msgstr ""
 
 #: templates/users/verify_phone.html:26
 msgid ""
-"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
-"border border-green-200 dark:border-green-800"
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border "
+"border-green-200 dark:border-green-800"
 msgstr ""
 
 #: templates/users/verify_phone.html:26
 msgid ""
-"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border "
-"border-red-200 dark:border-red-800"
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-"
+"red-200 dark:border-red-800"
 msgstr ""
 
 #: templates/users/verify_phone.html:26
@@ -3996,7 +3967,7 @@ msgstr "تأیید شده"
 
 #: templates/users/vessel_finder.html:16
 msgid "Vessel Finder"
-msgstr ""
+msgstr "🌍 جستجوی کشتی"
 
 #: templates/users/vessel_finder.html:25
 #, fuzzy
@@ -4018,7 +3989,7 @@ msgstr "جستجو"
 msgid ""
 "Vessel Details\n"
 "                    "
-msgstr ""
+msgstr "🌍 جستجوی کشتی"
 
 #: templates/users/vessel_finder.html:76 templates/users/vessel_finder.html:80
 #: templates/users/vessel_finder.html:84 templates/users/vessel_finder.html:88
@@ -4032,15 +4003,14 @@ msgstr ""
 #: templates/users/vessel_finder.html:101
 #: templates/users/vessel_finder.html:105
 msgid ""
-"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right"
-" font-mono\">"
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right "
+"font-mono\">"
 msgstr ""
 
 #: templates/users/vessel_finder.html:85 templates/users/vessel_finder.html:89
 #: templates/users/vessel_finder.html:93 templates/users/vessel_finder.html:97
 msgid ""
-"span class=\"font-medium text-gray-900 dark:text-white text-sm text-"
-"right\">"
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right\">"
 msgstr ""
 
 #~ msgid "Register"
@@ -4365,4 +4335,3 @@ msgstr ""
 
 #~ msgid "Investor Description"
 #~ msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
-
