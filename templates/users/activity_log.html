@@ -62,7 +62,7 @@
 <div class="activity-log-container py-6 md:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
-        <nav class="mb-6 md:mb-8" aria-label="Breadcrumb">
+        <nav class="mb-6 md:mb-8" aria-label="{{ _(''Breadcrumb'') }}">
             <ol class="flex items-center space-x-2 md:space-x-4 text-sm md:text-base">
                 <li>
                     <a href="{{ url_for('users.dashboard') }}" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
@@ -158,26 +158,26 @@
                         <!-- Content -->
                         <div class="flex-1 min-w-0">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-1">
-                                <h3 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white">
+                                <{{ _('h3 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white">') }}
                                     {{ activity.description }}
                                 </h3>
-                                <span class="activity-time mt-1 md:mt-0">
+                                <{{ _('span class="activity-time mt-1 md:mt-0">') }}
                                     {{ activity.created_at.strftime('%Y-%m-%d %H:%M') }}
                                 </span>
                             </div>
                             
                             <div class="flex flex-wrap items-center gap-2 md:gap-4 mt-2">
-                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium
-                                           bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                                <{{ _('span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium
+                                           bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">') }}
                                     {{ activity.action_type|title }}
                                 </span>
                                 {% if activity.ip_address %}
-                                <span class="activity-ip">
+                                <{{ _('span class="activity-ip">') }}
                                     IP: {{ activity.ip_address }}
                                 </span>
                                 {% endif %}
                                 {% if activity.user_agent %}
-                                <span class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px] md:max-w-xs">
+                                <{{ _('span class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px] md:max-w-xs">') }}
                                     {{ activity.user_agent[:50] }}{% if activity.user_agent|length > 50 %}...{% endif %}
                                 </span>
                                 {% endif %}
@@ -211,13 +211,13 @@
                 {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
                     {% if page_num %}
                         {% if page_num == pagination.page %}
-                            <span class="pagination-btn active">{{ page_num }}</span>
+                            <{{ _('span class="pagination-btn active">') }}{{ page_num }}</span>
                         {% else %}
-                            <a href="{{ url_for('users.activity_log', page=page_num) }}" 
-                               class="pagination-btn">{{ page_num }}</a>
+                            <{{ _('a href="') }}{{ url_for('users.activity_log', page=page_num) }}{{ _('" 
+                               class="pagination-btn">') }}{{ page_num }}</a>
                         {% endif %}
                     {% else %}
-                        <span class="px-3 py-2 text-gray-500">...</span>
+                        <{{ _('span class="px-3 py-2 text-gray-500">') }}...</span>
                     {% endif %}
                 {% endfor %}
                 

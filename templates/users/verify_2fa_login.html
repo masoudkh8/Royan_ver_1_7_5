@@ -15,8 +15,8 @@
                 </svg>
             </div>
             <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Two-Factor Authenticatio>{{ _("Two-Factor Authentication") }}</h2>
-            <p class="text-gray-600 dark:text-slate-400">Enter the code from your authenticator app</p>
-            <p class="text-sm text-gray-500 dark:text-slate-500 mt-2">Logged in as: {{ user.email }}</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400">') }}Enter the code from your authenticator app</p>
+            <{{ _('p class="text-sm text-gray-500 dark:text-slate-500 mt-2">') }}Logged in as: {{ user.email }}</p>
         </div>
 
         <!-- فرم تأیید کد 2FA -->
@@ -31,7 +31,7 @@
                            class="form-input text-center tracking-widest text-2xl"
                            placeholder="{{ _("000000") }}"
                            autocomplete="one-time-code">
-                    <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">Enter the 6-digit code from Google Authenticator or similar app</p>
+                    <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-slate-400">') }}Enter the 6-digit code from Google Authenticator or similar app</p>
                 </div>
 
                 <!-- جداکننده -->
@@ -40,7 +40,7 @@
                         <div class="w-full border-t border-gray-300 dark:border-dark-600"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white dark:bg-dark-800 text-gray-500 dark:text-slate-400">Or use backup code</span>
+                        <{{ _('span class="px-2 bg-white dark:bg-dark-800 text-gray-500 dark:text-slate-400">') }}Or use backup code</span>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                     <input id="backup_code" name="backup_code" type="text"
                            class="form-input"
                            placeholder="{{ _("Enter your 8-digit backup code") }}">
-                    <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">If you don't have access to your authenticator app</p>
+                    <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-slate-400">') }}If you don't have access to your authenticator app</p>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold 
                                transform hover:scale-[1.02] active:scale-[0.98] 
                                transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <span id="verifyBtnText">Verify & Login</span>
+                    <{{ _('span id="verifyBtnText">') }}Verify & Login</span>
                     <svg id="verifySpinner" class="hidden animate-spin ml-2 h-5 w-5 text-dark-900" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -73,7 +73,7 @@
 
             <!-- لینک بازگشت -->
             <div class="text-center pt-4 border-t border-gray-200 dark:border-dark-700">
-                <a href="{{ url_for('users.login') }}" class="text-sm text-gray-600 dark:text-slate-400 hover:text-gold transition">
+                <{{ _('a href="') }}{{ url_for('users.login') }}{{ _('" class="text-sm text-gray-600 dark:text-slate-400 hover:text-gold transition">') }}
                     ← Back to login
                 </a>
             </div>
@@ -83,10 +83,10 @@
         <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <h4class="text-sm font-semibold text-blue-900 dark:text-blue-200 mb-2">💡 How to use>{{ _("💡 How to use:") }}</h4>
             <ul class="text-sm text-blue-800 dark:text-blue-300 space-y-1 list-disc list-inside">
-                <li>Open your authenticator app (Google Authenticator, Authy, etc.)</li>
-                <li>Find the entry for "Metisma"</li>
-                <li>Enter the current 6-digit code shown</li>
-                <li>Codes refresh every 30 seconds</li>
+                <{{ _('li>') }}Open your authenticator app (Google Authenticator, Authy, etc.)</{{ _('li>') }}
+                <{{ _('li>') }}Find the entry for "Metisma"</{{ _('li>') }}
+                <{{ _('li>') }}Enter the current 6-digit code shown</{{ _('li>') }}
+                <{{ _('li>') }}Codes refresh every 30 seconds</{{ _('li>') }}
             </ul>
         </div>
     </div>

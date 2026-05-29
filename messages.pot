@@ -1,18 +1,17 @@
-# Persian (Farsi) translations for Metisma Platform
-# Copyright (C) 2024 Metisma
-# This file is distributed under the same license as the Metisma project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-05-29 19:24+0000\n"
-"PO-Revision-Date: 2024-01-01 00:00+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fa\n"
-"Language-Team: fa <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,68 +32,63 @@ msgstr ""
 
 #: routes/admin/routes.py:43
 msgid "❌ Please log in first."
-msgstr "❌ لطفاً ابتدا وارد شوید."
+msgstr ""
 
 #: routes/admin/routes.py:47
 msgid "❌ Access denied: Only admin can access this page."
-msgstr "❌ دسترسی رد شد: فقط مدیر می‌تواند به این صفحه دسترسی داشته باشد."
+msgstr ""
 
 #: routes/admin/routes.py:144
 msgid "❌ The role is invalid."
-msgstr "❌ نقش نامعتبر است."
+msgstr ""
 
 #: routes/admin/routes.py:218
-#, fuzzy
 msgid "⚠️ Invalid action."
-msgstr "❌ مقدار یا قیمت نامعتبر است."
+msgstr ""
 
 #: routes/admin/routes.py:407
 msgid "❌ You cannot delete yourself."
-msgstr "❌ نمی‌توانید خودتان را حذف کنید."
+msgstr ""
 
 #: routes/admin/routes.py:434
 msgid "❌ You cannot deactivate yourself."
-msgstr "❌ نمی‌توانید خودتان را غیرفعال کنید."
+msgstr ""
 
 #: routes/admin/routes.py:439
 msgid "❌ You cannot deactivate another admin."
-msgstr "❌ نمی‌توانید مدیر دیگری را غیرفعال کنید."
+msgstr ""
 
 #: routes/admin/routes.py:468
-#, fuzzy
 msgid "❌ You cannot change your own special status."
-msgstr "❌ نمی‌توانید خودتان را حذف کنید."
+msgstr ""
 
 #: routes/admin/routes.py:512
-#, fuzzy
 msgid "❌ You cannot chat with yourself."
-msgstr "❌ نمی‌توانید خودتان را غیرفعال کنید."
+msgstr ""
 
 #: routes/admin/routes.py:546
-#, fuzzy
 msgid "✅ Message sent to user."
-msgstr "هنوز پیامی ارسال نشده است."
+msgstr ""
 
 #: routes/admin/routes.py:572
 msgid "✅ Welcome, admin.!"
-msgstr "✅ خوش آمدید، مدیر!"
+msgstr ""
 
 #: routes/admin/routes.py:577
 msgid "❌ Access denied: Only admin can log in."
-msgstr "❌ دسترسی رد شد: فقط مدیر می‌تواند وارد شود."
+msgstr ""
 
 #: routes/admin/routes.py:579
 msgid "❌ The email or password is incorrect."
-msgstr "❌ ایمیل یا رمز عبور نادرست است."
+msgstr ""
 
 #: routes/admin/routes.py:593
 msgid "⚠️ Admin already exists. Please log in."
 msgstr ""
 
 #: routes/admin/routes.py:664
-#, fuzzy
 msgid "✅ First admin account created successfully! Please log in."
-msgstr "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید."
+msgstr ""
 
 #: routes/exhibition/routes.py:101
 msgid "Invalid time format."
@@ -109,46 +103,43 @@ msgid "Your appointment has been successfully booked!"
 msgstr ""
 
 #: routes/exhibition/routes.py:201
-#, fuzzy
 msgid "Your booth has been created successfully!"
-msgstr "👋 شما با موفقیت خارج شدید."
+msgstr ""
 
-# Messages from routes
 #: routes/magazine/routes.py:26
 msgid "This issue has not been published yet."
-msgstr "این شماره هنوز منتشر نشده است."
+msgstr ""
 
 #: routes/magazine/routes.py:40
 msgid "Magazine file not found."
-msgstr "فایل مجله یافت نشد."
+msgstr ""
 
 #: routes/magazine/routes.py:55 routes/magazine/routes.py:89
 #: routes/magazine/routes.py:123
 msgid "Please fill in the required fields."
-msgstr "لطفاً فیلدهای الزامی را پر کنید."
+msgstr ""
 
 #: routes/magazine/routes.py:69
 msgid ""
 "Your sponsorship request has been successfully submitted. We will contact"
 " you soon."
-msgstr "درخواست حمایت شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
+msgstr ""
 
 #: routes/magazine/routes.py:106
 msgid ""
 "Your advertising request has been successfully submitted. We will contact"
 " you soon."
-msgstr "درخواست تبلیغاتی شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت."
+msgstr ""
 
 #: routes/magazine/routes.py:138
 msgid ""
 "Your annual subscription has been successfully registered. Information "
 "will be sent soon."
-msgstr "اشتراک سالانه شما با موفقیت ثبت شد. اطلاعات به زودی ارسال خواهد شد."
+msgstr ""
 
 #: routes/trading/routes.py:158
-#, fuzzy
 msgid "Trading pair not found."
-msgstr "فایل مجله یافت نشد."
+msgstr ""
 
 #: routes/trading/routes.py:163
 msgid "Amount must be positive."
@@ -159,31 +150,28 @@ msgid "Insufficient balance."
 msgstr ""
 
 #: routes/trading/routes.py:200
-#, fuzzy
 msgid "Your order has been placed in the order book."
-msgstr "سفارش شما هنوز ارسال نشده است."
+msgstr ""
 
 #: routes/trading/routes.py:267
 msgid "You are not authorized to cancel this order."
 msgstr ""
 
 #: routes/trading/routes.py:271
-#, fuzzy
 msgid "This order cannot be cancelled."
-msgstr "این سفارش قبلاً"
+msgstr ""
 
 #: routes/trading/routes.py:277
-#, fuzzy
 msgid "Order cancelled successfully."
-msgstr "✅ سفارش با موفقیت ثبت شد."
+msgstr ""
 
 #: routes/users/auth.py:83
 msgid "❌ Please enter your mobile number in your profile first."
-msgstr "❌ لطفاً ابتدا شماره موبایل خود را در پروفایل وارد کنید."
+msgstr ""
 
 #: routes/users/auth.py:100
 msgid "✅ Your mobile number has already been verified."
-msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
+msgstr ""
 
 #: routes/users/auth.py:110
 msgid "New code sent."
@@ -191,19 +179,19 @@ msgstr ""
 
 #: routes/users/auth.py:113 routes/users/auth.py:138
 msgid "❌ There was a problem sending the code."
-msgstr "❌ مشکلی در ارسال کد وجود داشت."
+msgstr ""
 
 #: routes/users/auth.py:118
 msgid "Please enter the code."
-msgstr "لطفاً کد را وارد کنید."
+msgstr ""
 
 #: routes/users/auth.py:123
 msgid "✅ Mobile number successfully verified."
-msgstr "✅ شماره موبایل با موفقیت تأیید شد."
+msgstr ""
 
 #: routes/users/auth.py:126
 msgid "❌ The code is invalid."
-msgstr "❌ کد نامعتبر است."
+msgstr ""
 
 #: routes/users/auth.py:135
 msgid "A verification code has been sent to your number."
@@ -214,38 +202,36 @@ msgid "Please start the premium verification process first."
 msgstr ""
 
 #: routes/users/auth.py:175
-#, fuzzy
 msgid "Confirmation email sent."
-msgstr "تأیید"
+msgstr ""
 
 #: routes/users/auth.py:178
 msgid "❌ There was an error sending the email."
-msgstr "❌ خطایی در ارسال ایمیل رخ داد."
+msgstr ""
 
 #: routes/users/auth.py:230
 msgid "❌ The link has expired."
-msgstr "❌ لینک منقضی شده است."
+msgstr ""
 
 #: routes/users/auth.py:238
 msgid "❌ The link is invalid."
-msgstr "❌ لینک نامعتبر است."
+msgstr ""
 
 #: routes/users/auth.py:242
 msgid "❌ This link is not for you."
-msgstr "❌ این لینک برای شما نیست."
+msgstr ""
 
 #: routes/users/auth.py:247
 msgid "❌ No request found."
-msgstr "❌ درخواستی یافت نشد."
+msgstr ""
 
 #: routes/users/auth.py:257
 msgid "✅ Email has been verified."
-msgstr "✅ ایمیل تأیید شده است."
+msgstr ""
 
 #: routes/users/auth.py:271
-#, fuzzy
 msgid "❌ Please enter your email."
-msgstr "لطفاً کد را وارد کنید."
+msgstr ""
 
 #: routes/users/auth.py:315
 msgid ""
@@ -254,14 +240,12 @@ msgid ""
 msgstr ""
 
 #: routes/users/auth.py:333
-#, fuzzy
 msgid "❌ The recovery link is invalid or expired."
-msgstr "❌ لینک نامعتبر است."
+msgstr ""
 
 #: routes/users/auth.py:338
-#, fuzzy
 msgid "❌ User not found."
-msgstr "کاربر یافت نشد."
+msgstr ""
 
 #: routes/users/auth.py:346
 msgid "❌ Password must be at least 8 characters long."
@@ -272,32 +256,28 @@ msgid "❌ Password and repeat do not match."
 msgstr ""
 
 #: routes/users/auth.py:397
-#, fuzzy
 msgid "✅ Your password has been changed successfully. Please log in."
-msgstr "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید."
+msgstr ""
 
 #: routes/users/auth.py:412
 msgid "⚠️ Two-factor authentication is already enabled."
 msgstr ""
 
 #: routes/users/auth.py:420
-#, fuzzy
 msgid "❌ The information is incomplete."
-msgstr "❌ این حساب غیرفعال است."
+msgstr ""
 
 #: routes/users/auth.py:448
 msgid "✅ Two-factor authentication enabled. Save backup codes!"
 msgstr ""
 
 #: routes/users/auth.py:451 routes/users/auth.py:521
-#, fuzzy
 msgid "❌ The code entered is not valid."
-msgstr "❌ کد نامعتبر است."
+msgstr ""
 
 #: routes/users/auth.py:472
-#, fuzzy
 msgid "⚠️ No backup codes found."
-msgstr "❌ درخواستی یافت نشد."
+msgstr ""
 
 #: routes/users/auth.py:483
 msgid "⚠️ Two-factor authentication is not enabled."
@@ -308,28 +288,24 @@ msgid "✅ Two-factor authentication disabled."
 msgstr ""
 
 #: routes/users/auth.py:534
-#, fuzzy
 msgid "❌ No pending login found. Please log in first."
-msgstr "❌ لطفاً ابتدا وارد شوید."
+msgstr ""
 
 #: routes/users/auth.py:599
 msgid "✅ Welcome! Two-factor authentication successful."
 msgstr ""
 
 #: routes/users/auth.py:602
-#, fuzzy
 msgid "❌ The code entered is not valid. Please try again."
-msgstr "❌ درخواست به سرور زمان‌بندی شد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/auth.py:647
-#, fuzzy
 msgid "✅ Session successfully canceled."
-msgstr "✅ سفارش با موفقیت ثبت شد."
+msgstr ""
 
 #: routes/users/auth.py:649
-#, fuzzy
 msgid "❌ Session not found."
-msgstr "کاربر یافت نشد."
+msgstr ""
 
 #: routes/users/auth.py:668
 msgid "✅ All sessions have been canceled."
@@ -341,32 +317,28 @@ msgid "Security error: Invalid CSRF token."
 msgstr ""
 
 #: routes/users/routes.py:67
-#, fuzzy
 msgid "Please log in first."
-msgstr "❌ لطفاً ابتدا وارد شوید."
+msgstr ""
 
 #: routes/users/routes.py:71
 msgid "Unauthorized access. This section is for specific roles."
 msgstr ""
 
 #: routes/users/routes.py:136
-#, fuzzy
 msgid "There is already an admin."
-msgstr "قبلاً یک مدیر وجود دارد."
+msgstr ""
 
 #: routes/users/routes.py:145
-#, fuzzy
 msgid "❌ Please fill in all fields."
-msgstr "لطفاً فیلدهای الزامی را پر کنید."
+msgstr ""
 
 #: routes/users/routes.py:149
 msgid "❌ Username must be at least 3 characters long."
 msgstr ""
 
 #: routes/users/routes.py:153
-#, fuzzy
 msgid "❌ The email address is invalid."
-msgstr "❌ نقش نامعتبر است."
+msgstr ""
 
 #: routes/users/routes.py:157
 msgid "❌ The password must be at least 8 characters long."
@@ -374,21 +346,19 @@ msgstr ""
 
 #: routes/users/routes.py:161
 msgid "❌ Username already taken."
-msgstr "❌ نام کاربری قبلاً گرفته شده است."
+msgstr ""
 
 #: routes/users/routes.py:165
 msgid "❌ Email already used."
-msgstr "❌ ایمیل قبلاً استفاده شده است."
+msgstr ""
 
 #: routes/users/routes.py:181
-#, fuzzy
 msgid "✅ The first admin was created successfully. Please log in."
-msgstr "اولین مدیر ایجاد شد."
+msgstr ""
 
 #: routes/users/routes.py:186
-#, fuzzy
 msgid "❌ An error occurred while creating the admin."
-msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/routes.py:219
 msgid ""
@@ -419,14 +389,12 @@ msgid "Invalid role selected."
 msgstr ""
 
 #: routes/users/routes.py:280
-#, fuzzy
 msgid "Invalid phone number."
-msgstr "شماره تلفن"
+msgstr ""
 
 #: routes/users/routes.py:330
-#, fuzzy
 msgid "✅ Registration successful! Verification email sent."
-msgstr "✅ ثبت‌نام موفقیت‌آمیز بود! لطفاً وارد شوید."
+msgstr ""
 
 #: routes/users/routes.py:405
 msgid ""
@@ -439,9 +407,8 @@ msgid "✅ Password verified. Please enter your 2FA code."
 msgstr ""
 
 #: routes/users/routes.py:456
-#, fuzzy
 msgid "✅ Welcome!"
-msgstr "✅ خوش آمدید!"
+msgstr ""
 
 #: routes/users/routes.py:477
 msgid ""
@@ -451,22 +418,19 @@ msgstr ""
 
 #: routes/users/routes.py:494
 msgid "❌ Incorrect email or password."
-msgstr "❌ ایمیل یا رمز عبور نادرست است."
+msgstr ""
 
 #: routes/users/routes.py:554
-#, fuzzy
 msgid "✅ Profile picture updated successfully."
-msgstr "✅ پروفایل به‌روزرسانی شد."
+msgstr ""
 
 #: routes/users/routes.py:557
-#, fuzzy
 msgid "✅ Profile updated successfully."
-msgstr "✅ پروفایل به‌روزرسانی شد."
+msgstr ""
 
 #: routes/users/routes.py:592
-#, fuzzy
 msgid "❌ The current password is incorrect."
-msgstr "❌ ایمیل یا رمز عبور نادرست است."
+msgstr ""
 
 #: routes/users/routes.py:597
 msgid "❌ New password must be at least 8 characters long."
@@ -481,14 +445,12 @@ msgid "⚠️ New password must not be the same as previous password."
 msgstr ""
 
 #: routes/users/routes.py:618
-#, fuzzy
 msgid "✅ Your password has been changed successfully."
-msgstr "👋 شما با موفقیت خارج شدید."
+msgstr ""
 
 #: routes/users/routes.py:623
-#, fuzzy
 msgid "❌ An error occurred while changing the password. Please try again."
-msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/routes.py:638
 msgid "⚠️ Please check the confirmation checkbox to delete the account."
@@ -501,51 +463,48 @@ msgid ""
 msgstr ""
 
 #: routes/users/routes.py:681
-#, fuzzy
 msgid "❌ An error occurred while deleting the account. Please contact support."
-msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/routes.py:710
-#, fuzzy
 msgid "👋 You have successfully logged out."
-msgstr "👋 شما با موفقیت خارج شدید."
+msgstr ""
 
 #: routes/users/routes.py:721
 msgid "❌ This account is inactive."
-msgstr "❌ این حساب غیرفعال است."
+msgstr ""
 
 #: routes/users/routes.py:823
 msgid "❌ Please enter the product name."
-msgstr "❌ لطفاً نام محصول را وارد کنید."
+msgstr ""
 
 #: routes/users/routes.py:827
 msgid "❌ Please select origin and destination."
-msgstr "❌ لطفاً مبدأ و مقصد را انتخاب کنید."
+msgstr ""
 
 #: routes/users/routes.py:837
 msgid "❌ Invalid quantity or price."
-msgstr "❌ مقدار یا قیمت نامعتبر است."
+msgstr ""
 
 #: routes/users/routes.py:842
 msgid "❌ The seller is invalid."
-msgstr "❌ فروشنده نامعتبر است."
+msgstr ""
 
 #: routes/users/routes.py:849
 msgid "❌ The desired seller was not found."
-msgstr "❌ فروشنده مورد نظر یافت نشد."
+msgstr ""
 
 #: routes/users/routes.py:853
-#, fuzzy
 msgid "❌ The selected user is not a producer."
-msgstr "❌ کاربر انتخاب شده فروشنده نیست."
+msgstr ""
 
 #: routes/users/routes.py:910
 msgid "✅ Order successfully placed."
-msgstr "✅ سفارش با موفقیت ثبت شد."
+msgstr ""
 
 #: routes/users/routes.py:916
 msgid "❌ An error occurred while placing your order. Please try again."
-msgstr "❌ خطایی هنگام ثبت سفارش رخ داد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/routes.py:946
 msgid "❌ You do not have permission to manage orders."
@@ -556,31 +515,29 @@ msgid "❌ You can only cancel your own orders."
 msgstr ""
 
 #: routes/users/routes.py:996
-#, fuzzy
 msgid "⚠️ This order cannot be cancelled as it has already been processed."
-msgstr "⚠️این سفارش قبلاً تأیید یا رد شده است."
+msgstr ""
 
 #: routes/users/routes.py:1010 routes/users/routes.py:1063
 #: routes/users/routes.py:1119
 msgid "❌ Unauthorized access."
-msgstr "❌ دسترسی غیرمجاز."
+msgstr ""
 
 #: routes/users/routes.py:1047
 msgid "✅ The order was confirmed and the notification was sent"
-msgstr "✅ سفارش تأیید شد و اعلان ارسال گردید"
+msgstr ""
 
 #: routes/users/routes.py:1049
 msgid "⚠️This order has already been approved or rejected."
-msgstr "⚠️این سفارش قبلاً تأیید یا رد شده است."
+msgstr ""
 
 #: routes/users/routes.py:1103
 msgid "⚠️ This order has already changed status."
-msgstr "⚠️ این سفارش قبلاً تغییر وضعیت داده است."
+msgstr ""
 
 #: routes/users/routes.py:1123
-#, fuzzy
 msgid "❌ You can only update your own orders."
-msgstr "❌ نمی‌توانید خودتان را حذف کنید."
+msgstr ""
 
 #: routes/users/routes.py:1158
 msgid "✅ Order status updated to In Transit"
@@ -599,9 +556,8 @@ msgid "✅ All notifications marked as read"
 msgstr ""
 
 #: routes/users/routes.py:1247
-#, fuzzy
 msgid "❌ Limited access: Only special users can send messages."
-msgstr "❌ دسترسی محدود: فقط کاربران ویژه می‌توانند چت کنند."
+msgstr ""
 
 #: routes/users/routes.py:1256
 msgid "❌ Access denied: Non-special users can only view messages from admin."
@@ -609,70 +565,67 @@ msgstr ""
 
 #: routes/users/routes.py:1268
 msgid "❌ This user is not special and you cannot chat with him/her."
-msgstr "❌ این کاربر ویژه نیست و نمی‌توانید با او چت کنید."
+msgstr ""
 
 #: routes/users/routes.py:1292
 msgid "✉️ Message sent."
-msgstr "✉️ پیام ارسال شد."
+msgstr ""
 
 #: routes/users/routes.py:1321
 msgid "⚠️ No admin found to contact."
 msgstr ""
 
 #: routes/users/routes.py:1329
-#, fuzzy
 msgid "❌ Please enter a message."
-msgstr "لطفاً کد را وارد کنید."
+msgstr ""
 
 #: routes/users/routes.py:1349
-#, fuzzy
 msgid "✅ Your message was sent to support."
-msgstr "هنوز پیامی ارسال نشده است."
+msgstr ""
 
 #: routes/users/routes.py:1401
 msgid "❌ Access is only allowed for special users."
-msgstr "❌ دسترسی فقط برای کاربران ویژه مجاز است."
+msgstr ""
 
 #: routes/users/routes.py:1410
 msgid "❌ Please enter a valid 7-digit ID (IMO)."
-msgstr "❌ لطفاً یک شناسه ۷ رقمی معتبر وارد کنید (IMO)."
+msgstr ""
 
 #: routes/users/routes.py:1430
 msgid "⚠️ Network unavailable. Showing demo data."
-msgstr "⚠️ شبکه در دسترس نیست. نمایش داده‌های دموی."
+msgstr ""
 
 #: routes/users/routes.py:1446
 msgid "❌ No data found for this ship."
-msgstr "❌ داده‌ای برای این کشتی یافت نشد."
+msgstr ""
 
 #: routes/users/routes.py:1465
 msgid "❌ The request to the server was scheduled. Please try again."
-msgstr "❌ درخواست به سرور زمان‌بندی شد. لطفاً دوباره تلاش کنید."
+msgstr ""
 
 #: routes/users/routes.py:1467
 msgid "❌ An error occurred with the ship tracking service."
-msgstr "❌ خطایی در سرویس ردیابی کشتی رخ داد."
+msgstr ""
 
 #: routes/users/routes.py:1469
 msgid "❌ The received data is invalid."
-msgstr "❌ داده‌های دریافتی نامعتبر هستند."
+msgstr ""
 
 #: routes/users/routes.py:1480
 msgid "❌ Only special users can access the map."
-msgstr "❌ فقط کاربران ویژه می‌توانند به نقشه دسترسی داشته باشند."
+msgstr ""
 
 #: routes/users/routes.py:1494
 msgid "⚠️ No port data available."
-msgstr "⚠️ داده‌ای برای بندر موجود نیست."
+msgstr ""
 
 #: routes/users/routes.py:1608
 msgid "✅ You have already become a special user."
-msgstr "✅ شما قبلاً به کاربر ویژه تبدیل شده‌اید."
+msgstr ""
 
 #: routes/users/routes.py:1613
-#, fuzzy
 msgid "⚠️ Your request is under review by admin."
-msgstr "⚠️ درخواست شما در حال بررسی است."
+msgstr ""
 
 #: routes/users/routes.py:1633
 msgid "You are already a Premium member. Your documents have been verified."
@@ -683,9 +636,8 @@ msgid "You already have a pending verification request."
 msgstr ""
 
 #: routes/users/routes.py:1654
-#, fuzzy
 msgid "The upgrade process has started. Please upload your documents."
-msgstr "فرآیند ارتقاء شروع شده است. لطفاً شماره موبایل خود را تأیید کنید."
+msgstr ""
 
 #: routes/users/routes.py:1670
 msgid "Your documents have been verified. You cannot modify them."
@@ -696,60 +648,52 @@ msgid "Your documents are under review by admin."
 msgstr ""
 
 #: routes/users/routes.py:1723
-#, fuzzy
 msgid "✅ Documents uploaded successfully."
-msgstr "👋 شما با موفقیت خارج شدید."
+msgstr ""
 
 #: routes/users/routes.py:1726
 msgid "❌ No files were found to upload. Please select files and try again."
 msgstr ""
 
 #: routes/users/routes.py:1738
-#, fuzzy
 msgid "No verification request found."
-msgstr "هیچ درخواستی یافت نشد."
+msgstr ""
 
 #: routes/users/routes.py:1751
-#, fuzzy
 msgid "Please upload your documents first."
-msgstr "📎 آپلود مدارک"
+msgstr ""
 
 #: routes/users/routes.py:1774
 msgid "Payment receipt received. Reviewing..."
-msgstr "فیش پرداخت دریافت شد. در حال بررسی..."
+msgstr ""
 
 #: routes/users/routes.py:1882
-#, fuzzy
 msgid "✅ Your email is already verified. You can login."
-msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
+msgstr ""
 
 #: routes/users/routes.py:1898
 msgid "🎉 Email verified successfully! Welcome to Metisma."
 msgstr ""
 
 #: routes/users/routes.py:1910
-#, fuzzy
 msgid "No account found with this email."
-msgstr "❌ داده‌ای برای این کشتی یافت نشد."
+msgstr ""
 
 #: routes/users/routes.py:1914
-#, fuzzy
 msgid "✅ Your email is already verified."
-msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
+msgstr ""
 
 #: routes/users/routes.py:1938
 msgid "📧 New verification email sent! Please check your inbox."
 msgstr ""
 
 #: templates/offline.html:6
-#, fuzzy
 msgid "Offline - Metisma"
-msgstr "🌍 متیسما"
+msgstr ""
 
 #: templates/offline.html:59
-#, fuzzy
 msgid "You're Offline"
-msgstr "نقش شما"
+msgstr ""
 
 #: templates/offline.html:62
 msgid "p class=\"text-gray-600 dark:text-slate-400 mb-6 leading-relaxed\">"
@@ -799,9 +743,8 @@ msgid "p class=\"text-center text-xs text-gray-500 dark:text-slate-500 mt-6\">"
 msgstr ""
 
 #: templates/admin/chat.html:7
-#, fuzzy
 msgid "💬 Admin Chat"
-msgstr "💬 شروع چت"
+msgstr ""
 
 #: templates/admin/chat.html:8 templates/admin/chat_with_user.html:15
 #: templates/admin/dashboard.html:31 templates/admin/manage_users.html:69
@@ -942,18 +885,16 @@ msgstr ""
 
 #: templates/admin/chat_with_user.html:43 templates/users/chat.html:115
 #: templates/users/support.html:90
-#, fuzzy
 msgid "Send"
-msgstr "ارسال"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:6
 msgid "Create First Admin | Metisma"
 msgstr ""
 
 #: templates/admin/create_first_admin.html:287
-#, fuzzy
 msgid "Create First Admin"
-msgstr "اولین مدیر ایجاد شد."
+msgstr ""
 
 #: templates/admin/create_first_admin.html:288
 msgid "p class=\"auth-subtitle\">"
@@ -972,16 +913,14 @@ msgid ""
 msgstr ""
 
 #: templates/admin/create_first_admin.html:321
-#, fuzzy
 msgid ""
 "Username\n"
 "                    "
-msgstr "نام کاربری"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:330
-#, fuzzy
 msgid "Choose a username"
-msgstr "نام کاربری"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:342
 msgid ""
@@ -994,22 +933,20 @@ msgid "admin@example.com"
 msgstr ""
 
 #: templates/admin/create_first_admin.html:362
-#, fuzzy
 msgid ""
 "Password\n"
 "                    "
-msgstr "رمز عبور"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:371
 msgid "Minimum 8 characters"
 msgstr ""
 
 #: templates/admin/create_first_admin.html:384
-#, fuzzy
 msgid ""
 "Confirm Password\n"
 "                    "
-msgstr "رمز عبور"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:393
 msgid "Re-enter your password"
@@ -1045,9 +982,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/create_first_admin.html:432
-#, fuzzy
 msgid "Login here"
-msgstr "ورود"
+msgstr ""
 
 #: templates/admin/create_first_admin.html:434
 msgid "p class=\"mt-2\">"
@@ -1064,11 +1000,10 @@ msgid "span class=\"p-2 rounded-lg bg-gold/10 text-gold\">"
 msgstr ""
 
 #: templates/admin/dashboard.html:7
-#, fuzzy
 msgid ""
 "Admin Dashboard\n"
 "        "
-msgstr "📊 داشبورد مدیریت"
+msgstr ""
 
 #: templates/admin/dashboard.html:26
 msgid "span class=\"text-xs text-gray-500 dark:text-slate-500 mr-auto\">"
@@ -1181,11 +1116,10 @@ msgid ""
 msgstr ""
 
 #: templates/admin/edit_role_perms.html:433
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "                    "
-msgstr "📊 داشبورد مدیریت"
+msgstr ""
 
 #: templates/admin/edit_role_perms.html:467
 msgid "div class=\"permission-group-icon\" style=\"background:"
@@ -1200,11 +1134,10 @@ msgid "div class=\"group-subtitle\">"
 msgstr ""
 
 #: templates/admin/edit_role_perms.html:476
-#, fuzzy
 msgid ""
 "Select All\n"
 "                            "
-msgstr "انتخاب کنید..."
+msgstr ""
 
 #: templates/admin/edit_role_perms.html:489
 msgid "span class=\"permission-label-text\">"
@@ -1229,11 +1162,10 @@ msgid ""
 msgstr ""
 
 #: templates/admin/edit_role_perms.html:512
-#, fuzzy
 msgid ""
 "Save Changes\n"
 "                        "
-msgstr "ذخیره تغییرات"
+msgstr ""
 
 #: templates/admin/edit_role_perms.html:524
 msgid "Important Notice:"
@@ -1250,9 +1182,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/login.html:10
-#, fuzzy
 msgid "Admin Panel"
-msgstr "🔐 پنل مدیریت"
+msgstr ""
 
 #: templates/admin/login.html:11 templates/magazine/index.html:50
 #: templates/users/dashboard.html:117 templates/users/dashboard.html:259
@@ -1285,11 +1216,11 @@ msgstr ""
 
 #: templates/admin/login.html:26
 msgid "Email"
-msgstr "ایمیل"
+msgstr ""
 
 #: templates/admin/login.html:27
 msgid "Password"
-msgstr "رمز عبور"
+msgstr ""
 
 #: templates/admin/login.html:27 templates/users/account_settings.html:145
 #: templates/users/account_settings.html:160
@@ -1298,63 +1229,56 @@ msgid "••••••••"
 msgstr ""
 
 #: templates/admin/login.html:28
-#, fuzzy
 msgid "Login to Admin Panel"
-msgstr "ورود مدیر - پنل مدیریت"
+msgstr ""
 
 #: templates/admin/login.html:32
-#, fuzzy
 msgid "Return to Main Page"
-msgstr "← بازگشت به صفحه اصلی"
+msgstr ""
 
 #: templates/admin/login.html:34
 msgid "p class=\"text-center text-xs text-gray-500 dark:text-slate-500 mt-4\">"
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:174
-#, fuzzy
 msgid "User Permission Management"
-msgstr "🔧 مدیریت کاربران"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:175
 msgid "p class=\"mb-0 opacity-90\">"
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:178
-#, fuzzy
 msgid ""
 "Back to Panel\n"
 "            "
-msgstr "جلد پشت"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:188
-#, fuzzy
 msgid ""
 "User Information\n"
 "                "
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:192
 msgid "Username:"
-msgstr "نام کاربری:"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:193
 msgid "div class=\"font-weight-bold text-dark\">"
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:196
-#, fuzzy
 msgid "Role:"
-msgstr "نقش"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:197
 msgid "span class=\"badge badge-primary p-2\" style=\"font-size: 0.9rem;\">"
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:200
-#, fuzzy
 msgid "Email:"
-msgstr "ایمیل:"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:204
 msgid "Membership Date:"
@@ -1412,11 +1336,10 @@ msgid ""
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:275
-#, fuzzy
 msgid ""
 "Revoke\n"
 "                        "
-msgstr "کارگزار"
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:281
 msgid "Current Custom Permissions List:"
@@ -1429,9 +1352,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/manage_user_perms.html:311
-#, fuzzy
 msgid "Final Access Preview"
-msgstr "❌ دسترسی رد شد."
+msgstr ""
 
 #: templates/admin/manage_user_perms.html:314
 msgid "p class=\"mb-3\">"
@@ -1454,9 +1376,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/manage_users.html:17
-#, fuzzy
 msgid "🔧 User Management"
-msgstr "🔧 مدیریت کاربران"
+msgstr ""
 
 #: templates/admin/manage_users.html:21 templates/admin/manage_users.html:22
 #: templates/admin/manage_users.html:23
@@ -1495,9 +1416,8 @@ msgid "Disabled (%(num)s)"
 msgstr ""
 
 #: templates/admin/manage_users.html:23
-#, fuzzy
 msgid "All Users"
-msgstr "کل کاربران"
+msgstr ""
 
 #: templates/admin/manage_users.html:31 templates/admin/manage_users.html:32
 #: templates/admin/manage_users.html:33 templates/admin/manage_users.html:34
@@ -1527,11 +1447,10 @@ msgid "td class=\"px-4 py-3 text-gray-600 dark:text-slate-400\">"
 msgstr ""
 
 #: templates/admin/manage_users.html:52
-#, fuzzy
 msgid ""
 "Verified\n"
 "                                "
-msgstr "❌ تأیید نشده"
+msgstr ""
 
 #: templates/admin/manage_users.html:55
 msgid "span class=\"text-red-500 dark:text-red-400 text-xs\">"
@@ -1544,9 +1463,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/manage_users.html:61
-#, fuzzy
 msgid "Yes"
-msgstr "✅ بله"
+msgstr ""
 
 #: templates/admin/manage_users.html:63
 msgid "span class=\"text-gray-500 dark:text-slate-500 text-xs\">"
@@ -1616,9 +1534,8 @@ msgid "span class=\"px-2 text-gray-400\">"
 msgstr ""
 
 #: templates/admin/premium_requests.html:19
-#, fuzzy
 msgid "📂 Premium Upgrade Requests"
-msgstr "📂 درخواست‌های ارتقاء به کاربر ویژه"
+msgstr ""
 
 #: templates/admin/premium_requests.html:23
 #: templates/admin/premium_requests.html:24
@@ -1628,9 +1545,8 @@ msgid "\" class=\"px-4 py-2 rounded-lg text-sm font-medium transition"
 msgstr ""
 
 #: templates/admin/premium_requests.html:23
-#, fuzzy
 msgid "All"
-msgstr "همه"
+msgstr ""
 
 #: templates/admin/premium_requests.html:45
 #: templates/admin/premium_requests.html:55
@@ -1663,15 +1579,13 @@ msgid ""
 msgstr ""
 
 #: templates/admin/premium_requests.html:62
-#, fuzzy
 msgid "✅ Approve"
-msgstr "✅ تأیید شد"
+msgstr ""
 
 #: templates/admin/premium_requests.html:67
 #: templates/users/producer_orders.html:104
-#, fuzzy
 msgid "❌ Reject"
-msgstr "❌ رد شد"
+msgstr ""
 
 #: templates/admin/premium_requests.html:73
 msgid ""
@@ -1686,11 +1600,10 @@ msgid ""
 msgstr ""
 
 #: templates/admin/view_all_documents.html:19
-#, fuzzy
 msgid ""
 "User Documents\n"
 "        "
-msgstr "آپلود مدارک"
+msgstr ""
 
 #: templates/admin/view_all_documents.html:27
 #: templates/admin/view_all_documents.html:31
@@ -1744,11 +1657,10 @@ msgid "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:43
-#, fuzzy
 msgid ""
 "Approved\n"
 "                    "
-msgstr "تأیید شده"
+msgstr ""
 
 #: templates/admin/view_all_documents.html:46
 #: templates/users/producer_orders.html:43
@@ -1756,11 +1668,10 @@ msgid "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
 msgstr ""
 
 #: templates/admin/view_all_documents.html:47
-#, fuzzy
 msgid ""
 "All\n"
 "                    "
-msgstr "همه"
+msgstr ""
 
 #: templates/admin/view_all_documents.html:59
 #: templates/admin/view_all_documents.html:60
@@ -1846,9 +1757,8 @@ msgid "span class=\"px-4 py-2 text-sm text-gray-600 dark:text-slate-400\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:9
-#, fuzzy
 msgid "📄 Upgrade Request Details"
-msgstr "📄 جزئیات درخواست ارتقاء"
+msgstr ""
 
 #: templates/admin/view_premium_request.html:10
 #: templates/admin/view_user_documents.html:10
@@ -1861,9 +1771,8 @@ msgstr ""
 
 #: templates/admin/view_premium_request.html:15
 #: templates/admin/view_user_documents.html:15
-#, fuzzy
 msgid "👤 User Information"
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/admin/view_premium_request.html:17
 #: templates/admin/view_premium_request.html:18
@@ -1906,9 +1815,8 @@ msgid "span class=\"font-bold text-blue-600 dark:text-blue-400 ml-1\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:29
-#, fuzzy
 msgid "✅ Step Verification Status"
-msgstr "📬 تأیید ایمیل"
+msgstr ""
 
 #: templates/admin/view_premium_request.html:32
 #: templates/admin/view_premium_request.html:36
@@ -1948,9 +1856,8 @@ msgid "span class=\"text-red-600 dark:text-red-400\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:56
-#, fuzzy
 msgid "📎 Uploaded Documents"
-msgstr "📎 مدارک آپلود شده"
+msgstr ""
 
 #: templates/admin/view_premium_request.html:60
 #: templates/admin/view_premium_request.html:69
@@ -1985,14 +1892,12 @@ msgid "p class=\"text-xs text-red-500\">"
 msgstr ""
 
 #: templates/admin/view_premium_request.html:97
-#, fuzzy
 msgid "✅ Confirm Request"
-msgstr "✅ تأیید شده"
+msgstr ""
 
 #: templates/admin/view_premium_request.html:102
-#, fuzzy
 msgid "❌ Reject Request"
-msgstr "❌ رد شد"
+msgstr ""
 
 #: templates/admin/view_user_documents.html:9
 msgid ""
@@ -2010,9 +1915,8 @@ msgid "span class=\"text-yellow-600 dark:text-yellow-400 font-medium\">"
 msgstr ""
 
 #: templates/admin/view_user_documents.html:34
-#, fuzzy
 msgid "📁 List of Uploaded Documents"
-msgstr "📎 مدارک آپلود شده"
+msgstr ""
 
 #: templates/admin/view_user_documents.html:40
 msgid "span class=\"text-3xl\">"
@@ -2029,14 +1933,12 @@ msgid "p class=\"text-lg\">"
 msgstr ""
 
 #: templates/admin/view_user_documents.html:74
-#, fuzzy
 msgid "✅ Approve Documents"
-msgstr "📎 مدارک آپلود شده"
+msgstr ""
 
 #: templates/admin/view_user_documents.html:78
-#, fuzzy
 msgid "❌ Reject Documents"
-msgstr "❌ رد شد"
+msgstr ""
 
 #: templates/admin/view_user_documents.html:82
 msgid "p class=\"text-green-700 dark:text-green-400 font-medium\">"
@@ -2047,9 +1949,8 @@ msgid "Password Reset - Metisma"
 msgstr ""
 
 #: templates/email/password_reset.html:232
-#, fuzzy
 msgid "Password Reset Request"
-msgstr "درخواست اسپانسرشیپ"
+msgstr ""
 
 #: templates/email/password_reset.html:238
 #: templates/email/verify_email.html:238
@@ -2071,11 +1972,10 @@ msgid "\" class=\"link-url\">"
 msgstr ""
 
 #: templates/email/password_reset.html:262
-#, fuzzy
 msgid ""
 "Important Security Information:\n"
 "                "
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/email/password_reset.html:275
 #: templates/email/verify_email.html:275
@@ -2100,11 +2000,10 @@ msgid "\" class=\"verify-button\">"
 msgstr ""
 
 #: templates/email/verify_email.html:262
-#, fuzzy
 msgid ""
 "Important Information:\n"
 "                "
-msgstr "اطلاعات حساب شرکت"
+msgstr ""
 
 #: templates/exhibition/booth_detail.html:10
 msgid "\" class=\"text-white hover:text-blue-200\">"
@@ -2162,9 +2061,8 @@ msgid "p class=\"text-gray-500\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:73
-#, fuzzy
 msgid "Contact Information"
-msgstr "اطلاعات حساب شرکت"
+msgstr ""
 
 #: templates/exhibition/booth_detail.html:78
 #: templates/exhibition/booth_detail.html:84
@@ -2180,27 +2078,24 @@ msgid "Select Date & Time"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:105
-#, fuzzy
 msgid "Message (Optional)"
-msgstr "تلفن (اختیاری)"
+msgstr ""
 
 #: templates/exhibition/booth_detail.html:111
 msgid "Request Appointment"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:117
-#, fuzzy
 msgid "Available Time Slots:"
-msgstr "❌ فقط برای فروشندگان در دسترس است."
+msgstr ""
 
 #: templates/exhibition/booth_detail.html:120
 msgid "div class=\"text-sm text-gray-600\">"
 msgstr ""
 
 #: templates/exhibition/booth_detail.html:132
-#, fuzzy
 msgid "Quick Actions"
-msgstr "اعلان‌ها"
+msgstr ""
 
 #: templates/exhibition/booth_detail.html:137
 msgid "👍 Like Booth"
@@ -2345,9 +2240,8 @@ msgid ""
 msgstr ""
 
 #: templates/magazine/advertisement.html:8
-#, fuzzy
 msgid "Advertising Request"
-msgstr "بنر تبلیغاتی"
+msgstr ""
 
 #: templates/magazine/advertisement.html:9
 #: templates/magazine/sponsorship.html:9 templates/magazine/subscribe.html:9
@@ -2363,26 +2257,22 @@ msgid "Name and Surname *"
 msgstr ""
 
 #: templates/magazine/advertisement.html:19
-#, fuzzy
 msgid "Company / Brand"
-msgstr "نام شرکت"
+msgstr ""
 
 #: templates/magazine/advertisement.html:25
 #: templates/magazine/sponsorship.html:22 templates/magazine/subscribe.html:59
-#, fuzzy
 msgid "Email *"
-msgstr "ایمیل"
+msgstr ""
 
 #: templates/magazine/advertisement.html:29
 #: templates/magazine/sponsorship.html:26 templates/magazine/subscribe.html:64
-#, fuzzy
 msgid "Phone Number *"
-msgstr "شماره تلفن"
+msgstr ""
 
 #: templates/magazine/advertisement.html:34
-#, fuzzy
 msgid "Type of Advertisement *"
-msgstr "نوع تبلیغ"
+msgstr ""
 
 #: templates/magazine/advertisement.html:36
 #: templates/magazine/advertisement.html:53 templates/users/place_order.html:28
@@ -2448,9 +2338,8 @@ msgid "Message and Description"
 msgstr ""
 
 #: templates/magazine/advertisement.html:65
-#, fuzzy
 msgid "Submit Advertising Request"
-msgstr "ثبت درخواست‌های تبلیغاتی"
+msgstr ""
 
 #: templates/magazine/advertisement.html:68
 #: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
@@ -2463,9 +2352,8 @@ msgid ""
 msgstr ""
 
 #: templates/magazine/index.html:9
-#, fuzzy
 msgid "Imazhe Magazine"
-msgstr "مجله ایماژه"
+msgstr ""
 
 #: templates/magazine/index.html:10
 msgid "p class=\"text-gray-600 dark:text-slate-400 max-w-2xl mx-auto mb-8\">"
@@ -2485,9 +2373,8 @@ msgid ""
 msgstr ""
 
 #: templates/magazine/index.html:19
-#, fuzzy
 msgid "📚 Published Issues"
-msgstr "شماره‌های منتشر شده"
+msgstr ""
 
 #: templates/magazine/index.html:26
 msgid "{{ issue.title }}"
@@ -2512,39 +2399,32 @@ msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-3 line-clamp-2\">"
 msgstr ""
 
 #: templates/magazine/index.html:41
-#, fuzzy
 msgid "Download Digital Version"
-msgstr "✓ دسترسی به نسخه دیجیتال"
+msgstr ""
 
 #: templates/magazine/index.html:48
 msgid "p class=\"text-4xl mb-4\">"
 msgstr ""
 
-# Messages from routes
 #: templates/magazine/index.html:49
-#, fuzzy
 msgid "No issue has been published yet"
-msgstr "این شماره هنوز منتشر نشده است."
+msgstr ""
 
 #: templates/magazine/sponsorship.html:8
-#, fuzzy
 msgid "Request for Sponsorship"
-msgstr "درخواست اسپانسرشیپ - مجله ایماژه"
+msgstr ""
 
 #: templates/magazine/sponsorship.html:18 templates/users/profile_edit.html:39
-#, fuzzy
 msgid "Company Name"
-msgstr "نام شرکت"
+msgstr ""
 
 #: templates/magazine/sponsorship.html:33
-#, fuzzy
 msgid "Submit Sponsorship Request"
-msgstr "درخواست اسپانسرشیپ"
+msgstr ""
 
 #: templates/magazine/subscribe.html:8
-#, fuzzy
 msgid "Imazhe Magazine Subscription"
-msgstr "مجله ایماژه"
+msgstr ""
 
 #: templates/magazine/subscribe.html:16
 msgid ""
@@ -2553,33 +2433,28 @@ msgid ""
 msgstr ""
 
 #: templates/magazine/subscribe.html:17
-#, fuzzy
 msgid "Annual Subscription"
-msgstr "اشتراک سالانه"
+msgstr ""
 
 #: templates/magazine/subscribe.html:18 templates/magazine/subscribe.html:35
 msgid "span class=\"text-sm text-gray-500 dark:text-slate-400 font-normal\">"
 msgstr ""
 
 #: templates/magazine/subscribe.html:20
-#, fuzzy
 msgid "12 printed issues annually"
-msgstr "✓ ۱۲ شماره چاپی در سال"
+msgstr ""
 
 #: templates/magazine/subscribe.html:21 templates/magazine/subscribe.html:38
-#, fuzzy
 msgid "Access to digital version"
-msgstr "✓ دسترسی به نسخه دیجیتال"
+msgstr ""
 
 #: templates/magazine/subscribe.html:22 templates/magazine/subscribe.html:39
-#, fuzzy
 msgid "Free postage"
-msgstr "✓ پست رایگان"
+msgstr ""
 
 #: templates/magazine/subscribe.html:23
-#, fuzzy
 msgid "Special discounts for events"
-msgstr "✓ تخفیف‌های ویژه برای رویدادها"
+msgstr ""
 
 #: templates/magazine/subscribe.html:27 templates/magazine/subscribe.html:43
 msgid "span class=\"peer-checked:hidden\">"
@@ -2590,23 +2465,20 @@ msgid "span class=\"hidden peer-checked:inline\">"
 msgstr ""
 
 #: templates/magazine/subscribe.html:34
-#, fuzzy
 msgid "6-Month Subscription"
-msgstr "اشتراک شش ماهه"
+msgstr ""
 
 #: templates/magazine/subscribe.html:37
-#, fuzzy
 msgid "6 printed issues"
-msgstr "✓ ۶ شماره چاپی"
+msgstr ""
 
 #: templates/magazine/subscribe.html:68
 msgid "Complete Postal Address *"
 msgstr ""
 
 #: templates/magazine/subscribe.html:71
-#, fuzzy
 msgid "Complete Subscription"
-msgstr "اشتراک سالانه"
+msgstr ""
 
 #: templates/trading/market.html:12
 msgid "📊 Metisma Trading Hall"
@@ -2778,11 +2650,10 @@ msgid ""
 msgstr ""
 
 #: templates/users/chat.html:41
-#, fuzzy
 msgid ""
 "Contacts\n"
 "                    "
-msgstr "تماس‌های ویژه"
+msgstr ""
 
 #: templates/users/chat.html:52
 msgid "p class=\"font-medium text-gray-900 dark:text-white truncate\">"
@@ -2793,11 +2664,10 @@ msgid "p class=\"text-xs text-gray-500 dark:text-slate-400 capitalize\">"
 msgstr ""
 
 #: templates/users/chat.html:64
-#, fuzzy
 msgid ""
 "Return to Profile\n"
 "                    "
-msgstr "ویرایش پروفایل"
+msgstr ""
 
 #: templates/users/chat.html:78 templates/users/support.html:51
 msgid "p class=\"font-bold text-gray-900 dark:text-white\">"
@@ -2824,9 +2694,8 @@ msgid "mt-1 text-right\">"
 msgstr ""
 
 #: templates/users/chat.html:127
-#, fuzzy
 msgid "Select a Contact"
-msgstr "تماس‌های ویژه"
+msgstr ""
 
 #: templates/users/chat.html:128 templates/users/map.html:193
 #: templates/users/profile_edit.html:11
@@ -2836,18 +2705,16 @@ msgstr ""
 
 #: templates/users/dashboard.html:15 templates/users/place_order.html:112
 #: templates/users/producer_orders.html:27
-#, fuzzy
 msgid ""
 "Return to Profile\n"
 "            "
-msgstr "ویرایش پروفایل"
+msgstr ""
 
 #: templates/users/dashboard.html:23
-#, fuzzy
 msgid ""
 "Manage Permissions\n"
 "            "
-msgstr "مدیریت سفارشات"
+msgstr ""
 
 #: templates/users/dashboard.html:31
 msgid ""
@@ -2892,23 +2759,20 @@ msgid ""
 msgstr ""
 
 #: templates/users/dashboard.html:116
-#, fuzzy
 msgid "Access Permissions Management"
-msgstr "🔧 مدیریت کاربران"
+msgstr ""
 
 #: templates/users/dashboard.html:127
-#, fuzzy
 msgid ""
 "Manage Permissions\n"
 "                    "
-msgstr "مدیریت سفارشات"
+msgstr ""
 
 #: templates/users/dashboard.html:141
-#, fuzzy
 msgid ""
 "Orders\n"
 "                    "
-msgstr "سفارشات"
+msgstr ""
 
 #: templates/users/dashboard.html:144
 msgid ""
@@ -2931,9 +2795,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/dashboard.html:166
-#, fuzzy
 msgid "Manage Orders"
-msgstr "مدیریت سفارشات"
+msgstr ""
 
 #: templates/users/dashboard.html:169 templates/users/dashboard.html:215
 msgid ""
@@ -2943,9 +2806,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/dashboard.html:185
-#, fuzzy
 msgid "Smart Chat"
-msgstr "💬 شروع چت"
+msgstr ""
 
 #: templates/users/dashboard.html:189 templates/users/dashboard.html:195
 #: templates/users/dashboard.html:235 templates/users/dashboard.html:241
@@ -2957,14 +2819,12 @@ msgid ""
 msgstr ""
 
 #: templates/users/dashboard.html:212
-#, fuzzy
 msgid "Support"
-msgstr "پشتیبانی ۲۴ ساعته"
+msgstr ""
 
 #: templates/users/dashboard.html:231
-#, fuzzy
 msgid "Port Finder"
-msgstr "🌍 جستجوی بندر"
+msgstr ""
 
 #: templates/users/dashboard.html:254 templates/users/dashboard.html:274
 msgid ""
@@ -2993,16 +2853,14 @@ msgid "You're a Premium Member! 🌟"
 msgstr ""
 
 #: templates/users/dashboard.html:295
-#, fuzzy
 msgid ""
 "Sign Out\n"
 "            "
-msgstr "ثبت‌نام"
+msgstr ""
 
 #: templates/users/enable_2fa.html:15
-#, fuzzy
 msgid "Enable Two-Factor Authentication"
-msgstr "امنیت و احراز هویت"
+msgstr ""
 
 #: templates/users/enable_2fa.html:16 templates/users/show_backup_codes.html:16
 msgid "p class=\"mt-2 text-sm text-gray-600 dark:text-gray-400\">"
@@ -3025,20 +2883,18 @@ msgid "p class=\"text-sm text-gray-600 dark:text-gray-300 mb-4\">"
 msgstr ""
 
 #: templates/users/enable_2fa.html:53
-#, fuzzy
 msgid "6-digit verification code"
-msgstr "تأیید ایمیل"
+msgstr ""
 
 #: templates/users/enable_2fa.html:64
 msgid "p class=\"mt-1 text-xs text-gray-500 dark:text-gray-400\">"
 msgstr ""
 
 #: templates/users/enable_2fa.html:80
-#, fuzzy
 msgid ""
 "Enable Two-Factor Authentication\n"
 "                "
-msgstr "امنیت و احراز هویت"
+msgstr ""
 
 #: templates/users/enable_2fa.html:87 templates/users/show_backup_codes.html:83
 msgid "💡 Tip:"
@@ -3059,20 +2915,18 @@ msgid ""
 msgstr ""
 
 #: templates/users/make_payment.html:16
-#, fuzzy
 msgid "Upgrade to Premium"
-msgstr "🌟 ارتقاء به کاربر ویژه"
+msgstr ""
 
 #: templates/users/make_payment.html:17
 msgid "p class=\"text-3xl font-bold text-gold mt-2\">"
 msgstr ""
 
 #: templates/users/make_payment.html:27
-#, fuzzy
 msgid ""
 "Company Account Information\n"
 "            "
-msgstr "اطلاعات حساب شرکت"
+msgstr ""
 
 #: templates/users/make_payment.html:31 templates/users/make_payment.html:35
 #: templates/users/make_payment.html:39 templates/users/make_payment.html:43
@@ -3084,9 +2938,8 @@ msgid "span class=\"text-gray-600 dark:text-slate-400\">"
 msgstr ""
 
 #: templates/users/make_payment.html:58
-#, fuzzy
 msgid "Upload Payment Receipt"
-msgstr "آپلود فیش پرداخت"
+msgstr ""
 
 #: templates/users/make_payment.html:63
 #: templates/users/upload_documents.html:31
@@ -3096,9 +2949,8 @@ msgid "p class=\"mt-1 text-xs text-gray-500 dark:text-slate-500\">"
 msgstr ""
 
 #: templates/users/make_payment.html:75
-#, fuzzy
 msgid "Upload Receipt & Send"
-msgstr "آپلود فیش و ارسال"
+msgstr ""
 
 #: templates/users/make_payment.html:87
 msgid ""
@@ -3107,18 +2959,16 @@ msgid ""
 msgstr ""
 
 #: templates/users/make_payment.html:96
-#, fuzzy
 msgid ""
 "Return to Upgrade Steps\n"
 "                "
-msgstr "شروع فرآیند ارتقاء"
+msgstr ""
 
 #: templates/users/manage_sessions.html:15
-#, fuzzy
 msgid ""
 "Active Devices Management\n"
 "                "
-msgstr "🔧 مدیریت کاربران"
+msgstr ""
 
 #: templates/users/manage_sessions.html:17
 msgid "p class=\"mt-2 text-blue-100\">"
@@ -3129,11 +2979,10 @@ msgid "h3 class=\"font-semibold text-gray-900 dark:text-white\">"
 msgstr ""
 
 #: templates/users/manage_sessions.html:58
-#, fuzzy
 msgid ""
 "Current Device\n"
 "                                        "
-msgstr "خدمات ما"
+msgstr ""
 
 #: templates/users/manage_sessions.html:62
 msgid "p class=\"text-sm text-gray-500 dark:text-gray-400 mt-1\">"
@@ -3144,9 +2993,8 @@ msgid "p class=\"text-xs text-gray-400 dark:text-gray-500 mt-1\">"
 msgstr ""
 
 #: templates/users/manage_sessions.html:81
-#, fuzzy
 msgid "Log Out Device"
-msgstr "خدمات ما"
+msgstr ""
 
 #: templates/users/manage_sessions.html:84
 msgid "span class=\"text-sm text-gray-400 dark:text-gray-500 italic\">"
@@ -3159,9 +3007,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/manage_sessions.html:115
-#, fuzzy
 msgid "No sessions found"
-msgstr "هیچ درخواستی یافت نشد."
+msgstr ""
 
 #: templates/users/manage_sessions.html:116
 msgid "p class=\"mt-1 text-sm text-gray-500 dark:text-gray-400\">"
@@ -3180,9 +3027,8 @@ msgid "p class=\"text-gray-600 dark:text-slate-400 mt-1\">"
 msgstr ""
 
 #: templates/users/map.html:178
-#, fuzzy
 msgid "☰ Layers"
-msgstr "✅ بله"
+msgstr ""
 
 #: templates/users/map.html:181
 msgid "⛶"
@@ -3197,18 +3043,16 @@ msgid "🛣️ Route Planner"
 msgstr ""
 
 #: templates/users/map.html:215
-#, fuzzy
 msgid "Origin Country"
-msgstr "کشور"
+msgstr ""
 
 #: templates/users/map.html:216
 msgid "e.g., Iran, China..."
 msgstr ""
 
 #: templates/users/map.html:219
-#, fuzzy
 msgid "Destination Country"
-msgstr "مقصد"
+msgstr ""
 
 #: templates/users/map.html:220
 msgid "e.g., Germany, UAE..."
@@ -3259,9 +3103,8 @@ msgid "🔍 Quick Filters"
 msgstr ""
 
 #: templates/users/map.html:306
-#, fuzzy
 msgid "✅ Active Only"
-msgstr "فعال"
+msgstr ""
 
 #: templates/users/map.html:309
 msgid "⭐ Major Ports"
@@ -3276,9 +3119,8 @@ msgid "Selected Item"
 msgstr ""
 
 #: templates/users/map.html:327
-#, fuzzy
 msgid "Legend"
-msgstr "ارسال"
+msgstr ""
 
 #: templates/users/map.html:331 templates/users/map.html:335
 #: templates/users/map.html:339 templates/users/map.html:343
@@ -3291,14 +3133,12 @@ msgid "OSM"
 msgstr ""
 
 #: templates/users/map.html:386 templates/users/map.html:392
-#, fuzzy
 msgid "copy; "
-msgstr "شرکت:"
+msgstr ""
 
 #: templates/users/map.html:386 templates/users/map.html:392
-#, fuzzy
 msgid "CARTO"
-msgstr "چت"
+msgstr ""
 
 #: templates/users/map.html:495
 msgid "h3>"
@@ -3335,9 +3175,8 @@ msgid "⚠️ ${c.name}"
 msgstr ""
 
 #: templates/users/my_documents.html:11
-#, fuzzy
 msgid "📄 My Verified Documents"
-msgstr "📎 مدارک آپلود شده"
+msgstr ""
 
 #: templates/users/my_documents.html:25
 msgid "Premium Level 1 - Verified ✅"
@@ -3352,29 +3191,26 @@ msgid "p class=\"font-bold text-green-900 dark:text-green-200\">"
 msgstr ""
 
 #: templates/users/my_documents.html:50
-#, fuzzy
 msgid "Under Review ⏳"
-msgstr "در حال بررسی"
+msgstr ""
 
 #: templates/users/my_documents.html:51
 msgid "p class=\"text-yellow-700 dark:text-yellow-400 text-sm\">"
 msgstr ""
 
 #: templates/users/my_documents.html:64
-#, fuzzy
 msgid "Request Rejected ❌"
-msgstr "❌ رد درخواست"
+msgstr ""
 
 #: templates/users/my_documents.html:65
 msgid "p class=\"text-red-700 dark:text-red-400 text-sm\">"
 msgstr ""
 
 #: templates/users/my_documents.html:77
-#, fuzzy
 msgid ""
 "Uploaded Documents\n"
 "            "
-msgstr "📎 مدارک آپلود شده"
+msgstr ""
 
 #: templates/users/my_documents.html:84 templates/users/my_documents.html:104
 #: templates/users/my_documents.html:124
@@ -3396,34 +3232,30 @@ msgid "p class=\"text-xs text-red-500 mt-1\">"
 msgstr ""
 
 #: templates/users/my_documents.html:145
-#, fuzzy
 msgid ""
 "Admin Notes\n"
 "            "
-msgstr "🔐 پنل مدیریت"
+msgstr ""
 
 #: templates/users/my_documents.html:147 templates/users/support.html:33
 msgid "p class=\"text-sm text-gray-700 dark:text-slate-300\">"
 msgstr ""
 
 #: templates/users/notifications.html:17
-#, fuzzy
 msgid "Notifications"
-msgstr "اعلان‌ها"
+msgstr ""
 
 #: templates/users/notifications.html:25
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "                "
-msgstr "📊 داشبورد مدیریت"
+msgstr ""
 
 #: templates/users/notifications.html:32
-#, fuzzy
 msgid ""
 "Return\n"
 "                "
-msgstr "بازگشت"
+msgstr ""
 
 #: templates/users/notifications.html:55
 msgid "p class=\"text-gray-900 dark:text-white text-sm leading-relaxed\">"
@@ -3438,23 +3270,18 @@ msgid "Mark all as read"
 msgstr ""
 
 #: templates/users/notifications.html:90
-#, fuzzy
 msgid "No Notifications"
-msgstr "اعلان‌ها"
+msgstr ""
 
 #: templates/users/payment_confirmation.html:17
-#, fuzzy
 msgid "✅ Payment Received"
-msgstr "✅ فیش پرداخت دریافت شد"
+msgstr ""
 
 #: templates/users/payment_confirmation.html:19
-#, fuzzy
 msgid ""
 "Your premium upgrade request has been received. Our team will review your"
 " documents within "
 msgstr ""
-"درخواست ارتقاء شما دریافت شد. تیم مدیریت به زودی مدارک شما را بررسی کرده "
-"و نتیجه را از طریق ایمیل اطلاع‌رسانی خواهد کرد."
 
 #: templates/users/payment_confirmation.html:19
 #: templates/users/verify_phone.html:18
@@ -3468,22 +3295,20 @@ msgid ""
 msgstr ""
 
 #: templates/users/payment_confirmation.html:28
-#, fuzzy
 msgid ""
 "Payment Details\n"
 "            "
-msgstr "فیش پرداخت:"
+msgstr ""
 
 #: templates/users/payment_confirmation.html:37
 msgid "span class=\"font-medium text-green-600 dark:text-green-400\">"
 msgstr ""
 
 #: templates/users/payment_confirmation.html:57
-#, fuzzy
 msgid ""
 "Back to Profile\n"
 "            "
-msgstr "✏️ ویرایش پروفایل"
+msgstr ""
 
 #: templates/users/payment_confirmation.html:66
 msgid ""
@@ -3492,14 +3317,12 @@ msgid ""
 msgstr ""
 
 #: templates/users/place_order.html:16
-#, fuzzy
 msgid "Place New Order"
-msgstr "📝 ثبت سفارش جدید"
+msgstr ""
 
 #: templates/users/place_order.html:26
-#, fuzzy
 msgid "Product *"
-msgstr "محصول"
+msgstr ""
 
 #: templates/users/place_order.html:29
 msgid "option value=\"wheat\">"
@@ -3526,36 +3349,32 @@ msgid "option value=\"other\">"
 msgstr ""
 
 #: templates/users/place_order.html:41
-#, fuzzy
 msgid "Quantity (Tons) *"
-msgstr "مقدار (تن)"
+msgstr ""
 
 #: templates/users/place_order.html:44
 msgid "e.g., 50"
 msgstr ""
 
 #: templates/users/place_order.html:47
-#, fuzzy
 msgid "Price per Ton (USD) *"
-msgstr "قیمت هر تن (دلار آمریکا)"
+msgstr ""
 
 #: templates/users/place_order.html:50
 msgid "e.g., 350.00"
 msgstr ""
 
 #: templates/users/place_order.html:57
-#, fuzzy
 msgid "Origin Port *"
-msgstr "مبدأ:"
+msgstr ""
 
 #: templates/users/place_order.html:60
 msgid "e.g., Bandar Abbas"
 msgstr ""
 
 #: templates/users/place_order.html:63
-#, fuzzy
 msgid "Destination Port *"
-msgstr "مقصد"
+msgstr ""
 
 #: templates/users/place_order.html:66
 msgid "e.g., Sohar"
@@ -3578,9 +3397,8 @@ msgid "Specify quality, packaging, delivery terms, etc."
 msgstr ""
 
 #: templates/users/place_order.html:101
-#, fuzzy
 msgid "Place Order"
-msgstr "📝 ثبت سفارش جدید"
+msgstr ""
 
 #: templates/users/post_detail.html:21 templates/users/post_detail.html:59
 #: templates/users/post_detail.html:80
@@ -3608,16 +3426,14 @@ msgid ""
 msgstr ""
 
 #: templates/users/post_detail.html:69
-#, fuzzy
 msgid ""
 "WhatsApp\n"
 "                    "
-msgstr "گندم"
+msgstr ""
 
 #: templates/users/producer_orders.html:18
-#, fuzzy
 msgid "Seller Panel"
-msgstr "پنل فروشنده"
+msgstr ""
 
 #: templates/users/producer_orders.html:42
 msgid "span class=\"font-bold text-gray-900 dark:text-white\">"
@@ -3642,31 +3458,26 @@ msgid "span class=\"text-gold font-semibold\">"
 msgstr ""
 
 #: templates/users/producer_orders.html:60
-#, fuzzy
 msgid ""
 "Buyer Information\n"
 "                                    "
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/users/producer_orders.html:63
-#, fuzzy
 msgid "Name: "
-msgstr "نام کاربری:"
+msgstr ""
 
 #: templates/users/producer_orders.html:64
-#, fuzzy
 msgid "Company: "
-msgstr "شرکت:"
+msgstr ""
 
 #: templates/users/producer_orders.html:65
-#, fuzzy
 msgid "Country: "
-msgstr "کشور:"
+msgstr ""
 
 #: templates/users/producer_orders.html:66
-#, fuzzy
 msgid "Order Date: "
-msgstr "تاریخ:"
+msgstr ""
 
 #: templates/users/producer_orders.html:80
 msgid ""
@@ -3675,9 +3486,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/producer_orders.html:96
-#, fuzzy
 msgid "✅ Confirm"
-msgstr "✅ تأیید شده"
+msgstr ""
 
 #: templates/users/producer_orders.html:107
 msgid ""
@@ -3698,18 +3508,16 @@ msgid ""
 msgstr ""
 
 #: templates/users/producer_orders.html:134
-#, fuzzy
 msgid "No Orders Received"
-msgstr "سفارش دریافت نشده"
+msgstr ""
 
 #: templates/users/producer_orders.html:135
 msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-6\">"
 msgstr ""
 
 #: templates/users/profile_edit.html:10
-#, fuzzy
 msgid "Edit Profile"
-msgstr "ویرایش پروفایل"
+msgstr ""
 
 #: templates/users/profile_edit.html:18
 msgid "div class=\"mb-4 p-4 rounded-lg"
@@ -3734,41 +3542,36 @@ msgid ""
 msgstr ""
 
 #: templates/users/profile_edit.html:35
-#, fuzzy
 msgid ""
 "Basic Information\n"
 "                "
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/users/profile_edit.html:42
-#, fuzzy
 msgid "Enter your company name"
-msgstr "نام شرکت"
+msgstr ""
 
 #: templates/users/profile_edit.html:47
-#, fuzzy
 msgid "Country "
-msgstr "کشور"
+msgstr ""
 
 #: templates/users/profile_edit.html:50
 msgid "Enter your country"
 msgstr ""
 
 #: templates/users/profile_edit.html:55
-#, fuzzy
 msgid "Phone Number"
-msgstr "شماره تلفن"
+msgstr ""
 
 #: templates/users/profile_edit.html:58 templates/users/profile_edit.html:135
 msgid "+1 234 567 8900"
 msgstr ""
 
 #: templates/users/profile_edit.html:70
-#, fuzzy
 msgid ""
 "Professional Information\n"
 "                "
-msgstr "👤 اطلاعات کاربر"
+msgstr ""
 
 #: templates/users/profile_edit.html:74
 msgid "Job Title"
@@ -3787,9 +3590,8 @@ msgid "e.g., International Trade"
 msgstr ""
 
 #: templates/users/profile_edit.html:91
-#, fuzzy
 msgid "Bio"
-msgstr "IMO"
+msgstr ""
 
 #: templates/users/profile_edit.html:94
 msgid "Tell us about yourself and your professional background"
@@ -3822,19 +3624,16 @@ msgid "Telegram"
 msgstr ""
 
 #: templates/users/profile_edit.html:127
-#, fuzzy
 msgid "@username"
-msgstr "نام کاربری"
+msgstr ""
 
 #: templates/users/profile_edit.html:132
-#, fuzzy
 msgid "WhatsApp"
-msgstr "گندم"
+msgstr ""
 
 #: templates/users/profile_edit.html:146
-#, fuzzy
 msgid "Save Changes ✓"
-msgstr "ذخیره تغییرات"
+msgstr ""
 
 #: templates/users/profile_edit.html:147
 msgid ""
@@ -3891,9 +3690,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/show_backup_codes.html:15
-#, fuzzy
 msgid "Backup Codes"
-msgstr "جلد پشت"
+msgstr ""
 
 #: templates/users/show_backup_codes.html:32
 msgid "⚠️ Very Important!"
@@ -3910,16 +3708,14 @@ msgid ""
 msgstr ""
 
 #: templates/users/show_backup_codes.html:65
-#, fuzzy
 msgid ""
 "Print Codes\n"
 "            "
-msgstr "ارسال مجدد کد"
+msgstr ""
 
 #: templates/users/show_backup_codes.html:77
-#, fuzzy
 msgid "Got it, Continue"
-msgstr "آپلود و ادامه"
+msgstr ""
 
 #: templates/users/show_backup_codes.html:83
 msgid ""
@@ -3929,11 +3725,10 @@ msgid ""
 msgstr ""
 
 #: templates/users/support.html:14
-#, fuzzy
 msgid ""
 "Back to Dashboard\n"
 "        "
-msgstr "📊 داشبورد مدیریت"
+msgstr ""
 
 #: templates/users/support.html:28
 msgid "Support - Contact Admin"
@@ -3966,38 +3761,32 @@ msgid "\" class=\"text-gold hover:text-gold-light font-medium\">"
 msgstr ""
 
 #: templates/users/upload_documents.html:16
-#, fuzzy
 msgid "Upload Documents"
-msgstr "آپلود مدارک"
+msgstr ""
 
 #: templates/users/upload_documents.html:26
-#, fuzzy
 msgid "Passport Copy *"
-msgstr "کپی پاسپورت"
+msgstr ""
 
 #: templates/users/upload_documents.html:36
-#, fuzzy
 msgid "Company License *"
-msgstr "مجوز شرکت"
+msgstr ""
 
 #: templates/users/upload_documents.html:54
-#, fuzzy
 msgid "Upload & Continue to Payment"
-msgstr "آپلود و ادامه"
+msgstr ""
 
 #: templates/users/verify_2fa_login.html:17
-#, fuzzy
 msgid "Two-Factor Authentication"
-msgstr "امنیت و احراز هویت"
+msgstr ""
 
 #: templates/users/verify_2fa_login.html:19
 msgid "p class=\"text-sm text-gray-500 dark:text-slate-500 mt-2\">"
 msgstr ""
 
 #: templates/users/verify_2fa_login.html:29
-#, fuzzy
 msgid "Authentication Code"
-msgstr "امنیت و احراز هویت"
+msgstr ""
 
 #: templates/users/verify_2fa_login.html:34
 #: templates/users/verify_2fa_login.html:53
@@ -4011,9 +3800,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/verify_2fa_login.html:49
-#, fuzzy
 msgid "Backup Code"
-msgstr "جلد پشت"
+msgstr ""
 
 #: templates/users/verify_2fa_login.html:52
 msgid "Enter your 8-digit backup code"
@@ -4028,9 +3816,8 @@ msgid "💡 How to use:"
 msgstr ""
 
 #: templates/users/verify_phone.html:16
-#, fuzzy
 msgid "Verify Mobile Number"
-msgstr "شماره IMO"
+msgstr ""
 
 #: templates/users/verify_phone.html:18
 msgid "Enter the 6-digit code sent to "
@@ -4059,9 +3846,8 @@ msgid ""
 msgstr ""
 
 #: templates/users/verify_phone.html:39
-#, fuzzy
 msgid "Verification Code"
-msgstr "تأیید ایمیل"
+msgstr ""
 
 #: templates/users/verify_phone.html:42
 msgid "123456"
@@ -4072,14 +3858,12 @@ msgid "Verify Code"
 msgstr ""
 
 #: templates/users/vessel_finder.html:16
-#, fuzzy
 msgid "Vessel Finder"
-msgstr "🌍 جستجوی کشتی"
+msgstr ""
 
 #: templates/users/vessel_finder.html:25
-#, fuzzy
 msgid "IMO Number"
-msgstr "شماره IMO"
+msgstr ""
 
 #: templates/users/vessel_finder.html:28
 msgid "e.g., 9395044"
@@ -4092,11 +3876,10 @@ msgid ""
 msgstr ""
 
 #: templates/users/vessel_finder.html:69
-#, fuzzy
 msgid ""
 "Vessel Details\n"
 "                    "
-msgstr "🌍 جستجوی کشتی"
+msgstr ""
 
 #: templates/users/vessel_finder.html:76 templates/users/vessel_finder.html:80
 #: templates/users/vessel_finder.html:84 templates/users/vessel_finder.html:88
@@ -4120,696 +3903,4 @@ msgid ""
 "span class=\"font-medium text-gray-900 dark:text-white text-sm text-"
 "right\">"
 msgstr ""
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Home"
-#~ msgstr "خانه"
-
-#~ msgid "profile"
-#~ msgstr "پروفایل"
-
-#~ msgid "Special"
-#~ msgstr "ویژه"
-
-#~ msgid "Register"
-#~ msgstr "ثبت‌نام"
-
-#~ msgid "Metisma - the comprehensive international trade management platform"
-#~ msgstr "متیسما - پلتفرم جامع مدیریت تجارت بین‌الملل"
-
-#~ msgid "Metisma"
-#~ msgstr "متیسما"
-
-#~ msgid ""
-#~ "Register, track, and confirm orders "
-#~ "completely digitally and in real time."
-#~ msgstr "ثبت، پیگیری و تأیید سفارشات به صورت کاملاً دیجیتال و در لحظه"
-
-#~ msgid ""
-#~ "Verifying user identities, verifying "
-#~ "credentials, and upgrading to special "
-#~ "users with a transparent process."
-#~ msgstr ""
-#~ "احراز هویت کاربران، تأیید مدارک و "
-#~ "ارتقاء به کاربران ویژه با فرآیندی "
-#~ "شفاف"
-
-#~ msgid "Specialized support via chat, call, and email every day of the week."
-#~ msgstr "پشتیبانی تخصصی از طریق چت، تماس و ایمیل در تمام روزهای هفته"
-
-#~ msgid "System training video"
-#~ msgstr "ویدیو آموزشی سیستم"
-
-#~ msgid "Cooperation with reputable companies"
-#~ msgstr "همکاری با شرکت‌های معتبر"
-
-#~ msgid "Cooperate with us"
-#~ msgstr "همکاری با ما"
-
-#~ msgid "© 1403 Metisma | All rights reserved"
-#~ msgstr "© ۱۴۰۳ متیسما | تمامی حقوق محفوظ است"
-
-#~ msgid "Comprehensive international trade and logistics management platform"
-#~ msgstr "پلتفرم جامع مدیریت تجارت و لجستیک بین‌الملل"
-
-#~ msgid "1,200,000 Tomans"
-#~ msgstr "۱,۲۰۰,۰۰۰ تومان"
-
-#~ msgid "650,000 Tomans"
-#~ msgstr "۶۵۰,۰۰۰ تومان"
-
-#~ msgid "Annually (1,200,000 Tomans)"
-#~ msgstr "سالانه (۱,۲۰۰,۰۰۰ تومان)"
-
-#~ msgid "Six months (650,000 Tomans)"
-#~ msgstr "شش ماهه (۶۵۰,۰۰۰ تومان)"
-
-#~ msgid "Magazine number"
-#~ msgstr "شماره مجله"
-
-#~ msgid "choose..."
-#~ msgstr "انتخاب کنید..."
-
-#~ msgid "Full page"
-#~ msgstr "تمام صفحه"
-
-#~ msgid "half page"
-#~ msgstr "نیم صفحه"
-
-#~ msgid "quarter page"
-#~ msgstr "ربع صفحه"
-
-#~ msgid "Inner cover"
-#~ msgstr "جلد داخلی"
-
-#~ msgid "a number"
-#~ msgstr "یک شماره"
-
-#~ msgid "Three numbers"
-#~ msgstr "سه شماره"
-
-#~ msgid "Six numbers"
-#~ msgstr "شش شماره"
-
-#~ msgid "Annual (12 issues)"
-#~ msgstr "سالانه (۱۲ شماره)"
-
-#~ msgid "For admin users only"
-#~ msgstr "فقط برای کاربران مدیر"
-
-#~ msgid "Special requests"
-#~ msgstr "درخواست‌های ویژه"
-
-#~ msgid "Awaiting review"
-#~ msgstr "در انتظار بررسی"
-
-#~ msgid "Username"
-#~ msgstr "نام کاربری"
-
-#~ msgid "special?"
-#~ msgstr "ویژه؟"
-
-#~ msgid "State"
-#~ msgstr "وضعیت"
-
-#~ msgid "Operation"
-#~ msgstr "عملیات"
-
-#~ msgid "❌ No"
-#~ msgstr "❌ خیر"
-
-#~ msgid "disable"
-#~ msgstr "غیرفعال"
-
-#~ msgid "you"
-#~ msgstr "شما"
-
-#~ msgid "company_name:"
-#~ msgstr "نام شرکت:"
-
-#~ msgid "country:"
-#~ msgstr "کشور:"
-
-#~ msgid "✅ The status of the steps"
-#~ msgstr "✅ وضعیت مراحل"
-
-#~ msgid "new!"
-#~ msgstr "جدید!"
-
-#~ msgid "user"
-#~ msgstr "کاربر"
-
-#~ msgid "state"
-#~ msgstr "وضعیت"
-
-#~ msgid "Date of posting"
-#~ msgstr "تاریخ ثبت"
-
-#~ msgid "waiting"
-#~ msgstr "در انتظار"
-
-#~ msgid "rejected"
-#~ msgstr "رد شده"
-
-#~ msgid "📌 List of ports"
-#~ msgstr "📌 لیست بنادر"
-
-#~ msgid "Loading..."
-#~ msgstr "در حال بارگذاری..."
-
-#~ msgid "➕ Add new port"
-#~ msgstr "➕ افزودن بندر جدید"
-
-#~ msgid "Edit"
-#~ msgstr "ویرایش"
-
-#~ msgid "Delete"
-#~ msgstr "حذف"
-
-#~ msgid "loading error."
-#~ msgstr "خطا در بارگذاری."
-
-#~ msgid "🔒 Limited access"
-#~ msgstr "🔒 دسترسی محدود"
-
-#~ msgid "Only special users can access this map."
-#~ msgstr "فقط کاربران ویژه می‌توانند به این نقشه دسترسی داشته باشند."
-
-#~ msgid "تلفن"
-#~ msgstr "تلفن"
-
-#~ msgid "💳 Pay for the upgrade"
-#~ msgstr "💳 پرداخت هزینه ارتقاء"
-
-#~ msgid "Amount payable: US$1,000"
-#~ msgstr "مبلغ قابل پرداخت: ۱,۰۰۰ دلار آمریکا"
-
-#~ msgid "Bank name:"
-#~ msgstr "نام بانک:"
-
-#~ msgid "Bank of China"
-#~ msgstr "بانک چین"
-
-#~ msgid "Account number:"
-#~ msgstr "شماره حساب:"
-
-#~ msgid "Name of the account holder:"
-#~ msgstr "نام صاحب حساب:"
-
-#~ msgid "Royan Export Co."
-#~ msgstr "شرکت صادرات رویان"
-
-#~ msgid "(IBAN):"
-#~ msgstr "(شبا):"
-
-#~ msgid "📝 Register in the market"
-#~ msgstr "📝 ثبت‌نام در بازار"
-
-#~ msgid "password"
-#~ msgstr "رمز عبور"
-
-#~ msgid "Buyer"
-#~ msgstr "خریدار"
-
-#~ msgid "Seller"
-#~ msgstr "فروشنده"
-
-#~ msgid "Company name (optional)"
-#~ msgstr "نام شرکت (اختیاری)"
-
-#~ msgid "welcome"
-#~ msgstr "خوش آمدید"
-
-#~ msgid "Log in to the Metisma platform"
-#~ msgstr "ورود به پلتفرم متیسما"
-
-#~ msgid "⚠️ Access to chat"
-#~ msgstr "⚠️ دسترسی به چت"
-
-#~ msgid "Only"
-#~ msgstr "فقط"
-
-#~ msgid "special"
-#~ msgstr "ویژه"
-
-#~ msgid "users can use the chat system ."
-#~ msgstr "کاربران می‌توانند از سیستم چت استفاده کنند."
-
-#~ msgid "To start a chat, select a specific contact."
-#~ msgstr "برای شروع چت، یک مخاطب خاص انتخاب کنید."
-
-#~ msgid "special 🌟"
-#~ msgstr "ویژه 🌟"
-
-#~ msgid "View my orders"
-#~ msgstr "مشاهده سفارشات من"
-
-#~ msgid "🔒 Chat is only active for special users."
-#~ msgstr "🔒 چت فقط برای کاربران ویژه فعال است."
-
-#~ msgid "🗺️ Access to port finder is enabled only for special users."
-#~ msgstr "🗺️ دسترسی به جستجوی بندر فقط برای کاربران ویژه فعال است."
-
-#~ msgid "🗺️ Access to vessel finder is enabled only for special users."
-#~ msgstr "🗺️ دسترسی به جستجوی کشتی فقط برای کاربران ویژه فعال است."
-
-#~ msgid "✅ You are a special user"
-#~ msgstr "✅ شما یک کاربر ویژه هستید"
-
-#~ msgid "The process of upgrading to a special user"
-#~ msgstr "فرآیند ارتقاء به کاربر ویژه"
-
-#~ msgid "Start"
-#~ msgstr "شروع"
-
-#~ msgid "Completion"
-#~ msgstr "تکمیل"
-
-#~ msgid "Mobile number verification"
-#~ msgstr "تأیید شماره موبایل"
-
-#~ msgid "Orders received and their status"
-#~ msgstr "سفارشات دریافتی و وضعیت آن‌ها"
-
-#~ msgid "Buyer:"
-#~ msgstr "خریدار:"
-
-#~ msgid "Destination:"
-#~ msgstr "مقصد:"
-
-#~ msgid "Complete your order for export or import"
-#~ msgstr "سفارش خود را برای صادرات یا واردات تکمیل کنید"
-
-#~ msgid "Rice"
-#~ msgstr "برنج"
-
-#~ msgid "Sugar"
-#~ msgstr "شکر"
-
-#~ msgid "Corn"
-#~ msgstr "ذرت"
-
-#~ msgid "Steel"
-#~ msgstr "فولاد"
-
-#~ msgid "📦 My orders"
-#~ msgstr "📦 سفارشات من"
-
-#~ msgid "send:"
-#~ msgstr "ارسال:"
-
-#~ msgid "📱 Mobile number verification"
-#~ msgstr "📱 تأیید شماره موبایل"
-
-#~ msgid "six digit code"
-#~ msgstr "کد شش رقمی"
-
-#~ msgid "Review time:"
-#~ msgstr "زمان بررسی:"
-
-#~ msgid "Ship tracking - Vessel Finder"
-#~ msgstr "ردیابی کشتی - جستجوی کشتی"
-
-#~ msgid "Search for a ship by ID IMO"
-#~ msgstr "جستجوی کشتی بر اساس شناسه IMO"
-
-#~ msgid "Attribute"
-#~ msgstr "ویژگی"
-
-#~ msgid "Value"
-#~ msgstr "مقدار"
-
-#~ msgid "MMSI"
-#~ msgstr "MMSI"
-
-#~ msgid "ship name"
-#~ msgstr "نام کشتی"
-
-#~ msgid "❌ You cannot disable the admin."
-#~ msgstr "❌ نمی‌توانید مدیر را غیرفعال کنید."
-
-#~ msgid "❌ قبلاً یک ادمین وجود دارد."
-#~ msgstr "❌ قبلاً یک مدیر وجود دارد."
-
-#~ msgid "❌ ایجاد ادمین غیرفعال است."
-#~ msgstr "❌ ایجاد مدیر غیرفعال است."
-
-#~ msgid "❌ تمام فیلدها الزامی هستند."
-#~ msgstr "❌ تمام فیلدها الزامی هستند."
-
-#~ msgid "❌ نام کاربری باید حداقل 3 کاراکتر باشد."
-#~ msgstr "❌ نام کاربری باید حداقل ۳ کاراکتر باشد."
-
-#~ msgid "❌ رمز عبور باید حداقل 8 کاراکتر باشد."
-#~ msgstr "❌ رمز عبور باید حداقل ۸ کاراکتر باشد."
-
-#~ msgid "✅ شماره موبایل تأیید شد."
-#~ msgstr "✅ شماره موبایل تأیید شد."
-
-#~ msgid "کد نامعتبر است."
-#~ msgstr "کد نامعتبر است."
-
-#~ msgid "✅ شماره موبایل شما قبلاً تأیید شده است."
-#~ msgstr "✅ شماره موبایل شما قبلاً تأیید شده است."
-
-#~ msgid "لطفاً کد را وارد کنید."
-#~ msgstr "لطفاً کد را وارد کنید."
-
-#~ msgid ".There are no announcements"
-#~ msgstr ".اعلانی وجود ندارد"
-
-#~ msgid "There are no announcements"
-#~ msgstr "هیچ اعلانی وجود ندارد"
-
-#~ msgid "Login to the system"
-#~ msgstr "ورود به سیستم"
-
-#~ msgid "Login to the magazine section"
-#~ msgstr "ورود به بخش مجله"
-
-#~ msgid ""
-#~ "Specialized reference for international trade,"
-#~ " maritime transport and logistics"
-#~ msgstr "مرجع تخصصی تجارت داخلی و بین‌الملل، حمل و نقل دریایی و لجستیک"
-
-#~ msgid ""
-#~ "Watch this video to learn how to"
-#~ " use the comprehensive international trade"
-#~ " management platform."
-#~ msgstr ""
-#~ "برای یادگیری نحوه استفاده از پلتفرم "
-#~ "جامع مدیریت تجارت بین‌الملل، این ویدیو"
-#~ " را تماشا کنید."
-
-#~ msgid "Your browser does not support video playback."
-#~ msgstr "مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند."
-
-#~ msgid ""
-#~ "We cooperate with large and reputable"
-#~ " companies at the national and "
-#~ "international levels."
-#~ msgstr "ما با شرکت‌های بزرگ و معتبر در سطح ملی و بین‌المللی همکاری می‌کنیم."
-
-#~ msgid ""
-#~ "You too can take advantage of the"
-#~ " Metisma platform to grow your "
-#~ "business."
-#~ msgstr "شما هم می‌توانید از پلتفرم متیسما برای رشد کسب و کار خود بهره‌مند شوید."
-
-#~ msgid "Welcome to the comprehensive international trade management platform"
-#~ msgstr "به پلتفرم جامع مدیریت تجارت بین‌الملل خوش آمدید"
-
-#~ msgid ""
-#~ "By providing an intelligent and "
-#~ "comprehensive platform, Metisma simplifies, "
-#~ "transparently, and securely the process "
-#~ "of communication, analysis, marketing, "
-#~ "purchasing, selling, and international "
-#~ "transportation of goods."
-#~ msgstr ""
-#~ "متیسما با ارائه پلتفرمی هوشمند و "
-#~ "جامع، فرآیند ارتباط، تحلیل، بازاریابی، "
-#~ "خرید، فروش و حمل و نقل بین‌المللی"
-#~ " کالا را ساده، شفاف و ایمن "
-#~ "می‌سازد."
-
-#~ msgid ""
-#~ "To access the latest issues of the"
-#~ " magazine, request sponsorship, advertising, "
-#~ "and annual subscriptions, visit the "
-#~ "magazine section."
-#~ msgstr ""
-#~ "برای دسترسی به آخرین شماره‌های مجله، "
-#~ "درخواست اسپانسرینگ، تبلیغات و اشتراک "
-#~ "سالانه، به بخش مجله مراجعه کنید."
-
-#~ msgid "Metisma logo"
-#~ msgstr "لوگو متیسما"
-
-#~ msgid "Partner company 1"
-#~ msgstr "شرکت همکار ۱"
-
-#~ msgid "Partner company 2"
-#~ msgstr "شرکت همکار ۲"
-
-#~ msgid "Partner company 3"
-#~ msgstr "شرکت همکار ۳"
-
-#~ msgid "Partner company 4"
-#~ msgstr "شرکت همکار ۴"
-
-#~ msgid "Partner company 5"
-#~ msgstr "شرکت همکار ۵"
-
-#~ msgid "Partner company 6"
-#~ msgstr "شرکت همکار ۶"
-
-# Added on 2026-05-11 16:23:47
-#~ msgid "Passport copy:"
-#~ msgstr "کپی پاسپورت:"
-
-#~ msgid ""
-#~ "Please click on the verification link."
-#~ " If you do not receive an "
-#~ "email, please check your Spam folder."
-#~ msgstr ""
-#~ "لطفاً روی لینک تأیید کلیک کنید. "
-#~ "اگر ایمیلی دریافت نکردید، پوشه Spam "
-#~ "را بررسی کنید."
-
-#~ msgid "Please upload the receipt after making the payment."
-#~ msgstr "لطفاً پس از پرداخت، فیش را آپلود کنید."
-
-#~ msgid "Posted in:"
-#~ msgstr "ارسال شده در:"
-
-#~ msgid "Previous"
-#~ msgstr "قبلی"
-
-#~ msgid "Registration"
-#~ msgstr "ثبت‌نام"
-
-#~ msgid "Reviewed in:"
-#~ msgstr "بررسی شده در:"
-
-#~ msgid "Sign out of the account"
-#~ msgstr "خروج از حساب"
-
-#~ msgid "Size Advertisement"
-#~ msgstr "اندازه تبلیغ"
-
-#~ msgid ""
-#~ "Specialized reference for domestic and "
-#~ "international trade, maritime transport and"
-#~ " logistics"
-#~ msgstr "مرجع تخصصی تجارت داخلی و بین‌المللی، حمل و نقل دریایی و لجستیک"
-
-#~ msgid "Sponsorship application registration"
-#~ msgstr "ثبت درخواست اسپانسرشیپ"
-
-#~ msgid "Subscription registration"
-#~ msgstr "ثبت اشتراک"
-
-#~ msgid "Subscription type"
-#~ msgstr "نوع اشتراک"
-
-#~ msgid ""
-#~ "The IMO (International Maritime Organization)"
-#~ " identifier is a unique 7-digit code"
-#~ " for each ship."
-#~ msgstr "شناسه IMO یک کد ۷ رقمی منحصر به فرد برای هر کشتی است."
-
-#~ msgid "The first issue of the magazine will be available soon."
-#~ msgstr "اولین شماره مجله به زودی در دسترس خواهد بود."
-
-#~ msgid "To collaborate and sponsor the magazine, complete the following form."
-#~ msgstr "برای همکاری و اسپانسرشیپ مجله، فرم زیر را تکمیل کنید."
-
-#~ msgid "To complete the upgrade process, please upload the following documents:"
-#~ msgstr "برای تکمیل فرآیند ارتقاء، لطفاً مدارک زیر را آپلود کنید:"
-
-#~ msgid ""
-#~ "To receive the print and digital "
-#~ "version of the magazine, complete the"
-#~ " form below."
-#~ msgstr "برای دریافت نسخه چاپی و دیجیتال مجله، فرم زیر را تکمیل کنید."
-
-#~ msgid "To register an advertisement in the magazine, complete the form below."
-#~ msgstr "برای ثبت تبلیغ در مجله، فرم زیر را تکمیل کنید."
-
-#~ msgid "US1234567890123456789012"
-#~ msgstr ""
-
-#~ msgid "Upload a PDF file or clear image of your passport."
-#~ msgstr "یک فایل PDF یا تصویر واضح از پاسپورت خود آپلود کنید."
-
-#~ msgid "Upload a photo or PDF file of your payment receipt."
-#~ msgstr "عکس یا فایل PDF فیش پرداخت خود را آپلود کنید."
-
-#~ msgid "Upload your company registration certificate or business license."
-#~ msgstr "گواهی ثبت شرکت یا مجوز کسب و کار خود را آپلود کنید."
-
-#~ msgid "Usually between 24 and 48 business hours"
-#~ msgstr "معمولاً بین ۲۴ تا ۴۸ ساعت کاری"
-
-#~ msgid "View the file"
-#~ msgstr "مشاهده فایل"
-
-#~ msgid "date_arrival (ETA)"
-#~ msgstr "تاریخ ورود (ETA)"
-
-#~ msgid "latitude (Latitude)"
-#~ msgstr "عرض جغرافیایی"
-
-#~ msgid "log in"
-#~ msgstr "ورود"
-
-#~ msgid "longitude  (Longitude)"
-#~ msgstr "طول جغرافیایی"
-
-#~ msgid "not uploaded"
-#~ msgstr "آپلود نشده"
-
-#~ msgid "order registration"
-#~ msgstr "ثبت سفارش"
-
-#~ msgid "pay"
-#~ msgstr "پرداخت"
-
-#~ msgid "payment 1,000$"
-#~ msgstr "پرداخت ۱,۰۰۰ دلار"
-
-#~ msgid "reject the order"
-#~ msgstr "رد سفارش"
-
-#~ msgid "rejection"
-#~ msgstr "رد"
-
-#~ msgid "speed (knot)"
-#~ msgstr "سرعت (گره)"
-
-#~ msgid "the seller"
-#~ msgstr "فروشنده"
-
-#~ msgid "view"
-#~ msgstr "مشاهده"
-
-#~ msgid "©2026 Metisma. All rights reserved"
-#~ msgstr ""
-
-#~ msgid "ارسال کد با مشکل مواجه شد."
-#~ msgstr ""
-
-#~ msgid "محصول را وارد کنید."
-#~ msgstr ""
-
-#~ msgid "مقدار نامعتبر است."
-#~ msgstr ""
-
-#~ msgid "کد تأیید ارسال شد."
-#~ msgstr ""
-
-#~ msgid "کد تأیید به شماره شما ارسال شد."
-#~ msgstr ""
-
-#~ msgid "کد جدید ارسال شد."
-#~ msgstr ""
-
-#~ msgid "← Return to the magazine home page"
-#~ msgstr "← بازگشت به صفحه اصلی مجله"
-
-#~ msgid "⏳ The verification code expires after 10 minutes"
-#~ msgstr "⏳ کد تأیید پس از ۱۰ دقیقه منقضی می‌شود"
-
-#~ msgid "⚠️ این سفارش قبلاً تأیید یا رد شده است."
-#~ msgstr ""
-
-#~ msgid "⚠️ این سفارش قبلاً تغییر وضعیت داده است."
-#~ msgstr ""
-
-#~ msgid "✅ Request confirmation"
-#~ msgstr "✅ تأیید درخواست"
-
-#~ msgid "✅ paid"
-#~ msgstr "✅ پرداخت شده"
-
-#~ msgid "✅ uploaded"
-#~ msgstr "✅ آپلود شده"
-
-#~ msgid "✅ ادمین اول با موفقیت ایجاد شد."
-#~ msgstr ""
-
-#~ msgid "✅ سفارش با موفقیت ثبت شد."
-#~ msgstr ""
-
-#~ msgid "✅ سفارش تأیید و اعلان به خریدار ارسال شد."
-#~ msgstr ""
-
-#~ msgid "✅ سفارش و اعلان با موفقیت ثبت شد."
-#~ msgstr ""
-
-#~ msgid "✅ شماره موبایل با موفقیت تأیید شد."
-#~ msgstr ""
-
-#~ msgid "❌ No seller found."
-#~ msgstr "❌ فروشنده‌ای یافت نشد."
-
-#~ msgid "❌ not paid"
-#~ msgstr "❌ پرداخت نشده"
-
-#~ msgid "❌ ارسال کد با مشکل مواجه شد."
-#~ msgstr ""
-
-#~ msgid "❌ ایمیل قبلاً استفاده شده."
-#~ msgstr ""
-
-#~ msgid "❌ خطایی رخ داد."
-#~ msgstr ""
-
-#~ msgid "❌ خطایی رخ داد. لطفاً دوباره تلاش کنید."
-#~ msgstr ""
-
-#~ msgid "❌ دسترسی غیرمجاز"
-#~ msgstr ""
-
-#~ msgid "❌ دسترسی محدود: فقط برای فروشندگان"
-#~ msgstr ""
-
-#~ msgid "❌ فروشنده معتبر نیست."
-#~ msgstr ""
-
-#~ msgid "❌ لطفاً ابتدا شماره موبایل خود را در پروفایل خود وارد کنید."
-#~ msgstr ""
-
-#~ msgid "❌ نام کاربری قبلاً گرفته شده."
-#~ msgstr ""
-
-#~ msgid "❌ کد نامعتبر است."
-#~ msgstr ""
-
-#~ msgid "🌟 Special promotion."
-#~ msgstr "🌟 ارتقاء ویژه."
-
-#~ msgid "💬 Chat with the broker"
-#~ msgstr "💬 چت با کارگزار"
-
-#~ msgid "💬 Chat with the seller"
-#~ msgstr "💬 چت با فروشنده"
-
-#~ msgid "💬 Login to chat"
-#~ msgstr "💬 ورود برای چت"
-
-#~ msgid "📂 Upgrade requests to special user"
-#~ msgstr "📂 درخواست‌های ارتقاء به کاربر ویژه"
-
-#~ msgid "🔍 ship search"
-#~ msgstr "🔍 جستجوی کشتی"
-
-#~ msgid "🗑️ Your account has been deleted."
-#~ msgstr "🗑️ حساب شما حذف شده است."
-
-#~ msgid "🛒 Manage orders"
-#~ msgstr "🛒 مدیریت سفارشات"
 

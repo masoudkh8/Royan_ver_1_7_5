@@ -6,565 +6,4363 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Metisma 1.0\n"
 "Report-Msgid-Bugs-To: support@metisma.com\n"
-"POT-Creation-Date: 2024-01-01 00:00+0330\n"
+"POT-Creation-Date: 2026-05-29 19:24+0000\n"
 "PO-Revision-Date: 2024-01-01 00:00+0330\n"
 "Last-Translator: Metisma Team\n"
-"Language-Team: Persian\n"
 "Language: fa_IR\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Persian\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-# Authentication & Registration
-msgid "Welcome to Metisma"
-msgstr "به متیسمای خوش آمدید"
-
-msgid "Login"
-msgstr "ورود"
-
-msgid "Register"
-msgstr "ثبت‌نام"
-
-msgid "Logout"
-msgstr "خروج"
-
-msgid "Username"
-msgstr "نام کاربری"
-
-msgid "Email"
-msgstr "ایمیل"
-
-msgid "Password"
-msgstr "رمز عبور"
-
-msgid "Confirm Password"
-msgstr "تأیید رمز عبور"
-
-msgid "Forgot Password?"
-msgstr "رمز عبور را فراموش کرده‌اید؟"
-
-msgid "Reset Password"
-msgstr "بازنشانی رمز عبور"
-
-msgid "Remember Me"
-msgstr "مرا به خاطر بسپار"
-
-msgid "Don't have an account?"
-msgstr "حساب کاربری ندارید؟"
-
-msgid "Already have an account?"
-msgstr "حساب کاربری دارید؟"
-
-msgid "Sign Up Now"
-msgstr "همین حالا ثبت‌نام کنید"
-
-msgid "Sign In"
-msgstr "ورود به حساب"
-
-# Registration Steps
-msgid "Step 1: Basic Information"
-msgstr "مرحله ۱: اطلاعات پایه"
-
-msgid "Step 2: Professional Information"
-msgstr "مرحله ۲: اطلاعات حرفه‌ای"
-
-msgid "Step 3: Security & Verification"
-msgstr "مرحله ۳: امنیت و تأیید"
-
-msgid "Next Step"
-msgstr "مرحله بعد"
-
-msgid "Previous Step"
-msgstr "مرحله قبل"
-
-msgid "Complete Registration"
-msgstr "تکمیل ثبت‌نام"
-
-msgid "Select Your Role"
-msgstr "نقش خود را انتخاب کنید"
-
-msgid "Producer"
-msgstr "تولیدکننده"
-
-msgid "Buyer"
-msgstr "خریدار"
-
-msgid "Broker"
-msgstr "کارگزار"
-
-msgid "Corporate Agent"
-msgstr "نماینده شرکتی"
-
-msgid "Logistics Provider"
-msgstr "ارائه‌دهنده خدمات لجستیک"
-
-msgid "Legal Advisor"
-msgstr "مشاور حقوقی"
-
-msgid "Tech Partner"
-msgstr "شریک فناوری"
-
-msgid "Investor"
-msgstr "سرمایه‌گذار"
-
-# Profile & Dashboard
-msgid "Dashboard"
-msgstr "داشبورد"
-
-msgid "Profile"
-msgstr "پروفایل"
-
-msgid "Edit Profile"
-msgstr "ویرایش پروفایل"
-
-msgid "My Documents"
-msgstr "مدارک من"
-
-msgid "Upload Documents"
-msgstr "آپلود مدارک"
-
-msgid "Company Name"
-msgstr "نام شرکت"
-
-msgid "Job Title"
-msgstr "عنوان شغلی"
-
-msgid "Expertise Area"
-msgstr "حوزه تخصصی"
-
-msgid "Bio"
-msgstr "بیوگرافی"
-
-msgid "Website"
-msgstr "وبسایت"
-
-msgid "Phone Number"
-msgstr "شماره تلفن"
-
-msgid "Country"
-msgstr "کشور"
-
-msgid "City"
-msgstr "شهر"
-
-msgid "Address"
-msgstr "آدرس"
-
-msgid "Social Links"
-msgstr "لینک‌های اجتماعی"
-
-msgid "LinkedIn"
-msgstr "لینکدین"
-
-msgid "Telegram"
-msgstr "تلگرام"
-
-msgid "WhatsApp"
-msgstr "واتساپ"
-
-msgid "Save Changes"
-msgstr "ذخیره تغییرات"
-
-msgid "Cancel"
-msgstr "انصراف"
-
-# Trust Score
-msgid "Trust Score"
-msgstr "امتیاز اعتماد"
-
-msgid "Your Trust Score"
-msgstr "امتیاز اعتماد شما"
-
-msgid "Trust Level"
-msgstr "سطح اعتماد"
-
-msgid "Bronze"
-msgstr "برنز"
-
-msgid "Silver"
-msgstr "نقره‌ای"
-
-msgid "Gold"
-msgstr "طلایی"
-
-msgid "Platinum"
-msgstr "پلاتینیوم"
-
-msgid "Newcomer"
-msgstr "تازه‌وارد"
-
-msgid "Identity Verification"
-msgstr "تأیید هویت"
-
-msgid "Expertise Verification"
-msgstr "تأیید تخصص"
-
-msgid "Social Credibility"
-msgstr "اعتبار اجتماعی"
-
-msgid "Dynamic Score"
-msgstr "امتیاز پویا"
-
-msgid "Verified"
-msgstr "تأیید شده"
-
-msgid "Not Verified"
-msgstr "تأیید نشده"
-
-msgid "Pending Verification"
-msgstr "در انتظار تأیید"
-
-# Messages & Notifications
-msgid "Success"
-msgstr "موفقیت"
-
-msgid "Error"
-msgstr "خطا"
-
-msgid "Warning"
-msgstr "هشدار"
-
-msgid "Info"
-msgstr "اطلاعات"
-
-msgid "Please login first."
-msgstr "لطفاً ابتدا وارد شوید."
-
-msgid "Access denied."
-msgstr "دسترسی غیرمجاز."
-
-msgid "Invalid credentials."
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: routes/admin/permissions.py:17
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: routes/admin/permissions.py:57
+#, fuzzy
+msgid "Invalid role."
 msgstr "اطلاعات ورود نامعتبر است."
 
-msgid "Account created successfully."
-msgstr "حساب کاربری با موفقیت ایجاد شد."
+#: routes/admin/permissions.py:113 routes/admin/permissions.py:119
+#: routes/admin/permissions.py:160 routes/admin/permissions.py:166
+msgid "Invalid permission."
+msgstr ""
 
-msgid "Profile updated successfully."
-msgstr "پروفایل با موفقیت به‌روزرسانی شد."
+#: routes/admin/routes.py:43
+#, fuzzy
+msgid "❌ Please log in first."
+msgstr "لطفاً ابتدا وارد شوید."
 
-msgid "Documents uploaded successfully."
-msgstr "مدارک با موفقیت آپلود شدند."
+#: routes/admin/routes.py:47
+msgid "❌ Access denied: Only admin can access this page."
+msgstr ""
 
-msgid "File type not allowed."
-msgstr "نوع فایل مجاز نیست."
+#: routes/admin/routes.py:144
+msgid "❌ The role is invalid."
+msgstr ""
 
-msgid "File size exceeds limit."
-msgstr "حجم فایل از حد مجاز بیشتر است."
+#: routes/admin/routes.py:218
+#, fuzzy
+msgid "⚠️ Invalid action."
+msgstr "اطلاعات ورود نامعتبر است."
 
-msgid "Password reset link sent to your email."
-msgstr "لینک بازنشانی رمز عبور به ایمیل شما ارسال شد."
+#: routes/admin/routes.py:407
+msgid "❌ You cannot delete yourself."
+msgstr ""
 
-msgid "Old password is incorrect."
+#: routes/admin/routes.py:434
+msgid "❌ You cannot deactivate yourself."
+msgstr ""
+
+#: routes/admin/routes.py:439
+msgid "❌ You cannot deactivate another admin."
+msgstr ""
+
+#: routes/admin/routes.py:468
+msgid "❌ You cannot change your own special status."
+msgstr ""
+
+#: routes/admin/routes.py:512
+msgid "❌ You cannot chat with yourself."
+msgstr ""
+
+#: routes/admin/routes.py:546
+msgid "✅ Message sent to user."
+msgstr ""
+
+#: routes/admin/routes.py:572
+msgid "✅ Welcome, admin.!"
+msgstr ""
+
+#: routes/admin/routes.py:577
+msgid "❌ Access denied: Only admin can log in."
+msgstr ""
+
+#: routes/admin/routes.py:579
+#, fuzzy
+msgid "❌ The email or password is incorrect."
 msgstr "رمز عبور قدیمی نادرست است."
 
+#: routes/admin/routes.py:593
+#, fuzzy
+msgid "⚠️ Admin already exists. Please log in."
+msgstr "ایمیل قبلاً ثبت شده است."
+
+#: routes/admin/routes.py:664
+#, fuzzy
+msgid "✅ First admin account created successfully! Please log in."
+msgstr "حساب کاربری با موفقیت ایجاد شد."
+
+#: routes/exhibition/routes.py:101
+#, fuzzy
+msgid "Invalid time format."
+msgstr "اطلاعات ورود نامعتبر است."
+
+#: routes/exhibition/routes.py:112
+msgid "This time slot is already booked. Please choose another time."
+msgstr ""
+
+#: routes/exhibition/routes.py:137
+msgid "Your appointment has been successfully booked!"
+msgstr ""
+
+#: routes/exhibition/routes.py:201
+#, fuzzy
+msgid "Your booth has been created successfully!"
+msgstr "حساب کاربری با موفقیت ایجاد شد."
+
+#: routes/magazine/routes.py:26
+msgid "This issue has not been published yet."
+msgstr ""
+
+#: routes/magazine/routes.py:40
+msgid "Magazine file not found."
+msgstr ""
+
+#: routes/magazine/routes.py:55 routes/magazine/routes.py:89
+#: routes/magazine/routes.py:123
+msgid "Please fill in the required fields."
+msgstr ""
+
+#: routes/magazine/routes.py:69
+msgid ""
+"Your sponsorship request has been successfully submitted. We will contact"
+" you soon."
+msgstr ""
+
+#: routes/magazine/routes.py:106
+msgid ""
+"Your advertising request has been successfully submitted. We will contact"
+" you soon."
+msgstr ""
+
+#: routes/magazine/routes.py:138
+msgid ""
+"Your annual subscription has been successfully registered. Information "
+"will be sent soon."
+msgstr ""
+
+#: routes/trading/routes.py:158
+msgid "Trading pair not found."
+msgstr ""
+
+#: routes/trading/routes.py:163
+msgid "Amount must be positive."
+msgstr ""
+
+#: routes/trading/routes.py:177
+msgid "Insufficient balance."
+msgstr ""
+
+#: routes/trading/routes.py:200
+msgid "Your order has been placed in the order book."
+msgstr ""
+
+#: routes/trading/routes.py:267
+msgid "You are not authorized to cancel this order."
+msgstr ""
+
+#: routes/trading/routes.py:271
+msgid "This order cannot be cancelled."
+msgstr ""
+
+#: routes/trading/routes.py:277
+#, fuzzy
+msgid "Order cancelled successfully."
+msgstr "حساب کاربری با موفقیت ایجاد شد."
+
+#: routes/users/auth.py:83
+msgid "❌ Please enter your mobile number in your profile first."
+msgstr ""
+
+#: routes/users/auth.py:100
+msgid "✅ Your mobile number has already been verified."
+msgstr ""
+
+#: routes/users/auth.py:110
+msgid "New code sent."
+msgstr ""
+
+#: routes/users/auth.py:113 routes/users/auth.py:138
+msgid "❌ There was a problem sending the code."
+msgstr ""
+
+#: routes/users/auth.py:118
+msgid "Please enter the code."
+msgstr ""
+
+#: routes/users/auth.py:123
+#, fuzzy
+msgid "✅ Mobile number successfully verified."
+msgstr "پروفایل با موفقیت به‌روزرسانی شد."
+
+#: routes/users/auth.py:126
+msgid "❌ The code is invalid."
+msgstr ""
+
+#: routes/users/auth.py:135
+msgid "A verification code has been sent to your number."
+msgstr ""
+
+#: routes/users/auth.py:162 routes/users/routes.py:1665
+msgid "Please start the premium verification process first."
+msgstr ""
+
+#: routes/users/auth.py:175
+msgid "Confirmation email sent."
+msgstr ""
+
+#: routes/users/auth.py:178
+msgid "❌ There was an error sending the email."
+msgstr ""
+
+#: routes/users/auth.py:230
+msgid "❌ The link has expired."
+msgstr ""
+
+#: routes/users/auth.py:238
+msgid "❌ The link is invalid."
+msgstr ""
+
+#: routes/users/auth.py:242
+msgid "❌ This link is not for you."
+msgstr ""
+
+#: routes/users/auth.py:247
+#, fuzzy
+msgid "❌ No request found."
+msgstr "نتیجه‌ای یافت نشد."
+
+#: routes/users/auth.py:257
+msgid "✅ Email has been verified."
+msgstr ""
+
+#: routes/users/auth.py:271
+msgid "❌ Please enter your email."
+msgstr ""
+
+#: routes/users/auth.py:315
+msgid ""
+"✅ If your email is registered in the system, a recovery link will be sent"
+" to you."
+msgstr ""
+
+#: routes/users/auth.py:333
+msgid "❌ The recovery link is invalid or expired."
+msgstr ""
+
+#: routes/users/auth.py:338
+msgid "❌ User not found."
+msgstr ""
+
+#: routes/users/auth.py:346
+#, fuzzy
+msgid "❌ Password must be at least 8 characters long."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
+
+#: routes/users/auth.py:350
+#, fuzzy
+msgid "❌ Password and repeat do not match."
+msgstr "رمزهای عبور مطابقت ندارند."
+
+#: routes/users/auth.py:397
+msgid "✅ Your password has been changed successfully. Please log in."
+msgstr ""
+
+#: routes/users/auth.py:412
+msgid "⚠️ Two-factor authentication is already enabled."
+msgstr ""
+
+#: routes/users/auth.py:420
+msgid "❌ The information is incomplete."
+msgstr ""
+
+#: routes/users/auth.py:448
+msgid "✅ Two-factor authentication enabled. Save backup codes!"
+msgstr ""
+
+#: routes/users/auth.py:451 routes/users/auth.py:521
+msgid "❌ The code entered is not valid."
+msgstr ""
+
+#: routes/users/auth.py:472
+msgid "⚠️ No backup codes found."
+msgstr ""
+
+#: routes/users/auth.py:483
+msgid "⚠️ Two-factor authentication is not enabled."
+msgstr ""
+
+#: routes/users/auth.py:519
+msgid "✅ Two-factor authentication disabled."
+msgstr ""
+
+#: routes/users/auth.py:534
+msgid "❌ No pending login found. Please log in first."
+msgstr ""
+
+#: routes/users/auth.py:599
+msgid "✅ Welcome! Two-factor authentication successful."
+msgstr ""
+
+#: routes/users/auth.py:602
+msgid "❌ The code entered is not valid. Please try again."
+msgstr ""
+
+#: routes/users/auth.py:647
+msgid "✅ Session successfully canceled."
+msgstr ""
+
+#: routes/users/auth.py:649
+msgid "❌ Session not found."
+msgstr ""
+
+#: routes/users/auth.py:668
+msgid "✅ All sessions have been canceled."
+msgstr ""
+
+#: routes/users/permissions_routes.py:115
+#: routes/users/permissions_routes.py:232
+msgid "Security error: Invalid CSRF token."
+msgstr ""
+
+#: routes/users/routes.py:67
+#, fuzzy
+msgid "Please log in first."
+msgstr "لطفاً ابتدا وارد شوید."
+
+#: routes/users/routes.py:71
+msgid "Unauthorized access. This section is for specific roles."
+msgstr ""
+
+#: routes/users/routes.py:136
+msgid "There is already an admin."
+msgstr ""
+
+#: routes/users/routes.py:145
+#, fuzzy
+msgid "❌ Please fill in all fields."
+msgstr "لطفاً ابتدا وارد شوید."
+
+#: routes/users/routes.py:149
+#, fuzzy
+msgid "❌ Username must be at least 3 characters long."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
+
+#: routes/users/routes.py:153
+msgid "❌ The email address is invalid."
+msgstr ""
+
+#: routes/users/routes.py:157
+#, fuzzy
+msgid "❌ The password must be at least 8 characters long."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
+
+#: routes/users/routes.py:161
+#, fuzzy
+msgid "❌ Username already taken."
+msgstr "نام کاربری قبلاً گرفته شده است."
+
+#: routes/users/routes.py:165
+#, fuzzy
+msgid "❌ Email already used."
+msgstr "ایمیل قبلاً ثبت شده است."
+
+#: routes/users/routes.py:181
+msgid "✅ The first admin was created successfully. Please log in."
+msgstr ""
+
+#: routes/users/routes.py:186
+msgid "❌ An error occurred while creating the admin."
+msgstr ""
+
+#: routes/users/routes.py:219
+msgid ""
+"You already have an account. Please log out first to register a new "
+"account."
+msgstr ""
+
+#: routes/users/routes.py:242
+msgid "reCAPTCHA verification failed. Please try again."
+msgstr ""
+
+#: routes/users/routes.py:262
+#, fuzzy
+msgid "Password must be at least 8 characters long."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
+
+#: routes/users/routes.py:264
 msgid "Passwords do not match."
 msgstr "رمزهای عبور مطابقت ندارند."
 
-msgid "Username already exists."
-msgstr "نام کاربری قبلاً گرفته شده است."
-
-msgid "Email already exists."
-msgstr "ایمیل قبلاً ثبت شده است."
-
-msgid "Too many requests. Please try again later."
-msgstr "درخواست‌های زیادی ارسال شده است. لطفاً بعداً تلاش کنید."
-
-# Forms & Validation
-msgid "Required"
-msgstr "الزامی"
-
-msgid "This field is required."
-msgstr "این فیلد الزامی است."
-
-msgid "Enter a valid email address."
-msgstr "یک آدرس ایمیل معتبر وارد کنید."
-
-msgid "Password must be at least 8 characters."
-msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
-
-msgid "Password must contain uppercase, lowercase, and numbers."
+#: routes/users/routes.py:272
+#, fuzzy
+msgid ""
+"Password should contain uppercase, lowercase, and numbers for better "
+"security."
 msgstr "رمز عبور باید شامل حروف بزرگ، کوچک و اعداد باشد."
 
-msgid "Please accept the terms and conditions."
-msgstr "لطفاً شرایط و قوانین را بپذیرید."
+#: routes/users/routes.py:276
+msgid "Invalid role selected."
+msgstr ""
 
-msgid "I agree to the Terms of Service"
-msgstr "با شرایط خدمات موافقم"
+#: routes/users/routes.py:280
+#, fuzzy
+msgid "Invalid phone number."
+msgstr "شماره تلفن"
 
-msgid "I agree to the Privacy Policy"
-msgstr "با سیاست حریم خصوصی موافقم"
+#: routes/users/routes.py:330
+msgid "✅ Registration successful! Verification email sent."
+msgstr ""
 
-# Navigation & Menu
-msgid "Home"
-msgstr "خانه"
+#: routes/users/routes.py:405
+msgid ""
+"❌ Please verify your email before logging in. Check your inbox for the "
+"verification link."
+msgstr ""
 
-msgid "Marketplace"
-msgstr "بازار"
+#: routes/users/routes.py:438
+msgid "✅ Password verified. Please enter your 2FA code."
+msgstr ""
 
-msgid "Products"
-msgstr "محصولات"
+#: routes/users/routes.py:456
+msgid "✅ Welcome!"
+msgstr ""
 
-msgid "Services"
-msgstr "خدمات"
+#: routes/users/routes.py:477
+msgid ""
+"❌ Your account has been locked for 15 minutes due to too many failed "
+"attempts."
+msgstr ""
 
-msgid "Consortium"
-msgstr "کنسرسیوم"
+#: routes/users/routes.py:494
+msgid "❌ Incorrect email or password."
+msgstr ""
 
-msgid "Smart Chat"
-msgstr "چت هوشمند"
+#: routes/users/routes.py:554
+#, fuzzy
+msgid "✅ Profile picture updated successfully."
+msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
-msgid "Map"
-msgstr "نقشه"
+#: routes/users/routes.py:557
+#, fuzzy
+msgid "✅ Profile updated successfully."
+msgstr "پروفایل با موفقیت به‌روزرسانی شد."
 
-msgid "Learning"
-msgstr "یادگیری"
+#: routes/users/routes.py:592
+#, fuzzy
+msgid "❌ The current password is incorrect."
+msgstr "رمز عبور قدیمی نادرست است."
 
-msgid "Courses"
-msgstr "دوره‌ها"
+#: routes/users/routes.py:597
+#, fuzzy
+msgid "❌ New password must be at least 8 characters long."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
-msgid "Webinars"
-msgstr "وبینارها"
+#: routes/users/routes.py:602
+#, fuzzy
+msgid "❌ New password and repeat password do not match."
+msgstr "رمزهای عبور مطابقت ندارند."
 
-msgid "CRM"
-msgstr "مدیریت ارتباط با مشتری"
+#: routes/users/routes.py:607
+msgid "⚠️ New password must not be the same as previous password."
+msgstr ""
 
-msgid "Leads"
-msgstr "سرنخ‌ها"
+#: routes/users/routes.py:618
+msgid "✅ Your password has been changed successfully."
+msgstr ""
 
-msgid "Network"
-msgstr "شبکه"
+#: routes/users/routes.py:623
+msgid "❌ An error occurred while changing the password. Please try again."
+msgstr ""
 
-msgid "Exhibition"
-msgstr "نمایشگاه"
+#: routes/users/routes.py:638
+msgid "⚠️ Please check the confirmation checkbox to delete the account."
+msgstr ""
 
-msgid "Trading Hall"
-msgstr "تالار معاملات"
+#: routes/users/routes.py:675
+msgid ""
+"🗑️ Your account has been successfully deleted. Thank you for your "
+"cooperation."
+msgstr ""
 
-msgid "Magazine"
-msgstr "مجله"
+#: routes/users/routes.py:681
+msgid "❌ An error occurred while deleting the account. Please contact support."
+msgstr ""
 
-msgid "News"
-msgstr "اخبار"
+#: routes/users/routes.py:710
+msgid "👋 You have successfully logged out."
+msgstr ""
 
-msgid "Settings"
-msgstr "تنظیمات"
+#: routes/users/routes.py:721
+msgid "❌ This account is inactive."
+msgstr ""
 
-msgid "Help"
-msgstr "راهنما"
+#: routes/users/routes.py:823
+msgid "❌ Please enter the product name."
+msgstr ""
 
-msgid "Contact Us"
-msgstr "تماس با ما"
+#: routes/users/routes.py:827
+msgid "❌ Please select origin and destination."
+msgstr ""
 
-msgid "About Us"
-msgstr "درباره ما"
+#: routes/users/routes.py:837
+msgid "❌ Invalid quantity or price."
+msgstr ""
 
-msgid "Terms of Service"
-msgstr "شرایط خدمات"
+#: routes/users/routes.py:842
+msgid "❌ The seller is invalid."
+msgstr ""
 
-msgid "Privacy Policy"
-msgstr "سیاست حریم خصوصی"
+#: routes/users/routes.py:849
+msgid "❌ The desired seller was not found."
+msgstr ""
 
-# Actions
-msgid "View"
-msgstr "مشاهده"
+#: routes/users/routes.py:853
+msgid "❌ The selected user is not a producer."
+msgstr ""
 
-msgid "Edit"
-msgstr "ویرایش"
+#: routes/users/routes.py:910
+msgid "✅ Order successfully placed."
+msgstr ""
 
-msgid "Delete"
-msgstr "حذف"
+#: routes/users/routes.py:916
+msgid "❌ An error occurred while placing your order. Please try again."
+msgstr ""
 
-msgid "Create"
-msgstr "ایجاد"
+#: routes/users/routes.py:946
+msgid "❌ You do not have permission to manage orders."
+msgstr ""
 
-msgid "Update"
-msgstr "به‌روزرسانی"
+#: routes/users/routes.py:961
+msgid "❌ You can only cancel your own orders."
+msgstr ""
 
-msgid "Search"
-msgstr "جستجو"
+#: routes/users/routes.py:996
+msgid "⚠️ This order cannot be cancelled as it has already been processed."
+msgstr ""
 
-msgid "Filter"
-msgstr "فیلتر"
+#: routes/users/routes.py:1010 routes/users/routes.py:1063
+#: routes/users/routes.py:1119
+msgid "❌ Unauthorized access."
+msgstr ""
 
-msgid "Export"
-msgstr "خروجی"
+#: routes/users/routes.py:1047
+msgid "✅ The order was confirmed and the notification was sent"
+msgstr ""
 
-msgid "Import"
-msgstr "ورود"
+#: routes/users/routes.py:1049
+msgid "⚠️This order has already been approved or rejected."
+msgstr ""
 
-msgid "Download"
-msgstr "دانلود"
+#: routes/users/routes.py:1103
+msgid "⚠️ This order has already changed status."
+msgstr ""
 
-msgid "Upload"
-msgstr "آپلود"
+#: routes/users/routes.py:1123
+msgid "❌ You can only update your own orders."
+msgstr ""
 
-msgid "Share"
-msgstr "اشتراک‌گذاری"
+#: routes/users/routes.py:1158
+msgid "✅ Order status updated to In Transit"
+msgstr ""
 
+#: routes/users/routes.py:1190
+msgid "✅ Order marked as Delivered"
+msgstr ""
+
+#: routes/users/routes.py:1192
+msgid "⚠️ Cannot update order status at this stage."
+msgstr ""
+
+#: routes/users/routes.py:1230
+msgid "✅ All notifications marked as read"
+msgstr ""
+
+#: routes/users/routes.py:1247
+msgid "❌ Limited access: Only special users can send messages."
+msgstr ""
+
+#: routes/users/routes.py:1256
+msgid "❌ Access denied: Non-special users can only view messages from admin."
+msgstr ""
+
+#: routes/users/routes.py:1268
+msgid "❌ This user is not special and you cannot chat with him/her."
+msgstr ""
+
+#: routes/users/routes.py:1292
+msgid "✉️ Message sent."
+msgstr ""
+
+#: routes/users/routes.py:1321
+msgid "⚠️ No admin found to contact."
+msgstr ""
+
+#: routes/users/routes.py:1329
+msgid "❌ Please enter a message."
+msgstr ""
+
+#: routes/users/routes.py:1349
+msgid "✅ Your message was sent to support."
+msgstr ""
+
+#: routes/users/routes.py:1401
+msgid "❌ Access is only allowed for special users."
+msgstr ""
+
+#: routes/users/routes.py:1410
+msgid "❌ Please enter a valid 7-digit ID (IMO)."
+msgstr ""
+
+#: routes/users/routes.py:1430
+msgid "⚠️ Network unavailable. Showing demo data."
+msgstr ""
+
+#: routes/users/routes.py:1446
+msgid "❌ No data found for this ship."
+msgstr ""
+
+#: routes/users/routes.py:1465
+msgid "❌ The request to the server was scheduled. Please try again."
+msgstr ""
+
+#: routes/users/routes.py:1467
+msgid "❌ An error occurred with the ship tracking service."
+msgstr ""
+
+#: routes/users/routes.py:1469
+msgid "❌ The received data is invalid."
+msgstr ""
+
+#: routes/users/routes.py:1480
+msgid "❌ Only special users can access the map."
+msgstr ""
+
+#: routes/users/routes.py:1494
+msgid "⚠️ No port data available."
+msgstr ""
+
+#: routes/users/routes.py:1608
+msgid "✅ You have already become a special user."
+msgstr ""
+
+#: routes/users/routes.py:1613
+msgid "⚠️ Your request is under review by admin."
+msgstr ""
+
+#: routes/users/routes.py:1633
+msgid "You are already a Premium member. Your documents have been verified."
+msgstr ""
+
+#: routes/users/routes.py:1645
+msgid "You already have a pending verification request."
+msgstr ""
+
+#: routes/users/routes.py:1654
+msgid "The upgrade process has started. Please upload your documents."
+msgstr ""
+
+#: routes/users/routes.py:1670
+msgid "Your documents have been verified. You cannot modify them."
+msgstr ""
+
+#: routes/users/routes.py:1676
+msgid "Your documents are under review by admin."
+msgstr ""
+
+#: routes/users/routes.py:1723
+#, fuzzy
+msgid "✅ Documents uploaded successfully."
+msgstr "مدارک با موفقیت آپلود شدند."
+
+#: routes/users/routes.py:1726
+msgid "❌ No files were found to upload. Please select files and try again."
+msgstr ""
+
+#: routes/users/routes.py:1738
+msgid "No verification request found."
+msgstr ""
+
+#: routes/users/routes.py:1751
+#, fuzzy
+msgid "Please upload your documents first."
+msgstr "لطفاً ابتدا وارد شوید."
+
+#: routes/users/routes.py:1774
+msgid "Payment receipt received. Reviewing..."
+msgstr ""
+
+#: routes/users/routes.py:1882
+msgid "✅ Your email is already verified. You can login."
+msgstr ""
+
+#: routes/users/routes.py:1898
+msgid "🎉 Email verified successfully! Welcome to Metisma."
+msgstr ""
+
+#: routes/users/routes.py:1910
+msgid "No account found with this email."
+msgstr ""
+
+#: routes/users/routes.py:1914
+#, fuzzy
+msgid "✅ Your email is already verified."
+msgstr "ایمیل قبلاً ثبت شده است."
+
+#: routes/users/routes.py:1938
+msgid "📧 New verification email sent! Please check your inbox."
+msgstr ""
+
+# Authentication & Registration
+#: templates/offline.html:6
+#, fuzzy
+msgid "Offline - Metisma"
+msgstr "به متیسمای خوش آمدید"
+
+#: templates/offline.html:59
+msgid "You're Offline"
+msgstr ""
+
+#: templates/offline.html:62
+msgid "p class=\"text-gray-600 dark:text-slate-400 mb-6 leading-relaxed\">"
+msgstr ""
+
+#: templates/offline.html:72
+msgid ""
+"What you can do:\n"
+"                "
+msgstr ""
+
+#: templates/email/password_reset.html:265
+#: templates/email/password_reset.html:266
+#: templates/email/password_reset.html:267
+#: templates/email/password_reset.html:268
+#: templates/email/verify_email.html:265 templates/email/verify_email.html:266
+#: templates/email/verify_email.html:267 templates/email/verify_email.html:268
+#: templates/offline.html:75 templates/offline.html:76
+#: templates/offline.html:77 templates/offline.html:78
+#: templates/users/manage_sessions.html:128
+#: templates/users/manage_sessions.html:129
+#: templates/users/manage_sessions.html:130
+#: templates/users/manage_sessions.html:131
+#: templates/users/show_backup_codes.html:35
+#: templates/users/show_backup_codes.html:36
+#: templates/users/show_backup_codes.html:37
+#: templates/users/show_backup_codes.html:38
+#: templates/users/verify_2fa_login.html:86
+#: templates/users/verify_2fa_login.html:87
+#: templates/users/verify_2fa_login.html:88
+#: templates/users/verify_2fa_login.html:89
+msgid "li>"
+msgstr ""
+
+#: templates/offline.html:89
+msgid ""
+"Try Again\n"
+"                "
+msgstr ""
+
+#: templates/offline.html:96
+#, fuzzy
+msgid "← Back to Home"
+msgstr "بازگشت به بالا"
+
+#: templates/offline.html:101
+msgid "p class=\"text-center text-xs text-gray-500 dark:text-slate-500 mt-6\">"
+msgstr ""
+
+#: templates/admin/chat.html:7
+msgid "💬 Admin Chat"
+msgstr ""
+
+#: templates/admin/chat.html:8 templates/admin/chat_with_user.html:15
+#: templates/admin/dashboard.html:31 templates/admin/manage_users.html:69
+#: templates/admin/manage_users.html:106 templates/admin/manage_users.html:112
+#: templates/admin/manage_users.html:116
+#: templates/admin/premium_requests.html:23
+#: templates/admin/premium_requests.html:24
+#: templates/admin/premium_requests.html:25
+#: templates/admin/premium_requests.html:26
+#: templates/admin/premium_requests.html:57
+#: templates/admin/view_all_documents.html:37
+#: templates/admin/view_all_documents.html:41
+#: templates/admin/view_all_documents.html:45
+#: templates/admin/view_all_documents.html:105
+#: templates/admin/view_all_documents.html:127
+#: templates/admin/view_all_documents.html:138
+#: templates/admin/view_premium_request.html:10
+#: templates/admin/view_user_documents.html:10
+#: templates/admin/view_user_documents.html:58
+#: templates/email/password_reset.html:246
+#: templates/email/password_reset.html:253
+#: templates/email/verify_email.html:246 templates/email/verify_email.html:253
+#: templates/exhibition/booth_detail.html:10
+#: templates/exhibition/booth_detail.html:145 templates/exhibition/hall.html:74
+#: templates/exhibition/hall.html:139 templates/exhibition/hall.html:143
+#: templates/magazine/advertisement.html:68 templates/magazine/index.html:12
+#: templates/magazine/index.html:13 templates/magazine/index.html:14
+#: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
+#: templates/trading/market.html:53 templates/trading/market.html:100
+#: templates/trading/market.html:120 templates/trading/market.html:124
+#: templates/users/chat.html:19 templates/users/dashboard.html:57
+#: templates/users/dashboard.html:68 templates/users/dashboard.html:78
+#: templates/users/dashboard.html:85 templates/users/dashboard.html:90
+#: templates/users/dashboard.html:95 templates/users/dashboard.html:150
+#: templates/users/dashboard.html:169 templates/users/dashboard.html:189
+#: templates/users/dashboard.html:195 templates/users/dashboard.html:215
+#: templates/users/dashboard.html:235 templates/users/dashboard.html:241
+#: templates/users/dashboard.html:262 templates/users/enable_2fa.html:92
+#: templates/users/my_documents.html:12 templates/users/my_documents.html:89
+#: templates/users/my_documents.html:109 templates/users/my_documents.html:129
+#: templates/users/post_detail.html:36 templates/users/producer_orders.html:114
+#: templates/users/producer_orders.html:136
+#: templates/users/profile_edit.html:147 templates/users/profile_edit.html:166
+#: templates/users/profile_edit.html:183 templates/users/profile_edit.html:198
+#: templates/users/support.html:34 templates/users/support.html:100
+#: templates/users/upload_documents.html:62
+#: templates/users/upload_documents.html:67
+#: templates/users/verify_2fa_login.html:76
+#: templates/users/verify_phone.html:59
+msgid "a href=\""
+msgstr ""
+
+#: templates/admin/chat.html:8 templates/admin/chat_with_user.html:15
+msgid ""
+"\" class=\"text-sm text-gray-600 dark:text-slate-400 hover:text-gold "
+"transition flex items-center gap-1\">"
+msgstr ""
+
+#: templates/admin/chat.html:10 templates/users/chat.html:18
+msgid "p class=\"text-gray-600 dark:text-slate-400 mb-6\">"
+msgstr ""
+
+#: templates/admin/chat.html:15
+msgid ""
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
+"gold-dark/20 flex items-center justify-center text-gold font-bold flex-"
+"shrink-0\">"
+msgstr ""
+
+#: templates/admin/chat.html:18
+msgid ""
+"p class=\"font-medium text-gray-900 dark:text-white truncate group-hover"
+":text-gold transition\">"
+msgstr ""
+
+#: templates/admin/chat.html:19
+msgid ""
+"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 "
+"dark:bg-dark-700 text-gray-600 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/chat.html:20
+msgid ""
+"span class=\"px-1.5 py-0.5 rounded text-[10px] font-medium bg-gold/10 "
+"text-gold\">"
+msgstr ""
+
+#: templates/admin/chat.html:22
+msgid "p class=\"text-sm text-gray-500 dark:text-slate-400 truncate\">"
+msgstr ""
+
+#: templates/admin/chat.html:27
+msgid "div class=\"p-8 text-center text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:9 templates/users/chat.html:48
+#: templates/users/chat.html:74 templates/users/support.html:47
+msgid ""
+"div class=\"w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-"
+"gold-dark/20 flex items-center justify-center text-gold font-bold\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:11
+msgid "h2 class=\"font-bold text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:12
+msgid "span class=\"text-green-500\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:12 templates/users/profile_edit.html:47
+msgid "span class=\"text-red-500\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:25 templates/users/chat.html:89
+#: templates/users/support.html:62 templates/users/vessel_finder.html:115
+msgid "p class=\"text-sm\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:28
+msgid "span class=\"ml-1 text-gold\">"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:34
+#: templates/admin/view_premium_request.html:87
+#: templates/admin/view_premium_request.html:88
+#: templates/email/password_reset.html:233
+#: templates/email/password_reset.html:252
+#: templates/email/verify_email.html:233 templates/email/verify_email.html:252
+#: templates/users/chat.html:98 templates/users/my_documents.html:153
+#: templates/users/my_documents.html:154 templates/users/support.html:74
+msgid "p>"
+msgstr ""
+
+#: templates/admin/chat_with_user.html:42 templates/users/chat.html:109
+msgid "Type your message..."
+msgstr ""
+
+#: templates/admin/chat_with_user.html:43 templates/users/chat.html:115
+#: templates/users/support.html:90
 msgid "Send"
 msgstr "ارسال"
 
-msgid "Submit"
-msgstr "ثبت"
+#: templates/admin/create_first_admin.html:6
+msgid "Create First Admin | Metisma"
+msgstr ""
 
-msgid "Apply"
-msgstr "درخواست"
+#: templates/admin/create_first_admin.html:287
+msgid "Create First Admin"
+msgstr ""
 
-msgid "Accept"
-msgstr "پذیرفتن"
+#: templates/admin/create_first_admin.html:288
+msgid "p class=\"auth-subtitle\">"
+msgstr ""
 
-msgid "Reject"
-msgstr "رد کردن"
+#: templates/admin/create_first_admin.html:298
+#, fuzzy
+msgid "Important:"
+msgstr "ورود"
 
-msgid "Confirm"
-msgstr "تأیید"
+#: templates/admin/create_first_admin.html:298
+msgid ""
+"This action can only be performed once. \n"
+"                    Make sure to use secure credentials and store them "
+"safely.\n"
+"                "
+msgstr ""
 
-msgid "Approve"
-msgstr "تصویب"
+#: templates/admin/create_first_admin.html:321
+#, fuzzy
+msgid ""
+"Username\n"
+"                    "
+msgstr "نام کاربری"
 
-# Time & Dates
-msgid "Today"
-msgstr "امروز"
+#: templates/admin/create_first_admin.html:330
+#, fuzzy
+msgid "Choose a username"
+msgstr "نام کاربری"
 
-msgid "Yesterday"
-msgstr "دیروز"
+#: templates/admin/create_first_admin.html:342
+#, fuzzy
+msgid ""
+"Email Address\n"
+"                    "
+msgstr "آدرس"
 
-msgid "This Week"
-msgstr "این هفته"
+#: templates/admin/create_first_admin.html:351 templates/admin/login.html:26
+msgid "admin@example.com"
+msgstr ""
 
-msgid "This Month"
-msgstr "این ماه"
+#: templates/admin/create_first_admin.html:362
+#, fuzzy
+msgid ""
+"Password\n"
+"                    "
+msgstr "رمز عبور"
 
-msgid "This Year"
-msgstr "امسال"
+#: templates/admin/create_first_admin.html:371
+msgid "Minimum 8 characters"
+msgstr ""
 
-msgid "Created At"
-msgstr "ایجاد شده در"
+#: templates/admin/create_first_admin.html:384
+#, fuzzy
+msgid ""
+"Confirm Password\n"
+"                    "
+msgstr "تأیید رمز عبور"
 
-msgid "Updated At"
-msgstr "به‌روزرسانی شده در"
+#: templates/admin/create_first_admin.html:393
+#, fuzzy
+msgid "Re-enter your password"
+msgstr "بازنشانی رمز عبور"
 
-msgid "Last Login"
-msgstr "آخرین ورود"
+#: templates/admin/create_first_admin.html:404
+#, fuzzy
+msgid ""
+"Create Admin Account\n"
+"                "
+msgstr "حساب کاربری دارید؟"
 
-msgid "Date"
-msgstr "تاریخ"
+#: templates/admin/create_first_admin.html:412
+#: templates/admin/create_first_admin.html:416
+#: templates/admin/create_first_admin.html:420
+#: templates/admin/create_first_admin.html:424
+#: templates/admin/edit_role_perms.html:596
+#: templates/exhibition/booth_detail.html:79
+#: templates/exhibition/booth_detail.html:85
+#: templates/exhibition/booth_detail.html:157
+#: templates/exhibition/booth_detail.html:161
+#: templates/exhibition/booth_detail.html:165 templates/magazine/index.html:38
+#: templates/magazine/index.html:39 templates/users/map.html:498
+#: templates/users/map.html:502 templates/users/map.html:507
+#: templates/users/producer_orders.html:72
+#: templates/users/producer_orders.html:76
+msgid "span>"
+msgstr ""
 
-msgid "Time"
-msgstr "زمان"
+#: templates/admin/create_first_admin.html:431
+#, fuzzy
+msgid ""
+"Already have an admin account? \n"
+"                    "
+msgstr "حساب کاربری دارید؟"
 
-# Status
-msgid "Active"
-msgstr "فعال"
+#: templates/admin/create_first_admin.html:432
+#, fuzzy
+msgid "Login here"
+msgstr "ورود"
 
-msgid "Inactive"
-msgstr "غیرفعال"
+#: templates/admin/create_first_admin.html:434
+msgid "p class=\"mt-2\">"
+msgstr ""
 
-msgid "Pending"
-msgstr "در انتظار"
+#: templates/admin/create_first_admin.html:469
+msgid ""
+"Display feedback\n"
+"            if (strength "
+msgstr ""
 
-msgid "Approved"
-msgstr "تصویب شده"
+#: templates/admin/dashboard.html:7
+msgid "span class=\"p-2 rounded-lg bg-gold/10 text-gold\">"
+msgstr ""
 
-msgid "Rejected"
-msgstr "رد شده"
+# Profile & Dashboard
+#: templates/admin/dashboard.html:7
+#, fuzzy
+msgid ""
+"Admin Dashboard\n"
+"        "
+msgstr "داشبورد"
 
-msgid "Draft"
-msgstr "پیش‌نویس"
+#: templates/admin/dashboard.html:26
+msgid "span class=\"text-xs text-gray-500 dark:text-slate-500 mr-auto\">"
+msgstr ""
 
-msgid "Published"
-msgstr "منتشر شده"
+#: templates/admin/dashboard.html:31
+msgid ""
+"\" class=\"text-xs text-blue-600 dark:text-blue-400 hover:underline "
+"whitespace-nowrap\">"
+msgstr ""
 
-msgid "Archived"
-msgstr "بایگانی شده"
+#: templates/admin/dashboard.html:41 templates/admin/dashboard.html:45
+#: templates/admin/dashboard.html:49 templates/admin/dashboard.html:53
+msgid "p class=\"text-sm text-gray-500 dark:text-slate-400 mb-1\">"
+msgstr ""
 
-# Financial
-msgid "Wallet"
-msgstr "کیف پول"
+#: templates/admin/dashboard.html:42
+msgid "p class=\"text-3xl font-bold text-gray-900 dark:text-white\">"
+msgstr ""
 
-msgid "Balance"
-msgstr "موجودی"
+#: templates/admin/dashboard.html:46
+msgid "p class=\"text-3xl font-bold text-gold\">"
+msgstr ""
 
-msgid "Transaction"
-msgstr "تراکنش"
+#: templates/admin/dashboard.html:50
+msgid "p class=\"text-3xl font-bold text-red-500 dark:text-red-400\">"
+msgstr ""
 
-msgid "Transactions"
-msgstr "تراکنش‌ها"
+#: templates/admin/dashboard.html:54
+msgid "p class=\"text-3xl font-bold text-purple-500 dark:text-purple-400\">"
+msgstr ""
 
-msgid "Deposit"
-msgstr "واریز"
+#: templates/admin/dashboard.html:59
+msgid "🔧 Quick Actions"
+msgstr ""
 
-msgid "Withdraw"
-msgstr "برداشت"
+#: templates/admin/dashboard.html:62
+msgid ""
+"div class=\"p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 "
+"dark:text-blue-400 group-hover:scale-110 transition\">"
+msgstr ""
 
-msgid "Payment"
-msgstr "پرداخت"
+#: templates/admin/dashboard.html:63 templates/admin/dashboard.html:67
+#: templates/admin/dashboard.html:74 templates/admin/dashboard.html:81
+#: templates/admin/dashboard.html:85 templates/users/make_payment.html:32
+#: templates/users/make_payment.html:36 templates/users/make_payment.html:40
+#: templates/users/make_payment.html:44 templates/users/make_payment.html:48
+#: templates/users/payment_confirmation.html:33
+#: templates/users/payment_confirmation.html:41
+#: templates/users/producer_orders.html:49
+#: templates/users/producer_orders.html:50
+#: templates/users/producer_orders.html:63
+#: templates/users/producer_orders.html:64
+#: templates/users/producer_orders.html:65
+#: templates/users/producer_orders.html:66
+msgid "span class=\"font-medium text-gray-900 dark:text-white\">"
+msgstr ""
 
-msgid "Invoice"
-msgstr "فاکتور"
+#: templates/admin/dashboard.html:66
+msgid ""
+"div class=\"p-2 rounded-lg bg-gold/10 text-gold group-hover:scale-110 "
+"transition\">"
+msgstr ""
 
-msgid "Credit"
-msgstr "اعتبار"
+#: templates/admin/dashboard.html:69
+msgid ""
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white text-"
+"xs font-bold rounded-full flex items-center justify-center\">"
+msgstr ""
 
-msgid "Debit"
-msgstr "بدهی"
+#: templates/admin/dashboard.html:73
+msgid ""
+"div class=\"p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-"
+"purple-600 dark:text-purple-400 group-hover:scale-110 transition\">"
+msgstr ""
 
-msgid "Trade Credit"
-msgstr "اعتبار تجاری"
+#: templates/admin/dashboard.html:76
+msgid ""
+"span class=\"absolute -top-2 -right-2 w-6 h-6 bg-purple-500 text-white "
+"text-xs font-bold rounded-full flex items-center justify-center\">"
+msgstr ""
 
-msgid "Escrow"
-msgstr "امانت"
+#: templates/admin/dashboard.html:80
+msgid ""
+"div class=\"p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-"
+"indigo-600 dark:text-indigo-400 group-hover:scale-110 transition\">"
+msgstr ""
 
-# Miscellaneous
-msgid "Loading..."
-msgstr "در حال بارگذاری..."
+#: templates/admin/dashboard.html:84
+msgid ""
+"div class=\"p-2 rounded-lg bg-green-100 dark:bg-green-900/30 text-"
+"green-600 dark:text-green-400 group-hover:scale-110 transition\">"
+msgstr ""
 
-msgid "No results found."
-msgstr "نتیجه‌ای یافت نشد."
+#: templates/admin/edit_role_perms.html:423
+msgid ""
+"Edit Role Permissions: \n"
+"                        "
+msgstr ""
 
-msgid "Show more"
-msgstr "نمایش بیشتر"
+#: templates/admin/edit_role_perms.html:424
+msgid "span class=\"role-badge-large\">"
+msgstr ""
 
-msgid "Show less"
-msgstr "نمایش کمتر"
+#: templates/admin/edit_role_perms.html:428
+msgid ""
+"Configure permissions for this role. Changes will affect all users with "
+"this role.\n"
+"                    "
+msgstr ""
 
-msgid "Back to top"
+# Profile & Dashboard
+#: templates/admin/edit_role_perms.html:433
+#, fuzzy
+msgid ""
+"Back to Dashboard\n"
+"                    "
+msgstr "داشبورد"
+
+#: templates/admin/edit_role_perms.html:467
+msgid "div class=\"permission-group-icon\" style=\"background:"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:471
+msgid "div class=\"group-title-text\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:472
+msgid "div class=\"group-subtitle\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:476
+#, fuzzy
+msgid ""
+"Select All\n"
+"                            "
+msgstr "نقش خود را انتخاب کنید"
+
+#: templates/admin/edit_role_perms.html:489
+msgid "span class=\"permission-label-text\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:490
+msgid "span class=\"permission-code-badge\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:504
+msgid "span class=\"stats-number\" id=\"countValue\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:505
+msgid "span class=\"stats-label\">"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:509
+#, fuzzy
+msgid ""
+"Cancel\n"
+"                        "
+msgstr "انصراف"
+
+#: templates/admin/edit_role_perms.html:512
+#, fuzzy
+msgid ""
+"Save Changes\n"
+"                        "
+msgstr "ذخیره تغییرات"
+
+#: templates/admin/edit_role_perms.html:524
+msgid "Important Notice:"
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:525
+msgid "These changes will affect all users who have the role "
+msgstr ""
+
+#: templates/admin/edit_role_perms.html:526
+msgid ""
+"unless you have defined custom permissions for specific users. Before "
+"saving, make sure necessary permissions are preserved."
+msgstr ""
+
+#: templates/admin/login.html:10
+#, fuzzy
+msgid "Admin Panel"
+msgstr "تالار معاملات"
+
+#: templates/admin/login.html:11 templates/magazine/index.html:50
+#: templates/users/dashboard.html:117 templates/users/dashboard.html:259
+#: templates/users/dashboard.html:279 templates/users/notifications.html:91
+#: templates/users/place_order.html:17 templates/users/producer_orders.html:19
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm\">"
+msgstr ""
+
+#: templates/admin/login.html:18 templates/users/vessel_finder.html:53
+msgid "div class=\"p-3 rounded-lg text-sm border"
+msgstr ""
+
+#: templates/admin/login.html:18 templates/users/vessel_finder.html:53
+msgid ""
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
+"border-green-200 dark:border-green-800"
+msgstr ""
+
+#: templates/admin/login.html:18 templates/users/vessel_finder.html:53
+msgid ""
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-"
+"red-200 dark:border-red-800"
+msgstr ""
+
+#: templates/admin/login.html:18 templates/users/vessel_finder.html:53
+msgid ""
+"bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-"
+"blue-200 dark:border-blue-800"
+msgstr ""
+
+#: templates/admin/login.html:26
+msgid "Email"
+msgstr "ایمیل"
+
+#: templates/admin/login.html:27
+msgid "Password"
+msgstr "رمز عبور"
+
+#: templates/admin/login.html:27 templates/users/account_settings.html:145
+#: templates/users/account_settings.html:160
+#: templates/users/account_settings.html:174
+msgid "••••••••"
+msgstr ""
+
+#: templates/admin/login.html:28
+msgid "Login to Admin Panel"
+msgstr ""
+
+#: templates/admin/login.html:32
+msgid "Return to Main Page"
+msgstr ""
+
+#: templates/admin/login.html:34
+msgid "p class=\"text-center text-xs text-gray-500 dark:text-slate-500 mt-4\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:174
+msgid "User Permission Management"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:175
+msgid "p class=\"mb-0 opacity-90\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:178
+#, fuzzy
+msgid ""
+"Back to Panel\n"
+"            "
 msgstr "بازگشت به بالا"
 
-msgid "Copyright"
-msgstr "حق کپی‌رایت"
+# Registration Steps
+#: templates/admin/manage_user_perms.html:188
+#, fuzzy
+msgid ""
+"User Information\n"
+"                "
+msgstr "مرحله ۱: اطلاعات پایه"
 
-msgid "All rights reserved."
-msgstr "تمامی حقوق محفوظ است."
+#: templates/admin/manage_user_perms.html:192
+#, fuzzy
+msgid "Username:"
+msgstr "نام کاربری"
 
-msgid "Made with"
-msgstr "ساخته شده با"
+#: templates/admin/manage_user_perms.html:193
+msgid "div class=\"font-weight-bold text-dark\">"
+msgstr ""
 
-msgid "in Iran"
-msgstr "در ایران"
+#: templates/admin/manage_user_perms.html:196
+#, fuzzy
+msgid "Role:"
+msgstr "پروفایل"
 
-# Roles Description
-msgid "Producer Description"
-msgstr "تولیدکنندگان کالا و خدمات صادراتی"
+#: templates/admin/manage_user_perms.html:197
+msgid "span class=\"badge badge-primary p-2\" style=\"font-size: 0.9rem;\">"
+msgstr ""
 
-msgid "Buyer Description"
-msgstr "خریداران بین‌المللی و واردکنندگان"
+#: templates/admin/manage_user_perms.html:200
+#, fuzzy
+msgid "Email:"
+msgstr "ایمیل"
 
-msgid "Broker Description"
-msgstr "کارگزاران و واسطه‌های تجاری"
+#: templates/admin/manage_user_perms.html:204
+msgid "Membership Date:"
+msgstr ""
 
-msgid "Corporate Agent Description"
-msgstr "نمایندگان رسمی شرکت‌های بزرگ"
+#: templates/admin/manage_user_perms.html:210
+msgid "span class=\"text-muted small\">"
+msgstr ""
 
-msgid "Logistics Provider Description"
-msgstr "ارائه‌دهندگان خدمات حمل‌ونقل و لجستیک"
+#: templates/admin/manage_user_perms.html:211
+msgid "span class=\"badge badge-custom\">"
+msgstr ""
 
-msgid "Legal Advisor Description"
+#: templates/admin/manage_user_perms.html:230
+#: templates/admin/manage_user_perms.html:286
+msgid "span class=\"perm-value\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:231
+msgid "span class=\"badge-perm badge-default\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:236
+msgid "div class=\"alert alert-muted text-center\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:248
+msgid "Manage Custom Permissions"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:253
+msgid ""
+"In this section, you can exceptionally grant permissions to the user or "
+"revoke their default permissions.\n"
+"            "
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:260
+msgid "Select Permission:"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:262
+msgid "option value=\"\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:264
+#: templates/users/place_order.html:76
+msgid "option value=\""
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:270
+#, fuzzy
+msgid ""
+"Grant\n"
+"                        "
+msgstr "پیش‌نویس"
+
+#: templates/admin/manage_user_perms.html:275
+#, fuzzy
+msgid ""
+"Revoke\n"
+"                        "
+msgstr "کارگزار"
+
+#: templates/admin/manage_user_perms.html:281
+msgid "Current Custom Permissions List:"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:300
+msgid ""
+"No custom permissions registered for this user.\n"
+"                    "
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:311
+msgid "Final Access Preview"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:314
+msgid "p class=\"mb-3\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:334
+msgid "span class=\"perm-value small\">"
+msgstr ""
+
+#: templates/admin/manage_user_perms.html:339
+msgid "div class=\"col-12 text-muted text-center\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:13
+#: templates/admin/premium_requests.html:15
+#: templates/admin/view_all_documents.html:13
+msgid ""
+"Back to Admin Dashboard\n"
+"            "
+msgstr ""
+
+#: templates/admin/manage_users.html:17
+#, fuzzy
+msgid "🔧 User Management"
+msgstr "نام کاربری"
+
+#: templates/admin/manage_users.html:21 templates/admin/manage_users.html:22
+#: templates/admin/manage_users.html:23
+msgid "px-4 py-2 rounded-lg text-sm font-medium transition"
+msgstr ""
+
+#: templates/admin/manage_users.html:21 templates/admin/manage_users.html:22
+#: templates/admin/manage_users.html:23
+#: templates/admin/premium_requests.html:23
+#: templates/admin/premium_requests.html:24
+#: templates/admin/premium_requests.html:25
+#: templates/admin/premium_requests.html:26
+msgid "bg-gold text-dark-900"
+msgstr ""
+
+#: templates/admin/manage_users.html:21 templates/admin/manage_users.html:22
+#: templates/admin/manage_users.html:23
+#: templates/admin/premium_requests.html:23
+#: templates/admin/premium_requests.html:24
+#: templates/admin/premium_requests.html:25
+#: templates/admin/premium_requests.html:26
+msgid ""
+"bg-white dark:bg-dark-800 text-gray-700 dark:text-slate-300 border "
+"border-gray-200 dark:border-dark-700 hover:bg-gray-50 dark:hover:bg-"
+"dark-700"
+msgstr ""
+
+#: templates/admin/manage_users.html:21
+#, python-format
+msgid "Active (%(num)s)"
+msgstr ""
+
+#: templates/admin/manage_users.html:22
+#, python-format
+msgid "Disabled (%(num)s)"
+msgstr ""
+
+#: templates/admin/manage_users.html:23
+msgid "All Users"
+msgstr ""
+
+#: templates/admin/manage_users.html:31 templates/admin/manage_users.html:32
+#: templates/admin/manage_users.html:33 templates/admin/manage_users.html:34
+#: templates/admin/manage_users.html:35 templates/admin/manage_users.html:36
+#: templates/admin/manage_users.html:37
+#: templates/admin/premium_requests.html:34
+#: templates/admin/premium_requests.html:35
+#: templates/admin/premium_requests.html:36
+#: templates/admin/premium_requests.html:37
+msgid "th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:38
+#: templates/admin/premium_requests.html:38
+msgid ""
+"th class=\"px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 "
+"text-right\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:44
+#: templates/admin/premium_requests.html:44
+msgid "td class=\"px-4 py-3 font-medium text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:45
+msgid "td class=\"px-4 py-3 text-gray-600 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:52
+#, fuzzy
+msgid ""
+"Verified\n"
+"                                "
+msgstr "تأیید شده"
+
+#: templates/admin/manage_users.html:55
+msgid "span class=\"text-red-500 dark:text-red-400 text-xs\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:58
+msgid ""
+"span class=\"px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-"
+"dark-700 text-gray-700 dark:text-slate-300\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:61
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/manage_users.html:63
+msgid "span class=\"text-gray-500 dark:text-slate-500 text-xs\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:69
+msgid ""
+"\" class=\"px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-"
+"blue-700 dark:text-blue-400 text-xs font-medium hover:bg-blue-200 "
+"dark:hover:bg-blue-900/50 transition\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:71
+msgid "span class=\"text-gray-500 dark:text-slate-400 text-xs\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:76
+msgid ""
+"span class=\"px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 "
+"text-green-700 dark:text-green-400 text-xs font-medium\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:78
+msgid ""
+"span class=\"px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-"
+"red-700 dark:text-red-400 text-xs font-medium\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:84
+msgid ""
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-gold/10"
+" hover:text-gold transition\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:89
+msgid ""
+"button type=\"submit\" class=\"text-xs px-2 py-1 rounded hover:bg-"
+"gray-100 dark:hover:bg-dark-600 transition\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:92
+msgid "span class=\"text-xs text-gray-400\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:97
+msgid ""
+"td colspan=\"7\" class=\"px-4 py-8 text-center text-gray-500 dark:text-"
+"slate-400\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:106 templates/admin/manage_users.html:112
+#: templates/admin/manage_users.html:116
+msgid ""
+"\" class=\"px-3 py-1.5 rounded-lg bg-white dark:bg-dark-800 border "
+"border-gray-200 dark:border-dark-700 text-sm hover:bg-gray-50 dark:hover"
+":bg-dark-700 transition\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:110
+msgid ""
+"span class=\"px-3 py-1.5 rounded-lg bg-gold text-dark-900 font-medium "
+"text-sm\">"
+msgstr ""
+
+#: templates/admin/manage_users.html:114
+msgid "span class=\"px-2 text-gray-400\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:19
+msgid "📂 Premium Upgrade Requests"
+msgstr ""
+
+#: templates/admin/premium_requests.html:23
+#: templates/admin/premium_requests.html:24
+#: templates/admin/premium_requests.html:25
+#: templates/admin/premium_requests.html:26
+msgid "\" class=\"px-4 py-2 rounded-lg text-sm font-medium transition"
+msgstr ""
+
+# Financial
+#: templates/admin/premium_requests.html:23
+#, fuzzy
+msgid "All"
+msgstr "کیف پول"
+
+#: templates/admin/premium_requests.html:45
+#: templates/admin/premium_requests.html:55
+msgid "td class=\"px-4 py-3 text-gray-600 dark:text-slate-400 text-xs\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:48
+msgid ""
+"span class=\"px-2.5 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30"
+" text-yellow-700 dark:text-yellow-400 text-xs font-medium\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:50
+msgid ""
+"span class=\"px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 "
+"text-green-700 dark:text-green-400 text-xs font-medium\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:52
+msgid ""
+"span class=\"px-2.5 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-"
+"red-700 dark:text-red-400 text-xs font-medium\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:57
+msgid ""
+"\" class=\"inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-50 "
+"dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 "
+"dark:hover:bg-blue-900/50 text-xs font-medium transition\">"
+msgstr ""
+
+#: templates/admin/premium_requests.html:62
+#, fuzzy
+msgid "✅ Approve"
+msgstr "تصویب"
+
+#: templates/admin/premium_requests.html:67
+#: templates/users/producer_orders.html:104
+#, fuzzy
+msgid "❌ Reject"
+msgstr "رد کردن"
+
+#: templates/admin/premium_requests.html:73
+msgid ""
+"td colspan=\"4\" class=\"px-4 py-8 text-center text-gray-500 dark:text-"
+"slate-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:18
+msgid ""
+"span class=\"p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-"
+"purple-600\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:19
+#, fuzzy
+msgid ""
+"User Documents\n"
+"        "
+msgstr "مدارک من"
+
+#: templates/admin/view_all_documents.html:27
+#: templates/admin/view_all_documents.html:31
+#: templates/admin/view_all_documents.html:78
+#: templates/admin/view_user_documents.html:55
+#: templates/admin/view_user_documents.html:56
+#: templates/users/my_documents.html:87 templates/users/my_documents.html:107
+#: templates/users/my_documents.html:127
+msgid "p class=\"text-xs text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:28
+msgid "p class=\"text-2xl font-bold text-yellow-600\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:32
+msgid "p class=\"text-2xl font-bold text-green-600\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:37
+#: templates/admin/view_all_documents.html:41
+#: templates/admin/view_all_documents.html:45
+msgid ""
+"\" \n"
+"                       class=\"px-3 py-1.5 rounded-lg text-sm font-medium"
+" transition"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:38
+#: templates/users/producer_orders.html:43
+msgid "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:38
+#: templates/admin/view_all_documents.html:42
+#: templates/admin/view_all_documents.html:46
+msgid ""
+"bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-slate-300 hover:bg-"
+"gray-200"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:39
+#, fuzzy
+msgid ""
+"Pending\n"
+"                    "
+msgstr "در انتظار"
+
+#: templates/admin/view_all_documents.html:42
+#: templates/users/producer_orders.html:43
+msgid "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:43
+#, fuzzy
+msgid ""
+"Approved\n"
+"                    "
+msgstr "تصویب شده"
+
+#: templates/admin/view_all_documents.html:46
+#: templates/users/producer_orders.html:43
+msgid "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
+msgstr ""
+
+# Financial
+#: templates/admin/view_all_documents.html:47
+#, fuzzy
+msgid ""
+"All\n"
+"                    "
+msgstr "کیف پول"
+
+#: templates/admin/view_all_documents.html:59
+#: templates/admin/view_all_documents.html:60
+#: templates/admin/view_all_documents.html:61
+#: templates/admin/view_all_documents.html:62
+#: templates/admin/view_all_documents.html:63
+msgid ""
+"th class=\"px-4 py-3 text-right text-xs font-medium text-gray-500 dark"
+":text-slate-400 uppercase tracking-wider\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:64
+msgid ""
+"th class=\"px-4 py-3 text-center text-xs font-medium text-gray-500 dark"
+":text-slate-400 uppercase tracking-wider\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:73
+msgid ""
+"div class=\"w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-dark"
+" flex items-center justify-center text-sm font-bold text-dark-900\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:77
+#: templates/users/my_documents.html:86 templates/users/my_documents.html:106
+#: templates/users/my_documents.html:126
+msgid "p class=\"font-medium text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:83
+msgid ""
+"span class=\"px-2 py-1 rounded text-xs font-medium bg-blue-100 dark:bg-"
+"blue-900/30 text-blue-700 dark:text-blue-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:87
+msgid "td class=\"px-4 py-3 text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:92
+msgid ""
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
+"xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark"
+":text-green-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:96
+msgid ""
+"span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-full text-"
+"xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark"
+":text-yellow-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:101
+msgid "td class=\"px-4 py-3 text-sm text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:105
+msgid ""
+"\" \n"
+"                                   class=\"inline-flex items-center gap-1"
+" px-3 py-1.5 rounded-lg bg-gold text-dark-900 hover:bg-gold-dark "
+"transition text-sm font-medium\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:113
+msgid ""
+"td colspan=\"6\" class=\"px-4 py-8 text-center text-gray-500 dark:text-"
+"slate-400\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:127
+#: templates/admin/view_all_documents.html:138
+msgid ""
+"\" \n"
+"               class=\"px-4 py-2 rounded-lg border border-gray-300 dark"
+":border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 "
+"dark:hover:bg-dark-700 transition\">"
+msgstr ""
+
+#: templates/admin/view_all_documents.html:133
+msgid "span class=\"px-4 py-2 text-sm text-gray-600 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:9
+msgid "📄 Upgrade Request Details"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:10
+#: templates/admin/view_user_documents.html:10
+#: templates/users/my_documents.html:12
+#: templates/users/verify_2fa_login.html:76
+msgid ""
+"\" class=\"text-sm text-gray-600 dark:text-slate-400 hover:text-gold "
+"transition\">"
+msgstr ""
+
+# Registration Steps
+#: templates/admin/view_premium_request.html:15
+#: templates/admin/view_user_documents.html:15
+#, fuzzy
+msgid "👤 User Information"
+msgstr "مرحله ۱: اطلاعات پایه"
+
+#: templates/admin/view_premium_request.html:17
+#: templates/admin/view_premium_request.html:18
+#: templates/admin/view_premium_request.html:19
+#: templates/admin/view_premium_request.html:20
+#: templates/admin/view_premium_request.html:21
+#: templates/admin/view_premium_request.html:22
+#: templates/admin/view_premium_request.html:23
+#: templates/admin/view_user_documents.html:17
+#: templates/admin/view_user_documents.html:18
+#: templates/admin/view_user_documents.html:19
+#: templates/admin/view_user_documents.html:20
+#: templates/admin/view_user_documents.html:21
+#: templates/admin/view_user_documents.html:22
+msgid "span class=\"text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:17
+#: templates/admin/view_premium_request.html:18
+#: templates/admin/view_premium_request.html:19
+#: templates/admin/view_premium_request.html:20
+#: templates/admin/view_user_documents.html:17
+#: templates/admin/view_user_documents.html:18
+#: templates/admin/view_user_documents.html:19
+#: templates/admin/view_user_documents.html:20
+#: templates/admin/view_user_documents.html:21
+msgid "span class=\"font-medium text-gray-900 dark:text-white ml-1\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:21
+msgid "span class=\"font-medium text-gold ml-1\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:22
+msgid "span class=\"font-bold text-gold ml-1\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:23
+msgid "span class=\"font-bold text-blue-600 dark:text-blue-400 ml-1\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:29
+#, fuzzy
+msgid "✅ Step Verification Status"
+msgstr "تأیید تخصص"
+
+#: templates/admin/view_premium_request.html:32
+#: templates/admin/view_premium_request.html:36
+#: templates/admin/view_premium_request.html:40
+#: templates/admin/view_premium_request.html:44
+msgid "span class=\"font-medium text-gray-700 dark:text-slate-300\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:33
+#: templates/admin/view_premium_request.html:37
+#: templates/admin/view_premium_request.html:41
+msgid "span class=\""
+msgstr ""
+
+#: templates/admin/view_premium_request.html:33
+#: templates/admin/view_premium_request.html:37
+#: templates/admin/view_premium_request.html:41
+msgid "text-green-600 dark:text-green-400 font-medium"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:33
+#: templates/admin/view_premium_request.html:37
+#: templates/admin/view_premium_request.html:41
+msgid "text-red-500 dark:text-red-400 font-medium"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:46
+msgid "span class=\"text-yellow-600 dark:text-yellow-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:47
+msgid "span class=\"text-green-600 dark:text-green-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:48
+msgid "span class=\"text-red-600 dark:text-red-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:56
+#, fuzzy
+msgid "📎 Uploaded Documents"
+msgstr "آپلود مدارک"
+
+#: templates/admin/view_premium_request.html:60
+#: templates/admin/view_premium_request.html:69
+#: templates/admin/view_premium_request.html:78
+msgid "span class=\"text-2xl\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:61
+#: templates/admin/view_premium_request.html:70
+#: templates/admin/view_premium_request.html:79
+#: templates/admin/view_user_documents.html:48
+msgid "p class=\"text-sm font-medium text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:61
+#: templates/admin/view_premium_request.html:70
+#: templates/admin/view_premium_request.html:79
+msgid ""
+"p class=\"text-xs text-blue-600 dark:text-blue-400 group-"
+"hover:underline\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:64
+#: templates/admin/view_premium_request.html:73
+#: templates/users/my_documents.html:96 templates/users/my_documents.html:116
+msgid "p class=\"text-sm font-medium text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:64
+#: templates/admin/view_premium_request.html:73
+msgid "p class=\"text-xs text-red-500\">"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:97
+msgid "✅ Confirm Request"
+msgstr ""
+
+#: templates/admin/view_premium_request.html:102
+msgid "❌ Reject Request"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:9
+msgid ""
+"h1 class=\"text-2xl font-bold text-gray-900 dark:text-white flex items-"
+"center gap-2\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:24
+#: templates/users/my_documents.html:31 templates/users/my_documents.html:35
+msgid "span class=\"text-green-600 dark:text-green-400 font-medium\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:26
+msgid "span class=\"text-yellow-600 dark:text-yellow-400 font-medium\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:34
+#, fuzzy
+msgid "📁 List of Uploaded Documents"
+msgstr "آپلود مدارک"
+
+#: templates/admin/view_user_documents.html:40
+msgid "span class=\"text-3xl\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:58
+msgid ""
+"\" target=\"_blank\" class=\"px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-"
+"blue-700 text-white text-xs font-medium transition\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:64
+msgid "p class=\"text-lg\">"
+msgstr ""
+
+#: templates/admin/view_user_documents.html:74
+#, fuzzy
+msgid "✅ Approve Documents"
+msgstr "آپلود مدارک"
+
+#: templates/admin/view_user_documents.html:78
+#, fuzzy
+msgid "❌ Reject Documents"
+msgstr "مدارک من"
+
+#: templates/admin/view_user_documents.html:82
+msgid "p class=\"text-green-700 dark:text-green-400 font-medium\">"
+msgstr ""
+
+#: templates/email/password_reset.html:7
+#, fuzzy
+msgid "Password Reset - Metisma"
+msgstr "لینک بازنشانی رمز عبور به ایمیل شما ارسال شد."
+
+#: templates/email/password_reset.html:232
+msgid "Password Reset Request"
+msgstr ""
+
+#: templates/email/password_reset.html:238
+#: templates/email/verify_email.html:238
+msgid "div class=\"greeting\">"
+msgstr ""
+
+#: templates/email/password_reset.html:240
+#: templates/email/verify_email.html:240
+msgid "p class=\"message-text\">"
+msgstr ""
+
+#: templates/email/password_reset.html:246
+msgid "\" class=\"reset-button\">"
+msgstr ""
+
+#: templates/email/password_reset.html:253
+#: templates/email/verify_email.html:253
+msgid "\" class=\"link-url\">"
+msgstr ""
+
+#: templates/email/password_reset.html:262
+msgid ""
+"Important Security Information:\n"
+"                "
+msgstr ""
+
+#: templates/email/password_reset.html:275
+#: templates/email/verify_email.html:275
+msgid "p class=\"footer-text\">"
+msgstr ""
+
+#: templates/email/password_reset.html:276
+#: templates/email/verify_email.html:276
+msgid "p class=\"footer-copyright\">"
+msgstr ""
+
+#: templates/email/verify_email.html:7
+msgid "Verify Your Email - Metisma"
+msgstr ""
+
+#: templates/email/verify_email.html:232
+msgid "Verify Your Email"
+msgstr ""
+
+#: templates/email/verify_email.html:246
+msgid "\" class=\"verify-button\">"
+msgstr ""
+
+#: templates/email/verify_email.html:262
+msgid ""
+"Important Information:\n"
+"                "
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:10
+msgid "\" class=\"text-white hover:text-blue-200\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:14
+msgid ""
+"span class=\"bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs"
+" font-bold\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:21
+msgid "h1 class=\"text-4xl font-bold mb-2\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:22
+msgid "p class=\"text-xl opacity-90\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:34
+msgid ""
+"div class=\"h-64 bg-gradient-to-br from-blue-400 to-purple-500 flex "
+"items-center justify-center text-white text-6xl\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:38
+#, fuzzy
+msgid "About This Booth"
+msgstr "این ماه"
+
+#: templates/exhibition/booth_detail.html:39
+msgid "p class=\"text-gray-600 leading-relaxed\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:46
+#, fuzzy
+msgid "Featured Products"
+msgstr "محصولات"
+
+#: templates/exhibition/booth_detail.html:50
+#: templates/exhibition/booth_detail.html:184
+msgid "h3 class=\"font-bold text-gray-800\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:51
+#: templates/exhibition/booth_detail.html:185
+msgid "p class=\"text-sm text-gray-600 mt-1\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:61
+msgid "🎥 Virtual Tour"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:63
+#: templates/exhibition/booth_detail.html:90
+msgid "p class=\"text-gray-500\">"
+msgstr ""
+
+# Registration Steps
+#: templates/exhibition/booth_detail.html:73
+#, fuzzy
+msgid "Contact Information"
+msgstr "مرحله ۱: اطلاعات پایه"
+
+#: templates/exhibition/booth_detail.html:78
+#: templates/exhibition/booth_detail.html:84
+msgid "span class=\"mr-2\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:97
+msgid "📅 Book an Appointment"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:100
+msgid "Select Date & Time"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:105
+msgid "Message (Optional)"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:111
+msgid "Request Appointment"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:117
+msgid "Available Time Slots:"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:120
+msgid "div class=\"text-sm text-gray-600\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:132
+msgid "Quick Actions"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:137
+msgid "👍 Like Booth"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:140
+msgid "🔗 Share Booth"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:143
+msgid "💾 Save Booth"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:145
+msgid ""
+"\" class=\"block w-full bg-gray-100 text-gray-600 py-2 rounded-lg hover"
+":bg-gray-200 transition-colors text-center\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:154
+msgid "Booth Statistics"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:158
+#: templates/exhibition/booth_detail.html:162
+#: templates/exhibition/booth_detail.html:166
+msgid "span class=\"font-bold\">"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:176
+msgid "Related Booths in This Exhibition"
+msgstr ""
+
+#: templates/exhibition/booth_detail.html:180
+msgid ""
+"div class=\"h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex "
+"items-center justify-center text-white text-4xl\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:12
+msgid "🏛️ Metisma Online Exhibition"
+msgstr ""
+
+#: templates/exhibition/hall.html:13 templates/exhibition/hall.html:136
+#: templates/trading/market.html:117
+msgid "p class=\"text-xl mb-8 opacity-90\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:20 templates/exhibition/hall.html:24
+#: templates/exhibition/hall.html:28
+msgid "div class=\"text-3xl font-bold\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:21 templates/exhibition/hall.html:25
+#: templates/exhibition/hall.html:29 templates/trading/market.html:21
+#: templates/trading/market.html:25 templates/trading/market.html:29
+#: templates/trading/market.html:33
+msgid "div class=\"text-sm opacity-80\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:41
+msgid "⭐ Featured Booths"
+msgstr ""
+
+#: templates/exhibition/hall.html:49
+msgid "{{ booth.title_fa }}"
+msgstr ""
+
+#: templates/exhibition/hall.html:51
+msgid ""
+"div class=\"w-full h-full flex items-center justify-center text-white "
+"text-6xl\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:57
+msgid ""
+"span class=\"absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 "
+"py-1 rounded-full text-xs font-bold\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:65
+msgid "h3 class=\"font-bold text-lg mb-2 text-gray-800\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:66
+msgid "p class=\"text-gray-600 text-sm mb-3 line-clamp-2\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:71
+msgid "span class=\"text-xs text-gray-500\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:74
+msgid ""
+"\" \n"
+"                           class=\"bg-blue-600 text-white px-4 py-2 "
+"rounded-lg text-sm hover:bg-blue-700 transition-colors\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:87
+msgid "View All Booths →"
+msgstr ""
+
+#: templates/exhibition/hall.html:97
+#, fuzzy
+msgid "📅 Active Exhibitions"
+msgstr "نمایشگاه"
+
+#: templates/exhibition/hall.html:104
+msgid "h3 class=\"font-bold text-xl text-gray-800\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:105
+msgid "p class=\"text-sm text-gray-500 mt-1\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:109
+msgid ""
+"span class=\"bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs "
+"font-bold\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:114
+msgid "p class=\"text-gray-600 text-sm mb-4\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:119
+msgid "span class=\"text-sm text-gray-500\">"
+msgstr ""
+
+#: templates/exhibition/hall.html:124
+#, fuzzy
+msgid "Enter Exhibition →"
+msgstr "نمایشگاه"
+
+#: templates/exhibition/hall.html:135
+msgid "Are You an Exhibitor?"
+msgstr ""
+
+#: templates/exhibition/hall.html:139 templates/exhibition/hall.html:143
+msgid ""
+"\" class=\"inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-"
+"bold text-lg hover:bg-gray-100 transition-colors\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:8
+msgid "Advertising Request"
+msgstr ""
+
+#: templates/magazine/advertisement.html:9
+#: templates/magazine/sponsorship.html:9 templates/magazine/subscribe.html:9
+#: templates/users/make_payment.html:18
+#: templates/users/upload_documents.html:17
+#: templates/users/vessel_finder.html:17
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mt-2\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:15
+#: templates/magazine/sponsorship.html:14 templates/magazine/subscribe.html:55
+msgid "Name and Surname *"
+msgstr ""
+
+#: templates/magazine/advertisement.html:19
+#, fuzzy
+msgid "Company / Brand"
+msgstr "نام شرکت"
+
+#: templates/magazine/advertisement.html:25
+#: templates/magazine/sponsorship.html:22 templates/magazine/subscribe.html:59
+#, fuzzy
+msgid "Email *"
+msgstr "ایمیل"
+
+#: templates/magazine/advertisement.html:29
+#: templates/magazine/sponsorship.html:26 templates/magazine/subscribe.html:64
+#, fuzzy
+msgid "Phone Number *"
+msgstr "شماره تلفن"
+
+#: templates/magazine/advertisement.html:34
+msgid "Type of Advertisement *"
+msgstr ""
+
+#: templates/magazine/advertisement.html:36
+#: templates/magazine/advertisement.html:53 templates/users/place_order.html:28
+#: templates/users/place_order.html:74
+msgid "option value=\"\" disabled selected>"
+msgstr ""
+
+#: templates/magazine/advertisement.html:37
+msgid "option value=\"full_page\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:38
+msgid "option value=\"half_page\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:39
+msgid "option value=\"quarter_page\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:40
+msgid "option value=\"back_cover\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:41
+msgid "option value=\"inner_cover\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:42
+msgid "option value=\"banner\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:47
+msgid "Ad Size"
+msgstr ""
+
+#: templates/magazine/advertisement.html:48
+msgid "e.g., 210x297mm"
+msgstr ""
+
+#: templates/magazine/advertisement.html:51
+msgid "Publication Duration *"
+msgstr ""
+
+#: templates/magazine/advertisement.html:54
+msgid "option value=\"1_issue\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:55
+msgid "option value=\"3_issues\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:56
+msgid "option value=\"6_issues\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:57
+msgid "option value=\"annual\">"
+msgstr ""
+
+#: templates/magazine/advertisement.html:62
+#: templates/magazine/sponsorship.html:30
+#, fuzzy
+msgid "Message and Description"
 msgstr "مشاوران حقوقی و قراردادهای بین‌المللی"
 
-msgid "Tech Partner Description"
-msgstr "شریک‌های فناوری و پلتفرم‌های دیجیتال"
+#: templates/magazine/advertisement.html:65
+msgid "Submit Advertising Request"
+msgstr ""
 
-msgid "Investor Description"
-msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
+#: templates/magazine/advertisement.html:68
+#: templates/magazine/sponsorship.html:36 templates/magazine/subscribe.html:76
+#: templates/users/upload_documents.html:62
+#: templates/users/upload_documents.html:67
+#: templates/users/verify_phone.html:59
+msgid ""
+"\" class=\"text-gray-600 dark:text-slate-400 hover:text-gold transition "
+"text-sm\">"
+msgstr ""
+
+#: templates/magazine/index.html:9
+#, fuzzy
+msgid "Imazhe Magazine"
+msgstr "مجله"
+
+#: templates/magazine/index.html:10
+msgid "p class=\"text-gray-600 dark:text-slate-400 max-w-2xl mx-auto mb-8\">"
+msgstr ""
+
+#: templates/magazine/index.html:12 templates/magazine/index.html:13
+msgid ""
+"\" class=\"px-5 py-2.5 rounded-xl border border-gold/30 text-gold hover"
+":bg-gold/10 font-medium text-sm transition\">"
+msgstr ""
+
+#: templates/magazine/index.html:14
+msgid ""
+"\" class=\"px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-dark"
+" text-dark-900 font-bold text-sm hover:from-gold-light hover:to-gold "
+"shadow transition transform hover:scale-[1.02]\">"
+msgstr ""
+
+#: templates/magazine/index.html:19
+#, fuzzy
+msgid "📚 Published Issues"
+msgstr "منتشر شده"
+
+#: templates/magazine/index.html:26
+msgid "{{ issue.title }}"
+msgstr ""
+
+#: templates/magazine/index.html:28
+msgid "span class=\"text-4xl text-gray-400\">"
+msgstr ""
+
+#: templates/magazine/index.html:31
+msgid ""
+"span class=\"absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gold "
+"text-dark-900 text-xs font-bold\">"
+msgstr ""
+
+#: templates/magazine/index.html:35
+msgid "h3 class=\"font-bold text-gray-900 dark:text-white mb-2\">"
+msgstr ""
+
+#: templates/magazine/index.html:36
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-3 line-clamp-2\">"
+msgstr ""
+
+#: templates/magazine/index.html:41
+msgid "Download Digital Version"
+msgstr ""
+
+#: templates/magazine/index.html:48
+msgid "p class=\"text-4xl mb-4\">"
+msgstr ""
+
+#: templates/magazine/index.html:49
+msgid "No issue has been published yet"
+msgstr ""
+
+#: templates/magazine/sponsorship.html:8
+msgid "Request for Sponsorship"
+msgstr ""
+
+#: templates/magazine/sponsorship.html:18 templates/users/profile_edit.html:39
+msgid "Company Name"
+msgstr "نام شرکت"
+
+#: templates/magazine/sponsorship.html:33
+msgid "Submit Sponsorship Request"
+msgstr ""
+
+#: templates/magazine/subscribe.html:8
+msgid "Imazhe Magazine Subscription"
+msgstr ""
+
+#: templates/magazine/subscribe.html:16
+msgid ""
+"div class=\"absolute top-0 right-0 bg-gold text-dark-900 text-xs font-"
+"bold px-3 py-1 rounded-bl-lg\">"
+msgstr ""
+
+#: templates/magazine/subscribe.html:17
+msgid "Annual Subscription"
+msgstr ""
+
+#: templates/magazine/subscribe.html:18 templates/magazine/subscribe.html:35
+msgid "span class=\"text-sm text-gray-500 dark:text-slate-400 font-normal\">"
+msgstr ""
+
+#: templates/magazine/subscribe.html:20
+msgid "12 printed issues annually"
+msgstr ""
+
+#: templates/magazine/subscribe.html:21 templates/magazine/subscribe.html:38
+msgid "Access to digital version"
+msgstr ""
+
+#: templates/magazine/subscribe.html:22 templates/magazine/subscribe.html:39
+msgid "Free postage"
+msgstr ""
+
+#: templates/magazine/subscribe.html:23
+msgid "Special discounts for events"
+msgstr ""
+
+#: templates/magazine/subscribe.html:27 templates/magazine/subscribe.html:43
+msgid "span class=\"peer-checked:hidden\">"
+msgstr ""
+
+#: templates/magazine/subscribe.html:28 templates/magazine/subscribe.html:44
+msgid "span class=\"hidden peer-checked:inline\">"
+msgstr ""
+
+#: templates/magazine/subscribe.html:34
+msgid "6-Month Subscription"
+msgstr ""
+
+#: templates/magazine/subscribe.html:37
+msgid "6 printed issues"
+msgstr ""
+
+#: templates/magazine/subscribe.html:68
+msgid "Complete Postal Address *"
+msgstr ""
+
+#: templates/magazine/subscribe.html:71
+#, fuzzy
+msgid "Complete Subscription"
+msgstr "تکمیل ثبت‌نام"
+
+#: templates/trading/market.html:12
+#, fuzzy
+msgid "📊 Metisma Trading Hall"
+msgstr "تالار معاملات"
+
+#: templates/trading/market.html:13
+msgid "p class=\"text-xl mb-6 opacity-90\">"
+msgstr ""
+
+#: templates/trading/market.html:20 templates/trading/market.html:24
+#: templates/trading/market.html:28 templates/trading/market.html:32
+msgid "div class=\"text-2xl font-bold\">"
+msgstr ""
+
+#: templates/trading/market.html:43
+msgid "🔥 Top Performing Pairs"
+msgstr ""
+
+#: templates/trading/market.html:49
+msgid "span class=\"font-bold text-gray-800\">"
+msgstr ""
+
+#: templates/trading/market.html:50 templates/trading/market.html:91
+msgid "span class=\"text-green-600 font-bold\">"
+msgstr ""
+
+#: templates/trading/market.html:52
+msgid "div class=\"text-2xl font-bold text-gray-900\">"
+msgstr ""
+
+#: templates/trading/market.html:53
+msgid ""
+"\" \n"
+"                   class=\"block mt-3 text-center bg-green-600 text-white"
+" py-2 rounded hover:bg-green-700 text-sm\">"
+msgstr ""
+
+#: templates/trading/market.html:66
+msgid "📋 All Markets"
+msgstr ""
+
+#: templates/trading/market.html:72
+msgid "th class=\"px-6 py-4 text-right font-bold text-gray-700\">"
+msgstr ""
+
+#: templates/trading/market.html:73 templates/trading/market.html:74
+#: templates/trading/market.html:75 templates/trading/market.html:76
+msgid "th class=\"px-6 py-4 text-left font-bold text-gray-700\">"
+msgstr ""
+
+#: templates/trading/market.html:83
+msgid "div class=\"font-bold text-gray-900\">"
+msgstr ""
+
+#: templates/trading/market.html:84
+msgid "div class=\"text-xs text-gray-500\">"
+msgstr ""
+
+#: templates/trading/market.html:87
+msgid "span class=\"font-mono font-bold\">"
+msgstr ""
+
+#: templates/trading/market.html:93
+msgid "span class=\"text-red-600 font-bold\">"
+msgstr ""
+
+#: templates/trading/market.html:96
+msgid "td class=\"px-6 py-4 text-left text-gray-600\">"
+msgstr ""
+
+#: templates/trading/market.html:100
+msgid ""
+"\" \n"
+"                               class=\"text-blue-600 hover:text-blue-800 "
+"font-medium\">"
+msgstr ""
+
+#: templates/trading/market.html:116
+msgid "Ready to Start Trading?"
+msgstr ""
+
+#: templates/trading/market.html:120 templates/trading/market.html:124
+msgid ""
+"\" class=\"inline-block bg-white text-green-600 px-8 py-4 rounded-lg "
+"font-bold text-lg hover:bg-gray-100 transition-colors\">"
+msgstr ""
+
+#: templates/users/account_settings.html:16
+msgid ""
+"div class=\"w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-"
+"indigo-600 flex items-center justify-center text-white text-3xl font-bold"
+" shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30\">"
+msgstr ""
+
+#: templates/users/account_settings.html:26
+msgid ""
+"h1 class=\"text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-"
+"white mb-2\">"
+msgstr ""
+
+#: templates/users/account_settings.html:29
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-lg\">"
+msgstr ""
+
+#: templates/users/account_settings.html:95
+msgid "span class=\"flex-1 text-base font-medium\">"
+msgstr ""
+
+#: templates/users/account_settings.html:123
+#: templates/users/account_settings.html:232
+msgid "h2 class=\"text-2xl font-bold text-white\">"
+msgstr ""
+
+#: templates/users/account_settings.html:124
+msgid "p class=\"text-blue-100 text-sm\">"
+msgstr ""
+
+#: templates/users/account_settings.html:233
+msgid "p class=\"text-purple-100 text-sm\">"
+msgstr ""
+
+#: templates/users/account_settings.html:250
+msgid "h3 class=\"font-bold text-green-900 dark:text-green-300 text-xl mb-2\">"
+msgstr ""
+
+#: templates/users/account_settings.html:251
+msgid "p class=\"text-sm text-green-700 dark:text-green-400 mb-4\">"
+msgstr ""
+
+#: templates/users/account_settings.html:256
+msgid ""
+"label class=\"block text-sm font-bold text-green-900 dark:text-green-300 "
+"mb-2\">"
+msgstr ""
+
+#: templates/users/account_settings.html:261 templates/users/enable_2fa.html:62
+#: templates/users/verify_2fa_login.html:32
+msgid "000000"
+msgstr ""
+
+#: templates/users/account_settings.html:285
+msgid "h3 class=\"font-bold text-amber-900 dark:text-amber-300 text-xl mb-2\">"
+msgstr ""
+
+#: templates/users/account_settings.html:286
+msgid "p class=\"text-sm text-amber-700 dark:text-amber-400 mb-4\">"
+msgstr ""
+
+#: templates/users/account_settings.html:330
+#: templates/users/account_settings.html:334
+#: templates/users/account_settings.html:338
+msgid "span class=\"text-blue-500 font-bold\">"
+msgstr ""
+
+#: templates/users/chat.html:17
+msgid "⚠️ Premium Feature"
+msgstr ""
+
+#: templates/users/chat.html:19
+msgid ""
+"\" \n"
+"                   class=\"inline-flex items-center justify-center px-6 "
+"py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 \n"
+"                          bg-gradient-to-r from-gold to-gold-dark \n"
+"                          hover:from-gold-light hover:to-gold \n"
+"                          transform hover:scale-[1.02] "
+"active:scale-[0.98] \n"
+"                          transition-all duration-200\">"
+msgstr ""
+
+#: templates/users/chat.html:41
+#, fuzzy
+msgid ""
+"Contacts\n"
+"                    "
+msgstr "تماس با ما"
+
+#: templates/users/chat.html:52
+msgid "p class=\"font-medium text-gray-900 dark:text-white truncate\">"
+msgstr ""
+
+#: templates/users/chat.html:53
+msgid "p class=\"text-xs text-gray-500 dark:text-slate-400 capitalize\">"
+msgstr ""
+
+#: templates/users/chat.html:64
+#, fuzzy
+msgid ""
+"Return to Profile\n"
+"                    "
+msgstr "ویرایش پروفایل"
+
+#: templates/users/chat.html:78 templates/users/support.html:51
+msgid "p class=\"font-bold text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/users/chat.html:79 templates/users/support.html:52
+msgid "p class=\"text-xs text-gold\">"
+msgstr ""
+
+#: templates/users/chat.html:90
+msgid "p class=\"text-[10px]"
+msgstr ""
+
+#: templates/users/chat.html:90
+msgid "text-dark-900/70"
+msgstr ""
+
+#: templates/users/chat.html:90
+msgid "text-gray-500 dark:text-slate-400"
+msgstr ""
+
+#: templates/users/chat.html:90
+msgid "mt-1 text-right\">"
+msgstr ""
+
+#: templates/users/chat.html:127
+msgid "Select a Contact"
+msgstr ""
+
+#: templates/users/chat.html:128 templates/users/map.html:193
+#: templates/users/profile_edit.html:11
+#: templates/users/verify_2fa_login.html:18
+msgid "p class=\"text-gray-600 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/users/dashboard.html:15 templates/users/place_order.html:112
+#: templates/users/producer_orders.html:27
+#, fuzzy
+msgid ""
+"Return to Profile\n"
+"            "
+msgstr "ویرایش پروفایل"
+
+#: templates/users/dashboard.html:23
+msgid ""
+"Manage Permissions\n"
+"            "
+msgstr ""
+
+#: templates/users/dashboard.html:31
+msgid ""
+"div class=\"w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-"
+"dark flex items-center justify-center text-2xl font-bold text-dark-900 "
+"shadow-lg shadow-gold/30\">"
+msgstr ""
+
+#: templates/users/dashboard.html:35
+msgid "h2 class=\"text-2xl font-bold text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/users/dashboard.html:36
+msgid "p class=\"text-gray-600 dark:text-slate-400 capitalize\">"
+msgstr ""
+
+#: templates/users/dashboard.html:57 templates/users/dashboard.html:68
+#: templates/users/dashboard.html:78
+msgid "\" class=\"text-gold hover:text-gold-dark underline text-xs font-medium\">"
+msgstr ""
+
+#: templates/users/dashboard.html:85
+msgid ""
+"\" \n"
+"                       class=\"px-4 py-2 rounded-lg border border-"
+"gray-300 dark:border-dark-600 text-gray-700 dark:text-slate-300 hover:bg-"
+"gray-50 dark:hover:bg-dark-700 transition text-sm font-medium text-"
+"center\">"
+msgstr ""
+
+#: templates/users/dashboard.html:90 templates/users/dashboard.html:95
+msgid ""
+"\" \n"
+"                           class=\"px-4 py-2 rounded-lg bg-gold text-"
+"dark-900 hover:bg-gold-dark transition text-sm font-medium text-center\">"
+msgstr ""
+
+#: templates/users/dashboard.html:112
+msgid ""
+"div class=\"w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-"
+"indigo-600 flex items-center justify-center text-2xl shadow-lg\">"
+msgstr ""
+
+#: templates/users/dashboard.html:116
+msgid "Access Permissions Management"
+msgstr ""
+
+#: templates/users/dashboard.html:127
+msgid ""
+"Manage Permissions\n"
+"                    "
+msgstr ""
+
+#: templates/users/dashboard.html:141
+msgid ""
+"Orders\n"
+"                    "
+msgstr ""
+
+#: templates/users/dashboard.html:144
+msgid ""
+"span class=\"px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-"
+"red-600 dark:text-red-400 text-xs font-bold\">"
+msgstr ""
+
+#: templates/users/dashboard.html:149 templates/users/dashboard.html:168
+#: templates/users/dashboard.html:188 templates/users/dashboard.html:194
+#: templates/users/dashboard.html:214 templates/users/dashboard.html:234
+#: templates/users/dashboard.html:240
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-4\">"
+msgstr ""
+
+#: templates/users/dashboard.html:150
+msgid ""
+"\"\n"
+"                   class=\"inline-flex items-center gap-2 text-gold hover"
+":text-gold-light font-medium text-sm transition\">"
+msgstr ""
+
+#: templates/users/dashboard.html:166
+msgid "Manage Orders"
+msgstr ""
+
+#: templates/users/dashboard.html:169 templates/users/dashboard.html:215
+msgid ""
+"\" \n"
+"                   class=\"inline-flex items-center gap-2 text-gold hover"
+":text-gold-light font-medium text-sm transition\">"
+msgstr ""
+
+#: templates/users/dashboard.html:185
+msgid "Smart Chat"
+msgstr "چت هوشمند"
+
+#: templates/users/dashboard.html:189 templates/users/dashboard.html:195
+#: templates/users/dashboard.html:235 templates/users/dashboard.html:241
+#: templates/users/producer_orders.html:136
+msgid ""
+"\" \n"
+"                       class=\"inline-flex items-center gap-2 text-gold "
+"hover:text-gold-light font-medium text-sm transition\">"
+msgstr ""
+
+#: templates/users/dashboard.html:212
+#, fuzzy
+msgid "Support"
+msgstr "ورود"
+
+#: templates/users/dashboard.html:231
+msgid "Port Finder"
+msgstr ""
+
+#: templates/users/dashboard.html:254 templates/users/dashboard.html:274
+msgid ""
+"div class=\"w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-"
+"dark flex items-center justify-center text-dark-900 font-bold shadow-"
+"lg\">"
+msgstr ""
+
+#: templates/users/dashboard.html:258
+msgid "Start Premium Journey"
+msgstr ""
+
+#: templates/users/dashboard.html:262
+msgid ""
+"\" \n"
+"                       class=\"px-6 py-3 rounded-xl bg-gradient-to-r "
+"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold "
+"transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                              transition-all duration-200 shadow-lg "
+"whitespace-nowrap\">"
+msgstr ""
+
+#: templates/users/dashboard.html:278
+msgid "You're a Premium Member! 🌟"
+msgstr ""
+
+#: templates/users/dashboard.html:295
+#, fuzzy
+msgid ""
+"Sign Out\n"
+"            "
+msgstr "ورود به حساب"
+
+#: templates/users/enable_2fa.html:15
+msgid "Enable Two-Factor Authentication"
+msgstr ""
+
+#: templates/users/enable_2fa.html:16 templates/users/show_backup_codes.html:16
+msgid "p class=\"mt-2 text-sm text-gray-600 dark:text-gray-400\">"
+msgstr ""
+
+#: templates/users/enable_2fa.html:24
+msgid "Step 1: Scan QR Code"
+msgstr ""
+
+#: templates/users/enable_2fa.html:28
+msgid "QR Code"
+msgstr ""
+
+#: templates/users/enable_2fa.html:32 templates/users/enable_2fa.html:35
+msgid "p class=\"text-sm text-gray-600 dark:text-gray-300 mb-2\">"
+msgstr ""
+
+#: templates/users/enable_2fa.html:38
+msgid "p class=\"text-sm text-gray-600 dark:text-gray-300 mb-4\">"
+msgstr ""
+
+#: templates/users/enable_2fa.html:53
+#, fuzzy
+msgid "6-digit verification code"
+msgstr "در انتظار تأیید"
+
+#: templates/users/enable_2fa.html:64
+msgid "p class=\"mt-1 text-xs text-gray-500 dark:text-gray-400\">"
+msgstr ""
+
+#: templates/users/enable_2fa.html:80
+msgid ""
+"Enable Two-Factor Authentication\n"
+"                "
+msgstr ""
+
+#: templates/users/enable_2fa.html:87 templates/users/show_backup_codes.html:83
+msgid "💡 Tip:"
+msgstr ""
+
+#: templates/users/enable_2fa.html:87
+msgid ""
+"After activation, store backup codes in a secure location. These codes "
+"are used for emergencies.\n"
+"            "
+msgstr ""
+
+#: templates/users/enable_2fa.html:92
+msgid ""
+"\" \n"
+"               class=\"font-medium text-gray-600 hover:text-gray-500 dark"
+":text-gray-400 dark:hover:text-gray-300\">"
+msgstr ""
+
+#: templates/users/make_payment.html:16
+msgid "Upgrade to Premium"
+msgstr ""
+
+#: templates/users/make_payment.html:17
+msgid "p class=\"text-3xl font-bold text-gold mt-2\">"
+msgstr ""
+
+#: templates/users/make_payment.html:27
+msgid ""
+"Company Account Information\n"
+"            "
+msgstr ""
+
+#: templates/users/make_payment.html:31 templates/users/make_payment.html:35
+#: templates/users/make_payment.html:39 templates/users/make_payment.html:43
+#: templates/users/make_payment.html:47
+#: templates/users/payment_confirmation.html:32
+#: templates/users/payment_confirmation.html:36
+#: templates/users/payment_confirmation.html:40
+msgid "span class=\"text-gray-600 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/users/make_payment.html:58
+msgid "Upload Payment Receipt"
+msgstr ""
+
+#: templates/users/make_payment.html:63
+#: templates/users/upload_documents.html:31
+#: templates/users/upload_documents.html:41
+#: templates/users/vessel_finder.html:31
+msgid "p class=\"mt-1 text-xs text-gray-500 dark:text-slate-500\">"
+msgstr ""
+
+#: templates/users/make_payment.html:75
+msgid "Upload Receipt & Send"
+msgstr ""
+
+#: templates/users/make_payment.html:87
+msgid ""
+"View Payment Status\n"
+"                "
+msgstr ""
+
+#: templates/users/make_payment.html:96
+msgid ""
+"Return to Upgrade Steps\n"
+"                "
+msgstr ""
+
+#: templates/users/manage_sessions.html:15
+msgid ""
+"Active Devices Management\n"
+"                "
+msgstr ""
+
+#: templates/users/manage_sessions.html:17
+msgid "p class=\"mt-2 text-blue-100\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:50
+msgid "h3 class=\"font-semibold text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:58
+msgid ""
+"Current Device\n"
+"                                        "
+msgstr ""
+
+#: templates/users/manage_sessions.html:62
+msgid "p class=\"text-sm text-gray-500 dark:text-gray-400 mt-1\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:65
+msgid "p class=\"text-xs text-gray-400 dark:text-gray-500 mt-1\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:81
+#, fuzzy
+msgid "Log Out Device"
+msgstr "خروج"
+
+#: templates/users/manage_sessions.html:84
+msgid "span class=\"text-sm text-gray-400 dark:text-gray-500 italic\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:106
+msgid ""
+"Log Out All Devices (except current device)\n"
+"                        "
+msgstr ""
+
+#: templates/users/manage_sessions.html:115
+#, fuzzy
+msgid "No sessions found"
+msgstr "نتیجه‌ای یافت نشد."
+
+#: templates/users/manage_sessions.html:116
+msgid "p class=\"mt-1 text-sm text-gray-500 dark:text-gray-400\">"
+msgstr ""
+
+#: templates/users/manage_sessions.html:126
+msgid "💡 Security Tips:"
+msgstr ""
+
+#: templates/users/map.html:169
+msgid "span class=\"text-gold\">"
+msgstr ""
+
+#: templates/users/map.html:171
+msgid "p class=\"text-gray-600 dark:text-slate-400 mt-1\">"
+msgstr ""
+
+#: templates/users/map.html:178
+msgid "☰ Layers"
+msgstr ""
+
+#: templates/users/map.html:181
+msgid "⛶"
+msgstr ""
+
+#: templates/users/map.html:203
+msgid "span class=\"text-dark-900 dark:text-slate-200 text-xs font-bold\">"
+msgstr ""
+
+#: templates/users/map.html:212
+msgid "🛣️ Route Planner"
+msgstr ""
+
+#: templates/users/map.html:215
+#, fuzzy
+msgid "Origin Country"
+msgstr "کشور"
+
+#: templates/users/map.html:216
+msgid "e.g., Iran, China..."
+msgstr ""
+
+#: templates/users/map.html:219
+msgid "Destination Country"
+msgstr ""
+
+#: templates/users/map.html:220
+msgid "e.g., Germany, UAE..."
+msgstr ""
+
+#: templates/users/map.html:234
+msgid "🔍 Find Best Route"
+msgstr ""
+
+#: templates/users/map.html:242
+msgid "📊 Map Layers"
+msgstr ""
+
+#: templates/users/map.html:249 templates/users/map.html:259
+#: templates/users/map.html:269 templates/users/map.html:279
+#: templates/users/map.html:289
+msgid "div class=\"font-medium text-gray-900 dark:text-slate-100\">"
+msgstr ""
+
+#: templates/users/map.html:250 templates/users/map.html:260
+#: templates/users/map.html:270 templates/users/map.html:280
+#: templates/users/map.html:290
+msgid "div class=\"text-xs text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/users/map.html:252
+msgid "span class=\"text-gold text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:262
+msgid "span class=\"text-blue-500 text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:272
+msgid "span class=\"text-red-500 text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:282
+msgid "span class=\"text-green-500 text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:292
+msgid "span class=\"text-cyan-500 text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:302
+msgid "🔍 Quick Filters"
+msgstr ""
+
+# Status
+#: templates/users/map.html:306
+#, fuzzy
+msgid "✅ Active Only"
+msgstr "فعال"
+
+#: templates/users/map.html:309
+msgid "⭐ Major Ports"
+msgstr ""
+
+#: templates/users/map.html:312
+msgid "🛃 Customs Active"
+msgstr ""
+
+#: templates/users/map.html:318
+msgid "Selected Item"
+msgstr ""
+
+#: templates/users/map.html:327
+#, fuzzy
+msgid "Legend"
+msgstr "ارسال"
+
+#: templates/users/map.html:331 templates/users/map.html:335
+#: templates/users/map.html:339 templates/users/map.html:343
+#: templates/users/map.html:347
+msgid "span class=\"text-gray-700 dark:text-slate-300 text-xs\">"
+msgstr ""
+
+#: templates/users/map.html:386 templates/users/map.html:392
+msgid "OSM"
+msgstr ""
+
+#: templates/users/map.html:386 templates/users/map.html:392
+msgid "copy; "
+msgstr ""
+
+#: templates/users/map.html:386 templates/users/map.html:392
+msgid "CARTO"
+msgstr ""
+
+#: templates/users/map.html:495
+msgid "h3>"
+msgstr ""
+
+#: templates/users/map.html:505
+msgid "span class=\"text-green-600\">"
+msgstr ""
+
+#: templates/users/map.html:511
+msgid "🗺️ Plan Route Here"
+msgstr ""
+
+#: templates/users/map.html:605
+#, python-brace-format
+msgid "🛣️ ${route.type === 'sea' ? 'Maritime' : 'Land'} Route"
+msgstr ""
+
+#: templates/users/map.html:626
+msgid "📏 Route Stats:"
+msgstr ""
+
+#: templates/users/map.html:680 templates/users/map.html:681
+msgid "div>"
+msgstr ""
+
+#: templates/users/map.html:682
+msgid "div class=\"text-green-600\">"
+msgstr ""
+
+#: templates/users/map.html:727
+#, python-brace-format
+msgid "⚠️ ${c.name}"
+msgstr ""
+
+#: templates/users/my_documents.html:11
+#, fuzzy
+msgid "📄 My Verified Documents"
+msgstr "مدارک من"
+
+#: templates/users/my_documents.html:25
+msgid "Premium Level 1 - Verified ✅"
+msgstr ""
+
+#: templates/users/my_documents.html:26
+msgid "p class=\"text-green-700 dark:text-green-400 text-sm\">"
+msgstr ""
+
+#: templates/users/my_documents.html:32 templates/users/my_documents.html:36
+msgid "p class=\"font-bold text-green-900 dark:text-green-200\">"
+msgstr ""
+
+#: templates/users/my_documents.html:50
+msgid "Under Review ⏳"
+msgstr ""
+
+#: templates/users/my_documents.html:51
+msgid "p class=\"text-yellow-700 dark:text-yellow-400 text-sm\">"
+msgstr ""
+
+#: templates/users/my_documents.html:64
+#, fuzzy
+msgid "Request Rejected ❌"
+msgstr "رد شده"
+
+#: templates/users/my_documents.html:65
+msgid "p class=\"text-red-700 dark:text-red-400 text-sm\">"
+msgstr ""
+
+#: templates/users/my_documents.html:77
+#, fuzzy
+msgid ""
+"Uploaded Documents\n"
+"            "
+msgstr "آپلود مدارک"
+
+#: templates/users/my_documents.html:84 templates/users/my_documents.html:104
+#: templates/users/my_documents.html:124
+msgid ""
+"div class=\"w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex "
+"items-center justify-center text-2xl\">"
+msgstr ""
+
+#: templates/users/my_documents.html:89 templates/users/my_documents.html:109
+#: templates/users/my_documents.html:129
+msgid ""
+"\" target=\"_blank\"\n"
+"                       class=\"px-4 py-2 rounded-lg bg-blue-600 text-"
+"white text-sm font-medium hover:bg-blue-700 transition\">"
+msgstr ""
+
+#: templates/users/my_documents.html:97 templates/users/my_documents.html:117
+msgid "p class=\"text-xs text-red-500 mt-1\">"
+msgstr ""
+
+#: templates/users/my_documents.html:145
+msgid ""
+"Admin Notes\n"
+"            "
+msgstr ""
+
+#: templates/users/my_documents.html:147 templates/users/support.html:33
+msgid "p class=\"text-sm text-gray-700 dark:text-slate-300\">"
+msgstr ""
+
+#: templates/users/notifications.html:17
+#, fuzzy
+msgid "Notifications"
+msgstr "تأیید هویت"
+
+# Profile & Dashboard
+#: templates/users/notifications.html:25
+#, fuzzy
+msgid ""
+"Back to Dashboard\n"
+"                "
+msgstr "داشبورد"
+
+#: templates/users/notifications.html:32
+msgid ""
+"Return\n"
+"                "
+msgstr ""
+
+#: templates/users/notifications.html:55
+msgid "p class=\"text-gray-900 dark:text-white text-sm leading-relaxed\">"
+msgstr ""
+
+#: templates/users/notifications.html:56
+msgid "p class=\"text-xs text-gray-500 dark:text-slate-400 mt-2\">"
+msgstr ""
+
+#: templates/users/notifications.html:78
+msgid "Mark all as read"
+msgstr ""
+
+#: templates/users/notifications.html:90
+#, fuzzy
+msgid "No Notifications"
+msgstr "در انتظار تأیید"
+
+#: templates/users/payment_confirmation.html:17
+msgid "✅ Payment Received"
+msgstr ""
+
+#: templates/users/payment_confirmation.html:19
+msgid ""
+"Your premium upgrade request has been received. Our team will review your"
+" documents within "
+msgstr ""
+
+#: templates/users/payment_confirmation.html:19
+#: templates/users/verify_phone.html:18
+msgid "span class=\"font-semibold text-gold\">"
+msgstr ""
+
+#: templates/users/payment_confirmation.html:19
+msgid ""
+"and notify you via email.\n"
+"        "
+msgstr ""
+
+#: templates/users/payment_confirmation.html:28
+#, fuzzy
+msgid ""
+"Payment Details\n"
+"            "
+msgstr "پرداخت"
+
+#: templates/users/payment_confirmation.html:37
+msgid "span class=\"font-medium text-green-600 dark:text-green-400\">"
+msgstr ""
+
+#: templates/users/payment_confirmation.html:57
+#, fuzzy
+msgid ""
+"Back to Profile\n"
+"            "
+msgstr "بازگشت به بالا"
+
+#: templates/users/payment_confirmation.html:66
+#, fuzzy
+msgid ""
+"Contact Support\n"
+"            "
+msgstr "تماس با ما"
+
+#: templates/users/place_order.html:16
+msgid "Place New Order"
+msgstr ""
+
+#: templates/users/place_order.html:26
+#, fuzzy
+msgid "Product *"
+msgstr "محصولات"
+
+#: templates/users/place_order.html:29
+msgid "option value=\"wheat\">"
+msgstr ""
+
+#: templates/users/place_order.html:30
+msgid "option value=\"rice\">"
+msgstr ""
+
+#: templates/users/place_order.html:31
+msgid "option value=\"sugar\">"
+msgstr ""
+
+#: templates/users/place_order.html:32
+msgid "option value=\"corn\">"
+msgstr ""
+
+#: templates/users/place_order.html:33
+msgid "option value=\"steel\">"
+msgstr ""
+
+#: templates/users/place_order.html:34
+msgid "option value=\"other\">"
+msgstr ""
+
+#: templates/users/place_order.html:41
+msgid "Quantity (Tons) *"
+msgstr ""
+
+#: templates/users/place_order.html:44
+msgid "e.g., 50"
+msgstr ""
+
+#: templates/users/place_order.html:47
+msgid "Price per Ton (USD) *"
+msgstr ""
+
+#: templates/users/place_order.html:50
+msgid "e.g., 350.00"
+msgstr ""
+
+#: templates/users/place_order.html:57
+msgid "Origin Port *"
+msgstr ""
+
+#: templates/users/place_order.html:60
+msgid "e.g., Bandar Abbas"
+msgstr ""
+
+#: templates/users/place_order.html:63
+msgid "Destination Port *"
+msgstr ""
+
+#: templates/users/place_order.html:66
+msgid "e.g., Sohar"
+msgstr ""
+
+#: templates/users/place_order.html:72
+#, fuzzy
+msgid "Select Producer *"
+msgstr "نقش خود را انتخاب کنید"
+
+#: templates/users/place_order.html:85
+msgid "Additional Notes "
+msgstr ""
+
+#: templates/users/place_order.html:85
+msgid "span class=\"text-gray-400\">"
+msgstr ""
+
+#: templates/users/place_order.html:88
+msgid "Specify quality, packaging, delivery terms, etc."
+msgstr ""
+
+#: templates/users/place_order.html:101
+msgid "Place Order"
+msgstr ""
+
+#: templates/users/post_detail.html:21 templates/users/post_detail.html:59
+#: templates/users/post_detail.html:80
+msgid "h6 class=\"mb-0\">"
+msgstr ""
+
+#: templates/users/post_detail.html:31
+msgid "button type=\"submit\" class=\"btn btn-primary btn-sm\">"
+msgstr ""
+
+#: templates/users/post_detail.html:47
+msgid "p class=\"text-muted text-center py-4\">"
+msgstr ""
+
+#: templates/users/post_detail.html:63
+#, fuzzy
+msgid ""
+"Telegram\n"
+"                    "
+msgstr "تلگرام"
+
+#: templates/users/post_detail.html:66
+#, fuzzy
+msgid ""
+"Twitter\n"
+"                    "
+msgstr "فیلتر"
+
+#: templates/users/post_detail.html:69
+#, fuzzy
+msgid ""
+"WhatsApp\n"
+"                    "
+msgstr "واتساپ"
+
+#: templates/users/producer_orders.html:18
+msgid "Seller Panel"
+msgstr ""
+
+#: templates/users/producer_orders.html:42
+msgid "span class=\"font-bold text-gray-900 dark:text-white\">"
+msgstr ""
+
+#: templates/users/producer_orders.html:43
+msgid "span class=\"px-2.5 py-1 rounded-full text-xs font-bold"
+msgstr ""
+
+#: templates/users/producer_orders.html:43
+msgid "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+msgstr ""
+
+#: templates/users/producer_orders.html:49
+msgid ""
+"of \n"
+"                                    "
+msgstr ""
+
+#: templates/users/producer_orders.html:51
+msgid "span class=\"text-gold font-semibold\">"
+msgstr ""
+
+#: templates/users/producer_orders.html:60
+#, fuzzy
+msgid ""
+"Buyer Information\n"
+"                                    "
+msgstr "خریداران بین‌المللی و واردکنندگان"
+
+#: templates/users/producer_orders.html:63
+#, fuzzy
+msgid "Name: "
+msgstr "نام کاربری"
+
+#: templates/users/producer_orders.html:64
+#, fuzzy
+msgid "Company: "
+msgstr "نام شرکت"
+
+#: templates/users/producer_orders.html:65
+#, fuzzy
+msgid "Country: "
+msgstr "کشور"
+
+#: templates/users/producer_orders.html:66
+msgid "Order Date: "
+msgstr ""
+
+#: templates/users/producer_orders.html:80
+msgid ""
+"p class=\"text-sm text-gray-600 dark:text-slate-400 italic bg-gray-50 "
+"dark:bg-dark-700/50 rounded-lg p-2\">"
+msgstr ""
+
+#: templates/users/producer_orders.html:96
+#, fuzzy
+msgid "✅ Confirm"
+msgstr "تأیید"
+
+#: templates/users/producer_orders.html:107
+msgid ""
+"div class=\"text-center py-2.5 px-4 rounded-lg bg-gray-100 dark:bg-"
+"dark-700 text-gray-600 dark:text-slate-400 text-sm\">"
+msgstr ""
+
+#: templates/users/producer_orders.html:114
+msgid ""
+"\" \n"
+"                                   class=\"inline-flex items-center "
+"justify-center gap-1 py-2 px-4 rounded-lg border border-gray-300 dark"
+":border-dark-600 \n"
+"                                          text-gray-700 dark:text-"
+"slate-300 hover:bg-gray-50 dark:hover:bg-dark-700 \n"
+"                                          font-medium text-xs "
+"transition\">"
+msgstr ""
+
+#: templates/users/producer_orders.html:134
+msgid "No Orders Received"
+msgstr ""
+
+#: templates/users/producer_orders.html:135
+msgid "p class=\"text-gray-600 dark:text-slate-400 text-sm mb-6\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:10
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: templates/users/profile_edit.html:18
+msgid "div class=\"mb-4 p-4 rounded-lg"
+msgstr ""
+
+#: templates/users/profile_edit.html:18
+msgid ""
+"bg-green-100 border border-green-400 text-green-700 dark:bg-green-900/30 "
+"dark:border-green-700 dark:text-green-400"
+msgstr ""
+
+#: templates/users/profile_edit.html:18
+msgid ""
+"bg-red-100 border border-red-400 text-red-700 dark:bg-red-900/30 dark"
+":border-red-700 dark:text-red-400"
+msgstr ""
+
+#: templates/users/profile_edit.html:18
+msgid ""
+"bg-blue-100 border border-blue-400 text-blue-700 dark:bg-blue-900/30 dark"
+":border-blue-700 dark:text-blue-400"
+msgstr ""
+
+# Registration Steps
+#: templates/users/profile_edit.html:35
+#, fuzzy
+msgid ""
+"Basic Information\n"
+"                "
+msgstr "مرحله ۱: اطلاعات پایه"
+
+#: templates/users/profile_edit.html:42
+#, fuzzy
+msgid "Enter your company name"
+msgstr "نام شرکت"
+
+#: templates/users/profile_edit.html:47
+#, fuzzy
+msgid "Country "
+msgstr "کشور"
+
+#: templates/users/profile_edit.html:50
+msgid "Enter your country"
+msgstr ""
+
+#: templates/users/profile_edit.html:55
+msgid "Phone Number"
+msgstr "شماره تلفن"
+
+#: templates/users/profile_edit.html:58 templates/users/profile_edit.html:135
+msgid "+1 234 567 8900"
+msgstr ""
+
+#: templates/users/profile_edit.html:70
+#, fuzzy
+msgid ""
+"Professional Information\n"
+"                "
+msgstr "مرحله ۲: اطلاعات حرفه‌ای"
+
+#: templates/users/profile_edit.html:74
+msgid "Job Title"
+msgstr "عنوان شغلی"
+
+#: templates/users/profile_edit.html:77
+msgid "e.g., CEO, Manager"
+msgstr ""
+
+#: templates/users/profile_edit.html:82
+msgid "Area of Expertise"
+msgstr ""
+
+#: templates/users/profile_edit.html:85
+msgid "e.g., International Trade"
+msgstr ""
+
+#: templates/users/profile_edit.html:91
+msgid "Bio"
+msgstr "بیوگرافی"
+
+#: templates/users/profile_edit.html:94
+msgid "Tell us about yourself and your professional background"
+msgstr ""
+
+#: templates/users/profile_edit.html:98
+msgid "Website"
+msgstr "وبسایت"
+
+#: templates/users/profile_edit.html:101
+msgid "https://yourcompany.com"
+msgstr ""
+
+#: templates/users/profile_edit.html:112
+#, fuzzy
+msgid ""
+"Social Media Links\n"
+"                "
+msgstr "لینک‌های اجتماعی"
+
+#: templates/users/profile_edit.html:116
+msgid "LinkedIn"
+msgstr "لینکدین"
+
+#: templates/users/profile_edit.html:119
+msgid "https://linkedin.com/in/username"
+msgstr ""
+
+#: templates/users/profile_edit.html:124
+msgid "Telegram"
+msgstr "تلگرام"
+
+#: templates/users/profile_edit.html:127
+#, fuzzy
+msgid "@username"
+msgstr "نام کاربری"
+
+#: templates/users/profile_edit.html:132
+msgid "WhatsApp"
+msgstr "واتساپ"
+
+#: templates/users/profile_edit.html:146
+#, fuzzy
+msgid "Save Changes ✓"
+msgstr "ذخیره تغییرات"
+
+#: templates/users/profile_edit.html:147
+msgid ""
+"\"\n"
+"                   class=\"flex-1 bg-gray-200 dark:bg-dark-700 text-"
+"gray-700 dark:text-slate-300 py-3 px-4 rounded-lg hover:bg-gray-300 "
+"dark:hover:bg-dark-600 transition duration-200 font-medium text-center "
+"shadow-md\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:164
+msgid "p class=\"text-sm font-medium text-indigo-800 dark:text-indigo-300\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:165
+msgid "p class=\"text-xs text-indigo-600 dark:text-indigo-400 mt-1\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:166
+msgid ""
+"\" class=\"text-xs text-indigo-700 dark:text-indigo-300 underline font-"
+"medium mt-1 inline-block hover:text-indigo-900 dark:hover:text-"
+"indigo-200\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:181
+msgid "p class=\"text-sm font-medium text-yellow-800 dark:text-yellow-300\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:182
+msgid "p class=\"text-xs text-yellow-600 dark:text-yellow-400 mt-1\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:183
+msgid ""
+"\" class=\"text-xs text-yellow-700 dark:text-yellow-300 underline font-"
+"medium mt-1 inline-block hover:text-yellow-900 dark:hover:text-"
+"yellow-200\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:196
+msgid "p class=\"text-sm font-medium text-green-800 dark:text-green-300\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:197
+msgid "p class=\"text-xs text-green-600 dark:text-green-400 mt-1\">"
+msgstr ""
+
+#: templates/users/profile_edit.html:198
+msgid ""
+"\" class=\"text-xs text-green-700 dark:text-green-300 underline font-"
+"medium mt-1 inline-block hover:text-green-900 dark:hover:text-"
+"green-200\">"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:15
+msgid "Backup Codes"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:32
+msgid "⚠️ Very Important!"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:48
+msgid "p class=\"text-xs text-gray-500 dark:text-gray-400 mb-1\">"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:49
+msgid ""
+"p class=\"text-2xl font-mono font-bold text-gray-900 dark:text-white "
+"tracking-wider\">"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:65
+msgid ""
+"Print Codes\n"
+"            "
+msgstr ""
+
+#: templates/users/show_backup_codes.html:77
+msgid "Got it, Continue"
+msgstr ""
+
+#: templates/users/show_backup_codes.html:83
+msgid ""
+"You can take a picture of these codes or store them in a password manager"
+" like LastPass or 1Password.\n"
+"            "
+msgstr ""
+
+# Profile & Dashboard
+#: templates/users/support.html:14
+#, fuzzy
+msgid ""
+"Back to Dashboard\n"
+"        "
+msgstr "داشبورد"
+
+#: templates/users/support.html:28
+msgid "Support - Contact Admin"
+msgstr ""
+
+#: templates/users/support.html:30 templates/users/support.html:99
+msgid "p class=\"text-gray-600 dark:text-slate-400 mb-4\">"
+msgstr ""
+
+#: templates/users/support.html:34
+msgid ""
+"\" \n"
+"                       class=\"px-5 py-2 rounded-lg bg-gradient-to-r "
+"from-gold to-gold-dark text-dark-900 font-bold text-sm \n"
+"                              hover:from-gold-light hover:to-gold "
+"transform hover:scale-[1.02] active:scale-[0.98] \n"
+"                              transition-all duration-200 shadow\">"
+msgstr ""
+
+#: templates/users/support.html:66
+msgid "span class=\"text-gold ml-1\">"
+msgstr ""
+
+#: templates/users/support.html:84
+msgid "Type your message to admin..."
+msgstr ""
+
+#: templates/users/support.html:100
+msgid "\" class=\"text-gold hover:text-gold-light font-medium\">"
+msgstr ""
+
+#: templates/users/upload_documents.html:16
+msgid "Upload Documents"
+msgstr "آپلود مدارک"
+
+#: templates/users/upload_documents.html:26
+msgid "Passport Copy *"
+msgstr ""
+
+#: templates/users/upload_documents.html:36
+#, fuzzy
+msgid "Company License *"
+msgstr "نام شرکت"
+
+#: templates/users/upload_documents.html:54
+msgid "Upload & Continue to Payment"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:17
+msgid "Two-Factor Authentication"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:19
+msgid "p class=\"text-sm text-gray-500 dark:text-slate-500 mt-2\">"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:29
+msgid "Authentication Code"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:34
+#: templates/users/verify_2fa_login.html:53
+msgid "p class=\"mt-1 text-xs text-gray-500 dark:text-slate-400\">"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:43
+msgid ""
+"span class=\"px-2 bg-white dark:bg-dark-800 text-gray-500 dark:text-"
+"slate-400\">"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:49
+msgid "Backup Code"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:52
+msgid "Enter your 8-digit backup code"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:66
+msgid "span id=\"verifyBtnText\">"
+msgstr ""
+
+#: templates/users/verify_2fa_login.html:84
+msgid "💡 How to use:"
+msgstr ""
+
+#: templates/users/verify_phone.html:16
+msgid "Verify Mobile Number"
+msgstr ""
+
+#: templates/users/verify_phone.html:18
+msgid "Enter the 6-digit code sent to "
+msgstr ""
+
+#: templates/users/verify_phone.html:26
+msgid "div class=\"p-3 rounded-lg text-sm"
+msgstr ""
+
+#: templates/users/verify_phone.html:26
+msgid ""
+"bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 "
+"border border-green-200 dark:border-green-800"
+msgstr ""
+
+#: templates/users/verify_phone.html:26
+msgid ""
+"bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border "
+"border-red-200 dark:border-red-800"
+msgstr ""
+
+#: templates/users/verify_phone.html:26
+msgid ""
+"bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border "
+"border-blue-200 dark:border-blue-800"
+msgstr ""
+
+#: templates/users/verify_phone.html:39
+#, fuzzy
+msgid "Verification Code"
+msgstr "در انتظار تأیید"
+
+#: templates/users/verify_phone.html:42
+msgid "123456"
+msgstr ""
+
+#: templates/users/verify_phone.html:54
+#, fuzzy
+msgid "Verify Code"
+msgstr "تأیید شده"
+
+#: templates/users/vessel_finder.html:16
+msgid "Vessel Finder"
+msgstr ""
+
+#: templates/users/vessel_finder.html:25
+#, fuzzy
+msgid "IMO Number"
+msgstr "شماره تلفن"
+
+#: templates/users/vessel_finder.html:28
+msgid "e.g., 9395044"
+msgstr ""
+
+#: templates/users/vessel_finder.html:44
+#, fuzzy
+msgid ""
+"Search Vessel\n"
+"            "
+msgstr "جستجو"
+
+#: templates/users/vessel_finder.html:69
+msgid ""
+"Vessel Details\n"
+"                    "
+msgstr ""
+
+#: templates/users/vessel_finder.html:76 templates/users/vessel_finder.html:80
+#: templates/users/vessel_finder.html:84 templates/users/vessel_finder.html:88
+#: templates/users/vessel_finder.html:92 templates/users/vessel_finder.html:96
+#: templates/users/vessel_finder.html:100
+#: templates/users/vessel_finder.html:104
+msgid "span class=\"text-gray-600 dark:text-slate-400 text-sm\">"
+msgstr ""
+
+#: templates/users/vessel_finder.html:77 templates/users/vessel_finder.html:81
+#: templates/users/vessel_finder.html:101
+#: templates/users/vessel_finder.html:105
+msgid ""
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-right"
+" font-mono\">"
+msgstr ""
+
+#: templates/users/vessel_finder.html:85 templates/users/vessel_finder.html:89
+#: templates/users/vessel_finder.html:93 templates/users/vessel_finder.html:97
+msgid ""
+"span class=\"font-medium text-gray-900 dark:text-white text-sm text-"
+"right\">"
+msgstr ""
+
+#~ msgid "Register"
+#~ msgstr "ثبت‌نام"
+
+#~ msgid "Forgot Password?"
+#~ msgstr "رمز عبور را فراموش کرده‌اید؟"
+
+#~ msgid "Remember Me"
+#~ msgstr "مرا به خاطر بسپار"
+
+#~ msgid "Don't have an account?"
+#~ msgstr "حساب کاربری ندارید؟"
+
+#~ msgid "Sign Up Now"
+#~ msgstr "همین حالا ثبت‌نام کنید"
+
+#~ msgid "Step 3: Security & Verification"
+#~ msgstr "مرحله ۳: امنیت و تأیید"
+
+#~ msgid "Next Step"
+#~ msgstr "مرحله بعد"
+
+#~ msgid "Previous Step"
+#~ msgstr "مرحله قبل"
+
+#~ msgid "Producer"
+#~ msgstr "تولیدکننده"
+
+#~ msgid "Buyer"
+#~ msgstr "خریدار"
+
+#~ msgid "Corporate Agent"
+#~ msgstr "نماینده شرکتی"
+
+#~ msgid "Logistics Provider"
+#~ msgstr "ارائه‌دهنده خدمات لجستیک"
+
+#~ msgid "Legal Advisor"
+#~ msgstr "مشاور حقوقی"
+
+#~ msgid "Tech Partner"
+#~ msgstr "شریک فناوری"
+
+#~ msgid "Investor"
+#~ msgstr "سرمایه‌گذار"
+
+#~ msgid "Expertise Area"
+#~ msgstr "حوزه تخصصی"
+
+#~ msgid "City"
+#~ msgstr "شهر"
+
+# Trust Score
+#~ msgid "Trust Score"
+#~ msgstr "امتیاز اعتماد"
+
+#~ msgid "Your Trust Score"
+#~ msgstr "امتیاز اعتماد شما"
+
+#~ msgid "Trust Level"
+#~ msgstr "سطح اعتماد"
+
+#~ msgid "Bronze"
+#~ msgstr "برنز"
+
+#~ msgid "Silver"
+#~ msgstr "نقره‌ای"
+
+#~ msgid "Gold"
+#~ msgstr "طلایی"
+
+#~ msgid "Platinum"
+#~ msgstr "پلاتینیوم"
+
+#~ msgid "Newcomer"
+#~ msgstr "تازه‌وارد"
+
+#~ msgid "Social Credibility"
+#~ msgstr "اعتبار اجتماعی"
+
+#~ msgid "Dynamic Score"
+#~ msgstr "امتیاز پویا"
+
+#~ msgid "Not Verified"
+#~ msgstr "تأیید نشده"
+
+# Messages & Notifications
+#~ msgid "Success"
+#~ msgstr "موفقیت"
+
+#~ msgid "Error"
+#~ msgstr "خطا"
+
+#~ msgid "Warning"
+#~ msgstr "هشدار"
+
+#~ msgid "Info"
+#~ msgstr "اطلاعات"
+
+#~ msgid "Access denied."
+#~ msgstr "دسترسی غیرمجاز."
+
+#~ msgid "File type not allowed."
+#~ msgstr "نوع فایل مجاز نیست."
+
+#~ msgid "File size exceeds limit."
+#~ msgstr "حجم فایل از حد مجاز بیشتر است."
+
+#~ msgid "Too many requests. Please try again later."
+#~ msgstr "درخواست‌های زیادی ارسال شده است. لطفاً بعداً تلاش کنید."
+
+# Forms & Validation
+#~ msgid "Required"
+#~ msgstr "الزامی"
+
+#~ msgid "This field is required."
+#~ msgstr "این فیلد الزامی است."
+
+#~ msgid "Enter a valid email address."
+#~ msgstr "یک آدرس ایمیل معتبر وارد کنید."
+
+#~ msgid "Please accept the terms and conditions."
+#~ msgstr "لطفاً شرایط و قوانین را بپذیرید."
+
+#~ msgid "I agree to the Terms of Service"
+#~ msgstr "با شرایط خدمات موافقم"
+
+#~ msgid "I agree to the Privacy Policy"
+#~ msgstr "با سیاست حریم خصوصی موافقم"
+
+# Navigation & Menu
+#~ msgid "Home"
+#~ msgstr "خانه"
+
+#~ msgid "Marketplace"
+#~ msgstr "بازار"
+
+#~ msgid "Services"
+#~ msgstr "خدمات"
+
+#~ msgid "Consortium"
+#~ msgstr "کنسرسیوم"
+
+#~ msgid "Map"
+#~ msgstr "نقشه"
+
+#~ msgid "Learning"
+#~ msgstr "یادگیری"
+
+#~ msgid "Courses"
+#~ msgstr "دوره‌ها"
+
+#~ msgid "Webinars"
+#~ msgstr "وبینارها"
+
+#~ msgid "CRM"
+#~ msgstr "مدیریت ارتباط با مشتری"
+
+#~ msgid "Leads"
+#~ msgstr "سرنخ‌ها"
+
+#~ msgid "Network"
+#~ msgstr "شبکه"
+
+#~ msgid "News"
+#~ msgstr "اخبار"
+
+#~ msgid "Settings"
+#~ msgstr "تنظیمات"
+
+#~ msgid "Help"
+#~ msgstr "راهنما"
+
+#~ msgid "About Us"
+#~ msgstr "درباره ما"
+
+#~ msgid "Terms of Service"
+#~ msgstr "شرایط خدمات"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "سیاست حریم خصوصی"
+
+# Actions
+#~ msgid "View"
+#~ msgstr "مشاهده"
+
+#~ msgid "Edit"
+#~ msgstr "ویرایش"
+
+#~ msgid "Delete"
+#~ msgstr "حذف"
+
+#~ msgid "Create"
+#~ msgstr "ایجاد"
+
+#~ msgid "Update"
+#~ msgstr "به‌روزرسانی"
+
+#~ msgid "Export"
+#~ msgstr "خروجی"
+
+#~ msgid "Download"
+#~ msgstr "دانلود"
+
+#~ msgid "Upload"
+#~ msgstr "آپلود"
+
+#~ msgid "Share"
+#~ msgstr "اشتراک‌گذاری"
+
+#~ msgid "Submit"
+#~ msgstr "ثبت"
+
+#~ msgid "Apply"
+#~ msgstr "درخواست"
+
+#~ msgid "Accept"
+#~ msgstr "پذیرفتن"
+
+# Time & Dates
+#~ msgid "Today"
+#~ msgstr "امروز"
+
+#~ msgid "Yesterday"
+#~ msgstr "دیروز"
+
+#~ msgid "This Week"
+#~ msgstr "این هفته"
+
+#~ msgid "This Year"
+#~ msgstr "امسال"
+
+#~ msgid "Created At"
+#~ msgstr "ایجاد شده در"
+
+#~ msgid "Updated At"
+#~ msgstr "به‌روزرسانی شده در"
+
+#~ msgid "Last Login"
+#~ msgstr "آخرین ورود"
+
+#~ msgid "Date"
+#~ msgstr "تاریخ"
+
+#~ msgid "Time"
+#~ msgstr "زمان"
+
+#~ msgid "Inactive"
+#~ msgstr "غیرفعال"
+
+#~ msgid "Archived"
+#~ msgstr "بایگانی شده"
+
+#~ msgid "Balance"
+#~ msgstr "موجودی"
+
+#~ msgid "Transaction"
+#~ msgstr "تراکنش"
+
+#~ msgid "Transactions"
+#~ msgstr "تراکنش‌ها"
+
+#~ msgid "Deposit"
+#~ msgstr "واریز"
+
+#~ msgid "Withdraw"
+#~ msgstr "برداشت"
+
+#~ msgid "Invoice"
+#~ msgstr "فاکتور"
+
+#~ msgid "Credit"
+#~ msgstr "اعتبار"
+
+#~ msgid "Debit"
+#~ msgstr "بدهی"
+
+#~ msgid "Trade Credit"
+#~ msgstr "اعتبار تجاری"
+
+#~ msgid "Escrow"
+#~ msgstr "امانت"
+
+# Miscellaneous
+#~ msgid "Loading..."
+#~ msgstr "در حال بارگذاری..."
+
+#~ msgid "Show more"
+#~ msgstr "نمایش بیشتر"
+
+#~ msgid "Show less"
+#~ msgstr "نمایش کمتر"
+
+#~ msgid "Copyright"
+#~ msgstr "حق کپی‌رایت"
+
+#~ msgid "All rights reserved."
+#~ msgstr "تمامی حقوق محفوظ است."
+
+#~ msgid "Made with"
+#~ msgstr "ساخته شده با"
+
+#~ msgid "in Iran"
+#~ msgstr "در ایران"
+
+# Roles Description
+#~ msgid "Producer Description"
+#~ msgstr "تولیدکنندگان کالا و خدمات صادراتی"
+
+#~ msgid "Broker Description"
+#~ msgstr "کارگزاران و واسطه‌های تجاری"
+
+#~ msgid "Corporate Agent Description"
+#~ msgstr "نمایندگان رسمی شرکت‌های بزرگ"
+
+#~ msgid "Logistics Provider Description"
+#~ msgstr "ارائه‌دهندگان خدمات حمل‌ونقل و لجستیک"
+
+#~ msgid "Tech Partner Description"
+#~ msgstr "شریک‌های فناوری و پلتفرم‌های دیجیتال"
+
+#~ msgid "Investor Description"
+#~ msgstr "سرمایه‌گذاران و صندوق‌های سرمایه‌گذاری"
+

@@ -8,14 +8,14 @@
                 <svg class="h-8 w-8 text-dark-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
             <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Admin Pane>{{ _("Admin Panel") }}</h2>
-            <p class="text-gray-600 dark:text-slate-400 text-sm">Restricted access for administrators only</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm">') }}Restricted access for administrators only</p>
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="space-y-2">
                     {% for category, message in messages %}
-                        <div class="p-3 rounded-lg text-sm border {% if category=='success' %}bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800{% elif category in ['error','danger'] %}bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800{% else %}bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800{% endif %}">{{ message }}</div>
+                        <{{ _('div class="p-3 rounded-lg text-sm border') }} {% if category=='success' %}{{ _('bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800') }}{% elif category in ['error','danger'] %}{{ _('bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800') }}{% else %}{{ _('bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800') }}{% endif %}">{{ message }}</div>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -29,9 +29,9 @@
         </form>
 
         <div class="text-center pt-4 border-t border-gray-200 dark:border-dark-700">
-            <a href="{{ url_for('users.login') }}" class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg> Return to Main Page</a>
+            <a href="{{ url_for('users.login') }}" class="inline-flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg> {{ _('Return to Main Page') }}</a>
         </div>
-        <p class="text-center text-xs text-gray-500 dark:text-slate-500 mt-4">© 2026 Metisma. All rights reserved.</p>
+        <{{ _('p class="text-center text-xs text-gray-500 dark:text-slate-500 mt-4">') }}© 2026 Metisma. All rights reserved.</p>
     </div>
 </div>
 {% endblock %}

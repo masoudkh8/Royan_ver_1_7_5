@@ -15,13 +15,13 @@
                     </svg>
                 </div>
                 <h3class="text-xl font-bold text-gray-900 dark:text-white mb-2">⚠️ Premium Featur>{{ _("⚠️ Premium Feature") }}</h3>
-                <p class="text-gray-600 dark:text-slate-400 mb-6">Only special users can access the chat system.</p>
-                <a href="{{ url_for('users.upgrade_to_premium') }}" 
+                <{{ _('p class="text-gray-600 dark:text-slate-400 mb-6">') }}Only special users can access the chat system.</p>
+                <{{ _('a href="') }}{{ url_for('users.upgrade_to_premium') }}{{ _('" 
                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl shadow-lg text-sm font-bold text-dark-900 
                           bg-gradient-to-r from-gold to-gold-dark 
                           hover:from-gold-light hover:to-gold 
                           transform hover:scale-[1.02] active:scale-[0.98] 
-                          transition-all duration-200">
+                          transition-all duration-200">') }}
                     🌟 Upgrade to Premium
                 </a>
             </div>
@@ -38,19 +38,19 @@
                         <svg class="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
-                        Contacts
-                    </h3>
+                        {{ _('Contacts
+                    ') }}</h3>
                 </div>
                 <div class="max-h-96 overflow-y-auto">
                     {% for u in users %}
                     <a href="{{ url_for('users.chat', receiver_id=u.id) }}" 
                        class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-dark-700 transition border-b border-gray-100 dark:border-dark-700/50 {% if receiver and receiver.id == u.id %}bg-gold/5 dark:bg-gold/10{% endif %}">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">
+                        <{{ _('div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">') }}
                             {{ u.username[0]|upper }}
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-gray-900 dark:text-white truncate">{{ u.username }}</p>
-                            <p class="text-xs text-gray-500 dark:text-slate-400 capitalize">{{ u.role.value }}</p>
+                            <{{ _('p class="font-medium text-gray-900 dark:text-white truncate">') }}{{ u.username }}</p>
+                            <{{ _('p class="text-xs text-gray-500 dark:text-slate-400 capitalize">') }}{{ u.role.value }}</p>
                         </div>
                     </a>
                     {% endfor %}
@@ -61,8 +61,8 @@
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                         </svg>
-                        Return to Profile
-                    </a>
+                        {{ _('Return to Profile
+                    ') }}</a>
                 </div>
             </div>
             
@@ -71,12 +71,12 @@
                 {% if receiver %}
                     <!-- هدر چت -->
                     <div class="p-4 border-b border-gray-200 dark:border-dark-700 flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">
+                        <{{ _('div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center text-gold font-bold">') }}
                             {{ receiver.username[0]|upper }}
                         </div>
                         <div>
-                            <p class="font-bold text-gray-900 dark:text-white">{{ receiver.username }}</p>
-                            <p class="text-xs text-gold">🌟 Premium Contact</p>
+                            <{{ _('p class="font-bold text-gray-900 dark:text-white">') }}{{ receiver.username }}</p>
+                            <{{ _('p class="text-xs text-gold">') }}🌟 Premium Contact</p>
                         </div>
                     </div>
                     
@@ -86,8 +86,8 @@
                             {% for m in messages %}
                             <div class="flex {% if m.sender_id == current_user.id %}justify-end{% else %}justify-start{% endif %}">
                                 <div class="max-w-[70%] {% if m.sender_id == current_user.id %}bg-gold text-dark-900{% else %}bg-gray-100 dark:bg-dark-700 text-gray-900 dark:text-white{% endif %} rounded-2xl px-4 py-2.5 shadow-sm">
-                                    <p class="text-sm">{{ m.content }}</p>
-                                    <p class="text-[10px] {% if m.sender_id == current_user.id %}text-dark-900/70{% else %}text-gray-500 dark:text-slate-400{% endif %} mt-1 text-right">
+                                    <{{ _('p class="text-sm">') }}{{ m.content }}</p>
+                                    <{{ _('p class="text-[10px]') }} {% if m.sender_id == current_user.id %}{{ _('text-dark-900/70') }}{% else %}{{ _('text-gray-500 dark:text-slate-400') }}{% endif %} {{ _('mt-1 text-right">') }}
                                         {{ m.created_at.strftime('%H:%M') }}
                                     </p>
                                 </div>
@@ -95,7 +95,7 @@
                             {% endfor %}
                         {% else %}
                             <div class="flex items-center justify-center h-full text-gray-500 dark:text-slate-400">
-                                <p>No messages yet. Start the conversation!</p>
+                                <{{ _('p>') }}No messages yet. Start the conversation!</{{ _('p>') }}
                             </div>
                         {% endif %}
                     </div>
@@ -125,7 +125,7 @@
                                 </svg>
                             </div>
                             <h3class="text-lg font-bold text-gray-900 dark:text-white mb-2">Select a Contac>{{ _("Select a Contact") }}</h3>
-                            <p class="text-gray-600 dark:text-slate-400">To start a chat, select a specific contact from the list.</p>
+                            <{{ _('p class="text-gray-600 dark:text-slate-400">') }}To start a chat, select a specific contact from the list.</p>
                         </div>
                     </div>
                 {% endif %}

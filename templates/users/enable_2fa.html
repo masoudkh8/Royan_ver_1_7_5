@@ -13,7 +13,7 @@
                     </svg>
                 </div>
                 <h2class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Enable Two-Factor Authenticatio>{{ _("Enable Two-Factor Authentication") }}</h2>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <{{ _('p class="mt-2 text-sm text-gray-600 dark:text-gray-400">') }}
                     Increase your account security with two-factor authentication
                 </p>
             </div>
@@ -29,13 +29,13 @@
                          class="w-48 h-48">
                 </div>
                 <div class="text-center md:text-right">
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    <{{ _('p class="text-sm text-gray-600 dark:text-gray-300 mb-2">') }}
                         1. Install Google Authenticator or Authy app
                     </p>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    <{{ _('p class="text-sm text-gray-600 dark:text-gray-300 mb-2">') }}
                         2. Scan the QR code above
                     </p>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                    <{{ _('p class="text-sm text-gray-600 dark:text-gray-300 mb-4">') }}
                         3. Or enter the code below manually:
                     </p>
                     <div class="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600">
@@ -61,7 +61,7 @@
                                   transition duration-150 ease-in-out text-center text-2xl tracking-widest"
                            placeholder="{{ _("000000") }}" dir="ltr">
                 </div>
-                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-gray-400">') }}
                     Enter the 6-digit code displayed in the app
                 </p>
             </div>
@@ -77,20 +77,20 @@
                     <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    Enable Two-Factor Authentication
-                </button>
+                    {{ _('Enable Two-Factor Authentication
+                ') }}</button>
             </div>
         </form>
 
         <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <p class="text-sm text-blue-800 dark:text-blue-200">
-                <strong>💡 Tip:</strong> After activation, store backup codes in a secure location. These codes are used for emergencies.
-            </p>
+                <strong>{{ _('💡 Tip:') }}</strong> {{ _('After activation, store backup codes in a secure location. These codes are used for emergencies.
+            ') }}</p>
         </div>
 
         <div class="text-center">
-            <a href="{{ url_for('users.profile') }}" 
-               class="font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300">
+            <{{ _('a href="') }}{{ url_for('users.profile') }}{{ _('" 
+               class="font-medium text-gray-600 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300">') }}
                 ← Cancel and return to profile
             </a>
         </div>

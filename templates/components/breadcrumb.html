@@ -1,6 +1,6 @@
 {# Breadcrumb Component - Reusable #}
 {% macro render_breadcrumb(items) %}
-<nav class="mb-6 md:mb-8" aria-label="Breadcrumb">
+<nav class="mb-6 md:mb-8" aria-label="{{ _(''Breadcrumb'') }}">
     <ol class="flex items-center space-x-2 md:space-x-4 text-sm md:text-base overflow-x-auto whitespace-nowrap">
         {% for item in items %}
         <li class="flex items-center">
@@ -11,9 +11,9 @@
             {% endif %}
             
             {% if loop.last %}
-            <span class="text-gray-900 dark:text-white font-medium">{{ item.label }}</span>
+            <{{ _('span class="text-gray-900 dark:text-white font-medium">') }}{{ item.label }}</span>
             {% else %}
-            <a href="{{ item.url }}" class="text-gray-500 dark:text-gray-400 hover:text-gold dark:hover:text-gold-light transition-colors">
+            <{{ _('a href="') }}{{ item.url }}{{ _('" class="text-gray-500 dark:text-gray-400 hover:text-gold dark:hover:text-gold-light transition-colors">') }}
                 {{ item.label }}
             </a>
             {% endif %}

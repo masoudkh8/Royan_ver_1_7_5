@@ -259,9 +259,9 @@ def register():
         
         # Strong password check (Request 2)
         if not password or len(password) < 8:
-            errors.append("Password must be at least 8 characters long.")
+            errors.append(gettext("Password must be at least 8 characters long."))
         elif password != confirm_password:
-            errors.append("Passwords do not match.")
+            errors.append(gettext("Passwords do not match."))
         else:
             # Password strength check
             has_upper = any(c.isupper() for c in password)
@@ -269,7 +269,7 @@ def register():
             has_digit = any(c.isdigit() for c in password)
             
             if not (has_upper and has_lower and has_digit):
-                errors.append("Password should contain uppercase, lowercase, and numbers for better security.")
+                errors.append(gettext("Password should contain uppercase, lowercase, and numbers for better security."))
         
         # Role check
         if not role or not Role.has_value(role):
@@ -282,7 +282,7 @@ def register():
         # If there are errors, return to form
         if errors:
             for error in errors:
-                flash(error)
+                flash(gettext(error))
             return redirect(url_for('users.register'))
         # Create new user - DEBUG VERSION
         try:
@@ -381,7 +381,8 @@ def login():
         # بررسی قفل بودن حساب
         if user and user.locked_until:
             if datetime.utcnow() < user.locked_until:
-                flash(gettext(f"❌ Your account is locked until {user.locked_until.strftime(\'%Y-%m-%d %H:%M\')} due to failed attempts."))
+                lock_time = user.locked_until.strftime('%Y-%m-%d %H:%M')
+                flash(gettext(f"❌ Your account is locked until {lock_time} due to failed attempts."))
                 ActivityLog.log_activity(
                     user_id=user.id,
                     activity_type='login_blocked',

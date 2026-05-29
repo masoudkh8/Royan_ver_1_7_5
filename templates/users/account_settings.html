@@ -13,7 +13,7 @@
             <div class="relative bg-white dark:bg-dark-800 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-dark-700">
                 <div class="flex flex-col md:flex-row items-center gap-6">
                     <div class="relative">
-                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30">
+                        <{{ _('div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/30">') }}
                             {{ user.username[0].upper() if user.username else 'U' }}
                         </div>
                         <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-dark-800 flex items-center justify-center">
@@ -23,10 +23,10 @@
                         </div>
                     </div>
                     <div class="flex-1 text-center md:text-right">
-                        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
+                        <{{ _('h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">') }}
                             {{ t_('common.account_settings') }}
                         </h1>
-                        <p class="text-gray-600 dark:text-slate-400 text-lg">
+                        <{{ _('p class="text-gray-600 dark:text-slate-400 text-lg">') }}
                             {{ t_('profile.account_settings_subtitle') }}
                         </p>
                         <div class="flex flex-wrap justify-center md:justify-end gap-3 mt-3">
@@ -92,7 +92,7 @@
                                         </svg>
                                     </div>
                                 {% endif %}
-                                <span class="flex-1 text-base font-medium">{{ msg }}</span>
+                                <{{ _('span class="flex-1 text-base font-medium">') }}{{ msg }}</span>
                                 <button onclick="this.closest('.animate-fade-in').remove()" class="flex-shrink-0 p-2 hover:bg-white/50 dark:hover:bg-dark-700/50 rounded-lg transition">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -120,8 +120,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">{{ t_('profile.change_password_title') }}</h2>
-                                <p class="text-blue-100 text-sm">{{ t_('profile.change_password_desc') }}</p>
+                                <{{ _('h2 class="text-2xl font-bold text-white">') }}{{ t_('profile.change_password_title') }}</h2>
+                                <{{ _('p class="text-blue-100 text-sm">') }}{{ t_('profile.change_password_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -229,8 +229,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">{{ t_('security.two_factor_auth') }}</h2>
-                                <p class="text-purple-100 text-sm">{{ t_('security.two_factor_desc') }}</p>
+                                <{{ _('h2 class="text-2xl font-bold text-white">') }}{{ t_('security.two_factor_auth') }}</h2>
+                                <{{ _('p class="text-purple-100 text-sm">') }}{{ t_('security.two_factor_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -247,13 +247,13 @@
                                         </svg>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-green-900 dark:text-green-300 text-xl mb-2">{{ t_('security.two_factor_enabled') }}</h3>
-                                        <p class="text-sm text-green-700 dark:text-green-400 mb-4">{{ t_('security.two_factor_active_msg') }}</p>
+                                        <{{ _('h3 class="font-bold text-green-900 dark:text-green-300 text-xl mb-2">') }}{{ t_('security.two_factor_enabled') }}</h3>
+                                        <{{ _('p class="text-sm text-green-700 dark:text-green-400 mb-4">') }}{{ t_('security.two_factor_active_msg') }}</p>
                                         
                                         <form method="POST" action="{{ url_for('users.disable_2fa') }}" class="space-y-3">
                                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                             <div>
-                                                <label class="block text-sm font-bold text-green-900 dark:text-green-300 mb-2">
+                                                <{{ _('label class="block text-sm font-bold text-green-900 dark:text-green-300 mb-2">') }}
                                                     {{ t_('security.enter_code_to_disable') }}
                                                 </label>
                                                 <input type="text" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required
@@ -282,8 +282,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="font-bold text-amber-900 dark:text-amber-300 text-xl mb-2">{{ t_('security.two_factor_disabled') }}</h3>
-                                        <p class="text-sm text-amber-700 dark:text-amber-400 mb-4">{{ t_('security.two_factor_inactive_msg') }}</p>
+                                        <{{ _('h3 class="font-bold text-amber-900 dark:text-amber-300 text-xl mb-2">') }}{{ t_('security.two_factor_disabled') }}</h3>
+                                        <{{ _('p class="text-sm text-amber-700 dark:text-amber-400 mb-4">') }}{{ t_('security.two_factor_inactive_msg') }}</p>
                                         <div class="space-y-2">
                                             <div class="flex items-center gap-2.5 text-sm text-amber-800 dark:text-amber-300">
                                                 <svg class="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -327,15 +327,15 @@
                             </h4>
                             <ul class="text-sm text-gray-700 dark:text-slate-300 space-y-2">
                                 <li class="flex items-start gap-2">
-                                    <span class="text-blue-500 font-bold">•</span>
+                                    <{{ _('span class="text-blue-500 font-bold">') }}•</span>
                                     {{ t_('security.tip_use_authenticator') }}
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-blue-500 font-bold">•</span>
+                                    <{{ _('span class="text-blue-500 font-bold">') }}•</span>
                                     {{ t_('security.tip_save_backup_codes') }}
                                 </li>
                                 <li class="flex items-start gap-2">
-                                    <span class="text-blue-500 font-bold">•</span>
+                                    <{{ _('span class="text-blue-500 font-bold">') }}•</span>
                                     {{ t_('security.tip_never_share_codes') }}
                                 </li>
                             </ul>

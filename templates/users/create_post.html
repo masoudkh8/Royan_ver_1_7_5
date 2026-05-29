@@ -11,43 +11,43 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
             </svg>
-            Back to Feed
-        </a>
+            {{ _('Back to Feed
+        ') }}</a>
     </div>
     
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="mb-0">{{ t_('social.create_post') }}</h5>
+                    <{{ _('h5 class="mb-0">') }}{{ t_('social.create_post') }}</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ url_for('social.create_post') }}" method="POST" enctype="multipart/form-data">
                         <!-- Content -->
                         <div class="mb-3">
-                            <label for="content" class="form-label">{{ t_('social.what_is_on_your_mind') }}</label>
+                            <{{ _('label for="content" class="form-label">') }}{{ t_('social.what_is_on_your_mind') }}</label>
                             <textarea class="form-control" name="content" id="content" rows="5" required placeholder="{{ t_('social.what_is_on_your_mind') }}"></textarea>
-                            <div class="form-text" id="contentCount">0 characters</div>
+                            <{{ _('div class="form-text" id="contentCount">') }}0 characters</div>
                         </div>
                         
                         <!-- Visibility -->
                         <div class="mb-3">
-                            <label for="visibility" class="form-label">{{ t_('social.visibility') }}</label>
+                            <{{ _('label for="visibility" class="form-label">') }}{{ t_('social.visibility') }}</label>
                             <select class="form-select" name="visibility" id="visibility">
-                                <option value="public">{{ t_('social.visibility_public') }}</option>
-                                <option value="followers_only">{{ t_('social.visibility_followers_only') }}</option>
-                                <option value="private">{{ t_('social.visibility_private') }}</option>
+                                <{{ _('option value="public">') }}{{ t_('social.visibility_public') }}</option>
+                                <{{ _('option value="followers_only">') }}{{ t_('social.visibility_followers_only') }}</option>
+                                <{{ _('option value="private">') }}{{ t_('social.visibility_private') }}</option>
                             </select>
                         </div>
                         
                         <!-- Media Upload -->
                         <div class="mb-3">
-                            <label class="form-label">{{ t_('social.add_media') }}</label>
+                            <{{ _('label class="form-label">') }}{{ t_('social.add_media') }}</label>
                             <div class="border rounded p-3 text-center" id="dropZone">
                                 <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-2"></i>
-                                <p class="text-muted">{{ t_('social.add_images') }} {{ t_('common.or')|default('or') }} {{ t_('social.add_files') }}</p>
+                                <{{ _('p class="text-muted">') }}{{ t_('social.add_images') }} {{ t_('common.or')|default('or') }} {{ t_('social.add_files') }}</p>
                                 <input type="file" name="media" id="mediaInput" multiple accept="image/*,video/*,.pdf,.doc,.docx" style="display: none;">
-                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('mediaInput').click()">
+                                <{{ _('button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('mediaInput').click()">') }}
                                     {{ t_('social.add_media') }}
                                 </button>
                             </div>
@@ -56,19 +56,19 @@
                         
                         <!-- Tagging -->
                         <div class="mb-3">
-                            <label class="form-label">{{ t_('social.tag_products') }}</label>
+                            <{{ _('label class="form-label">') }}{{ t_('social.tag_products') }}</label>
                             <input type="text" class="form-control" id="tagProducts" placeholder="{{ _("Enter product IDs separated by comma") }}">
                         </div>
                         
                         <div class="mb-3">
-                            <label class="form-label">{{ t_('social.tag_companies') }}</label>
+                            <{{ _('label class="form-label">') }}{{ t_('social.tag_companies') }}</label>
                             <input type="text" class="form-control" id="tagCompanies" placeholder="{{ _("Enter company IDs separated by comma") }}">
                         </div>
                         
                         <!-- Actions -->
                         <div class="d-flex justify-content-between">
-                            <a href="{{ url_for('social.news_feed') }}" class="btn btn-secondary">{{ t_('common.cancel') }}</a>
-                            <button type="submit" class="btn btn-primary">{{ t_('social.publish') }}</button>
+                            <{{ _('a href="') }}{{ url_for('social.news_feed') }}{{ _('" class="btn btn-secondary">') }}{{ t_('common.cancel') }}</a>
+                            <{{ _('button type="submit" class="btn btn-primary">') }}{{ t_('social.publish') }}</button>
                         </div>
                     </form>
                 </div>

@@ -641,18 +641,18 @@
     <div class="permission-dashboard mb-4">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h2><i class="fas fa-shield-alt ml-2"></i>Permissions and Access Management Dashboard</h2>
-                <p class="mb-0 opacity-75">Professional centralized management of roles, permissions and user access</p>
+                <h2><i class="fas fa-shield-alt ml-2"></i>{{ _('Permissions and Access Management Dashboard') }}</h2>
+                <{{ _('p class="mb-0 opacity-75">') }}Professional centralized management of roles, permissions and user access</p>
             </div>
             <div class="col-md-4 text-left">
                 <div class="d-flex justify-content-end gap-2">
                     <button class="btn btn-light action-btn action-btn-primary" onclick="location.reload()">
-                        <i class="fas fa-sync-alt ml-1"></i>Update
-                    </button>
+                        <i class="fas fa-sync-alt ml-1"></i>{{ _('Update
+                    ') }}</button>
                     <a href="{{ url_for('users.manage_permissions', target_user_id=current_user.id) }}" 
                        class="btn btn-light action-btn action-btn-success">
-                        <i class="fas fa-user-cog ml-1"></i>User Management
-                    </a>
+                        <i class="fas fa-user-cog ml-1"></i>{{ _('User Management
+                    ') }}</a>
                 </div>
             </div>
         </div>
@@ -662,30 +662,30 @@
     <div class="row mb-4">
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
-                <div class="icon">🎭</div>
-                <div class="value">{{ roles|length }}</div>
-                <div class="label">Active User Roles</div>
+                <{{ _('div class="icon">') }}🎭</div>
+                <{{ _('div class="value">') }}{{ roles|length }}</div>
+                <{{ _('div class="label">') }}Active User Roles</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
-                <div class="icon">🔐</div>
-                <div class="value">{{ permissions|length }}</div>
-                <div class="label">Defined Permissions</div>
+                <{{ _('div class="icon">') }}🔐</div>
+                <{{ _('div class="value">') }}{{ permissions|length }}</div>
+                <{{ _('div class="label">') }}Defined Permissions</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
-                <div class="icon">👥</div>
-                <div class="value">{{ users|length }}</div>
-                <div class="label">Registered Users</div>
+                <{{ _('div class="icon">') }}👥</div>
+                <{{ _('div class="value">') }}{{ users|length }}</div>
+                <{{ _('div class="label">') }}Registered Users</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
             <div class="stat-card text-center">
-                <div class="icon">⚙️</div>
-                <div class="value">{{ matrix|length }}</div>
-                <div class="label">Active Systems</div>
+                <{{ _('div class="icon">') }}⚙️</div>
+                <{{ _('div class="value">') }}{{ matrix|length }}</div>
+                <{{ _('div class="label">') }}Active Systems</div>
             </div>
         </div>
     </div>
@@ -694,18 +694,18 @@
     <ul class="nav nav-tabs mb-0" id="permTabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="matrix-tab" data-toggle="tab" href="#matrix" role="tab">
-                <i class="fas fa-table ml-1"></i>Role Access Matrix
-            </a>
+                <i class="fas fa-table ml-1"></i>{{ _('Role Access Matrix
+            ') }}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab">
-                <i class="fas fa-users-cog ml-1"></i>Special User Management
-            </a>
+                <i class="fas fa-users-cog ml-1"></i>{{ _('Special User Management
+            ') }}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">
-                <i class="fas fa-eye ml-1"></i>User Menu Preview
-            </a>
+                <i class="fas fa-eye ml-1"></i>{{ _('User Menu Preview
+            ') }}</a>
         </li>
     </ul>
     
@@ -715,8 +715,8 @@
         <div class="tab-pane fade show active" id="matrix" role="tabpanel">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0 text-primary font-weight-bold">
-                    <i class="fas fa-grid-2 ml-2"></i>Default Role Access Table
-                </h5>
+                    <i class="fas fa-grid-2 ml-2"></i>{{ _('Default Role Access Table
+                ') }}</h5>
                 <div class="search-box" style="width: 350px;">
                     <input type="text" id="matrixSearch" placeholder="{{ _("Search in permissions and roles...") }}" onkeyup="filterMatrix()">
                     <i class="fas fa-search"></i>
@@ -725,18 +725,18 @@
             
             <div class="alert alert-info mb-3">
                 <i class="fas fa-info-circle ml-2"></i>
-                <strong>Guide:</strong> ✅ indicates authorized access and ❌ indicates no access. 
+                <strong>{{ _('Guide:') }}</strong> ✅ indicates authorized access and ❌ {{ _('indicates no access. 
                 Use the buttons below the table to edit each role's access.
-            </div>
+            ') }}</div>
             
             <div class="table-responsive">
                 <table class="permission-matrix" id="permissionMatrix">
                     <thead>
                         <tr>
-                            <th>Permission / Role</th>
+                            <{{ _('th>') }}Permission / Role</{{ _('th>') }}
                             {% for role in roles %}
                             <th>
-                                <span class="role-badge role-{{ role.name|lower }}">{{ role.value }}</span>
+                                <{{ _('span class="role-badge role-') }}{{ role.name|lower }}">{{ role.value }}</span>
                             </th>
                             {% endfor %}
                         </tr>
@@ -746,7 +746,7 @@
                         {% set perm_category = perm.name.split('_')[0]|lower %}
                         <tr class="permission-row" data-category="{{ perm_category }}">
                             <td class="text-right">
-                                <span class="category-badge cat-{{ perm_category }}">
+                                <{{ _('span class="category-badge cat-') }}{{ perm_category }}">
                                     {{ perm_category }}
                                 </span>
                                 <strong>{{ perm.value }}</strong>
@@ -789,7 +789,7 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-warning text-dark border-0">
-                            <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>Grant Exceptional Permission to User</h5>
+                            <h5 class="mb-0"><i class="fas fa-user-cog ml-2"></i>{{ _('Grant Exceptional Permission to User') }}</h5>
                         </div>
                         <div class="card-body">
                             <form method="GET" action="{{ url_for('admin.admin_perms.manage_user_permissions', user_id=0) }}"
@@ -798,11 +798,11 @@
                                 <labelclass="font-weight-bold mb-2">Select User:>{{ _("Select User:") }}</label>
                                 <select name="user_id" class="form-control filter-select" required 
                                         onchange="this.form.submit()">
-                                    <option value="">-- Select a user --</option>
+                                    <{{ _('option value="">') }}-- Select a user --</option>
                                     {% for user in users %}
                                     <option value="{{ user.id }}">
                                         {{ user.username }} 
-                                        <span class="text-muted">({{ user.role.value }})</span>
+                                        <{{ _('span class="text-muted">') }}({{ user.role.value }})</span>
                                     </option>
                                     {% endfor %}
                                 </select>
@@ -810,16 +810,16 @@
                             
                             <div class="alert alert-light border">
                                 <i class="fas fa-lightbulb text-warning ml-2"></i>
-                                <strong>Application:</strong> Use this section to grant special permissions to special users. 
+                                <strong>{{ _('Application:') }}</strong> Use this section to g{{ _('rant special permissions to special users. 
                                 These permissions are exceptionally added to the role's default access and have higher priority.
-                            </div>
+                            ') }}</div>
                             
                             <div class="mt-3">
-                                <h6 class="font-weight-bold mb-2"><i class="fas fa-info-circle ml-1"></i>Important Points:</h6>
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-info-circle ml-1"></i>{{ _('Important Points:') }}</h6>
                                 <ul class="small text-muted pr-2">
-                                    <li>Custom permissions have priority over role permissions</li>
-                                    <li>To delete custom permission, refer to user management page</li>
-                                    <li>Changes are applied immediately</li>
+                                    <{{ _('li>') }}Custom permissions have priority over role permissions</{{ _('li>') }}
+                                    <{{ _('li>') }}To delete custom permission, refer to user management page</{{ _('li>') }}
+                                    <{{ _('li>') }}Changes are applied immediately</{{ _('li>') }}
                                 </ul>
                             </div>
                         </div>
@@ -829,32 +829,32 @@
                 <div class="col-md-6">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-header bg-info text-white border-0">
-                            <h5 class="mb-0"><i class="fas fa-chart-pie ml-2"></i>Custom Access Statistics</h5>
+                            <h5 class="mb-0"><i class="fas fa-chart-pie ml-2"></i>{{ _('Custom Access Statistics') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="text-center py-4">
                                 <div class="display-4 text-info mb-3">
                                     <i class="fas fa-key"></i>
                                 </div>
-                                <p class="text-muted mb-3">
+                                <{{ _('p class="text-muted mb-3">') }}
                                     In this section you can view and manage users who have custom permissions.
                                 </p>
                                 <button class="btn action-btn action-btn-info" onclick="showCustomPermsStats()">
-                                    <i class="fas fa-list ml-1"></i>View List of special users
-                                </button>
+                                    <i class="fas fa-list ml-1"></i>{{ _('View List of special users
+                                ') }}</button>
                                 
                                 <div class="mt-4 pt-4 border-top">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="stat-card p-2">
-                                                <div class="value" style="font-size: 1.5rem;">{{ users|length }}</div>
-                                                <div class="label small">Total Users</div>
+                                                <{{ _('div class="value" style="font-size: 1.5rem;">') }}{{ users|length }}</div>
+                                                <{{ _('div class="label small">') }}Total Users</div>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="stat-card p-2">
-                                                <div class="value" style="font-size: 1.5rem;">{{ (users|selectattr('custom_permissions')|list)|length }}</div>
-                                                <div class="label small">With custom permission</div>
+                                                <{{ _('div class="value" style="font-size: 1.5rem;">') }}{{ (users|selectattr('custom_permissions')|list)|length }}</div>
+                                                <{{ _('div class="label small">') }}With custom permission</div>
                                             </div>
                                         </div>
                                     </div>
@@ -870,37 +870,37 @@
         <div class="tab-pane fade" id="preview" role="tabpanel">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-primary text-white border-0">
-                    <h5 class="mb-0"><i class="fas fa-desktop ml-2"></i>Preview of services visible to user</h5>
+                    <h5 class="mb-0"><i class="fas fa-desktop ml-2"></i>{{ _('Preview of services visible to user') }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info mb-4">
                         <i class="fas fa-info-circle ml-2"></i>
-                        <strong>Application:</strong> In this section you can see a preview of modules and services that a specific user can view.
+                        <strong>{{ _('Application:') }}</strong> In this {{ _('section you can see a preview of modules and services that a specific user can view.
                         This tool is very useful for testing and verifying permission settings.
-                    </div>
+                    ') }}</div>
                     
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <labelclass="font-weight-bold mb-2">Select user for preview:>{{ _("Select user for preview:") }}</label>
                                 <select id="previewUserSelect" class="form-control filter-select">
-                                    <option value="">-- Select a user --</option>
+                                    <{{ _('option value="">') }}-- Select a user --</option>
                                     {% for user in users %}
                                     <option value="{{ user.id }}">
                                         {{ user.username }} 
-                                        <span class="text-muted">({{ user.role.value }})</span>
+                                        <{{ _('span class="text-muted">') }}({{ user.role.value }})</span>
                                     </option>
                                     {% endfor %}
                                 </select>
                             </div>
                             
                             <button onclick="loadPreview()" class="btn action-btn action-btn-primary btn-block mt-3">
-                                <i class="fas fa-play ml-1"></i>Load Preview
-                            </button>
+                                <i class="fas fa-play ml-1"></i>{{ _('Load Preview
+                            ') }}</button>
                             
                             <div class="mt-4 p-3 bg-light rounded">
-                                <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>Note:</h6>
-                                <p class="small text-muted mb-0">
+                                <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>{{ _('Note:') }}</h6>
+                                <{{ _('p class="small text-muted mb-0">') }}
                                     The preview is displayed based on the user's role permissions plus any granted custom permissions.
                                 </p>
                             </div>
@@ -910,14 +910,14 @@
                             <div id="previewResult" class="preview-box" style="display:none;">
                                 <h6 class="font-weight-bold mb-3">
                                     <i class="fas fa-check-circle text-success ml-1"></i>
-                                    Visible Modules:
-                                </h6>
+                                    {{ _('Visible Modules:
+                                ') }}</h6>
                                 <div id="previewList"></div>
                             </div>
                             
                             <div id="previewPlaceholder" class="text-center text-muted py-5">
                                 <i class="fas fa-arrow-left display-4 mb-3"></i>
-                                <p class="mb-0">To view preview, select a user and click the load button.</p>
+                                <{{ _('p class="mb-0">') }}To view preview, select a user and click the load button.</p>
                             </div>
                         </div>
                     </div>
@@ -953,9 +953,9 @@ function loadPreview() {
     document.getElementById('previewResult').style.display = 'none';
     document.getElementById('previewPlaceholder').innerHTML = `
         <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
+            <{{ _('span class="sr-only">') }}Loading...</span>
         </div>
-        <p class="mt-3">Fetching information...</p>
+        <{{ _('p class="mt-3">') }}Fetching information...</p>
     `;
 
     fetch(`/admin/permissions/api/preview/${userId}`)
@@ -968,8 +968,8 @@ function loadPreview() {
                 list.innerHTML = `
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle ml-2"></i>
-                        No module is visible
-                    </div>`;
+                        {{ _('No module is visible
+                    ') }}</div>`;
             } else {
                 const icons = {
                     'orders': '📦',
@@ -984,10 +984,10 @@ function loadPreview() {
                     const div = document.createElement('div');
                     div.className = 'module-item';
                     div.innerHTML = `
-                        <div class="module-icon" style="background: #edf2f7;">${icon}</div>
+                        <{{ _('div class="module-icon" style="background: #edf2f7;">') }}${icon}</div>
                         <div>
                             <strong>${mod.name}</strong>
-                            <div class="text-muted small">${mod.perm.value}</div>
+                            <{{ _('div class="text-muted small">') }}${mod.perm.value}</div>
                         </div>
                     `;
                     list.appendChild(div);
@@ -1002,7 +1002,7 @@ function loadPreview() {
             showAlert('Error loading information', 'error');
             document.getElementById('previewPlaceholder').innerHTML = `
                 <i class="fas fa-exclamation-circle text-danger display-4"></i>
-                <p class="mt-3 text-danger">Error fetching information</p>
+                <{{ _('p class="mt-3 text-danger">') }}Error fetching information</p>
             `;
         });
 }
@@ -1020,7 +1020,7 @@ function showAlert(message, type = 'info') {
         <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
             ${message}
             <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
+                <{{ _('span>') }}&times;</{{ _('span>') }}
             </button>
         </div>
     `;

@@ -8,17 +8,17 @@
                     {% if post.author.profile and post.author.profile.avatar_url %}
                         <img src="{{ post.author.profile.avatar_url }}" alt="{{ _("{{ post.author.username }}") }}" class="rounded-circle me-2" width="40" height="40" style="object-fit: cover;">
                     {% else %}
-                        <div class="rounded-circle bg-secondary me-2 d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
+                        <{{ _('div class="rounded-circle bg-secondary me-2 d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">') }}
                             {{ post.author.username[0]|upper }}
                         </div>
                     {% endif %}
                 </a>
                 <div>
-                    <a href="{{ url_for('social.public_profile', username=post.author.username) }}" class="fw-bold text-dark text-decoration-none">
+                    <{{ _('a href="') }}{{ url_for('social.public_profile', username=post.author.username) }}{{ _('" class="fw-bold text-dark text-decoration-none">') }}
                         {{ post.author.company_name or post.author.username }}
                     </a>
                     {% if post.author.trust_score %}
-                        <span class="badge badge-sm {% if post.author.trust_score >= 70 %}bg-success{% elif post.author.trust_score >= 40 %}bg-warning{% else %}bg-danger{% endif %} ms-1" title="{{ t_('social.trust_score') }}">
+                        <{{ _('span class="badge badge-sm {% if post.author.trust_score >') }}= 70 %}bg-success{% elif post.author.trust_score >= 40 %}bg-warning{% else %}bg-danger{% endif %} ms-1" title="{{ t_('social.trust_score') }}">
                             {{ post.author.trust_score }}
                         </span>
                     {% endif %}
@@ -56,15 +56,15 @@
         
         <!-- Post Content -->
         <div class="post-content mb-3">
-            <p class="card-text">{{ post.content }}</p>
+            <{{ _('p class="card-text">') }}{{ post.content }}</p>
             
             {% if post.tagged_products or post.tagged_companies %}
             <div class="mb-2">
                 {% for product_id in (post.tagged_products or [])[:3] %}
-                    <span class="badge bg-info me-1">#Product{{ product_id }}</span>
+                    <{{ _('span class="badge bg-info me-1">') }}#Product{{ product_id }}</span>
                 {% endfor %}
                 {% for company_id in (post.tagged_companies or [])[:3] %}
-                    <span class="badge bg-primary me-1">#Company{{ company_id }}</span>
+                    <{{ _('span class="badge bg-primary me-1">') }}#Company{{ company_id }}</span>
                 {% endfor %}
             </div>
             {% endif %}
@@ -83,7 +83,7 @@
                 {% if post.media.images|length > 4 %}
                 <div class="col-md-4 position-relative">
                     <img src="{{ post.media.images[3] }}" alt="{{ _("More images") }}" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div class="position-absolute top-50 start-50 translate-middle bg-dark bg-opacity-75 rounded px-3 py-2 text-white">
+                    <{{ _('div class="position-absolute top-50 start-50 translate-middle bg-dark bg-opacity-75 rounded px-3 py-2 text-white">') }}
                         +{{ post.media.images|length - 4 }}
                     </div>
                 </div>

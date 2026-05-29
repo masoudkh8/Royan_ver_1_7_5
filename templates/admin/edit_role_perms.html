@@ -420,18 +420,18 @@
                 <div class="col-md-8">
                     <h2>
                         <i class="fas fa-user-shield ml-2"></i>
-                        Edit Role Permissions: 
-                        <span class="role-badge-large">{{ role.value }}</span>
+                        {{ _('Edit Role Permissions: 
+                        ') }}<{{ _('span class="role-badge-large">') }}{{ role.value }}</span>
                     </h2>
                     <p class="header-description mb-0">
                         <i class="fas fa-info-circle ml-1"></i>
-                        Configure permissions for this role. Changes will affect all users with this role.
-                    </p>
+                        {{ _('Configure permissions for this role. Changes will affect all users with this role.
+                    ') }}</p>
                 </div>
                 <div class="col-md-4 text-left">
                     <a href="{{ url_for('admin.admin_perms.permission_dashboard') }}" class="btn btn-light action-btn" style="border-radius: 12px; padding: 0.75rem 1.5rem; font-weight: 600;">
-                        <i class="fas fa-arrow-right ml-1"></i>Back to Dashboard
-                    </a>
+                        <i class="fas fa-arrow-right ml-1"></i>{{ _('Back to Dashboard
+                    ') }}</a>
                 </div>
             </div>
         </div>
@@ -464,17 +464,17 @@
                     <div class="permission-group" style="--group-gradient: {{ info.gradient }};">
                         <div class="permission-group-header">
                             <div class="permission-group-title">
-                                <div class="permission-group-icon" style="background: {{ info.gradient }};">
+                                <{{ _('div class="permission-group-icon" style="background:') }} {{ info.gradient }};">
                                     {{ info.icon }}
                                 </div>
                                 <div>
-                                    <div class="group-title-text">{{ info.title }}</div>
-                                    <div class="group-subtitle">{{ info.subtitle }}</div>
+                                    <{{ _('div class="group-title-text">') }}{{ info.title }}</div>
+                                    <{{ _('div class="group-subtitle">') }}{{ info.subtitle }}</div>
                                 </div>
                             </div>
                             <button type="button" class="select-all-btn" onclick="toggleCategory('{{ category }}')">
-                                <i class="fas fa-check-square"></i>Select All
-                            </button>
+                                <i class="fas fa-check-square"></i>{{ _('Select All
+                            ') }}</button>
                         </div>
                         
                         <div class="permissions-grid">
@@ -486,8 +486,8 @@
                                        class="permission-checkbox-input"
                                        {% if perm in current_perms %}checked{% endif %}>
                                 <div class="permission-checkbox-content">
-                                    <span class="permission-label-text">{{ perm.value }}</span>
-                                    <span class="permission-code-badge">{{ perm.name }}</span>
+                                    <{{ _('span class="permission-label-text">') }}{{ perm.value }}</span>
+                                    <{{ _('span class="permission-code-badge">') }}{{ perm.name }}</span>
                                 </div>
                             </label>
                             {% endfor %}
@@ -501,16 +501,16 @@
             <div class="action-bar-fixed">
                 <div class="action-buttons-row">
                     <div class="stats-counter">
-                        <span class="stats-number" id="countValue">{{ current_perms|length }}</span>
-                        <span class="stats-label">Active permissions selected</span>
+                        <{{ _('span class="stats-number" id="countValue">') }}{{ current_perms|length }}</span>
+                        <{{ _('span class="stats-label">') }}Active permissions selected</span>
                     </div>
                     <div style="display: flex; gap: 1rem;">
                         <button type="button" class="btn-action btn-cancel" onclick="window.history.back()">
-                            <i class="fas fa-times"></i>Cancel
-                        </button>
+                            <i class="fas fa-times"></i>{{ _('Cancel
+                        ') }}</button>
                         <button type="submit" class="btn-action btn-save">
-                            <i class="fas fa-save"></i>Save Changes
-                        </button>
+                            <i class="fas fa-save"></i>{{ _('Save Changes
+                        ') }}</button>
                     </div>
                 </div>
             </div>
@@ -521,9 +521,9 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="info-alert-content">
-                <strong>Important Notice:</strong>
-                <p>These changes will affect all users who have the role <strong>{{ role.value }}</strong>, 
-                   unless you have defined custom permissions for specific users. Before saving, make sure necessary permissions are preserved.</p>
+                <strong>{{ _('Important Notice:') }}</strong>
+                <p>{{ _('These changes will affect all users who have the role ') }}<strong>{{ role.value }}</strong>, 
+                   {{ _('unless you have defined custom permissions for specific users. Before saving, make sure necessary permissions are preserved.') }}</p>
             </div>
         </div>
     </div>
@@ -593,7 +593,7 @@ function showCustomAlert(message, type = 'info') {
         <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
             <i class="fas fa-exclamation-circle ml-2"></i>${message}
             <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
+                <{{ _('span>') }}&times;</{{ _('span>') }}
             </button>
         </div>
     `;

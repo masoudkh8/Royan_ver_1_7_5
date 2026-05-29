@@ -166,9 +166,9 @@
   <div class="flex items-center justify-between mb-6">
     <div>
       <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100">
-        🗺️ <span class="text-gold">Smart Map</span>
+        🗺️ <{{ _('span class="text-gold">') }}Smart Map</span>
       </h1>
-      <p class="text-gray-600 dark:text-slate-400 mt-1">
+      <{{ _('p class="text-gray-600 dark:text-slate-400 mt-1">') }}
         Intelligent navigation for global trade routes
       </p>
     </div>
@@ -190,7 +190,7 @@
     <div id="map-loading" class="map-loading hidden">
       <div class="text-center">
         <div class="loader w-16 h-16 mx-auto mb-4"></div>
-        <p class="text-gray-600 dark:text-slate-400">Loading map data...</p>
+        <{{ _('p class="text-gray-600 dark:text-slate-400">') }}Loading map data...</p>
       </div>
     </div>
   </div>
@@ -200,7 +200,7 @@
 <!-- ===== SIDEBAR PANEL ===== -->
 <div id="map-sidebar" class="map-sidebar">
   <button id="sidebar-toggle-btn" class="sidebar-toggle">
-    <span class="text-dark-900 dark:text-slate-200 text-xs font-bold">‹</span>
+    <{{ _('span class="text-dark-900 dark:text-slate-200 text-xs font-bold">') }}‹</span>
   </button>
   
   <div class="sidebar-content p-4 overflow-y-auto h-full">
@@ -246,50 +246,50 @@
         <div class="layer-item active" data-layer="ports">
           <div class="layer-toggle active" onclick="toggleLayer(this, 'ports')"></div>
           <div class="flex-1">
-            <div class="font-medium text-gray-900 dark:text-slate-100">🚢 Ports & Harbors</div>
-            <div class="text-xs text-gray-500 dark:text-slate-400">{{ ports_count|default(0) }} active ports</div>
+            <{{ _('div class="font-medium text-gray-900 dark:text-slate-100">') }}🚢 Ports & Harbors</div>
+            <{{ _('div class="text-xs text-gray-500 dark:text-slate-400">') }}{{ ports_count|default(0) }} active ports</div>
           </div>
-          <span class="text-gold text-xs">●</span>
+          <{{ _('span class="text-gold text-xs">') }}●</span>
         </div>
 
         <!-- Transit Routes Layer -->
         <div class="layer-item" data-layer="transit">
           <div class="layer-toggle" onclick="toggleLayer(this, 'transit')"></div>
           <div class="flex-1">
-            <div class="font-medium text-gray-900 dark:text-slate-100">🛣️ Transit Routes</div>
-            <div class="text-xs text-gray-500 dark:text-slate-400">Land & sea corridors</div>
+            <{{ _('div class="font-medium text-gray-900 dark:text-slate-100">') }}🛣️ Transit Routes</div>
+            <{{ _('div class="text-xs text-gray-500 dark:text-slate-400">') }}Land & sea corridors</div>
           </div>
-          <span class="text-blue-500 text-xs">●</span>
+          <{{ _('span class="text-blue-500 text-xs">') }}●</span>
         </div>
 
         <!-- Conflicts Layer -->
         <div class="layer-item" data-layer="conflicts">
           <div class="layer-toggle" onclick="toggleLayer(this, 'conflicts')"></div>
           <div class="flex-1">
-            <div class="font-medium text-gray-900 dark:text-slate-100">⚠️ Conflicts & Risks</div>
-            <div class="text-xs text-gray-500 dark:text-slate-400">Active zones</div>
+            <{{ _('div class="font-medium text-gray-900 dark:text-slate-100">') }}⚠️ Conflicts & Risks</div>
+            <{{ _('div class="text-xs text-gray-500 dark:text-slate-400">') }}Active zones</div>
           </div>
-          <span class="text-red-500 text-xs">●</span>
+          <{{ _('span class="text-red-500 text-xs">') }}●</span>
         </div>
 
         <!-- Trade Zones Layer -->
         <div class="layer-item" data-layer="trade-zones">
           <div class="layer-toggle" onclick="toggleLayer(this, 'trade-zones')"></div>
           <div class="flex-1">
-            <div class="font-medium text-gray-900 dark:text-slate-100">💼 Free Trade Zones</div>
-            <div class="text-xs text-gray-500 dark:text-slate-400">Economic areas</div>
+            <{{ _('div class="font-medium text-gray-900 dark:text-slate-100">') }}💼 Free Trade Zones</div>
+            <{{ _('div class="text-xs text-gray-500 dark:text-slate-400">') }}Economic areas</div>
           </div>
-          <span class="text-green-500 text-xs">●</span>
+          <{{ _('span class="text-green-500 text-xs">') }}●</span>
         </div>
 
         <!-- Weather Layer -->
         <div class="layer-item" data-layer="weather">
           <div class="layer-toggle" onclick="toggleLayer(this, 'weather')"></div>
           <div class="flex-1">
-            <div class="font-medium text-gray-900 dark:text-slate-100">🌤️ Weather & Conditions</div>
-            <div class="text-xs text-gray-500 dark:text-slate-400">Maritime forecasts</div>
+            <{{ _('div class="font-medium text-gray-900 dark:text-slate-100">') }}🌤️ Weather & Conditions</div>
+            <{{ _('div class="text-xs text-gray-500 dark:text-slate-400">') }}Maritime forecasts</div>
           </div>
-          <span class="text-cyan-500 text-xs">●</span>
+          <{{ _('span class="text-cyan-500 text-xs">') }}●</span>
         </div>
 
       </div>
@@ -328,23 +328,23 @@
   <div class="space-y-2">
     <div class="legend-item">
       <div class="legend-color bg-gold"></div>
-      <span class="text-gray-700 dark:text-slate-300 text-xs">Active Port</span>
+      <{{ _('span class="text-gray-700 dark:text-slate-300 text-xs">') }}Active Port</span>
     </div>
     <div class="legend-item">
       <div class="legend-color bg-gold/50"></div>
-      <span class="text-gray-700 dark:text-slate-300 text-xs">Inactive Port</span>
+      <{{ _('span class="text-gray-700 dark:text-slate-300 text-xs">') }}Inactive Port</span>
     </div>
     <div class="legend-item">
       <div class="w-8 h-0.5 bg-blue-500 rounded"></div>
-      <span class="text-gray-700 dark:text-slate-300 text-xs">Transit Route</span>
+      <{{ _('span class="text-gray-700 dark:text-slate-300 text-xs">') }}Transit Route</span>
     </div>
     <div class="legend-item">
       <div class="legend-color bg-red-500"></div>
-      <span class="text-gray-700 dark:text-slate-300 text-xs">Conflict Zone</span>
+      <{{ _('span class="text-gray-700 dark:text-slate-300 text-xs">') }}Conflict Zone</span>
     </div>
     <div class="legend-item">
       <div class="legend-color bg-green-500"></div>
-      <span class="text-gray-700 dark:text-slate-300 text-xs">Free Trade Zone</span>
+      <{{ _('span class="text-gray-700 dark:text-slate-300 text-xs">') }}Free Trade Zone</span>
     </div>
   </div>
 </div>
@@ -383,13 +383,13 @@ function initMap() {
 
   // Dark/Light tile layers
   const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM>{{ _("OSM") }}</a> &copy; <a href="https://carto.com/attributions">CARTO>{{ _("CARTO") }}</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM>{{ _("OSM") }}</a> &{{ _('copy; ') }}<a href="https://carto.com/attributions">CARTO>{{ _("CARTO") }}</a>',
     subdomains: 'abcd',
     maxZoom: 19
   });
 
   const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM>{{ _("OSM") }}</a> &copy; <a href="https://carto.com/attributions">CARTO>{{ _("CARTO") }}</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM>{{ _("OSM") }}</a> &{{ _('copy; ') }}<a href="https://carto.com/attributions">CARTO>{{ _("CARTO") }}</a>',
     subdomains: 'abcd',
     maxZoom: 19
   });
@@ -492,19 +492,19 @@ function renderPorts(filter = 'all') {
     // Popup content
     const popupContent = `
       <div class="popup-port">
-        <h3>🚢 ${port.name}</h3>
+        <{{ _('h3>') }}🚢 ${port.name}</{{ _('h3>') }}
         <div class="detail-row">
           <i>📍</i>
-          <span>${port.country} • ${port.latitude.toFixed(2)}, ${port.longitude.toFixed(2)}</span>
+          <{{ _('span>') }}${port.country} • ${port.latitude.toFixed(2)}, ${port.longitude.toFixed(2)}</{{ _('span>') }}
         </div>
         <div class="detail-row">
           <i>📊</i>
-          <span>${port.status || 'Operational'}</span>
+          <{{ _('span>') }}${port.status || 'Operational'}</{{ _('span>') }}
         </div>
         ${port.customs_active ? 
-          '<div class="detail-row"><i>🛃</i><span class="text-green-600">Customs: Active</span></div>' : ''}
+          '<div class="detail-row"><i>🛃</i><{{ _('span class="text-green-600">') }}Customs: Active</span></div>' : ''}
         ${port.capacity ? 
-          `<div class="detail-row"><i>📦</i><span>Capacity: ${port.capacity}</span></div>` : ''}
+          `<div class="detail-row"><i>📦</i><{{ _('span>') }}Capacity: ${port.capacity}</{{ _('span>') }}</div>` : ''}
         <buttononclick="planRouteToPort('${port.name}', ${port.latitude}, ${port.longitude})" 
                 class="mt-3 w-full px-3 py-2 rounded-lg bg-gold/20 hover:bg-gold/30 text-gold text-sm font-medium transition">
           🗺️ Plan Route Here
@@ -602,7 +602,7 @@ function drawRouteOnMap(route) {
   
   polyline.bindPopup(`
     <div class="p-3">
-      <strong>🛣️ ${route.type === 'sea' ? 'Maritime' : 'Land'} Route</strong><br>
+      <strong>{{ _('🛣️ ${route.type === \'sea\' ? \'Maritime\' : \'Land\'} Route') }}</strong><br>
       Distance: ${route.distance_km?.toLocaleString()} km<br>
       Est. Time: ${route.estimated_days} days
     </div>
@@ -623,7 +623,7 @@ function calculateRouteStats(layer) {
   
   const summary = `
     <div class="p-3 text-sm">
-      <strong>📏 Route Stats:</strong><br>
+      <strong>{{ _('📏 Route Stats:') }}</strong><br>
       Distance: ${(totalDistance/1000).toFixed(1)} km<br>
       Points: ${coords.length}
     </div>
@@ -677,9 +677,9 @@ function showSelectedInfo(item) {
   if (item.type === 'port') {
     details.innerHTML = `
       <div><strong>${item.name}</strong></div>
-      <div>📍 ${item.country}</div>
-      <div>🌐 ${item.coords[0].toFixed(3)}, ${item.coords[1].toFixed(3)}</div>
-      ${item.details.customs_active ? '<div class="text-green-600">✅ Customs Active</div>' : ''}
+      <{{ _('div>') }}📍 ${item.country}</{{ _('div>') }}
+      <{{ _('div>') }}🌐 ${item.coords[0].toFixed(3)}, ${item.coords[1].toFixed(3)}</{{ _('div>') }}
+      ${item.details.customs_active ? '<{{ _('div class="text-green-600">') }}✅ Customs Active</div>' : ''}
     `;
   }
   
@@ -724,7 +724,7 @@ function loadConflictsData() {
       radius: 50000
     });
     
-    circle.bindPopup(`<strong>⚠️ ${c.name}</strong><br>Risk Level: ${c.severity}`);
+    circle.bindPopup(`<strong>{{ _('⚠️ ${c.name}') }}</strong><br>Risk Level: ${c.severity}`);
     conflictsLayer.addLayer(circle);
   });
 }

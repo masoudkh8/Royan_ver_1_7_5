@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Your Email - Metisma</title>
+    <title>{{ _('Verify Your Email - Metisma') }}</title>
     <style>
         * {
             margin: 0;
@@ -230,27 +230,27 @@
                 </svg>
             </div>
             <h1Verify Your Emai>{{ _("Verify Your Email") }}</h1>
-            <p>Welcome to Metisma - Global Trade Intelligence Platform</p>
+            <{{ _('p>') }}Welcome to Metisma - Global Trade Intelligence Platform</{{ _('p>') }}
         </div>
         
         <!-- Content -->
         <div class="email-content">
-            <div class="greeting">Hello {{ username }}!</div>
+            <{{ _('div class="greeting">') }}Hello {{ username }}!</div>
             
-            <p class="message-text">
+            <{{ _('p class="message-text">') }}
                 Thank you for registering with Metisma. To complete your registration and unlock all platform features, 
                 please verify your email address by clicking the button below.
             </p>
             
             <!-- Verify Button -->
-            <a href="{{ verify_url }}" class="verify-button">
+            <{{ _('a href="') }}{{ verify_url }}{{ _('" class="verify-button">') }}
                 ✓ Verify My Email Address
             </a>
             
             <!-- Alternative Link -->
             <div class="alternative-link">
-                <p>Or copy and paste this link into your browser:</p>
-                <a href="{{ verify_url }}" class="link-url">{{ verify_url }}</a>
+                <{{ _('p>') }}Or copy and paste this link into your browser:</{{ _('p>') }}
+                <{{ _('a href="') }}{{ verify_url }}{{ _('" class="link-url">') }}{{ verify_url }}</a>
             </div>
             
             <!-- Info Box -->
@@ -259,21 +259,21 @@
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    Important Information:
-                </div>
+                    {{ _('Important Information:
+                ') }}</div>
                 <ul class="info-list">
-                    <li>This verification link will expire in 24 hours</li>
-                    <li>If you didn't create this account, please ignore this email</li>
-                    <li>Email verification unlocks all platform features and capabilities</li>
-                    <li>For security reasons, verification is required before login</li>
+                    <{{ _('li>') }}This verification link will expire in 24 hours</{{ _('li>') }}
+                    <{{ _('li>') }}If you didn't create this account, please ignore this email</{{ _('li>') }}
+                    <{{ _('li>') }}Email verification unlocks all platform features and capabilities</{{ _('li>') }}
+                    <{{ _('li>') }}For security reasons, verification is required before login</{{ _('li>') }}
                 </ul>
             </div>
         </div>
         
         <!-- Footer -->
         <div class="email-footer">
-            <p class="footer-text">Thank you for choosing Metisma</p>
-            <p class="footer-copyright">© 2024 Metisma - Global Trade Intelligence Platform. All rights reserved.</p>
+            <{{ _('p class="footer-text">') }}Thank you for choosing Metisma</p>
+            <{{ _('p class="footer-copyright">') }}© 2024 Metisma - Global Trade Intelligence Platform. All rights reserved.</p>
         </div>
     </div>
 </body>

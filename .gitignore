@@ -1,3 +1,9 @@
-(add_translation_tags_to_html.py is a source file, and all the modified files are template files (.html) which are part of the project's source code - no build artifacts, dependencies, or temporary files detected in the changes)
+```
+# Compiled translation files
+*.mo
 
-(empty - no output needed)
+# Environment files
+.env
+.env.local
+*.env.*
+```

@@ -14,7 +14,7 @@
                 </svg>
             </div>
             <h2class="mt-4 text-2xl font-bold text-gray-900 dark:text-white">Upload Document>{{ _("Upload Documents") }}</h2>
-            <p class="text-gray-600 dark:text-slate-400 text-sm mt-2">To complete the upgrade process, please upload clear scans or photos.</p>
+            <{{ _('p class="text-gray-600 dark:text-slate-400 text-sm mt-2">') }}To complete the upgrade process, please upload clear scans or photos.</p>
         </div>
 
         <!-- فرم آپلود -->
@@ -28,7 +28,7 @@
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
                               hover:file:bg-gold/20 dark:file:bg-gold/20 dark:file:text-gold-light">
-                <p class="mt-1 text-xs text-gray-500 dark:text-slate-500">Upload PDF or image of your passport.</p>
+                <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-slate-500">') }}Upload PDF or image of your passport.</p>
             </div>
 
             <!-- لایسنس شرکت -->
@@ -38,7 +38,7 @@
                        class="form-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
                               file:text-sm file:font-semibold file:bg-gold/10 file:text-gold 
                               hover:file:bg-gold/20 dark:file:bg-gold/20 dark:file:text-gold-light">
-                <p class="mt-1 text-xs text-gray-500 dark:text-slate-500">Upload company registration or business license.</p>
+                <{{ _('p class="mt-1 text-xs text-gray-500 dark:text-slate-500">') }}Upload company registration or business license.</p>
             </div>
 
             <!-- دکمه ادامه -->
@@ -59,12 +59,12 @@
         <div class="text-center pt-6 border-t border-gray-200 dark:border-dark-700">
             {% if req and req.passport_file and req.license_file %}
                 <!-- اگر مدارک آپلود شده، بازگشت به صفحه مشاهده مدارک -->
-                <a href="{{ url_for('users.view_my_documents') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                <{{ _('a href="') }}{{ url_for('users.view_my_documents') }}{{ _('" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">') }}
                     ← View Document Status
                 </a>
             {% else %}
                 <!-- اگر مدارک آپلود نشده، بازگشت به مراحل ارتقاء -->
-                <a href="{{ url_for('users.upgrade_to_premium') }}" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">
+                <{{ _('a href="') }}{{ url_for('users.upgrade_to_premium') }}{{ _('" class="text-gray-600 dark:text-slate-400 hover:text-gold transition text-sm">') }}
                     ← Return to Upgrade Steps
                 </a>
             {% endif %}
