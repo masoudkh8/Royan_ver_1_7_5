@@ -718,7 +718,7 @@
                     <i class="fas fa-grid-2 ml-2"></i>Default Role Access Table
                 </h5>
                 <div class="search-box" style="width: 350px;">
-                    <input type="text" id="matrixSearch" placeholder="جستجو در مجوزها و نقش‌ها..." onkeyup="filterMatrix()">
+                    <input type="text" id="matrixSearch" placeholder="Search in permissions and roles..." onkeyup="filterMatrix()">
                     <i class="fas fa-search"></i>
                 </div>
             </div>
@@ -726,7 +726,7 @@
             <div class="alert alert-info mb-3">
                 <i class="fas fa-info-circle ml-2"></i>
                 <strong>Guide:</strong> ✅ indicates authorized access and ❌ indicates no access. 
-                برای Edit Access‌های Each Role، of دکمه‌های زیر جدandل استفاده کنید.
+                Use the buttons below the table to edit each role's access.
             </div>
             
             <div class="table-responsive">
@@ -754,11 +754,11 @@
                             {% for role in roles %}
                             <td>
                                 {% if matrix[role.name][perm.name] %}
-                                    <span class="badge-permission granted" title="{{ role.value }}: دسترسی دارد">
+                                    <span class="badge-permission granted" title="{{ role.value }}: has access">
                                         <i class="fas fa-check"></i>
                                     </span>
                                 {% else %}
-                                    <span class="badge-permission denied" title="{{ role.value }}: بدون دسترسی">
+                                    <span class="badge-permission denied" title="{{ role.value }}: no access">
                                         <i class="fas fa-times"></i>
                                     </span>
                                 {% endif %}
@@ -811,7 +811,7 @@
                             <div class="alert alert-light border">
                                 <i class="fas fa-lightbulb text-warning ml-2"></i>
                                 <strong>Application:</strong> Use this section to grant special permissions to special users. 
-                                این Permissions به صandرت استثنا به Access‌های پیش‌فرض Role اضافه می‌شandند and اandلandیت بالاتری دارند.
+                                These permissions are exceptionally added to the role's default access and have higher priority.
                             </div>
                             
                             <div class="mt-3">
@@ -837,7 +837,7 @@
                                     <i class="fas fa-key"></i>
                                 </div>
                                 <p class="text-muted mb-3">
-                                    در این بخش می‌تandانید Usersی که دارای Permissionsی سفارشی هستند را View and Management کنید.
+                                    In this section you can view and manage users who have custom permissions.
                                 </p>
                                 <button class="btn action-btn action-btn-info" onclick="showCustomPermsStats()">
                                     <i class="fas fa-list ml-1"></i>View List of special users
@@ -876,7 +876,7 @@
                     <div class="alert alert-info mb-4">
                         <i class="fas fa-info-circle ml-2"></i>
                         <strong>Application:</strong> In this section you can see a preview of modules and services that a specific user can view.
-                        این ابزار برای تست and بررسی صحت تنظیمات Permissions بسیار مفید است.
+                        This tool is very useful for testing and verifying permission settings.
                     </div>
                     
                     <div class="row">
@@ -901,7 +901,7 @@
                             <div class="mt-4 p-3 bg-light rounded">
                                 <h6 class="font-weight-bold mb-2"><i class="fas fa-lightbulb text-warning ml-1"></i>Note:</h6>
                                 <p class="small text-muted mb-0">
-                                    پیش‌نمایش بر اساس Permissionsی Role User به علاandه هرگandنه مجandز سفارشی اعطا شده نمایش داده می‌شandد.
+                                    The preview is displayed based on the user's role permissions plus any granted custom permissions.
                                 </p>
                             </div>
                         </div>
@@ -945,11 +945,11 @@ function loadPreview() {
     const userId = document.getElementById('previewUserSelect').value;
     
     if (!userId) {
-        showAlert('لطفاً یک کاربر انتخاب کنید', 'warning');
+        showAlert('Please select a user', 'warning');
         return;
     }
 
-    // نمایش حالت لandدینگ
+    // Display loading state
     document.getElementById('previewResult').style.display = 'none';
     document.getElementById('previewPlaceholder').innerHTML = `
         <div class="spinner-border text-primary" role="status">
@@ -968,7 +968,7 @@ function loadPreview() {
                 list.innerHTML = `
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle ml-2"></i>
-                        هیچ ماژandلی قابل View نیست
+                        No module is visible
                     </div>`;
             } else {
                 const icons = {
@@ -999,7 +999,7 @@ function loadPreview() {
         })
         .catch(err => {
             console.error(err);
-            showAlert('خطا در بارگذاری اطلاعات', 'error');
+            showAlert('Error loading information', 'error');
             document.getElementById('previewPlaceholder').innerHTML = `
                 <i class="fas fa-exclamation-circle text-danger display-4"></i>
                 <p class="mt-3 text-danger">Error fetching information</p>
@@ -1033,7 +1033,7 @@ function showAlert(message, type = 'info') {
 
 // نمایش آمار Permissionsی سفارشی
 function showCustomPermsStats() {
-    showAlert('این قابلیت به زودی اضافه خواهد شد', 'info');
+    showAlert('This feature will be added soon', 'info');
 }
 </script>
 {% endblock %}
