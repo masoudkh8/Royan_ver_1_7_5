@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 
 def extract_texts_from_html(filepath):
-    """استخراج متن‌های قابل مشاهده از فایل HTML"""
+    """Extract visible texts from HTML file"""
     texts = []
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -31,7 +31,7 @@ def extract_texts_from_html(filepath):
     return texts
 
 def extract_flash_messages(filepath):
-    """استخراج پیام‌های flash از فایل Python"""
+    """Extract flash messages from Python file"""
     messages = []
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
@@ -51,12 +51,12 @@ def extract_flash_messages(filepath):
     return messages
 
 def extract_all_texts(workspace):
-    """استخراج تمام متن‌ها از پروژه"""
+    """Extract all texts from project"""
     all_texts = {}
     
     # استخراج از تمپلیت‌ها
     templates_dir = os.path.join(workspace, 'templates')
-    print("=== در حال استخراج متن از تمپلیت‌ها ===")
+    print("=== Extracting texts from templates ===")
     for root, dirs, files in os.walk(templates_dir):
         for file in files:
             if file.endswith('.html'):
@@ -67,11 +67,11 @@ def extract_all_texts(workspace):
                     if rel_path not in all_texts:
                         all_texts[rel_path] = []
                     all_texts[rel_path].extend(texts)
-                    print(f"  ✓ {rel_path}: {len(texts)} متن")
+                    print(f"  ✓ {rel_path}: {len(texts)} texts")
     
-    # استخراج پیام‌های flash از routes
+    # Extract flash messages from routes
     routes_dir = os.path.join(workspace, 'routes')
-    print("\n=== در حال استخراج پیام‌های flash از routeها ===")
+    print("\n=== Extracting flash messages from routes ===")
     flash_messages = {}
     for root, dirs, files in os.walk(routes_dir):
         for file in files:
@@ -83,7 +83,7 @@ def extract_all_texts(workspace):
                     if rel_path not in flash_messages:
                         flash_messages[rel_path] = []
                     flash_messages[rel_path].extend(messages)
-                    print(f"  ✓ {rel_path}: {len(messages)} پیام")
+                    print(f"  ✓ {rel_path}: {len(messages)} messages")
     
     # استخراج از app.py
     app_file = os.path.join(workspace, 'app.py')
@@ -91,12 +91,12 @@ def extract_all_texts(workspace):
         messages = extract_flash_messages(app_file)
         if messages:
             flash_messages['app.py'] = messages
-            print(f"  ✓ app.py: {len(messages)} پیام")
+            print(f"  ✓ app.py: {len(messages)} messages")
     
     return all_texts, flash_messages
 
 def update_po_file(po_file, all_texts, flash_messages):
-    """به‌روزرسانی فایل PO با متن‌های جدید"""
+    """Update PO file with new texts"""
     
     # خواندن فایل PO فعلی
     existing_msgids = set()
@@ -116,16 +116,16 @@ def update_po_file(po_file, all_texts, flash_messages):
     for filepath, messages in flash_messages.items():
         all_unique_texts.update(messages)
     
-    print(f"\n=== آمار ===")
-    print(f"متن‌های موجود در PO: {len(existing_msgids)}")
-    print(f"متن‌های کل استخراج شده: {len(all_unique_texts)}")
+    print(f"\n=== Statistics ===")
+    print(f"Existing texts in PO: {len(existing_msgids)}")
+    print(f"Total extracted texts: {len(all_unique_texts)}")
     
     # پیدا کردن متن‌های جدید
     new_texts = all_unique_texts - existing_msgids
-    print(f"متن‌های جدید نیازمند ترجمه: {len(new_texts)}")
+    print(f"New texts requiring translation: {len(new_texts)}")
     
     if new_texts:
-        print(f"\n=== افزودن {len(new_texts)} متن جدید به فایل PO ===")
+        print(f"\n=== Adding {len(new_texts)} new texts to PO file ===")
         
         with open(po_file, 'a', encoding='utf-8') as f:
             f.write(f"\n# Added on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -136,9 +136,9 @@ def update_po_file(po_file, all_texts, flash_messages):
                 f.write(f'\n#: templates/\nmsgid "{escaped_text}"\n')
                 f.write('msgstr ""\n')
         
-        print("✓ متن‌های جدید با موفقیت اضافه شدند")
+        print("✓ New texts successfully added")
     else:
-        print("✓ هیچ متن جدیدی یافت نشد")
+        print("✓ No new texts found")
     
     return len(new_texts)
 
@@ -146,7 +146,7 @@ def main():
     workspace = '/workspace'
     po_file = os.path.join(workspace, 'translations', 'fa', 'LC_MESSAGES', 'messages.po')
     
-    print("🔍 شروع استخراج متن‌ها از پروژه...\n")
+    print("🔍 Starting text extraction from project...\n")
     
     # استخراج تمام متن‌ها
     all_texts, flash_messages = extract_all_texts(workspace)
@@ -154,12 +154,12 @@ def main():
     # به‌روزرسانی فایل PO
     new_count = update_po_file(po_file, all_texts, flash_messages)
     
-    print(f"\n✅ فرآیند تکمیل شد!")
-    print(f"   {new_count} متن جدید به فایل PO اضافه شد")
-    print(f"   فایل: {po_file}")
-    print("\n📝 حالا می‌توانید:")
-    print("   1. فایل PO را ویرایش کنید و ترجمه‌ها را وارد کنید")
-    print("   2. دستور زیر را اجرا کنید تا فایل MO ساخته شود:")
+    print(f"\n✅ Process completed!")
+    print(f"   {new_count} new texts added to PO file")
+    print(f"   File: {po_file}")
+    print("\n📝 Now you can:")
+    print("   1. Edit the PO file and enter translations")
+    print("   2. Run the following command to build the MO file:")
     print("      msgfmt -o translations/fa/LC_MESSAGES/messages.mo translations/fa/LC_MESSAGES/messages.po")
 
 if __name__ == '__main__':

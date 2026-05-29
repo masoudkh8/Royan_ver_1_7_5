@@ -10,7 +10,7 @@ class Translator:
         self.load_translations()
     
     def load_translations(self):
-        """بارگذاری فایل ترجمه"""
+        """Load translation file"""
         # بارگذاری ترجمه‌های JSON (برای سازگاری با عقب)
         translations_path = os.path.join(os.path.dirname(__file__), '..', 'translations', f'{self.lang}.json')
         try:
@@ -24,11 +24,11 @@ class Translator:
         try:
             self.translator = gettext.translation('messages', localedir=translations_dir, languages=[self.lang])
         except FileNotFoundError:
-            print(f"⚠️ فایل ترجمه برای زبان {self.lang} یافت نشد. از ترجمه پیش‌فرض استفاده می‌شود.")
+            print(f"⚠️ Translation file for language {self.lang} not found. Using default translation.")
             self.translator = None
     
     def get(self, key, default=None):
-        """دریافت ترجمه با کلید تودرتو (مثلاً 'common.login')"""
+        """Get translation with nested key (e.g. 'common.login')"""
         keys = key.split('.')
         value = self.translations
         for k in keys:
@@ -39,13 +39,13 @@ class Translator:
         return value
     
     def gettext(self, message):
-        """ترجمه متن با استفاده از gettext"""
+        """Translate text using gettext"""
         if self.translator:
             return self.translator.gettext(message)
         return message
     
     def t(self, key, **kwargs):
-        """ترجمه کلید و جایگزینی متغیرها"""
+        """Translate key and replace variables"""
         # اول سعی کن از gettext استفاده کنی (برای متن‌های مستقیم)
         text = self.gettext(key)
         
@@ -62,5 +62,5 @@ class Translator:
 translator = Translator('fa')
 
 def t(key, **kwargs):
-    """تابع کمکی برای استفاده در تمپلیت‌ها"""
+    """Helper function for use in templates"""
     return translator.t(key, **kwargs)
