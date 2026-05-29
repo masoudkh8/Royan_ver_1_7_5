@@ -1,1 +1,50 @@
-Nothing needs to be added to .gitignore since only a template file (.html) was modified and no build artifacts, dependencies, or temporary files were detected in the changes.
+```
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Build and distribution directories
+build/
+dist/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Logs
+*.log
+
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
+
+# Translations - POT file (source) should be tracked, but compiled MO files should not
+*.mo
+
+# Virtual environments (if present)
+.venv/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache directories
+.mypy_cache/
+.pytest_cache/
+.cache/
+```
