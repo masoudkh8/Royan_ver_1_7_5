@@ -1,10 +1,10 @@
 # models/gamification.py
 """
-بخش ۳: سیستم اعتبار و گیمیفیکیشن حرفه‌ای (Trust & Gamification)
-- موتور امتیازدهی پویا
-- نشان‌های افتخار (Badges)
-- چالش‌های فصلی
-- پیشرفت شخصی
+Section 3: Trust & Professional Gamification System (Trust & Gamification)
+- Dynamic Scoring Engine
+- Badges (Badges)
+- Seasonal Challenges
+- Personal Progress
 """
 from . import db
 from datetime import datetime
@@ -14,71 +14,71 @@ tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 class UserBadge(db.Model):
-    """نشان‌های افتخار کاربران"""
+    """User Badges"""
     __tablename__ = 'user_badges'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     badge_type = db.Column(db.String(50), nullable=False)  # e.g., 'export_expert', 'top_seller'
-    badge_name = db.Column(db.String(100), nullable=False)  # e.g., 'متخصص صادرات به عمان'
+    badge_name = db.Column(db.String(100), nullable=False)  # e.g., 'Export Expert to Oman'
     badge_icon = db.Column(db.String(20))  # emoji or icon name
     earned_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     description = db.Column(db.Text)
     
-    # رابطه
+    # Relationship
     user = db.relationship('User', back_populates='badges')
 
 
 class UserProgress(db.Model):
-    """داشبورد پیشرفت شخصی کاربران"""
+    """User Personal Progress Dashboard"""
     __tablename__ = 'user_progress'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
     
-    # امتیاز کل گیمیفیکیشن
+    # Total Gamification Score
     total_points = db.Column(db.Integer, default=0)
     
-    # سطح کاربر (Level)
+    # User Level (Level)
     level = db.Column(db.Integer, default=1)
     
-    # پیشرفت به سطح بعدی (۰-۱۰۰ درصد)
+    # Progress to Next Level (0-100 percent)
     progress_to_next_level = db.Column(db.Integer, default=0)
     
-    # آمار فعالیت‌ها
+    # Activity Statistics
     completed_profile = db.Column(db.Boolean, default=False)
     successful_trades = db.Column(db.Integer, default=0)
-    content_created = db.Column(db.Integer, default=0)  # تعداد محتوای مفید
-    referrals = db.Column(db.Integer, default=0)  # تعداد معرفی‌های موفق
+    content_created = db.Column(db.Integer, default=0)  # Number of Useful Content
+    referrals = db.Column(db.Integer, default=0)  # Number of Successful Referrals
     
-    # آخرین فعالیت
+    # Last Activity
     last_activity = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # رابطه
+    # Relationship
     user = db.relationship('User', back_populates='progress')
     
     def calculate_level(self):
-        """محاسبه سطح بر اساس امتیاز کل"""
-        # فرمول ساده: هر ۱۰۰۰ امتیاز = ۱ سطح
+        """Calculate Level Based on Total Score"""
+        # Simple Formula: Every 1000 points = 1 level
         self.level = (self.total_points // 1000) + 1
         return self.level
     
     def get_next_actions(self):
-        """پیشنهاد ۳ اقدام بعدی برای ارتقا"""
+        """Suggest 3 Next Actions for Upgrade"""
         actions = []
         if not self.completed_profile:
-            actions.append("تکمیل پروفایل شرکتی (+۲۰۰ امتیاز)")
+            actions.append("Complete Company Profile (+200 points)")
         if self.successful_trades is None or self.successful_trades < 5:
-            actions.append("انجام اولین معامله موفق (+۵۰۰ امتیاز)")
+            actions.append("Complete First Successful Trade (+500 points)")
         if self.content_created is None or self.content_created < 3:
-            actions.append("اشتراک‌گذاری محتوای تخصصی (+۱۰۰ امتیاز)")
+            actions.append("Share Specialized Content (+100 points)")
         if self.referrals is None or self.referrals < 2:
-            actions.append("معرفی همکار تجاری (+۱۵۰ امتیاز)")
+            actions.append("Refer Business Partner (+150 points)")
         return actions[:3]
 
 
 class SeasonalChallenge(db.Model):
-    """چالش‌های فصلی با پاداش‌های ملموس"""
+    """Seasonal Challenges with Tangible Rewards"""
     __tablename__ = 'seasonal_challenges'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -90,22 +90,22 @@ class SeasonalChallenge(db.Model):
     reward_value = db.Column(db.String(100))  # e.g., '20% off logistics'
     is_active = db.Column(db.Boolean, default=True)
     
-    # شرکت‌کنندگان
+    # Participants
     participants = db.relationship('ChallengeParticipant', back_populates='challenge', cascade='all, delete-orphan')
 
 
 class ChallengeParticipant(db.Model):
-    """شرکت‌کنندگان در چالش‌های فصلی"""
+    """Participants in Seasonal Challenges"""
     __tablename__ = 'challenge_participants'
     
     id = db.Column(db.Integer, primary_key=True)
     challenge_id = db.Column(db.Integer, db.ForeignKey('seasonal_challenges.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    progress = db.Column(db.Integer, default=0)  # درصد پیشرفت
+    progress = db.Column(db.Integer, default=0)  # Progress Percentage
     completed = db.Column(db.Boolean, default=False)
     reward_claimed = db.Column(db.Boolean, default=False)
     joined_at = db.Column(db.DateTime, default=lambda: datetime.now(tehran_tz))
     
-    # روابط
+    # Relationships
     challenge = db.relationship('SeasonalChallenge', back_populates='participants')
     user = db.relationship('User', backref='challenge_participations')
