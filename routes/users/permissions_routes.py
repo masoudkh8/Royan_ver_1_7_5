@@ -66,7 +66,7 @@ class ManagePermissionsView(MethodView):
             target_profile = UserProfile(user_id=target_user.id)
             db.session.add(target_profile)
             db.session.commit()
-            flash(gettext(f"Profile for user {target_user.username} was automatically created."), "info")
+            flash(gettext("Profile for user %(username)s was automatically created.") % {"username": target_user.username}, "info")
         else:
             target_profile = target_user.profile
         
@@ -143,10 +143,10 @@ class ManagePermissionsView(MethodView):
         
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(gettext(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)"), "success")
+            flash(gettext("Permissions for user %(username)s updated successfully. (%(count)s active permissions)") % {"username": target_user.username, "count": len(valid_permissions)}, "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(gettext(f"Permissions for user {target_user.username} reverted to default."), "info")
+            flash(gettext("Permissions for user %(username)s reverted to default.") % {"username": target_user.username}, "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
@@ -189,7 +189,7 @@ def manage_permissions():
         target_profile = UserProfile(user_id=target_user.id)
         db.session.add(target_profile)
         db.session.commit()
-        flash(gettext(f"Profile for user {target_user.username} was automatically created."), "info")
+        flash(gettext("Profile for user %(username)s was automatically created.") % {"username": target_user.username}, "info")
     else:
         target_profile = target_user.profile
     
@@ -248,10 +248,10 @@ def manage_permissions():
         # Use new model methods to save permissions
         if valid_permissions:
             target_profile.set_custom_permissions(valid_permissions)
-            flash(gettext(f"Permissions for user {target_user.username} updated successfully. ({len(valid_permissions)} active permissions)"), "success")
+            flash(gettext("Permissions for user %(username)s updated successfully. (%(count)s active permissions)") % {"username": target_user.username, "count": len(valid_permissions)}, "success")
         else:
             target_profile.set_custom_permissions([])
-            flash(gettext(f"Permissions for user {target_user.username} reverted to default."), "info")
+            flash(gettext("Permissions for user %(username)s reverted to default.") % {"username": target_user.username}, "info")
         
         db.session.commit()
         return redirect(url_for('users.manage_permissions', target_user_id=target_user.id))
