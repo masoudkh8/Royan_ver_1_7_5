@@ -42,7 +42,7 @@ class TrustLevel:
 
 @pytest.fixture
 def app():
-    """ایجاد اپلیکیشن با تنظیمات تست"""
+    """Create application with test settings"""
     app = create_app()
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -62,13 +62,13 @@ def app():
 
 @pytest.fixture
 def client(app):
-    """ایجاد کلاینت تست"""
+    """Create test client"""
     return app.test_client()
 
 
 @pytest.fixture
 def sample_user(app):
-    """ایجاد کاربر نمونه برای تست‌ها"""
+    """Create sample user for tests"""
     with app.app_context():
         user = User(
             username='testuser',
@@ -108,10 +108,10 @@ def sample_user(app):
 # ============================================================================
 
 class TestAdvancedUserModel:
-    """تست‌های مدل کاربر با فیلدهای تخصصی"""
+    """User Model Tests with Specialized Fields"""
     
     def test_create_user_with_specialized_fields(self, app):
-        """تست ایجاد کاربر با فیلدهای تخصصی"""
+        """Test creating user with specialized fields"""
         with app.app_context():
             user = User(
                 username='prouser',
@@ -139,7 +139,7 @@ class TestAdvancedUserModel:
             assert user.is_verified is False
     
     def test_user_profile_creation(self, app, sample_user):
-        """تست ایجاد خودکار پروفایل کاربر"""
+        """Test automatic user profile creation"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             assert user.profile is not None
@@ -148,7 +148,7 @@ class TestAdvancedUserModel:
             assert user.profile.job_title == 'CEO'
     
     def test_user_verification_documents(self, app, sample_user):
-        """تست مدارک تأیید هویت کاربر"""
+        """Test user identity verification documents"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -167,7 +167,7 @@ class TestAdvancedUserModel:
             assert user.verification_documents[0].status == 'pending'
     
     def test_user_invite_code_generation(self, app):
-        """تست تولید کد دعوت انحصاری"""
+        """Test exclusive invite code generation"""
         with app.app_context():
             import secrets
             
@@ -185,7 +185,7 @@ class TestAdvancedUserModel:
             assert user.invite_code.isalnum()
     
     def test_user_role_enum_values(self, app):
-        """تست مقادیر enum نقش‌های کاربری"""
+        """Test user role enum values"""
         assert UserRole.PRODUCER.value == 'producer'
         assert UserRole.BUYER.value == 'buyer'
         assert UserRole.BROKER.value == 'broker'
@@ -204,10 +204,10 @@ class TestAdvancedUserModel:
 # ============================================================================
 
 class TestThreeStepRegistration:
-    """تست‌های سیستم ثبت‌نام ۳ مرحله‌ای هوشمند"""
+    """Smart 3-Step Registration System Tests"""
     
     def test_registration_step1_basic_info(self, client):
-        """تست مرحله ۱: اطلاعات پایه"""
+        """Test step 1: basic information"""
         response = client.post('/users/register', data={
             'username': 'step1user',
             'email': 'step1@example.com',
@@ -219,7 +219,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_step2_professional_info(self, client):
-        """تست مرحله ۲: اطلاعات حرفه‌ای"""
+        """Test step 2: professional information"""
         response = client.post('/users/register', data={
             'username': 'step2user',
             'email': 'step2@example.com',
@@ -235,7 +235,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_step3_security_terms(self, client):
-        """تست مرحله ۳: امنیت و پذیرش شرایط"""
+        """Test step 3: security and terms acceptance"""
         response = client.post('/users/register', data={
             'username': 'step3user',
             'email': 'step3@example.com',
@@ -248,7 +248,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_password_strength_validation(self, client):
-        """تست اعتبارسنجی قدرت رمز عبور"""
+        """Test password strength validation"""
         # رمز عبور ضعیف - بدون حروف بزرگ
         response = client.post('/users/register', data={
             'username': 'weakpass1',
@@ -272,7 +272,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_password_mismatch(self, client):
-        """تست عدم تطابق رمز عبور"""
+        """Test password mismatch"""
         response = client.post('/users/register', data={
             'username': 'mismatch',
             'email': 'mismatch@example.com',
@@ -284,7 +284,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_duplicate_email(self, client, sample_user):
-        """تست جلوگیری از ایمیل تکراری"""
+        """Test preventing duplicate email"""
         response = client.post('/users/register', data={
             'username': 'duplicate',
             'email': 'test@example.com',
@@ -295,7 +295,7 @@ class TestThreeStepRegistration:
         assert response.status_code == 200
     
     def test_registration_auto_profile_creation(self, app, client):
-        """تست ایجاد خودکار پروفایل پس از ثبت‌نام"""
+        """Test automatic profile creation after registration"""
         with app.app_context():
             response = client.post('/users/register', data={
                 'username': 'autoprofile',
@@ -315,10 +315,10 @@ class TestThreeStepRegistration:
 # ============================================================================
 
 class TestSmartDashboard:
-    """تست‌های داشبورد هوشمند نقش‌محور"""
+    """Smart Role-Based Dashboard Tests"""
     
     def test_dashboard_rendering(self, client, sample_user):
-        """تست رندر شدن داشبورد"""
+        """Test dashboard rendering"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -329,7 +329,7 @@ class TestSmartDashboard:
             assert response.status_code == 200
     
     def test_dashboard_widgets_for_buyer(self, app, sample_user):
-        """تست ویجت‌های داشبورد برای Buyer"""
+        """Test dashboard widgets for Buyer"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             assert user.role == UserRole.BUYER
@@ -344,7 +344,7 @@ class TestSmartDashboard:
             assert 'verify_identity' in pending_tasks
     
     def test_dashboard_widgets_for_producer(self, app):
-        """تست ویجت‌های داشبورد برای Producer"""
+        """Test dashboard widgets for Producer"""
         with app.app_context():
             producer = User(
                 username='producer',
@@ -359,7 +359,7 @@ class TestSmartDashboard:
             # Producer باید ویجت‌های محصولات و سفارشات داشته باشد
     
     def test_dashboard_pending_tasks_calculation(self, app, sample_user):
-        """تست محاسبه وظایف pending در داشبورد"""
+        """Test pending tasks calculation in dashboard"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -369,7 +369,7 @@ class TestSmartDashboard:
             if not user.is_verified:
                 pending_tasks.append({
                     'id': 'verify_identity',
-                    'title': 'تأیید هویت',
+                    'title': 'Identity Verification',
                     'priority': 'high'
                 })
             
@@ -377,7 +377,7 @@ class TestSmartDashboard:
             if not user.profile.bio:
                 pending_tasks.append({
                     'id': 'complete_bio',
-                    'title': 'تکمیل بیوگرافی',
+                    'title': 'Complete Biography',
                     'priority': 'medium'
                 })
             
@@ -390,10 +390,10 @@ class TestSmartDashboard:
 # ============================================================================
 
 class TestProfileAndDocuments:
-    """تست‌های پروفایل کاربری و آپلود مدارک"""
+    """User Profile and Document Upload Tests"""
     
     def test_profile_edit(self, client, sample_user):
-        """تست ویرایش پروفایل"""
+        """Test profile editing"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -411,7 +411,7 @@ class TestProfileAndDocuments:
             assert response.status_code == 200
     
     def test_profile_social_links_update(self, client, sample_user):
-        """تست به‌روزرسانی لینک‌های اجتماعی"""
+        """Test updating social links"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -425,7 +425,7 @@ class TestProfileAndDocuments:
             assert response.status_code == 200
     
     def test_document_upload_allowed_extensions(self, app):
-        """تست پسوند فایل‌های مجاز برای آپلود"""
+        """Test allowed file extensions for upload"""
         from routes.users.routes import allowed_file
         
         assert allowed_file('document.pdf') is True
@@ -438,7 +438,7 @@ class TestProfileAndDocuments:
         assert allowed_file('hack.php') is False
     
     def test_document_upload_size_validation(self, app):
-        """تست اعتبارسنجی حجم فایل"""
+        """Test file size validation"""
         from routes.users.routes import validate_file
         
         # فایل 1MB (مجاز)
@@ -454,7 +454,7 @@ class TestProfileAndDocuments:
         assert validate_file(large_file) is False
     
     def test_secure_filename_generation(self, app):
-        """تست تولید نام امن فایل"""
+        """Test secure filename generation"""
         from werkzeug.utils import secure_filename
         import secrets
         
@@ -473,7 +473,7 @@ class TestProfileAndDocuments:
             assert '\\' not in safe_name
     
     def test_document_upload_flow(self, client, sample_user):
-        """تست جریان کامل آپلود مدرک"""
+        """Test complete document upload flow"""
         with app.test_client() as c:
             # لاگین
             c.post('/users/login', data={
@@ -498,10 +498,10 @@ class TestProfileAndDocuments:
 # ============================================================================
 
 class TestSecurityAndAccessControl:
-    """تست‌های امنیت و کنترل دسترسی"""
+    """Security and Access Control Tests"""
     
     def test_role_required_decorator_authenticated(self, app, sample_user):
-        """تست دکوریتور role_required با کاربر لاگین شده"""
+        """Test role_required decorator with logged-in user"""
         from routes.users.routes import role_required
         from flask_login import login_user
         
@@ -516,7 +516,7 @@ class TestSecurityAndAccessControl:
             assert result == 'Access Granted'
     
     def test_role_required_decorator_unauthenticated(self, app):
-        """تست دکوریتور role_required بدون لاگین"""
+        """Test role_required decorator without login"""
         from routes.users.routes import role_required
         from flask_login import current_user
         
@@ -532,7 +532,7 @@ class TestSecurityAndAccessControl:
                 admin_view()
     
     def test_role_required_decorator_wrong_role(self, app, sample_user):
-        """تست دکوریتور role_required با نقش اشتباه"""
+        """Test role_required decorator with wrong role"""
         from routes.users.routes import role_required
         from flask_login import login_user
         
@@ -548,7 +548,7 @@ class TestSecurityAndAccessControl:
                 admin_only()
     
     def test_password_hashing_security(self, app):
-        """تست امنیت هش کردن رمز عبور"""
+        """Test password hashing security"""
         with app.app_context():
             user = User(
                 username='hashuser',
@@ -567,7 +567,7 @@ class TestSecurityAndAccessControl:
             assert not check_password_hash(user.password_hash, 'WrongPassword')
     
     def test_sql_injection_prevention(self, client, sample_user):
-        """تست جلوگیری از SQL Injection"""
+        """Test preventing SQL Injection"""
         # تلاش برای SQL Injection در لاگین
         response = client.post('/users/login', data={
             'username': "admin' OR '1'='1' --",
@@ -578,7 +578,7 @@ class TestSecurityAndAccessControl:
         # نباید بتواند بدون رمز عبور صحیح وارد شود
     
     def test_xss_prevention_in_profile(self, client, sample_user):
-        """تست جلوگیری از XSS در پروفایل"""
+        """Test preventing XSS in profile"""
         with app.test_client() as c:
             c.post('/users/login', data={
                 'username': 'testuser',
@@ -600,17 +600,17 @@ class TestSecurityAndAccessControl:
 # ============================================================================
 
 class TestRateLimiting:
-    """تست‌های محدودیت نرخ درخواست"""
+    """Request Rate Limiting Tests"""
     
     def test_rate_limit_configuration(self, app):
-        """تست پیکربندی Rate Limiting"""
+        """Test Rate Limiting configuration"""
         # در محیط تست غیرفعال است
         assert app.config['RATELIMIT_ENABLED'] is False
         assert app.config['RATELIMIT_DEFAULT'] == '100 per hour'
         assert app.config['RATELIMIT_STRATEGY'] == 'moving-window'
     
     def test_rate_limit_on_registration_endpoint(self, client):
-        """تست Rate Limit روی endpoint ثبت‌نام"""
+        """Test Rate Limit on registration endpoint"""
         # ارسال چندین درخواست متوالی
         responses = []
         for i in range(3):
@@ -626,7 +626,7 @@ class TestRateLimiting:
         assert all(status in [200, 302] for status in responses)
     
     def test_rate_limit_decorator_presence(self, app):
-        """تست وجود دکوریتور Rate Limit روی routeها"""
+        """Test Rate Limit decorator existence on routes"""
         from routes.users.routes import users_bp
         
         # بررسی وجود دکوریتور limiter
@@ -639,10 +639,10 @@ class TestRateLimiting:
 # ============================================================================
 
 class TestSecureDocumentUpload:
-    """تست‌های آپلود امن مدارک با اعتبارسنجی چندلایه"""
+    """Secure Document Upload Tests with Multi-layer Validation"""
     
     def test_multi_layer_validation_extension(self, app):
-        """تست لایه اول: بررسی پسوند فایل"""
+        """Test first layer: file extension check"""
         from routes.users.routes import allowed_file
         
         valid_extensions = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
@@ -655,7 +655,7 @@ class TestSecureDocumentUpload:
             assert allowed_file(f'malicious.{ext}') is False
     
     def test_multi_layer_validation_size(self, app):
-        """تست لایه دوم: بررسی حجم فایل"""
+        """Test second layer: file size check"""
         from routes.users.routes import validate_file
         
         # فایل‌های با حجم مختلف
@@ -673,7 +673,7 @@ class TestSecureDocumentUpload:
             assert result == expected
     
     def test_multi_layer_validation_secure_name(self, app):
-        """تست لایه سوم: تولید نام امن فایل"""
+        """Test third layer: secure filename generation"""
         from werkzeug.utils import secure_filename
         import secrets
         
@@ -689,7 +689,7 @@ class TestSecureDocumentUpload:
         assert len(unique_name) > len(secured)
     
     def test_document_json_storage(self, app, sample_user):
-        """تست ذخیره JSON مدارک"""
+        """Test JSON document storage"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -720,7 +720,7 @@ class TestSecureDocumentUpload:
             assert parsed[0]['type'] == 'passport'
     
     def test_document_upload_directory_traversal_prevention(self, app):
-        """تست جلوگیری از Directory Traversal"""
+        """Test preventing Directory Traversal"""
         from werkzeug.utils import secure_filename
         import os
         
@@ -743,10 +743,10 @@ class TestSecureDocumentUpload:
 # ============================================================================
 
 class TestTrustScoreSystem:
-    """تست‌های سیستم امتیاز اعتماد با سطوح Bronze/Silver/Gold/Platinum"""
+    """Trust Score System Tests with Bronze/Silver/Gold/Platinum Levels"""
     
     def test_trust_score_initialization(self, app, sample_user):
-        """تست مقداردهی اولیه امتیاز اعتماد"""
+        """Test initial Trust Score assignment"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
@@ -758,7 +758,7 @@ class TestTrustScoreSystem:
             assert trust_score.total_score == 50
     
     def test_trust_score_badge_levels(self, app):
-        """تست سطوح بج‌های اعتماد"""
+        """Test trust badge levels"""
         with app.app_context():
             # Platinum (90-100)
             platinum = TrustScore(identity_score=25, expertise_score=25, social_score=25, dynamic_score=25)
@@ -785,7 +785,7 @@ class TestTrustScoreSystem:
             assert newcomer.get_badge() == "Newcomer 🆕"
     
     def test_trust_score_progression(self, app, sample_user):
-        """تست پیشرفت امتیاز اعتماد"""
+        """Test Trust Score progression"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
@@ -794,26 +794,26 @@ class TestTrustScoreSystem:
             assert initial_score == 50
             
             # افزودن امتیاز برای تکمیل پروفایل
-            trust_score.add_score_change(10, 'profile_completion', 'تکمیل اطلاعات پروفایل')
+            trust_score.add_score_change(10, 'profile_completion', 'Complete Profile Information')
             assert trust_score.total_score == 60
             
             # افزودن امتیاز برای آپلود مدارک
-            trust_score.add_score_change(15, 'document_upload', 'آپلود پاسپورت')
+            trust_score.add_score_change(15, 'document_upload', 'Passport Upload')
             assert trust_score.total_score == 75
             
             # بررسی تغییر بج
             assert trust_score.get_badge() == "Gold 🥇"
     
     def test_trust_score_history_tracking(self, app, sample_user):
-        """تست ردیابی تاریخچه تغییرات امتیاز"""
+        """Test tracking score change history"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             trust_score = user.trust_score
             
             # ثبت چندین تغییر
-            trust_score.add_score_change(10, 'profile_completion', 'تکمیل پروفایل')
-            trust_score.add_score_change(15, 'document_upload', 'آپلود مدارک')
-            trust_score.add_score_change(-5, 'inactive_period', 'دوره عدم فعالیت')
+            trust_score.add_score_change(10, 'profile_completion', 'Complete Profile')
+            trust_score.add_score_change(15, 'document_upload', 'Document Upload')
+            trust_score.add_score_change(-5, 'inactive_period', 'Inactivity Period')
             db.session.commit()
             
             assert len(trust_score.score_history) == 3
@@ -824,7 +824,7 @@ class TestTrustScoreSystem:
             assert last_change.reason == 'inactive_period'
     
     def test_trust_score_four_layers(self, app):
-        """تست چهار لایه امتیازدهی"""
+        """Test four scoring layers"""
         with app.app_context():
             # لایه ۱: تأیید هویت پایه (۰-۲۵)
             layer1 = TrustScore(identity_score=25, expertise_score=0, social_score=0, dynamic_score=0)
@@ -847,7 +847,7 @@ class TestTrustScoreSystem:
             assert layer4.total_score == 100
     
     def test_trust_score_user_relationship(self, app, sample_user):
-        """تست رابطه کاربر با Trust Score"""
+        """Test user relationship with Trust Score"""
         with app.app_context():
             user = db.session.get(User, sample_user.id)
             
@@ -861,10 +861,10 @@ class TestTrustScoreSystem:
 # ============================================================================
 
 class TestIntegrationFlows:
-    """تست‌های Integration برای جریان‌های کامل"""
+    """Integration Tests for Complete Flows"""
     
     def test_full_registration_to_dashboard_flow(self, client):
-        """تست جریان کامل از ثبت‌نام تا داشبورد"""
+        """Test complete flow from registration to dashboard"""
         # 1. ثبت‌نام
         response = client.post('/users/register', data={
             'username': 'integrationuser',
@@ -894,7 +894,7 @@ class TestIntegrationFlows:
         assert response.status_code == 200
     
     def test_trust_score_full_progression_flow(self, app, client):
-        """تست جریان کامل پیشرفت Trust Score"""
+        """Test complete Trust Score progression flow"""
         with app.app_context():
             # ایجاد کاربر جدید
             user = User(
@@ -911,33 +911,33 @@ class TestIntegrationFlows:
             db.session.commit()
             
             # مرحله 1: تکمیل پروفایل (+10)
-            trust_score.add_score_change(10, 'profile_completion', 'تکمیل پروفایل')
+            trust_score.add_score_change(10, 'profile_completion', 'Complete Profile')
             assert trust_score.total_score == 10
             
             # مرحله 2: آپلود مدارک (+15)
-            trust_score.add_score_change(15, 'document_upload', 'آپلود پاسپورت')
+            trust_score.add_score_change(15, 'document_upload', 'Passport Upload')
             assert trust_score.total_score == 25
             assert trust_score.get_badge() == "Bronze 🥉"
             
             # مرحله 3: تأیید تخصص (+20)
-            trust_score.add_score_change(20, 'expertise_verification', 'تأیید تخصص')
+            trust_score.add_score_change(20, 'expertise_verification', 'Expertise Verification')
             assert trust_score.total_score == 45
             assert trust_score.get_badge() == "Bronze 🥉"
             
             # مرحله 4: فعالیت اجتماعی (+15)
-            trust_score.add_score_change(15, 'social_activity', 'فعالیت در شبکه')
+            trust_score.add_score_change(15, 'social_activity', 'Network Activity')
             assert trust_score.total_score == 60
             assert trust_score.get_badge() == "Silver 🥈"
             
             # مرحله 5: تعاملات موفق (+25)
-            trust_score.add_score_change(25, 'successful_trades', 'معاملات موفق')
+            trust_score.add_score_change(25, 'successful_trades', 'Successful Transactions')
             assert trust_score.total_score == 85
             assert trust_score.get_badge() == "Gold 🥇"
             
             db.session.commit()
     
     def test_document_upload_and_verification_flow(self, app, client, sample_user):
-        """تست جریان آپلود و تأیید مدرک"""
+        """Test document upload and verification flow"""
         with app.test_client() as c:
             # لاگین
             c.post('/users/login', data={

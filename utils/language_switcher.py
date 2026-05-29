@@ -84,7 +84,7 @@ LANGUAGE_SWITCHER_HTML = """
     
     <a href="?lang=fa_IR" 
        class="{{ 'active' if current_locale == 'fa_IR' else '' }}"
-       title="فارسی">
+       title="Persian">
        🇮🇷 فارسی
     </a>
     <a href="?lang=en" 
@@ -100,7 +100,7 @@ LANGUAGE_SWITCHER_HTML = """
 ROUTE_EXAMPLE = """
 @users_bp.route('/set_language/<lang>')
 def set_language(lang):
-    '''تغییر زبان کاربر'''
+    '''Change user language'''
     if lang in ['fa_IR', 'en']:
         session['lang'] = lang
     return redirect(request.referrer or url_for('users.profile'))
