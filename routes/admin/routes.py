@@ -152,7 +152,7 @@ def change_user_role(user_id):
             user.is_kyc_verified = True
             user.premium_since = datetime.now(tehran_tz)
         db.session.commit()
-        flash(gettext(f"✅ User role {user.username} changed to '{new_role}' ."), "success")
+        flash(gettext("✅ User role %(username)s changed to '%(role)s' .") % {"username": user.username, "role": new_role}, "success")
     return redirect(url_for('admin.manage_users'))
 
 
@@ -209,11 +209,11 @@ def review_premium_request(req_id):
         req.user.verification_documents = json.dumps(docs)
         
         db.session.commit()
-        flash(gettext(f"✅ User '{req.user.username}' successfully promoted to Premium Level 1 (Verified). Trust Score increased by 20 points!"), "success")
+        flash(gettext("✅ User '%(username)s' successfully promoted to Premium Level 1 (Verified). Trust Score increased by 20 points!") % {"username": req.user.username}, "success")
     elif action == 'reject':
         req.status = 'rejected'
         db.session.commit()
-        flash(gettext(f"❌ Upgrade Request for '{req.user.username}' rejected."), "warning")
+        flash(gettext("❌ Upgrade Request for '%(username)s' rejected.") % {"username": req.user.username}, "warning")
     else:
         flash(gettext("⚠️ Invalid action."), "error")
         return redirect(url_for('admin.view_premium_request', req_id=req_id))
@@ -240,7 +240,7 @@ def approve_premium(req_id):
     req.user.premium_since = datetime.now(tehran_tz)
     db.session.commit()
 
-    flash(gettext(f"✅ User '{req.user.username}' Successfully promoted to special user."), "success")
+    flash(gettext("✅ User '%(username)s' Successfully promoted to special user.") % {"username": req.user.username}, "success")
     return redirect(url_for('admin.premium_requests'))
 
 
@@ -254,7 +254,7 @@ def reject_premium(req_id):
     req.status = 'rejected'
     db.session.commit()
 
-    flash(gettext(f"❌ Upgrade Request for '{req.user.username}' rejected."), "warning")
+    flash(gettext("❌ Upgrade Request for '%(username)s' rejected.") % {"username": req.user.username}, "warning")
     return redirect(url_for('admin.premium_requests'))
 
 
@@ -363,7 +363,7 @@ def verify_user_documents(user_id):
         user.trust_score_value = min(100, user.trust_score_value + 20)
     
     db.session.commit()
-    flash(gettext(f"✅ Documents of user '{user.username}' have been successfully verified."), "success")
+    flash(gettext("✅ Documents of user '%(username)s' have been successfully verified.") % {"username": user.username}, "success")
     return redirect(url_for('admin.view_user_documents', user_id=user_id))
 
 
@@ -392,7 +392,7 @@ def reject_user_documents(user_id):
     db.session.add(notification)
     
     db.session.commit()
-    flash(gettext(f"⚠️ Documents of user '{user.username}' have been rejected."), "warning")
+    flash(gettext("⚠️ Documents of user '%(username)s' have been rejected.") % {"username": user.username}, "warning")
     return redirect(url_for('admin.view_user_documents', user_id=user_id))
 
 
@@ -419,7 +419,7 @@ def delete_user(user_id):
     # db.session.delete(user)
     db.session.commit()
 
-    flash(gettext(f" User✅{username} deleted successfully."),"success")
+    flash(gettext("User ✅%(username)s deleted successfully.") % {"username": username}, "success")
     return redirect(url_for('admin.manage_users'))
 
 
@@ -441,7 +441,7 @@ def deactivate_user(user_id):
 
     user.is_active = False
     db.session.commit()
-    flash(gettext(f"✅ User'{user.username}' has been disabled."))
+    flash(gettext("✅ User '%(username)s' has been disabled.") % {"username": user.username})
     return redirect(url_for('admin.manage_users', status=request.args.get('status', 'active')))
 
 
@@ -454,7 +454,7 @@ def activate_user(user_id):
     user = User.query.get_or_404(user_id)
     user.is_active = True
     db.session.commit()
-    flash(gettext(f"✅ User'{user.username}' activated."))
+    flash(gettext("✅ User '%(username)s' activated.") % {"username": user.username})
     return redirect(url_for('admin.manage_users', status=request.args.get('status', 'active')))
 
 
@@ -481,9 +481,9 @@ def toggle_premium(user_id):
     db.session.commit()
     
     if user.is_premium:
-        flash(gettext(f"✅ User '{user.username}' is now a special user."), "success")
+        flash(gettext("✅ User '%(username)s' is now a special user.") % {"username": user.username}, "success")
     else:
-        flash(gettext(f"⚠️ Special status removed from user '{user.username}'."), "warning")
+        flash(gettext("⚠️ Special status removed from user '%(username)s'.") % {"username": user.username}, "warning")
     
     return redirect(url_for('admin.manage_users'))
 
@@ -624,7 +624,7 @@ def create_first_admin():
         
         if errors:
             for error in errors:
-                flash(gettext(f"❌ {error}"), "error")
+                flash(gettext("❌ %(error)s") % {"error": error}, "error")
             return render_template('admin/create_first_admin.html', 
                                  username=username, 
                                  email=email,

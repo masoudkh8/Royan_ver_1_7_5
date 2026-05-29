@@ -59,7 +59,7 @@ def edit_role_permissions(role_name):
     
     if request.method == 'POST':
         selected_perms = request.form.getlist('permissions')
-        flash(gettext(f"Role {target_role.value} settings updated successfully. ({len(selected_perms)} permissions active)"), "success")
+        flash(gettext("Role %(role)s settings updated successfully. (%(count)s permissions active)") % {"role": target_role.value, "count": len(selected_perms)}, "success")
         return redirect(url_for('admin.admin_perms.permission_dashboard'))
     
     current_perms = get_role_permissions(target_role)
@@ -85,7 +85,7 @@ class ManageUserPermissionsView(MethodView):
             user.profile = UserProfile(user_id=user.id)
             db.session.add(user.profile)
             db.session.commit()
-            flash(gettext(f"User {user.username} profile created automatically."), "info")
+            flash(gettext("User %(username)s profile created automatically.") % {"username": user.username}, "info")
         
         base_perms = get_role_permissions(user.role)
         base_perms_values = [p.value if hasattr(p, 'value') else p for p in base_perms]
@@ -121,14 +121,14 @@ class ManageUserPermissionsView(MethodView):
         
         if action == 'grant':
             if user.profile.add_permission(perm_value):
-                flash(gettext(f"Permission {perm_enum.value} granted to user {user.username}."), "success")
+                flash(gettext("Permission %(perm)s granted to user %(username)s.") % {"perm": perm_enum.value, "username": user.username}, "success")
             else:
-                flash(gettext(f"Permission {perm_enum.value} already granted to user."), "info")
+                flash(gettext("Permission %(perm)s already granted to user.") % {"perm": perm_enum.value}, "info")
         elif action == 'revoke':
             if user.profile.remove_permission(perm_value):
-                flash(gettext(f"Permission {perm_enum.value} revoked from user {user.username}."), "warning")
+                flash(gettext("Permission %(perm)s revoked from user %(username)s.") % {"perm": perm_enum.value, "username": user.username}, "warning")
             else:
-                flash(gettext(f"Permission {perm_enum.value} was not in user's permission list."), "info")
+                flash(gettext("Permission %(perm)s was not in user's permission list.") % {"perm": perm_enum.value}, "info")
         
         db.session.commit()
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
@@ -150,7 +150,7 @@ def manage_user_permissions(user_id):
         user.profile = UserProfile(user_id=user.id)
         db.session.add(user.profile)
         db.session.commit()
-        flash(gettext(f"User {user.username} profile created automatically."), "info")
+        flash(gettext("User %(username)s profile created automatically.") % {"username": user.username}, "info")
     
     if request.method == 'POST':
         action = request.form.get('action')
@@ -168,14 +168,14 @@ def manage_user_permissions(user_id):
         
         if action == 'grant':
             if user.profile.add_permission(perm_value):
-                flash(gettext(f"Permission {perm_enum.value} granted to user {user.username}."), "success")
+                flash(gettext("Permission %(perm)s granted to user %(username)s.") % {"perm": perm_enum.value, "username": user.username}, "success")
             else:
-                flash(gettext(f"Permission {perm_enum.value} already granted to user."), "info")
+                flash(gettext("Permission %(perm)s already granted to user.") % {"perm": perm_enum.value}, "info")
         elif action == 'revoke':
             if user.profile.remove_permission(perm_value):
-                flash(gettext(f"Permission {perm_enum.value} revoked from user {user.username}."), "warning")
+                flash(gettext("Permission %(perm)s revoked from user %(username)s.") % {"perm": perm_enum.value, "username": user.username}, "warning")
             else:
-                flash(gettext(f"Permission {perm_enum.value} was not in user's permission list."), "info")
+                flash(gettext("Permission %(perm)s was not in user's permission list.") % {"perm": perm_enum.value}, "info")
         
         db.session.commit()
         return redirect(url_for('admin_perms.manage_user_permissions', user_id=user.id))
