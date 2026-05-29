@@ -1,2 +1,15 @@
 {"timestamp": "2026-05-28 16:37:45,505", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
 {"timestamp": "2026-05-28 16:37:45,850", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-29 19:50:35,510", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-29 19:50:47,963", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-29 19:50:48,224", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-29 19:50:57,011", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-29 19:50:57,269", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-29 19:50:58,073", "level": "INFO", "message": "Exhibition module initialized successfully.", "module": "app", "lineno": 570}
+{"timestamp": "2026-05-29 19:50:58,109", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 576}
+{"timestamp": "2026-05-29 19:50:58,109", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 580}
+{"timestamp": "2026-05-29 19:51:07,686", "level": "INFO", "message": "Application startup", "module": "app", "lineno": 82}
+{"timestamp": "2026-05-29 19:51:07,932", "level": "INFO", "message": "API documentation registered at /api/docs and /api/openapi.json", "module": "api_docs", "lineno": 1287}
+{"timestamp": "2026-05-29 19:51:08,772", "level": "INFO", "message": "Exhibition module initialized successfully.", "module": "app", "lineno": 570}
+{"timestamp": "2026-05-29 19:51:08,809", "level": "INFO", "message": "Trading module initialized successfully.", "module": "app", "lineno": 576}
+{"timestamp": "2026-05-29 19:51:08,809", "level": "INFO", "message": "Database and tables created.", "module": "app", "lineno": 580}

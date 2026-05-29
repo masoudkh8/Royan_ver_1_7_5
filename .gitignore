@@ -1,9 +1,37 @@
 ```
-# Compiled translation files
-*.mo
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Environment files
+# Logs
+*.log
+logs/
+
+# Environment
 .env
 .env.local
 *.env.*
+
+# Translations
+*.mo
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Editors
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
 ```
