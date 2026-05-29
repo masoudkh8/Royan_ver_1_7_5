@@ -1,24 +1,24 @@
 #!/usr/bin/env python
 """
-استخراج تمام متن‌های انگلیسی از فایل‌های HTML و Python برای ترجمه
+Extract all English texts from HTML and Python files for translation
 """
 import os
 import re
 from pathlib import Path
 
 def extract_text_from_html(html_file):
-    """استخراج متن‌های قابل مشاهده از فایل HTML"""
+    """Extract visible texts from HTML file"""
     texts = []
     with open(html_file, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # استخراج متن بین تگ‌ها
+    # Extract text between tags
     pattern = r'>([^<>\n{}]+?)<'
     matches = re.findall(pattern, content)
     
     for match in matches:
         text = match.strip()
-        # فیلتر کردن متن‌های کوتاه، متغیرها و کدها
+        # Filter short texts, variables, and codes
         if (len(text) > 2 and 
             not text.startswith('{') and 
             not text.endswith('}') and
@@ -31,12 +31,12 @@ def extract_text_from_html(html_file):
     return texts
 
 def extract_flash_messages(py_file):
-    """استخراج پیام‌های flash از فایل‌های Python"""
+    """Extract flash messages from Python files"""
     messages = []
     with open(py_file, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # پیدا کردن تمام flash() ها
+    # Find all flash() calls
     pattern = r'flash\([\'"]([^\'"]+)[\'"]'
     matches = re.findall(pattern, content)
     
@@ -53,8 +53,8 @@ def main():
     
     all_texts = {}
     
-    # استخراج از تمپلیت‌ها
-    print("=== استخراج متن از تمپلیت‌ها ===\n")
+    # Extract from templates
+    print("=== Extracting text from templates ===\n")
     for root, dirs, files in os.walk(templates_dir):
         for file in files:
             if file.endswith('.html'):
@@ -64,13 +64,13 @@ def main():
                 if texts:
                     all_texts[rel_path] = texts
                     print(f"\n{rel_path}:")
-                    for text in texts[:10]:  # نمایش ۱۰ تای اول
+                    for text in texts[:10]:  # Show first 10
                         print(f"  - {text}")
                     if len(texts) > 10:
-                        print(f"  ... و {len(texts) - 10} متن دیگر")
+                        print(f"  ... and {len(texts) - 10} more texts")
     
-    # استخراج پیام‌های flash
-    print("\n\n=== استخراج پیام‌های flash از routeها ===\n")
+    # Extract flash messages
+    print("\n\n=== Extracting flash messages from routes ===\n")
     flash_messages = []
     for root, dirs, files in os.walk(routes_dir):
         for file in files:
@@ -84,10 +84,10 @@ def main():
                     for msg in messages[:5]:
                         print(f"  - {msg}")
     
-    # ذخیره در فایل
+    # Save to file
     output_file = os.path.join(workspace, 'texts_to_translate.txt')
     with open(output_file, 'w', encoding='utf-8') as f:
-        f.write("متن‌های استخراج شده برای ترجمه به فارسی\n")
+        f.write("Extracted texts for translation to Persian\n")
         f.write("=" * 50 + "\n\n")
         
         for filepath, texts in all_texts.items():
@@ -95,11 +95,11 @@ def main():
             for text in texts:
                 f.write(f"{text}\n")
         
-        f.write("\n\n### پیام‌های Flash ###\n")
+        f.write("\n\n### Flash Messages ###\n")
         for msg in set(flash_messages):
             f.write(f"{msg}\n")
     
-    print(f"\n\n✅ تمام متن‌ها در فایل {output_file} ذخیره شدند.")
+    print(f"\n\n✅ All texts saved to {output_file}.")
 
 if __name__ == '__main__':
     main()

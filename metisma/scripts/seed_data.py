@@ -28,9 +28,9 @@ def create_exhibitions():
     exhibitions_data = [
         {
             'title_en': 'Global Tech Expo 2024',
-            'title_fa': 'نمایشگاه فناوری جهانی ۲۰۲۴',
+            'title_fa': 'Global Tech Expo 2024',
             'description_en': "The world's largest technology exhibition featuring cutting-edge innovations.",
-            'description_fa': 'بزرگترین نمایشگاه فناوری جهان با نوآوری‌های پیشرفته.',
+            'description_fa': "The world's largest technology exhibition featuring cutting-edge innovations.",
             'start_date': datetime.utcnow(),
             'end_date': datetime.utcnow() + timedelta(days=30),
             'has_virtual_tour': True,
@@ -53,9 +53,9 @@ def create_exhibitions():
         },
         {
             'title_en': 'International Trade Fair 2024',
-            'title_fa': 'نمایشگاه تجارت بین‌الملل ۲۰۲۴',
+            'title_fa': 'International Trade Fair 2024',
             'description_en': 'Connect with global traders and explore international business opportunities.',
-            'description_fa': 'ارتباط با بازرگانان جهانی و کشف فرصت‌های تجاری بین‌المللی.',
+            'description_fa': 'Connect with global traders and explore international business opportunities.',
             'start_date': datetime.utcnow() + timedelta(days=15),
             'end_date': datetime.utcnow() + timedelta(days=45),
             'has_virtual_tour': True,
@@ -78,9 +78,9 @@ def create_exhibitions():
         },
         {
             'title_en': 'Startup Pitch Arena',
-            'title_fa': 'آرنا ارائه استارتاپ',
+            'title_fa': 'Startup Pitch Arena',
             'description_en': 'Watch innovative startups pitch their ideas to investors.',
-            'description_fa': 'تماشای ارائه استارتاپ‌های نوآور به سرمایه‌گذاران.',
+            'description_fa': 'Watch innovative startups pitch their ideas to investors.',
             'start_date': datetime.utcnow() + timedelta(days=7),
             'end_date': datetime.utcnow() + timedelta(days=9),
             'has_virtual_tour': False,
@@ -109,7 +109,7 @@ def create_exhibitions():
         exhibition.id = uuid.uuid4()
         db.session.add(exhibition)
         created.append(exhibition)
-        print(f"  ✓ Created: {data['name_en']}")
+        print(f"  ✓ Created: {data['title_en']}")
     
     db.session.commit()
     return created
@@ -122,9 +122,9 @@ def create_booths(exhibitions):
     booth_templates = [
         {
             'title_en': 'AI Solutions Hub',
-            'title_fa': 'مرکز راهکارهای هوش مصنوعی',
+            'title_fa': 'AI Solutions Hub',
             'description_en': 'Leading AI solutions for enterprise automation.',
-            'description_fa': 'راهکارهای پیشرفته هوش مصنوعی برای اتوماسیون سازمانی.',
+            'description_fa': 'Leading AI solutions for enterprise automation.',
             'type_id': 2,  # Premium
             'owner_type': 'company',
             'booth_number': 'A101',
@@ -146,9 +146,9 @@ def create_booths(exhibitions):
         },
         {
             'title_en': 'Global Trade Partners',
-            'title_fa': 'شرکای تجارت جهانی',
+            'title_fa': 'Global Trade Partners',
             'description_en': 'Your gateway to international trade and export services.',
-            'description_fa': 'دروازه شما به تجارت بین‌الملل و خدمات صادراتی.',
+            'description_fa': 'Your gateway to international trade and export services.',
             'type_id': 1,  # Standard
             'owner_type': 'company',
             'booth_number': 'B205',
@@ -168,9 +168,9 @@ def create_booths(exhibitions):
         },
         {
             'title_en': 'Blockchain Innovations',
-            'title_fa': 'نوآوری‌های بلاکچین',
+            'title_fa': 'Blockchain Innovations',
             'description_en': 'Next-generation blockchain solutions for finance and supply chain.',
-            'description_fa': 'راهکارهای نسل جدید بلاکچین برای مالی و زنجیره تأمین.',
+            'description_fa': 'Next-generation blockchain solutions for finance and supply chain.',
             'type_id': 2,  # Premium
             'owner_type': 'company',
             'booth_number': 'C310',
@@ -192,9 +192,9 @@ def create_booths(exhibitions):
         },
         {
             'title_en': 'E-commerce Solutions',
-            'title_fa': 'راهکارهای تجارت الکترونیک',
+            'title_fa': 'E-commerce Solutions',
             'description_en': 'Complete e-commerce platforms and digital marketing tools.',
-            'description_fa': 'پلتفرم‌های کامل تجارت الکترونیک و ابزارهای بازاریابی دیجیتال.',
+            'description_fa': 'Complete e-commerce platforms and digital marketing tools.',
             'type_id': 3,  # Startup
             'owner_type': 'company',
             'booth_number': 'D415',
